@@ -33,7 +33,7 @@
         window.document.body.style.removeProperty('opacity');
         if(!window.document.body.style[0])window.document.body.removeAttribute('style');
     },1400);
-    // touch active
+    // active
     window.addEventListener('touchstart',()=>{});
     // callout
     if(!window.CSS.supports('-webkit-touch-callout:none')){
@@ -97,17 +97,17 @@
         window.document.head.insertAdjacentHTML('afterbegin',
 `<meta name="viewport" content="width=device-width,user-scalable=no,viewport-fit=cover">
 <meta name="format-detection" content="address=no,email=no,telephone=no">
-<title>${option.title}</title>
-<link rel="stylesheet" href="${option.style}">`
+<title>${option.title?option.title:''}</title>
+<link rel="stylesheet" href="${option.style?option.style:''}">`
         );
         window.document.head.insertAdjacentHTML('beforeend',
-`<link rel="icon" type="image/png" href="${option.icon}">
-<link rel="apple-touch-icon" href="${option.icon_apple}">
+`<link rel="icon" type="image/png" href="${option.icon?option.icon:''}">
+<link rel="apple-touch-icon" href="${option.icon_apple?option.icon_apple:''}">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="white">
-<meta name="apple-mobile-web-app-title" content="${option.title}">
+<meta name="apple-mobile-web-app-title" content="${option.title?option.title:''}">
 <!-- <meta name="theme-color" content="#000000"> -->
-<link rel="manifest" href="${option.manifest}">`
+<link rel="manifest" href="${option.manifest?option.manifest:''}">`
         );
     };
     // ic_oe
