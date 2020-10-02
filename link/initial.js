@@ -1,6 +1,7 @@
 'use strict';
 // #library
     // @initial.js
+    // module
 // #initial
     // sw
     // element
