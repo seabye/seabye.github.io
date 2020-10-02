@@ -88,4 +88,42 @@
         }
     }
 // #build
+    // sw
+    export let sw=path=>{
+        if('serviceWorker'in window.navigator)window.navigator.serviceWorker.register(path);
+    };
+    // head
+    export let head=option=>{
+        window.document.head.insertAdjacentHTML('afterbegin',
+`<meta name="viewport" content="width=device-width,user-scalable=no,viewport-fit=cover">
+<meta name="format-detection" content="address=no,email=no,telephone=no">
+<title>${option.title}</title>
+<link rel="stylesheet" href="${option.style}">`
+        );
+        window.document.head.insertAdjacentHTML('beforeend',
+`<link rel="icon" type="image/png" href="${option.icon}">
+<link rel="apple-touch-icon" href="${option.icon_apple}">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="white">
+<meta name="apple-mobile-web-app-title" content="${option.title}">
+<!-- <meta name="theme-color" content="#000000"> -->
+<link rel="manifest" href="${option.manifest}">`
+        );
+    };
+    // ic_oe
+    export let ic_oe=()=>{
+        let user_agent=window.navigator.userAgent;
+        let element_class=window.document.documentElement.classList;
+        if(user_agent.match('Unix'))element_class.add('ic_oe_system_unix');
+        if(user_agent.match('Mac OS')&&!user_agent.match('iPhone')&&!user_agent.match('iPad'))element_class.add('ic_oe_system_macos');
+        if(user_agent.match('Windows'))element_class.add('ic_oe_system_windows');
+        if(user_agent.match('Linux')&&!user_agent.match('Android'))element_class.add('ic_oe_system_linux');
+        if(user_agent.match('CrOS'))element_class.add('ic_oe_system_chromeos');
+        if(user_agent.match(/iPhone|iPad/))element_class.add('ic_oe_system_ios');
+        if(user_agent.match('Android'))element_class.add('ic_oe_system_android');
+        if(user_agent.match('Firefox'))element_class.add('ic_oe_browser_firefox');
+        if(user_agent.match('Safari')&&!user_agent.match('Chrome')&&!user_agent.match('Edg'))element_class.add('ic_oe_browser_safari');
+        if(user_agent.match('Chrome')&&!user_agent.match('Edg'))element_class.add('ic_oe_browser_chrome');
+        if(user_agent.match('Edg'))element_class.add('ic_oe_browser_edge');
+    };
 // #debug
