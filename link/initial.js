@@ -89,11 +89,11 @@
     }
 // #build
     // sw
-    export let sw=path=>{
+    export let initial_sw=path=>{
         if('serviceWorker'in window.navigator)window.navigator.serviceWorker.register(path);
     };
     // head
-    export let head=(option={})=>{
+    export let initial_head=(option={})=>{
         window.document.head.insertAdjacentHTML('afterbegin',
 `<meta name="viewport" content="width=device-width,user-scalable=no,viewport-fit=cover">
 <meta name="format-detection" content="address=no,email=no,telephone=no">
@@ -111,7 +111,7 @@
         );
     };
     // ic_oe
-    export let ic_oe=()=>{
+    export let initial_ic_oe=()=>{
         let user_agent=window.navigator.userAgent;
         let element_class=window.document.documentElement.classList;
         if(user_agent.match('Unix'))element_class.add('ic_oe_system_unix');
