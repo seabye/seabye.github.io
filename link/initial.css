@@ -1,0 +1,161 @@
+@charset "UTF-8";
+/* #library */
+    /* @initial.css */
+/* #initial */
+    /* variable */
+    /* element */
+/* #block */
+/* #build */
+    /* sc_cr */
+/* #debug */
+/*
+    style.css
+    sc_
+        #library
+            @initial.css
+            ic_
+        #initial
+        _ve_ / variable
+        #block
+        _bk_
+        #build
+        _cr_ / container
+        _ca_ / container abbreviation
+        #debug
+        _dg _dg_
+        ~~~~
+        _an_ / :hov~.cls action
+        _at_ / animation
+*/
+/* #library */
+/* #initial */
+    /* variable */
+    :root {
+        --ic_ve_color_transparent: rgba(255,255,255,0);
+        --ic_ve_color_white: #FFFFFF;
+        --ic_ve_color_black: #000000;
+        --ic_ve_color_background: rgba(255,255,255,0.8);
+        --ic_ve_color_background_2: rgba(255,255,255,0.4);
+        --ic_ve_color_background_3: rgba(255,255,255,0.2);
+        --ic_ve_color_font: rgba(0,0,0,0.8);
+        --ic_ve_color_font_2: rgba(0,0,0,0.4);
+        --ic_ve_color_font_3: rgba(0,0,0,0.2);
+    }
+    @media(prefers-color-scheme:dark) {
+        :root {
+            --ic_ve_color_transparent: rgba(0,0,0,0);
+            --ic_ve_color_white: #101010;
+            --ic_ve_color_black: #F0F0F0;
+            --ic_ve_color_background: rgba(0,0,0,0.8);
+            --ic_ve_color_background_2: rgba(0,0,0,0.4);
+            --ic_ve_color_background_3: rgba(0,0,0,0.2);
+            --ic_ve_color_font: rgba(255,255,255,0.8);
+            --ic_ve_color_font_2: rgba(255,255,255,0.4);
+            --ic_ve_color_font_3: rgba(255,255,255,0.2);
+        }
+    }
+    /* element */
+    *,
+    ::before,
+    ::after {
+        box-sizing: border-box;
+        outline: unset;
+        vertical-align: middle;
+        line-height: 100%;
+        touch-action: pan-x pan-y;
+        overscroll-behavior: contain;
+    }
+    html,
+    body,
+    iframe {
+        position: relative;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+    }
+    html,
+    body {
+        overflow: hidden;
+        touch-action: none;
+        overscroll-behavior: none;
+    }
+        /* html */
+        html {
+            background-color: var(--ic_ve_color_white)!important;
+            font-weight: normal;
+            font-size: 16px;
+            font-family:
+                "-apple-system",
+                "BlinkMacSystemFont",
+                "system-ui",
+                "PingFang SC",
+                "Noto Sans CJK SC",
+                "Microsoft YaHei";
+            color: var(--ic_ve_color_font);
+            word-break: break-word;
+            -webkit-user-select: none;
+            user-select: none;
+            text-rendering: optimizeLegibility;
+            -webkit-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+            -webkit-tap-highlight-color: var(--ic_ve_color_transparent);
+            cursor: default;
+            -webkit-touch-callout: none;
+        }
+            /* body */
+            body {
+                margin: unset;
+            }
+            @keyframes ic_at_landscape_body {
+                0% {
+                    margin: 1px;
+                }
+                100% {
+                    margin: unset;
+                }
+            }
+            @media(orientation:landscape) {
+                body {
+                    animation: ic_at_landscape_body 175ms cubic-bezier(0.4,0,0.2,1) 175ms both;
+                }
+            }
+            @keyframes ic_at_portrait_body {
+                0% {
+                    margin: 1px;
+                }
+                100% {
+                    margin: unset;
+                }
+            }
+            @media(orientation:portrait) {
+                body {
+                    animation: ic_at_portrait_body 175ms cubic-bezier(0.4,0,0.2,1) 175ms both;
+                }
+            }
+                /* iframe */
+                iframe {
+                    border: unset;
+                }
+                /* input@safari desktop */
+                input {
+                    all: unset;
+                    user-select: text;
+                    -webkit-user-select: text;
+                    cursor: auto;
+                    box-sizing: border-box;
+                }
+                input[type="search"]::-webkit-search-decoration,
+                input[type="search"]::-webkit-search-cancel-button {
+                    display: none;
+                }
+/* #block */
+/* #build */
+/* #debug */
+    /* border */
+    html.ic_dg *,
+    html.ic_dg ::before,
+    html.ic_dg ::after {
+        outline: 1px solid rgba(255,0,0,0.125)!important;
+        outline-offset: -1px!important;
+    }
