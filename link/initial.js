@@ -93,7 +93,7 @@
         if('serviceWorker'in window.navigator)window.navigator.serviceWorker.register(path);
     };
     // head
-    export let head=option=>{
+    export let head=(option=null)=>{
         window.document.head.insertAdjacentHTML('afterbegin',
 `<meta name="viewport" content="width=device-width,user-scalable=no,viewport-fit=cover">
 <meta name="format-detection" content="address=no,email=no,telephone=no">
