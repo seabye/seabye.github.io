@@ -1,15 +1,15 @@
 'use strict';
 // #library
     // @initial.js
-    // module
+    // module ~~~~ #block
 // #initial
     // sw
     // element
-// #block
+// #block ~~~~ module
     // tool
 // #build
     // element variable
-    // sc_cr
+    // sc_cr ~~~~ element build
 // #debug
 /*
     script.js
