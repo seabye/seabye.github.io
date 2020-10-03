@@ -60,7 +60,7 @@
         if(!event.target.localName.match(/input|textarea/))window.document.activeElement.blur();
     });
     window.document.documentElement.addEventListener('pointerdown',event=>{
-        if(event.target.localName.match(/input|textarea/))window.console.log(event.target.localName);;
+        if(event.target.localName.match(/input|textarea/))window.console.log('####',event.target.localName);;
     });
     if(!window.CSS.supports('overscroll-behavior:contain')){
         window.document.documentElement.addEventListener('touchstart',event=>{
