@@ -139,7 +139,7 @@
                 iframe {
                     border: unset;
                 }
-                /* input&textarea@safari desktop */
+                /* input&textarea */
                 input,
                 textarea {
                     all: unset;
@@ -147,10 +147,11 @@
                     -webkit-user-select: text;
                     cursor: auto;
                 }
-                input[type="search"]::-webkit-search-decoration,
-                input[type="search"]::-webkit-search-cancel-button {
-                    display: none;
-                }
+                    /* input@safari desktop */
+                    input[type="search"]::-webkit-search-decoration,
+                    input[type="search"]::-webkit-search-cancel-button {
+                        display: none;
+                    }
 /* #block */
 /* #build */
 /* #debug */
