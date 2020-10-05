@@ -146,6 +146,7 @@
                     user-select: text;
                     -webkit-user-select: text;
                     cursor: auto;
+                    /* @safari transform */
                     box-sizing: content-box;
                 }
                     /* input@safari desktop */
