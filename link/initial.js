@@ -60,20 +60,6 @@
             });
         });
     }
-    // {
-    //     let system=null;
-    //     let loop=(result=window)=>{
-    //         if(result.location.pathname==='/system/'){
-    //             system=result;
-    //         }else if(result!==window.top){
-    //             loop(result.parent);
-    //         }
-    //     };
-    //     loop();
-    //     window.document.documentElement.addEventListener('pointerdown',event=>{
-    //         system.postMessage([`input_${event.target.localName.match(/input|textarea/)?'focus':'blur'}`,''],'*');
-    //     });
-    // }
 // #block
     // tool
     class tool{
