@@ -33,15 +33,33 @@
         window.document.body.style.removeProperty('opacity');
         if(!window.document.body.style[0])window.document.body.removeAttribute('style');
     },1400);
-    // active
+    // :hov action
     window.addEventListener('touchstart',()=>{});
-    // callout
+    // context menu@chromium
     if(!window.CSS.supports('-webkit-touch-callout:none')){
         window.document.documentElement.addEventListener('pointerdown',event=>{
             event.button!==2?window.document.documentElement.addEventListener('contextmenu',tool.stop):window.document.documentElement.removeEventListener('contextmenu',tool.stop);
         });
     }
-    // input and scroll
+    // input blur
+    window.document.documentElement.addEventListener('pointerdown',event=>{
+        if(!event.target.localName.match(/input|textarea/))window.document.activeElement.blur();
+    });
+    // scroll@safari mobile
+    if(!window.CSS.supports('overscroll-behavior:contain')){
+        window.document.documentElement.addEventListener('touchstart',()=>{
+            window.document.querySelectorAll('*').forEach(element=>{
+                if(window.getComputedStyle(element).overflowY.match(/auto|overlay|scroll/)){
+                    if(element.scrollHeight===element.offsetHeight){
+                        element.removeEventListener('touchmove',tool.stop);
+                        element.addEventListener('touchmove',tool.stop);
+                    }else{
+                        element.removeEventListener('touchmove',tool.stop);
+                    }
+                }
+            });
+        });
+    }
     // {
     //     let system=null;
     //     let loop=(result=window)=>{
@@ -56,29 +74,6 @@
     //         system.postMessage([`input_${event.target.localName.match(/input|textarea/)?'focus':'blur'}`,''],'*');
     //     });
     // }
-    window.document.documentElement.addEventListener('pointerdown',event=>{
-        if(!event.target.localName.match(/input|textarea/))window.document.activeElement.blur();
-    });
-    window.document.documentElement.addEventListener('pointerdown',event=>{
-        if(event.target.localName.match(/input|textarea/))window.console.log('####',event.target.localName);;
-    });
-    if(!window.CSS.supports('overscroll-behavior:contain')){
-        window.document.documentElement.addEventListener('touchstart',event=>{
-            let event_element=event.target;
-            window.document.querySelectorAll('*').forEach(element=>{
-                if(event_element.localName.match(/input|textarea/)&&event_element.scrollHeight!==event_element.offsetHeight){
-                    element.removeEventListener('touchmove',tool.stop);
-                }else if(window.getComputedStyle(element).overflowY.match(/auto|overlay|scroll/)){
-                    if(element.scrollHeight===element.offsetHeight){
-                        element.removeEventListener('touchmove',tool.stop);
-                        element.addEventListener('touchmove',tool.stop);
-                    }else{
-                        element.removeEventListener('touchmove',tool.stop);
-                    }
-                }
-            });
-        });
-    }
 // #block
     // tool
     class tool{
@@ -91,6 +86,22 @@
     // sw
     export let initial_sw=path=>{
         if('serviceWorker'in window.navigator)window.navigator.serviceWorker.register(path);
+    };
+    // ic_oe
+    export let initial_ic_oe=()=>{
+        let user_agent=window.navigator.userAgent;
+        let element_class=window.document.documentElement.classList;
+        if(user_agent.match('Unix'))element_class.add('ic_oe_system_unix');
+        if(user_agent.match('Mac OS')&&!user_agent.match('iPhone')&&!user_agent.match('iPad'))element_class.add('ic_oe_system_macos');
+        if(user_agent.match('Windows'))element_class.add('ic_oe_system_windows');
+        if(user_agent.match('Linux')&&!user_agent.match('Android'))element_class.add('ic_oe_system_linux');
+        if(user_agent.match('CrOS'))element_class.add('ic_oe_system_chromeos');
+        if(user_agent.match(/iPhone|iPad/))element_class.add('ic_oe_system_ios');
+        if(user_agent.match('Android'))element_class.add('ic_oe_system_android');
+        if(user_agent.match('Firefox'))element_class.add('ic_oe_browser_firefox');
+        if(user_agent.match('Safari')&&!user_agent.match('Chrome')&&!user_agent.match('Edg'))element_class.add('ic_oe_browser_safari');
+        if(user_agent.match('Chrome')&&!user_agent.match('Edg'))element_class.add('ic_oe_browser_chrome');
+        if(user_agent.match('Edg'))element_class.add('ic_oe_browser_edge');
     };
     // head
     export let initial_head=(option={})=>{
@@ -109,21 +120,5 @@
 <!-- <meta name="theme-color" content="#000000"> -->
 <link rel="manifest" href="${option.manifest?option.manifest:''}">`
         );
-    };
-    // ic_oe
-    export let initial_ic_oe=()=>{
-        let user_agent=window.navigator.userAgent;
-        let element_class=window.document.documentElement.classList;
-        if(user_agent.match('Unix'))element_class.add('ic_oe_system_unix');
-        if(user_agent.match('Mac OS')&&!user_agent.match('iPhone')&&!user_agent.match('iPad'))element_class.add('ic_oe_system_macos');
-        if(user_agent.match('Windows'))element_class.add('ic_oe_system_windows');
-        if(user_agent.match('Linux')&&!user_agent.match('Android'))element_class.add('ic_oe_system_linux');
-        if(user_agent.match('CrOS'))element_class.add('ic_oe_system_chromeos');
-        if(user_agent.match(/iPhone|iPad/))element_class.add('ic_oe_system_ios');
-        if(user_agent.match('Android'))element_class.add('ic_oe_system_android');
-        if(user_agent.match('Firefox'))element_class.add('ic_oe_browser_firefox');
-        if(user_agent.match('Safari')&&!user_agent.match('Chrome')&&!user_agent.match('Edg'))element_class.add('ic_oe_browser_safari');
-        if(user_agent.match('Chrome')&&!user_agent.match('Edg'))element_class.add('ic_oe_browser_chrome');
-        if(user_agent.match('Edg'))element_class.add('ic_oe_browser_edge');
     };
 // #debug
