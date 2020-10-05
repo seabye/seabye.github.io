@@ -139,13 +139,13 @@
                 iframe {
                     border: unset;
                 }
-                /* input@safari desktop */
-                input {
+                /* input&textarea@safari desktop */
+                input,
+                textarea {
                     all: unset;
                     user-select: text;
                     -webkit-user-select: text;
                     cursor: auto;
-                    box-sizing: border-box;
                 }
                 input[type="search"]::-webkit-search-decoration,
                 input[type="search"]::-webkit-search-cancel-button {
