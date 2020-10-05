@@ -146,6 +146,7 @@
                     user-select: text;
                     -webkit-user-select: text;
                     cursor: auto;
+                    box-sizing: content-box;
                 }
                     /* input@safari desktop */
                     input[type="search"]::-webkit-search-decoration,
