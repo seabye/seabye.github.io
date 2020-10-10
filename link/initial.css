@@ -108,7 +108,6 @@
             /* body */
             body {
                 margin: unset;
-                perspective: 100vw;
             }
             @keyframes ic_at_landscape_body {
                 0% {
