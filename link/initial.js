@@ -50,7 +50,7 @@
         window.document.documentElement.addEventListener('touchstart',()=>{
             window.document.querySelectorAll('*').forEach(element=>{
                 if(window.getComputedStyle(element).overflowY.match(/auto|overlay|scroll/)){
-                    if(element.scrollHeight===element.offsetHeight){
+                    if(element.scrollHeight===element.clientHeight){
                         element.removeEventListener('touchmove',tool.stop);
                         element.addEventListener('touchmove',tool.stop);
                     }else{
