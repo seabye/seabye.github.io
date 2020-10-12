@@ -148,7 +148,7 @@
                     -webkit-user-select: text;
                     cursor: auto;
                     /* @safari transform */
-                    box-sizing: content-box;
+                    /* box-sizing: content-box; */
                 }
                     /* input@safari desktop */
                     input[type="search"]::-webkit-search-decoration,
