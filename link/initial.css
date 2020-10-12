@@ -63,7 +63,7 @@
         box-sizing: border-box;
         outline: unset;
         vertical-align: middle;
-        line-height: 100%;
+        line-height: normal;
         touch-action: pan-x pan-y;
         overscroll-behavior: contain;
     }
@@ -143,6 +143,7 @@
                 input,
                 textarea {
                     all: unset;
+                    line-height: normal;
                     user-select: text;
                     -webkit-user-select: text;
                     cursor: auto;
