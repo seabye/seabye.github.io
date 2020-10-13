@@ -109,6 +109,10 @@
                 /* body */
                 body {
                     margin: unset;
+                    display: flex;
+                    place-content: center;
+                    place-items: center;
+                    flex-flow: column;
                 }
                 @keyframes ic_at_landscape_body {
                     0% {
