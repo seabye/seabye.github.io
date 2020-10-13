@@ -96,7 +96,7 @@
                     "PingFang SC",
                     "Noto Sans CJK SC",
                     "Microsoft YaHei";
-                word-break: break-word;
+                overflow-wrap: break-word;
                 -webkit-user-select: none;
                 user-select: none;
                 text-rendering: optimizeLegibility;
