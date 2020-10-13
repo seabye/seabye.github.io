@@ -108,11 +108,11 @@
             }
                 /* body */
                 body {
-                    margin: unset;
                     display: flex;
                     place-content: center;
                     place-items: center;
                     flex-flow: column;
+                    margin: unset;
                 }
                 @keyframes ic_at_landscape_body {
                     0% {
