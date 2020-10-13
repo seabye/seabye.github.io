@@ -1,4 +1,5 @@
 'use strict';
+// #variable
 // #library
     // @initial.js
     // module
@@ -8,11 +9,12 @@
 // #block
     // tool
 // #build
-    // element variable
+    // element
     // sc_cr
 // #debug
 /*
     script.js
+        #variable
         #library
             @initial.js
         #initial
@@ -20,6 +22,7 @@
         #build
         #debug
 */
+// #variable
 // #library
 // #initial
     // display
