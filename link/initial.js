@@ -51,10 +51,14 @@
             window.document.querySelectorAll('*').forEach(element=>{
                 if(window.getComputedStyle(element).overflowY.match(/auto|overlay|scroll/)){
                     if(element.scrollHeight===element.clientHeight){
-                        element.removeEventListener('touchmove',tool.stop);
-                        element.addEventListener('touchmove',tool.stop);
+                        // element.removeEventListener('touchmove',tool.stop);
+                        // element.addEventListener('touchmove',tool.stop);
+                        element.style.removeProperty('touch-action');
+                        element.style.setProperty('touch-action','pan-x');
                     }else{
-                        element.removeEventListener('touchmove',tool.stop);
+                        // element.removeEventListener('touchmove',tool.stop);
+                        element.style.removeProperty('touch-action');
+                        if(!element.style[0])element.removeAttribute('style');
                     }
                 }
             });
