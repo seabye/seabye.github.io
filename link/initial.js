@@ -25,6 +25,9 @@
 // #variable
 // #library
 // #initial
+    // tabindex
+    window.document.documentElement.setAttribute('tabindex','0');
+    window.document.body.setAttribute('tabindex','0');
     // display
     window.document.documentElement.style.setProperty('background-color',`${window.matchMedia('(prefers-color-scheme:dark)').matches?'#000000':'#FFFFFF'}`);
     window.setTimeout(()=>{
