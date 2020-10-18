@@ -10,7 +10,7 @@
             element.setAttribute('type','module');
             item.insertAdjacentElement('afterend',element);
             white=data.white?data.white:'#FFFFFF';
-            black=data.black?data.black:'#000000';
+            black=data.black?data.black:'#101010';
             item.parentNode.removeChild(item);
             break;
         }

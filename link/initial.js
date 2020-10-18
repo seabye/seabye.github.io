@@ -29,7 +29,7 @@
     window.document.documentElement.setAttribute('tabindex','-1');
     window.document.body.setAttribute('tabindex','-1');
     // display
-    window.document.documentElement.style.setProperty('background-color',`var(--ic_ve_color_white,${window.document.documentElement.style.getPropertyValue('background-color')?window.document.documentElement.style.getPropertyValue('background-color'):window.matchMedia('(prefers-color-scheme:dark)').matches?'#000000':'#FFFFFF'})`);
+    window.document.documentElement.style.setProperty('background-color',`var(--ic_ve_color_white,${window.document.documentElement.style.getPropertyValue('background-color')?window.document.documentElement.style.getPropertyValue('background-color'):window.matchMedia('(prefers-color-scheme:dark)').matches?'#101010':'#FFFFFF'})`);
     window.document.body.style.setProperty('opacity','0');
     window.addEventListener('load',()=>{
         window.document.documentElement.style.removeProperty('background-color');

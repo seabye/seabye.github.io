@@ -86,7 +86,7 @@
         }
             /* html */
             html {
-                background-color: var(--ic_ve_color_white)!important;
+                background-color: var(--ic_ve_color_white);
                 color: var(--ic_ve_color_black2);
                 font-weight: normal;
                 font-size: 16px;
