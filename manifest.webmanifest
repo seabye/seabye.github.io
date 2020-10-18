@@ -3,10 +3,10 @@
     "short_name": "seabye",
     "description": "seabye.com",
     "start_url": ".",
-    "background_color": "#000000",
     "_theme_color": "#000000",
-    "display": "standalone",
+    "background_color": "#000000",
     "orientation": "natural",
+    "display": "standalone",
     "icons": [
         {
             "src": "base/icon-144x144-any.png",
