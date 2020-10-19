@@ -121,7 +121,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="white">
 <meta name="apple-mobile-web-app-title" content="${option.title?option.title:''}">`
             );
-        }else{
+        }else if(window.matchMedia('(prefers-color-scheme:dark)').addEventListener){
             window.document.head.insertAdjacentHTML('beforeend',`<meta name="theme-color" content="${window.matchMedia('(prefers-color-scheme:dark)').matches?black:white}">`);
             window.matchMedia('(prefers-color-scheme:dark)').addEventListener('change',event=>{
                 for(const item of window.document.head.children){
