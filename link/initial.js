@@ -103,6 +103,8 @@
     };
     // head
     export const initial_head=(option={})=>{
+        const white='#E0E0E0';
+        const black='#303030';
         window.document.head.insertAdjacentHTML('afterbegin',
 `<meta name="viewport" content="width=device-width,user-scalable=no,viewport-fit=cover">
 <meta name="format-detection" content="address=no,email=no,telephone=no">
@@ -115,8 +117,13 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="white">
 <meta name="apple-mobile-web-app-title" content="${option.title?option.title:''}">
-<!-- <meta name="theme-color" content="#000000"> -->
+<meta name="theme-color" content="${window.matchMedia('(prefers-color-scheme:dark)').matches?black:white}">
 <link rel="manifest" href="${option.manifest?option.manifest:''}">`
         );
+        window.matchMedia('(prefers-color-scheme:dark)').addEventListener('change',event=>{
+            for(const item of window.document.head.children){
+                if(item.name==='theme-color')item.content=event.matches?black:white;
+            }
+        });
     };
 // #debug
