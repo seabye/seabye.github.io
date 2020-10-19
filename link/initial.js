@@ -112,18 +112,25 @@
 <link rel="stylesheet" href="${option.style?option.style:''}">`
         );
         window.document.head.insertAdjacentHTML('beforeend',
-`<link rel="icon" type="image/png" href="${option.icon?option.icon:''}">
-<link rel="apple-touch-icon" href="${option.icon_apple?option.icon_apple:''}">
+`<link rel="icon" type="image/png" href="${option.icon?option.icon:''}">`
+        );
+        if(window.navigator.userAgent.match('Safari')&&!window.navigator.userAgent.match('Chrome')&&!window.navigator.userAgent.match('Edg')){
+            window.document.head.insertAdjacentHTML('beforeend',
+`<link rel="apple-touch-icon" href="${option.icon_apple?option.icon_apple:''}">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="white">
-<meta name="apple-mobile-web-app-title" content="${option.title?option.title:''}">
-<meta name="theme-color" content="${window.matchMedia('(prefers-color-scheme:dark)').matches?black:white}">
+<meta name="apple-mobile-web-app-title" content="${option.title?option.title:''}">`
+            );
+        }else{
+            window.document.head.insertAdjacentHTML('beforeend',
+`<meta name="theme-color" content="${window.matchMedia('(prefers-color-scheme:dark)').matches?black:white}">
 <link rel="manifest" href="${option.manifest?option.manifest:''}">`
-        );
-        window.matchMedia('(prefers-color-scheme:dark)').addEventListener('change',event=>{
-            for(const item of window.document.head.children){
-                if(item.name==='theme-color')item.content=event.matches?black:white;
-            }
-        });
+            );
+            window.matchMedia('(prefers-color-scheme:dark)').addEventListener('change',event=>{
+                for(const item of window.document.head.children){
+                    if(item.name==='theme-color')item.content=event.matches?black:white;
+                }
+            });
+        }
     };
 // #debug
