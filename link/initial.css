@@ -33,6 +33,10 @@
 /* #library */
 /* #initial */
     /* variable */
+    /* 255*0.8+30=234 */
+    /* 255*0.2=51 */
+    /* 240*0.2=48 */
+    /* 240*0.8+30=222 */
     :root {
         --ic_ve_color_transparent: rgba(255,255,255,0);
         --ic_ve_color_white: #FFFFFF;
@@ -54,8 +58,8 @@
         :root {
             --ic_ve_color_transparent: rgba(16,16,16,0);
             --ic_ve_color_white: #101010;
-            --ic_ve_color_white2: rgb(37,37,37);
-            --ic_ve_color_white3: rgb(88,88,88);
+            --ic_ve_color_white2: rgb(48,48,48);
+            --ic_ve_color_white3: rgb(96,96,96);
             --ic_ve_color_white4: rgb(192,192,192);
             --ic_ve_color_white2_opacity: rgba(16,16,16,0.8);
             --ic_ve_color_white3_opacity: rgba(16,16,16,0.4);
