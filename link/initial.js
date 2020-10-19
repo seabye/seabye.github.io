@@ -37,10 +37,12 @@
         window.document.documentElement.style.setProperty('background-color',`var(--ic_ve_color_white,${window.document.documentElement.style.getPropertyValue('background-color')?window.document.documentElement.style.getPropertyValue('background-color'):window.matchMedia('(prefers-color-scheme:dark)').matches?data.black?data.black:'#101010':data.white?data.white:'#FFFFFF'})`);
         window.document.body.style.setProperty('opacity','0');
         window.addEventListener('load',()=>{
-            window.document.documentElement.style.removeProperty('background-color');
-            window.document.body.style.removeProperty('opacity');
-            if(!window.document.documentElement.style[0])window.document.documentElement.removeAttribute('style');
-            if(!window.document.body.style[0])window.document.body.removeAttribute('style');
+            window.setTimeout(()=>{
+                window.document.documentElement.style.removeProperty('background-color');
+                window.document.body.style.removeProperty('opacity');
+                if(!window.document.documentElement.style[0])window.document.documentElement.removeAttribute('style');
+                if(!window.document.body.style[0])window.document.body.removeAttribute('style');
+            },175);
         });
     }
     // :hov action
