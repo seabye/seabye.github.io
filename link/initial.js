@@ -141,8 +141,8 @@
             if(theme_color){
                 window.document.head.insertAdjacentElement('beforeend',theme_color);
             }else{
-                const white='#E0E0E0';
-                const black='#303030';
+                const white='#E1E1E1';
+                const black='#292929';
                 const element=window.document.createElement('meta');
                 element.setAttribute('name','theme-color');
                 element.setAttribute('content',window.matchMedia('(prefers-color-scheme:dark)').matches?black:white);
