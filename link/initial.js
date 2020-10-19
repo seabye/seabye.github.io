@@ -25,9 +25,6 @@
 // #variable
 // #library
 // #initial
-    // tabindex
-    window.document.documentElement.setAttribute('tabindex','-1');
-    window.document.body.setAttribute('tabindex','-1');
     // display
     window.document.documentElement.style.setProperty('background-color',`var(--ic_ve_color_white,${window.document.documentElement.style.getPropertyValue('background-color')?window.document.documentElement.style.getPropertyValue('background-color'):window.matchMedia('(prefers-color-scheme:dark)').matches?'#101010':'#FFFFFF'})`);
     window.document.body.style.setProperty('opacity','0');
@@ -49,6 +46,9 @@
     window.document.documentElement.addEventListener('pointerdown',event=>{
         if(!event.target.localName.match(/input|textarea/))window.document.activeElement.blur();
     });
+    // tabindex
+    window.document.documentElement.setAttribute('tabindex','-1');
+    window.document.body.setAttribute('tabindex','-1');
     // scroll@safari mobile
     if(!window.CSS.supports('overscroll-behavior:contain')){
         window.document.documentElement.addEventListener('touchstart',()=>{
@@ -103,8 +103,6 @@
     };
     // head
     export const initial_head=(option={})=>{
-        const white='#E0E0E0';
-        const black='#303030';
         window.document.head.insertAdjacentHTML('afterbegin',
 `<meta name="viewport" content="width=device-width,user-scalable=no,viewport-fit=cover">
 <meta name="format-detection" content="address=no,email=no,telephone=no">
@@ -122,17 +120,20 @@
 <meta name="apple-mobile-web-app-title" content="${option.title?option.title:''}">`
             );
         }else if(window.matchMedia('(prefers-color-scheme:dark)').addEventListener){
-            window.document.head.insertAdjacentHTML('beforeend',`<meta name="theme-color" content="${window.matchMedia('(prefers-color-scheme:dark)').matches?black:white}">`);
-            window.matchMedia('(prefers-color-scheme:dark)').addEventListener('change',event=>{
-                for(const item of window.document.head.children){
-                    if(item.name==='theme-color')item.content=event.matches?black:white;
+            let theme_color=null;
+            for(const item of window.document.head.children){
+                if(item.name==='theme-color'){
+                    theme_color=item;
+                    break;
                 }
-            });
+            }
+            if(!theme_color){
+                const white='#E0E0E0';
+                const black='#303030';
+                const theme_color=window.document.head.insertAdjacentHTML('beforeend',`<meta name="theme-color" content="${window.matchMedia('(prefers-color-scheme:dark)').matches?black:white}">`);
+                window.matchMedia('(prefers-color-scheme:dark)').addEventListener('change',event=>theme_color.content=event.matches?black:white);
+            }
         }
         window.document.head.insertAdjacentHTML('beforeend',`<link rel="manifest" href="${option.manifest?option.manifest:''}">`);
     };
-    // clear
-    for(const item of window.document.scripts){
-        window.console.log(import.meta.url,item);
-    }
 // #debug
