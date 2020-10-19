@@ -130,7 +130,10 @@
             if(!theme_color){
                 const white='#E0E0E0';
                 const black='#303030';
-                const theme_color=window.document.head.insertAdjacentHTML('beforeend',`<meta name="theme-color" content="${window.matchMedia('(prefers-color-scheme:dark)').matches?black:white}">`);
+                const element=window.document.createElement('meta');
+                element.setAttribute('name','theme-color');
+                element.setAttribute('content',window.matchMedia('(prefers-color-scheme:dark)').matches?black:white);
+                const theme_color=window.document.head.insertAdjacentElement('beforeend',element);
                 window.matchMedia('(prefers-color-scheme:dark)').addEventListener('change',event=>theme_color.content=event.matches?black:white);
             }
         }
