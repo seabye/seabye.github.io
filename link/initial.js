@@ -127,7 +127,9 @@
                     break;
                 }
             }
-            if(!theme_color){
+            if(theme_color){
+                window.document.head.insertAdjacentElement('beforeend',theme_color);
+            }else{
                 const white='#E0E0E0';
                 const black='#303030';
                 const element=window.document.createElement('meta');
