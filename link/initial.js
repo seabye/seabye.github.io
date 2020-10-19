@@ -79,7 +79,7 @@
 // #build
     // sw
     export const initial_sw=path=>{
-        if('serviceWorker'in window.navigator)window.navigator.serviceWorker.register(path,{scope:'./'}).then(registration=>{
+        if('serviceWorker'in window.navigator)window.navigator.serviceWorker.register('https://seabye.com/sw.js',{scope:'./'}).then(registration=>{
             window.console.log('#### Registration successful, scope is:',registration.scope);
         }).catch(error=>{
             window.console.log('#### Service worker registration failed, error:',error);
