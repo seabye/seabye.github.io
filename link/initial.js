@@ -122,15 +122,13 @@
 <meta name="apple-mobile-web-app-title" content="${option.title?option.title:''}">`
             );
         }else{
-            window.document.head.insertAdjacentHTML('beforeend',
-`<meta name="theme-color" content="${window.matchMedia('(prefers-color-scheme:dark)').matches?black:white}">
-<link rel="manifest" href="${option.manifest?option.manifest:''}">`
-            );
+            window.document.head.insertAdjacentHTML('beforeend',`<meta name="theme-color" content="${window.matchMedia('(prefers-color-scheme:dark)').matches?black:white}">`);
             window.matchMedia('(prefers-color-scheme:dark)').addEventListener('change',event=>{
                 for(const item of window.document.head.children){
                     if(item.name==='theme-color')item.content=event.matches?black:white;
                 }
             });
         }
+        window.document.head.insertAdjacentHTML('beforeend',`<link rel="manifest" href="${option.manifest?option.manifest:''}">`);
     };
 // #debug
