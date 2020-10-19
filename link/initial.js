@@ -150,4 +150,8 @@
         }
         window.document.head.insertAdjacentHTML('beforeend',`<link rel="manifest" href="${option.manifest?option.manifest:''}">`);
     };
+    // clear
+    for(const item of window.document.scripts){
+        window.console.log(import.meta,import.meta.url,item);
+    }
 // #debug
