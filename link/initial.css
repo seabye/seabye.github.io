@@ -76,7 +76,7 @@
             --ic_ve_color_black4: rgb(126,126,126);
             --ic_ve_color_black2: rgb(78,78,78);
             --ic_ve_color_black8_opacity: rgba(240,240,240,0.8);
-            --ic_ve_color_black8_opacity: rgba(240,240,240,0.6);
+            --ic_ve_color_black6_opacity: rgba(240,240,240,0.6);
             --ic_ve_color_black4_opacity: rgba(240,240,240,0.4);
             --ic_ve_color_black2_opacity: rgba(240,240,240,0.2);
         }
