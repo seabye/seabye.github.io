@@ -35,42 +35,50 @@
     /* variable */
     /* 255*0.8+30=234 */
     /* 255*0.2=51 */
-    /* 240*0.2=48 */
-    /* 240*0.8+30=222 */
+    /* 255-16+1=240*0.2=48 */
+    /* 255-16+1=240*0.8+30=222 */
     :root {
         --ic_ve_color_transparent: rgba(255,255,255,0);
         --ic_ve_color_white: #FFFFFF;
-        --ic_ve_color_white2: rgb(234,234,234);
-        --ic_ve_color_white3: rgb(132,132,132);
-        --ic_ve_color_white4: rgb(81,81,81);
-        --ic_ve_color_white2_opacity: rgba(255,255,255,0.8);
-        --ic_ve_color_white3_opacity: rgba(255,255,255,0.4);
-        --ic_ve_color_white4_opacity: rgba(255,255,255,0.2);
+        --ic_ve_color_white8: rgb(234,234,234);
+        --ic_ve_color_white6: rgb(183,183,183);
+        --ic_ve_color_white4: rgb(132,132,132);
+        --ic_ve_color_white2: rgb(81,81,81);
+        --ic_ve_color_white8_opacity: rgba(255,255,255,0.8);
+        --ic_ve_color_white6_opacity: rgba(255,255,255,0.6);
+        --ic_ve_color_white4_opacity: rgba(255,255,255,0.4);
+        --ic_ve_color_white2_opacity: rgba(255,255,255,0.2);
         --ic_ve_color_black: #000000;
-        --ic_ve_color_black2: rgb(51,51,51);
-        --ic_ve_color_black3: rgb(102,102,102);
-        --ic_ve_color_black4: rgb(204,204,204);
-        --ic_ve_color_black2_opacity: rgba(0,0,0,0.8);
-        --ic_ve_color_black3_opacity: rgba(0,0,0,0.4);
-        --ic_ve_color_black4_opacity: rgba(0,0,0,0.2);
+        --ic_ve_color_black8: rgb(51,51,51);
+        --ic_ve_color_black6: rgb(102,102,102);
+        --ic_ve_color_black4: rgb(153,153,153);
+        --ic_ve_color_black2: rgb(204,204,204);
+        --ic_ve_color_black8_opacity: rgba(0,0,0,0.8);
+        --ic_ve_color_black6_opacity: rgba(0,0,0,0.6);
+        --ic_ve_color_black4_opacity: rgba(0,0,0,0.4);
+        --ic_ve_color_black2_opacity: rgba(0,0,0,0.2);
     }
     @media(prefers-color-scheme:dark) {
         :root {
             --ic_ve_color_transparent: rgba(16,16,16,0);
             --ic_ve_color_white: #101010;
-            --ic_ve_color_white2: rgb(48,48,48);
-            --ic_ve_color_white3: rgb(96,96,96);
-            --ic_ve_color_white4: rgb(192,192,192);
-            --ic_ve_color_white2_opacity: rgba(16,16,16,0.8);
-            --ic_ve_color_white3_opacity: rgba(16,16,16,0.4);
-            --ic_ve_color_white4_opacity: rgba(16,16,16,0.2);
+            --ic_ve_color_white8: rgb(48,48,48);
+            --ic_ve_color_white6: rgb(96,96,96);
+            --ic_ve_color_white4: rgb(144,144,144);
+            --ic_ve_color_white2: rgb(192,192,192);
+            --ic_ve_color_white8_opacity: rgba(16,16,16,0.8);
+            --ic_ve_color_white6_opacity: rgba(16,16,16,0.6);
+            --ic_ve_color_white4_opacity: rgba(16,16,16,0.4);
+            --ic_ve_color_white2_opacity: rgba(16,16,16,0.2);
             --ic_ve_color_black: #F0F0F0;
-            --ic_ve_color_black2: rgb(222,222,222);
-            --ic_ve_color_black3: rgb(118,118,118);
-            --ic_ve_color_black4: rgb(67,67,67);
-            --ic_ve_color_black2_opacity: rgba(240,240,240,0.8);
-            --ic_ve_color_black3_opacity: rgba(240,240,240,0.4);
-            --ic_ve_color_black4_opacity: rgba(240,240,240,0.2);
+            --ic_ve_color_black8: rgb(222,222,222);
+            --ic_ve_color_black6: rgb(174,174,174);
+            --ic_ve_color_black4: rgb(126,126,126);
+            --ic_ve_color_black2: rgb(78,78,78);
+            --ic_ve_color_black8_opacity: rgba(240,240,240,0.8);
+            --ic_ve_color_black8_opacity: rgba(240,240,240,0.6);
+            --ic_ve_color_black4_opacity: rgba(240,240,240,0.4);
+            --ic_ve_color_black2_opacity: rgba(240,240,240,0.2);
         }
     }
     /* element */
@@ -103,7 +111,7 @@
             /* html */
             html {
                 background-color: var(--ic_ve_color_white);
-                color: var(--ic_ve_color_black2_opacity);
+                color: var(--ic_ve_color_black8_opacity);
                 font-weight: normal;
                 font-size: 16px;
                 font-family:
@@ -200,11 +208,11 @@
     ::-webkit-scrollbar-thumb {
         border: 3px solid var(--ic_ve_color_transparent);
         border-radius: 4px;
-        background-color: var(--ic_ve_color_black4_opacity);
+        background-color: var(--ic_ve_color_black2_opacity);
         background-clip: padding-box;
     }
     ::-webkit-scrollbar-thumb:active {
-        background-color: var(--ic_ve_color_black3_opacity);
+        background-color: var(--ic_ve_color_black4_opacity);
     }
 /* #block */
 /* #build */
