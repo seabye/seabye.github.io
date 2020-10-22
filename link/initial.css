@@ -141,6 +141,9 @@
                 }
                 @keyframes ic_at_landscape_body {
                     0% {
+                        margin: unset;
+                    }
+                    50% {
                         margin: 1px;
                     }
                     100% {
@@ -154,6 +157,9 @@
                 }
                 @keyframes ic_at_portrait_body {
                     0% {
+                        margin: unset;
+                    }
+                    50% {
                         margin: 1px;
                     }
                     100% {
