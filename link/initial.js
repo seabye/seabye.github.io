@@ -53,14 +53,7 @@
     }
     // input
     window.document.documentElement.addEventListener('pointerdown',event=>{
-        if(!event.target.localName.match(/input|textarea/)){
-            window.document.activeElement.blur();
-            window.document.documentElement.style.removeProperty('height');
-            if(!window.document.documentElement.style[0])window.document.documentElement.removeAttribute('style');
-        }else{
-            window.document.documentElement.style.setProperty('height',`${window.innerHeight}px`);
-            event.target.scrollIntoView();
-        }
+        if(!event.target.localName.match(/input|textarea/))window.document.activeElement.blur();
     });
     // tabindex
     window.document.documentElement.setAttribute('tabindex','-1');
