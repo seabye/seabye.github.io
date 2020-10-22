@@ -46,7 +46,7 @@
         });
         // @safari
         window.addEventListener('orientationchange',()=>{
-            tool.add3(()=>window.document.documentElement.scrollIntoView());
+            tool.add3(()=>window.document.documentElement.scrollIntoView({behavior:'smooth',block:'center',inline:'center'}));
         });
     // :hov action
     window.addEventListener('pointerover',()=>{});
@@ -70,11 +70,11 @@
         // @chromium
         {
             const action=()=>{
-                window.document.documentElement.style.setProperty('width',`${window.innerWidth}px`);
+                window.document.documentElement.style.setProperty('min-width',`${window.innerWidth}px`);
                 if(!window.navigator.userAgent.match('Mobile')||(window.navigator.userAgent.match('Mobile')&&!window.document.activeElement.localName.match(/input|textarea/))){
-                    window.document.documentElement.style.setProperty('height',`${window.innerHeight}px`);
+                    window.document.documentElement.style.setProperty('min-height',`${window.innerHeight}px`);
                 }
-                if(window.parseInt(window.document.documentElement.style.getPropertyValue('height'))<=window.parseInt(window.document.documentElement.style.getPropertyValue('width'))){
+                if(window.parseInt(window.document.documentElement.style.getPropertyValue('min-height'))<=window.parseInt(window.document.documentElement.style.getPropertyValue('min-width'))){
                     tool.toggle_cls(window.document.documentElement,'ic_oe_orientation_landscape','ic_oe_orientation_portrait',true);
                 }else{
                     tool.toggle_cls(window.document.documentElement,'ic_oe_orientation_portrait','ic_oe_orientation_landscape',true);
