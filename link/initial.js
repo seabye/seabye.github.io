@@ -37,12 +37,10 @@
         window.document.documentElement.style.setProperty('background-color',`var(--ic_ve_color_white,${window.document.documentElement.style.getPropertyValue('background-color')?window.document.documentElement.style.getPropertyValue('background-color'):window.matchMedia('(prefers-color-scheme:dark)').matches?data.black?data.black:'#101010':data.white?data.white:'#FFFFFF'})`);
         window.document.body.style.setProperty('opacity','0');
         window.addEventListener('load',()=>{
-            window.setTimeout(()=>{
-                window.document.documentElement.style.removeProperty('background-color');
-                window.document.body.style.removeProperty('opacity');
-                if(!window.document.documentElement.style[0])window.document.documentElement.removeAttribute('style');
-                if(!window.document.body.style[0])window.document.body.removeAttribute('style');
-            },175);
+            window.document.documentElement.style.removeProperty('background-color');
+            window.document.body.style.removeProperty('opacity');
+            if(!window.document.documentElement.style[0])window.document.documentElement.removeAttribute('style');
+            if(!window.document.body.style[0])window.document.body.removeAttribute('style');
         });
     }
     // :hov action
@@ -53,9 +51,16 @@
             event.button!==2?window.document.documentElement.addEventListener('contextmenu',tool.stop):window.document.documentElement.removeEventListener('contextmenu',tool.stop);
         });
     }
-    // input blur
+    // input
     window.document.documentElement.addEventListener('pointerdown',event=>{
-        if(!event.target.localName.match(/input|textarea/))window.document.activeElement.blur();
+        if(!event.target.localName.match(/input|textarea/)){
+            window.document.activeElement.blur();
+            window.document.documentElement.style.removeProperty('height');
+            if(!window.document.documentElement.style[0])window.document.documentElement.removeAttribute('style');
+        }else{
+            window.document.documentElement.style.setProperty('height',`${window.innerHeight}px`);
+            event.target.scrollIntoView();
+        }
     });
     // tabindex
     window.document.documentElement.setAttribute('tabindex','-1');
