@@ -26,25 +26,29 @@
 // #library
 // #initial
     // display
-    {
-        let data={};
-        for(const item of window.document.scripts){
-            if(item.dataset.initial){
-                data=window.JSON.parse(item.dataset.initial.replace(/'/g,'"'));
-                break;
+        // ~background color
+        {
+            let data={};
+            for(const item of window.document.scripts){
+                if(item.dataset.initial){
+                    data=window.JSON.parse(item.dataset.initial.replace(/'/g,'"'));
+                    break;
+                }
             }
+            window.document.documentElement.style.setProperty('background-color',`var(--ic_ve_color_white,${window.document.documentElement.style.getPropertyValue('background-color')?window.document.documentElement.style.getPropertyValue('background-color'):window.matchMedia('(prefers-color-scheme:dark)').matches?data.black?data.black:'#101010':data.white?data.white:'#FFFFFF'})`);
+            window.document.body.style.setProperty('opacity','0');
         }
-        window.document.documentElement.style.setProperty('background-color',`var(--ic_ve_color_white,${window.document.documentElement.style.getPropertyValue('background-color')?window.document.documentElement.style.getPropertyValue('background-color'):window.matchMedia('(prefers-color-scheme:dark)').matches?data.black?data.black:'#101010':data.white?data.white:'#FFFFFF'})`);
-        window.document.body.style.setProperty('opacity','0');
-    }
-    window.addEventListener('load',()=>{
-        window.document.documentElement.style.removeProperty('background-color');
-        window.document.body.style.removeProperty('opacity');
-        if(!window.document.documentElement.style[0])window.document.documentElement.removeAttribute('style');
-        if(!window.document.body.style[0])window.document.body.removeAttribute('style');
-    });
+        window.addEventListener('load',()=>{
+            window.document.documentElement.style.removeProperty('background-color');
+            window.document.body.style.removeProperty('opacity');
+            if(!window.document.documentElement.style[0])window.document.documentElement.removeAttribute('style');
+            if(!window.document.body.style[0])window.document.body.removeAttribute('style');
+        });
         // @safari
         window.addEventListener('orientationchange',()=>{
+            tool.add3(()=>window.document.documentElement.scrollIntoView());
+        });
+        window.addEventListener('scroll',()=>{
             tool.add3(()=>window.document.documentElement.scrollIntoView());
         });
     // :hov action
@@ -63,7 +67,7 @@
         if(!event.target.localName.match(/input|textarea/))window.document.activeElement.blur();
     });
     window.addEventListener('orientationchange',()=>{
-        window.document.activeElement.blur();
+        if(window.document.activeElement.localName.match(/input|textarea/))window.document.activeElement.blur();
     });
     // orientation
         // @chromium
@@ -71,13 +75,15 @@
             const action=()=>{
                 window.setTimeout(()=>{
                     window.document.documentElement.style.setProperty('width',`${window.innerWidth}px`);
+                    if(!window.navigator.userAgent.match('Mobile')||(window.navigator.userAgent.match('Mobile')&&!window.document.activeElement.localName.match(/input|textarea/))){
+                        window.document.documentElement.style.setProperty('height',`${window.innerHeight}px`);
+                    }
+                    if(window.parseInt(window.document.documentElement.style.getPropertyValue('height'))<=window.parseInt(window.document.documentElement.style.getPropertyValue('width'))){
+                        tool.toggle_cls(window.document.documentElement,'ic_oe_orientation_landscape','ic_oe_orientation_portrait',true);
+                    }else{
+                        tool.toggle_cls(window.document.documentElement,'ic_oe_orientation_portrait','ic_oe_orientation_landscape',true);
+                    }
                 },175);
-                if(!window.document.activeElement.localName.match(/input|textarea/))window.document.documentElement.style.setProperty('height',`${window.innerHeight}px`);
-                if(window.parseInt(window.document.documentElement.style.getPropertyValue('height'))<=window.parseInt(window.document.documentElement.style.getPropertyValue('width'))){
-                    tool.toggle_cls(window.document.documentElement,'ic_oe_orientation_landscape','ic_oe_orientation_portrait',true);
-                }else{
-                    tool.toggle_cls(window.document.documentElement,'ic_oe_orientation_portrait','ic_oe_orientation_landscape',true);
-                }
             };
             window.addEventListener('load',action);
             window.addEventListener('resize',action);
@@ -187,6 +193,7 @@
 <meta name="apple-mobile-web-app-title" content="${option.title?option.title:''}">`
             );
         }else if(window.matchMedia('(prefers-color-scheme:dark)').addEventListener){
+            // ~theme color
             let theme_color=null;
             for(const item of window.document.head.children){
                 if(item.name==='theme-color'){

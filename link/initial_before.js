@@ -1,14 +1,14 @@
 'use strict';
 for(const item of window.document.scripts){
     if(item.dataset.initial){
-        // background color
+        // background color~
         const data=window.JSON.parse(item.dataset.initial.replace(/'/g,'"'));
         window.document.documentElement.style.setProperty('background-color',`var(--ic_ve_color_white,${window.matchMedia('(prefers-color-scheme:dark)').matches?data.black?data.black:'#101010':data.white?data.white:'#FFFFFF'})`);
         window.addEventListener('load',()=>{
             window.document.documentElement.style.removeProperty('background-color');
             if(!window.document.documentElement.style[0])window.document.documentElement.removeAttribute('style');
         });
-        // theme color
+        // theme color~
         if(!(window.navigator.userAgent.match('Safari')&&!window.navigator.userAgent.match('Chrome')&&!window.navigator.userAgent.match('Edg'))&&window.matchMedia('(prefers-color-scheme:dark)').addEventListener){
             const white='#E1E1E1';
             const black='#292929';
