@@ -70,17 +70,15 @@
         // @chromium
         {
             const action=()=>{
-                window.setTimeout(()=>{
-                    window.document.documentElement.style.setProperty('width',`${window.innerWidth}px`);
-                    if(!window.navigator.userAgent.match('Mobile')||(window.navigator.userAgent.match('Mobile')&&!window.document.activeElement.localName.match(/input|textarea/))){
-                        window.document.documentElement.style.setProperty('height',`${window.innerHeight}px`);
-                    }
-                    if(window.parseInt(window.document.documentElement.style.getPropertyValue('height'))<=window.parseInt(window.document.documentElement.style.getPropertyValue('width'))){
-                        tool.toggle_cls(window.document.documentElement,'ic_oe_orientation_landscape','ic_oe_orientation_portrait',true);
-                    }else{
-                        tool.toggle_cls(window.document.documentElement,'ic_oe_orientation_portrait','ic_oe_orientation_landscape',true);
-                    }
-                },175);
+                window.document.documentElement.style.setProperty('width',`${window.innerWidth}px`);
+                if(!window.navigator.userAgent.match('Mobile')||(window.navigator.userAgent.match('Mobile')&&!window.document.activeElement.localName.match(/input|textarea/))){
+                    window.document.documentElement.style.setProperty('height',`${window.innerHeight}px`);
+                }
+                if(window.parseInt(window.document.documentElement.style.getPropertyValue('height'))<=window.parseInt(window.document.documentElement.style.getPropertyValue('width'))){
+                    tool.toggle_cls(window.document.documentElement,'ic_oe_orientation_landscape','ic_oe_orientation_portrait',true);
+                }else{
+                    tool.toggle_cls(window.document.documentElement,'ic_oe_orientation_portrait','ic_oe_orientation_landscape',true);
+                }
             };
             window.addEventListener('load',action);
             window.addEventListener('resize',action);
