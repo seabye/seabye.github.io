@@ -45,9 +45,12 @@
             if(!window.document.body.style[0])window.document.body.removeAttribute('style');
         });
         // @safari
-        window.addEventListener('resize',()=>{
-            tool.add3(()=>window.document.documentElement.scrollIntoView({behavior:'smooth',block:'center',inline:'center'}));
-        });
+        {
+            const action=()=>tool.add3(()=>window.document.documentElement.scrollIntoView({behavior:'smooth',block:'center',inline:'center'}));
+            window.addEventListener('load',action);
+            window.addEventListener('orientationchange',action);
+            window.addEventListener('resize',action);
+        }
     // :hov action
     window.addEventListener('pointerover',()=>{});
     // context menu@chromium
@@ -88,6 +91,7 @@
                 }
             };
             window.addEventListener('load',action);
+            window.addEventListener('orientationchange',action);
             window.addEventListener('resize',action);
         }
         if(!(window.navigator.userAgent.match('Safari')&&!window.navigator.userAgent.match('Chrome')&&!window.navigator.userAgent.match('Edg'))){
@@ -110,6 +114,8 @@
             });
         };
         new MutationObserver(action).observe(window.document.documentElement,{attributes:true,childList:true,subtree:true});
+        window.addEventListener('load',action);
+        window.addEventListener('orientationchange',action);
         window.addEventListener('resize',action);
     }
 // #block
