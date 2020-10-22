@@ -51,11 +51,7 @@
             event.button!==2?window.document.documentElement.addEventListener('contextmenu',tool.stop):window.document.documentElement.removeEventListener('contextmenu',tool.stop);
         });
     }
-    // input focus&blur
-    window.document.documentElement.addEventListener('pointerdown',event=>{
-        if(!event.target.localName.match(/input|textarea/))window.document.activeElement.blur();
-    });
-    window.addEventListener('orientationchange',window.document.activeElement.blur());
+    // input
     window.document.documentElement.addEventListener('pointerdown',event=>{
         if(event.target.localName.match(/input|textarea/)){
             window.setTimeout(()=>{
@@ -63,7 +59,11 @@
             },700);
         }
     });
-    // orientation
+    window.document.documentElement.addEventListener('pointerdown',event=>{
+        if(!event.target.localName.match(/input|textarea/))window.document.activeElement.blur();
+    });
+    window.addEventListener('orientationchange',window.document.activeElement.blur());
+    // orientation@android
     {
         const action=()=>{
             window.document.documentElement.style.setProperty('width',`${window.innerWidth}px`);
