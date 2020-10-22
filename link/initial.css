@@ -148,8 +148,7 @@
                     }
                 }
                 @media(orientation:landscape) {
-                    html:not([style*="height"])
-                    >body {
+                    body {
                         animation: ic_at_landscape_body 175ms cubic-bezier(0.4,0,0.2,1) 175ms both;
                     }
                 }
@@ -162,8 +161,7 @@
                     }
                 }
                 @media(orientation:portrait) {
-                    html:not([style*="height"])
-                    >body {
+                    body {
                         animation: ic_at_portrait_body 175ms cubic-bezier(0.4,0,0.2,1) 175ms both;
                     }
                 }
