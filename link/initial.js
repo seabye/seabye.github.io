@@ -62,7 +62,9 @@
     window.document.documentElement.addEventListener('pointerdown',event=>{
         if(!event.target.localName.match(/input|textarea/))window.document.activeElement.blur();
     });
-    window.addEventListener('orientationchange',window.document.activeElement.blur());
+    window.addEventListener('orientationchange',()=>{
+        window.document.activeElement.blur();
+    });
     // orientation@android
     {
         const action=()=>{
