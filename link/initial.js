@@ -54,9 +54,12 @@
     // input
     window.document.documentElement.addEventListener('pointerdown',event=>{
         if(event.target.localName.match(/input|textarea/)){
-            window.setTimeout(()=>{
-                event.target.scrollIntoView({behavior:'smooth',block:'center',inline:'center'});
-            },700);
+            const action=()=>event.target.scrollIntoView({behavior:'smooth',block:'center',inline:'center'});
+            action();
+            window.setTimeout(action,175);
+            window.setTimeout(action,350);
+            window.setTimeout(action,700);
+            window.setTimeout(action,1050);
         }
     });
     window.document.documentElement.addEventListener('pointerdown',event=>{
