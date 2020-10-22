@@ -60,7 +60,7 @@
     // tabindex
     window.document.documentElement.setAttribute('tabindex','-1');
     window.document.body.setAttribute('tabindex','-1');
-    // scroll@safari mobile
+    // scroll@safari
     if(!window.CSS.supports('overscroll-behavior:contain')){
         const action=()=>{
             window.document.querySelectorAll('*').forEach(element=>{
