@@ -88,7 +88,12 @@
         }
         // @safari
         window.addEventListener('orientationchange',()=>{
-            window.document.documentElement.scrollIntoView();
+            const action=()=>window.document.documentElement.scrollIntoView();
+            action();
+            window.setTimeout(action,175);
+            window.setTimeout(action,350);
+            window.setTimeout(action,700);
+            window.setTimeout(action,1050);
         });
     // tabindex
     window.document.documentElement.setAttribute('tabindex','-1');
