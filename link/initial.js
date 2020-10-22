@@ -69,9 +69,9 @@
         // @chromium
         {
             const action=()=>{
-                // window.document.documentElement.style.setProperty('width',`${window.innerWidth}px`);
-                    // @safari
-                    tool.add3(()=>window.document.documentElement.style.setProperty('width',`${window.innerWidth}px`));
+                window.setTimeout(()=>{
+                    window.document.documentElement.style.setProperty('width',`${window.innerWidth}px`);
+                },175);
                 if(!window.document.activeElement.localName.match(/input|textarea/))window.document.documentElement.style.setProperty('height',`${window.innerHeight}px`);
                 if(window.parseInt(window.document.documentElement.style.getPropertyValue('height'))<=window.parseInt(window.document.documentElement.style.getPropertyValue('width'))){
                     tool.toggle_cls(window.document.documentElement,'ic_oe_orientation_landscape','ic_oe_orientation_portrait',true);
