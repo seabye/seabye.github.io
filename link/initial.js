@@ -45,7 +45,7 @@
             if(!window.document.body.style[0])window.document.body.removeAttribute('style');
         });
         // @safari
-        window.addEventListener('orientationchange',()=>{
+        window.addEventListener('resize',()=>{
             tool.add3(()=>window.document.documentElement.scrollIntoView({behavior:'smooth',block:'center',inline:'center'}));
         });
     // :hov action
