@@ -46,7 +46,7 @@
         });
     }
     // :hov action
-    window.addEventListener('touchstart',()=>{});
+    window.addEventListener('pointerover',()=>{});
     // context menu@chromium
     if(!window.CSS.supports('-webkit-touch-callout:none')){
         window.document.documentElement.addEventListener('pointerdown',event=>{
@@ -62,22 +62,20 @@
     window.document.body.setAttribute('tabindex','-1');
     // scroll@safari mobile
     if(!window.CSS.supports('overscroll-behavior:contain')){
-        window.document.documentElement.addEventListener('touchstart',()=>{
+        const action=()=>{
             window.document.querySelectorAll('*').forEach(element=>{
-                if(window.getComputedStyle(element).overflowY.match(/auto|overlay|scroll/)){
+                if(window.getComputedStyle(element).overflowY.match(/auto|scroll/)){
                     if(element.scrollHeight===element.clientHeight){
-                        // element.removeEventListener('touchmove',tool.stop);
-                        // element.addEventListener('touchmove',tool.stop);
-                        element.style.removeProperty('touch-action');
                         element.style.setProperty('touch-action','pan-x');
                     }else{
-                        // element.removeEventListener('touchmove',tool.stop);
                         element.style.removeProperty('touch-action');
                         if(!element.style[0])element.removeAttribute('style');
                     }
                 }
             });
-        });
+        };
+        new MutationObserver(action).observe(window.document.documentElement,{attributes:true,childList:true,subtree:true});
+        window.addEventListener('resize',action);
     }
 // #block
     // tool
@@ -101,12 +99,12 @@
         const user_agent=window.navigator.userAgent;
         const element_class=window.document.documentElement.classList;
         if(user_agent.match('Unix'))element_class.add('ic_oe_system_unix');
-        if(user_agent.match('Mac OS')&&!user_agent.match('iPhone')&&!user_agent.match('iPad'))element_class.add('ic_oe_system_macos');
-        if(user_agent.match('Windows'))element_class.add('ic_oe_system_windows');
+        if(user_agent.match('Mac OS')&&!user_agent.match('iPhone')&&!user_agent.match('iPad'))element_class.add('ic_oe_system_brand_apple','ic_oe_system_macos');
+        if(user_agent.match('Windows'))element_class.add('ic_oe_system_brand_microsoft','ic_oe_system_windows');
         if(user_agent.match('Linux')&&!user_agent.match('Android'))element_class.add('ic_oe_system_linux');
-        if(user_agent.match('CrOS'))element_class.add('ic_oe_system_chromeos');
-        if(user_agent.match(/iPhone|iPad/))element_class.add('ic_oe_system_ios');
-        if(user_agent.match('Android'))element_class.add('ic_oe_system_android');
+        if(user_agent.match('CrOS'))element_class.add('ic_oe_system_brand_google','ic_oe_system_chromeos');
+        if(user_agent.match(/iPhone|iPad/))element_class.add('ic_oe_system_brand_apple','ic_oe_system_ios');
+        if(user_agent.match('Android'))element_class.add('ic_oe_system_brand_google','ic_oe_system_android');
         if(user_agent.match('Firefox'))element_class.add('ic_oe_browser_firefox');
         if(user_agent.match('Safari')&&!user_agent.match('Chrome')&&!user_agent.match('Edg'))element_class.add('ic_oe_browser_safari');
         if(user_agent.match('Chrome')&&!user_agent.match('Edg'))element_class.add('ic_oe_browser_chrome');
