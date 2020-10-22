@@ -45,12 +45,7 @@
     });
         // @safari
         window.addEventListener('orientationchange',()=>{
-            const action=()=>window.document.documentElement.scrollIntoView();
-            action();
-            window.setTimeout(action,175);
-            window.setTimeout(action,350);
-            window.setTimeout(action,700);
-            window.setTimeout(action,1050);
+            tool.add3(()=>window.document.documentElement.scrollIntoView());
         });
     // :hov action
     window.addEventListener('pointerover',()=>{});
@@ -74,11 +69,9 @@
         // @chromium
         {
             const action=()=>{
-                window.document.documentElement.style.setProperty('width',`${window.innerWidth}px`);
+                // window.document.documentElement.style.setProperty('width',`${window.innerWidth}px`);
                     // @safari
-                    window.setTimeout(()=>{
-                        window.document.documentElement.style.setProperty('width',`${window.innerWidth}px`);
-                    },175);
+                    tool.add3(()=>window.document.documentElement.style.setProperty('width',`${window.innerWidth}px`));
                 if(!window.document.activeElement.localName.match(/input|textarea/))window.document.documentElement.style.setProperty('height',`${window.innerHeight}px`);
                 if(window.parseInt(window.document.documentElement.style.getPropertyValue('height'))<=window.parseInt(window.document.documentElement.style.getPropertyValue('width'))){
                     tool.toggle_cls(window.document.documentElement,'ic_oe_orientation_landscape','ic_oe_orientation_portrait',true);
@@ -91,14 +84,7 @@
         }
         if(!(window.navigator.userAgent.match('Safari')&&!window.navigator.userAgent.match('Chrome')&&!window.navigator.userAgent.match('Edg'))){
             window.document.documentElement.addEventListener('pointerdown',event=>{
-                if(event.target.localName.match(/input|textarea/)){
-                    const action=()=>event.target.scrollIntoView({behavior:'smooth',block:'center',inline:'center'});
-                    action();
-                    window.setTimeout(action,175);
-                    window.setTimeout(action,350);
-                    window.setTimeout(action,700);
-                    window.setTimeout(action,1050);
-                }
+                if(event.target.localName.match(/input|textarea/))tool.add3(()=>event.target.scrollIntoView({behavior:'smooth',block:'center',inline:'center'}));
             });
         }
     // scroll@safari
@@ -149,6 +135,12 @@
             }else{
                 element.classList.contains(cls)?element.classList.remove(cls):element.classList.add(cls);
             }
+        }
+        static add3(func){
+            func();
+            window.setTimeout(func,175);
+            window.setTimeout(func,350);
+            window.setTimeout(func,700);
         }
     }
 // #build
