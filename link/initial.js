@@ -48,9 +48,6 @@
         window.addEventListener('orientationchange',()=>{
             tool.add3(()=>window.document.documentElement.scrollIntoView());
         });
-        window.addEventListener('scroll',()=>{
-            tool.add3(()=>window.document.documentElement.scrollIntoView());
-        });
     // :hov action
     window.addEventListener('pointerover',()=>{});
     // context menu@chromium
