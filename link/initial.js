@@ -74,6 +74,7 @@
         // @chromium
         {
             const action=()=>{
+                window.document.documentElement.style.setProperty('width',`${window.innerWidth}px`);
                 window.setTimeout(()=>{
                     window.document.documentElement.style.setProperty('width',`${window.innerWidth}px`);
                 },175);
