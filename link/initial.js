@@ -51,10 +51,25 @@
             event.button!==2?window.document.documentElement.addEventListener('contextmenu',tool.stop):window.document.documentElement.removeEventListener('contextmenu',tool.stop);
         });
     }
-    // input
+    // input blur
     window.document.documentElement.addEventListener('pointerdown',event=>{
         if(!event.target.localName.match(/input|textarea/))window.document.activeElement.blur();
     });
+    window.addEventListener('orientationchange',window.document.activeElement.blur());
+    // orientation
+    {
+        const action=()=>{
+            window.document.documentElement.style.setProperty('width',`${window.innerWidth}px`);
+            if(!window.document.activeElement.localName.match(/input|textarea/))window.document.documentElement.style.setProperty('height',`${window.innerHeight}px`);
+            if(window.parseInt(window.document.documentElement.style.getPropertyValue('height'))<=window.parseInt(window.document.documentElement.style.getPropertyValue('width'))){
+                tool.toggle_cls(window.document.documentElement,'ic_oe_orientation_landscape','ic_oe_orientation_portrait',true);
+            }else{
+                tool.toggle_cls(window.document.documentElement,'ic_oe_orientation_portrait','ic_oe_orientation_landscape',true);
+            }
+        };
+        window.addEventListener('load',action);
+        window.addEventListener('resize',action);
+    }
     // tabindex
     window.document.documentElement.setAttribute('tabindex','-1');
     window.document.body.setAttribute('tabindex','-1');
@@ -81,6 +96,31 @@
         static stop(event){
             event.stopPropagation();
             event.preventDefault();
+        }
+        static toggle_cls(element,cls,cls2='',replace=false){
+            if(cls2){
+                switch(replace){
+                    case false:
+                        if(element.classList.contains(cls)){
+                            element.classList.remove(cls);
+                            element.classList.add(cls2);
+                        }else if(element.classList.contains(cls2)){
+                            element.classList.remove(cls2);
+                            element.classList.add(cls);
+                        }else{
+                            element.classList.add(cls);
+                        }
+                        break;
+                    case true:
+                        element.classList.remove(cls2);
+                        element.classList.add(cls);
+                        break;
+                    default:
+                        break;
+                }
+            }else{
+                element.classList.contains(cls)?element.classList.remove(cls):element.classList.add(cls);
+            }
         }
     }
 // #build
