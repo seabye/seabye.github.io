@@ -70,14 +70,21 @@
         // @chromium
         {
             const action=()=>{
-                window.document.documentElement.style.setProperty('min-width',`${window.innerWidth}px`);
-                if(!window.navigator.userAgent.match('Mobile')||(window.navigator.userAgent.match('Mobile')&&!window.document.activeElement.localName.match(/input|textarea/))){
-                    window.document.documentElement.style.setProperty('min-height',`${window.innerHeight}px`);
-                }
+                const set=head=>{
+                    window.document.documentElement.style.setProperty(`${head}-width`,`${window.innerWidth}px`);
+                    if(!window.navigator.userAgent.match('Mobile')||(window.navigator.userAgent.match('Mobile')&&!window.document.activeElement.localName.match(/input|textarea/))){
+                        window.document.documentElement.style.setProperty(`${head}-height`,`${window.innerHeight}px`);
+                    }
+                };
+                set('min');
                 if(window.parseInt(window.document.documentElement.style.getPropertyValue('min-height'))<=window.parseInt(window.document.documentElement.style.getPropertyValue('min-width'))){
                     tool.toggle_cls(window.document.documentElement,'ic_oe_orientation_landscape','ic_oe_orientation_portrait',true);
+                    set('max');
                 }else{
                     tool.toggle_cls(window.document.documentElement,'ic_oe_orientation_portrait','ic_oe_orientation_landscape',true);
+                    window.document.documentElement.style.removeProperty('max-width');
+                    window.document.documentElement.style.removeProperty('max-height');
+                    if(!window.document.documentElement.style[0])window.document.documentElement.removeAttribute('style');
                 }
             };
             window.addEventListener('load',action);
