@@ -207,7 +207,7 @@
     }
     ::-webkit-scrollbar-thumb {
         border: 3px solid var(--ic_ve_color_transparent);
-        border-radius: 90px;
+        border-radius: 10px;
         background-color: var(--ic_ve_color_black2_opacity);
         background-clip: padding-box;
     }
