@@ -73,6 +73,7 @@
         // @chromium
         {
             const action=()=>{
+                window.document.documentElement.style.setProperty('display','none');
                 const set=head=>{
                     window.document.documentElement.style.setProperty(`${head}-width`,`${window.innerWidth}px`);
                     if(!window.navigator.userAgent.match('Mobile')||(window.navigator.userAgent.match('Mobile')&&!window.document.activeElement.localName.match(/input|textarea/))){
@@ -89,6 +90,8 @@
                     if(!window.document.documentElement.style[0])window.document.documentElement.removeAttribute('style');
                     tool.toggle_cls(window.document.documentElement,'ic_oe_orientation_portrait','ic_oe_orientation_landscape',true);
                 }
+                window.document.documentElement.style.removeProperty('display');
+                if(!window.document.documentElement.style[0])window.document.body.removeAttribute('style');
             };
             window.addEventListener('load',action);
             window.addEventListener('resize',action);
