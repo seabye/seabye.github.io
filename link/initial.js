@@ -46,9 +46,9 @@
         });
         // @safari
         {
-            const action=()=>tool.add_run(()=>window.document.documentElement.scrollIntoView({behavior:'smooth',block:'center',inline:'center'}));
+            const action=()=>window.setTimeout(()=>window.document.documentElement.scrollIntoView({behavior:'smooth',block:'center',inline:'center'},350));
             window.addEventListener('load',action);
-            window.addEventListener('orientationchange',()=>tool.add_run(action));
+            window.addEventListener('orientationchange',()=>window.setTimeout(action,350));
             window.addEventListener('resize',action);
         }
     // :hov action
@@ -91,12 +91,12 @@
                 }
             };
             window.addEventListener('load',action);
-            window.addEventListener('orientationchange',()=>tool.add_run(action));
+            window.addEventListener('orientationchange',()=>window.setTimeout(action,350));
             window.addEventListener('resize',action);
         }
         if(!(window.navigator.userAgent.match('Safari')&&!window.navigator.userAgent.match('Chrome')&&!window.navigator.userAgent.match('Edg'))){
             window.document.documentElement.addEventListener('pointerdown',event=>{
-                if(event.target.localName.match(/input|textarea/))tool.add_run(()=>event.target.scrollIntoView({behavior:'smooth',block:'center',inline:'center'}));
+                if(event.target.localName.match(/input|textarea/))window.setTimeout(()=>event.target.scrollIntoView({behavior:'smooth',block:'center',inline:'center'},350));
             });
         }
     // scroll@safari
@@ -115,7 +115,7 @@
         };
         new MutationObserver(action).observe(window.document.documentElement,{attributes:true,childList:true,subtree:true});
         window.addEventListener('load',action);
-        window.addEventListener('orientationchange',()=>tool.add_run(action));
+        window.addEventListener('orientationchange',()=>window.setTimeout(action,350));
         window.addEventListener('resize',action);
     }
 // #block
@@ -149,9 +149,6 @@
             }else{
                 element.classList.contains(cls)?element.classList.remove(cls):element.classList.add(cls);
             }
-        }
-        static add_run(func){
-            window.setTimeout(func,350);
         }
     }
 // #build
