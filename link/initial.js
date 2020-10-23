@@ -44,33 +44,7 @@
             if(!window.document.documentElement.style[0])window.document.documentElement.removeAttribute('style');
             if(!window.document.body.style[0])window.document.body.removeAttribute('style');
         });
-        // @safari
-        {
-            const action=()=>window.setTimeout(()=>window.document.documentElement.scrollIntoView({behavior:'smooth',block:'center',inline:'center'},350));
-            window.addEventListener('load',action);
-            window.addEventListener('resize',action);
-            window.addEventListener('orientationchange',()=>window.setTimeout(action,350));
-        }
-    // :hov action
-    window.addEventListener('pointerover',()=>{});
-    // context menu@chromium
-    if(!window.CSS.supports('-webkit-touch-callout:none')){
-        window.document.documentElement.addEventListener('pointerdown',event=>{
-            event.button!==2?window.document.documentElement.addEventListener('contextmenu',tool.stop):window.document.documentElement.removeEventListener('contextmenu',tool.stop);
-        });
-    }
-    // tabindex
-    window.document.documentElement.setAttribute('tabindex','-1');
-    window.document.body.setAttribute('tabindex','-1');
-    // input
-    window.document.documentElement.addEventListener('pointerdown',event=>{
-        if(!event.target.localName.match(/input|textarea/))window.document.activeElement.blur();
-    });
-    window.addEventListener('orientationchange',()=>{
-        if(window.document.activeElement.localName.match(/input|textarea/))window.document.activeElement.blur();
-    });
-    // orientation
-        // @chromium
+        // orientation
         {
             const action=()=>{
                 window.document.body.style.setProperty('display','none');
@@ -93,17 +67,40 @@
                 window.setTimeout(()=>{
                     window.document.body.style.removeProperty('display');
                     if(!window.document.body.style[0])window.document.body.removeAttribute('style');
-                },350);
+                },0);
             };
             window.addEventListener('load',action);
             window.addEventListener('resize',action);
             window.addEventListener('orientationchange',()=>window.setTimeout(action,350));
         }
-        if(!(window.navigator.userAgent.match('Safari')&&!window.navigator.userAgent.match('Chrome')&&!window.navigator.userAgent.match('Edg'))){
+        if(window.navigator.userAgent.match('Safari')&&!window.navigator.userAgent.match('Chrome')&&!window.navigator.userAgent.match('Edg')){
+            const action=()=>window.setTimeout(()=>window.document.documentElement.scrollIntoView({behavior:'smooth',block:'center',inline:'center'},350));
+            window.addEventListener('load',action);
+            window.addEventListener('resize',action);
+            window.addEventListener('orientationchange',()=>window.setTimeout(action,350));
+        }else{
             window.document.documentElement.addEventListener('pointerdown',event=>{
                 if(event.target.localName.match(/input|textarea/))window.setTimeout(()=>event.target.scrollIntoView({behavior:'smooth',block:'center',inline:'center'},350));
             });
         }
+    // :hov action
+    window.addEventListener('pointerover',()=>{});
+    // context menu@chromium
+    if(!window.CSS.supports('-webkit-touch-callout:none')){
+        window.document.documentElement.addEventListener('pointerdown',event=>{
+            event.button!==2?window.document.documentElement.addEventListener('contextmenu',tool.stop):window.document.documentElement.removeEventListener('contextmenu',tool.stop);
+        });
+    }
+    // tabindex
+    window.document.documentElement.setAttribute('tabindex','-1');
+    window.document.body.setAttribute('tabindex','-1');
+    // input
+    window.document.documentElement.addEventListener('pointerdown',event=>{
+        if(!event.target.localName.match(/input|textarea/))window.document.activeElement.blur();
+    });
+    window.addEventListener('orientationchange',()=>{
+        if(window.document.activeElement.localName.match(/input|textarea/))window.document.activeElement.blur();
+    });
     // scroll@safari
     if(!window.CSS.supports('overscroll-behavior:contain')){
         const action=()=>{
