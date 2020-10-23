@@ -80,6 +80,9 @@
             window.addEventListener('load',action);
             window.addEventListener('resize',action);
             window.addEventListener('orientationchange',()=>window.setTimeout(action,350));
+            window.document.documentElement.addEventListener('pointerdown',event=>{
+                if(!event.target.localName.match(/input|textarea/))action();
+            });
         }else{
             window.document.documentElement.addEventListener('pointerdown',event=>{
                 if(event.target.localName.match(/input|textarea/)){
