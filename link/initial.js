@@ -79,7 +79,6 @@
                         window.document.documentElement.style.setProperty(`${head}-height`,`${window.innerHeight}px`);
                     }
                 };
-                set('min');
                 if(window.parseInt(window.document.documentElement.style.getPropertyValue('min-height'))<=window.parseInt(window.document.documentElement.style.getPropertyValue('min-width'))){
                     tool.toggle_cls(window.document.documentElement,'ic_oe_orientation_landscape','ic_oe_orientation_portrait',true);
                     set('max');
@@ -89,6 +88,7 @@
                     window.document.documentElement.style.removeProperty('max-height');
                     if(!window.document.documentElement.style[0])window.document.documentElement.removeAttribute('style');
                 }
+                set('min');
             };
             window.addEventListener('load',action);
             window.addEventListener('orientationchange',()=>tool.add_run(action));
