@@ -46,9 +46,9 @@
         });
         // @safari
         {
-            const action=()=>tool.add3(()=>window.document.documentElement.scrollIntoView({behavior:'smooth',block:'center',inline:'center'}));
+            const action=()=>tool.add_run(()=>window.document.documentElement.scrollIntoView({behavior:'smooth',block:'center',inline:'center'}));
             window.addEventListener('load',action);
-            window.addEventListener('orientationchange',()=>tool.add3(action));
+            window.addEventListener('orientationchange',()=>tool.add_run(action));
             window.addEventListener('resize',action);
         }
     // :hov action
@@ -91,12 +91,12 @@
                 }
             };
             window.addEventListener('load',action);
-            window.addEventListener('orientationchange',()=>tool.add3(action));
+            window.addEventListener('orientationchange',()=>tool.add_run(action));
             window.addEventListener('resize',action);
         }
         if(!(window.navigator.userAgent.match('Safari')&&!window.navigator.userAgent.match('Chrome')&&!window.navigator.userAgent.match('Edg'))){
             window.document.documentElement.addEventListener('pointerdown',event=>{
-                if(event.target.localName.match(/input|textarea/))tool.add3(()=>event.target.scrollIntoView({behavior:'smooth',block:'center',inline:'center'}));
+                if(event.target.localName.match(/input|textarea/))tool.add_run(()=>event.target.scrollIntoView({behavior:'smooth',block:'center',inline:'center'}));
             });
         }
     // scroll@safari
@@ -115,7 +115,7 @@
         };
         new MutationObserver(action).observe(window.document.documentElement,{attributes:true,childList:true,subtree:true});
         window.addEventListener('load',action);
-        window.addEventListener('orientationchange',()=>tool.add3(action));
+        window.addEventListener('orientationchange',()=>tool.add_run(action));
         window.addEventListener('resize',action);
     }
 // #block
@@ -150,11 +150,12 @@
                 element.classList.contains(cls)?element.classList.remove(cls):element.classList.add(cls);
             }
         }
-        static add3(func){
+        static add_run(func){
             func();
             window.setTimeout(func,175);
             window.setTimeout(func,350);
             window.setTimeout(func,700);
+            window.setTimeout(func,1050);
         }
     }
 // #build
