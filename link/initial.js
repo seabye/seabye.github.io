@@ -82,13 +82,13 @@
                 };
                 await set('min');
                 if(window.parseInt(window.document.documentElement.style.getPropertyValue('min-height'))<=window.parseInt(window.document.documentElement.style.getPropertyValue('min-width'))){
-                    tool.toggle_cls(window.document.documentElement,'ic_oe_orientation_landscape','ic_oe_orientation_portrait',true);
                     set('max');
+                    tool.toggle_cls(window.document.documentElement,'ic_oe_orientation_landscape','ic_oe_orientation_portrait',true);
                 }else{
-                    tool.toggle_cls(window.document.documentElement,'ic_oe_orientation_portrait','ic_oe_orientation_landscape',true);
                     window.document.documentElement.style.removeProperty('max-width');
                     window.document.documentElement.style.removeProperty('max-height');
                     if(!window.document.documentElement.style[0])window.document.documentElement.removeAttribute('style');
+                    tool.toggle_cls(window.document.documentElement,'ic_oe_orientation_portrait','ic_oe_orientation_landscape',true);
                 }
             };
             window.addEventListener('load',action);
