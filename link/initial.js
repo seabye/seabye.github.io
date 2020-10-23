@@ -73,6 +73,8 @@
         // @chromium
         {
             const action=()=>{
+                window.document.documentElement.style.setProperty('background-color',`var(--ic_ve_color_white,${window.document.documentElement.style.getPropertyValue('background-color')?window.document.documentElement.style.getPropertyValue('background-color'):window.matchMedia('(prefers-color-scheme:dark)').matches?data.black?data.black:'#101010':data.white?data.white:'#FFFFFF'})`);
+                window.document.body.style.setProperty('opacity','0');
                 const set=head=>{
                     window.document.documentElement.style.setProperty(`${head}-width`,`${window.innerWidth}px`);
                     if(!window.navigator.userAgent.match('Mobile')||(window.navigator.userAgent.match('Mobile')&&!window.document.activeElement.localName.match(/input|textarea/))){
@@ -83,11 +85,19 @@
                 if(window.parseInt(window.document.documentElement.style.getPropertyValue('min-height'))<=window.parseInt(window.document.documentElement.style.getPropertyValue('min-width'))){
                     set('max');
                     tool.toggle_cls(window.document.documentElement,'ic_oe_orientation_landscape','ic_oe_orientation_portrait',true);
+                    window.document.documentElement.style.removeProperty('background-color');
+                    window.document.body.style.removeProperty('opacity');
+                    if(!window.document.documentElement.style[0])window.document.documentElement.removeAttribute('style');
+                    if(!window.document.body.style[0])window.document.body.removeAttribute('style');
                 }else{
                     window.document.documentElement.style.removeProperty('max-width');
                     window.document.documentElement.style.removeProperty('max-height');
                     if(!window.document.documentElement.style[0])window.document.documentElement.removeAttribute('style');
                     tool.toggle_cls(window.document.documentElement,'ic_oe_orientation_portrait','ic_oe_orientation_landscape',true);
+                    window.document.documentElement.style.removeProperty('background-color');
+                    window.document.body.style.removeProperty('opacity');
+                    if(!window.document.documentElement.style[0])window.document.documentElement.removeAttribute('style');
+                    if(!window.document.body.style[0])window.document.body.removeAttribute('style');
                 }
             };
             window.addEventListener('load',action);
