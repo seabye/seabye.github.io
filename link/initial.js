@@ -76,13 +76,17 @@
             window.addEventListener('orientationchange',event=>window.setTimeout(action(event),350));
         }
         if(window.navigator.userAgent.match('Safari')&&!window.navigator.userAgent.match('Chrome')&&!window.navigator.userAgent.match('Edg')){
-            const action=()=>window.setTimeout(()=>window.document.documentElement.scrollIntoView({behavior:'smooth',block:'center',inline:'center'}),350);
+            const action=()=>window.document.documentElement.scrollIntoView({behavior:'smooth',block:'center',inline:'center'});
             window.addEventListener('load',action);
             window.addEventListener('resize',action);
             window.addEventListener('orientationchange',()=>window.setTimeout(action,350));
         }else{
             window.document.documentElement.addEventListener('pointerdown',event=>{
-                if(event.target.localName.match(/input|textarea/))window.setTimeout(()=>event.target.scrollIntoView({behavior:'smooth',block:'center',inline:'center'}),350);
+                if(event.target.localName.match(/input|textarea/)){
+                    const action=()=>event.target.scrollIntoView({behavior:'smooth',block:'center',inline:'center'});
+                    action();
+                    window.setTimeout(()=>action,350);
+                }
             });
         }
     // :hov action
