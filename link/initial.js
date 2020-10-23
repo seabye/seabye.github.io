@@ -67,7 +67,7 @@
                 window.setTimeout(()=>{
                     window.document.body.style.removeProperty('display');
                     if(!window.document.body.style[0])window.document.body.removeAttribute('style');
-                },0);
+                },350);
             };
             window.addEventListener('load',action);
             window.addEventListener('resize',action);
