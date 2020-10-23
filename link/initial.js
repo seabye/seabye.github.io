@@ -78,6 +78,7 @@
                     if(!window.navigator.userAgent.match('Mobile')||(window.navigator.userAgent.match('Mobile')&&!window.document.activeElement.localName.match(/input|textarea/))){
                         window.document.documentElement.style.setProperty(`${head}-height`,`${window.innerHeight}px`);
                     }
+                    return true;
                 };
                 await set('min');
                 if(window.parseInt(window.document.documentElement.style.getPropertyValue('min-height'))<=window.parseInt(window.document.documentElement.style.getPropertyValue('min-width'))){
