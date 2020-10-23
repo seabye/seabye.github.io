@@ -80,9 +80,6 @@
             window.addEventListener('load',action);
             window.addEventListener('resize',action);
             window.addEventListener('orientationchange',()=>window.setTimeout(action,350));
-            window.document.documentElement.addEventListener('pointerdown',event=>{
-                if(!event.target.localName.match(/input|textarea/))action();
-            });
         }else{
             window.document.documentElement.addEventListener('pointerdown',event=>{
                 if(event.target.localName.match(/input|textarea/)){
@@ -104,7 +101,10 @@
     window.document.body.setAttribute('tabindex','-1');
     // input
     window.document.documentElement.addEventListener('pointerdown',event=>{
-        if(!event.target.localName.match(/input|textarea/))window.document.activeElement.blur();
+        if(!event.target.localName.match(/input|textarea/)){
+            window.document.activeElement.blur();
+            window.document.documentElement.scrollIntoView({behavior:'smooth',block:'center',inline:'center'});
+        };
     });
     window.addEventListener('orientationchange',()=>{
         if(window.document.activeElement.localName.match(/input|textarea/))window.document.activeElement.blur();
