@@ -84,7 +84,7 @@
             window.document.documentElement.addEventListener('pointerdown',event=>{
                 if(event.target.localName.match(/input|textarea/)){
                     const action=event=>event.target.scrollIntoView({behavior:'smooth',block:'center',inline:'center'});
-                    window.setTimeout(()=>action(event),700);
+                    window.setTimeout(event=>action(event),700);
                 }
             });
         }
