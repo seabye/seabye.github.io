@@ -103,7 +103,7 @@
     window.document.documentElement.addEventListener('pointerdown',event=>{
         if(!event.target.localName.match(/input|textarea/)){
             window.document.activeElement.blur();
-            window.document.documentElement.scrollIntoView({behavior:'smooth',block:'center',inline:'center'});
+            window.setTimeout(()=>window.document.documentElement.scrollIntoView({behavior:'smooth',block:'center',inline:'center'}),350);
         };
     });
     window.addEventListener('orientationchange',()=>{
