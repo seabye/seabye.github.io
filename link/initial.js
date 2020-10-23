@@ -90,8 +90,10 @@
                     if(!window.document.documentElement.style[0])window.document.documentElement.removeAttribute('style');
                     tool.toggle_cls(window.document.documentElement,'ic_oe_orientation_portrait','ic_oe_orientation_landscape',true);
                 }
-                window.document.body.style.removeProperty('display');
-                if(!window.document.body.style[0])window.document.body.removeAttribute('style');
+                window.setTimeout(()=>{
+                    window.document.body.style.removeProperty('display');
+                    if(!window.document.body.style[0])window.document.body.removeAttribute('style');
+                },350);
             };
             window.addEventListener('load',action);
             window.addEventListener('resize',action);
