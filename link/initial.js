@@ -48,8 +48,8 @@
         {
             const action=()=>window.setTimeout(()=>window.document.documentElement.scrollIntoView({behavior:'smooth',block:'center',inline:'center'},350));
             window.addEventListener('load',action);
-            window.addEventListener('orientationchange',()=>window.setTimeout(action,350));
             window.addEventListener('resize',action);
+            window.addEventListener('orientationchange',()=>window.setTimeout(action,350));
         }
     // :hov action
     window.addEventListener('pointerover',()=>{});
@@ -91,8 +91,8 @@
                 }
             };
             window.addEventListener('load',action);
-            window.addEventListener('orientationchange',()=>window.setTimeout(action,350));
             window.addEventListener('resize',action);
+            window.addEventListener('orientationchange',()=>window.setTimeout(action,350));
         }
         if(!(window.navigator.userAgent.match('Safari')&&!window.navigator.userAgent.match('Chrome')&&!window.navigator.userAgent.match('Edg'))){
             window.document.documentElement.addEventListener('pointerdown',event=>{
@@ -115,8 +115,8 @@
         };
         new MutationObserver(action).observe(window.document.documentElement,{attributes:true,childList:true,subtree:true});
         window.addEventListener('load',action);
-        window.addEventListener('orientationchange',()=>window.setTimeout(action,350));
         window.addEventListener('resize',action);
+        window.addEventListener('orientationchange',()=>window.setTimeout(action,350));
     }
 // #block
     // tool
