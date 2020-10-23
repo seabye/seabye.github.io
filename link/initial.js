@@ -74,9 +74,9 @@
         {
             const action=()=>{
                 const set=head=>{
-                    window.document.documentElement.style.setProperty(`${head}-width`,`${window.visualViewport.width}px`);
+                    window.document.documentElement.style.setProperty(`${head}-width`,`${window.innerWidth}px`);
                     if(!window.navigator.userAgent.match('Mobile')||(window.navigator.userAgent.match('Mobile')&&!window.document.activeElement.localName.match(/input|textarea/))){
-                        window.document.documentElement.style.setProperty(`${head}-height`,`${window.visualViewport.height}px`);
+                        window.document.documentElement.style.setProperty(`${head}-height`,`${window.innerHeight}px`);
                     }
                 };
                 set('min');
@@ -154,8 +154,6 @@
             func();
             window.setTimeout(func,175);
             window.setTimeout(func,350);
-            window.setTimeout(func,700);
-            window.setTimeout(func,1050);
         }
     }
 // #build
