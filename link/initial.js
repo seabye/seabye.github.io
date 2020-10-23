@@ -109,6 +109,9 @@
     window.addEventListener('orientationchange',()=>{
         if(window.document.activeElement.localName.match(/input|textarea/))window.document.activeElement.blur();
     });
+    window.document.documentElement.addEventListener('keydown',event=>{
+        if(event.key==='Enter')window.setTimeout(()=>window.document.documentElement.scrollIntoView({behavior:'smooth',block:'center',inline:'center'}),350);
+    });
     // scroll@safari
     if(!window.CSS.supports('overscroll-behavior:contain')){
         const action=()=>{
