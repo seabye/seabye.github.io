@@ -46,8 +46,8 @@
         });
         // orientation
         {
-            const action=()=>{
-                window.document.body.style.setProperty('display','none');
+            const action=event=>{
+                if(event.type==='orientationchange')window.document.body.style.setProperty('display','none');
                 const set=head=>{
                     window.document.documentElement.style.setProperty(`${head}-width`,`${window.innerWidth}px`);
                     if(!window.navigator.userAgent.match('Mobile')||(window.navigator.userAgent.match('Mobile')&&!window.document.activeElement.localName.match(/input|textarea/))){
@@ -64,14 +64,16 @@
                     if(!window.document.documentElement.style[0])window.document.documentElement.removeAttribute('style');
                     tool.toggle_cls(window.document.documentElement,'ic_oe_orientation_portrait','ic_oe_orientation_landscape',true);
                 }
-                window.setTimeout(()=>{
-                    window.document.body.style.removeProperty('display');
-                    if(!window.document.body.style[0])window.document.body.removeAttribute('style');
-                },350);
+                if(event.type==='orientationchange'){
+                    window.setTimeout(()=>{
+                        window.document.body.style.removeProperty('display');
+                        if(!window.document.body.style[0])window.document.body.removeAttribute('style');
+                    },350);
+                }
             };
             window.addEventListener('load',action);
             window.addEventListener('resize',action);
-            window.addEventListener('orientationchange',()=>window.setTimeout(action,350));
+            window.addEventListener('orientationchange',event=>window.setTimeout(action(event),350));
         }
         if(window.navigator.userAgent.match('Safari')&&!window.navigator.userAgent.match('Chrome')&&!window.navigator.userAgent.match('Edg')){
             const action=()=>window.setTimeout(()=>window.document.documentElement.scrollIntoView({behavior:'smooth',block:'center',inline:'center'},350));
