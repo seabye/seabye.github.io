@@ -151,8 +151,6 @@
             }
         }
         static add_run(func){
-            func();
-            window.setTimeout(func,175);
             window.setTimeout(func,350);
         }
     }
