@@ -199,15 +199,15 @@
                     }
     /* scroll */
     ::-webkit-scrollbar {
-        width: 10px;
-        height: 10px;
+        width: 8px;
+        height: 8px;
     }
     ::-webkit-scrollbar-corner {
         background-color: var(--ic_ve_color_transparent);
     }
     ::-webkit-scrollbar-thumb {
-        border: 3px solid var(--ic_ve_color_transparent);
-        border-radius: 10px;
+        border: 2px solid var(--ic_ve_color_transparent);
+        border-radius: 8px;
         background-color: var(--ic_ve_color_black2_opacity);
         background-clip: padding-box;
     }
