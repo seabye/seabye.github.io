@@ -72,7 +72,7 @@
     // orientation
         // @chromium
         {
-            const action=()=>{
+            const action=async()=>{
                 const set=async head=>{
                     window.document.documentElement.style.setProperty(`${head}-width`,`${window.innerWidth}px`);
                     if(!window.navigator.userAgent.match('Mobile')||(window.navigator.userAgent.match('Mobile')&&!window.document.activeElement.localName.match(/input|textarea/))){
@@ -82,7 +82,7 @@
                 };
                 await set('min');
                 if(window.parseInt(window.document.documentElement.style.getPropertyValue('min-height'))<=window.parseInt(window.document.documentElement.style.getPropertyValue('min-width'))){
-                    set('max');
+                    await set('max');
                     tool.toggle_cls(window.document.documentElement,'ic_oe_orientation_landscape','ic_oe_orientation_portrait',true);
                 }else{
                     window.document.documentElement.style.removeProperty('max-width');
