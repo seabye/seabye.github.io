@@ -219,13 +219,13 @@
             if(theme_color){
                 window.document.head.insertAdjacentElement('beforeend',theme_color);
             }else{
-                const white='#E1E1E1';
-                const black='#292929';
+                const light='#E1E1E1';
+                const dark='#292929';
                 const element=window.document.createElement('meta');
                 element.setAttribute('name','theme-color');
-                element.setAttribute('content',window.matchMedia('(prefers-color-scheme:dark)').matches?black:white);
+                element.setAttribute('content',window.matchMedia('(prefers-color-scheme:dark)').matches?dark:light);
                 const theme_color=window.document.head.insertAdjacentElement('beforeend',element);
-                window.matchMedia('(prefers-color-scheme:dark)').addEventListener('change',event=>theme_color.content=event.matches?black:white);
+                window.matchMedia('(prefers-color-scheme:dark)').addEventListener('change',event=>theme_color.content=event.matches?dark:light);
             }
         }
         window.document.head.insertAdjacentHTML('beforeend',`<link rel="manifest" href="${option.manifest?option.manifest:''}">`);
