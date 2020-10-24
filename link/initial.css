@@ -34,89 +34,93 @@
 /* #initial */
     /* variable */
     :root {
-        --ic_ve_color_transparent: rgba(255,255,255,0);
         --ic_ve_color_white: #FFFFFF;
+        --ic_ve_color_white_transparent: rgba(255,255,255,0);
         --ic_ve_color_gray: #808080;
+        --ic_ve_color_gray_transparent: rgba(128,128,128,0);
         --ic_ve_color_black: #000000;
-        --ic_ve_color_white9: rgb(242,242,242);
-        --ic_ve_color_white8: rgb(229,229,229);
-        --ic_ve_color_white7: rgb(216,216,216);
-        --ic_ve_color_white6: rgb(204,204,204);
-        --ic_ve_color_white5: rgb(191,191,191);
-        --ic_ve_color_white4: rgb(178,178,178);
-        --ic_ve_color_white3: rgb(165,165,165);
-        --ic_ve_color_white2: rgb(153,153,153);
-        --ic_ve_color_white1: rgb(140,140,140);
-        --ic_ve_color_white9_opacity: rgba(255,255,255,0.9);
-        --ic_ve_color_white8_opacity: rgba(255,255,255,0.8);
-        --ic_ve_color_white7_opacity: rgba(255,255,255,0.7);
-        --ic_ve_color_white6_opacity: rgba(255,255,255,0.6);
-        --ic_ve_color_white5_opacity: rgba(255,255,255,0.5);
-        --ic_ve_color_white4_opacity: rgba(255,255,255,0.4);
-        --ic_ve_color_white3_opacity: rgba(255,255,255,0.3);
-        --ic_ve_color_white2_opacity: rgba(255,255,255,0.2);
-        --ic_ve_color_white1_opacity: rgba(255,255,255,0.1);
-        --ic_ve_color_black9: rgb(12,12,12);
-        --ic_ve_color_black8: rgb(25,25,25);
-        --ic_ve_color_black7: rgb(38,38,38);
-        --ic_ve_color_black6: rgb(50,50,50);
-        --ic_ve_color_black5: rgb(63,63,63);
-        --ic_ve_color_black4: rgb(76,76,76);
-        --ic_ve_color_black3: rgb(89,89,89);
-        --ic_ve_color_black2: rgb(101,101,101);
-        --ic_ve_color_black1: rgb(114,114,114);
-        --ic_ve_color_black9_opacity: rgba(0,0,0,0.9);
-        --ic_ve_color_black8_opacity: rgba(0,0,0,0.8);
-        --ic_ve_color_black7_opacity: rgba(0,0,0,0.7);
-        --ic_ve_color_black6_opacity: rgba(0,0,0,0.6);
-        --ic_ve_color_black5_opacity: rgba(0,0,0,0.5);
-        --ic_ve_color_black4_opacity: rgba(0,0,0,0.4);
-        --ic_ve_color_black3_opacity: rgba(0,0,0,0.3);
-        --ic_ve_color_black2_opacity: rgba(0,0,0,0.2);
-        --ic_ve_color_black1_opacity: rgba(0,0,0,0.1);
+        --ic_ve_color_black_transparent: rgba(0,0,0,0);
+        --ic_ve_color_white9: rgba(255,255,255,0.9);
+        --ic_ve_color_white8: rgba(255,255,255,0.8);
+        --ic_ve_color_white7: rgba(255,255,255,0.7);
+        --ic_ve_color_white6: rgba(255,255,255,0.6);
+        --ic_ve_color_white5: rgba(255,255,255,0.5);
+        --ic_ve_color_white4: rgba(255,255,255,0.4);
+        --ic_ve_color_white3: rgba(255,255,255,0.3);
+        --ic_ve_color_white2: rgba(255,255,255,0.2);
+        --ic_ve_color_white1: rgba(255,255,255,0.1);
+        --ic_ve_color_white9_opacity: rgb(242,242,242);
+        --ic_ve_color_white8_opacity: rgb(229,229,229);
+        --ic_ve_color_white7_opacity: rgb(216,216,216);
+        --ic_ve_color_white6_opacity: rgb(204,204,204);
+        --ic_ve_color_white5_opacity: rgb(191,191,191);
+        --ic_ve_color_white4_opacity: rgb(178,178,178);
+        --ic_ve_color_white3_opacity: rgb(165,165,165);
+        --ic_ve_color_white2_opacity: rgb(153,153,153);
+        --ic_ve_color_white1_opacity: rgb(140,140,140);
+        --ic_ve_color_black9: rgba(0,0,0,0.9);
+        --ic_ve_color_black8: rgba(0,0,0,0.8);
+        --ic_ve_color_black7: rgba(0,0,0,0.7);
+        --ic_ve_color_black6: rgba(0,0,0,0.6);
+        --ic_ve_color_black5: rgba(0,0,0,0.5);
+        --ic_ve_color_black4: rgba(0,0,0,0.4);
+        --ic_ve_color_black3: rgba(0,0,0,0.3);
+        --ic_ve_color_black2: rgba(0,0,0,0.2);
+        --ic_ve_color_black1: rgba(0,0,0,0.1);
+        --ic_ve_color_black9_opacity: rgb(12,12,12);
+        --ic_ve_color_black8_opacity: rgb(25,25,25);
+        --ic_ve_color_black7_opacity: rgb(38,38,38);
+        --ic_ve_color_black6_opacity: rgb(50,50,50);
+        --ic_ve_color_black5_opacity: rgb(63,63,63);
+        --ic_ve_color_black4_opacity: rgb(76,76,76);
+        --ic_ve_color_black3_opacity: rgb(89,89,89);
+        --ic_ve_color_black2_opacity: rgb(101,101,101);
+        --ic_ve_color_black1_opacity: rgb(114,114,114);
     }
     @media(prefers-color-scheme:dark) {
         :root {
-            --ic_ve_color_transparent: rgba(16,16,16,0);
             --ic_ve_color_white: #101010;
+            --ic_ve_color_white_transparent: rgba(16,16,16,0);
             --ic_ve_color_gray: #707070;
+            --ic_ve_color_gray_transparent: rgba(112,112,112,0);
             --ic_ve_color_black: #F0F0F0;
-            --ic_ve_color_white9: rgb(11,11,11);
-            --ic_ve_color_white8: rgb(23,23,23);
-            --ic_ve_color_white7: rgb(35,35,35);
-            --ic_ve_color_white6: rgb(47,47,47);
-            --ic_ve_color_white5: rgb(59,59,59);
-            --ic_ve_color_white4: rgb(71,71,71);
-            --ic_ve_color_white3: rgb(83,83,83);
-            --ic_ve_color_white2: rgb(95,95,95);
-            --ic_ve_color_white1: rgb(107,107,107);
-            --ic_ve_color_white9_opacity: rgba(16,16,16,0.9);
-            --ic_ve_color_white8_opacity: rgba(16,16,16,0.8);
-            --ic_ve_color_white7_opacity: rgba(16,16,16,0.7);
-            --ic_ve_color_white6_opacity: rgba(16,16,16,0.6);
-            --ic_ve_color_white5_opacity: rgba(16,16,16,0.5);
-            --ic_ve_color_white4_opacity: rgba(16,16,16,0.4);
-            --ic_ve_color_white3_opacity: rgba(16,16,16,0.3);
-            --ic_ve_color_white2_opacity: rgba(16,16,16,0.2);
-            --ic_ve_color_white1_opacity: rgba(16,16,16,0.1);
-            --ic_ve_color_black9: rgb(228,228,228);
-            --ic_ve_color_black8: rgb(216,216,216);
-            --ic_ve_color_black7: rgb(204,204,204);
-            --ic_ve_color_black6: rgb(192,192,192);
-            --ic_ve_color_black5: rgb(180,180,180);
-            --ic_ve_color_black4: rgb(168,168,168);
-            --ic_ve_color_black3: rgb(156,156,156);
-            --ic_ve_color_black2: rgb(144,144,144);
-            --ic_ve_color_black1: rgb(132,132,132);
-            --ic_ve_color_black9_opacity: rgba(240,240,240,0.9);
-            --ic_ve_color_black8_opacity: rgba(240,240,240,0.8);
-            --ic_ve_color_black7_opacity: rgba(240,240,240,0.7);
-            --ic_ve_color_black6_opacity: rgba(240,240,240,0.6);
-            --ic_ve_color_black5_opacity: rgba(240,240,240,0.5);
-            --ic_ve_color_black4_opacity: rgba(240,240,240,0.4);
-            --ic_ve_color_black3_opacity: rgba(240,240,240,0.3);
-            --ic_ve_color_black2_opacity: rgba(240,240,240,0.2);
-            --ic_ve_color_black1_opacity: rgba(240,240,240,0.1);
+            --ic_ve_color_black_transparent: rgba(240,240,240,0);
+            --ic_ve_color_white9: rgba(16,16,16,0.9);
+            --ic_ve_color_white8: rgba(16,16,16,0.8);
+            --ic_ve_color_white7: rgba(16,16,16,0.7);
+            --ic_ve_color_white6: rgba(16,16,16,0.6);
+            --ic_ve_color_white5: rgba(16,16,16,0.5);
+            --ic_ve_color_white4: rgba(16,16,16,0.4);
+            --ic_ve_color_white3: rgba(16,16,16,0.3);
+            --ic_ve_color_white2: rgba(16,16,16,0.2);
+            --ic_ve_color_white1: rgba(16,16,16,0.1);
+            --ic_ve_color_white9_opacity: rgb(11,11,11);
+            --ic_ve_color_white8_opacity: rgb(23,23,23);
+            --ic_ve_color_white7_opacity: rgb(35,35,35);
+            --ic_ve_color_white6_opacity: rgb(47,47,47);
+            --ic_ve_color_white5_opacity: rgb(59,59,59);
+            --ic_ve_color_white4_opacity: rgb(71,71,71);
+            --ic_ve_color_white3_opacity: rgb(83,83,83);
+            --ic_ve_color_white2_opacity: rgb(95,95,95);
+            --ic_ve_color_white1_opacity: rgb(107,107,107);
+            --ic_ve_color_black9: rgba(240,240,240,0.9);
+            --ic_ve_color_black8: rgba(240,240,240,0.8);
+            --ic_ve_color_black7: rgba(240,240,240,0.7);
+            --ic_ve_color_black6: rgba(240,240,240,0.6);
+            --ic_ve_color_black5: rgba(240,240,240,0.5);
+            --ic_ve_color_black4: rgba(240,240,240,0.4);
+            --ic_ve_color_black3: rgba(240,240,240,0.3);
+            --ic_ve_color_black2: rgba(240,240,240,0.2);
+            --ic_ve_color_black1: rgba(240,240,240,0.1);
+            --ic_ve_color_black9_opacity: rgb(228,228,228);
+            --ic_ve_color_black8_opacity: rgb(216,216,216);
+            --ic_ve_color_black7_opacity: rgb(204,204,204);
+            --ic_ve_color_black6_opacity: rgb(192,192,192);
+            --ic_ve_color_black5_opacity: rgb(180,180,180);
+            --ic_ve_color_black4_opacity: rgb(168,168,168);
+            --ic_ve_color_black3_opacity: rgb(156,156,156);
+            --ic_ve_color_black2_opacity: rgb(144,144,144);
+            --ic_ve_color_black1_opacity: rgb(132,132,132);
         }
     }
     /* element */
@@ -149,7 +153,7 @@
             /* html */
             html {
                 background-color: var(--ic_ve_color_white);
-                color: var(--ic_ve_color_black8_opacity);
+                color: var(--ic_ve_color_black8);
                 font-weight: normal;
                 font-size: 16px;
                 font-family:
@@ -165,7 +169,7 @@
                 text-rendering: optimizeLegibility;
                 -webkit-text-size-adjust: 100%;
                 text-size-adjust: 100%;
-                -webkit-tap-highlight-color: var(--ic_ve_color_transparent);
+                -webkit-tap-highlight-color: var(--ic_ve_color_white_transparent);
                 -webkit-touch-callout: none;
                 cursor: default;
             }
@@ -241,16 +245,16 @@
         height: 8px;
     }
     ::-webkit-scrollbar-corner {
-        background-color: var(--ic_ve_color_transparent);
+        background-color: var(--ic_ve_color_white_transparent);
     }
     ::-webkit-scrollbar-thumb {
-        border: 2px solid var(--ic_ve_color_transparent);
+        border: 2px solid var(--ic_ve_color_white_transparent);
         border-radius: 8px;
-        background-color: var(--ic_ve_color_black2_opacity);
+        background-color: var(--ic_ve_color_black2);
         background-clip: padding-box;
     }
     ::-webkit-scrollbar-thumb:active {
-        background-color: var(--ic_ve_color_black4_opacity);
+        background-color: var(--ic_ve_color_black4);
     }
 /* #block */
 /* #build */
