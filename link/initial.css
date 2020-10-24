@@ -33,7 +33,6 @@
 /* #library */
 /* #initial */
     /* variable */
-    /* --ic_ve_color_white1: 255*0.1+(255-255*0.1)/2 */
     :root {
         --ic_ve_color_transparent: rgba(255,255,255,0);
         --ic_ve_color_white: #FFFFFF;
