@@ -108,7 +108,7 @@
     // scroll@safari
     if(!window.CSS.supports('overscroll-behavior:contain')){
         const action=()=>{
-            window.document.querySelectorAll('*').forEach(element=>{
+            for(const element of window.document.all){
                 if(window.getComputedStyle(element).overflowY.match(/auto|scroll/)){
                     if(element.scrollHeight===element.clientHeight){
                         element.style.setProperty('touch-action','pan-x');
@@ -117,7 +117,7 @@
                         if(!element.style[0])element.removeAttribute('style');
                     }
                 }
-            });
+            }
         };
         new MutationObserver(action).observe(window.document.documentElement,{attributes:true,childList:true,subtree:true});
         window.addEventListener('load',action,{once:true});
