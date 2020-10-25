@@ -7,7 +7,7 @@ for(const item of window.document.scripts){
         window.addEventListener('load',()=>{
             window.document.documentElement.style.removeProperty('background-color');
             if(!window.document.documentElement.style[0])window.document.documentElement.removeAttribute('style');
-        });
+        },{once:true});
         // theme color~
         if(!(window.navigator.userAgent.match('Safari')&&!window.navigator.userAgent.match('Chrome')&&!window.navigator.userAgent.match('Edg'))&&window.matchMedia('(prefers-color-scheme:dark)').addEventListener){
             const light='#E1E1E1';
