@@ -211,6 +211,12 @@
                     iframe {
                         border: unset;
                     }
+        /* text */
+        a {
+            color: currentColor;
+            text-decoration: unset;
+            cursor: default;
+        }
         /* form */
         button,
         input,
