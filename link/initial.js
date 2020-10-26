@@ -83,9 +83,11 @@
         },()=>window.document.body.style.setProperty('opacity','0'),1000/60);
         window.addEventListener('load',()=>{
             window.document.documentElement.style.removeProperty('background-color');
-            window.document.body.style.removeProperty('opacity');
             if(!window.document.documentElement.style[0])window.document.documentElement.removeAttribute('style');
-            if(!window.document.body.style[0])window.document.body.removeAttribute('style');
+            tool.loop(()=>window.document.body.style.getPropertyValue('opacity')==='0'?true:false,()=>{
+                window.document.body.style.removeProperty('opacity');
+                if(!window.document.body.style[0])window.document.body.removeAttribute('style');
+            },1000/60);
         },{once:true});
         // orientation
         {
