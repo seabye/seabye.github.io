@@ -80,7 +80,7 @@
                 }
             }
             return result;
-        },()=>window.document.body.style.setProperty('opacity','0'));
+        },()=>window.document.body.style.setProperty('opacity','0'),1000/60);
         window.addEventListener('load',()=>{
             window.document.documentElement.style.removeProperty('background-color');
             window.document.body.style.removeProperty('opacity');
@@ -143,7 +143,7 @@
             }
         }
         return result;
-    },()=>window.document.body.setAttribute('tabindex','-1'));
+    },()=>window.document.body.setAttribute('tabindex','-1'),1000/60);
     // input
     window.addEventListener('pointerdown',event=>{
         if(!event.target.localName.match(/input|textarea/)){
