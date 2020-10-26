@@ -2,12 +2,11 @@
 // #variable
 // #library
     // @initial.js
-    // module
+    // @module.js
+    // block
 // #initial
     // sw
     // element
-// #block
-    // tool
 // #build
     // element
     // sc_cr
@@ -17,13 +16,48 @@
         #variable
         #library
             @initial.js
+            @module.js
         #initial
-        #block
         #build
         #debug
 */
 // #variable
 // #library
+    // block
+    class tool{
+        static stop(event){
+            event.stopPropagation();
+            event.preventDefault();
+        }
+        static toggle_cls(element,cls,cls2='',replace=false){
+            if(cls2){
+                switch(replace){
+                    case false:
+                        if(element.classList.contains(cls)){
+                            element.classList.remove(cls);
+                            element.classList.add(cls2);
+                        }else if(element.classList.contains(cls2)){
+                            element.classList.remove(cls2);
+                            element.classList.add(cls);
+                        }else{
+                            element.classList.add(cls);
+                        }
+                        break;
+                    case true:
+                        element.classList.remove(cls2);
+                        element.classList.add(cls);
+                        break;
+                    default:
+                        break;
+                }
+            }else{
+                element.classList.contains(cls)?element.classList.remove(cls):element.classList.add(cls);
+            }
+        }
+        static loop(premise,callback,wait=1000/24){
+            premise()?callback():window.setTimeout(()=>this.loop(premise,callback,wait),wait);
+        }
+    }
 // #initial
     // display
         // ~background color
@@ -36,18 +70,17 @@
                 }
             }
             window.document.documentElement.style.setProperty('background-color',`var(--ic_ve_color_white,${window.document.documentElement.style.getPropertyValue('background-color')?window.document.documentElement.style.getPropertyValue('background-color'):window.matchMedia('(prefers-color-scheme:dark)').matches?data.dark?data.dark:'#101010':data.light?data.light:'#FFFFFF'})`);
-            const loop=(premise,callback,wait=1000/24)=>premise()?callback():window.setTimeout(()=>loop(premise,callback,wait),wait);
-            loop(()=>{
-                let result=false;
-                for(const item of window.document.documentElement.children){
-                    if(item.localName==='body'){
-                        result=true;
-                        break;
-                    }
-                }
-                return result;
-            },()=>window.document.body.style.setProperty('opacity','0'));
         }
+        tool.loop(()=>{
+            let result=false;
+            for(const item of window.document.documentElement.children){
+                if(item.localName==='body'){
+                    result=true;
+                    break;
+                }
+            }
+            return result;
+        },()=>window.document.body.style.setProperty('opacity','0'));
         window.addEventListener('load',()=>{
             window.document.documentElement.style.removeProperty('background-color');
             window.document.body.style.removeProperty('opacity');
@@ -101,19 +134,16 @@
     if(!window.CSS.supports('-webkit-touch-callout:none'))window.addEventListener('pointerdown',event=>event.button!==2?window.addEventListener('contextmenu',tool.stop):window.document.documentElement.removeEventListener('contextmenu',tool.stop));
     // tabindex
     window.document.documentElement.setAttribute('tabindex','-1');
-    {
-        const loop=(premise,callback,wait=1000/24)=>premise()?callback():window.setTimeout(()=>loop(premise,callback,wait),wait);
-        loop(()=>{
-            let result=false;
-            for(const item of window.document.documentElement.children){
-                if(item.localName==='body'){
-                    result=true;
-                    break;
-                }
+    tool.loop(()=>{
+        let result=false;
+        for(const item of window.document.documentElement.children){
+            if(item.localName==='body'){
+                result=true;
+                break;
             }
-            return result;
-        },()=>window.document.body.setAttribute('tabindex','-1'));
-    }
+        }
+        return result;
+    },()=>window.document.body.setAttribute('tabindex','-1'));
     // input
     window.addEventListener('pointerdown',event=>{
         if(!event.target.localName.match(/input|textarea/)){
@@ -145,39 +175,6 @@
         window.addEventListener('load',action,{once:true});
         window.addEventListener('resize',action);
         window.addEventListener('orientationchange',()=>window.setTimeout(action,350));
-    }
-// #block
-    // tool
-    class tool{
-        static stop(event){
-            event.stopPropagation();
-            event.preventDefault();
-        }
-        static toggle_cls(element,cls,cls2='',replace=false){
-            if(cls2){
-                switch(replace){
-                    case false:
-                        if(element.classList.contains(cls)){
-                            element.classList.remove(cls);
-                            element.classList.add(cls2);
-                        }else if(element.classList.contains(cls2)){
-                            element.classList.remove(cls2);
-                            element.classList.add(cls);
-                        }else{
-                            element.classList.add(cls);
-                        }
-                        break;
-                    case true:
-                        element.classList.remove(cls2);
-                        element.classList.add(cls);
-                        break;
-                    default:
-                        break;
-                }
-            }else{
-                element.classList.contains(cls)?element.classList.remove(cls):element.classList.add(cls);
-            }
-        }
     }
 // #build
     // sw
