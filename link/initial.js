@@ -27,7 +27,7 @@
 // #initial
     // display
         // root
-        if(!window.document.body)window.document.body.insertAdjacentHTML('beforeend','<body></body>');
+        if(!window.document.body)window.document.documentElement.insertAdjacentHTML('beforeend','<body></body>');
         // ~background color
         {
             let data={};
