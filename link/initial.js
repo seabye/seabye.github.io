@@ -36,7 +36,7 @@
                 }
             }
             window.document.documentElement.style.setProperty('background-color',`var(--ic_ve_color_white,${window.document.documentElement.style.getPropertyValue('background-color')?window.document.documentElement.style.getPropertyValue('background-color'):window.matchMedia('(prefers-color-scheme:dark)').matches?data.dark?data.dark:'#101010':data.light?data.light:'#FFFFFF'})`);
-            const loop=(premise,callback,wait=1000/24)=>premise()?callback():window.setTimeout(()=>this.loop(premise,callback,wait),wait);
+            const loop=(premise,callback,wait=1000/24)=>premise()?callback():window.setTimeout(()=>loop(premise,callback,wait),wait);
             loop(()=>{
                 let result=false;
                 for(const item of window.document.documentElement.children){
@@ -102,7 +102,7 @@
     // tabindex
     window.document.documentElement.setAttribute('tabindex','-1');
     {
-        const loop=(premise,callback,wait=1000/24)=>premise()?callback():window.setTimeout(()=>this.loop(premise,callback,wait),wait);
+        const loop=(premise,callback,wait=1000/24)=>premise()?callback():window.setTimeout(()=>loop(premise,callback,wait),wait);
         loop(()=>{
             let result=false;
             for(const item of window.document.documentElement.children){
