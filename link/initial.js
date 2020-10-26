@@ -32,9 +32,6 @@
             event.stopPropagation();
             event.preventDefault();
         }
-        static loop(premise,callback,wait=1000/24){
-            premise()?callback():window.setTimeout(()=>this.loop(premise,callback,wait),wait);
-        }
         static element(tag,attribute=false,insert_element=false,insert_position=false,content=false){
             const element=window.document.createElement(tag);
             if(attribute)for(const [key,value] of attribute)element.setAttribute(key,value);
@@ -66,6 +63,9 @@
             }else{
                 element.classList.contains(cls)?element.classList.remove(cls):element.classList.add(cls);
             }
+        }
+        static loop(premise,callback,wait=1000/24){
+            premise()?callback():window.setTimeout(()=>this.loop(premise,callback,wait),wait);
         }
         static debounce(callback,wait=1000/24,before_function=false){
             let timeout=null;
