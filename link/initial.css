@@ -1,6 +1,7 @@
 @charset "UTF-8";
 /* #library */
     /* @initial.css */
+    /* @module.css */
 /* #initial */
     /* variable */
     /* element */
@@ -16,6 +17,8 @@
             ic_
             ~~~~
             _oe_ / operating environment
+            ====
+            @module.css
         #initial
         _ve_ / variable
         #block

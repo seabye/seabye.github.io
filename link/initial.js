@@ -3,12 +3,13 @@
 // #library
     // @initial.js
     // @module.js
-    // block
 // #initial
+    // tool
     // sw
-    // element
+    // head element
+// #block
 // #build
-    // element
+    // body element
     // sc_cr
 // #debug
 /*
@@ -18,16 +19,28 @@
             @initial.js
             @module.js
         #initial
+        #block
         #build
         #debug
 */
 // #variable
 // #library
-    // block
-    class tool{
+// #initial
+    // tool
+    export class initial_tool{
         static stop(event){
             event.stopPropagation();
             event.preventDefault();
+        }
+        static loop(premise,callback,wait=1000/24){
+            premise()?callback():window.setTimeout(()=>this.loop(premise,callback,wait),wait);
+        }
+        static element(tag,attribute=false,insert_element=false,insert_position=false,content=false){
+            const element=window.document.createElement(tag);
+            if(attribute)for(const [key,value] of attribute)element.setAttribute(key,value);
+            if(insert_element)insert_position?insert_element.insertAdjacentElement(insert_position,element):insert_element.appendChild(element);
+            if(content)typeof content==='function'?content(element):element.innerHTML=content;
+            return element;
         }
         static toggle_cls(element,cls,cls2='',replace=false){
             if(cls2){
@@ -54,11 +67,17 @@
                 element.classList.contains(cls)?element.classList.remove(cls):element.classList.add(cls);
             }
         }
-        static loop(premise,callback,wait=1000/24){
-            premise()?callback():window.setTimeout(()=>this.loop(premise,callback,wait),wait);
+        static debounce(callback,wait=1000/24,before_function=false){
+            let timeout=null;
+            return function(){
+                const context=this;
+                const args=arguments;
+                window.clearTimeout(timeout);
+                if(before_function)before_function();
+                timeout=window.setTimeout(()=>callback.apply(context,args),wait);
+            };
         }
     }
-// #initial
     // display
         // ~background color
         {
@@ -71,7 +90,7 @@
             }
             window.document.documentElement.style.setProperty('background-color',`var(--ic_ve_color_white,${window.document.documentElement.style.getPropertyValue('background-color')?window.document.documentElement.style.getPropertyValue('background-color'):window.matchMedia('(prefers-color-scheme:dark)').matches?data.dark?data.dark:'#101010':data.light?data.light:'#FFFFFF'})`);
         }
-        tool.loop(()=>{
+        initial_tool.loop(()=>{
             let result=false;
             for(const item of window.document.documentElement.children){
                 if(item.localName==='body'){
@@ -84,7 +103,7 @@
         window.addEventListener('load',()=>{
             window.document.documentElement.style.removeProperty('background-color');
             if(!window.document.documentElement.style[0])window.document.documentElement.removeAttribute('style');
-            tool.loop(()=>window.document.body.style.getPropertyValue('opacity')==='0'?true:false,()=>{
+            initial_tool.loop(()=>window.document.body.style.getPropertyValue('opacity')==='0'?true:false,()=>{
                 window.document.body.style.removeProperty('opacity');
                 if(!window.document.body.style[0])window.document.body.removeAttribute('style');
             },1000/60);
@@ -102,12 +121,12 @@
                 set('min');
                 if(window.parseInt(window.document.documentElement.style.getPropertyValue('min-height'))<=window.parseInt(window.document.documentElement.style.getPropertyValue('min-width'))){
                     set('max');
-                    tool.toggle_cls(window.document.documentElement,'ic_oe_orientation_landscape','ic_oe_orientation_portrait',true);
+                    initial_tool.toggle_cls(window.document.documentElement,'ic_oe_orientation_landscape','ic_oe_orientation_portrait',true);
                 }else{
                     window.document.documentElement.style.removeProperty('max-width');
                     window.document.documentElement.style.removeProperty('max-height');
                     if(!window.document.documentElement.style[0])window.document.documentElement.removeAttribute('style');
-                    tool.toggle_cls(window.document.documentElement,'ic_oe_orientation_portrait','ic_oe_orientation_landscape',true);
+                    initial_tool.toggle_cls(window.document.documentElement,'ic_oe_orientation_portrait','ic_oe_orientation_landscape',true);
                 }
                 if(event.type==='orientationchange'){
                     window.setTimeout(()=>{
@@ -133,10 +152,10 @@
     // :hov action
     window.addEventListener('pointerover',()=>{});
     // context menu@chromium
-    if(!window.CSS.supports('-webkit-touch-callout:none'))window.addEventListener('pointerdown',event=>event.button!==2?window.addEventListener('contextmenu',tool.stop):window.document.documentElement.removeEventListener('contextmenu',tool.stop));
+    if(!window.CSS.supports('-webkit-touch-callout:none'))window.addEventListener('pointerdown',event=>event.button!==2?window.addEventListener('contextmenu',initial_tool.stop):window.document.documentElement.removeEventListener('contextmenu',initial_tool.stop));
     // tabindex
     window.document.documentElement.setAttribute('tabindex','-1');
-    tool.loop(()=>{
+    initial_tool.loop(()=>{
         let result=false;
         for(const item of window.document.documentElement.children){
             if(item.localName==='body'){
