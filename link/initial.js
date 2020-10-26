@@ -26,8 +26,6 @@
 // #library
 // #initial
     // display
-        // root
-        if(!window.document.body)window.document.documentElement.insertAdjacentHTML('beforeend','<body></body>');
         // ~background color
         {
             let data={};
@@ -38,7 +36,7 @@
                 }
             }
             window.document.documentElement.style.setProperty('background-color',`var(--ic_ve_color_white,${window.document.documentElement.style.getPropertyValue('background-color')?window.document.documentElement.style.getPropertyValue('background-color'):window.matchMedia('(prefers-color-scheme:dark)').matches?data.dark?data.dark:'#101010':data.light?data.light:'#FFFFFF'})`);
-            window.document.body.style.setProperty('opacity','0');
+            window.document.body.addEventListener('loadstart',()=>window.document.body.style.setProperty('opacity','0'),{once:true});
         }
         window.addEventListener('load',()=>{
             window.document.documentElement.style.removeProperty('background-color');
