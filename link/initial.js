@@ -36,7 +36,17 @@
                 }
             }
             window.document.documentElement.style.setProperty('background-color',`var(--ic_ve_color_white,${window.document.documentElement.style.getPropertyValue('background-color')?window.document.documentElement.style.getPropertyValue('background-color'):window.matchMedia('(prefers-color-scheme:dark)').matches?data.dark?data.dark:'#101010':data.light?data.light:'#FFFFFF'})`);
-            window.document.body.style.setProperty('opacity','0');
+            const loop=(premise,callback,wait=1000/24)=>premise()?callback():window.setTimeout(()=>this.loop(premise,callback,wait),wait);
+            loop(()=>{
+                let result=false;
+                for(const item of window.document.documentElement.children){
+                    if(item.localName==='body'){
+                        result=true;
+                        break;
+                    }
+                }
+                return result;
+            },()=>window.document.body.style.setProperty('opacity','0'));
         }
         window.addEventListener('load',()=>{
             window.document.documentElement.style.removeProperty('background-color');
@@ -91,7 +101,17 @@
     if(!window.CSS.supports('-webkit-touch-callout:none'))window.addEventListener('pointerdown',event=>event.button!==2?window.addEventListener('contextmenu',tool.stop):window.document.documentElement.removeEventListener('contextmenu',tool.stop));
     // tabindex
     window.document.documentElement.setAttribute('tabindex','-1');
-    window.document.body.setAttribute('tabindex','-1');
+    const loop=(premise,callback,wait=1000/24)=>premise()?callback():window.setTimeout(()=>this.loop(premise,callback,wait),wait);
+    loop(()=>{
+        let result=false;
+        for(const item of window.document.documentElement.children){
+            if(item.localName==='body'){
+                result=true;
+                break;
+            }
+        }
+        return result;
+    },()=>window.document.body.setAttribute('tabindex','-1'));
     // input
     window.addEventListener('pointerdown',event=>{
         if(!event.target.localName.match(/input|textarea/)){
