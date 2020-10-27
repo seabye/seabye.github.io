@@ -45,43 +45,80 @@
                     case false:
                         if(element.classList.contains(cls)){
                             element.classList.remove(cls);
-                            window.setTimeout(()=>{
+                            if(wait){
+                                window.setTimeout(()=>{
+                                    element.classList.add(cls2);
+                                    callback();
+                                },wait);
+                            }else{
                                 element.classList.add(cls2);
                                 callback();
-                            },wait);
+                            }
                         }else if(element.classList.contains(cls2)){
                             element.classList.remove(cls2);
-                            window.setTimeout(()=>{
+                            if(wait){
+                                window.setTimeout(()=>{
+                                    element.classList.add(cls);
+                                    callback();
+                                },wait);
+                            }else{
                                 element.classList.add(cls);
                                 callback();
-                            },wait);
+                            }
                         }else{
-                            window.setTimeout(()=>{
+                            if(wait){
+                                window.setTimeout(()=>{
+                                    element.classList.add(cls);
+                                    callback();
+                                },wait);
+                            }else{
                                 element.classList.add(cls);
                                 callback();
-                            },wait);
+                            }
                         }
                         break;
                     case true:
                         if(cls){
                             element.classList.remove(cls2);
-                            window.setTimeout(()=>{
+                            if(wait){
+                                window.setTimeout(()=>{
+                                    element.classList.add(cls);
+                                    callback();
+                                },wait);
+                            }else{
                                 element.classList.add(cls);
                                 callback();
-                            },wait);
+                            }
                         }else{
                             element.classList.add(cls2);
-                            window.setTimeout(()=>{
+                            if(wait){
+                                window.setTimeout(()=>{
+                                    element.classList.remove(cls2);
+                                    callback();
+                                },wait);
+                            }else{
                                 element.classList.remove(cls2);
                                 callback();
-                            },wait);
+                            }
                         }
                         break;
                     default:
                         break;
                 }
             }else{
-                element.classList.contains(cls)?element.classList.remove(cls):window.setTimeout(()=>element.classList.add(cls),wait);
+                if(element.classList.contains(cls)){
+                    element.classList.remove(cls);
+                }else{
+                    if(wait){
+                        window.setTimeout(()=>{
+                            element.classList.add(cls);
+                            callback();
+                        },wait);
+                    }else{
+                        element.classList.add(cls);
+                        callback();
+                    }
+                }
             }
         }
         static loop(premise,callback,wait=1000/24){
