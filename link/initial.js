@@ -1,6 +1,5 @@
 'use strict';
 // #variable
-    typeof module==='undefined'?window.console.log('true'):window.console.log('false');
 // #library
     // @initial.js
     // @module.js
