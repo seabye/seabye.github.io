@@ -40,31 +40,29 @@
             return element;
         }
         static toggle_cls(element,cls,cls2='',replace=false,wait=0){
-            window.setTimeout(()=>{
-                if(cls2){
-                    switch(replace){
-                        case false:
-                            if(element.classList.contains(cls)){
-                                element.classList.remove(cls);
-                                element.classList.add(cls2);
-                            }else if(element.classList.contains(cls2)){
-                                element.classList.remove(cls2);
-                                element.classList.add(cls);
-                            }else{
-                                element.classList.add(cls);
-                            }
-                            break;
-                        case true:
+            if(cls2){
+                switch(replace){
+                    case false:
+                        if(element.classList.contains(cls)){
+                            element.classList.remove(cls);
+                            window.setTimeout(()=>element.classList.add(cls2),wait);
+                        }else if(element.classList.contains(cls2)){
                             element.classList.remove(cls2);
+                            window.setTimeout(()=>element.classList.add(cls),wait);
+                        }else{
                             element.classList.add(cls);
-                            break;
-                        default:
-                            break;
-                    }
-                }else{
-                    element.classList.contains(cls)?element.classList.remove(cls):element.classList.add(cls);
+                        }
+                        break;
+                    case true:
+                        element.classList.remove(cls2);
+                        window.setTimeout(()=>element.classList.add(cls),wait);
+                        break;
+                    default:
+                        break;
                 }
-            },wait);
+            }else{
+                element.classList.contains(cls)?element.classList.remove(cls):element.classList.add(cls);
+            }
         }
         static loop(premise,callback,wait=1000/24){
             premise()?callback():window.setTimeout(()=>this.loop(premise,callback,wait),wait);
