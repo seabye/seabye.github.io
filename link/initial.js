@@ -59,7 +59,7 @@
                             window.setTimeout(()=>element.classList.add(cls),wait);
                         }else{
                             element.classList.add(cls2);
-                            window.setTimeout(()=>element.classList.add(cls2),wait);
+                            window.setTimeout(()=>element.classList.remove(cls2),wait);
                         }
                         break;
                     default:
