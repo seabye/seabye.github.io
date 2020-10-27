@@ -61,7 +61,7 @@
                         break;
                 }
             }else{
-                element.classList.contains(cls)?element.classList.remove(cls):element.classList.add(cls);
+                element.classList.contains(cls)?element.classList.remove(cls):window.setTimeout(()=>element.classList.add(cls),wait);
             }
         }
         static loop(premise,callback,wait=1000/24){
