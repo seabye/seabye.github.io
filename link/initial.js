@@ -50,12 +50,12 @@
                             element.classList.remove(cls2);
                             window.setTimeout(()=>element.classList.add(cls),wait);
                         }else{
-                            element.classList.add(cls);
+                            window.setTimeout(()=>element.classList.add(cls),wait);
                         }
                         break;
                     case true:
                         element.classList.remove(cls2);
-                        cls?element.classList.add(cls):window.setTimeout(()=>element.classList.add(cls2),wait);
+                        cls?window.setTimeout(()=>element.classList.add(cls),wait):window.setTimeout(()=>element.classList.add(cls2),wait);
                         break;
                     default:
                         break;
