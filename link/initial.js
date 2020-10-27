@@ -14,14 +14,14 @@
 // #debug
 /*
     script.js
-        #variable
-        #library
+        #variable !
+        #library !!
             @initial.js
             @module.js
-        #initial
-        #block
-        #build
-        #debug
+        #initial !!
+        #block !!!
+        #build !!!
+        #debug !
 */
 // #variable
 // #library
