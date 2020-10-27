@@ -39,27 +39,42 @@
             if(content)typeof content==='function'?content(element):element.innerHTML=content;
             return element;
         }
-        static toggle_cls(element,cls,cls2='',replace=false,wait=0){
+        static toggle_cls(element,cls,cls2='',replace=false,wait=0,callback=()=>{}){
             if(cls2){
                 switch(replace){
                     case false:
                         if(element.classList.contains(cls)){
                             element.classList.remove(cls);
-                            window.setTimeout(()=>element.classList.add(cls2),wait);
+                            window.setTimeout(()=>{
+                                element.classList.add(cls2);
+                                callback();
+                            },wait);
                         }else if(element.classList.contains(cls2)){
                             element.classList.remove(cls2);
-                            window.setTimeout(()=>element.classList.add(cls),wait);
+                            window.setTimeout(()=>{
+                                element.classList.add(cls);
+                                callback();
+                            },wait);
                         }else{
-                            window.setTimeout(()=>element.classList.add(cls),wait);
+                            window.setTimeout(()=>{
+                                element.classList.add(cls);
+                                callback();
+                            },wait);
                         }
                         break;
                     case true:
                         if(cls){
                             element.classList.remove(cls2);
-                            window.setTimeout(()=>element.classList.add(cls),wait);
+                            window.setTimeout(()=>{
+                                element.classList.add(cls);
+                                callback();
+                            },wait);
                         }else{
                             element.classList.add(cls2);
-                            window.setTimeout(()=>element.classList.remove(cls2),wait);
+                            window.setTimeout(()=>{
+                                element.classList.remove(cls2);
+                                callback();
+                            },wait);
                         }
                         break;
                     default:
