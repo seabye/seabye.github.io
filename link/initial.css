@@ -131,7 +131,7 @@
     ::before,
     ::after {
         box-sizing: border-box;
-        line-height: normal;
+        line-height: 100%;
         vertical-align: middle;
         outline: unset;
         touch-action: pan-x pan-y;
@@ -229,7 +229,7 @@
             all: unset;
             /* _ */
             box-sizing: border-box;
-            line-height: normal;
+            line-height: 100%;
             vertical-align: middle;
             outline: unset;
             touch-action: pan-x pan-y;
