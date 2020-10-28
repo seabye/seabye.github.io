@@ -11,7 +11,7 @@ for(const item of window.document.scripts){
         // theme color~
         if(!(window.navigator.userAgent.match('Safari')&&!window.navigator.userAgent.match('Chrome')&&!window.navigator.userAgent.match('Edg'))&&window.matchMedia('(prefers-color-scheme:dark)').addEventListener){
             const light='#E1E1E1';
-            const dark='#292929';
+            const dark='#212121';
             const element=window.document.createElement('meta');
             element.setAttribute('name','theme-color');
             element.setAttribute('content',window.matchMedia('(prefers-color-scheme:dark)').matches?dark:light);

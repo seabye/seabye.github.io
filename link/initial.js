@@ -311,7 +311,7 @@
                 window.document.head.insertAdjacentElement('beforeend',theme_color);
             }else{
                 const light='#E1E1E1';
-                const dark='#292929';
+                const dark='#212121';
                 const element=window.document.createElement('meta');
                 element.setAttribute('name','theme-color');
                 element.setAttribute('content',window.matchMedia('(prefers-color-scheme:dark)').matches?dark:light);
