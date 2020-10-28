@@ -245,13 +245,13 @@
     // scroll@safari
     if(!window.CSS.supports('overscroll-behavior:contain')){
         const action=()=>{
-            for(const element of window.document.all){
-                if(window.getComputedStyle(element).overflowY.match(/auto|scroll/)){
-                    if(element.scrollHeight===element.clientHeight){
-                        element.style.setProperty('touch-action','pan-x');
+            for(const item of window.document.all){
+                if(window.getComputedStyle(item).overflowY.match(/auto|scroll/)){
+                    if(item.scrollHeight===item.clientHeight){
+                        item.style.setProperty('touch-action','pan-x');
                     }else{
-                        element.style.removeProperty('touch-action');
-                        if(!element.style[0])element.removeAttribute('style');
+                        item.style.removeProperty('touch-action');
+                        if(!item.style[0])item.removeAttribute('style');
                     }
                 }
             }
