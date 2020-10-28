@@ -79,8 +79,8 @@
         --ic_ve_color_black3_opacity: rgb(89,89,89);
         --ic_ve_color_black2_opacity: rgb(101,101,101);
         --ic_ve_color_black1_opacity: rgb(114,114,114);
-        --ic_ve_color_gui_back: #DDDEDF;
-        --ic_ve_color_gui_fore: #FDFEFF;
+        --ic_ve_color_gui_back: #E0E1E2;
+        --ic_ve_color_gui_fore: #EDEEEF;
     }
     @media(prefers-color-scheme:dark) {
         :root {
@@ -127,7 +127,7 @@
             --ic_ve_color_black2_opacity: rgb(153,153,153);
             --ic_ve_color_black1_opacity: rgb(140,140,140);
             --ic_ve_color_gui_back: #303132;
-            --ic_ve_color_gui_fore: #101112;
+            --ic_ve_color_gui_fore: #3D3E3F;
         }
     }
     /* element */
