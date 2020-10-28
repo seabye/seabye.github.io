@@ -211,7 +211,7 @@
             });
         }
     // :hov action
-    window.addEventListener('pointerover',()=>{});
+    window.addEventListener('touchstart',()=>{});
     // context menu
     window.addEventListener('contextmenu',initial_tool.stop);
     // tabindex
