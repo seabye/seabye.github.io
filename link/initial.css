@@ -79,6 +79,8 @@
         --ic_ve_color_black3_opacity: rgb(89,89,89);
         --ic_ve_color_black2_opacity: rgb(101,101,101);
         --ic_ve_color_black1_opacity: rgb(114,114,114);
+        --ic_ve_color_gui_base: #DDDEDF;
+        --ic_ve_color_gui_focus: #FDFEFF;
     }
     @media(prefers-color-scheme:dark) {
         :root {
@@ -124,6 +126,8 @@
             --ic_ve_color_black3_opacity: rgb(165,165,165);
             --ic_ve_color_black2_opacity: rgb(153,153,153);
             --ic_ve_color_black1_opacity: rgb(140,140,140);
+            --ic_ve_color_gui_base: #303132;
+            --ic_ve_color_gui_focus: #101112;
         }
     }
     /* element */
