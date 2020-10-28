@@ -213,7 +213,7 @@
     // :hov action
     window.addEventListener('pointerover',()=>{});
     // context menu
-    if(!window.navigator.userAgent.match('Mobile'))window.addEventListener('contextmenu',initial_tool.stop);
+    window.addEventListener('contextmenu',initial_tool.stop);
     // tabindex
     window.document.documentElement.setAttribute('tabindex','-1');
     initial_tool.loop(()=>{
