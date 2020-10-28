@@ -216,7 +216,6 @@
     // :hov action
     window.addEventListener('pointerover',()=>{});
     // context menu
-    // if(!window.CSS.supports('-webkit-touch-callout:none'))window.addEventListener('pointerdown',event=>event.button!==2?window.addEventListener('contextmenu',initial_tool.stop):window.document.documentElement.removeEventListener('contextmenu',initial_tool.stop));
     window.addEventListener('contextmenu',initial_tool.stop);
     // tabindex
     window.document.documentElement.setAttribute('tabindex','-1');
