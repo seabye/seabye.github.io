@@ -1,9 +1,9 @@
 'use strict';
-// #variable
 // #library
     // @initial.js
     // @module.js
 // #initial
+    // variable
     // tool
     // sw
     // head element
@@ -14,7 +14,6 @@
 // #debug
 /*
     script.js
-        #variable !
         #library !!
             @initial.js
             @module.js
