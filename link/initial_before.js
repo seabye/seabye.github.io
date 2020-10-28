@@ -3,7 +3,7 @@ for(const item of window.document.scripts){
     if(item.dataset.initial){
         // background color~
         const data=window.JSON.parse(item.dataset.initial.replace(/'/g,'"'));
-        window.document.documentElement.style.setProperty('background-color',`var(--ic_ve_color_white,${window.matchMedia('(prefers-color-scheme:dark)').matches?data.dark?data.dark:'#101010':data.light?data.light:'#FFFFFF'})`);
+        window.document.documentElement.style.setProperty('background-color',`var(--ic_ve_color_white,${window.matchMedia('(prefers-color-scheme:dark)').matches?data.dark?data.dark:'#000000':data.light?data.light:'#FFFFFF'})`);
         window.addEventListener('load',()=>{
             window.document.documentElement.style.removeProperty('background-color');
             if(!window.document.documentElement.style[0])window.document.documentElement.removeAttribute('style');
