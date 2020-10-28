@@ -177,9 +177,7 @@
                 if(event.type==='orientationchange')window.document.body.style.setProperty('display','none');
                 const set=head=>{
                     window.document.documentElement.style.setProperty(`${head}-width`,`${window.innerWidth}px`);
-                    if(!window.navigator.userAgent.match('Mobile')||(window.navigator.userAgent.match('Mobile')&&!window.document.activeElement.localName.match(/input|textarea/))){
-                        window.document.documentElement.style.setProperty(`${head}-height`,`${window.innerHeight}px`);
-                    }
+                    if(!window.navigator.userAgent.match('Mobile')||(window.navigator.userAgent.match('Mobile')&&!window.document.activeElement.localName.match(/input|textarea/)))window.document.documentElement.style.setProperty(`${head}-height`,`${window.innerHeight}px`);
                 };
                 set('min');
                 if(window.parseInt(window.document.documentElement.style.getPropertyValue('min-height'))<=window.parseInt(window.document.documentElement.style.getPropertyValue('min-width'))){
@@ -215,7 +213,7 @@
     // :hov action
     window.addEventListener('pointerover',()=>{});
     // context menu
-    window.addEventListener('contextmenu',initial_tool.stop);
+    if(!window.navigator.userAgent.match('Mobile'))window.addEventListener('contextmenu',initial_tool.stop);
     // tabindex
     window.document.documentElement.setAttribute('tabindex','-1');
     initial_tool.loop(()=>{
