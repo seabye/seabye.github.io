@@ -2,6 +2,7 @@
 import{initial_tool,initial_sw,initial_head}from'/link/initial.js';
 initial_sw('/sw.js');
 initial_head({title:'seabye',style:'/style.css',icon:'/base/icon.png',icon_apple:'/base/icon-apple.png',manifest:'/manifest.webmanifest'});
+window.document.documentElement.classList.add('ic_dg');
 initial_tool.loop(()=>{
     let result=false;
     for(const item of window.document.documentElement.children){
