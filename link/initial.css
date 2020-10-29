@@ -283,3 +283,29 @@
         outline: 1px solid rgba(255,0,0,0.125)!important;
         outline-offset: -1px!important;
     }
+    html.ic_dg,
+    html.ic_dg
+    >body,
+    html.ic_dg
+    >body
+    >* {
+        transform: scale(0.95)!important;
+        outline: 1px solid rgba(0,128,255,0.25)!important;
+        outline-offset: 1px!important;
+    }
+    html.ic_dg::before,
+    html.ic_dg::after,
+    html.ic_dg
+    >body::before,
+    html.ic_dg
+    >body::after,
+    html.ic_dg
+    >body
+    >*::before,
+    html.ic_dg
+    >body
+    >*::after {
+        transform: scale(0.975)!important;
+        outline: 1px solid rgba(0,255,0,0.25)!important;
+        outline-offset: 1px!important;
+    }
