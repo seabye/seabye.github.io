@@ -206,12 +206,12 @@
             window.addEventListener('resize',action);
             window.addEventListener('orientationchange',()=>window.setTimeout(action,350));
         }else{
-            window.addEventListener('pointerover',event=>{
+            window.addEventListener('pointerdown',event=>{
                 if(event.target.localName.match(/input|textarea/))window.setTimeout(()=>event.target.scrollIntoView({behavior:'smooth',block:'center',inline:'center'}),700);
             });
         }
     // :hov action
-    window.addEventListener('pointerover',()=>{});
+    window.addEventListener('pointerdown',()=>{});
     // context menu
     window.addEventListener('contextmenu',initial_tool.stop);
     // tabindex
@@ -227,7 +227,7 @@
         return result;
     },()=>window.document.body.setAttribute('tabindex','-1'),1000/60);
     // input
-    window.addEventListener('pointerover',event=>{
+    window.addEventListener('pointerdown',event=>{
         if(!event.target.localName.match(/input|textarea/)){
             window.document.activeElement.blur();
             window.setTimeout(()=>window.document.documentElement.scrollIntoView({behavior:'smooth',block:'center',inline:'center'}),350);
