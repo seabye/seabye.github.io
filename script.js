@@ -6,6 +6,7 @@
     window.document.head.insertAdjacentElement('beforeend',element);
     element=window.document.createElement('script');
     element.innerHTML=`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-SBCF7D104D');`;
+    window.document.head.insertAdjacentElement('beforeend',element);
 }
 import{initial_tool,initial_sw,initial_head}from'/link/initial.js';
 initial_sw('/sw.js');
