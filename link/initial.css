@@ -276,6 +276,7 @@
 /* #build */
 /* #debug */
     /* wireframe */
+    html.ic_dg,
     html.ic_dg *,
     html.ic_dg ::before,
     html.ic_dg ::after {
