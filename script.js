@@ -1,11 +1,15 @@
 'use strict';
-import'https://www.googletagmanager.com/gtag/js?id=UA-48096764-1';
-window.dataLayer=window.dataLayer||[];
-function gtag(){
-    dataLayer.push(arguments);
-}
-gtag('js',new Date());
-gtag('config','UA-48096764-1');
+window.document.head.insertAdjacentHTML('beforeend',
+`<script async src="https://www.googletagmanager.com/gtag/js?id=UA-48096764-1"></script>
+<script>
+    window.dataLayer=window.dataLayer||[];
+    function gtag(){
+        dataLayer.push(arguments);
+    }
+    gtag('js',new Date());
+    gtag('config','UA-48096764-1');
+</script>`
+);
 import{initial_tool,initial_sw,initial_head}from'/link/initial.js';
 initial_sw('/sw.js');
 initial_head({title:'seabye',style:'/style.css',icon:'/base/icon.png',icon_apple:'/base/icon-apple.png',manifest:'/manifest.webmanifest'});
