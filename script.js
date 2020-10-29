@@ -1,15 +1,12 @@
 'use strict';
-window.document.head.insertAdjacentHTML('beforeend',
-`<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-SBCF7D104D"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-SBCF7D104D');
-</script>`
-);
+{
+    let element=window.document.createElement('script');
+    element.setAttribute('async','');
+    element.setAttribute('src','https://www.googletagmanager.com/gtag/js?id=G-SBCF7D104D');
+    window.document.head.insertAdjacentElement('beforeend',element);
+    element=window.document.createElement('script');
+    element.innerHTML=`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-SBCF7D104D');`;
+}
 import{initial_tool,initial_sw,initial_head}from'/link/initial.js';
 initial_sw('/sw.js');
 initial_head({title:'seabye',style:'/style.css',icon:'/base/icon.png',icon_apple:'/base/icon-apple.png',manifest:'/manifest.webmanifest'});
