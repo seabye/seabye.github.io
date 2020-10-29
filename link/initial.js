@@ -203,7 +203,6 @@
         if(window.navigator.userAgent.match('Safari')&&!window.navigator.userAgent.match('Chrome')&&!window.navigator.userAgent.match('Edg')){
             const action=()=>window.document.documentElement.scrollIntoView({behavior:'smooth',block:'center',inline:'center'});
             window.addEventListener('load',action,{once:true});
-            // window.addEventListener('resize',action);
             window.addEventListener('orientationchange',()=>window.setTimeout(action,350));
         }else{
             window.addEventListener('pointerdown',event=>{
