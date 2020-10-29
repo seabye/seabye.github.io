@@ -291,6 +291,7 @@
     >* {
         transform: scale(0.95)!important;
         outline: 1px dashed rgba(255,0,0,0.25)!important;
+        outline-offset: 1px!important;
     }
     html.ic_dg::before,
     html.ic_dg::after,
@@ -306,4 +307,5 @@
     >*::after {
         transform: scale(0.975)!important;
         outline: 1px dotted rgba(255,0,0,0.25)!important;
+        outline-offset: 1px!important;
     }
