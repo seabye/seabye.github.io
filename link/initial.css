@@ -140,6 +140,9 @@
         touch-action: pan-x pan-y;
         overscroll-behavior: contain;
     }
+    i {
+        pointer-events: none;
+    }
         /* root */
         html,
         body,
