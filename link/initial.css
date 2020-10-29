@@ -232,7 +232,7 @@
             all: unset;
             /* _ */
             box-sizing: border-box;
-            line-height: 100%;
+            line-height: normal;
             vertical-align: middle;
             outline: unset;
             touch-action: pan-x pan-y;
