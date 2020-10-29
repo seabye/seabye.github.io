@@ -1,13 +1,13 @@
 'use strict';
 window.document.head.insertAdjacentHTML('beforeend',
-`<script async src="https://www.googletagmanager.com/gtag/js?id=UA-48096764-1"></script>
+`<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SBCF7D104D"></script>
 <script>
-    window.dataLayer=window.dataLayer||[];
-    function gtag(){
-        dataLayer.push(arguments);
-    }
-    gtag('js',new Date());
-    gtag('config','UA-48096764-1');
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SBCF7D104D');
 </script>`
 );
 import{initial_tool,initial_sw,initial_head}from'/link/initial.js';
