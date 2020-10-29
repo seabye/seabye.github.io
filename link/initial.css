@@ -140,9 +140,6 @@
         touch-action: pan-x pan-y;
         overscroll-behavior: contain;
     }
-    i {
-        pointer-events: none;
-    }
         /* root */
         html,
         body,
@@ -254,6 +251,10 @@
                     input[type="search"]::-webkit-search-cancel-button {
                         display: none;
                     }
+        /* other */
+        i {
+            pointer-events: none;
+        }
     /* scroll */
     ::-webkit-scrollbar {
         width: 8px;
