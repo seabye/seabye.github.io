@@ -249,7 +249,8 @@
             /* input */
                 /* @safari */
                     /* type search */
-                    input[type="search"]::-webkit-textfield-decoration-container {
+                    input[type="search"]::-webkit-search-decoration,
+                    input[type="search"]::-webkit-search-cancel-button {
                         display: none;
                     }
     /* scroll */
