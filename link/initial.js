@@ -126,6 +126,47 @@
                 }
             }
         }
+        static toggle_full(element=window.document.documentElement,top_window=false){
+            if(!top_window){
+                if(!(window.document.fullscreen||window.document.webkitIsFullScreen)){
+                    if('requestFullscreen'in window.document.documentElement){
+                        element.requestFullscreen();
+                    }else if('webkitRequestFullScreen'in window.document.documentElement){
+                        element.webkitRequestFullScreen();
+                    }
+                }else{
+                    if('exitFullscreen'in window.document){
+                        window.document.exitFullscreen();
+                    }else if('webkitExitFullscreen'in window.document){
+                        window.document.webkitExitFullscreen();
+                    }
+                }
+            }else{
+                if(!(window.top.document.fullscreen||window.top.document.webkitIsFullScreen)){
+                    if('requestFullscreen'in window.top.document.documentElement){
+                        element.requestFullscreen();
+                    }else if('webkitRequestFullScreen'in window.top.document.documentElement){
+                        element.webkitRequestFullScreen();
+                    }
+                }else{
+                    if('exitFullscreen'in window.top.document){
+                        window.top.document.exitFullscreen();
+                    }else if('webkitExitFullscreen'in window.top.document){
+                        window.top.document.webkitExitFullscreen();
+                    }
+                }
+            }
+        }
+        static window_open(uri=window.location.href,width=640,height=480,left=0,top=0,center=true){
+            if(center){
+                left=(window.screen.availWidth-width)/2+window.screen.availLeft;
+                top=(window.screen.availHeight-height)/2+window.screen.availTop;
+            }else{
+                left+=window.screen.availLeft;
+                top+=window.screen.availTop;
+            }
+            window.open(uri,'',`width=${width},height=${height},left=${left},top=${top}`);
+        }
         static loop(premise,callback,wait=1000/24){
             premise()?callback():window.setTimeout(()=>this.loop(premise,callback,wait),wait);
         }
