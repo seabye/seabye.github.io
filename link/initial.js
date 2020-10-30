@@ -261,7 +261,7 @@
             window.addEventListener('orientationchange',()=>window.setTimeout(action,350));
         }else{
             window.addEventListener('pointerdown',event=>{
-                if(event.target.localName.match(/input|textarea/))window.setTimeout(()=>event.target.scrollIntoView({behavior:'smooth',block:'center',inline:'center'}),700);
+                if(event.target.localName.match(/input|textarea/))window.setTimeout(()=>event.target.scrollIntoView({behavior:'smooth',block:'center',inline:'center'}),350*2);
             });
         }
     // :hov action
