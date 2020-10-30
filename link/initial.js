@@ -126,6 +126,20 @@
                 }
             }
         }
+        static find_parent(target,start,end=window.document.documentElement){
+            let result=null;
+            const find=(target,start,end)=>{
+                if(start===target){
+                    result=true;
+                }else if(start===end){
+                    result=false;
+                }else if(start!==target){
+                    find(target,start.parentElement,end);
+                };
+            };
+            find(target,start,end);
+            return result;
+        }
         static toggle_full(element=window.document.documentElement,top_window=false){
             if(!top_window){
                 if(!(window.document.fullscreen||window.document.webkitIsFullScreen)){
