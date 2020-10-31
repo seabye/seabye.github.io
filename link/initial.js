@@ -375,7 +375,6 @@
             window.setTimeout(action,350);
         });
     }
-    // }
 // #build
     // sw
     export const initial_sw=(path)=>{
