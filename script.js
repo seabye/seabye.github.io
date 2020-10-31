@@ -1,14 +1,7 @@
 'use strict';
 import{initial_tool,initial_sw,initial_head}from'/link/initial.js';
-{
-    let element=window.document.createElement('script');
-    element.setAttribute('async','');
-    element.setAttribute('src','https://www.googletagmanager.com/gtag/js?id=G-SBCF7D104D');
-    window.document.head.insertAdjacentElement('beforeend',element);
-    element=window.document.createElement('script');
-    element.innerHTML=`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-SBCF7D104D');`;
-    window.document.head.insertAdjacentElement('beforeend',element);
-}
+initial_tool.element('script',[['async',''],['src','https://www.googletagmanager.com/gtag/js?id=G-SBCF7D104D']],window.document.head,'beforeend');
+initial_tool.element('script',false,window.document.head,'beforeend',`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-SBCF7D104D');`);
 initial_sw('/sw.js');
 initial_head({title:'seabye',style:'/style.css',icon:'/base/icon.png',icon_apple:'/base/icon-apple.png',manifest:'/manifest.webmanifest'});
 window.document.documentElement.classList.add('ic_dg');

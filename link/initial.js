@@ -434,10 +434,7 @@
             }else{
                 const light='#E1E1E1';
                 const dark='#212121';
-                const element=window.document.createElement('meta');
-                element.setAttribute('name','theme-color');
-                element.setAttribute('content',window.matchMedia('(prefers-color-scheme:dark)').matches?dark:light);
-                const theme_color=window.document.head.insertAdjacentElement('beforeend',element);
+                const theme_color=initial_tool.element('meta',[['name','theme-color'],['content',`${window.matchMedia('(prefers-color-scheme:dark)').matches?dark:light}`]],window.document.head,'beforeend');
                 window.matchMedia('(prefers-color-scheme:dark)').addEventListener('change',(event)=>{
                     theme_color.setAttribute('content',event.matches?dark:light);
                 });
