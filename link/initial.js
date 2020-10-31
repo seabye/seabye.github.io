@@ -138,7 +138,7 @@
                 return false;
             }else if(start!==target){
                 return this.find_parent(target,start.parentElement,end);
-            };
+            }
         }
         static toggle_full(element=window.document.documentElement,top_window=false){
             if(top_window){
