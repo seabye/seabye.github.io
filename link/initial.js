@@ -330,7 +330,9 @@
             }
         }
         return result;
-    },()=>window.document.body.setAttribute('tabindex','-1'),1000/60);
+    },()=>{
+        window.document.body.setAttribute('tabindex','-1');
+    },1000/60);
     // input
     window.addEventListener('pointerdown',(event)=>{
         if(!event.target.localName.match(/input|textarea/)){
