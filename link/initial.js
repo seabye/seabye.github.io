@@ -132,25 +132,13 @@
             }
         }
         static find_parent(target,start,end=window.document.documentElement){
-            // if(start===target){
-            //     return true;
-            // }else if(start===end){
-            //     return false;
-            // }else if(start!==target){
-            //     this.find_parent(target,start.parentElement,end);
-            // };
-            let result=null;
-            const find=(target,start,end)=>{
-                if(start===target){
-                    result=true;
-                }else if(start===end){
-                    result=false;
-                }else if(start!==target){
-                    find(target,start.parentElement,end);
-                };
+            if(start===target){
+                return true;
+            }else if(start===end){
+                return false;
+            }else if(start!==target){
+                return this.find_parent(target,start.parentElement,end);
             };
-            find(target,start,end);
-            return result;
         }
         static toggle_full(element=window.document.documentElement,top_window=false){
             if(top_window){
