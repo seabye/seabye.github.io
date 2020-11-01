@@ -361,6 +361,7 @@
         new MutationObserver(action).observe(window.document.documentElement,{attributes:true,childList:true,subtree:true});
         window.addEventListener('load',action,{once:true});
         window.addEventListener('resize',action);
+        window.addEventListener('resize',initial_tool.debounce(action,350*3));
         window.addEventListener('orientationchange',()=>{
             window.setTimeout(action,350);
         });
