@@ -283,7 +283,7 @@
             window.addEventListener('resize',action);
             window.addEventListener('resize',initial_tool.debounce(action,350*3));
             window.addEventListener('orientationchange',(event)=>{
-                window.setTimeout(action(event),350);
+                initial_tool.debounce(action(event),350);
             });
         }
         if(window.navigator.userAgent.match('Safari')&&!window.navigator.userAgent.match('Chrome')&&!window.navigator.userAgent.match('Edg')){
@@ -362,9 +362,7 @@
         window.addEventListener('load',action,{once:true});
         window.addEventListener('resize',action);
         window.addEventListener('resize',initial_tool.debounce(action,350*3));
-        window.addEventListener('orientationchange',()=>{
-            window.setTimeout(action,350);
-        });
+        window.addEventListener('orientationchange',initial_tool.debounce(action,350));
     }
 // #build
     // sw
