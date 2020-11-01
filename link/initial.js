@@ -199,6 +199,7 @@
                     before_function();
                 }
                 timeout=window.setTimeout(()=>{
+                    window.console.log('#### debounce');
                     callback.apply(context,args);
                 },wait);
             };
@@ -259,8 +260,10 @@
                     window.document.body.style.setProperty('display','none');
                 }
                 set('min');
+                initial_tool.debounce(set('min'),350*3);
                 if(window.parseInt(window.document.documentElement.style.getPropertyValue('min-height'))<=window.parseInt(window.document.documentElement.style.getPropertyValue('min-width'))){
                     set('max');
+                    initial_tool.debounce(set('max'),350*3);
                     initial_tool.toggle_cls(window.document.documentElement,'ic_oe_orientation_landscape','ic_oe_orientation_portrait',true);
                 }else{
                     window.document.documentElement.style.removeProperty('max-width');
@@ -279,17 +282,8 @@
                     },350);
                 }
             };
-            const check=()=>{
-                if(window.parseInt(window.document.documentElement.style.getPropertyValue('min-height'))<=window.parseInt(window.document.documentElement.style.getPropertyValue('min-width'))){
-                    if(window.parseInt(window.document.documentElement.style.getPropertyValue('max-width'))>window.innerWidth){
-                        set('max');
-                        window.console.log('set');
-                    }
-                }
-            };
             window.addEventListener('load',action,{once:true});
             window.addEventListener('resize',action);
-            window.addEventListener('resize',initial_tool.debounce(check,1000));
             window.addEventListener('orientationchange',(event)=>{
                 window.setTimeout(action(event),350);
             });
