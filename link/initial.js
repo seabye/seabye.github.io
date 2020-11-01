@@ -189,13 +189,10 @@
                 },wait);
             }
         }
-        static debounce(callback,wait=1000/24,before_function=false){
+        static debounce(callback,wait=1000/24){
             let timeout=null;
             return function(){
                 window.clearTimeout(timeout);
-                if(before_function){
-                    before_function();
-                }
                 timeout=window.setTimeout(()=>{
                     callback.apply(this,arguments);
                 },wait);
