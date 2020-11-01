@@ -295,6 +295,7 @@
             window.addEventListener('load',action,{once:true});
             window.addEventListener('orientationchange',()=>{
                 window.setTimeout(action,350);
+                window.setTimeout(action,350*2);
             });
         }else{
             window.addEventListener('pointerdown',(event)=>{
@@ -325,7 +326,7 @@
     },1000/60);
     // input
     window.addEventListener('pointerdown',(event)=>{
-        if(!event.target.localName.match(/input|textarea/)){
+        if(!event.target.localName.match(/input|textarea/)&&window.document.activeElement.localName.match(/input|textarea/)){
             window.document.activeElement.blur();
             window.setTimeout(()=>{
                 window.document.documentElement.scrollIntoView({behavior:'smooth',block:'center',inline:'center'});
