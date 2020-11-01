@@ -192,14 +192,12 @@
         static debounce(callback,wait=1000/24,before_function=false){
             let timeout=null;
             return function(){
-                const context=this;
-                const args=arguments;
                 window.clearTimeout(timeout);
                 if(before_function){
                     before_function();
                 }
                 timeout=window.setTimeout(()=>{
-                    callback.apply(context,args);
+                    callback.apply(this,arguments);
                 },wait);
             };
         }
