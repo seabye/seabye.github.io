@@ -199,7 +199,6 @@
                     before_function();
                 }
                 timeout=window.setTimeout(()=>{
-                    window.console.log('#### debounce');
                     callback.apply(context,args);
                 },wait);
             };
