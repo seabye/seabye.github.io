@@ -281,9 +281,11 @@
             };
             window.addEventListener('load',action,{once:true});
             window.addEventListener('resize',action);
-            // window.addEventListener('resize',initial_tool.debounce(action,350*3));
+            window.addEventListener('resize',initial_tool.debounce(action,350*3));
             window.addEventListener('orientationchange',(event)=>{
-                window.setTimeout(action(event),350);
+                window.setTimeout(()=>{
+                    action(event);
+                },350);
             });
         }
         if(window.navigator.userAgent.match('Safari')&&!window.navigator.userAgent.match('Chrome')&&!window.navigator.userAgent.match('Edg')){
