@@ -292,8 +292,7 @@
             }
             window.addEventListener('load',action,{once:true});
             window.addEventListener('orientationchange',()=>{
-                window.setTimeout(action,350);
-                window.setTimeout(action,350*2);
+                window.setTimeout(action,350*3);
             });
         }else{
             window.addEventListener('pointerdown',(event)=>{
@@ -364,7 +363,7 @@
         window.addEventListener('resize',action);
         window.addEventListener('resize',initial_tool.debounce(action,350*3));
         window.addEventListener('orientationchange',()=>{
-            window.setTimeout(action,350);
+            window.setTimeout(action,350*2);
         });
     }
 // #build
