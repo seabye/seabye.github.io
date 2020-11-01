@@ -291,14 +291,6 @@
             window.addEventListener('orientationchange',()=>{
                 window.setTimeout(action,350*3);
             });
-        }else{
-            window.addEventListener('pointerdown',(event)=>{
-                if(event.target.localName.match(/input|textarea/)){
-                    window.setTimeout(()=>{
-                        event.target.scrollIntoView({behavior:'smooth',block:'center',inline:'center'});
-                    },350*2);
-                }
-            });
         }
     // :hov action
     window.addEventListener('pointerdown',()=>{});
@@ -318,7 +310,7 @@
     },()=>{
         window.document.body.setAttribute('tabindex','-1');
     },1000/60);
-    // input
+    // form
     window.addEventListener('pointerdown',(event)=>{
         if(!event.target.localName.match(/input|textarea/)&&window.document.activeElement.localName.match(/input|textarea/)){
             window.document.activeElement.blur();
@@ -339,6 +331,15 @@
             },350);
         }
     });
+    if(!(window.navigator.userAgent.match('Safari')&&!window.navigator.userAgent.match('Chrome')&&!window.navigator.userAgent.match('Edg'))){
+        window.addEventListener('pointerdown',(event)=>{
+            if(event.target.localName.match(/input|textarea/)){
+                window.setTimeout(()=>{
+                    event.target.scrollIntoView({behavior:'smooth',block:'center',inline:'center'});
+                },350*2);
+            }
+        });
+    }
     // scroll@safari
     if(!window.CSS.supports('overscroll-behavior:contain')){
         const action=()=>{
@@ -376,19 +377,19 @@
     };
     // ic_oe
     export const initial_ic_oe=()=>{
-        const user_agent=window.navigator.userAgent;
-        const element_class=window.document.documentElement.classList;
-        if(user_agent.match('Unix')){element_class.add('ic_oe_system_unix');}
-        if(user_agent.match('Mac OS')&&!user_agent.match('iPhone')&&!user_agent.match('iPad')){element_class.add('ic_oe_system_brand_apple','ic_oe_system_macos');}
-        if(user_agent.match('Windows')){element_class.add('ic_oe_system_brand_microsoft','ic_oe_system_windows');}
-        if(user_agent.match('Linux')&&!user_agent.match('Android')){element_class.add('ic_oe_system_linux');}
-        if(user_agent.match('CrOS')){element_class.add('ic_oe_system_brand_google','ic_oe_system_chromeos');}
-        if(user_agent.match(/iPhone|iPad/)){element_class.add('ic_oe_system_brand_apple','ic_oe_system_ios');}
-        if(user_agent.match('Android')){element_class.add('ic_oe_system_brand_google','ic_oe_system_android');}
-        if(user_agent.match('Firefox')){element_class.add('ic_oe_browser_firefox');}
-        if(user_agent.match('Safari')&&!user_agent.match('Chrome')&&!user_agent.match('Edg')){element_class.add('ic_oe_browser_safari');}
-        if(user_agent.match('Chrome')&&!user_agent.match('Edg')){element_class.add('ic_oe_browser_chrome');}
-        if(user_agent.match('Edg')){element_class.add('ic_oe_browser_edge');}
+        const ua=window.navigator.userAgent;
+        const cls=window.document.documentElement.classList;
+        if(ua.match('Unix')){cls.add('ic_oe_system_unix');}
+        if(ua.match('Mac OS')&&!ua.match('iPhone')&&!ua.match('iPad')){cls.add('ic_oe_system_brand_apple','ic_oe_system_macos');}
+        if(ua.match('Windows')){cls.add('ic_oe_system_brand_microsoft','ic_oe_system_windows');}
+        if(ua.match('Linux')&&!ua.match('Android')){cls.add('ic_oe_system_linux');}
+        if(ua.match('CrOS')){cls.add('ic_oe_system_brand_google','ic_oe_system_chromeos');}
+        if(ua.match(/iPhone|iPad/)){cls.add('ic_oe_system_brand_apple','ic_oe_system_ios');}
+        if(ua.match('Android')){cls.add('ic_oe_system_brand_google','ic_oe_system_android');}
+        if(ua.match('Firefox')){cls.add('ic_oe_browser_firefox');}
+        if(ua.match('Safari')&&!ua.match('Chrome')&&!ua.match('Edg')){cls.add('ic_oe_browser_safari');}
+        if(ua.match('Chrome')&&!ua.match('Edg')){cls.add('ic_oe_browser_chrome');}
+        if(ua.match('Edg')){cls.add('ic_oe_browser_edge');}
     };
     // head
     export const initial_head=(option={})=>{
