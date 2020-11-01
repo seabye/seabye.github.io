@@ -249,21 +249,19 @@
         },{once:true});
         // orientation
         {
-            const set=(head)=>{
-                window.document.documentElement.style.setProperty(`${head}-width`,`${window.innerWidth}px`);
-                if(!window.navigator.userAgent.match('Mobile')||(window.navigator.userAgent.match('Mobile')&&!window.document.activeElement.localName.match(/input|textarea/))){
-                    window.document.documentElement.style.setProperty(`${head}-height`,`${window.innerHeight}px`);
-                }
-            };
             const action=(event)=>{
                 if(event.type==='orientationchange'){
                     window.document.body.style.setProperty('display','none');
                 }
+                const set=(head)=>{
+                    window.document.documentElement.style.setProperty(`${head}-width`,`${window.innerWidth}px`);
+                    if(!window.navigator.userAgent.match('Mobile')||(window.navigator.userAgent.match('Mobile')&&!window.document.activeElement.localName.match(/input|textarea/))){
+                        window.document.documentElement.style.setProperty(`${head}-height`,`${window.innerHeight}px`);
+                    }
+                };
                 set('min');
-                initial_tool.debounce(set('min'),350*3);
                 if(window.parseInt(window.document.documentElement.style.getPropertyValue('min-height'))<=window.parseInt(window.document.documentElement.style.getPropertyValue('min-width'))){
                     set('max');
-                    initial_tool.debounce(set('max'),350*3);
                     initial_tool.toggle_cls(window.document.documentElement,'ic_oe_orientation_landscape','ic_oe_orientation_portrait',true);
                 }else{
                     window.document.documentElement.style.removeProperty('max-width');
@@ -284,6 +282,7 @@
             };
             window.addEventListener('load',action,{once:true});
             window.addEventListener('resize',action);
+            window.addEventListener('resize',initial_tool.debounce(action,350*3));
             window.addEventListener('orientationchange',(event)=>{
                 window.setTimeout(action(event),350);
             });
