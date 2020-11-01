@@ -248,16 +248,16 @@
         },{once:true});
         // orientation
         {
+            const set=(head)=>{
+                window.document.documentElement.style.setProperty(`${head}-width`,`${window.innerWidth}px`);
+                if(!window.navigator.userAgent.match('Mobile')||(window.navigator.userAgent.match('Mobile')&&!window.document.activeElement.localName.match(/input|textarea/))){
+                    window.document.documentElement.style.setProperty(`${head}-height`,`${window.innerHeight}px`);
+                }
+            };
             const action=(event)=>{
                 if(event.type==='orientationchange'){
                     window.document.body.style.setProperty('display','none');
                 }
-                const set=(head)=>{
-                    window.document.documentElement.style.setProperty(`${head}-width`,`${window.innerWidth}px`);
-                    if(!window.navigator.userAgent.match('Mobile')||(window.navigator.userAgent.match('Mobile')&&!window.document.activeElement.localName.match(/input|textarea/))){
-                        window.document.documentElement.style.setProperty(`${head}-height`,`${window.innerHeight}px`);
-                    }
-                };
                 set('min');
                 if(window.parseInt(window.document.documentElement.style.getPropertyValue('min-height'))<=window.parseInt(window.document.documentElement.style.getPropertyValue('min-width'))){
                     set('max');
@@ -279,8 +279,17 @@
                     },350);
                 }
             };
+            const check=()=>{
+                if(window.parseInt(window.document.documentElement.style.getPropertyValue('min-height'))<=window.parseInt(window.document.documentElement.style.getPropertyValue('min-width'))){
+                    if(window.parseInt(window.document.documentElement.style.getPropertyValue('max-width'))>window.innerWidth){
+                        set('max');
+                        window.console.log('set');
+                    }
+                }
+            };
             window.addEventListener('load',action,{once:true});
             window.addEventListener('resize',action);
+            window.addEventListener('resize',initial_tool.debounce(check,1000));
             window.addEventListener('orientationchange',(event)=>{
                 window.setTimeout(action(event),350);
             });
