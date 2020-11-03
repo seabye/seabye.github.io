@@ -80,7 +80,7 @@
         --ic_ve_color_black1_opacity: rgb(114,114,114);
         --ic_ve_color_background: #F9F9F9;
         --ic_ve_color_foreground: #E1E1E1;
-        --ic_ve_color_highlight: #D1D1D1;
+        --ic_ve_color_highlight: #C9C9C9;
     }
     @media(prefers-color-scheme:dark) {
         :root {
@@ -128,7 +128,7 @@
             --ic_ve_color_black1_opacity: rgb(140,140,140);
             --ic_ve_color_background: #090909;
             --ic_ve_color_foreground: #212121;
-            --ic_ve_color_highlight: #313131;
+            --ic_ve_color_highlight: #393939;
         }
     }
     /* element */
