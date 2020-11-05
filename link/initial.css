@@ -37,7 +37,7 @@
     /* variable */
         /* other */
         :root {
-            --ic_ve_pixel_half: 0.5;
+            --ic_ve_pixel_half: 0.5px;
         }
         /* color */
             /* base */
