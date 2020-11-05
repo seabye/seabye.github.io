@@ -156,14 +156,14 @@
             /* system_brand */
                 /* other */
                 :root {
-                    --ic_ve_color_system_red: var(--ic_ve_color_red);
-                    --ic_ve_color_system_green: var(--ic_ve_color_green);
-                    --ic_ve_color_system_blue: var(--ic_ve_color_blue);
-                    --ic_ve_color_system_orange: var(--ic_ve_color_orange);
-                    --ic_ve_color_system_red_translucent: var(--ic_ve_color_red_translucent);
-                    --ic_ve_color_system_green_translucent: var(--ic_ve_color_green_translucent);
-                    --ic_ve_color_system_blue_translucent: var(--ic_ve_color_blue_translucent);
-                    --ic_ve_color_system_orange_translucent: var(--ic_ve_color_orange_translucent);
+                    --ic_ve_color_system_red: var(--sc_ve_color_red,var(--ic_ve_color_red));
+                    --ic_ve_color_system_green: var(--sc_ve_color_green,var(--ic_ve_color_green));
+                    --ic_ve_color_system_blue: var(--sc_ve_color_blue,var(--ic_ve_color_blue));
+                    --ic_ve_color_system_orange: var(--sc_ve_color_orange,var(--ic_ve_color_orange));
+                    --ic_ve_color_system_red_translucent: var(--sc_ve_color_red_translucent,var(--ic_ve_color_red_translucent));
+                    --ic_ve_color_system_green_translucent: var(--sc_ve_color_green_translucent),var(--ic_ve_color_green_translucent);
+                    --ic_ve_color_system_blue_translucent: var(--sc_ve_color_blue_translucent,var(--ic_ve_color_blue_translucent));
+                    --ic_ve_color_system_orange_translucent: var(--sc_ve_color_orange_translucent,var(--ic_ve_color_orange_translucent));
                 }
                 /* apple */
                 html.ic_oe_system_brand_apple:root {
