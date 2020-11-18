@@ -2,27 +2,34 @@
 // #library
     // @initial.js
     // @module.js
+        // ..js
 // #initial
     // variable
-    // tool
     // sw
-    // head element
+    // ic_oe
+    // head
+    // tool
 // #block
 // #build
-    // body element
     // sc_cr
 // #debug
 /*
     script.js
         #library !!
             @initial.js
-            @module.js
+            @module.js ~ 1
+                ..js
         #initial !!
-        #block !!!
+            variable
+            sw
+            ic_oe
+            head / head element
+            tool ~ 2
+        #block !!! ~ 3
         #build !!!
+            sc_cr / body element
         #debug !
 */
-// #variable
 // #library
 // #initial
     // tool
@@ -372,7 +379,6 @@
             window.setTimeout(action,350*2);
         });
     }
-// #build
     // sw
     export const initial_sw=(path)=>{
         if('serviceWorker'in window.navigator){
@@ -439,4 +445,6 @@
         }
         window.document.head.insertAdjacentHTML('beforeend',`<link rel="manifest" href="${option.manifest?option.manifest:''}">`);
     };
+// #block
+// #build
 // #debug
