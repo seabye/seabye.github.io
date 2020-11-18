@@ -2,7 +2,8 @@
 // #library
     // @initial.js
     // @module.js
-        // ..js
+        // ?.js
+// (async()=>{
 // #initial
     // variable
     // sw
@@ -12,13 +13,15 @@
 // #block
 // #build
     // sc_cr
+        // sc_cr_?
 // #debug
+// })();
 /*
     script.js
         #library !!
             @initial.js
             @module.js ~ 1
-                ..js
+                ?.js
         #initial !!
             variable
             sw
@@ -28,6 +31,7 @@
         #block !!! ~ 3
         #build !!!
             sc_cr / body element
+                sc_cr_?
         #debug !
 */
 // #library

@@ -2,23 +2,18 @@
 /* #library */
     /* @initial.css */
     /* @module.css */
+        /* ?.css */
 /* #initial */
     /* variable */
     /* element */
 /* #block */
 /* #build */
     /* sc_cr */
+        /* sc_cr_? */
 /* #debug */
 /*
-    style.css
-    sc_
+    ic_ / @initial.css & sc_ / style.css
         #library !!
-            @initial.css
-            ic_
-            ~~~~
-            _oe_ / operating environment
-            ====
-            @module.css
         #initial !!
         _ve_ / variable
         #block !!!
@@ -29,6 +24,7 @@
         #debug !
         _dg _dg_
         ~~~~
+        _oe_ / operating environment
         _at_ / animation
         _mk _mk_ / :hov~.cls action... mark
 */
