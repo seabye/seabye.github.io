@@ -20,15 +20,15 @@
     script.js
         #library !!
             @initial.js
-            @module.js / 0 ~ initial & block & build & debug
+            @module.js / 0 ~ initial & block & build
                 ?.js
         #initial !!
-            variable / ~ initial & block & build & debug
+            variable / ~ initial & block & build
             sw
             ic_oe
             head / head element
-            tool / 1 ~ initial & block & build & debug
-        #block !!! / 2 ~ block & build & debug
+            tool / 1 ~ initial & block & build
+        #block !!! / 2 ~ block & build
         #build !!!
             sc_cr / body element
                 sc_cr_?
