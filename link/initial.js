@@ -19,8 +19,8 @@
 /*
     script.js
         #library !!
-            @initial.js
-            @module.js / 0 ~ initial & block & build
+            @initial.js / initial_
+            @module.js / module_ / 0 ~ initial & block & build
                 ?.js
         #initial !!
             variable / ~ initial & block & build
