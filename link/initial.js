@@ -431,7 +431,7 @@
             // ~theme color
             let theme_color=null;
             for(const item of window.document.head.children){
-                if(item.name==='theme-color'){
+                if(item.getAttribute('name')==='theme-color'){
                     theme_color=item;
                     break;
                 }
