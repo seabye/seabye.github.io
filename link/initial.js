@@ -21,7 +21,7 @@
 /*
     script.js
         #library !! / module_0 ~ initial & block & build
-        #initial !!
+        #initial !!!
             variable / variable_0 ~ initial & block & build
             sw
             ic_oe
