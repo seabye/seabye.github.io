@@ -11,25 +11,26 @@
     // head
     // tool
 // #block
+    // variable
 // #build
+    // variable
     // sc_cr
         // sc_cr_?
 // #debug
 // })();
 /*
     script.js
-        #library !!
-            @initial.js / initial_
-            @module.js / module_ / 0 ~ initial & block & build
-                ?.js
+        #library !! / module_0 ~ initial & block & build
         #initial !!
-            variable / ~ initial & block & build
+            variable / variable_0 ~ initial & block & build
             sw
             ic_oe
             head / head element
-            tool / 1 ~ initial & block & build
-        #block !!! / 2 ~ block & build
+            tool / module_1 ~ initial & block & build
+        #block !!! / module_2 ~ block & build
+            variable / variable_1 ~ block & build
         #build !!!
+            variable / variable_2 ~ build
             sc_cr / body element
                 sc_cr_?
         #debug !

@@ -13,11 +13,11 @@
 /* #debug */
 /*
     ic_ / @initial.css & sc_ / style.css
-        #library !!
+        #library !! / module_0 ~ initial & block & build
         #initial !!
-        _ve_ / variable
+        _ve_ / variable / variable_0 ~ initial & block & build
         #block !!!
-        _bk_
+        _bk_ / module_1 ~ block & build
         #build !!!
         _cr / container
         _ca_ / container abbreviation
