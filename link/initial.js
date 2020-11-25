@@ -46,8 +46,14 @@
         static element(tag,attribute=false,insert_element=false,insert_position=false,content=false){
             const element=window.document.createElement(tag);
             if(attribute){
-                for(const [key,value] of attribute){
-                    element.setAttribute(key,value);
+                if(!window.Array.isArray(attribute)){
+                    for(const item in attribute){
+                        element.setAttribute(item,attribute[item]);
+                    }
+                }else{
+                    for(const[key,value]of attribute){
+                        element.setAttribute(key,value);
+                    }
                 }
             }
             if(insert_element){
@@ -65,6 +71,9 @@
                 }
             }
             return element;
+        }
+        static element_machine(){
+
         }
         static toggle_cls(element,cls,cls2='',replace=false,wait=0,callback=()=>{}){
             if(cls2){
@@ -442,7 +451,7 @@
             }else{
                 const light='#E1E1E1';
                 const dark='#212121';
-                const theme_color=initial_tool.element('meta',[['name','theme-color'],['content',`${window.matchMedia('(prefers-color-scheme:dark)').matches?dark:light}`]],window.document.head,'beforeend');
+                const theme_color=initial_tool.element('meta',{name:'theme-color',content:`${window.matchMedia('(prefers-color-scheme:dark)').matches?dark:light}`},window.document.head,'beforeend');
                 window.matchMedia('(prefers-color-scheme:dark)').addEventListener('change',(event)=>{
                     theme_color.setAttribute('content',event.matches?dark:light);
                 });
