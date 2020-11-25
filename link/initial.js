@@ -38,12 +38,12 @@
 // #library
 // #initial
     // tool
-    export class initial_tool{
-        static stop(event){
+    export const initial_tool={
+        stop:(event)=>{
             event.stopPropagation();
             event.preventDefault();
-        }
-        static element(tag,attribute=false,insert_element=false,insert_position=false,content=false){
+        },
+        element:(tag,attribute=false,insert_element=false,insert_position=false,content=false)=>{
             const element=window.document.createElement(tag);
             if(attribute){
                 for(const [key,value] of attribute){
@@ -65,8 +65,8 @@
                 }
             }
             return element;
-        }
-        static toggle_cls(element,cls,cls2='',replace=false,wait=0,callback=()=>{}){
+        },
+        toggle_cls:(element,cls,cls2='',replace=false,wait=0,callback=()=>{})=>{
             if(cls2){
                 if(replace){
                     if(cls){
@@ -142,16 +142,16 @@
                     }
                 }
             }
-        }
-        static find_parent(target,start,end=window.document.documentElement){
+        },
+        find_parent:(target,start,end=window.document.documentElement)=>{
             if(start===target){
                 return true;
             }else if(start===end){
                 return false;
             }
             return this.find_parent(target,start.parentElement,end);
-        }
-        static toggle_full(element=window.document.documentElement,top_window=false){
+        },
+        toggle_full:(element=window.document.documentElement,top_window=false)=>{
             if(top_window){
                 if(window.top.document.fullscreen||window.top.document.webkitIsFullScreen){
                     if('exitFullscreen'in window.top.document){
@@ -181,8 +181,8 @@
                     }
                 }
             }
-        }
-        static window_open(uri=window.location.href,width=640,height=480,left=0,top=0,center=true){
+        },
+        window_open:(uri=window.location.href,width=640,height=480,left=0,top=0,center=true)=>{
             if(center){
                 left=(window.screen.availWidth-width)/2+window.screen.availLeft;
                 top=(window.screen.availHeight-height)/2+window.screen.availTop;
@@ -191,8 +191,8 @@
                 top+=window.screen.availTop;
             }
             window.open(uri,'',`width=${width},height=${height},left=${left},top=${top}`);
-        }
-        static loop(premise,callback,wait=1000/24){
+        },
+        loop:(premise,callback,wait=1000/24)=>{
             if(premise()){
                 callback();
             }else{
@@ -200,8 +200,8 @@
                     this.loop(premise,callback,wait);
                 },wait);
             }
-        }
-        static debounce(callback,wait=1000/24){
+        },
+        debounce:(callback,wait=1000/24)=>{
             let timeout=null;
             return function(){
                 window.clearTimeout(timeout);
