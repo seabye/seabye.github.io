@@ -38,12 +38,12 @@
 // #library
 // #initial
     // tool
-    export const initial_tool={
-        stop:(event)=>{
+    export class initial_tool{
+        static stop(event){
             event.stopPropagation();
             event.preventDefault();
-        },
-        element:(tag,attribute=false,insert_element=false,insert_position=false,content=false)=>{
+        }
+        static element(tag,attribute=false,insert_element=false,insert_position=false,content=false){
             const element=window.document.createElement(tag);
             if(attribute){
                 for(const [key,value] of attribute){
@@ -65,8 +65,8 @@
                 }
             }
             return element;
-        },
-        toggle_cls:(element,cls,cls2='',replace=false,wait=0,callback=()=>{})=>{
+        }
+        static toggle_cls(element,cls,cls2='',replace=false,wait=0,callback=()=>{}){
             if(cls2){
                 if(replace){
                     if(cls){
@@ -142,16 +142,16 @@
                     }
                 }
             }
-        },
-        find_parent:(target,start,end=window.document.documentElement)=>{
+        }
+        static find_parent(target,start,end=window.document.documentElement){
             if(start===target){
                 return true;
             }else if(start===end){
                 return false;
             }
             return this.find_parent(target,start.parentElement,end);
-        },
-        toggle_full:(element=window.document.documentElement,top_window=false)=>{
+        }
+        static toggle_full(element=window.document.documentElement,top_window=false){
             if(top_window){
                 if(window.top.document.fullscreen||window.top.document.webkitIsFullScreen){
                     if('exitFullscreen'in window.top.document){
@@ -181,8 +181,8 @@
                     }
                 }
             }
-        },
-        window_open:(uri=window.location.href,width=640,height=480,left=0,top=0,center=true)=>{
+        }
+        static window_open(uri=window.location.href,width=640,height=480,left=0,top=0,center=true){
             if(center){
                 left=(window.screen.availWidth-width)/2+window.screen.availLeft;
                 top=(window.screen.availHeight-height)/2+window.screen.availTop;
@@ -191,8 +191,8 @@
                 top+=window.screen.availTop;
             }
             window.open(uri,'',`width=${width},height=${height},left=${left},top=${top}`);
-        },
-        loop:(premise,callback,wait=1000/24)=>{
+        }
+        static loop(premise,callback,wait=1000/24){
             if(premise()){
                 callback();
             }else{
@@ -200,8 +200,8 @@
                     this.loop(premise,callback,wait);
                 },wait);
             }
-        },
-        debounce:(callback,wait=1000/24)=>{
+        }
+        static debounce(callback,wait=1000/24){
             let timeout=null;
             return function(){
                 window.clearTimeout(timeout);
