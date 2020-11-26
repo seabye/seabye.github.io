@@ -85,7 +85,7 @@
                     object.run(element);
                 }
                 if(object.child){
-                    build_array(object[item],object.element);
+                    build_array(object.child,object.element);
                 }
             };
             build_array(array,position);
