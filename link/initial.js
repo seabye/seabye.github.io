@@ -81,11 +81,11 @@
             };
             const build_object=(object,position)=>{
                 element[object.element[0]]=object.element=this.element(object.element[1],object.element[2],position,'beforeend');
-                object.run(element);
-                for(const item in object){
-                    if(item==='child'){
-                        build_array(object[item],object.element);
-                    }
+                if(object.run){
+                    object.run(element);
+                }
+                if(object.child){
+                    build_array(object[item],object.element);
                 }
             };
             build_array(array,position);
