@@ -72,8 +72,23 @@
             }
             return element;
         }
-        static element_machine(){
-
+        static element_machine(array,position=window.document.body){
+            const element={};
+            const build_array=(array,position)=>{
+                for(const item of array){
+                    build_object(item,position);
+                }
+            };
+            const build_object=(object,position)=>{
+                element[object.mark]=object.element=this.element(object.element,object.attribute,position,'beforeend');
+                object.run(element);
+                for(const item in object){
+                    if(item==='child'){
+                        build_array(object[item],object.element);
+                    }
+                }
+            };
+            build_array(array,position);
         }
         static toggle_cls(element,cls,cls2='',replace=false,wait=0,callback=()=>{}){
             if(cls2){
