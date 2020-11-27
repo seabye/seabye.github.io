@@ -80,7 +80,10 @@
                 }
             };
             const build_object=(object,position)=>{
-                element[object.element[0]]=object.element=this.element(object.element[1],object.element[2],position,'beforeend');
+                if(!object.element[3]){
+                    object.element[3]='';
+                }
+                element[object.element[0]]=object.element=this.element(object.element[1],object.element[2],position,'beforeend',object.element[3]);
                 if(object.run){
                     object.run(element);
                 }
