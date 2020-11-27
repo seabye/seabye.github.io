@@ -1,21 +1,32 @@
 'use strict';
-import{initial_tool,initial_sw,initial_head}from'/link/initial.js';
-initial_tool.element('script',{async:'',src:'https://www.googletagmanager.com/gtag/js?id=G-SBCF7D104D'},window.document.head,'beforeend');
-initial_tool.element('script',false,window.document.head,'beforeend',`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-SBCF7D104D');`);
-initial_sw('/sw.js');
-initial_head({title:'seabye',style:'/style.css',icon:'/base/icon.png',icon_apple:'/base/icon-apple.png',manifest:'/manifest.webmanifest'});
-window.document.documentElement.classList.add('ic_dg');
-initial_tool.loop(()=>{
-    let result=false;
-    for(const item of window.document.documentElement.children){
-        if(item.localName==='body'){
-            result=true;
-            break;
-        }
-    }
-    return result;
-},()=>{
-    window.document.body.insertAdjacentHTML('beforeend',
+// #initial
+    // ##import
+        // initial
+        import{initial_tool,initial_option}from'/link/initial.js';
+        // Google Analytics
+        initial_tool.element('script',{async:'',src:'https://www.googletagmanager.com/gtag/js?id=G-SBCF7D104D'},window.document.head,'beforeend');
+        initial_tool.element('script',false,window.document.head,'beforeend',`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-SBCF7D104D');`);
+    // ##global
+        // ###variable
+        // ###module
+    // ##initial
+        // initial
+        initial_option({sw:'/sw.js',head:{title:'seabye',style:'/style.css',icon:'/base/icon.png',icon_apple:'/base/icon-apple.png',manifest:'/manifest.webmanifest'}});
+// #build
+    // ##module
+    // ##element
+        // element
+        initial_tool.loop(()=>{
+            let result=false;
+            for(const item of window.document.documentElement.children){
+                if(item.localName==='body'){
+                    result=true;
+                    break;
+                }
+            }
+            return result;
+        },()=>{
+            window.document.body.insertAdjacentHTML('beforeend',
 `<div style="perspective: 100vw;">
     <div style="font-size: calc(100vmax/20); transform: rotateX(-15deg); text-align: center; perspective: 50vw;">
         <div style="transform: rotateY(-60deg);"><a href="//seabye.com">seabye.com</a></div>
@@ -27,5 +38,8 @@ initial_tool.loop(()=>{
         <div style="transform: rotateY(60deg);"><a href="//oddbye.com">oddbye.com</a></div>
     </div>
 </div>`
-    );
-},1000/60);
+            );
+        },1000/60);
+// #debug
+    // ic_dg / initial container_debug
+    window.document.documentElement.classList.add('ic_dg');

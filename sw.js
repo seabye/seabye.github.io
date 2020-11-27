@@ -1,2 +1,14 @@
 'use strict';
-self.addEventListener('fetch',()=>{});
+// #initial
+    // ##import
+    // ##global
+        // ###variable
+        // ###module
+    // ##initial
+        // initial_option
+            // sw
+            self.addEventListener('fetch',()=>{});
+// #build
+    // ##module
+    // ##element
+// #debug

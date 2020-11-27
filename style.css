@@ -1,1 +1,13 @@
-@import "/link/initial.css";
+@charset "UTF-8";
+/* #initial */
+    /* ##import */
+        /* initial */
+        @import "/link/initial.css";
+    /* ##global */
+        /* ###variable */
+        /* ###module */
+    /* ##initial */
+/* #build */
+    /* ##module */
+    /* ##element */
+/* #debug */
