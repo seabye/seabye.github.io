@@ -1,148 +1,132 @@
 'use strict';
 // ---- ---- ---- ----
-// #initial
-    // ##import
-    // ##global
-        // ###variable
-        // ###module
-    // ##initial
-// #build
+// #import
+// #global
+    // ##variable
     // ##module
-    // ##element
+    // ##build
+// #content
+    // ##variable
+    // ##module
+    // ##build
 // #debug
 // ---- ---- ---- ----
-// #initial
-    // ##import
-    // ##global
-        // ###variable
-        // ###module
-            // initial_tool
-            export class initial_tool{
-                static stop(event){
-                    event.stopPropagation();
-                    event.preventDefault();
-                }
-                static element(tag,attribute=false,insert_element=false,insert_position=false,content=false){
-                    const element=window.document.createElement(tag);
-                    if(attribute){
-                        if(!window.Array.isArray(attribute)){
-                            for(const item in attribute){
-                                element.setAttribute(item,attribute[item]);
-                            }
-                        }else{
-                            for(const[key,value]of attribute){
-                                element.setAttribute(key,value);
-                            }
+// #import
+// #global
+    // ##variable
+    // ##module
+        // initial_tool
+        export class initial_tool{
+            static stop(event){
+                event.stopPropagation();
+                event.preventDefault();
+            }
+            static element(tag,attribute=false,insert_element=false,insert_position=false,content=false){
+                const element=window.document.createElement(tag);
+                if(attribute){
+                    if(!window.Array.isArray(attribute)){
+                        for(const item in attribute){
+                            element.setAttribute(item,attribute[item]);
+                        }
+                    }else{
+                        for(const[key,value]of attribute){
+                            element.setAttribute(key,value);
                         }
                     }
-                    if(insert_element){
-                        if(insert_position){
-                            insert_element.insertAdjacentElement(insert_position,element);
+                }
+                if(insert_element){
+                    if(insert_position){
+                        insert_element.insertAdjacentElement(insert_position,element);
+                    }else{
+                        insert_element.appendChild(element);
+                    }
+                }
+                if(content){
+                    if(typeof content==='function'){
+                        content(element);
+                    }else{
+                        element.innerHTML=content;
+                    }
+                }
+                return element;
+            }
+            static element_machine(data,position=window.document.body){
+                const element={};
+                const build_element=(data,position)=>{
+                    for(const item of data){
+                        const element_=this.element(item.element[1],item.element[2]?item.element[2]:false,position,'beforeend',item.element[3]?item.element[3]:false);
+                        if(item.element[0]){
+                            element[item.element[0]]=item.element=element_;
                         }else{
-                            insert_element.appendChild(element);
+                            item.element=element_;
+                        }
+                        if(item.child){
+                            build_element(item.child,item.element);
                         }
                     }
-                    if(content){
-                        if(typeof content==='function'){
-                            content(element);
-                        }else{
-                            element.innerHTML=content;
+                };
+                build_element(data,position);
+                const build_run=(data)=>{
+                    for(const item of data){
+                        if(item.run){
+                            item.run(element);
+                        }
+                        if(item.child){
+                            build_run(item.child);
                         }
                     }
-                    return element;
-                }
-                static element_machine(data,position=window.document.body){
-                    const element={};
-                    const build_element=(data,position)=>{
-                        for(const item of data){
-                            const element_=this.element(item.element[1],item.element[2]?item.element[2]:false,position,'beforeend',item.element[3]?item.element[3]:false);
-                            if(item.element[0]){
-                                element[item.element[0]]=item.element=element_;
-                            }else{
-                                item.element=element_;
-                            }
-                            if(item.child){
-                                build_element(item.child,item.element);
-                            }
-                        }
-                    };
-                    build_element(data,position);
-                    const build_run=(data)=>{
-                        for(const item of data){
-                            if(item.run){
-                                item.run(element);
-                            }
-                            if(item.child){
-                                build_run(item.child);
-                            }
-                        }
-                    };
-                    build_run(data);
-                }
-                static toggle_cls(element,cls,cls2='',replace=false,wait=0,callback=()=>{}){
-                    if(cls2){
-                        if(replace){
-                            if(cls){
-                                element.classList.remove(cls2);
-                                if(wait){
-                                    window.setTimeout(()=>{
-                                        element.classList.add(cls);
-                                        callback();
-                                    },wait);
-                                }else{
+                };
+                build_run(data);
+            }
+            static toggle_cls(element,cls,cls2='',replace=false,wait=0,callback=()=>{}){
+                if(cls2){
+                    if(replace){
+                        if(cls){
+                            element.classList.remove(cls2);
+                            if(wait){
+                                window.setTimeout(()=>{
                                     element.classList.add(cls);
                                     callback();
-                                }
+                                },wait);
                             }else{
-                                element.classList.add(cls2);
-                                if(wait){
-                                    window.setTimeout(()=>{
-                                        element.classList.remove(cls2);
-                                        callback();
-                                    },wait);
-                                }else{
+                                element.classList.add(cls);
+                                callback();
+                            }
+                        }else{
+                            element.classList.add(cls2);
+                            if(wait){
+                                window.setTimeout(()=>{
                                     element.classList.remove(cls2);
                                     callback();
-                                }
-                            }
-                        }else{
-                            if(element.classList.contains(cls)){
-                                element.classList.remove(cls);
-                                if(wait){
-                                    window.setTimeout(()=>{
-                                        element.classList.add(cls2);
-                                        callback();
-                                    },wait);
-                                }else{
-                                    element.classList.add(cls2);
-                                    callback();
-                                }
-                            }else if(element.classList.contains(cls2)){
-                                element.classList.remove(cls2);
-                                if(wait){
-                                    window.setTimeout(()=>{
-                                        element.classList.add(cls);
-                                        callback();
-                                    },wait);
-                                }else{
-                                    element.classList.add(cls);
-                                    callback();
-                                }
+                                },wait);
                             }else{
-                                if(wait){
-                                    window.setTimeout(()=>{
-                                        element.classList.add(cls);
-                                        callback();
-                                    },wait);
-                                }else{
-                                    element.classList.add(cls);
-                                    callback();
-                                }
+                                element.classList.remove(cls2);
+                                callback();
                             }
                         }
                     }else{
                         if(element.classList.contains(cls)){
                             element.classList.remove(cls);
+                            if(wait){
+                                window.setTimeout(()=>{
+                                    element.classList.add(cls2);
+                                    callback();
+                                },wait);
+                            }else{
+                                element.classList.add(cls2);
+                                callback();
+                            }
+                        }else if(element.classList.contains(cls2)){
+                            element.classList.remove(cls2);
+                            if(wait){
+                                window.setTimeout(()=>{
+                                    element.classList.add(cls);
+                                    callback();
+                                },wait);
+                            }else{
+                                element.classList.add(cls);
+                                callback();
+                            }
                         }else{
                             if(wait){
                                 window.setTimeout(()=>{
@@ -155,76 +139,91 @@
                             }
                         }
                     }
-                }
-                static find_parent(target,start,end=window.document.documentElement){
-                    if(start===target){
-                        return true;
-                    }else if(start===end){
-                        return false;
-                    }
-                    return this.find_parent(target,start.parentElement,end);
-                }
-                static toggle_full(element=window.document.documentElement,top_window=false){
-                    if(top_window){
-                        if(window.top.document.fullscreen||window.top.document.webkitIsFullScreen){
-                            if('exitFullscreen'in window.top.document){
-                                window.top.document.exitFullscreen();
-                            }else if('webkitExitFullscreen'in window.top.document){
-                                window.top.document.webkitExitFullscreen();
-                            }
-                        }else{
-                            if('requestFullscreen'in window.top.document.documentElement){
-                                element.requestFullscreen();
-                            }else if('webkitRequestFullScreen'in window.top.document.documentElement){
-                                element.webkitRequestFullScreen();
-                            }
-                        }
+                }else{
+                    if(element.classList.contains(cls)){
+                        element.classList.remove(cls);
                     }else{
-                        if(window.document.fullscreen||window.document.webkitIsFullScreen){
-                            if('exitFullscreen'in window.document){
-                                window.document.exitFullscreen();
-                            }else if('webkitExitFullscreen'in window.document){
-                                window.document.webkitExitFullscreen();
-                            }
+                        if(wait){
+                            window.setTimeout(()=>{
+                                element.classList.add(cls);
+                                callback();
+                            },wait);
                         }else{
-                            if('requestFullscreen'in window.document.documentElement){
-                                element.requestFullscreen();
-                            }else if('webkitRequestFullScreen'in window.document.documentElement){
-                                element.webkitRequestFullScreen();
-                            }
+                            element.classList.add(cls);
+                            callback();
                         }
                     }
-                }
-                static window_open(uri=window.location.href,width=640,height=480,left=0,top=0,center=true){
-                    if(center){
-                        left=(window.screen.availWidth-width)/2+window.screen.availLeft;
-                        top=(window.screen.availHeight-height)/2+window.screen.availTop;
-                    }else{
-                        left+=window.screen.availLeft;
-                        top+=window.screen.availTop;
-                    }
-                    window.open(uri,'',`width=${width},height=${height},left=${left},top=${top}`);
-                }
-                static loop(premise,callback,wait=1000/24){
-                    if(premise()){
-                        callback();
-                    }else{
-                        window.setTimeout(()=>{
-                            this.loop(premise,callback,wait);
-                        },wait);
-                    }
-                }
-                static debounce(callback,wait=1000/24){
-                    let timeout=null;
-                    return function(){
-                        window.clearTimeout(timeout);
-                        timeout=window.setTimeout(()=>{
-                            callback.apply(this,arguments);
-                        },wait);
-                    };
                 }
             }
-    // ##initial
+            static find_parent(target,start,end=window.document.documentElement){
+                if(start===target){
+                    return true;
+                }else if(start===end){
+                    return false;
+                }
+                return this.find_parent(target,start.parentElement,end);
+            }
+            static toggle_full(element=window.document.documentElement,top_window=false){
+                if(top_window){
+                    if(window.top.document.fullscreen||window.top.document.webkitIsFullScreen){
+                        if('exitFullscreen'in window.top.document){
+                            window.top.document.exitFullscreen();
+                        }else if('webkitExitFullscreen'in window.top.document){
+                            window.top.document.webkitExitFullscreen();
+                        }
+                    }else{
+                        if('requestFullscreen'in window.top.document.documentElement){
+                            element.requestFullscreen();
+                        }else if('webkitRequestFullScreen'in window.top.document.documentElement){
+                            element.webkitRequestFullScreen();
+                        }
+                    }
+                }else{
+                    if(window.document.fullscreen||window.document.webkitIsFullScreen){
+                        if('exitFullscreen'in window.document){
+                            window.document.exitFullscreen();
+                        }else if('webkitExitFullscreen'in window.document){
+                            window.document.webkitExitFullscreen();
+                        }
+                    }else{
+                        if('requestFullscreen'in window.document.documentElement){
+                            element.requestFullscreen();
+                        }else if('webkitRequestFullScreen'in window.document.documentElement){
+                            element.webkitRequestFullScreen();
+                        }
+                    }
+                }
+            }
+            static window_open(uri=window.location.href,width=640,height=480,left=0,top=0,center=true){
+                if(center){
+                    left=(window.screen.availWidth-width)/2+window.screen.availLeft;
+                    top=(window.screen.availHeight-height)/2+window.screen.availTop;
+                }else{
+                    left+=window.screen.availLeft;
+                    top+=window.screen.availTop;
+                }
+                window.open(uri,'',`width=${width},height=${height},left=${left},top=${top}`);
+            }
+            static loop(premise,callback,wait=1000/24){
+                if(premise()){
+                    callback();
+                }else{
+                    window.setTimeout(()=>{
+                        this.loop(premise,callback,wait);
+                    },wait);
+                }
+            }
+            static debounce(callback,wait=1000/24){
+                let timeout=null;
+                return function(){
+                    window.clearTimeout(timeout);
+                    timeout=window.setTimeout(()=>{
+                        callback.apply(this,arguments);
+                    },wait);
+                };
+            }
+        }
+    // ##build
         // ~background color
         {
             let data={};
@@ -467,7 +466,8 @@
                 window.document.head.insertAdjacentHTML('beforeend',`<link rel="manifest" href="${option.head.manifest?option.head.manifest:''}">`);
             }
         };
-// #build
+// #content
+    // ##variable
     // ##module
-    // ##element
+    // ##build
 // #debug

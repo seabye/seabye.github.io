@@ -1,10 +1,9 @@
 'use strict';
-// #initial
-    // ##import
-    // ##global
-        // ###variable
-        // ###module
-    // ##initial
+// #import
+// #global
+    // ##variable
+    // ##module
+    // ##build
         // initial
         for(const item of window.document.scripts){
             if(item.dataset.initial){
@@ -41,7 +40,8 @@
                 break;
             }
         }
-// #build
+// #content
+    // ##variable
     // ##module
-    // ##element
+    // ##build
 // #debug

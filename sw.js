@@ -1,14 +1,14 @@
 'use strict';
-// #initial
-    // ##import
-    // ##global
-        // ###variable
-        // ###module
-    // ##initial
+// #import
+// #global
+    // ##variable
+    // ##module
+    // ##build
         // initial_option
             // sw
             self.addEventListener('fetch',()=>{});
-// #build
+// #content
+    // ##variable
     // ##module
-    // ##element
+    // ##build
 // #debug
