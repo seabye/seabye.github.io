@@ -82,7 +82,7 @@
             const build_object=(object,position)=>{
                 object.element=this.element(object.element[1],object.element[2]?object.element[2]:false,position,'beforeend',object.element[3]?object.element[3]:false);
                 if(object.element[0]){
-                    element[object.element[0]]=object.element[0];
+                    element[object.element[0]]=object.element;
                 }
                 if(object.run){
                     object.run(element);
