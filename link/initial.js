@@ -72,28 +72,33 @@
             }
             return element;
         }
-        static element_machine(array,position=window.document.body){
+        static element_machine(data,position=window.document.body){
             const element={};
-            const build_array=(array,position)=>{
-                for(const item of array){
-                    build_object(item,position);
+            const build_element=(data,position)=>{
+                for(const item of data){
+                    const element_=this.element(item.element[1],item.element[2]?item.element[2]:false,position,'beforeend',item.element[3]?item.element[3]:false);
+                    if(item.element[0]){
+                        element[item.element[0]]=item.element=element_;
+                    }else{
+                        item.element=element_;
+                    }
+                    if(item.child){
+                        build_element(item.child,item.element);
+                    }
                 }
             };
-            const build_object=(object,position)=>{
-                const element_=this.element(object.element[1],object.element[2]?object.element[2]:false,position,'beforeend',object.element[3]?object.element[3]:false);
-                if(object.element[0]){
-                    element[object.element[0]]=object.element=element_;
-                }else{
-                    object.element=element_;
-                }
-                if(object.run){
-                    object.run(element);
-                }
-                if(object.child){
-                    build_array(object.child,object.element);
+            build_element(data,position);
+            const build_run=(data)=>{
+                for(const item of data){
+                    if(item.run){
+                        item.run(element);
+                    }
+                    if(item.child){
+                        build_run(item.child);
+                    }
                 }
             };
-            build_array(array,position);
+            build_run(data);
         }
         static toggle_cls(element,cls,cls2='',replace=false,wait=0,callback=()=>{}){
             if(cls2){
