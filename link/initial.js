@@ -427,22 +427,22 @@
             }
             // head
             if(option.head){
-                window.document.head.insertAdjacentHTML('afterbegin',
-`<meta name="viewport" content="width=device-width,user-scalable=no,viewport-fit=cover">
-<meta name="format-detection" content="address=no,email=no,telephone=no">
-<title>${option.head.title?option.head.title:''}</title>
-<link rel="stylesheet" href="${option.head.style?option.head.style:''}">`
-                );
-                window.document.head.insertAdjacentHTML('beforeend',
-`<link rel="icon" type="image/png" href="${option.head.icon?option.head.icon:''}">`
-                );
+                window.document.head.insertAdjacentHTML('afterbegin',`
+                    <meta name="viewport" content="width=device-width,user-scalable=no,viewport-fit=cover">
+                    <meta name="format-detection" content="address=no,email=no,telephone=no">
+                    <title>${option.head.title?option.head.title:''}</title>
+                    <link rel="stylesheet" href="${option.head.style?option.head.style:''}">
+                `);
+                window.document.head.insertAdjacentHTML('beforeend',`
+                    <link rel="icon" type="image/png" href="${option.head.icon?option.head.icon:''}">
+                `);
                 if(window.navigator.userAgent.match('Safari')&&!window.navigator.userAgent.match('Chrome')&&!window.navigator.userAgent.match('Edg')){
-                    window.document.head.insertAdjacentHTML('beforeend',
-`<link rel="apple-touch-icon" href="${option.head.icon_apple?option.head.icon_apple:''}">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="white">
-<meta name="apple-mobile-web-app-title" content="${option.head.title?option.head.title:''}">`
-                    );
+                    window.document.head.insertAdjacentHTML('beforeend',`
+                        <link rel="apple-touch-icon" href="${option.head.icon_apple?option.head.icon_apple:''}">
+                        <meta name="apple-mobile-web-app-capable" content="yes">
+                        <meta name="apple-mobile-web-app-status-bar-style" content="white">
+                        <meta name="apple-mobile-web-app-title" content="${option.head.title?option.head.title:''}">
+                    `);
                 }else if(window.matchMedia('(prefers-color-scheme:dark)').addEventListener){
                     // ~theme color
                     let theme_color=null;
