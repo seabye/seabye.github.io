@@ -377,7 +377,7 @@
                 }
             });
         }
-        // scroll@safari
+        // scroll
         if(!window.CSS.supports('overscroll-behavior:contain')){
             const action=()=>{
                 for(const item of window.document.all){

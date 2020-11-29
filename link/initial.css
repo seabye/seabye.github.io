@@ -327,12 +327,11 @@
                 cursor: auto;
             }
                 /* input */
-                    /* @safari */
-                        /* type search */
-                        input[type="search"]::-webkit-search-decoration,
-                        input[type="search"]::-webkit-search-cancel-button {
-                            display: none;
-                        }
+                    /* type search */
+                    input[type="search"]::-webkit-search-decoration,
+                    input[type="search"]::-webkit-search-cancel-button {
+                        display: none;
+                    }
             /* other */
             i {
                 font-style: italic;
