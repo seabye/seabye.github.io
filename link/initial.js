@@ -339,6 +339,7 @@
             }
             return result;
         },()=>{
+            window.document.head.setAttribute('tabindex','-1');
             window.document.body.setAttribute('tabindex','-1');
         },1000/60);
         // form
