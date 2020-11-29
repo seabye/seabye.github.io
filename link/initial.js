@@ -326,7 +326,7 @@
             if(event.ctrlKey){
                 event.preventDefault();
             }
-        });
+        },{passive:false});
         // tabindex
         window.document.documentElement.setAttribute('tabindex','-1');
         initial_tool.loop(()=>{
