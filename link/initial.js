@@ -159,6 +159,24 @@
                 }
                 return this.find_parent(target,start.parentElement,end);
             },
+            loop:function(premise,callback,wait=1000/24){
+                if(premise()){
+                    callback();
+                }else{
+                    window.setTimeout(()=>{
+                        this.loop(premise,callback,wait);
+                    },wait);
+                }
+            },
+            debounce:(callback,wait=1000/24)=>{
+                let timeout=null;
+                return function(){
+                    window.clearTimeout(timeout);
+                    timeout=window.setTimeout(()=>{
+                        callback.apply(this,arguments);
+                    },wait);
+                };
+            },
             toggle_full:(element=window.document.documentElement,top_window=false)=>{
                 if(top_window){
                     if(window.top.document.fullscreen||window.top.document.webkitIsFullScreen){
@@ -199,24 +217,6 @@
                     top+=window.screen.availTop;
                 }
                 window.open(uri,'',`width=${width},height=${height},left=${left},top=${top}`);
-            },
-            loop:function(premise,callback,wait=1000/24){
-                if(premise()){
-                    callback();
-                }else{
-                    window.setTimeout(()=>{
-                        this.loop(premise,callback,wait);
-                    },wait);
-                }
-            },
-            debounce:(callback,wait=1000/24)=>{
-                let timeout=null;
-                return function(){
-                    window.clearTimeout(timeout);
-                    timeout=window.setTimeout(()=>{
-                        callback.apply(this,arguments);
-                    },wait);
-                };
             }
         }
     // ##build
