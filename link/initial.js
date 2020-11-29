@@ -323,6 +323,12 @@
         window.addEventListener('pointerdown',()=>{});
         // context menu
         window.addEventListener('contextmenu',initial_tool.stop);
+        // touchpad zoom
+        window.addEventListener('wheel',(event)=>{
+            if(event.ctrlKey){
+                initial_tool.stop(event);
+            }
+        },{passive:false});
         // tabindex
         window.document.documentElement.setAttribute('tabindex','-1');
         initial_tool.loop(()=>{
@@ -397,12 +403,6 @@
                 window.setTimeout(action,350*2);
             });
         }
-        // touchpad zoom
-        window.addEventListener('wheel',(event)=>{
-            if(event.ctrlKey){
-                initial_tool.stop(event);
-            }
-        },{passive:false});
         // ic_nr / initial container_navigator
         {
             const ua=window.navigator.userAgent;
