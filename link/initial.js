@@ -397,6 +397,12 @@
                 window.setTimeout(action,350*2);
             });
         }
+        // touchpad zoom
+        window.addEventListener('wheel',(event)=>{
+            if(event.ctrlKey){
+                initial_tool.stop(event);
+            }
+        },{passive:false});
         // ic_nr / initial container_navigator
         {
             const ua=window.navigator.userAgent;
