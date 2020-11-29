@@ -17,10 +17,6 @@
     // ##module
         // initial_tool
         export const initial_tool={
-            stop:(event)=>{
-                event.stopPropagation();
-                event.preventDefault();
-            },
             element:(tag,attribute=false,insert_element=false,insert_position=false,content=false)=>{
                 const element=window.document.createElement(tag);
                 if(attribute){
@@ -322,11 +318,13 @@
         // :hov action
         window.addEventListener('pointerdown',()=>{});
         // context menu
-        window.addEventListener('contextmenu',initial_tool.stop);
+        window.addEventListener('contextmenu',(event)=>{
+            event.preventDefault();
+        });
         // touchpad zoom
         window.addEventListener('wheel',(event)=>{
             if(event.ctrlKey){
-                initial_tool.stop(event);
+                event.preventDefault();
             }
         },{passive:false});
         // tabindex
