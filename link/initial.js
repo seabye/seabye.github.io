@@ -52,7 +52,6 @@
                 }
                 const build_element=(data,position)=>{
                     for(const item in data){
-                        window.console.log('1',item,data[item]);
                         const element_=this.element(data[item].element[0],data[item].element[1]?data[item].element[1]:false,position,'beforeend',data[item].element[2]?data[item].element[2]:false);
                         if(item){
                             element[item]=data[item].element=element_;
@@ -60,10 +59,10 @@
                             data[item].element=element_;
                         }
                         for(const item_ in data[item]){
-                            // window.console.log('2',item_,data[item_]);
                             if(!window.JSON.stringify(item_).match(/element|function/)){
-                                window.console.log('3',item_,data[item_]);
-                                build_element({item_:data[item][item_]},data[item].element);
+                                const obj={};
+                                obj[item_]=data[item][item_];
+                                build_element(obj,data[item].element);
                             }
                         }
                     }
@@ -76,7 +75,9 @@
                         }
                         for(const item_ in data[item]){
                             if(!window.JSON.stringify(item_).match(/element|function/)){
-                                run_function({item_:data[item][item_]});
+                                const obj={};
+                                obj[item_]=data[item][item_];
+                                run_function({obj:data[item][item_]});
                             }
                         }
                     }
