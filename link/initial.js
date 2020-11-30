@@ -52,7 +52,7 @@
                 }
                 const build_element=(data,position)=>{
                     for(const item in data){
-                        window.console.log(item);
+                        window.console.log('1',item);
                         const element_=this.element(data[item].element[0],data[item].element[1]?data[item].element[1]:false,position,'beforeend',data[item].element[2]?data[item].element[2]:false);
                         if(item){
                             element[item]=data[item].element=element_;
@@ -61,7 +61,7 @@
                         }
                         for(const item_ in data[item]){
                             if(!item.match(/element|function/)){
-                                window.console.log(item_,data[item_]);
+                                window.console.log('2',item_,data[item_]);
                                 build_element(data[item_],data[item].element);
                             }
                         }
