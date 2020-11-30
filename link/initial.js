@@ -59,7 +59,8 @@
                             data[item].element=element_;
                         }
                         if(window.JSON.stringify(item)!==/element|function/){
-                            build_element({item:data[item]},data[item].element);
+                            window.console.log(item,data[item]);
+                            // build_element({item:data[item]},data[item].element);
                         }
                     }
                 };
@@ -70,7 +71,7 @@
                             data[item].function(element);
                         }
                         if(window.JSON.stringify(item)!==/element|function/){
-                            run_function({item:data[item]});
+                            // run_function({item:data[item]});
                         }
                     }
                 };
