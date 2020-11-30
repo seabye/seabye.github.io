@@ -62,7 +62,7 @@
                         //     build_element(data[item].child,data[item].element);
                         // }
                         for(const item_ in data[item]){
-                            if(window.JSON.stringify(item_)!==/element|function/){
+                            if(!window.JSON.stringify(item_).match(/element|function/)){
                                 window.console.log(item_,data[item_]);
                                 build_element({item_:data[item_]},data[item].element);
                             }
@@ -76,7 +76,7 @@
                             data[item].function(element);
                         }
                         for(const item_ in data[item]){
-                            if(window.JSON.stringify(item_)!==/element|function/){
+                            if(!window.JSON.stringify(item_).match(/element|function/)){
                                 run_function({item:data[item_]});
                             }
                         }
