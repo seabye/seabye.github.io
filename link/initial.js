@@ -62,7 +62,7 @@
                         for(const item_ in data[item]){
                             if(!item.match(/element|function/)){
                                 window.console.log(item_,data[item_]);
-                                build_element({item_:data[item_]},data[item].element);
+                                build_element(data[item_],data[item].element);
                             }
                         }
                     }
@@ -75,7 +75,7 @@
                         }
                         for(const item_ in data[item]){
                             if(!item.match(/element|function/)){
-                                run_function({item_:data[item_]});
+                                run_function(data[item_]);
                             }
                         }
                     }
