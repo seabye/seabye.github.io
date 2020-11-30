@@ -46,7 +46,7 @@
                 }
                 return element;
             },
-            element_machine:function(data,position=window.document.body,element){
+            element_machine:function(data,position=window.document.body,element={}){
                 // const element={};
                 const build_element=(data,position)=>{
                     for(const item in data){
