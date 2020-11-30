@@ -58,7 +58,7 @@
                         }else{
                             data[item].element=element_;
                         }
-                        if(item!=='element'&&item!=='function'){
+                        if(window.JSON.stringify(item)!==/element|function/){
                             build_element(data[item],data[item].element);
                         }
                     }
@@ -69,7 +69,7 @@
                         if(data[item].function){
                             data[item].function(element);
                         }
-                        if(item!=='element'&&item!=='function'){
+                        if(window.JSON.stringify(item)!==/element|function/){
                             run_function(data[item]);
                         }
                     }
