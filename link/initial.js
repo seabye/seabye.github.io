@@ -60,8 +60,9 @@
                             data[item].element=element_;
                         }
                         for(const item_ in data[item]){
-                            if(!item.match(/element|function/)){
-                                window.console.log('2',item_,data[item_]);
+                            window.console.log('2',item_,data[item_]);
+                            if(!window.JSON.stringify(item_).match(/element|function/)){
+                                window.console.log('3',item_,data[item_]);
                                 build_element(data[item_],data[item].element);
                             }
                         }
@@ -74,7 +75,7 @@
                             data[item].function(element);
                         }
                         for(const item_ in data[item]){
-                            if(!item.match(/element|function/)){
+                            if(!window.JSON.stringify(item_).match(/element|function/)){
                                 run_function(data[item_]);
                             }
                         }
