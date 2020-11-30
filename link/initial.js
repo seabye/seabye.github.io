@@ -64,17 +64,17 @@
                     }
                 };
                 build_element(data,position);
-                const run=(data)=>{
+                const run_function=(data)=>{
                     for(const item in data){
-                        if(data[item].run){
-                            data[item].run(element);
+                        if(data[item].function){
+                            data[item].function(element);
                         }
                         if(data[item].child){
-                            run(data[item].child);
+                            run_function(data[item].child);
                         }
                     }
                 };
-                run(data);
+                run_function(data);
                 return element;
             },
             toggle_cls:(element,cls,cls2='',replace=false,wait=0,callback=()=>{})=>{
