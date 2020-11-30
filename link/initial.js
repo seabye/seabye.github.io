@@ -58,8 +58,8 @@
                         }else{
                             data[item].element=element_;
                         }
-                        if(data[item].child){
-                            build_element(data[item].child,data[item].element);
+                        if(item!=='element'&&item!=='function'){
+                            build_element(data[item],data[item].element);
                         }
                     }
                 };
@@ -69,8 +69,8 @@
                         if(data[item].function){
                             data[item].function(element);
                         }
-                        if(data[item].child){
-                            run_function(data[item].child);
+                        if(item!=='element'&&item!=='function'){
+                            run_function(data[item]);
                         }
                     }
                 };
