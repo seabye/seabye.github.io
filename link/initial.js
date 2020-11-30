@@ -73,6 +73,7 @@
                     }
                 };
                 run(data);
+                return element;
             },
             toggle_cls:(element,cls,cls2='',replace=false,wait=0,callback=()=>{})=>{
                 if(cls2){
