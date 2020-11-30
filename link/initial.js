@@ -63,7 +63,7 @@
                             // window.console.log('2',item_,data[item_]);
                             if(!window.JSON.stringify(item_).match(/element|function/)){
                                 window.console.log('3',item_,data[item_]);
-                                build_element(data[item_],data[item].element);
+                                build_element(data[item][item_],data[item].element);
                             }
                         }
                     }
@@ -76,7 +76,7 @@
                         }
                         for(const item_ in data[item]){
                             if(!window.JSON.stringify(item_).match(/element|function/)){
-                                run_function(data[item_]);
+                                run_function(data[item][item_]);
                             }
                         }
                     }
