@@ -49,26 +49,26 @@
             element_machine:function(data,position=window.document.body){
                 const element={};
                 const build_element=(data,position)=>{
-                    for(const item of data){
-                        const element_=this.element(item.element[1],item.element[2]?item.element[2]:false,position,'beforeend',item.element[3]?item.element[3]:false);
-                        if(item.element[0]){
-                            element[item.element[0]]=item.element=element_;
+                    for(const item in data){
+                        const element_=this.element(data[item].element[0],data[item].element[1]?data[item].element[1]:false,position,'beforeend',data[item].element[2]?data[item].element[2]:false);
+                        if(item){
+                            element[item]=data[item].element=element_;
                         }else{
-                            item.element=element_;
+                            data[item].element=element_;
                         }
-                        if(item.child){
-                            build_element(item.child,item.element);
+                        if(data[item].child){
+                            build_element(data[item].child,data[item].element);
                         }
                     }
                 };
                 build_element(data,position);
                 const run=(data)=>{
-                    for(const item of data){
-                        if(item.run){
-                            item.run(element);
+                    for(const item in data){
+                        if(data[item].run){
+                            data[item].run(element);
                         }
-                        if(item.child){
-                            run(item.child);
+                        if(data[item].child){
+                            run(data[item].child);
                         }
                     }
                 };
