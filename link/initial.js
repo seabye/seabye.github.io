@@ -60,9 +60,9 @@
                         }
                         for(const item_ in data[item]){
                             if(!window.JSON.stringify(item_).match(/element|function/)){
-                                const obj={};
-                                obj[item_]=data[item][item_];
-                                build_element(obj,data[item].element);
+                                const data_={};
+                                data_[item_]=data[item][item_];
+                                build_element(data_,data[item].element);
                             }
                         }
                     }
@@ -75,9 +75,9 @@
                         }
                         for(const item_ in data[item]){
                             if(!window.JSON.stringify(item_).match(/element|function/)){
-                                const obj={};
-                                obj[item_]=data[item][item_];
-                                run_function({obj:data[item][item_]});
+                                const data_={};
+                                data_[item_]=data[item][item_];
+                                run_function({data_:data[item][item_]});
                             }
                         }
                     }
