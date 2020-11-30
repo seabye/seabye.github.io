@@ -58,13 +58,10 @@
                         }else{
                             data[item].element=element_;
                         }
-                        // if(data[item].child){
-                        //     build_element(data[item].child,data[item].element);
-                        // }
                         for(const item_ in data[item]){
                             if(!window.JSON.stringify(item_).match(/element|function/)){
                                 window.console.log(item_,data[item_]);
-                                build_element(data[item_],data[item].element);
+                                build_element({item_:data[item_]},data[item].element);
                             }
                         }
                     }
@@ -77,7 +74,7 @@
                         }
                         for(const item_ in data[item]){
                             if(!window.JSON.stringify(item_).match(/element|function/)){
-                                run_function(data[item_]);
+                                run_function({item_:data[item_]});
                             }
                         }
                     }
