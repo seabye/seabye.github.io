@@ -17,7 +17,10 @@
     // ##module
         // initial_tool
         export const initial_tool={
-            element:(tag,attribute=false,insert_element=false,insert_position=false,content=false)=>{
+            element:(tag='div',attribute=false,insert_element=false,insert_position=false,content=false)=>{
+                if(!tag){
+                    tag='div';
+                }
                 const element=window.document.createElement(tag);
                 if(attribute){
                     if(!window.Array.isArray(attribute)){
