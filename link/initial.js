@@ -21,18 +21,6 @@
                 if(!tag){
                     tag='div';
                 }
-                if(!attribute){
-                    attribute=false;
-                }
-                if(!insert_element){
-                    insert_element=false;
-                }
-                if(!insert_position){
-                    insert_position=false;
-                }
-                if(!content){
-                    content=false;
-                }
                 const element=window.document.createElement(tag);
                 if(attribute){
                     if(!window.Array.isArray(attribute)){
