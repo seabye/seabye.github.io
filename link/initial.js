@@ -57,6 +57,21 @@
                     for(const item in data){
                         if(!data[item].element){
                             data[item].element=['div',{class:item}]
+                        }else{
+                            if(!data[item].element[0]){
+                                data[item].element[0]='div';
+                            }
+                            if(!data[item].element[1]){
+                                data[item].element[1]={class:item};
+                            }else{
+                                if(!data[item].element[1].class){
+                                    data[item].element[1].class=item;
+                                }else{
+                                    if(item){
+                                        data[item].element[1]=`${item} ${data[item].element[1]}`;
+                                    }
+                                }
+                            }
                         }
                         const element_=this.element(data[item].element[0],data[item].element[1]?data[item].element[1]:false,position,'beforeend',data[item].element[2]?data[item].element[2]:false);
                         if(item){
