@@ -17,7 +17,7 @@
     // ##module
         // initial_tool
         export const initial_tool={
-            element:(tag='div',attribute=false,insert_element=false,insert_position=false,content=false)=>{
+            element:(tag='div',attribute,insert_element,insert_position,content)=>{
                 if(!tag){
                     tag='div';
                 }
@@ -49,9 +49,15 @@
                 }
                 return element;
             },
-            element_machine:function(data,insert_element=window.document.body,element={}){
+            element_machine:function(data={},insert_element=window.document.body,element={}){
+                if(!data){
+                    data={};
+                }
                 if(!insert_element){
                     insert_element=window.document.body;
+                }
+                if(!element){
+                    element={};
                 }
                 const build_element=(data,insert_element)=>{
                     for(const item in data){
