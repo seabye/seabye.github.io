@@ -55,9 +55,8 @@
                 }
                 const build_element=(data,position)=>{
                     for(const item in data){
-                        window.console.log(item,window.JSON.stringify(item));
                         if(!data[item].element){
-                            element[item].element=['div',{class:element[item]}]
+                            element[item].element=['div',{class:window.JSON.stringify(item)}]
                         }
                         const element_=this.element(data[item].element[0],data[item].element[1]?data[item].element[1]:false,position,'beforeend',data[item].element[2]?data[item].element[2]:false);
                         if(item){
