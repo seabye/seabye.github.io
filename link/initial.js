@@ -62,10 +62,9 @@
                 const build_element=(data,insert_element)=>{
                     for(const item in data){
                         if(!data[item].element){
+                            data[item].element=['div']
                             if(item!==''){
-                                data[item].element=['div',{class:item}];
-                            }else{
-                                data[item].element=['div'];
+                                data[item].element[1]={class:item};
                             }
                         }else{
                             if(!data[item].element[0]){
