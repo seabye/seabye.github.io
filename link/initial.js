@@ -229,7 +229,13 @@
                     },wait);
                 };
             },
-            toggle_full:(element=window.document.documentElement,top_window=false)=>{
+            toggle_full:(element,top_window)=>{
+                if(!element){
+                    element=window.document.documentElement;
+                }
+                if(top_window!==true){
+                    top_window=false;
+                }
                 if(top_window){
                     if(window.top.document.fullscreen||window.top.document.webkitIsFullScreen){
                         if('exitFullscreen'in window.top.document){
@@ -260,7 +266,25 @@
                     }
                 }
             },
-            window_open:(uri=window.location.href,width=640,height=480,left=0,top=0,center=true)=>{
+            window_open:(uri,width,height,left,top,center)=>{
+                if(!uri){
+                    uri=window.location.href;
+                }
+                if(!width){
+                    width=640;
+                }
+                if(!height){
+                    height=480;
+                }
+                if(!left){
+                    left=0;
+                }
+                if(!top){
+                    top=0;
+                }
+                if(center!==false){
+                    center=true;
+                }
                 if(center){
                     left=(window.screen.availWidth-width)/2+window.screen.availLeft;
                     top=(window.screen.availHeight-height)/2+window.screen.availTop;
