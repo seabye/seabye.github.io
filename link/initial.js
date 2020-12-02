@@ -56,7 +56,7 @@
                 const build_element=(data,position)=>{
                     for(const item in data){
                         if(!data[item].element){
-                            data[item].element=['div',{class:window.JSON.stringify(item)}]
+                            data[item].element=['div',{class:item}]
                         }
                         const element_=this.element(data[item].element[0],data[item].element[1]?data[item].element[1]:false,position,'beforeend',data[item].element[2]?data[item].element[2]:false);
                         if(item){
@@ -65,7 +65,7 @@
                             data[item].element=element_;
                         }
                         for(const item_ in data[item]){
-                            if(!window.JSON.stringify(item_).match(/element|function/)){
+                            if(!item_.match(/element|function/)){
                                 const data_={};
                                 data_[item_]=data[item][item_];
                                 build_element(data_,data[item].element);
@@ -80,7 +80,7 @@
                             data[item].function(element);
                         }
                         for(const item_ in data[item]){
-                            if(!window.JSON.stringify(item_).match(/element|function/)){
+                            if(!item_.match(/element|function/)){
                                 const data_={};
                                 data_[item_]=data[item][item_];
                                 run_function({data_:data[item][item_]});
