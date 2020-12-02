@@ -62,39 +62,31 @@
                 const build_element=(data,insert_element)=>{
                     for(const item in data){
                         if(!data[item].element){
-                            data[item].element=['div']
-                            if(item!==''){
-                                data[item].element[1]={class:item};
+                            data[item].element=['div'];
+                            if(item.trim()){
+                                data[item].element[1]={class:item.trim()};
                             }
                         }else{
                             if(!data[item].element[0]){
                                 data[item].element[0]='div';
                             }
                             if(!data[item].element[1]){
-                                if(item!==''){
-                                    data[item].element[1]={class:item};
+                                if(item.trim()){
+                                    data[item].element[1]={class:item.trim()};
                                 }
                             }else{
                                 if(!data[item].element[1].class){
-                                    if(item!==''){
-                                        data[item].element[1].class=item;
+                                    if(item.trim()){
+                                        data[item].element[1].class=item.trim();
                                     }
                                 }else{
-                                    if(item!==''&&!(()=>{
-                                        for(const item_ of data[item].element[1].class.split(' ')){
-                                            if(item_===item){
-                                                return true;
-                                            }
-                                        }
-                                    })()){
-                                        data[item].element[1].class=`${item} ${data[item].element[1].class}`;
-                                    }
+                                    data[item].element[1].class=window.Array.from(new window.Set(item.trim().split(' ').concat(data[item].element[1].class.trim().split(' ')))).join(' ');
                                 }
                             }
                         }
                         const element_=this.element(data[item].element[0],data[item].element[1]?data[item].element[1]:false,insert_element,'beforeend',data[item].element[2]?data[item].element[2]:false);
-                        if(item){
-                            element[item]=data[item].element=element_;
+                        if(item.split(' ')[0]){
+                            element[item.split(' ')[0]]=data[item].element=element_;
                         }else{
                             data[item].element=element_;
                         }
