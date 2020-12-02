@@ -17,9 +17,21 @@
     // ##module
         // initial_tool
         export const initial_tool={
-            element:(tag='div',attribute,insert_element,insert_position,content)=>{
+            element:(tag,attribute,insert_element,insert_position,content)=>{
                 if(!tag){
                     tag='div';
+                }
+                if(!attribute){
+                    attribute=false;
+                }
+                if(!insert_element){
+                    insert_element=false;
+                }
+                if(!insert_position){
+                    insert_position=false;
+                }
+                if(!content){
+                    content=false;
                 }
                 const element=window.document.createElement(tag);
                 if(attribute){
@@ -49,7 +61,7 @@
                 }
                 return element;
             },
-            element_machine:function(data={'':{}},insert_element=window.document.body,element={}){
+            element_machine:function(data,insert_element,element){
                 if(!data){
                     data={'':{}};
                 }
