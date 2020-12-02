@@ -55,7 +55,7 @@
                 }
                 const build_element=(data,position)=>{
                     for(const item in data){
-                        window.console.log(element[item]);
+                        window.console.log(data[item]);
                         if(!data[item].element){
                             element[item].element=['div',{class:element[item]}]
                         }
