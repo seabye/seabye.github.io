@@ -51,7 +51,7 @@
             },
             element_machine:function(data={},insert_element=window.document.body,element={}){
                 if(!data){
-                    data={};
+                    data={'':{}};
                 }
                 if(!insert_element){
                     insert_element=window.document.body;
