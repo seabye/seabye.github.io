@@ -49,7 +49,7 @@
                 }
                 return element;
             },
-            element_machine:function(data={},insert_element=window.document.body,element={}){
+            element_machine:function(data={'':{}},insert_element=window.document.body,element={}){
                 if(!data){
                     data={'':{}};
                 }
