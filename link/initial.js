@@ -49,31 +49,45 @@
                 }
                 return element;
             },
-            element_machine:function(data,position=window.document.body,element={}){
-                if(!position){
-                    position=window.document.body;
+            element_machine:function(data,insert_element=window.document.body,element={}){
+                if(!insert_element){
+                    insert_element=window.document.body;
                 }
-                const build_element=(data,position)=>{
+                const build_element=(data,insert_element)=>{
                     for(const item in data){
-                        if(!item.element){
-                            item.element=['div',{class:item}]
-                        }else{
-                            if(!item.element[0]){
-                                item.element[0]='div';
-                            }
-                            if(!item.element[1]){
-                                item.element[1]={class:item};
+                        if(!data[item].element){
+                            if(item!==''){
+                                data[item].element=['div',{class:item}];
                             }else{
-                                if(!item.element[1].class){
-                                    item.element[1].class=item;
+                                data[item].element=['div'];
+                            }
+                        }else{
+                            if(!data[item].element[0]){
+                                data[item].element[0]='div';
+                            }
+                            if(!data[item].element[1]){
+                                if(item!==''){
+                                    data[item].element[1]={class:item};
+                                }
+                            }else{
+                                if(!data[item].element[1].class){
+                                    if(item!==''){
+                                        data[item].element[1].class=item;
+                                    }
                                 }else{
-                                    if(item){
-                                        item.element[1]=`${item} ${item.element[1]}`;
+                                    if(item!==''&&!(()=>{
+                                        for(const item_ of data[item].element[1].class.split(' ')){
+                                            if(item_===item){
+                                                return true;
+                                            }
+                                        }
+                                    })()){
+                                        data[item].element[1].class=`${item} ${data[item].element[1].class}`;
                                     }
                                 }
                             }
                         }
-                        const element_=this.element(data[item].element[0],data[item].element[1]?data[item].element[1]:false,position,'beforeend',data[item].element[2]?data[item].element[2]:false);
+                        const element_=this.element(data[item].element[0],data[item].element[1]?data[item].element[1]:false,insert_element,'beforeend',data[item].element[2]?data[item].element[2]:false);
                         if(item){
                             element[item]=data[item].element=element_;
                         }else{
@@ -88,7 +102,7 @@
                         }
                     }
                 };
-                build_element(data,position);
+                build_element(data,insert_element);
                 const run_function=(data)=>{
                     for(const item in data){
                         if(data[item].function){
