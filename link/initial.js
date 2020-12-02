@@ -55,20 +55,20 @@
                 }
                 const build_element=(data,position)=>{
                     for(const item in data){
-                        if(!data[item].element){
-                            data[item].element=['div',{class:item}]
+                        if(!item.element){
+                            item.element=['div',{class:item}]
                         }else{
-                            if(!data[item].element[0]){
-                                data[item].element[0]='div';
+                            if(!item.element[0]){
+                                item.element[0]='div';
                             }
-                            if(!data[item].element[1]){
-                                data[item].element[1]={class:item};
+                            if(!item.element[1]){
+                                item.element[1]={class:item};
                             }else{
-                                if(!data[item].element[1].class){
-                                    data[item].element[1].class=item;
+                                if(!item.element[1].class){
+                                    item.element[1].class=item;
                                 }else{
                                     if(item){
-                                        data[item].element[1]=`${item} ${data[item].element[1]}`;
+                                        item.element[1]=`${item} ${item.element[1]}`;
                                     }
                                 }
                             }
