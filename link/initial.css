@@ -264,9 +264,9 @@
                     /* body */
                     body {
                         display: flex;
-                        place-content: center;
-                        place-items: center;
-                        flex-flow: column;
+                        justify-content: center;
+                        align-items: center;
+                        flex-direction: column;
                         margin: unset;
                     }
                     @keyframes ic_an_landscape_body {
