@@ -339,10 +339,6 @@
                     if(!window.navigator.userAgent.match('Mobile')||(window.navigator.userAgent.match('Mobile')&&!window.document.activeElement.localName.match(/input|textarea/))){
                         window.document.documentElement.style.setProperty(`${head}-height`,`${window.innerHeight}px`);
                     }
-                    initial_tool.debounce(()=>{
-                        window.document.documentElement.style.removeProperty('max-width');
-                        window.document.documentElement.style.removeProperty('max-height');
-                    },350*3);
                 };
                 set('min');
                 if(window.parseInt(window.document.documentElement.style.getPropertyValue('min-height'))<window.parseInt(window.document.documentElement.style.getPropertyValue('min-width'))){
@@ -373,6 +369,8 @@
                     action(event);
                 },350);
             });
+            window.addEventListener('blur',action);
+            window.addEventListener('focus',action);
         }
         if(window.navigator.userAgent.match('Safari')&&!window.navigator.userAgent.match('Chrome')&&!window.navigator.userAgent.match('Edg')){
             const action=()=>{
