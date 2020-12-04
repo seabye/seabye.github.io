@@ -328,7 +328,7 @@
                 }
             },1000/60);
         },{once:true});
-        // orientation
+        // size
         {
             const action=(event)=>{
                 if(event.type==='orientationchange'){
@@ -339,6 +339,10 @@
                     if(!window.navigator.userAgent.match('Mobile')||(window.navigator.userAgent.match('Mobile')&&!window.document.activeElement.localName.match(/input|textarea/))){
                         window.document.documentElement.style.setProperty(`${head}-height`,`${window.innerHeight}px`);
                     }
+                    initial_tool.debounce(()=>{
+                        window.document.documentElement.style.removeProperty('max-width');
+                        window.document.documentElement.style.removeProperty('max-height');
+                    },350);
                 };
                 set('min');
                 if(window.parseInt(window.document.documentElement.style.getPropertyValue('min-height'))<window.parseInt(window.document.documentElement.style.getPropertyValue('min-width'))){
@@ -409,7 +413,7 @@
             window.document.head.setAttribute('tabindex','-1');
             window.document.body.setAttribute('tabindex','-1');
         },1000/60);
-        // form
+        // form input
         window.addEventListener('pointerdown',(event)=>{
             if(!event.target.localName.match(/input|textarea/)&&window.document.activeElement.localName.match(/input|textarea/)){
                 window.document.activeElement.blur();
