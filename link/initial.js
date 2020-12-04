@@ -342,7 +342,7 @@
                     initial_tool.debounce(()=>{
                         window.document.documentElement.style.removeProperty('max-width');
                         window.document.documentElement.style.removeProperty('max-height');
-                    },350);
+                    },350*3);
                 };
                 set('min');
                 if(window.parseInt(window.document.documentElement.style.getPropertyValue('min-height'))<window.parseInt(window.document.documentElement.style.getPropertyValue('min-width'))){
