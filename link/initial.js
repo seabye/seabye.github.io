@@ -502,7 +502,7 @@
                 window.setTimeout(action,350*2);
             });
         }
-        // ic_nr / initial.css container_navigator
+        // ic_nr / ic_ navigator
         {
             const user_agent=window.navigator.userAgent;
             const class_=window.document.documentElement.classList;

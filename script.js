@@ -41,5 +41,5 @@
             `);
         },1000/60);
 // #debug
-    // ic_dg / initial.css container_debug
+    // ic_dg / ic_ debug
     window.document.documentElement.classList.add('ic_dg');
