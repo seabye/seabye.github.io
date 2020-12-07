@@ -270,7 +270,17 @@
                     }
                 }
             },
-            toggle_machine:function(){
+            toggle_machine:function(mode='single',data){
+                switch(mode){
+                    case'single':
+
+                        break;
+                    case'multiple':
+
+                        break;
+                    default:
+                        break;
+                }
 
             },
             // function / content build
@@ -345,7 +355,7 @@
                     left+=window.screen.availLeft;
                     top+=window.screen.availTop;
                 }
-                window.open(uri,'',`width=${width},height=${height},left=${left},top=${top}`);
+                return window.open(uri,'',`width=${width},height=${height},left=${left},top=${top}`);
             }
         }
     // ##build
