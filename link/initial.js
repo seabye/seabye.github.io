@@ -17,9 +17,41 @@
     // ##module
         // initial_tool
         export const initial_tool={
-            element:(tag,attribute,insert_element,insert_position,content)=>{
+            debounce:(callback,wait=1000/24)=>{
+                let timeout=null;
+                return function(){
+                    window.clearTimeout(timeout);
+                    timeout=window.setTimeout(()=>{
+                        callback.apply(this,arguments);
+                    },wait);
+                };
+            },
+            throttle:()=>{
+
+            },
+            loop:function(loop_function,callback,wait=1000/24){
+                if(loop_function()){
+                    callback();
+                }else{
+                    window.setTimeout(()=>{
+                        this.loop(loop_function,callback,wait);
+                    },wait);
+                }
+            },
+            parent:function(find_element,start_element,end_element=window.document.documentElement){
+                if(start_element===find_element){
+                    return true;
+                }else if(start_element===end_element){
+                    return false;
+                }
+                return this.parent(find_element,start_element.parentElement,end_element);
+            },
+            element:(tag,attribute,insert_element,insert_position,content,next_function)=>{
                 if(!tag){
                     tag='div';
+                }
+                if(!insert_position){
+                    insert_position='beforeend';
                 }
                 const element=window.document.createElement(tag);
                 if(attribute){
@@ -34,18 +66,17 @@
                     }
                 }
                 if(insert_element){
-                    if(insert_position){
-                        insert_element.insertAdjacentElement(insert_position,element);
-                    }else{
-                        insert_element.appendChild(element);
-                    }
+                    insert_element.insertAdjacentElement(insert_position,element);
                 }
                 if(content){
-                    if(typeof content==='function'){
-                        content(element);
-                    }else{
+                    if(typeof content==='string'){
                         element.innerHTML=content;
+                    }else if(content instanceof window.HTMLElement){
+                        element.insertAdjacentElement('beforeend',content);
                     }
+                }
+                if(next_function){
+                    next_function(element);
                 }
                 return element;
             },
@@ -84,7 +115,7 @@
                                 }
                             }
                         }
-                        const element_=this.element(data[item].element[0],data[item].element[1]?data[item].element[1]:false,insert_element,'beforeend',data[item].element[2]?data[item].element[2]:false);
+                        const element_=this.element(data[item].element[0],data[item].element[1]?data[item].element[1]:false,insert_element,false,data[item].element[2]?data[item].element[2]:false);
                         if(item.split(' ')[0]){
                             element[item.split(' ')[0]]=data[item].element=element_;
                         }else{
@@ -117,7 +148,7 @@
                 run_function(data);
                 return element;
             },
-            toggle_cls:(element,cls,cls2='',replace=false,wait=0,callback=()=>{})=>{
+            toggle:(element,cls,cls2='',replace=false,wait=0,callback=()=>{})=>{
                 if(cls2){
                     if(replace){
                         if(cls){
@@ -194,33 +225,10 @@
                     }
                 }
             },
-            find_parent:function(target,start,end=window.document.documentElement){
-                if(start===target){
-                    return true;
-                }else if(start===end){
-                    return false;
-                }
-                return this.find_parent(target,start.parentElement,end);
+            toggle_machine:function(){
+
             },
-            loop:function(premise,callback,wait=1000/24){
-                if(premise()){
-                    callback();
-                }else{
-                    window.setTimeout(()=>{
-                        this.loop(premise,callback,wait);
-                    },wait);
-                }
-            },
-            debounce:(callback,wait=1000/24)=>{
-                let timeout=null;
-                return function(){
-                    window.clearTimeout(timeout);
-                    timeout=window.setTimeout(()=>{
-                        callback.apply(this,arguments);
-                    },wait);
-                };
-            },
-            toggle_full:(element,top_window)=>{
+            full_switch:(element,top_window)=>{
                 if(!element){
                     element=window.document.documentElement;
                 }
@@ -287,7 +295,7 @@
             }
         }
     // ##build
-        // ~background color
+        // ~ background color
         {
             let data={};
             for(const item of window.document.scripts){
@@ -343,14 +351,14 @@
                 set('min');
                 if(window.parseInt(window.document.documentElement.style.getPropertyValue('min-height'))<window.parseInt(window.document.documentElement.style.getPropertyValue('min-width'))){
                     set('max');
-                    initial_tool.toggle_cls(window.document.documentElement,'ic_nr_orientation_landscape','ic_nr_orientation_portrait',true);
+                    initial_tool.toggle(window.document.documentElement,'ic_nr_orientation_landscape','ic_nr_orientation_portrait',true);
                 }else{
                     window.document.documentElement.style.removeProperty('max-width');
                     window.document.documentElement.style.removeProperty('max-height');
                     if(!window.document.documentElement.style[0]){
                         window.document.documentElement.removeAttribute('style');
                     }
-                    initial_tool.toggle_cls(window.document.documentElement,'ic_nr_orientation_portrait','ic_nr_orientation_landscape',true);
+                    initial_tool.toggle(window.document.documentElement,'ic_nr_orientation_portrait','ic_nr_orientation_landscape',true);
                 }
                 if(event.type==='orientationchange'){
                     window.setTimeout(()=>{
@@ -473,19 +481,19 @@
         }
         // ic_nr / initial container_navigator
         {
-            const ua=window.navigator.userAgent;
+            const user_agent=window.navigator.userAgent;
             const cls=window.document.documentElement.classList;
-            if(ua.match('Unix')){cls.add('ic_nr_system_unix');}
-            if(ua.match('Mac OS')&&!ua.match('iPhone')&&!ua.match('iPad')){cls.add('ic_nr_system_brand_apple','ic_nr_system_macos');}
-            if(ua.match('Windows')){cls.add('ic_nr_system_brand_microsoft','ic_nr_system_windows');}
-            if(ua.match('Linux')&&!ua.match('Android')){cls.add('ic_nr_system_linux');}
-            if(ua.match('CrOS')){cls.add('ic_nr_system_brand_google','ic_nr_system_chromeos');}
-            if(ua.match(/iPhone|iPad/)){cls.add('ic_nr_system_brand_apple','ic_nr_system_ios');}
-            if(ua.match('Android')){cls.add('ic_nr_system_brand_google','ic_nr_system_android');}
-            if(ua.match('Firefox')){cls.add('ic_nr_browser_firefox');}
-            if(ua.match('Safari')&&!ua.match('Chrome')&&!ua.match('Edg')){cls.add('ic_nr_browser_safari');}
-            if(ua.match('Chrome')&&!ua.match('Edg')){cls.add('ic_nr_browser_chrome');}
-            if(ua.match('Edg')){cls.add('ic_nr_browser_edge');}
+            if(user_agent.match('Unix')){cls.add('ic_nr_system_unix');}
+            if(user_agent.match('Mac OS')&&!user_agent.match('iPhone')&&!user_agent.match('iPad')){cls.add('ic_nr_system_brand_apple','ic_nr_system_macos');}
+            if(user_agent.match('Windows')){cls.add('ic_nr_system_brand_microsoft','ic_nr_system_windows');}
+            if(user_agent.match('Linux')&&!user_agent.match('Android')){cls.add('ic_nr_system_linux');}
+            if(user_agent.match('CrOS')){cls.add('ic_nr_system_brand_google','ic_nr_system_chromeos');}
+            if(user_agent.match(/iPhone|iPad/)){cls.add('ic_nr_system_brand_apple','ic_nr_system_ios');}
+            if(user_agent.match('Android')){cls.add('ic_nr_system_brand_google','ic_nr_system_android');}
+            if(user_agent.match('Firefox')){cls.add('ic_nr_browser_firefox');}
+            if(user_agent.match('Safari')&&!user_agent.match('Chrome')&&!user_agent.match('Edg')){cls.add('ic_nr_browser_safari');}
+            if(user_agent.match('Chrome')&&!user_agent.match('Edg')){cls.add('ic_nr_browser_chrome');}
+            if(user_agent.match('Edg')){cls.add('ic_nr_browser_edge');}
         }
         // initial_option
         export const initial_option=(option)=>{
@@ -518,7 +526,7 @@
                         <meta name="apple-mobile-web-app-title" content="${option.head.title?option.head.title:''}">
                     `);
                 }else if(window.matchMedia('(prefers-color-scheme:dark)').addEventListener){
-                    // ~theme color
+                    // ~ theme color
                     let theme_color=null;
                     for(const item of window.document.head.children){
                         if(item.getAttribute('name')==='theme-color'){
@@ -531,7 +539,7 @@
                     }else{
                         const light='#E1E1E1';
                         const dark='#212121';
-                        const theme_color=initial_tool.element('meta',{name:'theme-color',content:`${window.matchMedia('(prefers-color-scheme:dark)').matches?dark:light}`},window.document.head,'beforeend');
+                        const theme_color=initial_tool.element('meta',{name:'theme-color',content:`${window.matchMedia('(prefers-color-scheme:dark)').matches?dark:light}`},window.document.head);
                         window.matchMedia('(prefers-color-scheme:dark)').addEventListener('change',(event)=>{
                             theme_color.setAttribute('content',event.matches?dark:light);
                         });
