@@ -18,11 +18,13 @@
         // initial_tool
         export const initial_tool={
             // programming / base code
-            debounce:(callback,wait)=>{
+            debounce:(callback,wait,first)=>{
                 if(typeof wait!=='number'){
                     wait=1000/24;
                 }
-                let first=true;
+                if(first!==true){
+                    first=false;
+                }
                 let timeout=null;
                 return function(){
                     const set=()=>{
@@ -40,11 +42,13 @@
                     }
                 };
             },
-            throttle:(callback,wait)=>{
+            throttle:(callback,wait,first)=>{
                 if(typeof wait!=='number'){
                     wait=1000/24;
                 }
-                let first=true;
+                if(first!==true){
+                    first=false;
+                }
                 let timeout=null;
                 return function(){
                     const set=()=>{
@@ -434,8 +438,8 @@
                 }
             };
             window.addEventListener('load',action,{once:true});
-            window.addEventListener('resize',action);
-            window.addEventListener('resize',initial_tool.debounce(action,350*3));
+            // window.addEventListener('resize',action);
+            window.addEventListener('resize',initial_tool.throttle(action,350*3));
             window.addEventListener('orientationchange',(event)=>{
                 window.setTimeout(()=>{
                     action(event);
@@ -537,8 +541,8 @@
             };
             new MutationObserver(action).observe(window.document.documentElement,{attributes:true,childList:true,subtree:true});
             window.addEventListener('load',action,{once:true});
-            window.addEventListener('resize',action);
-            window.addEventListener('resize',initial_tool.debounce(action,350*3));
+            // window.addEventListener('resize',action);
+            window.addEventListener('resize',initial_tool.throttle(action,350*3));
             window.addEventListener('orientationchange',()=>{
                 window.setTimeout(action,350*2);
             });
