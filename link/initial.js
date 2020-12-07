@@ -62,7 +62,10 @@
                     }
                 };
             },
-            loop:function(loop_function,callback,wait=1000/24){
+            loop:function(loop_function,callback,wait){
+                if(typeof wait!=='number'){
+                    wait=1000/24;
+                }
                 if(loop_function()){
                     callback();
                 }else{
