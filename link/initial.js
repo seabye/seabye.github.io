@@ -17,6 +17,7 @@
     // ##module
         // initial_tool
         export const initial_tool={
+            // programming / base code
             debounce:(callback,wait=1000/24)=>{
                 let timeout=null;
                 return function(){
@@ -46,6 +47,7 @@
                 }
                 return this.parent(find_element,start_element.parentElement,end_element);
             },
+            // graphical user interface / content build
             element:(tag,attribute,insert_element,insert_position,content,next_function)=>{
                 if(!tag){
                     tag='div';
@@ -228,6 +230,7 @@
             toggle_machine:function(){
 
             },
+            // function / content build
             full_switch:(element,top_window)=>{
                 if(!element){
                     element=window.document.documentElement;
