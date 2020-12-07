@@ -18,37 +18,49 @@
         // initial_tool
         export const initial_tool={
             // programming / base code
-            debounce:(callback,wait,immediate)=>{
-                if(!wait){
+            debounce:(callback,wait)=>{
+                if(typeof wait!=='number'){
                     wait=1000/24;
                 }
+                let first=true;
                 let timeout=null;
-                let result=null;
-                const function_=function(){
-                    window.clearTimeout(timeout);
-                    if(immediate){
-                        const call_now=!timeout;
-                        timeout=window.setTimeout(()=>{
-                            timeout=null;
-                        },wait)
-                        if(call_now){
-                            result=callback.apply(this,arguments);
-                        }
-                    }else{
+                return function(){
+                    const set=()=>{
                         timeout=window.setTimeout(()=>{
                             callback.apply(this,arguments);
                         },wait);
+                    };
+                    if(first){
+                        first=false;
+                        callback.apply(this,arguments);
+                        set();
+                    }else{
+                        window.clearTimeout(timeout);
+                        set();
                     }
-                    return result;
                 };
-                function_.cancel=()=>{
-                    window.clearTimeout(timeout);
-                    timeout=null;
-                };
-                return function_;
             },
-            throttle:()=>{
-
+            throttle:(callback,wait)=>{
+                if(typeof wait!=='number'){
+                    wait=1000/24;
+                }
+                let first=true;
+                let timeout=null;
+                return function(){
+                    const set=()=>{
+                        timeout=window.setTimeout(()=>{
+                            timeout=null;
+                            callback.apply(this,arguments);
+                        },wait);
+                    };
+                    if(first){
+                        first=false;
+                        callback.apply(this,arguments);
+                        set();
+                    }else if(!timeout){
+                        set();
+                    }
+                };
             },
             loop:function(loop_function,callback,wait=1000/24){
                 if(loop_function()){
