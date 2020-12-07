@@ -438,14 +438,12 @@
                 }
             };
             window.addEventListener('load',action,{once:true});
-            // window.addEventListener('resize',action);
-            // window.addEventListener('resize',initial_tool.throttle(action,350*3));
             window.addEventListener('resize',initial_tool.throttle(action,1000/60));
+            window.addEventListener('resize',initial_tool.throttle(action,350*3));
             window.addEventListener('orientationchange',(event)=>{
                 window.setTimeout(()=>{
                     action(event);
-                // },350);
-                },350*3);
+                },350);
             });
             window.addEventListener('blur',action);
             window.addEventListener('focus',action);
@@ -543,12 +541,10 @@
             };
             new MutationObserver(action).observe(window.document.documentElement,{attributes:true,childList:true,subtree:true});
             window.addEventListener('load',action,{once:true});
-            // window.addEventListener('resize',action);
-            // window.addEventListener('resize',initial_tool.throttle(action,350*3));
             window.addEventListener('resize',initial_tool.throttle(action,1000/60));
+            window.addEventListener('resize',initial_tool.throttle(action,350*3));
             window.addEventListener('orientationchange',()=>{
-                // window.setTimeout(action,350*2);
-                window.setTimeout(action,350*3);
+                window.setTimeout(action,350*2);
             });
         }
         // ic_nr / ic_ navigator
