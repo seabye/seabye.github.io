@@ -17,7 +17,7 @@
     // ##module
         // initial_tool
         export const initial_tool={
-            // programming / base code
+            // programming
             debounce:(callback,wait,first)=>{
                 if(typeof wait!=='number'){
                     wait=1000/24;
@@ -296,7 +296,7 @@
             action_machine:()=>{
 
             },
-            // function / content build
+            // function
             full_switch:(element,top_window)=>{
                 if(!element){
                     element=window.document.documentElement;
