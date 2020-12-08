@@ -100,15 +100,19 @@
                 }
                 const element=window.document.createElement(tag);
                 if(attribute){
+                    // ??? ~
                     if(!window.Array.isArray(attribute)){
+                    // ~ ???
                         for(const item in attribute){
                             element.setAttribute(item,attribute[item]);
                         }
+                    // ??? ~
                     }else{
                         for(const[key,value]of attribute){
                             element.setAttribute(key,value);
                         }
                     }
+                    // ~ ???
                 }
                 if(insert_element){
                     insert_element.insertAdjacentElement(insert_position,element);
@@ -195,7 +199,7 @@
                 run_function(data);
                 return element;
             },
-            toggle:(element,class_,class_2='',replace=false,wait=0,callback=()=>{})=>{
+            state:(element,class_,class_2='',replace=false,wait=0,callback=()=>{})=>{
                 if(class_2){
                     if(replace){
                         if(class_){
@@ -274,7 +278,7 @@
                     }
                 }
             },
-            toggle_machine:function(mode='single',data){
+            state_machine:function(mode='single',data){
                 switch(mode){
                     case'single':
 
@@ -285,6 +289,11 @@
                     default:
                         break;
                 }
+            },
+            action:()=>{
+
+            },
+            action_machine:()=>{
 
             },
             // function / content build
@@ -419,14 +428,14 @@
                 set('min');
                 if(window.parseInt(window.document.documentElement.style.getPropertyValue('min-height'))<window.parseInt(window.document.documentElement.style.getPropertyValue('min-width'))){
                     set('max');
-                    initial_tool.toggle(window.document.documentElement,'ic_nr_orientation_landscape','ic_nr_orientation_portrait',true);
+                    initial_tool.state(window.document.documentElement,'ic_nr_orientation_landscape','ic_nr_orientation_portrait',true);
                 }else{
                     window.document.documentElement.style.removeProperty('max-width');
                     window.document.documentElement.style.removeProperty('max-height');
                     if(!window.document.documentElement.style[0]){
                         window.document.documentElement.removeAttribute('style');
                     }
-                    initial_tool.toggle(window.document.documentElement,'ic_nr_orientation_portrait','ic_nr_orientation_landscape',true);
+                    initial_tool.state(window.document.documentElement,'ic_nr_orientation_portrait','ic_nr_orientation_landscape',true);
                 }
                 if(event.type==='orientationchange'){
                     window.setTimeout(()=>{
