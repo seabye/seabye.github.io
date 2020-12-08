@@ -90,7 +90,7 @@
                 }
                 return this.parent(find_element,start_element.parentElement,end_element);
             },
-            // graphical user interface / content build
+            // graphical user interface
             element:(tag,attribute,insert_element,insert_position,content,next_function)=>{
                 if(!tag){
                     tag='div';
