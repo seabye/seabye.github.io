@@ -101,16 +101,16 @@
                 const element=window.document.createElement(tag);
                 if(attribute){
                     // ??? ~
-                    if(!window.Array.isArray(attribute)){
+                    if(window.Array.isArray(attribute)){
+                        for(const[key,value]of attribute){
+                            element.setAttribute(key,value);
+                        }
+                    }else{
                     // ~ ???
                         for(const item in attribute){
                             element.setAttribute(item,attribute[item]);
                         }
                     // ??? ~
-                    }else{
-                        for(const[key,value]of attribute){
-                            element.setAttribute(key,value);
-                        }
                     }
                     // ~ ???
                 }
