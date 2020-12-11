@@ -91,113 +91,122 @@
                 return this.parent(find,start.parentElement,end);
             },
             // graphical user interface
-            element:(tag,attribute,insert_element,insert_position,content,callback)=>{
-                if(!tag){
-                    tag='div';
-                }
-                if(!insert_position){
-                    insert_position='beforeend';
-                }
-                const element=window.document.createElement(tag);
-                if(attribute){
-                    // ??? ~
-                    if(window.Array.isArray(attribute)){
-                        for(const[key,value]of attribute){
-                            element.setAttribute(key,value);
-                        }
-                    }else{
-                    // ~ ???
-                        for(const item in attribute){
-                            element.setAttribute(item,attribute[item]);
-                        }
-                    // ??? ~
-                    }
-                    // ~ ???
-                }
-                if(content){
-                    if(typeof content==='string'){
-                        element.innerHTML=content;
-                    }else{
-                        if(content instanceof window.HTMLElement){
-                            element.insertAdjacentElement('beforeend',content);
-                        }
-                    }
-                }
-                if(insert_element){
-                    insert_element.insertAdjacentElement(insert_position,element);
-                }
-                if(callback){
-                    callback(element);
-                }
-                return element;
-            },
-            element_machine:function(data,insert_element,element){
-                if(!data){
-                    data={'':{}};
-                }
-                if(!insert_element){
-                    insert_element=window.document.body;
-                }
-                if(!element){
-                    element={};
-                }
-                const build_element=(data,insert_element)=>{
-                    for(const item in data){
-                        if(!data[item].element){
-                            data[item].element=['div'];
-                            if(item.trim()){
-                                data[item].element[1]={class:item.trim()};
+            element:function(){
+                switch(typeof arguments[0]){
+                    case'string':
+                        {
+                            let tag=arguments[0];
+                            let attribute=arguments[1];
+                            let insert_element=arguments[2];
+                            let insert_position=arguments[3];
+                            let content=arguments[4];
+                            let callback=arguments[5];
+                            if(!tag){
+                                tag='div';
                             }
-                        }else{
-                            if(!data[item].element[0]){
-                                data[item].element[0]='div';
+                            if(!insert_position){
+                                insert_position='beforeend';
                             }
-                            if(!data[item].element[1]){
-                                if(item.trim()){
-                                    data[item].element[1]={class:item.trim()};
+                            const element=window.document.createElement(tag);
+                            if(attribute){
+                                for(const item in attribute){
+                                    element.setAttribute(item,attribute[item]);
                                 }
-                            }else{
-                                if(!data[item].element[1].class){
-                                    if(item.trim()){
-                                        data[item].element[1].class=item.trim();
-                                    }
+                            }
+                            if(content){
+                                if(typeof content==='string'){
+                                    element.innerHTML=content;
                                 }else{
-                                    data[item].element[1].class=window.Array.from(new window.Set(item.trim().split(' ').concat(data[item].element[1].class.trim().split(' ')))).join(' ');
+                                    if(content instanceof window.HTMLElement){
+                                        element.insertAdjacentElement('beforeend',content);
+                                    }
                                 }
                             }
-                        }
-                        const element_=this.element(data[item].element[0],data[item].element[1]?data[item].element[1]:false,insert_element,false,data[item].element[2]?data[item].element[2]:false);
-                        if(item.split(' ')[0]){
-                            element[item.split(' ')[0]]=data[item].element=element_;
-                        }else{
-                            data[item].element=element_;
-                        }
-                        for(const item_ in data[item]){
-                            if(!item_.match(/element|function/)){
-                                const data_={};
-                                data_[item_]=data[item][item_];
-                                build_element(data_,data[item].element);
+                            if(insert_element){
+                                insert_element.insertAdjacentElement(insert_position,element);
                             }
-                        }
-                    }
-                };
-                build_element(data,insert_element);
-                const run_function=(data)=>{
-                    for(const item in data){
-                        if(data[item].function){
-                            data[item].function(element);
-                        }
-                        for(const item_ in data[item]){
-                            if(!item_.match(/element|function/)){
-                                const data_={};
-                                data_[item_]=data[item][item_];
-                                run_function({data_:data[item][item_]});
+                            if(callback){
+                                callback(element);
                             }
+                            return element;
                         }
-                    }
-                };
-                run_function(data);
-                return element;
+                        break;
+                    case'object':
+                        {
+                            let data=arguments[0];
+                            let insert_element=arguments[1];
+                            let element=arguments[2];
+                            if(!data){
+                                data={'':{}};
+                            }
+                            if(!insert_element){
+                                insert_element=window.document.body;
+                            }
+                            if(!element){
+                                element={};
+                            }
+                            const build_element=(data,insert_element)=>{
+                                for(const item in data){
+                                    if(!data[item].element){
+                                        data[item].element=['div'];
+                                        if(item.trim()){
+                                            data[item].element[1]={class:item.trim()};
+                                        }
+                                    }else{
+                                        if(!data[item].element[0]){
+                                            data[item].element[0]='div';
+                                        }
+                                        if(!data[item].element[1]){
+                                            if(item.trim()){
+                                                data[item].element[1]={class:item.trim()};
+                                            }
+                                        }else{
+                                            if(!data[item].element[1].class){
+                                                if(item.trim()){
+                                                    data[item].element[1].class=item.trim();
+                                                }
+                                            }else{
+                                                data[item].element[1].class=window.Array.from(new window.Set(item.trim().split(' ').concat(data[item].element[1].class.trim().split(' ')))).join(' ');
+                                            }
+                                        }
+                                    }
+                                    const element_=this.element(data[item].element[0],data[item].element[1]?data[item].element[1]:false,insert_element,false,data[item].element[2]?data[item].element[2]:false);
+                                    if(item.split(' ')[0]){
+                                        element[item.split(' ')[0]]=data[item].element=element_;
+                                    }else{
+                                        data[item].element=element_;
+                                    }
+                                    for(const item_ in data[item]){
+                                        if(!item_.match(/element|function/)){
+                                            const data_={};
+                                            data_[item_]=data[item][item_];
+                                            build_element(data_,data[item].element);
+                                        }
+                                    }
+                                }
+                            };
+                            build_element(data,insert_element);
+                            const run_function=(data)=>{
+                                for(const item in data){
+                                    if(data[item].function){
+                                        data[item].function(element);
+                                    }
+                                    for(const item_ in data[item]){
+                                        if(!item_.match(/element|function/)){
+                                            const data_={};
+                                            data_[item_]=data[item][item_];
+                                            run_function({data_:data[item][item_]});
+                                        }
+                                    }
+                                }
+                            };
+                            run_function(data);
+                            return element;
+                        }
+                        break;
+                    default:
+                        break;
+                }
             },
             conversion:(element,class_,class__='',replace=false,wait=0,callback=()=>{})=>{
                 if(class__){
