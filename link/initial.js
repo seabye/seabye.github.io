@@ -68,15 +68,15 @@
                     }
                 };
             },
-            loop:function(loop,callback,wait){
+            loop:function(condition,callback,wait){
                 if(typeof wait!=='number'){
                     wait=1000/24;
                 }
-                if(loop()){
+                if(condition()){
                     callback();
                 }else{
                     window.setTimeout(()=>{
-                        this.loop(loop,callback,wait);
+                        this.loop(condition,callback,wait);
                     },wait);
                 }
             },
@@ -329,7 +329,7 @@
 
             },
             // function
-            full_switch:(element,top)=>{
+            full_screen:(element,top)=>{
                 if(!element){
                     element=window.document.documentElement;
                 }
@@ -374,7 +374,7 @@
                     }
                 }
             },
-            window_open:(uri,width,height,left,top,center)=>{
+            open_window:(uri,width,height,left,top,center)=>{
                 if(!uri){
                     uri=window.location.href;
                 }
