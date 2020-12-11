@@ -114,9 +114,6 @@
                     }
                     // ~ ???
                 }
-                if(insert_element){
-                    insert_element.insertAdjacentElement(insert_position,element);
-                }
                 if(content){
                     if(typeof content==='string'){
                         element.innerHTML=content;
@@ -125,6 +122,9 @@
                             element.insertAdjacentElement('beforeend',content);
                         }
                     }
+                }
+                if(insert_element){
+                    insert_element.insertAdjacentElement(insert_position,element);
                 }
                 if(next_function){
                     next_function(element);
@@ -199,7 +199,7 @@
                 run_function(data);
                 return element;
             },
-            state:(element,class_,class_2='',replace=false,wait=0,callback=()=>{})=>{
+            conversion:(element,class_,class_2='',replace=false,wait=0,callback=()=>{})=>{
                 if(class_2){
                     if(replace){
                         if(class_){
@@ -278,7 +278,7 @@
                     }
                 }
             },
-            state_machine:function(mode='single',data){
+            conversion_machine:function(mode='single',data){
                 switch(mode){
                     case'single':
 
@@ -290,10 +290,10 @@
                         break;
                 }
             },
-            action:()=>{
+            state:()=>{
 
             },
-            action_machine:()=>{
+            state_machine:()=>{
 
             },
             // function
@@ -428,14 +428,14 @@
                 set('min');
                 if(window.parseInt(window.document.documentElement.style.getPropertyValue('min-height'))<window.parseInt(window.document.documentElement.style.getPropertyValue('min-width'))){
                     set('max');
-                    initial_tool.state(window.document.documentElement,'ic_nr_orientation_landscape','ic_nr_orientation_portrait',true);
+                    initial_tool.conversion(window.document.documentElement,'ic_nr_orientation_landscape','ic_nr_orientation_portrait',true);
                 }else{
                     window.document.documentElement.style.removeProperty('max-width');
                     window.document.documentElement.style.removeProperty('max-height');
                     if(!window.document.documentElement.style[0]){
                         window.document.documentElement.removeAttribute('style');
                     }
-                    initial_tool.state(window.document.documentElement,'ic_nr_orientation_portrait','ic_nr_orientation_landscape',true);
+                    initial_tool.conversion(window.document.documentElement,'ic_nr_orientation_portrait','ic_nr_orientation_landscape',true);
                 }
                 if(event.type==='orientationchange'){
                     window.setTimeout(()=>{
