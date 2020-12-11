@@ -618,24 +618,29 @@
             }
             // head
             if(option.head){
+                for(const item in option.head){
+                    if(!option.head[item]){
+                        option.head[item]='';
+                    }
+                }
                 window.document.head.insertAdjacentHTML('afterbegin',`
                     <meta name="viewport" content="width=device-width,user-scalable=no,viewport-fit=cover">
                     <meta name="format-detection" content="address=no,email=no,telephone=no">
-                    <title>${option.head.title?option.head.title:''}</title>
-                    <link rel="stylesheet" href="${option.head.style?option.head.style:''}">
+                    <title>${option.head.title}</title>
+                    <link rel="stylesheet" href="${option.head.style}">
                 `);
                 window.document.head.insertAdjacentHTML('beforeend',`
-                    <link rel="icon" type="image/png" href="${option.head.icon?option.head.icon:''}">
+                    <link rel="icon" type="image/png" href="${option.head.icon}">
                 `);
                 if(window.navigator.userAgent.match('Safari')&&!window.navigator.userAgent.match('Chrome')&&!window.navigator.userAgent.match('Edg')){
                     window.document.head.insertAdjacentHTML('beforeend',`
-                        <link rel="apple-touch-icon" href="${option.head.icon_apple?option.head.icon_apple:''}">
+                        <link rel="apple-touch-icon" href="${option.head.icon_apple}">
                         <meta name="apple-mobile-web-app-capable" content="yes">
                         <meta name="apple-mobile-web-app-status-bar-style" content="white">
-                        <meta name="apple-mobile-web-app-title" content="${option.head.title?option.head.title:''}">
+                        <meta name="apple-mobile-web-app-title" content="${option.head.title}">
                     `);
                 }else{
-                    if(window.matchMedia('(prefers-color-scheme:dark)').addEventListener){
+                    if(!(window.navigator.userAgent.match('Safari')&&!window.navigator.userAgent.match('Chrome')&&!window.navigator.userAgent.match('Edg'))&&window.matchMedia('(prefers-color-scheme:dark)').addEventListener){
                         // ~ theme color
                         let theme_color=null;
                         for(const item of window.document.head.children){
@@ -656,7 +661,7 @@
                         }
                     }
                 }
-                window.document.head.insertAdjacentHTML('beforeend',`<link rel="manifest" href="${option.head.manifest?option.head.manifest:''}">`);
+                window.document.head.insertAdjacentHTML('beforeend',`<link rel="manifest" href="${option.head.manifest}">`);
             }
         };
 // #content
