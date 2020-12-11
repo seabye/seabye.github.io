@@ -68,30 +68,30 @@
                     }
                 };
             },
-            loop:function(loop_function,callback,wait){
+            loop:function(loop,callback,wait){
                 if(typeof wait!=='number'){
                     wait=1000/24;
                 }
-                if(loop_function()){
+                if(loop()){
                     callback();
                 }else{
                     window.setTimeout(()=>{
-                        this.loop(loop_function,callback,wait);
+                        this.loop(loop,callback,wait);
                     },wait);
                 }
             },
-            parent:function(find_element,start_element,end_element=window.document.documentElement){
-                if(start_element===find_element){
+            parent:function(find,start,end=window.document.documentElement){
+                if(start===find){
                     return true;
                 }else{
-                    if(start_element===end_element){
+                    if(start===end){
                         return false;
                     }
                 }
-                return this.parent(find_element,start_element.parentElement,end_element);
+                return this.parent(find,start.parentElement,end);
             },
             // graphical user interface
-            element:(tag,attribute,insert_element,insert_position,content,next_function)=>{
+            element:(tag,attribute,insert_element,insert_position,content,callback)=>{
                 if(!tag){
                     tag='div';
                 }
@@ -126,8 +126,8 @@
                 if(insert_element){
                     insert_element.insertAdjacentElement(insert_position,element);
                 }
-                if(next_function){
-                    next_function(element);
+                if(callback){
+                    callback(element);
                 }
                 return element;
             },
@@ -297,14 +297,14 @@
 
             },
             // function
-            full_switch:(element,top_window)=>{
+            full_switch:(element,top)=>{
                 if(!element){
                     element=window.document.documentElement;
                 }
-                if(top_window!==true){
-                    top_window=false;
+                if(top!==true){
+                    top=false;
                 }
-                if(top_window){
+                if(top){
                     if(window.top.document.fullscreen||window.top.document.webkitIsFullScreen){
                         if('exitFullscreen'in window.top.document){
                             window.top.document.exitFullscreen();
