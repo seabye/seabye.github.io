@@ -640,7 +640,7 @@
                         <meta name="apple-mobile-web-app-title" content="${option.head.title}">
                     `);
                 }else{
-                    if(!(window.navigator.userAgent.match('Safari')&&!window.navigator.userAgent.match('Chrome')&&!window.navigator.userAgent.match('Edg'))&&window.matchMedia('(prefers-color-scheme:dark)').addEventListener){
+                    if(window.matchMedia('(prefers-color-scheme:dark)').addEventListener){
                         // ~ theme color
                         let theme_color=null;
                         for(const item of window.document.head.children){
