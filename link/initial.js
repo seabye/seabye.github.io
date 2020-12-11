@@ -208,101 +208,124 @@
                         break;
                 }
             },
-            conversion:(element,class_,class__='',replace=false,wait=0,callback=()=>{})=>{
-                if(class__){
-                    if(replace){
-                        if(class_){
-                            element.classList.remove(class__);
-                            if(wait){
-                                window.setTimeout(()=>{
+            conversion:function(){
+                if(arguments[0]instanceof window.HTMLElement){
+                    let element=arguments[0];
+                    let class_=arguments[1];
+                    let class__=arguments[2];
+                    let replace=arguments[3];
+                    let wait=arguments[4];
+                    let callback=arguments[5];
+                    if(class__===undefined){
+                        class__='';
+                    }
+                    if(replace===undefined){
+                        replace=false;
+                    }
+                    if(wait===undefined){
+                        wait=0;
+                    }
+                    if(callback===undefined){
+                        callback=()=>{};
+                    }
+                    if(class__){
+                        if(replace){
+                            if(class_){
+                                element.classList.remove(class__);
+                                if(wait){
+                                    window.setTimeout(()=>{
+                                        element.classList.add(class_);
+                                        callback();
+                                    },wait);
+                                }else{
                                     element.classList.add(class_);
                                     callback();
-                                },wait);
+                                }
                             }else{
-                                element.classList.add(class_);
-                                callback();
-                            }
-                        }else{
-                            element.classList.add(class__);
-                            if(wait){
-                                window.setTimeout(()=>{
+                                element.classList.add(class__);
+                                if(wait){
+                                    window.setTimeout(()=>{
+                                        element.classList.remove(class__);
+                                        callback();
+                                    },wait);
+                                }else{
                                     element.classList.remove(class__);
                                     callback();
-                                },wait);
+                                }
+                            }
+                        }else{
+                            if(element.classList.contains(class_)){
+                                element.classList.remove(class_);
+                                if(wait){
+                                    window.setTimeout(()=>{
+                                        element.classList.add(class__);
+                                        callback();
+                                    },wait);
+                                }else{
+                                    element.classList.add(class__);
+                                    callback();
+                                }
                             }else{
-                                element.classList.remove(class__);
-                                callback();
+                                if(element.classList.contains(class__)){
+                                    element.classList.remove(class__);
+                                    if(wait){
+                                        window.setTimeout(()=>{
+                                            element.classList.add(class_);
+                                            callback();
+                                        },wait);
+                                    }else{
+                                        element.classList.add(class_);
+                                        callback();
+                                    }
+                                }else{
+                                    if(wait){
+                                        window.setTimeout(()=>{
+                                            element.classList.add(class_);
+                                            callback();
+                                        },wait);
+                                    }else{
+                                        element.classList.add(class_);
+                                        callback();
+                                    }
+                                }
                             }
                         }
                     }else{
                         if(element.classList.contains(class_)){
                             element.classList.remove(class_);
+                        }else{
                             if(wait){
                                 window.setTimeout(()=>{
-                                    element.classList.add(class__);
+                                    element.classList.add(class_);
                                     callback();
                                 },wait);
                             }else{
-                                element.classList.add(class__);
+                                element.classList.add(class_);
                                 callback();
-                            }
-                        }else{
-                            if(element.classList.contains(class__)){
-                                element.classList.remove(class__);
-                                if(wait){
-                                    window.setTimeout(()=>{
-                                        element.classList.add(class_);
-                                        callback();
-                                    },wait);
-                                }else{
-                                    element.classList.add(class_);
-                                    callback();
-                                }
-                            }else{
-                                if(wait){
-                                    window.setTimeout(()=>{
-                                        element.classList.add(class_);
-                                        callback();
-                                    },wait);
-                                }else{
-                                    element.classList.add(class_);
-                                    callback();
-                                }
                             }
                         }
                     }
                 }else{
-                    if(element.classList.contains(class_)){
-                        element.classList.remove(class_);
-                    }else{
-                        if(wait){
-                            window.setTimeout(()=>{
-                                element.classList.add(class_);
-                                callback();
-                            },wait);
-                        }else{
-                            element.classList.add(class_);
-                            callback();
+                    if(typeof arguments[0]==='string'){
+                        let mode=arguments[0];
+                        let data=arguments[1];
+                        if(mode===undefined){
+                            mode='single';
+                        }
+                        switch(mode){
+                            case'single':
+
+                                break;
+                            case'multiple':
+
+                                break;
+                            default:
+                                break;
                         }
                     }
                 }
             },
-            conversion_machine:function(mode='single',data){
-                switch(mode){
-                    case'single':
-
-                        break;
-                    case'multiple':
-
-                        break;
-                    default:
-                        break;
-                }
-            },
             state:()=>{
-
-            },
-            state_machine:()=>{
 
             },
             // function
