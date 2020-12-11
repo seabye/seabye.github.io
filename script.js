@@ -1,7 +1,7 @@
 'use strict';
 // #import
     // initial
-    import{initial_tool,initial_option}from'/link/initial.js';
+    import{initial_option,initial_tool}from'/link/initial.js';
     // Google Analytics
     initial_tool.element('script',{async:'',src:'https://www.googletagmanager.com/gtag/js?id=G-SBCF7D104D'},window.document.head);
     initial_tool.element('script',false,window.document.head,false,`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-SBCF7D104D');`);
