@@ -199,11 +199,11 @@
                 run_function(data);
                 return element;
             },
-            conversion:(element,class_,class_2='',replace=false,wait=0,callback=()=>{})=>{
-                if(class_2){
+            conversion:(element,class_,class__='',replace=false,wait=0,callback=()=>{})=>{
+                if(class__){
                     if(replace){
                         if(class_){
-                            element.classList.remove(class_2);
+                            element.classList.remove(class__);
                             if(wait){
                                 window.setTimeout(()=>{
                                     element.classList.add(class_);
@@ -214,14 +214,14 @@
                                 callback();
                             }
                         }else{
-                            element.classList.add(class_2);
+                            element.classList.add(class__);
                             if(wait){
                                 window.setTimeout(()=>{
-                                    element.classList.remove(class_2);
+                                    element.classList.remove(class__);
                                     callback();
                                 },wait);
                             }else{
-                                element.classList.remove(class_2);
+                                element.classList.remove(class__);
                                 callback();
                             }
                         }
@@ -230,16 +230,16 @@
                             element.classList.remove(class_);
                             if(wait){
                                 window.setTimeout(()=>{
-                                    element.classList.add(class_2);
+                                    element.classList.add(class__);
                                     callback();
                                 },wait);
                             }else{
-                                element.classList.add(class_2);
+                                element.classList.add(class__);
                                 callback();
                             }
                         }else{
-                            if(element.classList.contains(class_2)){
-                                element.classList.remove(class_2);
+                            if(element.classList.contains(class__)){
+                                element.classList.remove(class__);
                                 if(wait){
                                     window.setTimeout(()=>{
                                         element.classList.add(class_);
