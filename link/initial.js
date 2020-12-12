@@ -306,21 +306,23 @@
                         }
                     }
                 }else{
-                    if(typeof arguments[0]==='string'){
-                        let mode=arguments[0];
-                        let data=arguments[1];
-                        if(mode===undefined){
-                            mode='single';
-                        }
-                        switch(mode){
-                            case'single':
+                    if(window.Array.isArray(arguments[0])){
+                        let data=arguments[0];
+                        for(const item of data){
+                            let mode=item[0];
+                            if(mode===undefined){
+                                mode='single';
+                            }
+                            switch(mode){
+                                case'single':
 
-                                break;
-                            case'multiple':
+                                    break;
+                                case'multiple':
 
-                                break;
-                            default:
-                                break;
+                                    break;
+                                default:
+                                    break;
+                            }
                         }
                     }
                 }
