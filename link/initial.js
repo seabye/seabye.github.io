@@ -208,6 +208,9 @@
                         break;
                 }
             },
+            state:()=>{
+
+            },
             conversion:function(){
                 if(arguments[0]instanceof window.HTMLElement){
                     let element=arguments[0];
@@ -327,7 +330,7 @@
                     }
                 }
             },
-            state:()=>{
+            connect:()=>{
 
             },
             // function
