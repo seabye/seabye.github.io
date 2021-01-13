@@ -1,22 +1,20 @@
 'use strict';
 // #import
-    // initial
-    import{initial_option,initial_tool}from'/link/initial.js';
+    // guim
+    import{guim}from'/link/guim.js';
     // Google Analytics
-    initial_tool.element('script',{async:'',src:'https://www.googletagmanager.com/gtag/js?id=G-SBCF7D104D'},window.document.head);
-    initial_tool.element('script',false,window.document.head,false,`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-SBCF7D104D');`);
+    guim.create('script',{async:'',src:'https://www.googletagmanager.com/gtag/js?id=G-SBCF7D104D'},window.document.head);
+    guim.create('script',false,window.document.head,false,`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-SBCF7D104D');`);
 // #global
     // ##variable
     // ##module
     // ##build
-        // initial
-        initial_option({sw:'/sw.js',head:{title:'seabye',style:'/style.css',icon:'/base/icon.png',icon_apple:'/base/icon-apple.png',manifest:'/manifest.webmanifest'}});
 // #content
     // ##variable
     // ##module
     // ##build
         // element
-        initial_tool.loop(()=>{
+        guim.loop(()=>{
             let result=false;
             for(const item of window.document.documentElement.children){
                 if(item.localName==='body'){
