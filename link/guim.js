@@ -158,7 +158,7 @@
                                             }
                                         }
                                     }
-                                    const element_=this.element(data[item].element[0],data[item].element[1]?data[item].element[1]:false,insert_element,false,data[item].element[2]?data[item].element[2]:false);
+                                    const element_=this.create(data[item].element[0],data[item].element[1]?data[item].element[1]:false,insert_element,false,data[item].element[2]?data[item].element[2]:false);
                                     if(item.split(' ')[0]){
                                         element[item.split(' ')[0]]=data[item].element=element_;
                                     }else{
