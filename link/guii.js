@@ -79,7 +79,8 @@
             for(const item of window.document.scripts){
                 if(item.dataset.guii){
                     config=window.JSON.parse(item.dataset.guii.replace(/'/g,'"'));
-                    config.head_guii_css=item.getAttribute('src').replace('.js','.css');
+                    config.head_guii_js=item;
+                    config.head_guii_css_href=item.getAttribute('src').replace('.js','.css');
                     break;
                 }
             }
@@ -124,11 +125,11 @@
                 });
             }
             // head
-            window.document.head.insertAdjacentHTML('afterbegin',`
+            config.head_guii_js.insertAdjacentHTML('beforebegin',`
                 <meta name="viewport" content="width=device-width,user-scalable=no,viewport-fit=cover">
                 <meta name="format-detection" content="address=no,email=no,telephone=no">
                 <title>${config.head_title}</title>
-                <link rel="stylesheet" href="${config.head_guii_css}">
+                <link rel="stylesheet" href="${config.head_guii_css_href}">
                 <link rel="stylesheet" href="${config.head_style}">
             `);
             {
