@@ -1,6 +1,6 @@
 'use strict';
 // Graphical User Interface Initial
-// ---- ---- ---- ----
+// ==== ==== ==== ====
 // #import
 // #global
     // ##variable
@@ -11,7 +11,7 @@
     // ##module
     // ##build
 // #debug
-// ---- ---- ---- ----
+// ==== ==== ==== ====
 // {
 //     'background_color_light': '',
 //     'background_color_dark': '',
@@ -25,7 +25,7 @@
 //     'head_theme_color_dark': '',
 //     'head_manifest': ''
 // }
-// ---- ---- ---- ----
+// ==== ==== ==== ====
 // #import
 // #global
 {

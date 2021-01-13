@@ -1,6 +1,6 @@
 'use strict';
 // Graphical User Interface Machine
-// ---- ---- ---- ----
+// ==== ==== ==== ====
 // #import
 // #global
     // ##variable
@@ -79,6 +79,7 @@
                 }
                 return this.parent(find,start.parentElement,end);
             },
+            // ====
             create:function(){
                 switch(typeof arguments[0]){
                     case'string':
@@ -321,6 +322,7 @@
             get:()=>{
 
             },
+            // ====
             full_screen:(element,top)=>{
                 if(!element){
                     element=window.document.documentElement;
