@@ -74,6 +74,7 @@
         };
     // ##build
         // guii
+        {
             // data
             let config={};
             for(const item of window.document.scripts){
@@ -322,6 +323,7 @@
                 if(user_agent.match('Chrome')&&!user_agent.match('Edg')){class_.add('ic_nr_browser_chrome');}
                 if(user_agent.match('Edg')){class_.add('ic_nr_browser_edge');}
             }
+        }
 }
 // #content
     // ##variable
