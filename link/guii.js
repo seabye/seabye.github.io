@@ -12,7 +12,7 @@
     // ##build
 // #debug
 // ==== ==== ==== ====
-// {
+// data-guii="{
 //     'background_color_light': '',
 //     'background_color_dark': '',
 //     'service_worker': '',
@@ -24,7 +24,7 @@
 //     'head_theme_color_light': '',
 //     'head_theme_color_dark': '',
 //     'head_manifest': ''
-// }
+// }"
 // ==== ==== ==== ====
 // #import
 // #global
