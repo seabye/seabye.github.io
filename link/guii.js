@@ -75,11 +75,12 @@
     // ##build
         // guii
         {
-            // data
+            // dataset
             let config={};
             for(const item of window.document.scripts){
                 if(item.dataset.guii){
                     config=window.JSON.parse(item.dataset.guii.replace(/'/g,'"'));
+                    item.removeAttribute('data-guii');
                     config.head_guii_js=item;
                     config.head_guii_css_href=item.getAttribute('src').replace('.js','.css');
                     break;
@@ -125,6 +126,22 @@
                     window.console.log('#### Service worker registration failed, error:',error);
                 });
             }
+            // ic_nr / ic_ navigator
+            {
+                const user_agent=window.navigator.userAgent;
+                const class_=window.document.documentElement.classList;
+                if(user_agent.match('Unix')){class_.add('ic_nr_system_unix');}
+                if(user_agent.match('Mac OS')&&!user_agent.match('iPhone')&&!user_agent.match('iPad')){class_.add('ic_nr_system_brand_apple','ic_nr_system_macos');}
+                if(user_agent.match('Windows')){class_.add('ic_nr_system_brand_microsoft','ic_nr_system_windows');}
+                if(user_agent.match('Linux')&&!user_agent.match('Android')){class_.add('ic_nr_system_linux');}
+                if(user_agent.match('CrOS')){class_.add('ic_nr_system_brand_google','ic_nr_system_chromeos');}
+                if(user_agent.match(/iPhone|iPad/)){class_.add('ic_nr_system_brand_apple','ic_nr_system_ios');}
+                if(user_agent.match('Android')){class_.add('ic_nr_system_brand_google','ic_nr_system_android');}
+                if(user_agent.match('Firefox')){class_.add('ic_nr_browser_firefox');}
+                if(user_agent.match('Safari')&&!user_agent.match('Chrome')&&!user_agent.match('Edg')){class_.add('ic_nr_browser_safari');}
+                if(user_agent.match('Chrome')&&!user_agent.match('Edg')){class_.add('ic_nr_browser_chrome');}
+                if(user_agent.match('Edg')){class_.add('ic_nr_browser_edge');}
+            }
             // head
             config.head_guii_js.insertAdjacentHTML('beforebegin',`
                 <meta name="viewport" content="width=device-width,user-scalable=no,viewport-fit=cover">
@@ -162,7 +179,34 @@
                 });
             }
             window.document.head.insertAdjacentHTML('beforeend',`<link rel="manifest" href="${config.head_manifest}">`);
-            // size
+            // touch :hov
+            window.addEventListener('pointerdown',()=>{});
+            // context menu
+            window.addEventListener('contextmenu',(event)=>{
+                event.preventDefault();
+            });
+            // touchpad zoom
+            window.addEventListener('wheel',(event)=>{
+                if(event.ctrlKey){
+                    event.preventDefault();
+                }
+            },{passive:false});
+            // tabindex
+            window.document.documentElement.setAttribute('tabindex','-1');
+            guim.loop(()=>{
+                let result=false;
+                for(const item of window.document.documentElement.children){
+                    if(item.localName==='body'){
+                        result=true;
+                        break;
+                    }
+                }
+                return result;
+            },()=>{
+                window.document.head.setAttribute('tabindex','-1');
+                window.document.body.setAttribute('tabindex','-1');
+            },1000/60);
+            // window size
             {
                 const action=(event)=>{
                     if(event.type==='orientationchange'){
@@ -220,33 +264,6 @@
                     window.setTimeout(action,350*3);
                 });
             }
-            // :hov action
-            window.addEventListener('pointerdown',()=>{});
-            // context menu
-            window.addEventListener('contextmenu',(event)=>{
-                event.preventDefault();
-            });
-            // touchpad zoom
-            window.addEventListener('wheel',(event)=>{
-                if(event.ctrlKey){
-                    event.preventDefault();
-                }
-            },{passive:false});
-            // tabindex
-            window.document.documentElement.setAttribute('tabindex','-1');
-            guim.loop(()=>{
-                let result=false;
-                for(const item of window.document.documentElement.children){
-                    if(item.localName==='body'){
-                        result=true;
-                        break;
-                    }
-                }
-                return result;
-            },()=>{
-                window.document.head.setAttribute('tabindex','-1');
-                window.document.body.setAttribute('tabindex','-1');
-            },1000/60);
             // form input
             window.addEventListener('pointerdown',(event)=>{
                 if(!event.target.localName.match(/input|textarea/)&&window.document.activeElement.localName.match(/input|textarea/)){
@@ -283,7 +300,7 @@
                     }
                 });
             }
-            // scroll
+            // partial scroll
             if(!window.CSS.supports('overscroll-behavior:contain')){
                 const action=()=>{
                     for(const item of window.document.all){
@@ -306,22 +323,6 @@
                 window.addEventListener('orientationchange',()=>{
                     window.setTimeout(action,350*2);
                 });
-            }
-            // ic_nr / ic_ navigator
-            {
-                const user_agent=window.navigator.userAgent;
-                const class_=window.document.documentElement.classList;
-                if(user_agent.match('Unix')){class_.add('ic_nr_system_unix');}
-                if(user_agent.match('Mac OS')&&!user_agent.match('iPhone')&&!user_agent.match('iPad')){class_.add('ic_nr_system_brand_apple','ic_nr_system_macos');}
-                if(user_agent.match('Windows')){class_.add('ic_nr_system_brand_microsoft','ic_nr_system_windows');}
-                if(user_agent.match('Linux')&&!user_agent.match('Android')){class_.add('ic_nr_system_linux');}
-                if(user_agent.match('CrOS')){class_.add('ic_nr_system_brand_google','ic_nr_system_chromeos');}
-                if(user_agent.match(/iPhone|iPad/)){class_.add('ic_nr_system_brand_apple','ic_nr_system_ios');}
-                if(user_agent.match('Android')){class_.add('ic_nr_system_brand_google','ic_nr_system_android');}
-                if(user_agent.match('Firefox')){class_.add('ic_nr_browser_firefox');}
-                if(user_agent.match('Safari')&&!user_agent.match('Chrome')&&!user_agent.match('Edg')){class_.add('ic_nr_browser_safari');}
-                if(user_agent.match('Chrome')&&!user_agent.match('Edg')){class_.add('ic_nr_browser_chrome');}
-                if(user_agent.match('Edg')){class_.add('ic_nr_browser_edge');}
             }
         }
 }
