@@ -1,6 +1,4 @@
 @charset "UTF-8";
-/* Graphical User Interface Initial */
-/* ==== ==== ==== ==== */
 /* #import */
 /* #global */
     /* ##variable */
@@ -12,9 +10,11 @@
     /* ##build */
 /* #debug */
 /* ==== ==== ==== ==== */
-/* #content */
+/* Graphical User Interface Initial */
+/* ==== ==== ==== ==== */
+/* #... */
     /* ##build */
-        /* sc_cr */
+        /* ... */
         /* #state */
         /* #child */
 /* ==== ==== ==== ==== */

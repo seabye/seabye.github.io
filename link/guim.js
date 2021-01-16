@@ -1,6 +1,16 @@
 'use strict';
 // Graphical User Interface Machine
 // ==== ==== ==== ====
+// import{guim}from'guim.js';
+    // guim.throttle()
+        // window.addEventListener('resize',guim.throttle(function));
+        // window.addEventListener('resize',guim.throttle(function,1000/60));
+        // window.addEventListener('resize',guim.throttle(function,1000/60,true));
+    // guim.debounce()
+        // window.addEventListener('resize',guim.debounce(function));
+        // window.addEventListener('resize',guim.debounce(function,1000/60));
+        // window.addEventListener('resize',guim.debounce(function,1000/60,true));
+// ==== ==== ==== ====
 // #import
 // #global
     // ##variable
@@ -79,7 +89,7 @@
                 }
                 return this.parent(find,start.parentElement,end);
             },
-            // ==== ====
+            // ==== ==== ==== ====
             create:function(){
                 switch(typeof arguments[0]){
                     case'string':
@@ -322,7 +332,7 @@
             get:()=>{
 
             },
-            // ==== ====
+            // ==== ==== ==== ====
             full_screen:(element,top)=>{
                 if(!element){
                     element=window.document.documentElement;

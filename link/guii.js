@@ -1,6 +1,4 @@
 'use strict';
-// Graphical User Interface Initial
-// ==== ==== ==== ====
 // #import
 // #global
     // ##variable
@@ -12,26 +10,28 @@
     // ##build
 // #debug
 // ==== ==== ==== ====
-// data-guii="{
-//     'background_color_light': '',
-//     'background_color_dark': '',
-//     'service_worker': '',
-//     'head_title': '',
-//     'head_style': '',
-//     'head_script': '',
-//     'head_icon': '',
-//     'head_icon_apple': '',
-//     'head_theme_color_light': '',
-//     'head_theme_color_dark': '',
-//     'head_manifest': ''
-// }"
+// Graphical User Interface Initial
+// ==== ==== ==== ====
+// <script src="guii.js" type="application/javascript" data-guii="{
+    // 'background_color_light': '#FFFFFF',
+    // 'background_color_dark': '#000000',
+    // 'service_worker': 'sw.js',
+    // 'head_title': '...',
+    // 'head_style': 'style.css',
+    // 'head_script': 'script.js',
+    // 'head_icon': 'icon.png',
+    // 'head_icon_apple': 'icon-apple.png',
+    // 'head_theme_color_light': '#E1E1E1',
+    // 'head_theme_color_dark': '#212121',
+    // 'head_manifest': 'manifest.webmanifest'
+// }"></script>
 // ==== ==== ==== ====
 // #import
 // #global
 {
     // ##variable
     // ##module
-        // guim copy
+        // guim guim.js
         const guim={
             throttle:(callback,wait,first)=>{
                 if(typeof wait!=='number'){
