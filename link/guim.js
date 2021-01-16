@@ -150,27 +150,27 @@
                             }
                             const build_element=(data,insert_element)=>{
                                 for(const item in data){
-                                    if(!data[item].element){
-                                        data[item].element=['div'];
-                                        if(item.trim()){
-                                            data[item].element[1]={class:item.trim()};
-                                        }
-                                    }else{
+                                    if(data[item].element){
                                         if(!data[item].element[0]){
                                             data[item].element[0]='div';
                                         }
-                                        if(!data[item].element[1]){
-                                            if(item.trim()){
-                                                data[item].element[1]={class:item.trim()};
-                                            }
-                                        }else{
-                                            if(!data[item].element[1].class){
+                                        if(data[item].element[1]){
+                                            if(data[item].element[1].class){
+                                                data[item].element[1].class=window.Array.from(new window.Set(item.trim().split(' ').concat(data[item].element[1].class.trim().split(' ')))).join(' ');
+                                            }else{
                                                 if(item.trim()){
                                                     data[item].element[1].class=item.trim();
                                                 }
-                                            }else{
-                                                data[item].element[1].class=window.Array.from(new window.Set(item.trim().split(' ').concat(data[item].element[1].class.trim().split(' ')))).join(' ');
                                             }
+                                        }else{
+                                            if(item.trim()){
+                                                data[item].element[1]={class:item.trim()};
+                                            }
+                                        }
+                                    }else{
+                                        data[item].element=['div'];
+                                        if(item.trim()){
+                                            data[item].element[1]={class:item.trim()};
                                         }
                                     }
                                     const element_=this.create(data[item].element[0],data[item].element[1]?data[item].element[1]:false,insert_element,false,data[item].element[2]?data[item].element[2]:false);
