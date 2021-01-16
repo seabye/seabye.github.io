@@ -146,26 +146,34 @@
             config.head_guii_js.insertAdjacentHTML('beforebegin',`
                 <meta name="viewport" content="width=device-width,user-scalable=no,viewport-fit=cover">
                 <meta name="format-detection" content="address=no,email=no,telephone=no">
-                <title>${config.head_title}</title>
-                <link rel="stylesheet" href="${config.head_guii_css_href}">
-                <link rel="stylesheet" href="${config.head_style}">
             `);
-            {
+            if(config.head_title){
+                config.head_guii_js.insertAdjacentHTML('beforebegin',`<title>${config.head_title}</title>`);
+            }
+            config.head_guii_js.insertAdjacentHTML('beforebegin',`<link rel="stylesheet" href="${config.head_guii_css_href}">`);
+            if(config.head_style){
+                config.head_guii_js.insertAdjacentHTML('beforebegin',`<link rel="stylesheet" href="${config.head_style}">`);
+            }
+            if(config.head_script){
                 const element=window.document.createElement('script');
                 element.setAttribute('src',config.head_script);
                 element.setAttribute('type','module');
                 window.document.head.insertAdjacentElement('beforeend',element);
             }
-            window.document.head.insertAdjacentHTML('beforeend',`
-                <link rel="icon" type="image/png" href="${config.head_icon}">
-            `);
+            if(config.head_icon){
+                window.document.head.insertAdjacentHTML('beforeend',`<link rel="icon" type="image/png" href="${config.head_icon}">`);
+            }
             if(window.navigator.userAgent.match('Safari')&&!window.navigator.userAgent.match('Chrome')&&!window.navigator.userAgent.match('Edg')){
+                if(config.head_icon_apple){
+                    window.document.head.insertAdjacentHTML('beforeend',`<link rel="apple-touch-icon" href="${config.head_icon_apple}">`);
+                }
                 window.document.head.insertAdjacentHTML('beforeend',`
-                    <link rel="apple-touch-icon" href="${config.head_icon_apple}">
                     <meta name="apple-mobile-web-app-capable" content="yes">
                     <meta name="apple-mobile-web-app-status-bar-style" content="white">
-                    <meta name="apple-mobile-web-app-title" content="${config.head_title}">
                 `);
+                if(config.head_title){
+                    window.document.head.insertAdjacentHTML('beforeend',`<meta name="apple-mobile-web-app-title" content="${config.head_title}">`);
+                }
             }else{
                 const value=(matches)=>{
                     return matches?config.head_theme_color_dark?config.head_theme_color_dark:'#212121':config.head_theme_color_light?config.head_theme_color_light:'#E1E1E1';
@@ -178,7 +186,9 @@
                     theme_color.setAttribute('content',value(event.matches));
                 });
             }
-            window.document.head.insertAdjacentHTML('beforeend',`<link rel="manifest" href="${config.head_manifest}">`);
+            if(config.head_manifest){
+                window.document.head.insertAdjacentHTML('beforeend',`<link rel="manifest" href="${config.head_manifest}">`);
+            }
             // touch :hov
             window.addEventListener('pointerdown',()=>{});
             // context menu

@@ -10,6 +10,14 @@
         // window.addEventListener('resize',guim.debounce(function));
         // window.addEventListener('resize',guim.debounce(function,1000/60));
         // window.addEventListener('resize',guim.debounce(function,1000/60,true));
+    // guim.loop()
+    // guim.parent()
+    // guim.create()
+    // guim.bind()
+    // guim.switch()
+    // guim.get()
+    // guim.full_screen()
+    // guim.open_window()
 // ==== ==== ==== ====
 // #import
 // #global
