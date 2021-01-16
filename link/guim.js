@@ -3,19 +3,15 @@
 // ==== ==== ==== ====
 // import{guim}from'guim.js';
     // guim.throttle()
-        // window.addEventListener('resize',guim.throttle(function));
-        // window.addEventListener('resize',guim.throttle(function,1000/60));
-        // window.addEventListener('resize',guim.throttle(function,1000/60,true));
     // guim.debounce()
-        // window.addEventListener('resize',guim.debounce(function));
-        // window.addEventListener('resize',guim.debounce(function,1000/60));
-        // window.addEventListener('resize',guim.debounce(function,1000/60,true));
     // guim.loop()
     // guim.parent()
+    // ==== ==== ==== ====
     // guim.create()
     // guim.bind()
     // guim.switch()
     // guim.get()
+    // ==== ==== ==== ====
     // guim.full_screen()
     // guim.open_window()
 // ==== ==== ==== ====
@@ -386,7 +382,7 @@
                     }
                 }
             },
-            open_window:(uri,width,height,left,top,center)=>{
+            open_window:(uri,width,height,left,top)=>{
                 if(!uri){
                     uri=window.location.href;
                 }
@@ -396,21 +392,15 @@
                 if(!height){
                     height=480;
                 }
-                if(!left){
-                    left=0;
-                }
-                if(!top){
-                    top=0;
-                }
-                if(center!==false){
-                    center=true;
-                }
-                if(center){
-                    left=(window.screen.availWidth-width)/2+window.screen.availLeft;
-                    top=(window.screen.availHeight-height)/2+window.screen.availTop;
-                }else{
+                if(typeof left==='number'){
                     left+=window.screen.availLeft;
+                }else{
+                    left=(window.screen.availWidth-width)/2+window.screen.availLeft;
+                }
+                if(typeof top==='number'){
                     top+=window.screen.availTop;
+                }else{
+                    top=(window.screen.availHeight-height)/2+window.screen.availTop;
                 }
                 return window.open(uri,'',`width=${width},height=${height},left=${left},top=${top}`);
             }
