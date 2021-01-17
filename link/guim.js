@@ -3,48 +3,83 @@
 // Graphical User Interface Machine
 // ==== ==== ==== ====
 // import{guim}from'guim.js';
-// ---- ---- ---- ----
+// ~~~~ ~~~~ ~~~~ ~~~~
 // guim.throttle()
+    // guim.throttle(
+    //     callback<function>,
+    //     wait<number,/false,'',/=1000/24>,
+    //     first<true,/false,'',/=false>
+    // )
 // guim.debounce()
+    // guim.debounce(
+    //     callback<function>,
+    //     wait<number,/false,'',/=1000/24>,
+    //     first<true,/false,'',/=false>
+    // )
 // guim.loop()
+    // guim.loop(
+    //     condition<function>,
+    //     callback<function>,
+    //     wait<number,/false,'',/=1000/24>
+    // )
 // guim.parent()
-// ---- ---- ---- ----
+    // guim.parent(
+    //     find<element>,
+    //     start<element>,
+    //     end<element,/false,'',/=window.document.documentElement>
+    // )
 // guim.create()
     // guim.create(
-    //     tag<string,false,''>,
+    //     tag<string,/false,'',/='div'>,
     //     attribute<{
     //         key:'value',
     //         key:'value'
-    //     },false,''>,
-    //     insert_element<element,false,''>,
-    //     insert_position<string,false,''>,
-    //     content<element,string,false,''>,
-    //     callback<function,false,''>
+    //     },/false,'',/>,
+    //     insert_element<element,/false,'',/>,
+    //     insert_position<string,/false,'',/='beforeend'>,
+    //     content<string,element,/false,'',/>,
+    //     callback<function(result_element),/false,'',/>
     // )
-    // ---- ---- ---- ----
     // guim.create(
-    //     {
+    //     data<{
     //         name_class<name_class,'name_class class2',''>:{
     //             element:[
-    //                 tag<string,false,'',>,
+    //                 tag<string,/false,'',/='div'>,
     //                 attribute<{
     //                     key:'value',
     //                     key:'value'
-    //                 },false,'',>,
-    //                 content<element,string,false,'',>
+    //                 },/false,'',/>,
+    //                 content<string,element,/false,'',/>
     //             ],
-    //             function:function(element){<this.element,element.name_class>}
+    //             function:function(result_element){<this.element\=\result_element.name_class>}
     //         }
-    //     },
-    //     insert_element<element,false,''>,
-    //     element<{},false>
+    //     },/false,'',/='div'>,
+    //     insert_element<element,/false,'',/>,
+    //     insert_position<string,/false,'',/='beforeend'>,
+    //     element<object\result_element.\,/false,'',/={}\result_element.\>
     // )
 // guim.bind()
+    // guim.bind(
+    // )
 // guim.switch()
+    // guim.switch(
+    // )
 // guim.get()
-// ---- ---- ---- ----
+    // guim.get(
+    // )
 // guim.full_screen()
+    // guim.full_screen(
+    //     element<element,/false,'',/=window.document.documentElement>,
+    //     top<true,/false,'',/=false>
+    // )
 // guim.open_window()
+    // guim.open_window(
+    //     uri<string,/false,'',/=window.location.href>,
+    //     width<+number,/false,'',/=640>>,
+    //     height<+number,/false,'',/=480>,
+    //     left<+number,/false,'',/=\center\>,
+    //     top<+number,/false,'',/=\center\>
+    // )
 // >>>> >>>> >>>> >>>>
 // #import
 // #global
@@ -124,7 +159,6 @@
                 }
                 return this.parent(find,start.parentElement,end);
             },
-            // ---- ---- ---- ----
             create:function(){
                 switch(typeof arguments[0]){
                     case'string':
@@ -135,9 +169,6 @@
                             let insert_position=arguments[3];
                             let content=arguments[4];
                             let callback=arguments[5];
-                            if(!tag){
-                                tag='div';
-                            }
                             if(!insert_position){
                                 insert_position='beforeend';
                             }
@@ -169,17 +200,15 @@
                         {
                             let data=arguments[0];
                             let insert_element=arguments[1];
-                            let element=arguments[2];
-                            if(!data){
-                                data={'':{}};
-                            }
-                            if(!insert_element){
-                                insert_element=window.document.body;
+                            let insert_position=arguments[2];
+                            let element=arguments[3];
+                            if(!insert_position){
+                                insert_position='beforeend';
                             }
                             if(!element){
                                 element={};
                             }
-                            const build_element=(data,insert_element)=>{
+                            const build_element=(data,insert_element,insert_position)=>{
                                 for(const item in data){
                                     if(data[item].element){
                                         if(!data[item].element[0]){
@@ -204,7 +233,7 @@
                                             data[item].element[1]={class:item.trim()};
                                         }
                                     }
-                                    const element_=this.create(data[item].element[0],data[item].element[1]?data[item].element[1]:false,insert_element,false,data[item].element[2]?data[item].element[2]:false);
+                                    const element_=this.create(data[item].element[0],data[item].element[1]?data[item].element[1]:false,insert_element,insert_position,data[item].element[2]?data[item].element[2]:false);
                                     if(item.split(' ')[0]){
                                         element[item.split(' ')[0]]=data[item].element=element_;
                                     }else{
@@ -214,12 +243,12 @@
                                         if(!item_.match(/element|function/)){
                                             const data_={};
                                             data_[item_]=data[item][item_];
-                                            build_element(data_,data[item].element);
+                                            build_element(data_,data[item].element,'beforeend');
                                         }
                                     }
                                 }
                             };
-                            build_element(data,insert_element);
+                            build_element(data,insert_element,insert_position);
                             const run_function=(data)=>{
                                 for(const item in data){
                                     if(data[item].function){
@@ -239,6 +268,9 @@
                         }
                         break;
                     default:
+                        {
+                            return this.create('div');
+                        }
                         break;
                 }
             },
@@ -352,10 +384,10 @@
                             }
                             switch(mode){
                                 case'single':
-
+                                    {}
                                     break;
                                 case'multiple':
-
+                                    {}
                                     break;
                                 default:
                                     break;
@@ -367,7 +399,6 @@
             get:()=>{
 
             },
-            // ---- ---- ---- ----
             full_screen:(element,top)=>{
                 if(!element){
                     element=window.document.documentElement;
