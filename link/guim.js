@@ -276,15 +276,15 @@
             },
             // guim.bind(
             // )
-            bind:()=>{
+            bind:(element,event_,function_)=>{
 
             },
             // guim.switch(
                 // element<element>,
                 // class_<string,/false,'',undefined/>,
                 // class__<string,/false,'',undefined/=''>,
-                // set_to_class_<true,/false,'',undefined/=false>,
-                // add_and_callback_wait<number,/false,'',undefined/=0>,
+                // set_class_<true,/false,'',undefined/=false>,
+                // wait<number,/false,'',undefined/=0>,
                 // callback<function,/false,'',undefined/=()=>{}>
             // )
             switch:function(){
@@ -292,35 +292,35 @@
                     const element=arguments[0];
                     const class_=arguments[1];
                     let class__=arguments[2];
-                    let set_to_class_=arguments[3];
-                    let add_and_callback_wait=arguments[4];
+                    let set_class_=arguments[3];
+                    let wait=arguments[4];
                     let callback=arguments[5];
                     if(typeof class__!=='string'){
                         class__='';
                     }
-                    if(set_to_class_!==true){
-                        set_to_class_=false;
+                    if(set_class_!==true){
+                        set_class_=false;
                     }
-                    if(typeof add_and_callback_wait!=='number'){
-                        add_and_callback_wait=0;
+                    if(typeof wait!=='number'){
+                        wait=0;
                     }
                     if(typeof callback!=='function'){
                         callback=()=>{};
                     }
                     if(class__){
-                        if(set_to_class_){
+                        if(set_class_){
                             if(class_){
                                 element.classList.remove(class__);
                                 window.setTimeout(()=>{
                                     element.classList.add(class_);
                                     callback();
-                                },add_and_callback_wait);
+                                },wait);
                             }else{
                                 element.classList.add(class__);
                                 window.setTimeout(()=>{
                                     element.classList.remove(class__);
                                     callback();
-                                },add_and_callback_wait);
+                                },wait);
                             }
                         }else{
                             if(element.classList.contains(class_)){
@@ -328,19 +328,19 @@
                                 window.setTimeout(()=>{
                                     element.classList.add(class__);
                                     callback();
-                                },add_and_callback_wait);
+                                },wait);
                             }else{
                                 if(element.classList.contains(class__)){
                                     element.classList.remove(class__);
                                     window.setTimeout(()=>{
                                         element.classList.add(class_);
                                         callback();
-                                    },add_and_callback_wait);
+                                    },wait);
                                 }else{
                                     window.setTimeout(()=>{
                                         element.classList.add(class_);
                                         callback();
-                                    },add_and_callback_wait);
+                                    },wait);
                                 }
                             }
                         }
@@ -351,7 +351,7 @@
                             window.setTimeout(()=>{
                                 element.classList.add(class_);
                                 callback();
-                            },add_and_callback_wait);
+                            },wait);
                         }
                     }
                 }else{
