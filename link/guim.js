@@ -1,20 +1,51 @@
 'use strict';
+// <<<< <<<< <<<< <<<<
 // Graphical User Interface Machine
 // ==== ==== ==== ====
 // import{guim}from'guim.js';
-    // guim.throttle()
-    // guim.debounce()
-    // guim.loop()
-    // guim.parent()
-    // ==== ==== ==== ====
-    // guim.create()
-    // guim.bind()
-    // guim.switch()
-    // guim.get()
-    // ==== ==== ==== ====
-    // guim.full_screen()
-    // guim.open_window()
-// ==== ==== ==== ====
+// ---- ---- ---- ----
+// guim.throttle()
+// guim.debounce()
+// guim.loop()
+// guim.parent()
+// ---- ---- ---- ----
+// guim.create()
+    // guim.create(
+    //     tag<string,false,''>,
+    //     attribute<{
+    //         key:'value',
+    //         key:'value'
+    //     },false,''>,
+    //     insert_element<element,false,''>,
+    //     insert_position<string,false,''>,
+    //     content<element,string,false,''>,
+    //     callback<function,false,''>
+    // )
+    // ---- ---- ---- ----
+    // guim.create(
+    //     {
+    //         name_class<name_class,'name_class class2',''>:{
+    //             element:[
+    //                 tag<string,false,'',>,
+    //                 attribute<{
+    //                     key:'value',
+    //                     key:'value'
+    //                 },false,'',>,
+    //                 content<element,string,false,'',>
+    //             ],
+    //             function:function(element){<this.element,element.name_class>}
+    //         }
+    //     },
+    //     insert_element<element,false,''>,
+    //     element<{},false>
+    // )
+// guim.bind()
+// guim.switch()
+// guim.get()
+// ---- ---- ---- ----
+// guim.full_screen()
+// guim.open_window()
+// >>>> >>>> >>>> >>>>
 // #import
 // #global
     // ##variable
@@ -93,7 +124,7 @@
                 }
                 return this.parent(find,start.parentElement,end);
             },
-            // ==== ==== ==== ====
+            // ---- ---- ---- ----
             create:function(){
                 switch(typeof arguments[0]){
                     case'string':
@@ -336,7 +367,7 @@
             get:()=>{
 
             },
-            // ==== ==== ==== ====
+            // ---- ---- ---- ----
             full_screen:(element,top)=>{
                 if(!element){
                     element=window.document.documentElement;

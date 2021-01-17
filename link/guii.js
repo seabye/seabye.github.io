@@ -1,4 +1,5 @@
 'use strict';
+// <<<< <<<< <<<< <<<<
 // #import
 // #global
     // ##variable
@@ -25,7 +26,7 @@
     // 'head_theme_color_dark': '#212121',
     // 'head_manifest': 'manifest.webmanifest'
 // }"></script>
-// ==== ==== ==== ====
+// >>>> >>>> >>>> >>>>
 // #import
 // #global
 {
