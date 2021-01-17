@@ -200,7 +200,7 @@
                                 insert_position='beforeend';
                             }
                             if(!element){
-                                element=null;
+                                element={};
                             }
                             let once=true;
                             const build_element=(data,insert_element,insert_position)=>{
