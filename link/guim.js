@@ -59,14 +59,8 @@
     //     element<object\element_group.\,/false,'',undefined/={}\element_group.\>
     // )
 // guim.bind()
-    // guim.bind(
-    // )
 // guim.switch()
-    // guim.switch(
-    // )
 // guim.get()
-    // guim.get(
-    // )
 // guim.full_screen()
     // guim.full_screen(
     //     element<element,/false,'',undefined/=window.document.documentElement>,
@@ -275,6 +269,9 @@
                 }
             },
             // guim.bind(
+                // element<>,
+                // event_<>,
+                // function_<>
             // )
             bind:(element,event_,function_)=>{
 
