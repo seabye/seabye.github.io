@@ -40,7 +40,7 @@
     //     content<string,element,/false,'',undefined/>,
     //     callback<function(element),/false,'',undefined/>
     // )
-    // <element_group><=guim.create(
+    // <element><=guim.create(
     //     data<{
     //         name_class<name_class,'name_class class2',''>undefined:{
     //             element:[
@@ -51,12 +51,12 @@
     //                 },/false,'',undefined/>,
     //                 content<string,element,/false,'',undefined/>
     //             ],
-    //             function:function(element_group){<this.element\=\element_group.name_class>}
+    //             function:function(element){<this.element\=\element.name_class>}
     //         }
     //     },/false,'',undefined/='div'>,
     //     insert_element<element,/false,'',undefined/>,
     //     insert_position<string,/false,'',undefined/='beforeend'>,
-    //     element<object\element_group.\,/false,'',undefined/={}\element_group.\>
+    //     element<object\element.\,/false,'',undefined/={}\element.\>
     // )
 // guim.bind()
 // guim.switch()
@@ -202,6 +202,7 @@
                             if(!element){
                                 element={};
                             }
+                            let once=true;
                             const build_element=(data,insert_element,insert_position)=>{
                                 for(const item in data){
                                     if(data[item].element){
@@ -229,6 +230,10 @@
                                     }
                                     const element_=this.create(data[item].element[0],data[item].element[1]?data[item].element[1]:false,insert_element,insert_position,data[item].element[2]?data[item].element[2]:false);
                                     if(item.split(' ')[0]){
+                                        if(once===true){
+                                            element=element_;
+                                            once=false;
+                                        }
                                         element[item.split(' ')[0]]=data[item].element=element_;
                                     }else{
                                         data[item].element=element_;
