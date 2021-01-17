@@ -56,7 +56,7 @@
     //     },/false,'',undefined/='div'>,
     //     insert_element<element,/false,'',undefined/>,
     //     insert_position<string,/false,'',undefined/='beforeend'>,
-    //     element<object\element.\,/false,'',undefined/={}\element.\>
+    //     element<object,/false,'',undefined/={}>\element.\
     // )
 // guim.bind()
 // guim.switch()
@@ -200,7 +200,7 @@
                                 insert_position='beforeend';
                             }
                             if(!element){
-                                element={};
+                                element=null;
                             }
                             let once=true;
                             const build_element=(data,insert_element,insert_position)=>{
