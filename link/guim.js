@@ -202,7 +202,7 @@
                             if(!element){
                                 element={};
                             }
-                            let once=true;
+                            // let once=true;
                             const build_element=(data,insert_element,insert_position)=>{
                                 for(const item in data){
                                     if(data[item].element){
@@ -230,10 +230,10 @@
                                     }
                                     const element_=this.create(data[item].element[0],data[item].element[1]?data[item].element[1]:false,insert_element,insert_position,data[item].element[2]?data[item].element[2]:false);
                                     if(item.split(' ')[0]){
-                                        if(once===true){
-                                            element=element_;
-                                            once=false;
-                                        }
+                                        // if(once===true){
+                                        //     element=element_;
+                                        //     once=false;
+                                        // }
                                         element[item.split(' ')[0]]=data[item].element=element_;
                                     }else{
                                         data[item].element=element_;
