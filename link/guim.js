@@ -23,13 +23,13 @@
     //     wait<number,/false,'',/=1000/24>
     // )
 // guim.parent()
-    // guim.parent(
+    // boolean<=guim.parent(
     //     find<element>,
     //     start<element>,
     //     end<element,/false,'',/=window.document.documentElement>
     // )
 // guim.create()
-    // guim.create(
+    // result_element<=guim.create(
     //     tag<string,/false,'',/='div'>,
     //     attribute<{
     //         key:'value',
@@ -40,7 +40,7 @@
     //     content<string,element,/false,'',/>,
     //     callback<function(result_element),/false,'',/>
     // )
-    // guim.create(
+    // result_element<=guim.create(
     //     data<{
     //         name_class<name_class,'name_class class2',''>:{
     //             element:[
@@ -73,7 +73,7 @@
     //     top<true,/false,'',/=false>
     // )
 // guim.open_window()
-    // guim.open_window(
+    // window<=guim.open_window(
     //     uri<string,/false,'',/=window.location.href>,
     //     width<+number,/false,'',/=640>>,
     //     height<+number,/false,'',/=480>,
