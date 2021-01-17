@@ -7,56 +7,56 @@
 // guim.throttle()
     // guim.throttle(
     //     callback<function>,
-    //     wait<number,/false,'',/=1000/24>,
-    //     first<true,/false,'',/=false>
+    //     wait<number,/false,'',undefined/=1000/24>,
+    //     first<true,/false,'',undefined/=false>
     // )
 // guim.debounce()
     // guim.debounce(
     //     callback<function>,
-    //     wait<number,/false,'',/=1000/24>,
-    //     first<true,/false,'',/=false>
+    //     wait<number,/false,'',undefined/=1000/24>,
+    //     first<true,/false,'',undefined/=false>
     // )
 // guim.loop()
-    // guim.loop(
-    //     condition<function>,
+    // </\callback result\,undefined/><=guim.loop(
+    //     <boolean><=condition<function>,
     //     callback<function>,
-    //     wait<number,/false,'',/=1000/24>
+    //     wait<number,/false,'',undefined/=1000/24>
     // )
 // guim.parent()
-    // boolean<=guim.parent(
+    // <boolean><=guim.parent(
     //     find<element>,
     //     start<element>,
-    //     end<element,/false,'',/=window.document.documentElement>
+    //     end<element,/false,'',undefined/=window.document.documentElement>
     // )
 // guim.create()
-    // result_element<=guim.create(
-    //     tag<string,/false,'',/='div'>,
+    // <element><=guim.create(
+    //     tag<string,/false,'',undefined/='div'>,
     //     attribute<{
     //         key:'value',
     //         key:'value'
-    //     },/false,'',/>,
-    //     insert_element<element,/false,'',/>,
-    //     insert_position<string,/false,'',/='beforeend'>,
-    //     content<string,element,/false,'',/>,
-    //     callback<function(result_element),/false,'',/>
+    //     },/false,'',undefined/>,
+    //     insert_element<element,/false,'',undefined/>,
+    //     insert_position<string,/false,'',undefined/='beforeend'>,
+    //     content<string,element,/false,'',undefined/>,
+    //     callback<function(element),/false,'',undefined/>
     // )
-    // result_element<=guim.create(
+    // <element_group><=guim.create(
     //     data<{
-    //         name_class<name_class,'name_class class2',''>:{
+    //         name_class<name_class,'name_class class2',''>undefined:{
     //             element:[
-    //                 tag<string,/false,'',/='div'>,
+    //                 tag<string,/false,'',undefined/='div'>,
     //                 attribute<{
     //                     key:'value',
     //                     key:'value'
-    //                 },/false,'',/>,
-    //                 content<string,element,/false,'',/>
+    //                 },/false,'',undefined/>,
+    //                 content<string,element,/false,'',undefined/>
     //             ],
-    //             function:function(result_element){<this.element\=\result_element.name_class>}
+    //             function:function(element_group){<this.element\=\element_group.name_class>}
     //         }
-    //     },/false,'',/='div'>,
-    //     insert_element<element,/false,'',/>,
-    //     insert_position<string,/false,'',/='beforeend'>,
-    //     element<object\result_element.\,/false,'',/={}\result_element.\>
+    //     },/false,'',undefined/='div'>,
+    //     insert_element<element,/false,'',undefined/>,
+    //     insert_position<string,/false,'',undefined/='beforeend'>,
+    //     element<object\element_group.\,/false,'',undefined/={}\element_group.\>
     // )
 // guim.bind()
     // guim.bind(
@@ -69,16 +69,16 @@
     // )
 // guim.full_screen()
     // guim.full_screen(
-    //     element<element,/false,'',/=window.document.documentElement>,
-    //     top<true,/false,'',/=false>
+    //     element<element,/false,'',undefined/=window.document.documentElement>,
+    //     top<true,/false,'',undefined/=false>
     // )
 // guim.open_window()
-    // window<=guim.open_window(
-    //     uri<string,/false,'',/=window.location.href>,
-    //     width<+number,/false,'',/=640>>,
-    //     height<+number,/false,'',/=480>,
-    //     left<+number,/false,'',/=\center\>,
-    //     top<+number,/false,'',/=\center\>
+    // <window><=guim.open_window(
+    //     uri<string,/false,'',undefined/=window.location.href>,
+    //     width<+number,/false,'',undefined/=640>>,
+    //     height<+number,/false,'',undefined/=480>,
+    //     left<+number,/false,'',undefined/=\center\>,
+    //     top<+number,/false,'',undefined/=\center\>
     // )
 // >>>> >>>> >>>> >>>>
 // #import
@@ -142,7 +142,7 @@
                     wait=1000/24;
                 }
                 if(condition()){
-                    callback();
+                    return callback();
                 }else{
                     window.setTimeout(()=>{
                         this.loop(condition,callback,wait);
@@ -163,12 +163,12 @@
                 switch(typeof arguments[0]){
                     case'string':
                         {
-                            let tag=arguments[0];
-                            let attribute=arguments[1];
-                            let insert_element=arguments[2];
+                            const tag=arguments[0];
+                            const attribute=arguments[1];
+                            const insert_element=arguments[2];
                             let insert_position=arguments[3];
-                            let content=arguments[4];
-                            let callback=arguments[5];
+                            const content=arguments[4];
+                            const callback=arguments[5];
                             if(!insert_position){
                                 insert_position='beforeend';
                             }
@@ -198,8 +198,8 @@
                         break;
                     case'object':
                         {
-                            let data=arguments[0];
-                            let insert_element=arguments[1];
+                            const data=arguments[0];
+                            const insert_element=arguments[1];
                             let insert_position=arguments[2];
                             let element=arguments[3];
                             if(!insert_position){
@@ -274,13 +274,23 @@
                         break;
                 }
             },
+            // guim.bind(
+            // )
             bind:()=>{
 
             },
+            // guim.switch(
+                // element<>,
+                // class_<>,
+                // class__<>,
+                // replace<>,
+                // wait<>,
+                // callback<>
+            // )
             switch:function(){
                 if(arguments[0]instanceof window.HTMLElement){
-                    let element=arguments[0];
-                    let class_=arguments[1];
+                    const element=arguments[0];
+                    const class_=arguments[1];
                     let class__=arguments[2];
                     let replace=arguments[3];
                     let wait=arguments[4];
@@ -376,7 +386,7 @@
                     }
                 }else{
                     if(window.Array.isArray(arguments[0])){
-                        let data=arguments[0];
+                        const data=arguments[0];
                         for(const item of data){
                             let mode=item[0];
                             if(mode===undefined){
@@ -396,8 +406,38 @@
                     }
                 }
             },
-            get:()=>{
-
+            // <object><=guim.get(
+                // uri<string,/false,'',/=window.location.origin>,
+                // method<>,
+                // object<object>
+            // )
+            get:async(uri,method,object)=>{
+                if(!uri){
+                    uri=window.location.origin;
+                }
+                switch(method){
+                    case'GET':
+                        {}
+                        break;
+                    case'POST':
+                        {
+                            let status=null;
+                            return await window.fetch(uri,{
+                                method:'POST',
+                                headers:{'Content-Type':'application/json; charset=utf-8'},
+                                body:window.JSON.stringify(object),
+                            }).then((response)=>{
+                                status=response.status;
+                                return response.json();
+                            }).then((result)=>{
+                                result.status=status;
+                                return result;
+                            });
+                        }
+                        break;
+                    default:
+                        break;
+                }
             },
             full_screen:(element,top)=>{
                 if(!element){

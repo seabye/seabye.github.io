@@ -65,7 +65,7 @@
                     wait=1000/24;
                 }
                 if(condition()){
-                    callback();
+                    return callback();
                 }else{
                     window.setTimeout(()=>{
                         this.loop(condition,callback,wait);
