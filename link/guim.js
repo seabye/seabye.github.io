@@ -282,6 +282,8 @@
                             switch(action){
                                 case'add':
                                     {
+                                        const option_=option;
+                                        option_.once=true;
                                         element.addEventListener('pointerdown',(event)=>{
                                             const left=event.target.getBoundingClientRect().left;
                                             const right=event.target.getBoundingClientRect().right;
@@ -314,13 +316,20 @@
                                                         callback(event);
                                                     }
                                                 }
-                                            },{once:true});
-                                        },option);
+                                            },option_);
+                                            element.dispatchEvent(new window.CustomEvent('pointer_up',{
+                                                bubbles:true,
+                                                cancelable:true,
+                                                composed:true,
+                                                detail:{}
+                                            }));
+                                        },option_);
+                                        element.addEventListener('pointer_up',callback,option);
                                     }
                                     break;
                                 case'remove':
                                     {
-
+                                        element.removeEventListener('pointer_up',callback);
                                     }
                                     break;
                                 default:
