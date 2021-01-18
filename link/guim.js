@@ -285,7 +285,8 @@
                             switch(action){
                                 case'add':
                                     {
-                                        element.addEventListener('pointerdown',pointer_up.bind(null,callback),option);
+                                        // element.addEventListener('pointerdown',pointer_up.bind(null,callback),option);
+                                        element.addEventListener('pointerdown',pointer_up,option);
                                     }
                                     break;
                                 case'remove':
@@ -540,7 +541,8 @@
         // guim
             // bind
                 // pointer_up
-                const pointer_up=(callback,event)=>{
+                // const pointer_up=(callback,event)=>{
+                const pointer_up=(event)=>{
                     const left=event.target.getBoundingClientRect().left;
                     const right=event.target.getBoundingClientRect().right;
                     const top=event.target.getBoundingClientRect().top;
@@ -560,16 +562,25 @@
                                             }
                                         }
                                         if(!intersect){
-                                            callback(event);
+                                            // callback(event);
+                                            (function(){
+                                                window.console.log(arguments);
+                                            })().call(guim.bind);
                                         }
                                         break;
                                     }
                                 }
                                 if(!block){
-                                    callback(event);
+                                    // callback(event);
+                                    (function(){
+                                        window.console.log(arguments);
+                                    })().call(guim.bind);
                                 }
                             }else{
-                                callback(event);
+                                // callback(event);
+                                (function(){
+                                    window.console.log(arguments);
+                                })().call(guim.bind);
                             }
                         }
                     },{once:true});
