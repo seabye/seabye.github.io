@@ -285,54 +285,12 @@
                             switch(action){
                                 case'add':
                                     {
-                                        const option_=option;
-                                        option_.once=true;
-                                        element.addEventListener('pointerdown',(event)=>{
-                                            const left=event.target.getBoundingClientRect().left;
-                                            const right=event.target.getBoundingClientRect().right;
-                                            const top=event.target.getBoundingClientRect().top;
-                                            const bottom=event.target.getBoundingClientRect().bottom;
-                                            event.target.parentNode.addEventListener('pointerup',(event_)=>{
-                                                if((event_.target===event.target||event_.target===event.target.parentNode)&&(event_.clientX>=left&&event_.clientX<=right&&event_.clientY>=top&&event_.clientY<=bottom)){
-                                                    if(event_.target.children.length){
-                                                        let block=false;
-                                                        for(const item of event_.target.children){
-                                                            if(window.getComputedStyle(item).pointerEvents!=='none'){
-                                                                block=true;
-                                                                let intersect=false;
-                                                                for(const item of event_.target.children){
-                                                                    if(event_.clientX>=item.getBoundingClientRect().left&&event_.clientX<=item.getBoundingClientRect().right&&event_.clientY>=item.getBoundingClientRect().top&&event_.clientY<=item.getBoundingClientRect().bottom){
-                                                                        intersect=true;
-                                                                        break;
-                                                                    }
-                                                                }
-                                                                if(!intersect){
-                                                                    callback(event);
-                                                                }
-                                                                break;
-                                                            }
-                                                        }
-                                                        if(!block){
-                                                            callback(event);
-                                                        }
-                                                    }else{
-                                                        callback(event);
-                                                    }
-                                                }
-                                            },option_);
-                                            element.dispatchEvent(new window.CustomEvent('pointer_up',{
-                                                bubbles:true,
-                                                cancelable:true,
-                                                composed:true,
-                                                detail:{}
-                                            }));
-                                        },option_);
-                                        element.addEventListener('pointer_up',callback,option);
+                                        element.addEventListener('pointerdown',pointer_up);
                                     }
                                     break;
                                 case'remove':
                                     {
-                                        element.removeEventListener('pointer_up',callback);
+                                        element.removeEventListener('pointerdown',pointer_up);
                                     }
                                     break;
                                 default:
@@ -518,7 +476,7 @@
                     top=false;
                 }
                 if(top){
-                    if(window.top.document.fullscreen||window.top.document.webkitIsFullScreen){
+                    if(window.top.document.fullscreenElement||window.top.document.webkitIsFullScreen){
                         if('exitFullscreen'in window.top.document){
                             window.top.document.exitFullscreen();
                         }else{
@@ -536,7 +494,7 @@
                         }
                     }
                 }else{
-                    if(window.document.fullscreen||window.document.webkitIsFullScreen){
+                    if(window.document.fullscreenElement||window.document.webkitIsFullScreen){
                         if('exitFullscreen'in window.document){
                             window.document.exitFullscreen();
                         }else{
@@ -579,6 +537,43 @@
             }
         }
     // ##build
+        // guim
+            // bind
+                // pointer_up
+                const pointer_up=(event)=>{
+                    const left=event.target.getBoundingClientRect().left;
+                    const right=event.target.getBoundingClientRect().right;
+                    const top=event.target.getBoundingClientRect().top;
+                    const bottom=event.target.getBoundingClientRect().bottom;
+                    event.target.parentNode.addEventListener('pointerup',(event_)=>{
+                        if((event_.target===event.target||event_.target===event.target.parentNode)&&(event_.clientX>=left&&event_.clientX<=right&&event_.clientY>=top&&event_.clientY<=bottom)){
+                            if(event_.target.children.length){
+                                let block=false;
+                                for(const item of event_.target.children){
+                                    if(window.getComputedStyle(item).pointerEvents!=='none'){
+                                        block=true;
+                                        let intersect=false;
+                                        for(const item of event_.target.children){
+                                            if(event_.clientX>=item.getBoundingClientRect().left&&event_.clientX<=item.getBoundingClientRect().right&&event_.clientY>=item.getBoundingClientRect().top&&event_.clientY<=item.getBoundingClientRect().bottom){
+                                                intersect=true;
+                                                break;
+                                            }
+                                        }
+                                        if(!intersect){
+                                            callback(event).call(guim.bind);
+                                        }
+                                        break;
+                                    }
+                                }
+                                if(!block){
+                                    callback(event).call(guim.bind);
+                                }
+                            }else{
+                                callback(event).call(guim.bind);
+                            }
+                        }
+                    },{once:true});
+                };
 // #content
     // ##variable
     // ##module
