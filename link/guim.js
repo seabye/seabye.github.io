@@ -279,7 +279,7 @@
                         {
                             element.addEventListener('pointerdown',(event)=>{
                                 window.console.log('event',event);
-                                event.target.addEventListener('event_',(event_)=>{
+                                event.target.addEventListener('pointerup',(event_)=>{
                                     window.console.log('event_.clientX',event_.clientX);
                                     window.console.log('event_.clientY',event_.clientY);
                                     window.console.log('event.target.getBoundingClientRect().left',event.target.getBoundingClientRect().left);
