@@ -276,7 +276,7 @@
                 // option<\event option object\,/false,'',undefined/={}>
             // )
             bind:(action,element,change,callback,option)=>{
-                if(!!window.Object.prototype.toString.call(option).match('Object')){
+                if(!window.Object.prototype.toString.call(option).match('Object')){
                     option={};
                 }
                 switch(change){
@@ -285,7 +285,7 @@
                             switch(action){
                                 case'add':
                                     {
-                                        let option_=option;
+                                        const option_=option;
                                         option_.once=true;
                                         element.addEventListener('pointerdown',(event)=>{
                                             const left=event.target.getBoundingClientRect().left;
