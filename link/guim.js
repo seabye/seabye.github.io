@@ -282,6 +282,40 @@
                 switch(change){
                     case'pointer_up':
                         {
+                            const pointer_up=(event)=>{
+                                const left=event.target.getBoundingClientRect().left;
+                                const right=event.target.getBoundingClientRect().right;
+                                const top=event.target.getBoundingClientRect().top;
+                                const bottom=event.target.getBoundingClientRect().bottom;
+                                event.target.parentNode.addEventListener('pointerup',(event_)=>{
+                                    if((event_.target===event.target||event_.target===event.target.parentNode)&&(event_.clientX>=left&&event_.clientX<=right&&event_.clientY>=top&&event_.clientY<=bottom)){
+                                        if(event_.target.children.length){
+                                            let block=false;
+                                            for(const item of event_.target.children){
+                                                if(window.getComputedStyle(item).pointerEvents!=='none'){
+                                                    block=true;
+                                                    let intersect=false;
+                                                    for(const item of event_.target.children){
+                                                        if(event_.clientX>=item.getBoundingClientRect().left&&event_.clientX<=item.getBoundingClientRect().right&&event_.clientY>=item.getBoundingClientRect().top&&event_.clientY<=item.getBoundingClientRect().bottom){
+                                                            intersect=true;
+                                                            break;
+                                                        }
+                                                    }
+                                                    if(!intersect){
+                                                        callback();
+                                                    }
+                                                    break;
+                                                }
+                                            }
+                                            if(!block){
+                                                callback();
+                                            }
+                                        }else{
+                                            callback();
+                                        }
+                                    }
+                                },{once:true});
+                            };
                             switch(action){
                                 case'add':
                                     {
@@ -540,40 +574,6 @@
         // guim
             // bind
                 // pointer_up
-                const pointer_up=(event)=>{
-                    const left=event.target.getBoundingClientRect().left;
-                    const right=event.target.getBoundingClientRect().right;
-                    const top=event.target.getBoundingClientRect().top;
-                    const bottom=event.target.getBoundingClientRect().bottom;
-                    event.target.parentNode.addEventListener('pointerup',(event_)=>{
-                        if((event_.target===event.target||event_.target===event.target.parentNode)&&(event_.clientX>=left&&event_.clientX<=right&&event_.clientY>=top&&event_.clientY<=bottom)){
-                            if(event_.target.children.length){
-                                let block=false;
-                                for(const item of event_.target.children){
-                                    if(window.getComputedStyle(item).pointerEvents!=='none'){
-                                        block=true;
-                                        let intersect=false;
-                                        for(const item of event_.target.children){
-                                            if(event_.clientX>=item.getBoundingClientRect().left&&event_.clientX<=item.getBoundingClientRect().right&&event_.clientY>=item.getBoundingClientRect().top&&event_.clientY<=item.getBoundingClientRect().bottom){
-                                                intersect=true;
-                                                break;
-                                            }
-                                        }
-                                        if(!intersect){
-                                            callback(event).call(guim.bind);
-                                        }
-                                        break;
-                                    }
-                                }
-                                if(!block){
-                                    callback(event).call(guim.bind);
-                                }
-                            }else{
-                                callback(event).call(guim.bind);
-                            }
-                        }
-                    },{once:true});
-                };
 // #content
     // ##variable
     // ##module
