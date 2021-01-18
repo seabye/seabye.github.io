@@ -269,35 +269,50 @@
                 }
             },
             // guim.bind(
+                // action<element>,
                 // element<element>,
                 // change<string>,
-                // callback<>
+                // callback<>,
+                // option<>
             // )
-            bind:(element,change,callback)=>{
+            bind:(action,element,change,callback,option)=>{
                 switch(change){
                     case'pointer_up':
                         {
-                            element.addEventListener('pointerdown',(event_)=>{
-                                element.addEventListener('pointerup',(event)=>{
-                                    if(event.clientX>=element.getBoundingClientRect().left&&
-                                        event.clientX<=element.getBoundingClientRect().right&&
-                                        event.clientY>=element.getBoundingClientRect().top&&
-                                        event.clientY<=element.getBoundingClientRect().bottom){
-                                        callback(event_);
+                            switch(action){
+                                case'add':
+                                    {
+                                        element.addEventListener('pointerdown',(event_)=>{
+                                            element.addEventListener('pointerup',(event)=>{
+                                                if(event.clientX>=element.getBoundingClientRect().left&&
+                                                    event.clientX<=element.getBoundingClientRect().right&&
+                                                    event.clientY>=element.getBoundingClientRect().top&&
+                                                    event.clientY<=element.getBoundingClientRect().bottom){
+                                                    callback(event_);
+                                                }
+                                            },{once:true});
+                                        },option);
+                                        // element.addEventListener('pointerdown',(event)=>{
+                                        //     event.target.addEventListener('pointerup',(event_)=>{
+                                        //         if(guim.parent(event.target,event_.target)||
+                                        //             (event_.clientX>=event.target.getBoundingClientRect().left&&
+                                        //             event_.clientX<=event.target.getBoundingClientRect().right&&
+                                        //             event_.clientY>=event.target.getBoundingClientRect().top&&
+                                        //             event_.clientY<=event.target.getBoundingClientRect().bottom)){
+                                        //             callback(event,event_);
+                                        //         }
+                                        //     },{once:true});
+                                        // });
                                     }
-                                },{once:true});
-                            });
-                            // element.addEventListener('pointerdown',(event)=>{
-                            //     event.target.addEventListener('pointerup',(event_)=>{
-                            //         if(guim.parent(event.target,event_.target)||
-                            //             (event_.clientX>=event.target.getBoundingClientRect().left&&
-                            //             event_.clientX<=event.target.getBoundingClientRect().right&&
-                            //             event_.clientY>=event.target.getBoundingClientRect().top&&
-                            //             event_.clientY<=event.target.getBoundingClientRect().bottom)){
-                            //             callback(event,event_);
-                            //         }
-                            //     },{once:true});
-                            // });
+                                    break;
+                                case'remove':
+                                    {
+
+                                    }
+                                    break;
+                                default:
+                                    break;
+                            }
                         }
                         break;
                     case'element_attribute':
@@ -322,7 +337,20 @@
                         break;
                     default:
                         {
-                            element.addEventListener(change,callback(event_));
+                            switch(action){
+                                case'add':
+                                    {
+                                        element.addEventListener(change,callback,option);
+                                    }
+                                    break;
+                                case'remove':
+                                    {
+                                        element.removeEventListener(change,callback);
+                                    }
+                                    break;
+                                default:
+                                    break;
+                            }
                         }
                         break;
                 }
