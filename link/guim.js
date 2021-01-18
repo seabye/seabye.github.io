@@ -285,7 +285,7 @@
                             switch(action){
                                 case'add':
                                     {
-                                        const option_=option;
+                                        let option_=option;
                                         option_.once=true;
                                         element.addEventListener('pointerdown',(event)=>{
                                             const left=event.target.getBoundingClientRect().left;
