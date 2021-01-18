@@ -285,7 +285,7 @@
                                         event.clientY<=element.getBoundingClientRect().bottom){
                                         callback(event_);
                                     }
-                                });
+                                },{once:true});
                             });
                             // element.addEventListener('pointerdown',(event)=>{
                             //     event.target.addEventListener('pointerup',(event_)=>{
