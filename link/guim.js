@@ -285,7 +285,7 @@
                             switch(action){
                                 case'add':
                                     {
-                                        element.addEventListener('pointerdown',pointer_up.bind(this,callback),option);
+                                        element.addEventListener('pointerdown',pointer_up.bind(null,callback),option);
                                     }
                                     break;
                                 case'remove':
