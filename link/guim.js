@@ -279,7 +279,8 @@
                         {
                             element.addEventListener('pointerdown',(event)=>{
                                 event.target.addEventListener('pointerup',(event_)=>{
-                                    if(guim.parent(event.target,event_.target)){
+                                    if(event_.clientX>=event.target.getBoundingClientRect().left&&event_.clientX<=event.target.getBoundingClientRect().right&&
+                                        event_.clientY>=event.target.getBoundingClientRect().top&&event_.clientY<=event.target.getBoundingClientRect().top){
                                         callback(event,event_);
                                     }
                                 },{once:true});
