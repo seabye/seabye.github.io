@@ -278,9 +278,16 @@
                     case'pointer_up':
                         {
                             element.addEventListener('pointerdown',(event)=>{
-                                event.target.addEventListener('pointerup',(event_)=>{
+                                window.console.log('event',event);
+                                event.target.addEventListener('event_',(event_)=>{
+                                    window.console.log('event_.clientX',event_.clientX);
+                                    window.console.log('event_.clientY',event_.clientY);
+                                    window.console.log('event.target.getBoundingClientRect().left',event.target.getBoundingClientRect().left);
+                                    window.console.log('event.target.getBoundingClientRect().right',event.target.getBoundingClientRect().right);
+                                    window.console.log('event.target.getBoundingClientRect().top',event.target.getBoundingClientRect().top);
+                                    window.console.log('event.target.getBoundingClientRect().bottom',event.target.getBoundingClientRect().bottom);
                                     if(event_.clientX>=event.target.getBoundingClientRect().left&&event_.clientX<=event.target.getBoundingClientRect().right&&
-                                        event_.clientY>=event.target.getBoundingClientRect().top&&event_.clientY<=event.target.getBoundingClientRect().top){
+                                        event_.clientY>=event.target.getBoundingClientRect().top&&event_.clientY<=event.target.getBoundingClientRect().bottom){
                                         callback(event,event_);
                                     }
                                 },{once:true});
