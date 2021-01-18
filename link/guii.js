@@ -314,10 +314,10 @@
             // partial scroll
             if(!window.CSS.supports('overscroll-behavior:contain')){
                 const action=()=>{
-                    for(const item of window.document.all){
+                    for(const item of window.document.querySelectorAll('*')){
                         if(window.getComputedStyle(item).overflowY.match(/auto|scroll/)){
                             if(item.scrollHeight===item.clientHeight){
-                                item.style.setProperty('touch-action','pan-x');
+                                item.style.setProperty('touch-action','none');
                             }else{
                                 item.style.removeProperty('touch-action');
                                 if(!item.style[0]){
