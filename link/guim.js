@@ -276,14 +276,16 @@
             bind:(element,change,callback)=>{
                 switch(change){
                     case'pointer_up':
-                    {
-                            element.addEventListener('pointerup',(event)=>{
-                                if(event.clientX>=element.getBoundingClientRect().left&&
-                                    event.clientX<=element.getBoundingClientRect().right&&
-                                    event.clientY>=element.getBoundingClientRect().top&&
-                                    event.clientY<=element.getBoundingClientRect().bottom){
-                                    callback(event);
-                                }
+                        {
+                            element.addEventListener('pointerdown',(event_)=>{
+                                element.addEventListener('pointerup',(event)=>{
+                                    if(event.clientX>=element.getBoundingClientRect().left&&
+                                        event.clientX<=element.getBoundingClientRect().right&&
+                                        event.clientY>=element.getBoundingClientRect().top&&
+                                        event.clientY<=element.getBoundingClientRect().bottom){
+                                        callback(event_);
+                                    }
+                                });
                             });
                             // element.addEventListener('pointerdown',(event)=>{
                             //     event.target.addEventListener('pointerup',(event_)=>{
