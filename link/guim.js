@@ -269,11 +269,11 @@
                 }
             },
             // guim.bind(
-                // action<element>,
+                // action<'add','remove'>,
                 // element<element>,
-                // change<string>,
-                // callback<>,
-                // option<>
+                // change<'pointer_up','element_attribute','element_content','element_size','element_position'>,
+                // callback<function>,
+                // option<\event option object\>
             // )
             bind:(action,element,change,callback,option)=>{
                 switch(change){
@@ -288,7 +288,7 @@
                                             const top=event.target.getBoundingClientRect().top;
                                             const bottom=event.target.getBoundingClientRect().bottom;
                                             event.target.parentNode.addEventListener('pointerup',(event_)=>{
-                                                if(event_.clientX>=left&&event_.clientX<=right&&event_.clientY>=top&&event_.clientY<=bottom){
+                                                if(event_.target===event.target&&(event_.clientX>=left&&event_.clientX<=right&&event_.clientY>=top&&event_.clientY<=bottom)){
                                                     callback(event);
                                                 }
                                             },{once:true});
