@@ -287,57 +287,92 @@
                                     {
                                         // element.addEventListener('pointerdown',pointer_up.bind(null,callback),option);
                                         // element.addEventListener('pointerdown',pointer_up,option);
-                                        element.addEventListener('pointerdown',pointer_up=(event)=>{
-                                            // const pointer_up=(callback,event)=>{
-                                                // const pointer_up=(event)=>{
-                                                    const left=event.target.getBoundingClientRect().left;
-                                                    const right=event.target.getBoundingClientRect().right;
-                                                    const top=event.target.getBoundingClientRect().top;
-                                                    const bottom=event.target.getBoundingClientRect().bottom;
-                                                    event.target.parentNode.addEventListener('pointerup',(event_)=>{
-                                                        if((event_.target===event.target||event_.target===event.target.parentNode)&&(event_.clientX>=left&&event_.clientX<=right&&event_.clientY>=top&&event_.clientY<=bottom)){
-                                                            if(event_.target.children.length){
-                                                                let block=false;
+                                        // element.addEventListener('pointerdown',pointer_up=(event)=>{
+                                        //     // const pointer_up=(callback,event)=>{
+                                        //     // const pointer_up=(event)=>{
+                                        //         const left=event.target.getBoundingClientRect().left;
+                                        //         const right=event.target.getBoundingClientRect().right;
+                                        //         const top=event.target.getBoundingClientRect().top;
+                                        //         const bottom=event.target.getBoundingClientRect().bottom;
+                                        //         event.target.parentNode.addEventListener('pointerup',(event_)=>{
+                                        //             if((event_.target===event.target||event_.target===event.target.parentNode)&&(event_.clientX>=left&&event_.clientX<=right&&event_.clientY>=top&&event_.clientY<=bottom)){
+                                        //                 if(event_.target.children.length){
+                                        //                     let block=false;
+                                        //                     for(const item of event_.target.children){
+                                        //                         if(window.getComputedStyle(item).pointerEvents!=='none'){
+                                        //                             block=true;
+                                        //                             let intersect=false;
+                                        //                             for(const item of event_.target.children){
+                                        //                                 if(event_.clientX>=item.getBoundingClientRect().left&&event_.clientX<=item.getBoundingClientRect().right&&event_.clientY>=item.getBoundingClientRect().top&&event_.clientY<=item.getBoundingClientRect().bottom){
+                                        //                                     intersect=true;
+                                        //                                     break;
+                                        //                                 }
+                                        //                             }
+                                        //                             if(!intersect){
+                                        //                                 callback(event);
+                                        //                                 // (function(){
+                                        //                                 //     window.console.log(arguments);
+                                        //                                 // }.call(guim.bind));
+                                        //                             }
+                                        //                             break;
+                                        //                         }
+                                        //                     }
+                                        //                     if(!block){
+                                        //                         callback(event);
+                                        //                         // (function(){
+                                        //                         //     window.console.log(arguments);
+                                        //                         // }.call(guim.bind));
+                                        //                     }
+                                        //                 }else{
+                                        //                     callback(event);
+                                        //                     // (function(){
+                                        //                     //     window.console.log(arguments);
+                                        //                     // }.call(guim.bind));
+                                        //                 }
+                                        //             }
+                                        //         },{once:true});
+                                        //     // };
+                                        // },option);
+                                        element.pointer_up=(event)=>{
+                                            const left=event.target.getBoundingClientRect().left;
+                                            const right=event.target.getBoundingClientRect().right;
+                                            const top=event.target.getBoundingClientRect().top;
+                                            const bottom=event.target.getBoundingClientRect().bottom;
+                                            event.target.parentNode.addEventListener('pointerup',(event_)=>{
+                                                if((event_.target===event.target||event_.target===event.target.parentNode)&&(event_.clientX>=left&&event_.clientX<=right&&event_.clientY>=top&&event_.clientY<=bottom)){
+                                                    if(event_.target.children.length){
+                                                        let block=false;
+                                                        for(const item of event_.target.children){
+                                                            if(window.getComputedStyle(item).pointerEvents!=='none'){
+                                                                block=true;
+                                                                let intersect=false;
                                                                 for(const item of event_.target.children){
-                                                                    if(window.getComputedStyle(item).pointerEvents!=='none'){
-                                                                        block=true;
-                                                                        let intersect=false;
-                                                                        for(const item of event_.target.children){
-                                                                            if(event_.clientX>=item.getBoundingClientRect().left&&event_.clientX<=item.getBoundingClientRect().right&&event_.clientY>=item.getBoundingClientRect().top&&event_.clientY<=item.getBoundingClientRect().bottom){
-                                                                                intersect=true;
-                                                                                break;
-                                                                            }
-                                                                        }
-                                                                        if(!intersect){
-                                                                            callback(event);
-                                                                            // (function(){
-                                                                            //     window.console.log(arguments);
-                                                                            // }.call(guim.bind));
-                                                                        }
+                                                                    if(event_.clientX>=item.getBoundingClientRect().left&&event_.clientX<=item.getBoundingClientRect().right&&event_.clientY>=item.getBoundingClientRect().top&&event_.clientY<=item.getBoundingClientRect().bottom){
+                                                                        intersect=true;
                                                                         break;
                                                                     }
                                                                 }
-                                                                if(!block){
+                                                                if(!intersect){
                                                                     callback(event);
-                                                                    // (function(){
-                                                                    //     window.console.log(arguments);
-                                                                    // }.call(guim.bind));
                                                                 }
-                                                            }else{
-                                                                callback(event);
-                                                                // (function(){
-                                                                //     window.console.log(arguments);
-                                                                // }.call(guim.bind));
+                                                                break;
                                                             }
                                                         }
-                                                    },{once:true});
-                                                // };
-                                        },option);
+                                                        if(!block){
+                                                            callback(event);
+                                                        }
+                                                    }else{
+                                                        callback(event);
+                                                    }
+                                                }
+                                            },{once:true});
+                                        };
+                                        element.addEventListener('pointerdown',element.pointer_up,option);
                                     }
                                     break;
                                 case'remove':
                                     {
-                                        element.removeEventListener('pointerdown',pointer_up);
+                                        element.removeEventListener('pointerdown',element.pointer_up);
                                     }
                                     break;
                                 default:
