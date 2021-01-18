@@ -540,7 +540,7 @@
         // guim
             // bind
                 // pointer_up
-                const pointer_up=(event)=>{
+                const pointer_up=(event,callback)=>{
                     const left=event.target.getBoundingClientRect().left;
                     const right=event.target.getBoundingClientRect().right;
                     const top=event.target.getBoundingClientRect().top;
