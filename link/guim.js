@@ -565,7 +565,7 @@
                                             // callback(event);
                                             (function(){
                                                 window.console.log(arguments);
-                                            })().call(guim.bind);
+                                            }.call(guim.bind));
                                         }
                                         break;
                                     }
@@ -574,13 +574,13 @@
                                     // callback(event);
                                     (function(){
                                         window.console.log(arguments);
-                                    })().call(guim.bind);
+                                    }.call(guim.bind));
                                 }
                             }else{
                                 // callback(event);
                                 (function(){
                                     window.console.log(arguments);
-                                })().call(guim.bind);
+                                }.call(guim.bind));
                             }
                         }
                     },{once:true});
