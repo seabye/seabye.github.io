@@ -283,26 +283,16 @@
                                 case'add':
                                     {
                                         element.addEventListener('pointerdown',(event_)=>{
+                                            const left=event_.target.getBoundingClientRect().left;
+                                            const right=event_.target.getBoundingClientRect().right;
+                                            const top=event_.target.getBoundingClientRect().top;
+                                            const bottom=event_.target.getBoundingClientRect().bottom;
                                             element.addEventListener('pointerup',(event)=>{
-                                                if(event.clientX>=event_.target.getBoundingClientRect().left&&
-                                                    event.clientX<=event_.target.getBoundingClientRect().right&&
-                                                    event.clientY>=event_.target.getBoundingClientRect().top&&
-                                                    event.clientY<=event_.target.getBoundingClientRect().bottom){
+                                                if(event.clientX>=left&&event.clientX<=right&&event.clientY>=top&&event.clientY<=bottom){
                                                     callback(event_);
                                                 }
                                             },{once:true});
                                         },option);
-                                        // element.addEventListener('pointerdown',(event)=>{
-                                        //     event.target.addEventListener('pointerup',(event_)=>{
-                                        //         if(guim.parent(event.target,event_.target)||
-                                        //             (event_.clientX>=event.target.getBoundingClientRect().left&&
-                                        //             event_.clientX<=event.target.getBoundingClientRect().right&&
-                                        //             event_.clientY>=event.target.getBoundingClientRect().top&&
-                                        //             event_.clientY<=event.target.getBoundingClientRect().bottom)){
-                                        //             callback(event,event_);
-                                        //         }
-                                        //     },{once:true});
-                                        // });
                                     }
                                     break;
                                 case'remove':
