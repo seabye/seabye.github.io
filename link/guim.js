@@ -273,9 +273,12 @@
                 // element<element>,
                 // change<'pointer_up','element_attribute','element_content','element_size','element_position'>,
                 // callback<function>,
-                // option<\event option object\>
+                // option<\event option object\,/false,'',undefined/={}>
             // )
             bind:(action,element,change,callback,option)=>{
+                if(option.constructor!==Object){
+                    option={};
+                }
                 switch(change){
                     case'pointer_up':
                         {
