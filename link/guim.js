@@ -302,16 +302,16 @@
                                                         }
                                                     }
                                                     if(!intersect){
-                                                        callback();
+                                                        callback(event);
                                                     }
                                                     break;
                                                 }
                                             }
                                             if(!block){
-                                                callback();
+                                                callback(event);
                                             }
                                         }else{
-                                            callback();
+                                            callback(event);
                                         }
                                     }
                                 },{once:true});
@@ -319,12 +319,12 @@
                             switch(action){
                                 case'add':
                                     {
-                                        element.addEventListener('pointerdown',pointer_up);
+                                        element.addEventListener('pointerdown',pointer_up,option);
                                     }
                                     break;
                                 case'remove':
                                     {
-                                        element.removeEventListener('pointerdown',pointer_up);
+                                        element.removeEventListener('pointerdown',pointer_up,option);
                                     }
                                     break;
                                 default:
@@ -571,9 +571,6 @@
             }
         }
     // ##build
-        // guim
-            // bind
-                // pointer_up
 // #content
     // ##variable
     // ##module
