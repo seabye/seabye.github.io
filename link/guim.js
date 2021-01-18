@@ -324,7 +324,7 @@
                                     break;
                                 case'remove':
                                     {
-                                        element.removeEventListener('pointerdown',pointer_up,option);
+                                        element.removeEventListener('pointerdown',pointer_up);
                                     }
                                     break;
                                 default:
