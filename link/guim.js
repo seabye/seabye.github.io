@@ -282,14 +282,14 @@
                             switch(action){
                                 case'add':
                                     {
-                                        element.addEventListener('pointerdown',(event_)=>{
-                                            const left=event_.target.getBoundingClientRect().left;
-                                            const right=event_.target.getBoundingClientRect().right;
-                                            const top=event_.target.getBoundingClientRect().top;
-                                            const bottom=event_.target.getBoundingClientRect().bottom;
-                                            element.addEventListener('pointerup',(event)=>{
-                                                if(event.clientX>=left&&event.clientX<=right&&event.clientY>=top&&event.clientY<=bottom){
-                                                    callback(event_);
+                                        element.addEventListener('pointerdown',(event)=>{
+                                            const left=event.target.getBoundingClientRect().left;
+                                            const right=event.target.getBoundingClientRect().right;
+                                            const top=event.target.getBoundingClientRect().top;
+                                            const bottom=event.target.getBoundingClientRect().bottom;
+                                            event.target.parentNode.addEventListener('pointerup',(event_)=>{
+                                                if(event_.clientX>=left&&event_.clientX<=right&&event_.clientY>=top&&event_.clientY<=bottom){
+                                                    callback(event);
                                                 }
                                             },{once:true});
                                         },option);
