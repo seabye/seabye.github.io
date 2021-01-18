@@ -276,7 +276,7 @@
                 // option<\event option object\,/false,'',undefined/={}>
             // )
             bind:(action,element,change,callback,option)=>{
-                if(option.constructor!==Object){
+                if(window.Object.prototype.toString.call(option).match('Object')[0]){
                     option={};
                 }
                 switch(change){
