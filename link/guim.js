@@ -285,7 +285,7 @@
                             switch(action){
                                 case'add':
                                     {
-                                        element.addEventListener('pointerdown',pointer_up.bind(null,callback),option);
+                                        element.addEventListener('pointerdown',pointer_up.bind(this,callback),option);
                                     }
                                     break;
                                 case'remove':
@@ -540,7 +540,7 @@
         // guim
             // bind
                 // pointer_up
-                const pointer_up=(event,callback)=>{
+                const pointer_up=(callback,event)=>{
                     const left=event.target.getBoundingClientRect().left;
                     const right=event.target.getBoundingClientRect().right;
                     const top=event.target.getBoundingClientRect().top;
