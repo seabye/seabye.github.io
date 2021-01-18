@@ -36,7 +36,7 @@
     //         key:'value'
     //     },/false,'',undefined/>,
     //     insert_element<element,/false,'',undefined/>,
-    //     insert_position<string,/false,'',undefined/='beforeend'>,
+    //     insert_position<'beforebegin','afterbegin','beforeend','afterend',/false,'',undefined/='beforeend'>,
     //     content<string,element,/false,'',undefined/>,
     //     callback<function(element),/false,'',undefined/>
     // )
@@ -55,7 +55,7 @@
     //         }
     //     },/false,'',undefined/='div'>,
     //     insert_element<element,/false,'',undefined/>,
-    //     insert_position<string,/false,'',undefined/='beforeend'>,
+    //     insert_position<'beforebegin','afterbegin','beforeend','afterend',/false,'',undefined/='beforeend'>,
     //     element<object,/false,'',undefined/={}>\element.\
     // )
 // guim.bind()
@@ -269,12 +269,49 @@
                 }
             },
             // guim.bind(
-                // element<>,
-                // event_<>,
-                // function_<>
+                // element<element>,
+                // change<string>,
+                // callback<>
             // )
-            bind:(element,event_,function_)=>{
+            bind:(element,change,callback)=>{
+                switch(change){
+                    case'pointer_up':
+                        {
+                            element.addEventListener('pointerdown',(event)=>{
+                                event.target.addEventListener('pointerup',(event_)=>{
+                                    if(guim.parent(event.target,event_.target)){
+                                        callback(event,event_);
+                                    }
+                                },{once:true});
+                            });
+                        }
+                        break;
+                    case'element_attribute':
+                        {
 
+                        }
+                        break;
+                    case'element_content':
+                        {
+
+                        }
+                        break;
+                    case'element_size':
+                        {
+
+                        }
+                        break;
+                    case'element_position':
+                        {
+
+                        }
+                        break;
+                    default:
+                        {
+                            element.addEventListener(change,callback(event_));
+                        }
+                        break;
+                }
             },
             // guim.switch(
                 // element<element>,
