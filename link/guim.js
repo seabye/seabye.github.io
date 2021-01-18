@@ -284,10 +284,10 @@
                                     {
                                         element.addEventListener('pointerdown',(event_)=>{
                                             element.addEventListener('pointerup',(event)=>{
-                                                if(event.clientX>=element.getBoundingClientRect().left&&
-                                                    event.clientX<=element.getBoundingClientRect().right&&
-                                                    event.clientY>=element.getBoundingClientRect().top&&
-                                                    event.clientY<=element.getBoundingClientRect().bottom){
+                                                if(event.clientX>=event_.target.getBoundingClientRect().left&&
+                                                    event.clientX<=event_.target.getBoundingClientRect().right&&
+                                                    event.clientY>=event_.target.getBoundingClientRect().top&&
+                                                    event.clientY<=event_.target.getBoundingClientRect().bottom){
                                                     callback(event_);
                                                 }
                                             },{once:true});
