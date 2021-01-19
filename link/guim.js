@@ -60,7 +60,7 @@
     // )
 // guim.bind()
 // guim.switch()
-// guim.get()
+// guim.request()
 // guim.full_screen()
     // guim.full_screen(
     //     element<element,/false,'',undefined/=window.document.documentElement>,
@@ -285,7 +285,7 @@
                             switch(action){
                                 case'add':
                                     {
-                                        element.pointer_up=(event)=>{
+                                        element.guim_bind_pointer_up=(event)=>{
                                             const left=event.target.getBoundingClientRect().left;
                                             const right=event.target.getBoundingClientRect().right;
                                             const top=event.target.getBoundingClientRect().top;
@@ -319,12 +319,13 @@
                                                 }
                                             },{once:true});
                                         };
-                                        element.addEventListener('pointerdown',element.pointer_up,option);
+                                        element.addEventListener('pointerdown',element.guim_bind_pointer_up,option);
                                     }
                                     break;
                                 case'remove':
                                     {
-                                        element.removeEventListener('pointerdown',element.pointer_up);
+                                        element.removeEventListener('pointerdown',element.guim_bind_pointer_up);
+                                        delete element.guim_bind_pointer_up;
                                     }
                                     break;
                                 default:
@@ -332,24 +333,46 @@
                             }
                         }
                         break;
-                    case'element_attribute':
+                    case'element_mutation':
                         {
-
+                            switch(action) {
+                                case'add':
+                                    {}
+                                    break;
+                                case'remove':
+                                    {}
+                                    break;
+                                default:
+                                    break;
+                            }
                         }
                         break;
-                    case'element_content':
+                    case'element_resize':
                         {
-
+                            switch(action) {
+                                case'add':
+                                    {}
+                                    break;
+                                case'remove':
+                                    {}
+                                    break;
+                                default:
+                                    break;
+                            }
                         }
                         break;
-                    case'element_size':
+                    case'element_intersection':
                         {
-
-                        }
-                        break;
-                    case'element_position':
-                        {
-
+                            switch(action) {
+                                case'add':
+                                    {}
+                                    break;
+                                case'remove':
+                                    {}
+                                    break;
+                                default:
+                                    break;
+                            }
                         }
                         break;
                     default:
@@ -469,12 +492,12 @@
                     }
                 }
             },
-            // <object><=guim.get(
+            // <object><=guim.request(
                 // uri<string,/false,'',/=window.location.origin>,
-                // method<>,
+                // method<'GET','HEAD','POST','PUT','DELETE','CONNECT','OPTIONS','TRACE','PATCH'>,
                 // object<object>
             // )
-            get:async(uri,method,object)=>{
+            request:async(uri,method,object)=>{
                 if(!uri){
                     uri=window.location.origin;
                 }
@@ -482,21 +505,29 @@
                     case'GET':
                         {}
                         break;
+                    case'HEAD':
+                        {}
+                        break;
                     case'POST':
-                        {
-                            let status=null;
-                            return await window.fetch(uri,{
-                                method:'POST',
-                                headers:{'Content-Type':'application/json; charset=utf-8'},
-                                body:window.JSON.stringify(object),
-                            }).then((response)=>{
-                                status=response.status;
-                                return response.json();
-                            }).then((result)=>{
-                                result.status=status;
-                                return result;
-                            });
-                        }
+                        {}
+                        break;
+                    case'PUT':
+                        {}
+                        break;
+                    case'DELETE':
+                        {}
+                        break;
+                    case'CONNECT':
+                        {}
+                        break;
+                    case'OPTIONS':
+                        {}
+                        break;
+                    case'TRACE':
+                        {}
+                        break;
+                    case'PATCH':
+                        {}
                         break;
                     default:
                         break;
