@@ -190,18 +190,6 @@
             if(config.head_manifest){
                 window.document.head.insertAdjacentHTML('beforeend',`<link rel="manifest" href="${config.head_manifest}">`);
             }
-            // touch :hov
-            window.addEventListener('pointerdown',()=>{});
-            // context menu
-            window.addEventListener('contextmenu',(event)=>{
-                event.preventDefault();
-            });
-            // touchpad zoom
-            window.addEventListener('wheel',(event)=>{
-                if(event.ctrlKey){
-                    event.preventDefault();
-                }
-            },{passive:false});
             // tabindex
             window.document.documentElement.setAttribute('tabindex','-1');
             guim.loop(()=>{
@@ -217,6 +205,18 @@
                 window.document.head.setAttribute('tabindex','-1');
                 window.document.body.setAttribute('tabindex','-1');
             },1000/60);
+            // touch :hov
+            window.addEventListener('pointerdown',()=>{});
+            // touchpad zoom
+            window.addEventListener('wheel',(event)=>{
+                if(event.ctrlKey){
+                    event.preventDefault();
+                }
+            },{passive:false});
+            // context menu
+            window.addEventListener('contextmenu',(event)=>{
+                event.preventDefault();
+            });
             // window size
             {
                 const action=(event)=>{
