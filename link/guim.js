@@ -295,7 +295,7 @@
                                                     if(event_.target.children.length){
                                                         let block=false;
                                                         for(const item of event_.target.children){
-                                                            if(window.getComputedStyle(item).pointerEvents!=='none'||window.getComputedStyle(item).visibility!=='hidden'){
+                                                            if(window.getComputedStyle(item).pointerEvents!=='none'&&window.getComputedStyle(item).visibility!=='hidden'){
                                                                 block=true;
                                                                 let intersect=false;
                                                                 for(const item of event_.target.children){
