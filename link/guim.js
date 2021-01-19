@@ -397,77 +397,79 @@
             },
             // guim.switch(
                 // element<element>,
-                // class_<string,/false,'',undefined/>,
-                // class__<string,/false,'',undefined/=''>,
-                // set_class_<true,/false,'',undefined/=false>,
-                // wait<number,/false,'',undefined/=0>,
+                // one<string,/false,'',undefined/>,
+                // two<string,/false,'',undefined/=''>,
+                // set_one<true,/false,'',undefined/=false>,
+                // two_wait<number,/false,'',undefined/=0>,
                 // callback<function,/false,'',undefined/=()=>{}>
             // )
+            // flash mode
+                // guim.switch(element,<''>,two,<true>,two_wait,callback)
             switch:function(){
                 if(arguments[0]instanceof window.HTMLElement){
                     const element=arguments[0];
-                    const class_=arguments[1];
-                    let class__=arguments[2];
-                    let set_class_=arguments[3];
-                    let wait=arguments[4];
+                    const one=arguments[1];
+                    let two=arguments[2];
+                    let set_one=arguments[3];
+                    let two_wait=arguments[4];
                     let callback=arguments[5];
-                    if(typeof class__!=='string'){
-                        class__='';
+                    if(typeof two!=='string'){
+                        two='';
                     }
-                    if(set_class_!==true){
-                        set_class_=false;
+                    if(set_one!==true){
+                        set_one=false;
                     }
-                    if(typeof wait!=='number'){
-                        wait=0;
+                    if(typeof two_wait!=='number'){
+                        two_wait=0;
                     }
                     if(typeof callback!=='function'){
                         callback=()=>{};
                     }
-                    if(class__){
-                        if(set_class_){
-                            if(class_){
-                                element.classList.remove(class__);
+                    if(two){
+                        if(set_one){
+                            if(one){
+                                element.classList.remove(two);
                                 window.setTimeout(()=>{
-                                    element.classList.add(class_);
+                                    element.classList.add(one);
                                     callback();
-                                },wait);
+                                },two_wait);
                             }else{
-                                element.classList.add(class__);
+                                element.classList.add(two);
                                 window.setTimeout(()=>{
-                                    element.classList.remove(class__);
+                                    element.classList.remove(two);
                                     callback();
-                                },wait);
+                                },two_wait);
                             }
                         }else{
-                            if(element.classList.contains(class_)){
-                                element.classList.remove(class_);
+                            if(element.classList.contains(one)){
+                                element.classList.remove(one);
                                 window.setTimeout(()=>{
-                                    element.classList.add(class__);
+                                    element.classList.add(two);
                                     callback();
-                                },wait);
+                                },two_wait);
                             }else{
-                                if(element.classList.contains(class__)){
-                                    element.classList.remove(class__);
+                                if(element.classList.contains(two)){
+                                    element.classList.remove(two);
                                     window.setTimeout(()=>{
-                                        element.classList.add(class_);
+                                        element.classList.add(one);
                                         callback();
-                                    },wait);
+                                    },two_wait);
                                 }else{
                                     window.setTimeout(()=>{
-                                        element.classList.add(class_);
+                                        element.classList.add(one);
                                         callback();
-                                    },wait);
+                                    },two_wait);
                                 }
                             }
                         }
                     }else{
-                        if(element.classList.contains(class_)){
-                            element.classList.remove(class_);
+                        if(element.classList.contains(one)){
+                            element.classList.remove(one);
                         }else{
                             window.setTimeout(()=>{
-                                element.classList.add(class_);
+                                element.classList.add(one);
                                 callback();
-                            },wait);
+                            },two_wait);
                         }
                     }
                 }else{
