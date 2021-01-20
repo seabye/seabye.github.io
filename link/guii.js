@@ -217,7 +217,7 @@
             window.addEventListener('contextmenu',(event)=>{
                 event.preventDefault();
             });
-            // window size
+            // window orientation and size
             {
                 const action=(event)=>{
                     if(event.type==='orientationchange'){
@@ -275,7 +275,7 @@
                     window.setTimeout(action,350*3);
                 });
             }
-            // form input
+            // form input focus scroll
             window.addEventListener('pointerdown',(event)=>{
                 if(!event.target.localName.match(/input|textarea/)&&window.document.activeElement.localName.match(/input|textarea/)){
                     window.document.activeElement.blur();
