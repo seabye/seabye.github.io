@@ -26,6 +26,21 @@
     // 'head_theme_color_dark': '#212121',
     // 'head_manifest': 'manifest.webmanifest'
 // }"></script>
+// ~~~~ ~~~~ ~~~~ ~~~~
+// guii
+    // dataset
+    // background color
+    // opacity
+    // service worker
+    // ic_nr / ic_ navigator
+    // head
+    // tabindex
+    // touch :hov
+    // touchpad zoom
+    // context menu
+    // window orientation and size
+    // form input focus scroll
+    // partial scroll
 // >>>> >>>> >>>> >>>>
 // #import
 // #global
