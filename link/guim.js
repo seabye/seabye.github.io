@@ -29,7 +29,7 @@
     //     end<element,/false,'',undefined/=window.document.documentElement>
     // )
 // guim.create()
-    // <element><=guim.create(
+    // \<string,> single mode\<element><=guim.create(
     //     tag<string,/false,'',undefined/='div'>,
     //     attribute<{
     //         key:'value',
@@ -40,7 +40,7 @@
     //     content<string,element,/false,'',undefined/>,
     //     <element>=>callback<function,/false,'',undefined/>
     // )
-    // <object><=guim.create(
+    // \<object,> tree mode\<object><=guim.create(
     //     data<{
     //         name_class<name_class,'name_class class2',''>undefined:{
     //             element:[
@@ -60,6 +60,15 @@
     // )
 // guim.bind()
 // guim.switch()
+    // \<element,> basic mode\guim.switch(
+        // element<element>,
+        // one<string,/false,'',undefined/>,
+        // two<string,/false,'',undefined/=''>,
+        // set_one<true,/false,'',undefined/=false>,
+        // two_wait<number,/false,'',undefined/=0>,
+        // callback<function,/false,'',undefined/=()=>{}>
+    // )
+    // \<element,> flash mode\guim.switch(element,!<''>,two,!<true>,two_wait,callback)
 // guim.request()
 // guim.full_screen()
     // guim.full_screen(
@@ -271,7 +280,7 @@
             // guim.bind(
                 // action<'add','remove'>,
                 // element<element>,
-                // change<'pointer_up','element_attribute','element_content','element_size','element_position'>,
+                // change<'pointer_up','pointer_track','element_mutation','element_intersection','element_resize'>,
                 // <event>=>callback<function>,
                 // option<object,/false,'',undefined/={}>
             // )
@@ -361,7 +370,7 @@
                             }
                         }
                         break;
-                    case'element_resize':
+                    case'element_intersection':
                         {
                             switch(action) {
                                 case'add':
@@ -375,7 +384,7 @@
                             }
                         }
                         break;
-                    case'element_intersection':
+                    case'element_resize':
                         {
                             switch(action) {
                                 case'add':
@@ -409,16 +418,8 @@
                         break;
                 }
             },
-            // guim.switch(
-                // element<element>,
-                // one<string,/false,'',undefined/>,
-                // two<string,/false,'',undefined/=''>,
-                // set_one<true,/false,'',undefined/=false>,
-                // two_wait<number,/false,'',undefined/=0>,
-                // callback<function,/false,'',undefined/=()=>{}>
-            // )
-            // flash mode
-                // guim.switch(element,<''>,two,<true>,two_wait,callback)
+            // \<array\['target',]\,> target mode\guim.switch()
+            // \<array\['tab',]\,> tab mode\guim.switch()
             switch:function(){
                 if(arguments[0]instanceof window.HTMLElement){
                     const element=arguments[0];
@@ -489,21 +490,15 @@
                 }else{
                     if(window.Array.isArray(arguments[0])){
                         const data=arguments[0];
-                        for(const item of data){
-                            let mode=item[0];
-                            if(mode===undefined){
-                                mode='single';
-                            }
-                            switch(mode){
-                                case'single':
-                                    {}
-                                    break;
-                                case'multiple':
-                                    {}
-                                    break;
-                                default:
-                                    break;
-                            }
+                        switch(data[0]){
+                            case'target':
+                                {}
+                                break;
+                            case'tab':
+                                {}
+                                break;
+                            default:
+                                break;
                         }
                     }
                 }
