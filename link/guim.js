@@ -17,7 +17,7 @@
     //     first<true,/false,'',undefined/=false>
     // )
 // guim.loop()
-    // </\callback result\,undefined/><=guim.loop(
+    // <result,/undefined/><=guim.loop(
     //     <boolean><=condition<function>,
     //     callback<function>,
     //     wait<number,/false,'',undefined/=1000/24>
@@ -38,9 +38,9 @@
     //     insert_element<element,/false,'',undefined/>,
     //     insert_position<'beforebegin','afterbegin','beforeend','afterend',/false,'',undefined/='beforeend'>,
     //     content<string,element,/false,'',undefined/>,
-    //     callback<function(element),/false,'',undefined/>
+    //     <element>=>callback<function,/false,'',undefined/>
     // )
-    // <element><=guim.create(
+    // <object><=guim.create(
     //     data<{
     //         name_class<name_class,'name_class class2',''>undefined:{
     //             element:[
@@ -51,12 +51,12 @@
     //                 },/false,'',undefined/>,
     //                 content<string,element,/false,'',undefined/>
     //             ],
-    //             function:function(element){<this.element\=\element.name_class>}
+    //             <object>=>function:function{\this.element===object.name_class\}
     //         }
     //     },/false,'',undefined/='div'>,
     //     insert_element<element,/false,'',undefined/>,
     //     insert_position<'beforebegin','afterbegin','beforeend','afterend',/false,'',undefined/='beforeend'>,
-    //     element<object,/false,'',undefined/={}>\element.\
+    //     object<object,/false,'',undefined/={}>
     // )
 // guim.bind()
 // guim.switch()
@@ -272,8 +272,8 @@
                 // action<'add','remove'>,
                 // element<element>,
                 // change<'pointer_up','element_attribute','element_content','element_size','element_position'>,
-                // callback<function>,
-                // option<\event option object\,/false,'',undefined/={}>
+                // <event>=>callback<function>,
+                // option<object,/false,'',undefined/={}>
             // )
             bind:(action,element,change,callback,option)=>{
                 if(!window.Object.prototype.toString.call(option).match('Object')){
@@ -327,6 +327,20 @@
                                         element.removeEventListener('pointerdown',element.guim_bind_pointer_up);
                                         delete element.guim_bind_pointer_up;
                                     }
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        break;
+                    case'pointer_track':
+                        {
+                            switch(action) {
+                                case'add':
+                                    {}
+                                    break;
+                                case'remove':
+                                    {}
                                     break;
                                 default:
                                     break;
