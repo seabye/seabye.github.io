@@ -26,7 +26,9 @@
     // <boolean><=guim.parent(
     //     find<element>,
     //     start<element>,
-    //     end<element,/false,'',undefined/=window.document.documentElement>
+    //     end<element,/false,'',undefined/=window.document.documentElement>,
+    //     true_callback<function,/false,'',undefined/=()=>{}>,
+    //     false_callback<function,/false,'',undefined/=()=>{}>
     // )
 // guim.create()
     // \<string,> single mode\<element><=guim.create(
@@ -160,26 +162,40 @@
                     },wait);
                 }
             },
-            parent:function(find,start,end=window.document.documentElement){
+            parent:function(find,start,end,true_callback,false_callback){
+                if(!(end instanceof window.HTMLElement)){
+                    end=window.document.documentElement;
+                }
+                if(typeof true_callback!=='function'){
+                    true_callback=()=>{};
+                }
+                if(typeof false_callback!=='function'){
+                    false_callback=()=>{};
+                }
                 if(start===find){
+                    true_callback();
                     return true;
                 }else{
                     if(start===end){
+                        false_callback();
                         return false;
                     }
                 }
-                return this.parent(find,start.parentElement,end);
+                return this.parent(find,start.parentElement,end,true_callback,false_callback);
             },
             create:function(){
                 switch(typeof arguments[0]){
                     case'string':
                         {
-                            const tag=arguments[0];
+                            let tag=arguments[0];
                             const attribute=arguments[1];
                             const insert_element=arguments[2];
                             let insert_position=arguments[3];
                             const content=arguments[4];
                             const callback=arguments[5];
+                            if(!tag){
+                                tag='div';
+                            }
                             if(!insert_position){
                                 insert_position='beforeend';
                             }
