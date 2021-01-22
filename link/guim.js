@@ -31,50 +31,52 @@
 // guim.create()
     // \<string,> single mode\<element><=guim.create(
     //     tag<string,/false,'',undefined/='div'>,
-    //     attribute<{key:'value'...},/false,'',undefined/>,
-    //     insert_element<element,/false,'',undefined/>,
+    //     attribute<{key:'value'...},/false,'',undefined/=false>,
+    //     insert_element<element,/false,'',undefined/=false>,
     //     insert_position<'beforebegin','afterbegin','beforeend','afterend',/false,'',undefined/='beforeend'>,
-    //     content<string,element,/false,'',undefined/>,
-    //     <element>=>callback<function,/false,'',undefined/>
+    //     content<string,element,/false,'',undefined/=false>,
+    //     callback<function(<element>),/false,'',undefined/=false>
     // )
-    // \<element_object,> tree mode\<element_object><=guim.create(
+    // \<elements,> tree mode\<elements><=guim.create(
     //     data<{
-    //         name_class<name_class,'name_class class2',''>undefined:{
-    //             element:[
+    //         name_class<name_class,'name_class class2','',' class class2'>:{
+    //             <element:[
     //                 tag<string,/false,'',undefined/='div'>,
-    //                 attribute<{key:'value'...},/false,'',undefined/>,
-    //                 content<string,element,/false,'',undefined/>
-    //             ],
-    //             <element_object>=>function:function{\this.element===element_object.name_class\}
+    //                 attribute<{key:'value'...},/false,'',undefined/=false>,
+    //                 content<string,element,/false,'',undefined/=false>
+    //             ],/false,'',undefined/=false>,
+    //             <function:function(<elements>)\this.element===elements.name_class\,/false,'',undefined/=false>
     //         }
-    //     },/false,'',undefined/='div'>,
-    //     insert_element<element,/false,'',undefined/>,
+    //     },/false,'',undefined/='div'\single mode\>,
+    //     insert_element<element,/false,'',undefined/=false>,
     //     insert_position<'beforebegin','afterbegin','beforeend','afterend',/false,'',undefined/='beforeend'>,
-    //     element_object<element_object,/false,'',undefined/={}>
+    //     elements<elements,/false,'',undefined/=elements>,
+    //     callback<function(<elements>),/false,'',undefined/=false>
     // )
 // guim.bind()
     // guim.bind(
     //     action<'add','remove'>,
     //     element<element>,
     //     change<'pointer_up','pointer_track','observer_mutation','observer_intersection','observer_resize'>,
-    //     <event>=>callback<function>,
-    //     option<object,/false,'',undefined/={}>
+    //     callback<function(<event>)>,
+    //     option<object,/false,'',undefined/=false>
     // )
 // guim.switch()
     // \<element,> basic mode\guim.switch(
     //     element<element>,
-    //     one<string,/false,'',undefined/>,
+    //     one<string,/false,'',undefined/=''>,
     //     two<string,/false,'',undefined/=''>,
     //     set_one<true,/false,'',undefined/=false>,
     //     two_wait<number,/false,'',undefined/=0>,
     //     callback<function,/false,'',undefined/=()=>{}>
     // )
     // \<element,> flash mode\guim.switch(element,!<''>,two,!<true>,two_wait,callback)
+// guim.data()
 // guim.request()
     // <object><=guim.request(
-    //     uri<string,/false,'',/=window.location.origin>,
+    //     uri<string,/false,'',undefined/=window.location.origin>,
     //     method<'GET','HEAD','POST','PUT','DELETE','CONNECT','OPTIONS','TRACE','PATCH'>,
-    //     object<object>
+    //     data<object,/false,'',undefined/=false>
     // )
 // guim.full_screen()
     // guim.full_screen(
@@ -210,12 +212,13 @@
                             const data=arguments[0];
                             const insert_element=arguments[1];
                             let insert_position=arguments[2];
-                            let element=arguments[3];
+                            let elements=arguments[3];
+                            const callback=arguments[4];
                             if(!insert_position){
                                 insert_position='beforeend';
                             }
-                            if(!element){
-                                element={};
+                            if(!elements){
+                                elements={};
                             }
                             const build_element=(data,insert_element,insert_position)=>{
                                 for(const item in data){
@@ -242,11 +245,11 @@
                                             data[item].element[1]={class:item.trim()};
                                         }
                                     }
-                                    const element_=this.create(data[item].element[0],data[item].element[1]?data[item].element[1]:false,insert_element,insert_position,data[item].element[2]?data[item].element[2]:false);
+                                    const element=this.create(data[item].element[0],data[item].element[1]?data[item].element[1]:false,insert_element,insert_position,data[item].element[2]?data[item].element[2]:false);
                                     if(item.split(' ')[0]){
-                                        element[item.split(' ')[0]]=data[item].element=element_;
+                                        elements[item.split(' ')[0]]=data[item].element=element;
                                     }else{
-                                        data[item].element=element_;
+                                        data[item].element=element;
                                     }
                                     for(const item_ in data[item]){
                                         if(!item_.match(/element|function/)){
@@ -261,7 +264,7 @@
                             const run_function=(data)=>{
                                 for(const item in data){
                                     if(data[item].function){
-                                        data[item].function(element);
+                                        data[item].function(elements);
                                     }
                                     for(const item_ in data[item]){
                                         if(!item_.match(/element|function/)){
@@ -273,7 +276,10 @@
                                 }
                             };
                             run_function(data);
-                            return element;
+                            if(callback){
+                                callback(elements);
+                            }
+                            return elements;
                         }
                         break;
                     default:
@@ -343,7 +349,7 @@
                         break;
                     case'pointer_track':
                         {
-                            switch(action) {
+                            switch(action){
                                 case'add':
                                     {}
                                     break;
@@ -357,7 +363,7 @@
                         break;
                     case'observer_mutation':
                         {
-                            switch(action) {
+                            switch(action){
                                 case'add':
                                     {}
                                     break;
@@ -371,7 +377,7 @@
                         break;
                     case'observer_intersection':
                         {
-                            switch(action) {
+                            switch(action){
                                 case'add':
                                     {
                                         element.observer_intersection=new window.IntersectionObserver((entries)=>{
@@ -396,7 +402,7 @@
                         break;
                     case'observer_resize':
                         {
-                            switch(action) {
+                            switch(action){
                                 case'add':
                                     {
                                         element.guim_bind_observer_resize=new window.ResizeObserver((entries)=>{
@@ -538,7 +544,8 @@
                     }
                 }
             },
-            request:async(uri,method,object)=>{
+            data:()=>{},
+            request:async(uri,method,data,callback)=>{
                 if(!uri){
                     uri=window.location.origin;
                 }
