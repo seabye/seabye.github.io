@@ -41,3 +41,12 @@
 // #debug
     // ic_dg / ic_ debug
     window.document.documentElement.classList.add('ic_dg');
+    // guim
+    guim.bind('add',window.document.documentElement,'observer_intersection',()=>{
+        window.console.log('???');
+    },{});
+    guim.bind('add',window.document.documentElement,'observer_resize',()=>{
+        window.console.log('???');
+    });
+    guim.switch(['target',[]]);
+    guim.switch(['tab',[]]);
