@@ -687,6 +687,15 @@
     };
 // #build
 // #debug
+    // machine_tool
+    machine_tool.bind('add',window.document.documentElement,'observer_intersection',()=>{
+        window.console.log('???');
+    },{});
+    machine_tool.bind('add',window.document.documentElement,'observer_resize',()=>{
+        window.console.log('???');
+    });
+    machine_tool.switch(['target',[]]);
+    machine_tool.switch(['tab',[]]);
 // #after
     // console
     window.console.log('#### end machine_tool.js');

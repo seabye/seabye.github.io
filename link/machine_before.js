@@ -3,16 +3,16 @@
 // Machine Before
 // ==== ==== ==== ====
 // <script src="machine_before.js" type="application/javascript" data-machine_before="{
-//     'background_color_light': '#FFFFFF',
-//     'background_color_dark': '#000000',
+//     'background_color_light': '</""/=#FFFFFF>',
+//     'background_color_dark': '</""/=#000000>',
 //     'service_worker': 'sw.js',
-//     'head_title': '...',
+//     'head_title': '</""/="">',
 //     'head_style': 'style.css',
 //     'head_script': 'script.js',
 //     'head_icon': 'icon.png',
 //     'head_icon_apple': 'icon-apple.png',
-//     'head_theme_color_light': '#E1E1E1',
-//     'head_theme_color_dark': '#212121',
+//     'head_theme_color_light': '</""/=#E1E1E1>',
+//     'head_theme_color_dark': '</""/=#212121>',
 //     'head_manifest': 'manifest.webmanifest'
 // }"></script>
 // ~~~~ ~~~~ ~~~~ ~~~~
@@ -153,7 +153,7 @@
             <meta name="viewport" content="width=device-width,user-scalable=no,viewport-fit=cover">
             <meta name="format-detection" content="address=no,email=no,telephone=no">
         `);
-        if(config.head_title){
+        if(config.head_title||config.head_title===''){
             config.head_machine_before_js.insertAdjacentHTML('beforebegin',`<title>${config.head_title}</title>`);
         }
         config.head_machine_before_js.insertAdjacentHTML('beforebegin',`<link rel="stylesheet" href="${config.head_machine_before_css_href}">`);
@@ -177,7 +177,7 @@
                 <meta name="apple-mobile-web-app-capable" content="yes">
                 <meta name="apple-mobile-web-app-status-bar-style" content="white">
             `);
-            if(config.head_title){
+            if(config.head_title||config.head_title===''){
                 window.document.head.insertAdjacentHTML('beforeend',`<meta name="apple-mobile-web-app-title" content="${config.head_title}">`);
             }
         }else{
