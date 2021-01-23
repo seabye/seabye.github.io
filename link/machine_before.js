@@ -1,6 +1,7 @@
 'use strict';
 // <<<< <<<< <<<< <<<<
 // Machine Before
+// for Browser
 // ==== ==== ==== ====
 // <script src="machine_before.js" type="application/javascript" data-machine_before="{
 //     'background_color_light': '</""/=#FFFFFF>',

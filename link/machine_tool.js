@@ -1,6 +1,7 @@
 'use strict';
 // <<<< <<<< <<<< <<<<
 // Machine Tool
+// for Browser and Deno
 // ==== ==== ==== ====
 // import{machine_tool}from'machine_tool.js';
 // ~~~~ ~~~~ ~~~~ ~~~~
@@ -24,6 +25,7 @@
 //             wait<number,/false,'',undefined/=1000/24>
 //         )
 //     🧩machine_tool.uuid_36_to_uuid_22()
+//         machine_tool.uuid_36_to_uuid_22(uuid_36<string>)
 // interface
 //     🧩machine_tool.parent()
 //         <boolean><=machine_tool.parent(
