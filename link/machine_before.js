@@ -27,9 +27,9 @@
 // 🧩touch :hov
 // 🧩touchpad zoom
 // 🧩context menu
-// 💭window orientation and size
-// 💭form input focus scroll
-// 💭partial scroll
+// 🧿window orientation and size
+// 🧿form input focus scroll
+// 🧿partial scroll
 // >>>> >>>> >>>> >>>>
 {
 // #before

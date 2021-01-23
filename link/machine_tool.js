@@ -60,7 +60,7 @@
 //             elements<elements,/false,'',undefined/=elements>,
 //             callback<function(<elements>),/false,'',undefined/=false>
 //         )
-//     💭machine_tool.bind()
+//     🧿machine_tool.bind()
 //         machine_tool.bind(
 //             action<'add','remove'>,
 //             element<element>,
@@ -68,7 +68,7 @@
 //             callback<function(<event>)>,
 //             option<object,/false,'',undefined/=false>
 //         )
-//     💭machine_tool.switch()
+//     🧿machine_tool.switch()
 //         \<element,> base mode\machine_tool.switch(
 //             element<element>,
 //             one<string,/false,'',undefined/=''>,
