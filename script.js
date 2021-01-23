@@ -1,7 +1,7 @@
 'use strict';
 // #before
     // console
-    self.console.log('#### start script.js');
+    window.console.log('#### start script.js');
 // #import
     // machine_tool
     import{machine_tool}from'/link/machine_tool.js';
@@ -50,4 +50,4 @@
     machine_tool.switch(['tab',[]]);
 // #after
     // console
-    self.console.log('#### end script.js');
+    window.console.log('#### end script.js');
