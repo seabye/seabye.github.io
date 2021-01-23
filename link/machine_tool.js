@@ -18,14 +18,14 @@
 //             wait<number,/false,'',undefined/=1000/24>,
 //             first<true,/false,'',undefined/=false>
 //         )
-//     🧩machine_tool.loop()
-//         <result,undefined><=machine_tool.loop(
+//     🧿machine_tool.loop()
+//         <\result\,undefined><=machine_tool.loop(
 //             <boolean><=condition<function>,
 //             callback<function>,
 //             wait<number,/false,'',undefined/=1000/24>
 //         )
 //     🧩machine_tool.uuid_36_to_uuid_22()
-//         machine_tool.uuid_36_to_uuid_22(uuid_36<string>)
+//         <string><=machine_tool.uuid_36_to_uuid_22(uuid_36<string>)
 // interface
 //     🧩machine_tool.parent()
 //         <boolean><=machine_tool.parent(
@@ -165,7 +165,7 @@
                 }
             };
         },
-        loop:function(condition,callback,wait){
+        loop:function(condition,callback,wait,count){
             if(typeof wait!=='number'){
                 wait=1000/24;
             }
