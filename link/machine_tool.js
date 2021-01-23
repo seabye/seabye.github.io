@@ -175,7 +175,21 @@
                 },wait);
             }
         },
-        uuid_36_to_uuid_22:()=>{},
+        uuid_36_to_uuid_22:(uuid_36)=>{
+            if(uuid_36.length===36){
+                const char='0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_-';
+                const uuid32='0'+uuid_36.replace(/-/g,'');
+                if(uuid32.length===33){
+                    let result='';
+                    for(let index=0;index<11;index++){
+                        const start=index*3;
+                        const str=window.parseInt(uuid32[start]+uuid32[start+1]+uuid32[start+2],16);
+                        result+=char[window.Math.floor(str/64)]+char[str%64];
+                    }
+                    return result;
+                }
+            }
+        },
         parent:function(find,start,end,true_callback,false_callback){
             if(!(end instanceof window.HTMLElement)){
                 end=window.document.documentElement;
@@ -688,14 +702,16 @@
 // #build
 // #debug
     // machine_tool
-    machine_tool.bind('add',window.document.documentElement,'observer_intersection',()=>{
-        window.console.log('???');
-    },{});
-    machine_tool.bind('add',window.document.documentElement,'observer_resize',()=>{
-        window.console.log('???');
-    });
-    machine_tool.switch(['target',[]]);
-    machine_tool.switch(['tab',[]]);
+    if(window.document.documentElement){
+        machine_tool.bind('add',window.document.documentElement,'observer_intersection',()=>{
+            window.console.log('???');
+        },{});
+        machine_tool.bind('add',window.document.documentElement,'observer_resize',()=>{
+            window.console.log('???');
+        });
+        machine_tool.switch(['target',[]]);
+        machine_tool.switch(['tab',[]]);
+    }
 // #after
     // console
     window.console.log('#### end machine_tool.js');
