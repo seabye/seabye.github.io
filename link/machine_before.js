@@ -16,20 +16,19 @@
 //     'head_manifest': 'manifest.webmanifest'
 // }"></script>
 // ~~~~ ~~~~ ~~~~ ~~~~
-// machine_before
-//     dataset
-//     background color
-//     opacity
-//     service worker
-//     ic_nr / ic_ navigator
-//     head
-//     tabindex
-//     touch :hov
-//     touchpad zoom
-//     context menu
-//     window orientation and size
-//     form input focus scroll
-//     partial scroll
+// 🧩dataset
+// 🧩background color
+// 🧩opacity
+// 🧩service worker
+// 🧩ic_nr / ic_ navigator
+// 🧩head
+// 🧩tabindex
+// 🧩touch :hov
+// 🧩touchpad zoom
+// 🧩context menu
+// 💭window orientation and size
+// 💭form input focus scroll
+// 💭partial scroll
 // >>>> >>>> >>>> >>>>
 {
 // #before
