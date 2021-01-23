@@ -6,19 +6,19 @@
 // import{machine_tool}from'machine_tool.js';
 // ~~~~ ~~~~ ~~~~ ~~~~
 // base
-//     🧩machine_tool.throttle()
+//     🧩💦machine_tool.throttle()
 //         machine_tool.throttle(
 //             callback<function>,
 //             wait<number,/false,'',undefined/=1000/24>,
 //             first<true,/false,'',undefined/=false>
 //         )
-//     🧩machine_tool.debounce()
+//     🧩💦machine_tool.debounce()
 //         machine_tool.debounce(
 //             callback<function>,
 //             wait<number,/false,'',undefined/=1000/24>,
 //             first<true,/false,'',undefined/=false>
 //         )
-//     🧿machine_tool.loop()
+//     🧿💦machine_tool.loop()
 //         <\result\,undefined><=machine_tool.loop(
 //             <boolean><=condition_function<function>,
 //             callback<function>,
@@ -26,10 +26,10 @@
 //             count<number,/false,'',undefined/=false>,
 //             count_callback<function,/false,'',undefined/=false>
 //         )
-//     🧩machine_tool.uuid_36_to_uuid_22()
+//     🧩💧machine_tool.uuid_36_to_uuid_22()
 //         <string><=machine_tool.uuid_36_to_uuid_22(uuid_36<string>)
 // interface
-//     🧩machine_tool.parent()
+//     🧩💦machine_tool.parent()
 //         <boolean><=machine_tool.parent(
 //             find<element>,
 //             start<element>,
@@ -80,12 +80,12 @@
 //             callback<function,/false,'',undefined/=()=>{}>
 //         )
 //         \<element,> flash mode\machine_tool.switch(element,!<''>,two,!<true>,two_wait,callback)
-//     🧩machine_tool.full_screen()
+//     🧩💧machine_tool.full_screen()
 //         machine_tool.full_screen(
 //             element<element,/false,'',undefined/=window.document.documentElement>,
 //             top<true,/false,'',undefined/=false>
 //         )
-//     🧩machine_tool.open_window()
+//     🧩💧machine_tool.open_window()
 //         <window><=machine_tool.open_window(
 //             uri<string,/false,'',undefined/=window.location.href>,
 //             width<+number,/false,'',undefined/=640>>,
@@ -94,13 +94,13 @@
 //             top<+number,/false,'',undefined/=\center\>
 //         )
 // storage
-//     💭machine_tool.file()
-//     💭machine_tool.local_storage()
-//     💭machine_tool.session_storage()
-//     💭machine_tool.indexeddb()
-//     💭machine_tool.web_sql()
-//     💭machine_tool.cookie()
-//     💭machine_tool.sql()
+//     💭💦machine_tool.file()
+//     💭💦machine_tool.local_storage()
+//     💭💦machine_tool.session_storage()
+//     💭💦machine_tool.indexeddb()
+//     💭💦machine_tool.web_sql()
+//     💭💦machine_tool.cookie()
+//     💭💦machine_tool.sql()
 // service
 //     🧿⭐️machine_tool.request()
 //         <object><=machine_tool.request(
@@ -108,7 +108,7 @@
 //             method<'GET','HEAD','POST','PUT','DELETE','CONNECT','OPTIONS','TRACE','PATCH'>,
 //             data<object,/false,'',undefined/=false>
 //         )
-//     💭machine_tool.response()
+//     💭💦machine_tool.response()
 // >>>> >>>> >>>> >>>>
 // #before
     // console
