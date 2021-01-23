@@ -26,7 +26,7 @@
         --ic_ve_pixel_half: 0.5px;
     }
     /* color */
-        /* basic */
+        /* base */
         :root {
             --ic_ve_color_white: #FFFFFF;
             --ic_ve_color_white_transparent: rgba(255,255,255,0);

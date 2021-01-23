@@ -64,7 +64,7 @@
 //         option<object,/false,'',undefined/=false>
 //     )
 // machine_tool.switch()
-//     \<element,> basic mode\machine_tool.switch(
+//     \<element,> base mode\machine_tool.switch(
 //         element<element>,
 //         one<string,/false,'',undefined/=''>,
 //         two<string,/false,'',undefined/=''>,
