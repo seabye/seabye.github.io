@@ -702,7 +702,7 @@
 // #build
 // #debug
     // machine_tool
-    if(window.document.documentElement){
+    if(window.document?.documentElement){
         machine_tool.bind('add',window.document.documentElement,'observer_intersection',()=>{
             window.console.log('???');
         },{});
