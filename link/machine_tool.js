@@ -37,7 +37,7 @@
 //             true_callback<function,/false,'',undefined/=()=>{}>,
 //             false_callback<function,/false,'',undefined/=()=>{}>
 //         )
-//     🧩machine_tool.create()
+//     🧩⭐️machine_tool.create()
 //         \<string,> single mode\<element><=machine_tool.create(
 //             tag<string,/false,'',undefined/='div'>,
 //             attribute<{key:'value'...},/false,'',undefined/=false>,
@@ -62,7 +62,7 @@
 //             elements<elements,/false,'',undefined/=elements>,
 //             callback<function(<elements>),/false,'',undefined/=false>
 //         )
-//     🧿machine_tool.bind()
+//     🧿⭐️machine_tool.bind()
 //         machine_tool.bind(
 //             action<'add','remove'>,
 //             element<element>,
@@ -70,7 +70,7 @@
 //             callback<function(<event>)>,
 //             option<object,/false,'',undefined/=false>
 //         )
-//     🧿machine_tool.switch()
+//     🧿⭐️machine_tool.switch()
 //         \<element,> base mode\machine_tool.switch(
 //             element<element>,
 //             one<string,/false,'',undefined/=''>,
@@ -94,6 +94,7 @@
 //             top<+number,/false,'',undefined/=\center\>
 //         )
 // storage
+//     💭machine_tool.file()
 //     💭machine_tool.local_storage()
 //     💭machine_tool.session_storage()
 //     💭machine_tool.indexeddb()
@@ -101,7 +102,7 @@
 //     💭machine_tool.cookie()
 //     💭machine_tool.sql()
 // service
-//     💭machine_tool.request()
+//     🧿⭐️machine_tool.request()
 //         <object><=machine_tool.request(
 //             uri<string,/false,'',undefined/=window.location.origin>,
 //             method<'GET','HEAD','POST','PUT','DELETE','CONNECT','OPTIONS','TRACE','PATCH'>,
@@ -659,6 +660,7 @@
             }
             return window.open(uri,'',`width=${width},height=${height},left=${left},top=${top}`);
         },
+        file:()=>{},
         local_storage:()=>{},
         session_storage:()=>{},
         indexeddb:()=>{},
