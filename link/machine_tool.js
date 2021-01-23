@@ -92,6 +92,7 @@
 //         left<+number,/false,'',undefined/=\center\>,
 //         top<+number,/false,'',undefined/=\center\>
 //     )
+// ~~~~ ~~~~ ~~~~ ~~~~
 // >>>> >>>> >>>> >>>>
 // #before
     // console
@@ -530,18 +531,18 @@
                     }
                 }
             }else{
-// \<array\[<'target','tab'>,]\,> group mode\machine_tool.switch(
-//     [
-//         'target',[
-//             [string<'open'>,string<'close'>,action<'open','close','auto'>,<boolean><=condition<function>\open\,<boolean><=condition<function>\close\,element...]...,
-//             [string<'open'>,string<'close'>,element...]
-//         ],
-//         'tab',[
-//             [,element...]
-//             [<>,element...]
-//         ]
-//     ]
-// )
+                // \<array\[<'target','tab'>,]\,> group mode\machine_tool.switch(
+                //     [
+                //         'target',[
+                //             [string<'open'>,string<'close'>,action<'open','close','auto'>,<boolean><=condition<function>\open\,<boolean><=condition<function>\close\,element...]...,
+                //             [string<'open'>,string<'close'>,element...]
+                //         ],
+                //         'tab',[
+                //             [,element...]
+                //             [<>,element...]
+                //         ]
+                //     ]
+                // )
                 if(window.Array.isArray(arguments[0])){
                     let data=arguments[0];
                     switch(data[0]){
@@ -664,7 +665,35 @@
             }
             return window.open(uri,'',`width=${width},height=${height},left=${left},top=${top}`);
         }
-    }
+    };
+    export const _machine_tool={
+        base:{
+            throttle:{},
+            debounce:{},
+            loop:{},
+            uuid_36_to_uuid_22:{}
+        },
+        interface:{
+            parent:{},
+            create:{},
+            bind:{},
+            switch:{},
+            full_screen:{},
+            open_window:{}
+        },
+        storage:{
+            local_storage:{},
+            session_storage:{},
+            indexeddb:{},
+            web_sql:{},
+            cookie:{},
+            sql:{}
+        },
+        service:{
+            request:{},
+            response:{}
+        }
+    };
 // #build
 // #debug
 // #after
