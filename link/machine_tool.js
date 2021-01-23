@@ -20,9 +20,11 @@
 //         )
 //     🧿machine_tool.loop()
 //         <\result\,undefined><=machine_tool.loop(
-//             <boolean><=condition<function>,
+//             <boolean><=condition_function<function>,
 //             callback<function>,
-//             wait<number,/false,'',undefined/=1000/24>
+//             wait<number,/false,'',undefined/=1000/24>,
+//             count<number,/false,'',undefined/=false>,
+//             count_callback<function,/false,'',undefined/=false>
 //         )
 //     🧩machine_tool.uuid_36_to_uuid_22()
 //         <string><=machine_tool.uuid_36_to_uuid_22(uuid_36<string>)
@@ -165,15 +167,15 @@
                 }
             };
         },
-        loop:function(condition,callback,wait,count){
+        loop:function(condition_function,callback,wait,count,count_callback){
             if(typeof wait!=='number'){
                 wait=1000/24;
             }
-            if(condition()){
+            if(condition_function()){
                 return callback();
             }else{
                 window.setTimeout(()=>{
-                    this.loop(condition,callback,wait);
+                    this.loop(condition_function,callback,wait);
                 },wait);
             }
         },
@@ -562,7 +564,7 @@
                 // \<array\[<'target','tab'>,]\,> group mode\machine_tool.switch(
                 //     [
                 //         'target',[
-                //             [string<'open'>,string<'close'>,action<'open','close','auto'>,<boolean><=condition<function>\open\,<boolean><=condition<function>\close\,element...]...,
+                //             [string<'open'>,string<'close'>,action<'open','close','auto'>,<boolean><=condition_function<function>\open\,<boolean><=condition_function<function>\close\,element...]...,
                 //             [string<'open'>,string<'close'>,element...]
                 //         ],
                 //         'tab',[
