@@ -195,7 +195,10 @@
                     return count_callback();
                 }
             }
-            const condition_result=condition();
+            const condition_result=null;
+            (async()=>{
+                condition_result=await condition();
+            })();
             window.console.dir(condition_result);
             if(condition_result){
                 if(callback==='function'){
