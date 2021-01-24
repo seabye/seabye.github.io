@@ -6,32 +6,32 @@
 // import{machine_tool}from'machine_tool.js';
 // ~~~~ ~~~~ ~~~~ ~~~~
 // base
-//     🧩💦machine_tool.throttle()
+//     🟢💦machine_tool.throttle()
 //         machine_tool.throttle(
 //             callback<function>,
 //             wait<number,/false,'',undefined/=1000/24>,
 //             first<true,/false,'',undefined/=false>
 //         )
-//     🧩💦machine_tool.debounce()
+//     🟢💦machine_tool.debounce()
 //         machine_tool.debounce(
 //             callback<function>,
 //             wait<number,/false,'',undefined/=1000/24>,
 //             first<true,/false,'',undefined/=false>
 //         )
-//     🧩💦machine_tool.loop()
+//     🟢💦machine_tool.loop()
 //         <\result\,undefined><=machine_tool.loop(
-//             <boolean><=condition_function<function>,
-//             callback<function>,
+//             condition_function<function>,
+//             <\result\,undefined><=callback<function>,
 //             wait<number,/false,'',undefined/=1000/24>,
-//             count<number,/false,'',undefined/=false>,
-//             count_callback<function,/false,'',undefined/=false>
+//             count<number,/false,'',undefined/=undefined>,
+//             <undefined><=count_callback<function,/false,'',undefined/=undefined>
 //         )
-//     🧩💧machine_tool.uuid_36_to_uuid_22()
+//     🟢💧machine_tool.uuid_36_to_uuid_22()
 //         <string><=machine_tool.uuid_36_to_uuid_22(uuid_36<string>)
-//     🧩💧machine_tool.uuid_22_to_uuid_36()
+//     🟢💧machine_tool.uuid_22_to_uuid_36()
 //         <string><=machine_tool.uuid_22_to_uuid_36(uuid_22<string>)
 // interface
-//     🧩💦machine_tool.parent()
+//     🟢💦machine_tool.parent()
 //         <boolean><=machine_tool.parent(
 //             find<element>,
 //             start<element>,
@@ -39,7 +39,7 @@
 //             true_callback<function,/false,'',undefined/=undefined>,
 //             false_callback<function,/false,'',undefined/=undefined>
 //         )
-//     🧩⭐️machine_tool.create()
+//     🟢⭐️machine_tool.create()
 //         \<string,> single mode\<element><=machine_tool.create(
 //             tag<string,/false,'',undefined/='div'>,
 //             attribute<{key:'value'...},/false,'',undefined/=false>,
@@ -64,7 +64,7 @@
 //             elements<elements,/false,'',undefined/=elements>,
 //             callback<function(<elements>),/false,'',undefined/=false>
 //         )
-//     🧿⭐️machine_tool.bind()
+//     🟠⭐️machine_tool.bind()
 //         machine_tool.bind(
 //             element<element>,
 //             action<'add','remove'>,
@@ -72,7 +72,7 @@
 //             callback<function(<event>)>,
 //             option<object,/false,'',undefined/=false>
 //         )
-//     🧿⭐️machine_tool.switch()
+//     🟠⭐️machine_tool.switch()
 //         \<element,> base mode\machine_tool.switch(
 //             element<element>,
 //             one<string,/false,'',undefined/=''>,
@@ -82,12 +82,12 @@
 //             callback<function,/false,'',undefined/=()=>{}>
 //         )
 //         \<element,> flash mode\machine_tool.switch(element,!<''>,two,!<true>,two_wait,callback)
-//     🧩💧machine_tool.full_screen()
+//     🟢💧machine_tool.full_screen()
 //         machine_tool.full_screen(
 //             element<element,/false,'',undefined/=window.document.documentElement>,
 //             top<true,/false,'',undefined/=false>
 //         )
-//     🧩💧machine_tool.open_window()
+//     🟢💧machine_tool.open_window()
 //         <window><=machine_tool.open_window(
 //             uri<string,/false,'',undefined/=window.location.href>,
 //             width<+number,/false,'',undefined/=640>>,
@@ -96,23 +96,23 @@
 //             top<+number,/false,'',undefined/=\center\>
 //         )
 // storage
-//     💭💦machine_tool.file()
-//     💭💦machine_tool.local_storage()
-//     💭💦machine_tool.session_storage()
-//     💭💦machine_tool.indexeddb()
-//     💭💦machine_tool.web_sql()
-//     💭💦machine_tool.cookie()
-//     💭💦machine_tool.sql()
-//     💭💦machine_tool.cache()
+//     🔴💦machine_tool.file()
+//     🔴💦machine_tool.local_storage()
+//     🔴💦machine_tool.session_storage()
+//     🔴💦machine_tool.indexeddb()
+//     🔴💦machine_tool.web_sql()
+//     🔴💦machine_tool.cookie()
+//     🔴💦machine_tool.sql()
+//     🔴💦machine_tool.cache()
 // service
-//     🧿⭐️machine_tool.request()
+//     🟠⭐️machine_tool.request()
 //         <object><=machine_tool.request(
 //             uri<string,/false,'',undefined/=window.location.origin>,
 //             method<'GET','HEAD','POST','PUT','DELETE','CONNECT','OPTIONS','TRACE','PATCH'>,
 //             data<object,/false,'',undefined/=false>,
 //             callback<function,/false,'',undefined/=>
 //         )
-//     💭💦machine_tool.response()
+//     🔴💦machine_tool.response()
 // >>>> >>>> >>>> >>>>
 // #before
     // console
@@ -176,11 +176,18 @@
             if(typeof wait!=='number'){
                 wait=1000/24;
             }
+            if(typeof count==='number'&&typeof count_callback==='function'){
+                if(count!==0){
+                    count-=1;
+                }else{
+                    return count_callback();
+                }
+            }
             if(condition_function()){
                 return callback();
             }else{
                 window.setTimeout(()=>{
-                    this.loop(condition_function,callback,wait);
+                    this.loop(condition_function,callback,wait,count,count_callback);
                 },wait);
             }
         },
