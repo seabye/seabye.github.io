@@ -6,19 +6,19 @@
 // import{machine_tool}from'machine_tool.js';
 // ~~~~ ~~~~ ~~~~ ~~~~
 // base
-//     🟢💦machine_tool.throttle()
+//     🟢🧩machine_tool.throttle()
 //         machine_tool.throttle(
 //             callback<function>,
 //             wait<number,/false,'',undefined/=1000/24>,
 //             first<true,/false,'',undefined/=false>
 //         )
-//     🟢💦machine_tool.debounce()
+//     🟢🧩machine_tool.debounce()
 //         machine_tool.debounce(
 //             callback<function>,
 //             wait<number,/false,'',undefined/=1000/24>,
 //             first<true,/false,'',undefined/=false>
 //         )
-//     🟢💦machine_tool.loop()
+//     🟢🧩machine_tool.loop()
 //         <\result\,undefined><=machine_tool.loop(
 //             condition_function<function>,
 //             <\result\,undefined><=callback<function>,
@@ -31,7 +31,7 @@
 //     🟢💧machine_tool.uuid_22_to_uuid_36()
 //         <string><=machine_tool.uuid_22_to_uuid_36(uuid_22<string>)
 // interface
-//     🟢💦machine_tool.parent()
+//     🟢🧩machine_tool.parent()
 //         <boolean><=machine_tool.parent(
 //             find<element>,
 //             start<element>,
@@ -96,14 +96,14 @@
 //             top<+number,/false,'',undefined/=\center\>
 //         )
 // storage
-//     🔴💦machine_tool.file()
-//     🔴💦machine_tool.local_storage()
-//     🔴💦machine_tool.session_storage()
-//     🔴💦machine_tool.indexeddb()
-//     🔴💦machine_tool.web_sql()
-//     🔴💦machine_tool.cookie()
-//     🔴💦machine_tool.sql()
-//     🔴💦machine_tool.cache()
+//     🔴🧩machine_tool.file()
+//     🔴🧩machine_tool.local_storage()
+//     🔴🧩machine_tool.session_storage()
+//     🔴🧩machine_tool.indexeddb()
+//     🔴🧩machine_tool.web_sql()
+//     🔴🧩machine_tool.cookie()
+//     🔴🧩machine_tool.sql()
+//     🔴🧩machine_tool.cache()
 // service
 //     🟠⭐️machine_tool.request()
 //         <object>!async<=machine_tool.request(
@@ -112,7 +112,7 @@
 //             data<object,/false,'',undefined/=false>,
 //             callback<function,/false,'',undefined/=>
 //         )
-//     🔴💦machine_tool.response()
+//     🔴🧩machine_tool.response()
 // >>>> >>>> >>>> >>>>
 // #before
     // console
