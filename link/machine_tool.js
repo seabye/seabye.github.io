@@ -188,26 +188,32 @@
             if(typeof wait!=='number'){
                 wait=1000/24;
             }
-            if(typeof count==='number'&&typeof count_callback==='function'){
+            if(typeof count==='number'){
                 if(count!==0){
                     count-=1;
                 }else{
-                    return count_callback();
+                    if(typeof count_callback==='function'){
+                        return count_callback();
+                    }
                 }
             }
-            const condition_result=await condition();
-            if(condition_result){
-                if(callback==='function'){
-                    return callback(condition_result);
+            if(count!==0){
+                const condition_result=await condition();
+                if(condition_result){
+                    if(callback==='function'){
+                        return callback(condition_result);
+                    }else{
+                        return condition_result;
+                    }
                 }else{
-                    return condition_result;
+                    return new window.Promise((resolve)=>{
+                        window.setTimeout(()=>{
+                            resolve(this.loop(condition,callback,wait,count,count_callback));
+                        },wait);
+                    });
                 }
             }else{
-                return new window.Promise((resolve)=>{
-                    window.setTimeout(()=>{
-                        resolve(this.loop(condition,callback,wait,count,count_callback));
-                    },wait);
-                });
+                return null;
             }
         },
         time_out:(callback,wait)=>{
