@@ -184,20 +184,11 @@
                 }
             };
         },
-        loop:async function(condition,callback,wait,count,count_callback){
+        loop:function(condition,callback,wait,count,count_callback){
             if(typeof wait!=='number'){
                 wait=1000/24;
             }
-            if(typeof count==='number'){
-                if(count!==0){
-                    count-=1;
-                }else{
-                    if(typeof count_callback==='function'){
-                        return count_callback();
-                    }
-                }
-            }
-            if(count!==0){
+            const run=async()=>{
                 const condition_result=await condition();
                 if(condition_result){
                     if(callback==='function'){
@@ -212,8 +203,19 @@
                         },wait);
                     });
                 }
+            };
+            if(typeof count==='number'){
+                count=window.parseInt(window.Math.abs(count));
+                if(count!==0){
+                    count-=1;
+                    return await run();
+                }else{
+                    if(typeof count_callback==='function'){
+                        return count_callback();
+                    }
+                }
             }else{
-                return null;
+                return await run();
             }
         },
         time_out:(callback,wait)=>{
