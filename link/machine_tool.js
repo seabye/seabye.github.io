@@ -28,6 +28,8 @@
 //         )
 //     🧩💧machine_tool.uuid_36_to_uuid_22()
 //         <string><=machine_tool.uuid_36_to_uuid_22(uuid_36<string>)
+//     🧩💧machine_tool.uuid_22_to_uuid_36()
+//         <string><=machine_tool.uuid_22_to_uuid_36(uuid_22<string>)
 // interface
 //     🧩💦machine_tool.parent()
 //         <boolean><=machine_tool.parent(
@@ -182,17 +184,40 @@
         },
         uuid_36_to_uuid_22:(uuid_36)=>{
             if(uuid_36.length===36){
-                const char='0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_-';
-                const uuid32='0'+uuid_36.replace(/-/g,'');
-                if(uuid32.length===33){
+                const uuid_32='0'+uuid_36.replace(/-/g,'');
+                if(uuid_32.length===33){
+                    const char='0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_-';
                     let result='';
                     for(let index=0;index<11;index++){
                         const start=index*3;
-                        const str=window.parseInt(uuid32[start]+uuid32[start+1]+uuid32[start+2],16);
+                        const str=window.parseInt(uuid_32[start]+uuid_32[start+1]+uuid_32[start+2],16);
                         result+=char[window.Math.floor(str/64)]+char[str%64];
                     }
                     return result;
                 }
+            }
+        },
+        uuid_22_to_uuid_36:(uuid_22)=>{
+            if(uuid_22.length===22){
+                const get_char_index=()=>{
+                    const char='0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_-';
+                    let result={};
+                    for(let index=0;index<char.length;index++){
+                        const char0=char[index];
+                        result[char0]=index;
+                    }
+                    return result;
+                };
+                let char_index=get_char_index();
+                let result='';
+                for(let index=0;index<22;index+=2){
+                    let u=(char_index[uuid_22[index]]*64+char_index[uuid_22[index+1]]).toString(16).padStart(3,'0');
+                    if(index===0&&u[0]==='0'){
+                        u=u.substr(1);
+                    }
+                    result+=u;
+                }
+                return`${result.substr(0,8)}-${result.substr(8,4)}-${result.substr(12,4)}-${result.substr(16,4)}-${result.substr(20)}`;
             }
         },
         parent:function(find,start,end,true_callback,false_callback){
@@ -709,6 +734,9 @@
 // #debug
     // machine_tool
     if(window.document?.documentElement){
+        window.console.log('5e05fd00-d923-44f3-aba6-2463a3e61da2','1U1Vq0sID4ywkc96EZvXsY');
+        window.console.log(machine_tool.uuid_36_to_uuid_22('5e05fd00-d923-44f3-aba6-2463a3e61da2'));
+        window.console.log(machine_tool.uuid_22_to_uuid_36('1U1Vq0sID4ywkc96EZvXsY'));
         machine_tool.bind('add',window.document.documentElement,'observer_intersection',()=>{
             window.console.log('???');
         },{});
@@ -717,7 +745,6 @@
         });
         machine_tool.switch(['target',[]]);
         machine_tool.switch(['tab',[]]);
-        //
     }
 // #after
     // console
