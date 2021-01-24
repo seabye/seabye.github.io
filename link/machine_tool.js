@@ -196,6 +196,8 @@
                 }
             }
             const condition_result=condition();
+            window.console.log(condition_result);
+            window.console.log(typeof condition_result);
             if(condition_result){
                 if(callback==='function'){
                     return callback(condition_result);
