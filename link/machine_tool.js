@@ -184,7 +184,7 @@
                 }
             };
         },
-        loop:function(condition,callback,wait,count,count_callback){
+        loop:async function(condition,callback,wait,count,count_callback){
             if(typeof wait!=='number'){
                 wait=1000/24;
             }
@@ -195,11 +195,7 @@
                     return count_callback();
                 }
             }
-            let condition_result=null;
-            (async()=>{
-                condition_result=await condition();
-            })();
-            window.console.dir(condition_result);
+            const condition_result=await condition();
             if(condition_result){
                 if(callback==='function'){
                     return callback(condition_result);
