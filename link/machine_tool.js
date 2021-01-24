@@ -18,18 +18,18 @@
 //             wait<number,/false,'',undefined/=1000/24>,
 //             first<true,/false,'',undefined/=false>
 //         )
-//     🟢🧩machine_tool.wait()
-//         <\result\><=machine_tool.wait(
-//             callback<function>,
-//             wait<number,/false,'',undefined/=1000/24>
-//         )
 //     🟢🧩machine_tool.loop()
 //         <\result\,undefined><=machine_tool.loop(
-//             condition_function<function>,
+//             condition<function>,
 //             <\result\,undefined><=callback<function>,
 //             wait<number,/false,'',undefined/=1000/24>,
 //             count<number,/false,'',undefined/=undefined>,
 //             <\result\,undefined>!async<=count_callback<function,/false,'',undefined/=undefined>
+//         )
+//     🟢🧩machine_tool.time_out()
+//         <\result\><=machine_tool.time_out(
+//             callback<function>,
+//             wait<number,/false,'',undefined/=1000/24>
 //         )
 //     🟢💧machine_tool.uuid_36_to_uuid_22()
 //         <string><=machine_tool.uuid_36_to_uuid_22(uuid_36<string>)
@@ -184,7 +184,28 @@
                 }
             };
         },
-        wait:(callback,wait)=>{
+        loop:function(condition,callback,wait,count,count_callback){
+            if(typeof wait!=='number'){
+                wait=1000/24;
+            }
+            if(typeof count==='number'&&typeof count_callback==='function'){
+                if(count!==0){
+                    count-=1;
+                }else{
+                    return count_callback();
+                }
+            }
+            if(condition()){
+                return callback();
+            }else{
+                return new window.Promise((resolve)=>{
+                    window.setTimeout(()=>{
+                        resolve(this.loop(condition,callback,wait,count,count_callback));
+                    },wait);
+                });
+            }
+        },
+        time_out:(callback,wait)=>{
             if(typeof wait!=='number'){
                 wait=1000/24;
             }
@@ -197,27 +218,6 @@
                     }
                 },wait);
             });
-        },
-        loop:function(condition_function,callback,wait,count,count_callback){
-            if(typeof wait!=='number'){
-                wait=1000/24;
-            }
-            if(typeof count==='number'&&typeof count_callback==='function'){
-                if(count!==0){
-                    count-=1;
-                }else{
-                    return count_callback();
-                }
-            }
-            if(condition_function()){
-                return callback();
-            }else{
-                return new window.Promise((resolve)=>{
-                    window.setTimeout(()=>{
-                        resolve(this.loop(condition_function,callback,wait,count,count_callback));
-                    },wait);
-                });
-            }
         },
         uuid_36_to_uuid_22:(uuid_36)=>{
             if(uuid_36.length===36){
@@ -625,7 +625,7 @@
                 // \<array\[<'target','tab'>,]\,> group mode\machine_tool.switch(
                 //     [
                 //         'target',[
-                //             [string<'open'>,string<'close'>,action<'open','close','auto'>,<boolean><=condition_function<function>\open\,<boolean><=condition_function<function>\close\,element...]...,
+                //             [string<'open'>,string<'close'>,action<'open','close','auto'>,<boolean><=condition<function>\open\,<boolean><=condition<function>\close\,element...]...,
                 //             [string<'open'>,string<'close'>,element...]
                 //         ],
                 //         'tab',[
