@@ -18,7 +18,7 @@
 //             wait<number,/false,'',undefined/=1000/24>,
 //             first<true,/false,'',undefined/=false>
 //         )
-//     🟢🧩machine_tool.loop()
+//     🟠🧩machine_tool.loop()
 //         <\result\,\!!result\,undefined><=machine_tool.loop(
 //             <\!!result\><=condition<function>,
 //             <\result\,undefined><=callback(<\!!result\>)<function,/false,'',undefined/=undefined>,
@@ -26,7 +26,7 @@
 //             count<number,/false,'',undefined/=undefined>,
 //             <\result\,undefined>!async<=count_callback<function,/false,'',undefined/=undefined>
 //         )
-//     🟢🧩machine_tool.time_out()
+//     🟠🧩machine_tool.time_out()
 //         <\result\><=machine_tool.time_out(
 //             callback<function>,
 //             wait<number,/false,'',undefined/=1000/24>
