@@ -109,8 +109,8 @@
 //         <object>!async<=machine_tool.request(
 //             uri<string,/false,'',undefined/=window.location.origin>,
 //             method<'GET','HEAD','POST','PUT','DELETE','CONNECT','OPTIONS','TRACE','PATCH'>,
-//             data<object,/false,'',undefined/=>,
-//             callback<function,/false,'',undefined/=>
+//             data<object,/false,'',undefined/=???>,
+//             callback<function,/false,'',undefined/=???>
 //         )
 //     🟠⭐️machine_tool.response()
 //         <object><=machine_tool.response(
