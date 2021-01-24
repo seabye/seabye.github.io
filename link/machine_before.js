@@ -80,11 +80,13 @@
             if(condition_function()){
                 return callback();
             }else{
-                window.setTimeout(()=>{
-                    this.loop(condition_function,callback,wait,count,count_callback);
-                },wait);
+                return new window.Promise((resolve)=>{
+                    window.setTimeout(()=>{
+                        resolve(this.loop(condition_function,callback,wait,count,count_callback));
+                    },wait);
+                });
             }
-        },
+        }
     };
 // #build
     // machine_before

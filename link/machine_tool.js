@@ -24,7 +24,7 @@
 //             <\result\,undefined><=callback<function>,
 //             wait<number,/false,'',undefined/=1000/24>,
 //             count<number,/false,'',undefined/=undefined>,
-//             <undefined><=count_callback<function,/false,'',undefined/=undefined>
+//             <\result\,undefined><=count_callback<function,/false,'',undefined/=undefined>
 //         )
 //     🟢💧machine_tool.uuid_36_to_uuid_22()
 //         <string><=machine_tool.uuid_36_to_uuid_22(uuid_36<string>)
@@ -186,9 +186,11 @@
             if(condition_function()){
                 return callback();
             }else{
-                window.setTimeout(()=>{
-                    this.loop(condition_function,callback,wait,count,count_callback);
-                },wait);
+                return new window.Promise((resolve)=>{
+                    window.setTimeout(()=>{
+                        resolve(this.loop(condition_function,callback,wait,count,count_callback));
+                    },wait);
+                });
             }
         },
         uuid_36_to_uuid_22:(uuid_36)=>{
@@ -733,6 +735,9 @@
                     {}
                     break;
                 default:
+                    {
+                        return false;
+                    }
                     break;
             }
         },
@@ -742,17 +747,32 @@
 // #debug
     // machine_tool
     if(window.document?.documentElement){
-        window.console.log('5e05fd00-d923-44f3-aba6-2463a3e61da2','1U1Vq0sID4ywkc96EZvXsY');
-        window.console.log(machine_tool.uuid_36_to_uuid_22('5e05fd00-d923-44f3-aba6-2463a3e61da2'));
-        window.console.log(machine_tool.uuid_22_to_uuid_36('1U1Vq0sID4ywkc96EZvXsY'));
-        machine_tool.bind(window.document.documentElement,'add','observer_intersection',()=>{
-            window.console.log('???');
-        },{});
-        machine_tool.bind(window.document.documentElement,'add','observer_resize',()=>{
-            window.console.log('???');
-        });
-        machine_tool.switch(['target',[]]);
-        machine_tool.switch(['tab',[]]);
+        (async()=>{
+            window.console.log(await machine_tool.loop(
+                ()=>{
+                    return false;
+                },
+                ()=>{
+                    window.console.log('1');
+                    return 11;
+                },
+                1000,
+                2,
+                ()=>{
+                    window.console.log('2');
+                    return 22;
+                }
+            ));
+            machine_tool.bind(window.document.documentElement,'add','observer_intersection',()=>{
+                window.console.log('???');
+            },{});
+            machine_tool.bind(window.document.documentElement,'add','observer_resize',()=>{
+                window.console.log('???');
+            });
+            machine_tool.switch(['target',[]]);
+            machine_tool.switch(['tab',[]]);
+            window.console.log(await machine_tool.request());
+        })();
     }
 // #after
     // console
