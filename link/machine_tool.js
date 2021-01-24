@@ -109,10 +109,17 @@
 //         <object>!async<=machine_tool.request(
 //             uri<string,/false,'',undefined/=window.location.origin>,
 //             method<'GET','HEAD','POST','PUT','DELETE','CONNECT','OPTIONS','TRACE','PATCH'>,
-//             data<object,/false,'',undefined/=false>,
+//             data<object,/false,'',undefined/=>,
 //             callback<function,/false,'',undefined/=>
 //         )
-//     🔴🧩machine_tool.response()
+//     🟠⭐️machine_tool.response()
+//         <object><=machine_tool.response(
+//             uri,
+//             method,
+//             data,
+//             other,
+//             callback
+//         )
 // >>>> >>>> >>>> >>>>
 // #before
     // console
@@ -738,7 +745,16 @@
                     break;
             }
         },
-        response:()=>{}
+        response:(uri,method,data,other,callback)=>{
+            let result={
+                uri:uri,
+                method:method,
+                data:data
+            };
+            window.Object.assign(result,other);
+            callback(result);
+            return result;
+        }
     };
 // #build
 // #debug
