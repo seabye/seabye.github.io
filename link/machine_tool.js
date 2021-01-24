@@ -18,6 +18,11 @@
 //             wait<number,/false,'',undefined/=1000/24>,
 //             first<true,/false,'',undefined/=false>
 //         )
+//     🟢🧩machine_tool.wait()
+//         <\result\><=machine_tool.wait(
+//             callback<function>,
+//             wait<number,/false,'',undefined/=1000/24>
+//         )
 //     🟢🧩machine_tool.loop()
 //         <\result\,undefined><=machine_tool.loop(
 //             condition_function<function>,
@@ -178,6 +183,16 @@
                     set();
                 }
             };
+        },
+        wait:(callback,wait)=>{
+            if(typeof wait!=='number'){
+                wait=1000/24;
+            }
+            return new window.Promise((resolve)=>{
+                window.setTimeout(()=>{
+                    resolve(callback);
+                },wait);
+            });
         },
         loop:function(condition_function,callback,wait,count,count_callback){
             if(typeof wait!=='number'){
