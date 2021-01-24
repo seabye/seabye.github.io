@@ -19,9 +19,9 @@
 //             first<true,/false,'',undefined/=false>
 //         )
 //     🟢🧩machine_tool.loop()
-//         <\result\,undefined><=machine_tool.loop(
-//             condition<function>,
-//             <\result\,undefined><=callback<function>,
+//         <\result\,\!!result\,undefined><=machine_tool.loop(
+//             <\!!result\><=condition<function>,
+//             <\result\,undefined><=callback(<\!!result\>)<function,/false,'',undefined/=undefined>,
 //             wait<number,/false,'',undefined/=1000/24>,
 //             count<number,/false,'',undefined/=undefined>,
 //             <\result\,undefined>!async<=count_callback<function,/false,'',undefined/=undefined>
@@ -195,8 +195,13 @@
                     return count_callback();
                 }
             }
-            if(condition()){
-                return callback();
+            const condition_result=condition();
+            if(condition_result){
+                if(callback==='function'){
+                    return callback(condition_result);
+                }else{
+                    return condition_result;
+                }
             }else{
                 return new window.Promise((resolve)=>{
                     window.setTimeout(()=>{
