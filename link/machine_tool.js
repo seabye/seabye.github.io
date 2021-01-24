@@ -195,7 +195,7 @@
                     return count_callback();
                 }
             }
-            const condition_result=null;
+            let condition_result=null;
             (async()=>{
                 condition_result=await condition();
             })();
