@@ -24,7 +24,7 @@
 //             <\result\,undefined><=callback<function>,
 //             wait<number,/false,'',undefined/=1000/24>,
 //             count<number,/false,'',undefined/=undefined>,
-//             <\result\,undefined><=count_callback<function,/false,'',undefined/=undefined>
+//             <\result\,undefined>!async<=count_callback<function,/false,'',undefined/=undefined>
 //         )
 //     🟢💧machine_tool.uuid_36_to_uuid_22()
 //         <string><=machine_tool.uuid_36_to_uuid_22(uuid_36<string>)
@@ -81,7 +81,7 @@
 //             two_wait<number,/false,'',undefined/=0>,
 //             callback<function,/false,'',undefined/=()=>{}>
 //         )
-//         \<element,> flash mode\machine_tool.switch(element,!<''>,two,!<true>,two_wait,callback)
+//         \<element,> flash mode\machine_tool.switch(element,<<''>>,two,<<true>>,two_wait,callback)
 //     🟢💧machine_tool.full_screen()
 //         machine_tool.full_screen(
 //             element<element,/false,'',undefined/=window.document.documentElement>,
@@ -106,7 +106,7 @@
 //     🔴💦machine_tool.cache()
 // service
 //     🟠⭐️machine_tool.request()
-//         <object><=machine_tool.request(
+//         <object>!async<=machine_tool.request(
 //             uri<string,/false,'',undefined/=window.location.origin>,
 //             method<'GET','HEAD','POST','PUT','DELETE','CONNECT','OPTIONS','TRACE','PATCH'>,
 //             data<object,/false,'',undefined/=false>,
