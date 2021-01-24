@@ -735,9 +735,6 @@
                     {}
                     break;
                 default:
-                    {
-                        return false;
-                    }
                     break;
             }
         },
