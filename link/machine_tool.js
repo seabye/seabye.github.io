@@ -190,7 +190,7 @@
             }
             return new window.Promise((resolve)=>{
                 window.setTimeout(()=>{
-                    resolve(callback);
+                    resolve(callback());
                 },wait);
             });
         },
