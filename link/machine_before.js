@@ -66,18 +66,25 @@
                 }
             };
         },
-        loop:function(condition,callback,wait){
+        loop:function(condition_function,callback,wait,count,count_callback){
             if(typeof wait!=='number'){
                 wait=1000/24;
             }
-            if(condition()){
+            if(typeof count==='number'&&typeof count_callback==='function'){
+                if(count!==0){
+                    count-=1;
+                }else{
+                    return count_callback();
+                }
+            }
+            if(condition_function()){
                 return callback();
             }else{
                 window.setTimeout(()=>{
-                    this.loop(condition,callback,wait);
+                    this.loop(condition_function,callback,wait,count,count_callback);
                 },wait);
             }
-        }
+        },
     };
 // #build
     // machine_before
