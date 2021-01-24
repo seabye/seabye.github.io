@@ -184,7 +184,7 @@
                 }
             };
         },
-        loop:function(condition,callback,wait,count,count_callback){
+        loop:async function(condition,callback,wait,count,count_callback){
             if(typeof wait!=='number'){
                 wait=1000/24;
             }
