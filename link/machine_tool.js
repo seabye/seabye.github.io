@@ -18,7 +18,7 @@
 //             wait<number,/false,'',undefined/=1000/24>,
 //             first<true,/false,'',undefined/=false>
 //         )
-//     🧿💦machine_tool.loop()
+//     🧩💦machine_tool.loop()
 //         <\result\,undefined><=machine_tool.loop(
 //             <boolean><=condition_function<function>,
 //             callback<function>,
@@ -36,8 +36,8 @@
 //             find<element>,
 //             start<element>,
 //             end<element,/false,'',undefined/=window.document.documentElement>,
-//             true_callback<function,/false,'',undefined/=()=>{}>,
-//             false_callback<function,/false,'',undefined/=()=>{}>
+//             true_callback<function,/false,'',undefined/=undefined>,
+//             false_callback<function,/false,'',undefined/=undefined>
 //         )
 //     🧩⭐️machine_tool.create()
 //         \<string,> single mode\<element><=machine_tool.create(
@@ -66,8 +66,8 @@
 //         )
 //     🧿⭐️machine_tool.bind()
 //         machine_tool.bind(
-//             action<'add','remove'>,
 //             element<element>,
+//             action<'add','remove'>,
 //             change<'pointer_up','pointer_track','observer_mutation','observer_intersection','observer_resize'>,
 //             callback<function(<event>)>,
 //             option<object,/false,'',undefined/=false>
@@ -103,12 +103,14 @@
 //     💭💦machine_tool.web_sql()
 //     💭💦machine_tool.cookie()
 //     💭💦machine_tool.sql()
+//     💭💦machine_tool.cache()
 // service
 //     🧿⭐️machine_tool.request()
 //         <object><=machine_tool.request(
 //             uri<string,/false,'',undefined/=window.location.origin>,
 //             method<'GET','HEAD','POST','PUT','DELETE','CONNECT','OPTIONS','TRACE','PATCH'>,
-//             data<object,/false,'',undefined/=false>
+//             data<object,/false,'',undefined/=false>,
+//             callback<function,/false,'',undefined/=>
 //         )
 //     💭💦machine_tool.response()
 // >>>> >>>> >>>> >>>>
@@ -221,21 +223,19 @@
             }
         },
         parent:function(find,start,end,true_callback,false_callback){
-            if(!(end instanceof window.HTMLElement)){
-                end=window.document.documentElement;
-            }
-            if(typeof true_callback!=='function'){
-                true_callback=()=>{};
-            }
-            if(typeof false_callback!=='function'){
-                false_callback=()=>{};
-            }
             if(start===find){
-                true_callback();
+                if(typeof true_callback==='function'){
+                    true_callback();
+                }
                 return true;
             }else{
+                if(!(end instanceof window.HTMLElement)){
+                    end=window.document.documentElement;
+                }
                 if(start===end){
-                    false_callback();
+                    if(typeof false_callback==='function'){
+                        false_callback();
+                    }
                     return false;
                 }
             }
@@ -294,7 +294,7 @@
                         if(!elements){
                             elements={};
                         }
-                        const build_element=(data,insert_element,insert_position)=>{
+                        const element_build=(data,insert_element,insert_position)=>{
                             for(const item in data){
                                 if(data[item].element){
                                     if(!data[item].element[0]){
@@ -329,13 +329,13 @@
                                     if(!item_.match(/element|function/)){
                                         const data_={};
                                         data_[item_]=data[item][item_];
-                                        build_element(data_,data[item].element,'beforeend');
+                                        element_build(data_,data[item].element,'beforeend');
                                     }
                                 }
                             }
                         };
-                        build_element(data,insert_element,insert_position);
-                        const run_function=(data)=>{
+                        element_build(data,insert_element,insert_position);
+                        const function_run=(data)=>{
                             for(const item in data){
                                 if(data[item].function){
                                     data[item].function(elements);
@@ -344,12 +344,12 @@
                                     if(!item_.match(/element|function/)){
                                         const data_={};
                                         data_[item_]=data[item][item_];
-                                        run_function({data_:data[item][item_]});
+                                        function_run({data_:data[item][item_]});
                                     }
                                 }
                             }
                         };
-                        run_function(data);
+                        function_run(data);
                         if(callback){
                             callback(elements);
                         }
@@ -363,7 +363,7 @@
                     break;
             }
         },
-        bind:(action,element,change,callback,option)=>{
+        bind:(element,action,change,callback,option)=>{
             if(!window.Object.prototype.toString.call(option).match('Object')){
                 option={};
             }
@@ -692,6 +692,7 @@
         web_sql:()=>{},
         cookie:()=>{},
         sql:()=>{},
+        cache:()=>{},
         request:async(uri,method,data,callback)=>{
             if(!uri){
                 uri=window.location.origin;
@@ -737,10 +738,10 @@
         window.console.log('5e05fd00-d923-44f3-aba6-2463a3e61da2','1U1Vq0sID4ywkc96EZvXsY');
         window.console.log(machine_tool.uuid_36_to_uuid_22('5e05fd00-d923-44f3-aba6-2463a3e61da2'));
         window.console.log(machine_tool.uuid_22_to_uuid_36('1U1Vq0sID4ywkc96EZvXsY'));
-        machine_tool.bind('add',window.document.documentElement,'observer_intersection',()=>{
+        machine_tool.bind(window.document.documentElement,'add','observer_intersection',()=>{
             window.console.log('???');
         },{});
-        machine_tool.bind('add',window.document.documentElement,'observer_resize',()=>{
+        machine_tool.bind(window.document.documentElement,'add','observer_resize',()=>{
             window.console.log('???');
         });
         machine_tool.switch(['target',[]]);
