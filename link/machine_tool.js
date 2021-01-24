@@ -746,7 +746,7 @@
             }
         },
         response:(uri,method,data,other,callback)=>{
-            let result={
+            const result={
                 uri:uri,
                 method:method,
                 data:data
