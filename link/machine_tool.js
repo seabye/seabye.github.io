@@ -117,8 +117,8 @@
 //             uri,
 //             method,
 //             data,
-//             other,
-//             callback
+//             callback,
+//             other
 //         )
 // >>>> >>>> >>>> >>>>
 // #before
@@ -745,7 +745,7 @@
                     break;
             }
         },
-        response:(uri,method,data,other,callback)=>{
+        response:(uri,method,data,callback,other)=>{
             const result={
                 uri:uri,
                 method:method,
