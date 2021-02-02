@@ -208,34 +208,17 @@
             /*🔴*/cli(){},
             /*🔴*/cli_emulator(){},
         // graphical user interface
-            /*🟠*/create_element(...argument){
-                // \<string,> single mode\<element><=machine_tool.create_element(
-                //     tag<string,/false,'',undefined/='div'>,
-                //     attribute<{key:'value'...},/false,'',undefined/=false>,
-                //     insert_element<element,/false,'',undefined/=false>,
-                //     insert_position<'beforebegin','afterbegin','beforeend','afterend',/false,'',undefined/='beforeend'>,
-                //     content<string,element,/false,'',undefined/=false>,
-                //     callback<function(<element>),/false,'',undefined/=false>
-                // )
-                // \<elements,> tree mode\<elements><=machine_tool.create_element(
-                //     data<{
-                //         name_class<name_class,'name_class class2','',' class class2'>:{
-                //             <element:[
-                //                 tag<string,/false,'',undefined/='div'>,
-                //                 attribute<{key:'value'...},/false,'',undefined/=false>,
-                //                 content<string,element,/false,'',undefined/=false>
-                //             ],/false,'',undefined/=false>,
-                //             <function:function(<elements>)\this.element===elements.name_class\,/false,'',undefined/=false>
-                //         }
-                //     },/false,'',undefined/='div'\single mode\>,
-                //     insert_element<element,/false,'',undefined/=false>,
-                //     insert_position<'beforebegin','afterbegin','beforeend','afterend',/false,'',undefined/='beforeend'>,
-                //     elements<elements,/false,'',undefined/=elements>,
-                //     callback<function(<elements>),/false,'',undefined/=false>
-                // )
+            /*🟢*/create_element(...argument){
                 switch(typeof argument[0]){
                     case'string':
                         {
+                            // single mode
+                            //     tag<string,undefined='div'>,
+                            //     attribute<{key:'value'...},undefined=false>,
+                            //     insert_element<element,undefined=false>,
+                            //     insert_position<'beforebegin','afterbegin','beforeend','afterend',undefined='beforeend'>,
+                            //     content<string,element,undefined=false>,
+                            //     callback<function(result_element),undefined=false>
                             let tag=argument[0];
                             const attribute=argument[1];
                             const insert_element=argument[2];
@@ -274,6 +257,21 @@
                         break;
                     case'object':
                         {
+                            // tree mode
+                            //     data<{
+                            //         name_class<name_class,'name_class class2','',' class',' class class2'>:{
+                            //             <element:[
+                            //                 tag<string,undefined='div'>,
+                            //                 attribute<{key:'value'...},undefined=false>,
+                            //                 content<string,element,undefined=false>
+                            //             ],undefined=false>,
+                            //             <function:function(result_elements)/* this.element===result_elements.name_class */,undefined=false>
+                            //         }
+                            //     },undefined='div'>,
+                            //     insert_element<element,undefined=false>,
+                            //     insert_position<'beforebegin','afterbegin','beforeend','afterend',undefined='beforeend'>,
+                            //     result_elements<result_elements,undefined=result_elements>,
+                            //     callback<function(result_elements),undefined=false>
                             const data=argument[0];
                             const insert_element=argument[1];
                             let insert_position=argument[2];
@@ -442,19 +440,19 @@
                             switch(action){
                                 case'add':
                                     {
-                                        element.observe_intersection=new window.IntersectionObserver((entries)=>{
+                                        element.machine_tool_listen_element_observe_intersection=new window.IntersectionObserver((entries)=>{
                                             window.console.log(entries);
                                             entries.forEach((entry)=>{
                                                 window.console.log(entry);
                                             });
                                         },option);
-                                        element.observe_intersection.observe(element);
+                                        element.machine_tool_listen_element_observe_intersection.observe(element);
                                     }
                                     break;
                                 case'remove':
                                     {
-                                        element.observe_intersection.disconnect();
-                                        delete element.observe_intersection;
+                                        element.machine_tool_listen_element_observe_intersection.disconnect();
+                                        delete element.machine_tool_listen_element_observe_intersection;
                                     }
                                     break;
                                 default:
@@ -508,44 +506,36 @@
                 }
             },
             /*🟠*/switch_state(...argument){
-                // \<element,> base mode\machine_tool.switch_state(
-                //     element<element>,
-                //     one<string,/false,'',undefined/=''>,
-                //     two<string,/false,'',undefined/=''>,
-                //     set_one<true,/false,'',undefined/=false>,
-                //     two_wait<number,/false,'',undefined/=0>,
-                //     callback<function,/false,'',undefined/=()=>{}>
-                // )
-                // \<element,> flash mode\machine_tool.switch_state(element,<<''>>,two,<<true>>,two_wait,callback)
-                // \<array\[<'target','tab'>,]\,> group mode\machine_tool.switch_state(
-                //     [
-                //         'target',[
-                //             [string<'open'>,string<'close'>,action<'open','close','auto'>,<boolean><=condition<function>\open\,<boolean><=condition<function>\close\,element...]...,
-                //             [string<'open'>,string<'close'>,element...]
-                //         ],
-                //         'tab',[
-                //             [,element...]
-                //             [<>,element...]
-                //         ]
-                //     ]
-                // )
                 if(argument[0]instanceof window.HTMLElement){
+                    // one mode
+                    //     base mode
+                    //         element<element>,
+                    //         one<string,undefined=''>,
+                    //         two<string,undefined=''>,
+                    //         set_one<boolean,undefined=false>,
+                    //         two_wait<number,undefined=0>,
+                    //         callback<function,undefined=()=>{}>
+                    //     flash mode
+                    //         (element,'',two,true,two_wait,callback)
                     const element=argument[0];
-                    const one=argument[1];
+                    let one=argument[1];
                     let two=argument[2];
                     let set_one=argument[3];
                     let two_wait=argument[4];
                     let callback=argument[5];
-                    if(typeof two!=='string'){
+                    if(!one){
+                        one='';
+                    }
+                    if(!two){
                         two='';
                     }
                     if(set_one!==true){
                         set_one=false;
                     }
-                    if(typeof two_wait!=='number'){
+                    if(!two_wait){
                         two_wait=0;
                     }
-                    if(typeof callback!=='function'){
+                    if(!callback){
                         callback=()=>{};
                     }
                     if(two){
@@ -597,6 +587,18 @@
                     }
                 }else{
                     if(window.Array.isArray(argument[0])){
+                        // two mode
+                        //     group mode
+                        //         [
+                        //             'target',[
+                        //                 [string<'open'>,string<'close'>,action<'open','close','auto'>,<boolean><=condition<function>/open/,<boolean><=condition<function>/close/,element...]...,
+                        //                 [string<'open'>,string<'close'>,element...]
+                        //             ],
+                        //             'tab',[
+                        //                 [,element...],
+                        //                 [,element...]
+                        //             ]
+                        //         ]
                         let data=argument[0];
                         switch(data[0]){
                             case'target':
@@ -767,6 +769,7 @@
                 return result;
             },
             /*🔴*/route(){},
+            /*🔴*/extract(){},
             /*🔴*/middleware(){},
             /*🔴*/static_file(){}
     };
