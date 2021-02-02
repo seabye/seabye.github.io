@@ -6,8 +6,8 @@
     // machine_tool
     import{machine_tool}from'/link/machine_tool.js';
     // Google Analytics
-    machine_tool.create('script',{async:'',src:'https://www.googletagmanager.com/gtag/js?id=G-SBCF7D104D'},window.document.head);
-    machine_tool.create('script',false,window.document.head,false,`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-SBCF7D104D');`);
+    machine_tool.create_element('script',{async:'',src:'https://www.googletagmanager.com/gtag/js?id=G-SBCF7D104D'},window.document.head);
+    machine_tool.create_element('script',null,window.document.head,null,`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-SBCF7D104D');`);
 // #variable
 // #method
 // #build

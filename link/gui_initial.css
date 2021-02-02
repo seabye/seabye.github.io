@@ -1,23 +1,24 @@
 @charset "UTF-8";
 /* <<<< <<<< <<<< <<<< */
-/* Machine Before */
+/* GUI Initial */
 /* for Browser */
+/* gui_initial.css */
 /* ==== ==== ==== ==== */
 /*
-    #build
-        sc_cr .sc_cr
-        #state .sc_cr.sc_mk
-        #child .sc_cr>div .sc_cr>div.sc_mk
     ic_ / initial css
     sc_ / style.css
     _ve_ / variable
-    _me_ / module
+    _md_ / method
     _cr\_ / container
     _cc_ / child container
     _mk\_ / mark \ :hov .cls state
     _an_ / animation
     _nr_ / navigator
     _dg\_ / debug
+    #build
+        sc_cr .sc_cr
+        #state .sc_cr.sc_mk
+        #child .sc_cr>div .sc_cr>div.sc_mk
 */
 /* >>>> >>>> >>>> >>>> */
 /* #before */
