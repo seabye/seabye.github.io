@@ -47,25 +47,13 @@
                 }
             };
         },
-        loop:function(condition_function,callback,wait,count,count_callback){
-            if(typeof wait!=='number'){
-                wait=1000/24;
-            }
-            if(typeof count==='number'&&typeof count_callback==='function'){
-                if(count!==0){
-                    count-=1;
-                }else{
-                    return count_callback();
-                }
-            }
+        simple_loop(condition_function,callback,wait=1000/24){
             if(condition_function()){
                 return callback();
             }else{
-                return new window.Promise((resolve)=>{
-                    window.setTimeout(()=>{
-                        resolve(this.loop(condition_function,callback,wait,count,count_callback));
-                    },wait);
-                });
+                window.setTimeout(()=>{
+                    this.simple_loop(condition_function,callback,wait);
+                },wait);
             }
         }
     };
@@ -94,7 +82,7 @@
         }
         // 🟢 opacity
         {
-            machine_tool.loop(()=>{
+            machine_tool.simple_loop(()=>{
                 let result=false;
                 for(const item of window.document.documentElement.children){
                     if(item.localName==='body'){
@@ -107,7 +95,7 @@
                 window.document.body.style.setProperty('opacity','0');
             },1000/60);
             window.addEventListener('load',()=>{
-                machine_tool.loop(()=>{
+                machine_tool.simple_loop(()=>{
                     let result=false;
                     if(window.document.body.style.getPropertyValue('opacity')==='0'){
                         result=true;
@@ -199,7 +187,7 @@
         // 🟢 tabindex
         {
             window.document.documentElement.setAttribute('tabindex','-1');
-            machine_tool.loop(()=>{
+            machine_tool.simple_loop(()=>{
                 let result=false;
                 for(const item of window.document.documentElement.children){
                     if(item.localName==='body'){

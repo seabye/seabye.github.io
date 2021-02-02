@@ -53,6 +53,15 @@
                     }
                 };
             },
+            /*🟢*/simple_loop(condition_function,callback,wait=1000/24){
+                if(condition_function()){
+                    return callback();
+                }else{
+                    window.setTimeout(()=>{
+                        this.simple_loop(condition_function,callback,wait);
+                    },wait);
+                }
+            },
             /*🟠*/async loop(condition,callback=null,wait=null,count=null,count_callback=null){
                 // machine_tool.loop(
                 //     <\!!result\><=condition<function>,
@@ -771,10 +780,10 @@
             //         return 22;
             //     }
             // ));
-            // machine_tool.listen_element(window.document.documentElement,'add','observer_intersection',()=>{
+            // machine_tool.listen_element('add',window.document.documentElement,'observer_intersection',()=>{
             //     window.console.log('???');
             // },{});
-            // machine_tool.listen_element(window.document.documentElement,'add','observer_resize',()=>{
+            // machine_tool.listen_element('add',window.document.documentElement,'observer_resize',()=>{
             //     window.console.log('???');
             // });
             // machine_tool.switch_state(['target',[]]);

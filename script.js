@@ -12,7 +12,7 @@
 // #method
 // #build
     // element
-    machine_tool.loop(()=>{
+    machine_tool.simple_loop(()=>{
         let result=false;
         for(const item of window.document.documentElement.children){
             if(item.localName==='body'){
