@@ -656,33 +656,33 @@
                                         }
                                         this.callback=callback;
                                     }
-                                    #popstate=(data)=>{
+                                    _popstate=(data)=>{
                                         this.callback({
                                             type:data.type,
                                             path:machine_tool.url_path()
                                         });
                                     }
-                                    #pushState=(data)=>{
+                                    _pushState=(data)=>{
                                         this.callback({
                                             type:data.type,
                                             path:data.pushState.replace()
                                         });
                                     }
-                                    #replaceState=(data)=>{
+                                    _replaceState=(data)=>{
                                         this.callback({
                                             type:data.type,
                                             path:data.replaceState.replace()
                                         });
                                     }
                                     add(){
-                                        window.addEventListener('popstate',this.#popstate);
-                                        window.addEventListener('pushState',this.#pushState);
-                                        window.addEventListener('replaceState',this.#replaceState);
+                                        window.addEventListener('popstate',this._popstate);
+                                        window.addEventListener('pushState',this._pushState);
+                                        window.addEventListener('replaceState',this._replaceState);
                                     }
                                     remove(){
-                                        window.removeEventListener('popstate',this.#popstate);
-                                        window.removeEventListener('pushState',this.#pushState);
-                                        window.removeEventListener('replaceState',this.#replaceState);
+                                        window.removeEventListener('popstate',this._popstate);
+                                        window.removeEventListener('pushState',this._pushState);
+                                        window.removeEventListener('replaceState',this._replaceState);
                                     }
                                 }
                                 this.listen_url[id]=new template(callback);
@@ -778,21 +778,21 @@
     // machine_tool
     if(window.document?.documentElement){
         (async()=>{
-            // window.console.log(await machine_tool.loop(
-            //     ()=>{
-            //         return false;
-            //     },
-            //     ()=>{
-            //         window.console.log('1');
-            //         return 11;
-            //     },
-            //     1000,
-            //     2,
-            //     ()=>{
-            //         window.console.log('2');
-            //         return 22;
-            //     }
-            // ));
+            window.console.log(await machine_tool.loop(
+                ()=>{
+                    return false;
+                },
+                ()=>{
+                    window.console.log('1');
+                    return 11;
+                },
+                1000,
+                2,
+                ()=>{
+                    window.console.log('2');
+                    return 22;
+                }
+            ));
             // window.console.log(machine_tool.uuid_36_to_uuid_22('8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3'));
             // window.console.log(machine_tool.uuid_22_to_uuid_36('jvZe6aA5S_Kks2h_zB88ww'));
             // window.console.log(machine_tool.string_to_base64_url_safe_no_pad('8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3'));
@@ -803,8 +803,8 @@
             // machine_tool.listen_element('add',window.document.documentElement,'observe_resize',()=>{
             //     window.console.log('???');
             // });
-            // machine_tool.switch_state(['target',[]]);
-            // machine_tool.switch_state(['tab',[]]);
+            machine_tool.switch_state(['target',[]]);
+            machine_tool.switch_state(['tab',[]]);
             // machine_tool.listen_url('add',(data)=>{
             //     window.console.log(data);
             // });
