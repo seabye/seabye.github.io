@@ -47,12 +47,12 @@
                 }
             };
         },
-        simple_loop(condition_function,callback,wait=1000/24){
-            if(condition_function()){
+        simple_loop(condition,callback,wait=1000/24){
+            if(condition()){
                 return callback();
             }else{
                 window.setTimeout(()=>{
-                    this.simple_loop(condition_function,callback,wait);
+                    this.simple_loop(condition,callback,wait);
                 },wait);
             }
         }
