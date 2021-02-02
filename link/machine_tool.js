@@ -62,21 +62,11 @@
                     },wait);
                 }
             },
-            /*🟠*/async loop(condition,callback=null,wait=null,count=null,count_callback=null){
-                // machine_tool.loop(
-                //     <\!!result\><=condition<function>,
-                //     <\result\,undefined><=callback(<\!!result\>)<function,/false,'',undefined/=undefined>,
-                //     wait<number,/false,'',undefined/=1000/24>,
-                //     count<number,/false,'',undefined/=undefined>,
-                //     <\result\,undefined>!async<=count_callback<function,/false,'',undefined/=undefined>
-                // )=>result
-                if(wait===null){
-                    wait=1000/24;
-                }
+            /*🟠*/async loop(condition,callback,wait=1000/24,count,count_callback){
                 const run=async()=>{
                     const condition_result=await condition();
                     if(condition_result){
-                        if(callback==='function'){
+                        if(callback){
                             return callback(condition_result);
                         }else{
                             return condition_result;
@@ -95,7 +85,7 @@
                         count-=1;
                         return await run();
                     }else{
-                        if(typeof count_callback==='function'){
+                        if(count_callback){
                             return count_callback();
                         }
                     }
@@ -106,7 +96,7 @@
             /*🟢*/time_out(callback,wait=1000/24){
                 return new window.Promise((resolve)=>{
                     window.setTimeout(()=>{
-                        if(callback==='function'){
+                        if(typeof callback==='function'){
                             resolve(callback());
                         }else{
                             resolve(callback);
@@ -364,10 +354,7 @@
                         break;
                 }
             },
-            /*🟠*/listen_element(action,element,type,callback,option){
-                if(!window.Object.prototype.toString.call(option).match('Object')){
-                    option={};
-                }
+            /*🟠*/listen_element(action,element,type,callback,option={}){
                 switch(type){
                     case'pointer_up':
                         {
@@ -436,7 +423,7 @@
                             }
                         }
                         break;
-                    case'observer_mutation':
+                    case'observe_mutation':
                         {
                             switch(action){
                                 case'add':
@@ -450,24 +437,24 @@
                             }
                         }
                         break;
-                    case'observer_intersection':
+                    case'observe_intersection':
                         {
                             switch(action){
                                 case'add':
                                     {
-                                        element.observer_intersection=new window.IntersectionObserver((entries)=>{
+                                        element.observe_intersection=new window.IntersectionObserver((entries)=>{
                                             window.console.log(entries);
                                             entries.forEach((entry)=>{
                                                 window.console.log(entry);
                                             });
                                         },option);
-                                        element.observer_intersection.observe(element);
+                                        element.observe_intersection.observe(element);
                                     }
                                     break;
                                 case'remove':
                                     {
-                                        element.observer_intersection.disconnect();
-                                        delete element.observer_intersection;
+                                        element.observe_intersection.disconnect();
+                                        delete element.observe_intersection;
                                     }
                                     break;
                                 default:
@@ -475,24 +462,24 @@
                             }
                         }
                         break;
-                    case'observer_resize':
+                    case'observe_resize':
                         {
                             switch(action){
                                 case'add':
                                     {
-                                        element.machine_tool_listen_element_observer_resize=new window.ResizeObserver((entries)=>{
+                                        element.machine_tool_listen_element_observe_resize=new window.ResizeObserver((entries)=>{
                                             window.console.log(entries);
                                             entries.forEach((entry)=>{
                                                 window.console.log(entry);
                                             });
                                         });
-                                        element.machine_tool_listen_element_observer_resize.observe(element);
+                                        element.machine_tool_listen_element_observe_resize.observe(element);
                                     }
                                     break;
                                 case'remove':
                                     {
-                                        element.machine_tool_listen_element_observer_resize.disconnect();
-                                        delete element.machine_tool_listen_element_observer_resize;
+                                        element.machine_tool_listen_element_observe_resize.disconnect();
+                                        delete element.machine_tool_listen_element_observe_resize;
                                     }
                                     break;
                                 default:
@@ -713,8 +700,8 @@
                             }
                         }
                     }else{
-                        if('network_storageFullscreen'in window.top.document.documentElement){
-                            element.network_storageFullscreen();
+                        if('requestFullscreen'in window.top.document.documentElement){
+                            element.requestFullscreen();
                         }else{
                             if('webkitRequestFullScreen'in window.top.document.documentElement){
                                 element.webkitRequestFullScreen();
@@ -731,8 +718,8 @@
                             }
                         }
                     }else{
-                        if('network_storageFullscreen'in window.document.documentElement){
-                            element.network_storageFullscreen();
+                        if('requestFullscreen'in window.document.documentElement){
+                            element.requestFullscreen();
                         }else{
                             if('webkitRequestFullScreen'in window.document.documentElement){
                                 element.webkitRequestFullScreen();
@@ -756,6 +743,20 @@
             },
         // application programming interface
             /*🔴*/listen_port(){},
+            /*🔴*/port_receive(uri,method,data,callback,other_data){
+                const result={
+                    uri:uri,
+                    method:method,
+                    data:data
+                };
+                if(other_data){
+                    window.Object.assign(result,other_data);
+                }
+                if(callback){
+                    callback(result);
+                }
+                return result;
+            },
             /*🔴*/route(){},
             /*🔴*/middleware(){},
             /*🔴*/static_file(){}
@@ -780,23 +781,24 @@
             //         return 22;
             //     }
             // ));
-            // machine_tool.listen_element('add',window.document.documentElement,'observer_intersection',()=>{
+            // window.console.log(machine_tool.uuid_36_to_uuid_22('8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3'));
+            // window.console.log(machine_tool.uuid_22_to_uuid_36('jvZe6aA5S_Kks2h_zB88ww'));
+            // window.console.log(machine_tool.string_to_base64_url_safe_no_pad('8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3'));
+            // window.console.log(machine_tool.base64_url_safe_no_pad_to_string('jvZe6aA5S_Kks2h_zB88ww'));
+            // machine_tool.listen_element('add',window.document.documentElement,'observe_intersection',()=>{
             //     window.console.log('???');
             // },{});
-            // machine_tool.listen_element('add',window.document.documentElement,'observer_resize',()=>{
+            // machine_tool.listen_element('add',window.document.documentElement,'observe_resize',()=>{
             //     window.console.log('???');
             // });
             // machine_tool.switch_state(['target',[]]);
             // machine_tool.switch_state(['tab',[]]);
-            // window.console.log(await machine_tool.network_storage());
-            // window.console.log(machine_tool.uuid_22_to_uuid_36('VXyAGF4hS3SLsJBA4ujq0Q'));
             // machine_tool.listen_url('add',(data)=>{
             //     window.console.log(data);
             // });
             // window.history.pushState(null,null,'/x/');
             // window.history.pushState(null,null,'/');
             // window.history.replaceState(null,null,window.location.pathname);
-            // ???
         })();
     }
 // #after
