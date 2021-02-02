@@ -80,7 +80,6 @@
                     }
                 };
                 if(typeof count==='number'){
-                    count=window.parseInt(window.Math.abs(count));
                     if(count!==0){
                         count-=1;
                         return await run();
