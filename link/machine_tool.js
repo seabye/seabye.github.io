@@ -107,7 +107,7 @@
             /*🟢*/observe_function(origin_function,event_type,event_option={},who_listen,data_plus=()=>{}){
                 const insert_event=new window.CustomEvent(event_type,event_option);
                 return function(...argument){
-                    insert_event.arguments=argument;
+                    insert_event.function_argument=argument;
                     insert_event[event_type]=data_plus.apply(this,argument);
                     who_listen.dispatchEvent(insert_event);
                     return origin_function.apply(this,argument);
@@ -643,25 +643,34 @@
                                 class template{
                                     constructor(callback){
                                         if(window.history.pushState.name){
-                                            window.history.pushState=machine_tool.observe_function(window.history.pushState,'pushState',{detail:'detail'},window,(...argument)=>{
+                                            window.history.pushState=machine_tool.observe_function(window.history.pushState,'pushState',undefined,window,(...argument)=>{
                                                 return argument[2];
                                             });
                                         }
                                         if(window.history.replaceState.name){
-                                            window.history.replaceState=machine_tool.observe_function(window.history.replaceState,'replaceState',{detail:'detail'},window,(...argument)=>{
+                                            window.history.replaceState=machine_tool.observe_function(window.history.replaceState,'replaceState',undefined,window,(...argument)=>{
                                                 return argument[2];
                                             });
                                         }
                                         this.callback=callback;
                                     }
-                                    #popstate=()=>{
-                                        this.callback(machine_tool.url_path());
+                                    #popstate=(data)=>{
+                                        this.callback({
+                                            type:data.type,
+                                            path:machine_tool.url_path()
+                                        });
                                     }
                                     #pushState=(data)=>{
-                                        this.callback(data.pushState.replace());
+                                        this.callback({
+                                            type:data.type,
+                                            path:data.pushState.replace()
+                                        });
                                     }
                                     #replaceState=(data)=>{
-                                        this.callback(data.replaceState.replace());
+                                        this.callback({
+                                            type:data.type,
+                                            path:data.replaceState.replace()
+                                        });
                                     }
                                     add(){
                                         window.addEventListener('popstate',this.#popstate);
@@ -793,12 +802,12 @@
             // });
             // machine_tool.switch_state(['target',[]]);
             // machine_tool.switch_state(['tab',[]]);
-            // machine_tool.listen_url('add',(data)=>{
-            //     window.console.log(data);
-            // });
-            // window.history.pushState(null,null,'/x/');
-            // window.history.pushState(null,null,'/');
-            // window.history.replaceState(null,null,window.location.pathname);
+            machine_tool.listen_url('add',(data)=>{
+                window.console.log(data);
+            });
+            window.history.pushState(null,null,'/x/');
+            window.history.pushState(null,null,'/');
+            window.history.replaceState(null,null,window.location.pathname);
         })();
     }
 // #after
