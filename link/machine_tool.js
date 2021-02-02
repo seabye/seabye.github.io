@@ -802,12 +802,12 @@
             // });
             // machine_tool.switch_state(['target',[]]);
             // machine_tool.switch_state(['tab',[]]);
-            machine_tool.listen_url('add',(data)=>{
-                window.console.log(data);
-            });
-            window.history.pushState(null,null,'/x/');
-            window.history.pushState(null,null,'/');
-            window.history.replaceState(null,null,window.location.pathname);
+            // machine_tool.listen_url('add',(data)=>{
+            //     window.console.log(data);
+            // });
+            // window.history.pushState(null,null,'/x/');
+            // window.history.pushState(null,null,'/');
+            // window.history.replaceState(null,null,window.location.pathname);
         })();
     }
 // #after
