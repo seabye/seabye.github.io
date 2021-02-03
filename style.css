@@ -4,5 +4,9 @@
 /* #variable */
 /* #method */
 /* #build */
+    /* ??? */
+    a:hover {
+        text-shadow: 0 0 10px #FFFFFF;
+    }
 /* #debug */
 /* #after */

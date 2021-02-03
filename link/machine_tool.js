@@ -103,7 +103,7 @@
                     },wait);
                 });
             },
-            /*🟢*/observe_function(origin_function,event_type,event_option={},who_listen,data_plus=()=>{}){
+            /*🟠*/observe_function(origin_function,event_type,event_option={},who_listen,data_plus=()=>{}){
                 const insert_event=new window.CustomEvent(event_type,event_option);
                 return function(...argument){
                     insert_event.function_argument=argument;
@@ -642,7 +642,7 @@
             /*🟢*/url_path(){
                 return window.location.href.replace(window.location.origin,'');
             },
-            /*🟢*/listen_url(action,callback){
+            /*🟠*/listen_url(action,callback){
                 const id='id_'+this.java_string_hash_code(callback.toString()).toString().replace(/[^0-9]/ig,'');
                 switch(action){
                     case'add':
@@ -700,6 +700,9 @@
                         {
                             this.listen_url[id].remove();
                             delete this.listen_url[id];
+                            if(!window.Object.keys(this.listen_url).length){
+                                // ???
+                            }
                         }
                         break;
                     default:
@@ -784,21 +787,21 @@
     // machine_tool
     if(window.document?.documentElement){
         (async()=>{
-            window.console.log(await machine_tool.loop(
-                ()=>{
-                    return false;
-                },
-                ()=>{
-                    window.console.log('1');
-                    return 11;
-                },
-                1000,
-                2,
-                ()=>{
-                    window.console.log('2');
-                    return 22;
-                }
-            ));
+            // window.console.log(await machine_tool.loop(
+            //     ()=>{
+            //         return false;
+            //     },
+            //     ()=>{
+            //         window.console.log('1');
+            //         return 11;
+            //     },
+            //     1000,
+            //     2,
+            //     ()=>{
+            //         window.console.log('2');
+            //         return 22;
+            //     }
+            // ));
             // window.console.log(machine_tool.uuid_36_to_uuid_22('8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3'));
             // window.console.log(machine_tool.uuid_22_to_uuid_36('jvZe6aA5S_Kks2h_zB88ww'));
             // window.console.log(machine_tool.string_to_base64_url_safe_no_pad('8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3'));
