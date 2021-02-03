@@ -39,7 +39,7 @@
                     <div style="color: var(--ic_ve_color_black6); transform: rotateY(-30deg);">
                         <a href="//w3daze.com">🍁w3daze.com</a>
                     </div>
-                    <div style="font-size: 125%; color: rgba(255,0,0,0.125);">Hello, World!</div>
+                    <div style="font-size: 125%; color: rgba(255,0,0,0.1875);">Hello, World!</div>
                     <div style="transform: rotateY(30deg);">
                         <a href="//luojia.me">🍄luojia.me</a>
                     </div>
