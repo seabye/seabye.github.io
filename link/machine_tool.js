@@ -271,7 +271,7 @@
                             //                 attribute<{key:'value'...},undefined=false>,
                             //                 content<string,element,undefined=false>
                             //             ],undefined=false>,
-                            //             <function:function(result_elements)/* this.element===result_elements.name_class */,undefined=false>
+                            //             <function:function(result_elements)/this.element===result_elements.name_class/,undefined=false>
                             //         }
                             //     },undefined='div'>,
                             //     insert_element<element,undefined=false>,
@@ -314,7 +314,7 @@
                                             data[item].element[1]={class:item.trim()};
                                         }
                                     }
-                                    const element=this.create_element(data[item].element[0],data[item].element[1]?data[item].element[1]:false,insert_element,insert_position,data[item].element[2]?data[item].element[2]:false);
+                                    const element=this.create_element(data[item].element[0],data[item].element[1]?data[item].element[1]:undefined,insert_element,insert_position,data[item].element[2]?data[item].element[2]:undefined);
                                     if(item.split(' ')[0]){
                                         elements[item.split(' ')[0]]=data[item].element=element;
                                     }else{
@@ -513,16 +513,15 @@
             },
             /*🟠*/switch_state(...argument){
                 if(argument[0]instanceof window.HTMLElement){
-                    // one mode
-                    //     base mode
-                    //         element<element>,
-                    //         one<string,undefined=''>,
-                    //         two<string,undefined=''>,
-                    //         set_one<boolean,undefined=false>,
-                    //         two_wait<number,undefined=0>,
-                    //         callback<function,undefined=()=>{}>
-                    //     flash mode
-                    //         (element,'',two,true,two_wait,callback)
+                    // base mode
+                    //     element<element>,
+                    //     one<string,undefined=''>,
+                    //     two<string,undefined=''>,
+                    //     set_one<boolean,undefined=false>,
+                    //     two_wait<number,undefined=0>,
+                    //     callback<function,undefined=()=>{}>
+                    // flash mode
+                    //     (element,'',two,true,two_wait,callback)
                     const element=argument[0];
                     let one=argument[1];
                     let two=argument[2];
@@ -593,28 +592,29 @@
                     }
                 }else{
                     if(window.Array.isArray(argument[0])){
-                        // two mode
-                        //     group mode
-                        //         [
-                        //             'target',[
-                        //                 [string<'open'>,string<'close'>,action<'open','close','auto'>,<boolean><=condition<function>/open/,<boolean><=condition<function>/close/,element...]...,
-                        //                 [string<'open'>,string<'close'>,element...]
-                        //             ],
-                        //             'tab',[
-                        //                 [,element...],
-                        //                 [,element...]
-                        //             ]
-                        //         ]
-                        let data=argument[0];
-                        switch(data[0]){
+                        switch(argument[0][0]){
                             case'target':
                                 {
-                                    data=data[1];
+                                    // target mode
+                                    //     [
+                                    //         'target',[
+                                    //             [string<'open'>,string<'close'>,action<'open','close','auto'>,<boolean><=condition<function>/open/,<boolean><=condition<function>/close/,element...]...,
+                                    //             [string<'open'>,string<'close'>,element...]
+                                    //         ]
+                                    //     ]
+                                    const data=argument[0][1];
                                 }
                                 break;
                             case'tab':
                                 {
-                                    data=data[1];
+                                    // tab mode
+                                    //     [
+                                    //         'tab',[
+                                    //             [,element...],
+                                    //             [,element...]
+                                    //         ]
+                                    //     ]
+                                    const data=argument[0][1];
                                 }
                                 break;
                             default:
@@ -812,8 +812,70 @@
             // machine_tool.listen_element('add',window.document.documentElement,'observe_resize',()=>{
             //     window.console.log('???');
             // });
-            machine_tool.switch_state(['target',[]]);
-            machine_tool.switch_state(['tab',[]]);
+            machine_tool.create_element({
+                test:{
+                    element:[,{style:'position: fixed; left: 0; top: 0; width: 128px; height: 192px; background-color: gray; display: flex; justify-content: center; align-items: center; flex-direction: column;'}],
+                    function(elements){
+                        window.console.log(elements);
+                        machine_tool.switch_state([
+                            'target',
+                            [
+                                'test_close',
+                                'test_open',
+                                'test_close',
+                                elements.target,
+                                [
+                                    ['auto',elements.red,()=>{}],
+                                    ['open',elements.green,()=>{}],
+                                    ['close',elements.blue,()=>{}]
+                                ]
+                            ]
+                        ]);
+                    },
+                    target:{
+                        element:[,{style:'width: 100%; height: 48px; background-color: white;'}]
+                    },
+                    red:{
+                        element:[,{style:'width: 75%; height: 48px; background-color: red;'}]
+                    },
+                    green:{
+                        element:[,{style:'width: 75%; height: 48px; background-color: green;'}]
+                    },
+                    blue:{
+                        element:[,{style:'width: 75%; height: 48px; background-color: blue;'}]
+                    }
+                },
+            },window.document.body);
+            machine_tool.create_element({
+                test:{
+                    element:[,{style:'position: fixed; left: 128px; top: 0; width: 128px; height: 192px; background-color: gray; display: flex; justify-content: center; align-items: center; flex-direction: column;'}],
+                    function(elements){
+                        window.console.log(elements);
+                        machine_tool.switch_state([
+                            'tab',
+                            []
+                        ]);
+                    },
+                    red_target:{
+                        element:[,{style:'width: 100%; height: 32px; background-color: white;'}]
+                    },
+                    red_button:{
+                        element:[,{style:'width: 100%; height: 32px; background-color: red;'}]
+                    },
+                    green_target:{
+                        element:[,{style:'width: 75%; height: 32px; background-color: white;'}]
+                    },
+                    green_button:{
+                        element:[,{style:'width: 75%; height: 32px; background-color: green;'}]
+                    },
+                    blue_target:{
+                        element:[,{style:'width: 50%; height: 32px; background-color: white;'}]
+                    },
+                    blue_button:{
+                        element:[,{style:'width: 50%; height: 32px; background-color: blue;'}]
+                    }
+                },
+            },window.document.body);
             // machine_tool.listen_url('add',(data)=>{
             //     window.console.log(data);
             // });
