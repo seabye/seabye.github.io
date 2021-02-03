@@ -53,16 +53,16 @@
                     }
                 };
             },
-            /*🟢*/simple_loop(condition,callback,wait=1000/24){
+            /*🟢*/loop(condition,callback,wait=1000/24){
                 if(condition()){
                     return callback();
                 }else{
                     window.setTimeout(()=>{
-                        this.simple_loop(condition,callback,wait);
+                        this.loop(condition,callback,wait);
                     },wait);
                 }
             },
-            /*🟢*/async loop(condition,callback,wait=1000/24,count,count_callback){
+            /*🟢*/async aw_loop(condition,callback,wait=1000/24,count,count_callback){
                 const run=async()=>{
                     const condition_result=await condition();
                     if(condition_result){
@@ -74,7 +74,7 @@
                     }else{
                         return new window.Promise((resolve)=>{
                             window.setTimeout(()=>{
-                                resolve(this.loop(condition,callback,wait,count,count_callback));
+                                resolve(this.aw_loop(condition,callback,wait,count,count_callback));
                             },wait);
                         });
                     }
@@ -788,7 +788,7 @@
     // machine_tool
     if(window.document?.documentElement&&window.location.hostname==='localhost'){
         (async()=>{
-            window.console.log(await machine_tool.loop(
+            window.console.log(await machine_tool.aw_loop(
                 ()=>{
                     return false;
                 },
