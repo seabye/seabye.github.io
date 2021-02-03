@@ -785,7 +785,7 @@
 // #build
 // #debug
     // machine_tool
-    if(window.document?.documentElement){
+    if(window.document?.documentElement&&window.location.hostname==='localhost'){
         (async()=>{
             // window.console.log(await machine_tool.loop(
             //     ()=>{
