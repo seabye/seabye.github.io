@@ -160,6 +160,13 @@
                 }
                 return result;
             },
+            /*🟢*/run_object(object){
+                if(object){
+                    for(const item in object){
+                        object[item]();
+                    }
+                }
+            },
         // local data
             /*🔴*/file(){},
             /*🔴*/local_storage(){},

@@ -27,61 +27,65 @@
 // #method
     // machine_tool of machine_tool.js
     const machine_tool={
-        throttle(callback,wait=1000/24,first=false){
-            let timeout=null;
-            return function(...argument){
-                const set=()=>{
-                    timeout=window.setTimeout(()=>{
-                        timeout=null;
+        // base
+            /*🟢*/throttle(callback,wait=1000/24,first=false){
+                let timeout=null;
+                return function(...argument){
+                    const set=()=>{
+                        timeout=window.setTimeout(()=>{
+                            timeout=null;
+                            callback.apply(this,argument);
+                        },wait);
+                    };
+                    if(first){
+                        first=false;
                         callback.apply(this,argument);
-                    },wait);
-                };
-                if(first){
-                    first=false;
-                    callback.apply(this,argument);
-                    set();
-                }else{
-                    if(!timeout){
                         set();
+                    }else{
+                        if(!timeout){
+                            set();
+                        }
+                    }
+                };
+            },
+            /*🟢*/simple_loop(condition,callback,wait=1000/24){
+                if(condition()){
+                    return callback();
+                }else{
+                    window.setTimeout(()=>{
+                        this.simple_loop(condition,callback,wait);
+                    },wait);
+                }
+            },
+            /*🟢*/run_object(object){
+                if(object){
+                    for(const item in object){
+                        object[item]();
                     }
                 }
-            };
-        },
-        simple_loop(condition,callback,wait=1000/24){
-            if(condition()){
-                return callback();
-            }else{
-                window.setTimeout(()=>{
-                    this.simple_loop(condition,callback,wait);
-                },wait);
             }
-        }
     };
 // #build
     // gui_initial
-    {
-        // 🟢 dataset
-        let config={};
-        {
+    machine_tool.run_object({
+        /*🟢*/dataset(){
             for(const item of window.document.scripts){
                 if(item.dataset.gui_initial){
-                    config=window.JSON.parse(item.dataset.gui_initial.replace(/'/g,'"'));
+                    this.dataset.config=window.JSON.parse(item.dataset.gui_initial.replace(/'/g,'"'));
                     item.removeAttribute('data-gui_initial');
-                    config.head_gui_initial_js=item;
-                    config.head_gui_initial_css_href=item.getAttribute('src').replace('.js','.css');
+                    this.dataset.config.head_gui_initial_js=item;
+                    this.dataset.config.head_gui_initial_css_href=item.getAttribute('src').replace('.js','.css');
                     break;
                 }
             }
-        }
-        // 🟢 background color
-        {
-            window.document.documentElement.style.setProperty('background-color',`${window.matchMedia('(prefers-color-scheme:dark)').matches?config.background_color_dark?config.background_color_dark:'#000000':config.background_color_light?config.background_color_light:'#FFFFFF'}`);
+        },
+        /*🟢*/background$color(){
+            window.document.documentElement.style.setProperty('background-color',`${window.matchMedia('(prefers-color-scheme:dark)').matches?this.dataset.config.background_color_dark?this.dataset.config.background_color_dark:'#000000':this.dataset.config.background_color_light?this.dataset.config.background_color_light:'#FFFFFF'}`);
             window.addEventListener('load',()=>{
                 window.document.documentElement.style.removeProperty('background-color');
             },{once:true});
-        }
-        // 🟢 opacity
-        {
+        },
+        /*🟢*/opacity(){
             machine_tool.simple_loop(()=>{
                 let result=false;
                 for(const item of window.document.documentElement.children){
@@ -108,19 +112,17 @@
                     }
                 },1000/60);
             },{once:true});
-        }
-        // 🟢 service worker
-        {
-            if(config.service_worker&&'serviceWorker'in window.navigator){
-                window.navigator.serviceWorker.register(config.service_worker,{scope:'./'}).then((registration)=>{
+        },
+        /*🟢*/service$worker(){
+            if(this.dataset.config.service_worker&&'serviceWorker'in window.navigator){
+                window.navigator.serviceWorker.register(this.dataset.config.service_worker,{scope:'./'}).then((registration)=>{
                     window.console.log('#### Registration successful, scope is:',registration.scope);
                 }).catch((error)=>{
                     window.console.log('#### Service worker registration failed, error:',error);
                 });
             }
-        }
-        // 🟢 ic_nr / ic_ navigator
-        {
+        },
+        /*🟢*/ic_nr$ic_$navigator(){
             const user_agent=window.navigator.userAgent;
             const class_=window.document.documentElement.classList;
             if(user_agent.match('Unix')){class_.add('ic_nr_system_unix');}
@@ -134,43 +136,42 @@
             if(user_agent.match('Safari')&&!user_agent.match('Chrome')&&!user_agent.match('Edg')){class_.add('ic_nr_browser_safari');}
             if(user_agent.match('Chrome')&&!user_agent.match('Edg')){class_.add('ic_nr_browser_chrome');}
             if(user_agent.match('Edg')){class_.add('ic_nr_browser_edge');}
-        }
-        // 🟢 head
-        {
-            config.head_gui_initial_js.insertAdjacentHTML('beforebegin',`
+        },
+        /*🟢*/head(){
+            this.dataset.config.head_gui_initial_js.insertAdjacentHTML('beforebegin',`
                 <meta name="viewport" content="width=device-width,user-scalable=no,viewport-fit=cover">
                 <meta name="format-detection" content="address=no,email=no,telephone=no">
             `);
-            if(config.head_title||config.head_title===''){
-                config.head_gui_initial_js.insertAdjacentHTML('beforebegin',`<title>${config.head_title}</title>`);
+            if(this.dataset.config.head_title||this.dataset.config.head_title===''){
+                this.dataset.config.head_gui_initial_js.insertAdjacentHTML('beforebegin',`<title>${this.dataset.config.head_title}</title>`);
             }
-            config.head_gui_initial_js.insertAdjacentHTML('beforebegin',`<link rel="stylesheet" href="${config.head_gui_initial_css_href}">`);
-            if(config.head_style){
-                config.head_gui_initial_js.insertAdjacentHTML('beforebegin',`<link rel="stylesheet" href="${config.head_style}">`);
+            this.dataset.config.head_gui_initial_js.insertAdjacentHTML('beforebegin',`<link rel="stylesheet" href="${this.dataset.config.head_gui_initial_css_href}">`);
+            if(this.dataset.config.head_style){
+                this.dataset.config.head_gui_initial_js.insertAdjacentHTML('beforebegin',`<link rel="stylesheet" href="${this.dataset.config.head_style}">`);
             }
-            if(config.head_script){
+            if(this.dataset.config.head_script){
                 const element=window.document.createElement('script');
-                element.setAttribute('src',config.head_script);
+                element.setAttribute('src',this.dataset.config.head_script);
                 element.setAttribute('type','module');
                 window.document.head.insertAdjacentElement('beforeend',element);
             }
-            if(config.head_icon){
-                window.document.head.insertAdjacentHTML('beforeend',`<link rel="icon" type="image/png" href="${config.head_icon}">`);
+            if(this.dataset.config.head_icon){
+                window.document.head.insertAdjacentHTML('beforeend',`<link rel="icon" type="image/png" href="${this.dataset.config.head_icon}">`);
             }
             if(window.navigator.userAgent.match('Safari')&&!window.navigator.userAgent.match('Chrome')&&!window.navigator.userAgent.match('Edg')){
-                if(config.head_icon_apple){
-                    window.document.head.insertAdjacentHTML('beforeend',`<link rel="apple-touch-icon" href="${config.head_icon_apple}">`);
+                if(this.dataset.config.head_icon_apple){
+                    window.document.head.insertAdjacentHTML('beforeend',`<link rel="apple-touch-icon" href="${this.dataset.config.head_icon_apple}">`);
                 }
                 window.document.head.insertAdjacentHTML('beforeend',`
                     <meta name="apple-mobile-web-app-capable" content="yes">
                     <meta name="apple-mobile-web-app-status-bar-style" content="white">
                 `);
-                if(config.head_title||config.head_title===''){
-                    window.document.head.insertAdjacentHTML('beforeend',`<meta name="apple-mobile-web-app-title" content="${config.head_title}">`);
+                if(this.dataset.config.head_title||this.dataset.config.head_title===''){
+                    window.document.head.insertAdjacentHTML('beforeend',`<meta name="apple-mobile-web-app-title" content="${this.dataset.config.head_title}">`);
                 }
             }else{
                 const value=(matches)=>{
-                    return matches?config.head_theme_color_dark?config.head_theme_color_dark:'#212121':config.head_theme_color_light?config.head_theme_color_light:'#E1E1E1';
+                    return matches?this.dataset.config.head_theme_color_dark?this.dataset.config.head_theme_color_dark:'#212121':this.dataset.config.head_theme_color_light?this.dataset.config.head_theme_color_light:'#E1E1E1';
                 };
                 const element=window.document.createElement('meta');
                 element.setAttribute('name','theme-color');
@@ -180,12 +181,11 @@
                     theme_color.setAttribute('content',value(event.matches));
                 });
             }
-            if(config.head_manifest){
-                window.document.head.insertAdjacentHTML('beforeend',`<link rel="manifest" href="${config.head_manifest}">`);
+            if(this.dataset.config.head_manifest){
+                window.document.head.insertAdjacentHTML('beforeend',`<link rel="manifest" href="${this.dataset.config.head_manifest}">`);
             }
-        }
-        // 🟢 tabindex
-        {
+        },
+        /*🟢*/tabindex(){
             window.document.documentElement.setAttribute('tabindex','-1');
             machine_tool.simple_loop(()=>{
                 let result=false;
@@ -200,72 +200,66 @@
                 window.document.head.setAttribute('tabindex','-1');
                 window.document.body.setAttribute('tabindex','-1');
             },1000/60);
-        }
-        // 🟢 touch :hov
-        {
+        },
+        /*🟢*/touch$hov(){
             window.addEventListener('pointerdown',()=>{});
-        }
-        // 🟢 touchpad zoom
-        {
+        },
+        /*🟢*/touchpad$zoom(){
             window.addEventListener('wheel',(event)=>{
                 if(event.ctrlKey){
                     event.preventDefault();
                 }
             },{passive:false});
-        }
-        // 🟢 context menu
-        {
+        },
+        /*🟢*/context$menu(){
             window.addEventListener('contextmenu',(event)=>{
                 event.preventDefault();
             });
-        }
-        // 🟠 window orientation and size
-        {
-            {
-                const action=(event)=>{
-                    if(event.type==='orientationchange'){
-                        window.document.body.style.setProperty('display','none');
-                    }
-                    const set=(head)=>{
-                        window.document.documentElement.style.setProperty(`${head}-width`,`${window.innerWidth}px`);
-                        if(!window.navigator.userAgent.match('Mobile')||(window.navigator.userAgent.match('Mobile')&&!window.document.activeElement.localName.match(/input|textarea/))){
-                            window.document.documentElement.style.setProperty(`${head}-height`,`${window.innerHeight}px`);
-                        }
-                    };
-                    set('min');
-                    if(window.parseInt(window.document.documentElement.style.getPropertyValue('min-height'))<window.parseInt(window.document.documentElement.style.getPropertyValue('min-width'))){
-                        set('max');
-                        window.document.documentElement.classList.remove('ic_nr_orientation_portrait');
-                        window.document.documentElement.classList.add('ic_nr_orientation_landscape');
-                    }else{
-                        window.document.documentElement.style.removeProperty('max-width');
-                        window.document.documentElement.style.removeProperty('max-height');
-                        if(!window.document.documentElement.style[0]){
-                            window.document.documentElement.removeAttribute('style');
-                        }
-                        window.document.documentElement.classList.remove('ic_nr_orientation_landscape');
-                        window.document.documentElement.classList.add('ic_nr_orientation_portrait');
-                    }
-                    if(event.type==='orientationchange'){
-                        window.setTimeout(()=>{
-                            window.document.body.style.removeProperty('display');
-                            if(!window.document.body.style[0]){
-                                window.document.body.removeAttribute('style');
-                            }
-                        },350);
+        },
+        /*🟠*/window$orientation$and$size(){
+            const action=(event)=>{
+                if(event.type==='orientationchange'){
+                    window.document.body.style.setProperty('display','none');
+                }
+                const set=(head)=>{
+                    window.document.documentElement.style.setProperty(`${head}-width`,`${window.innerWidth}px`);
+                    if(!window.navigator.userAgent.match('Mobile')||(window.navigator.userAgent.match('Mobile')&&!window.document.activeElement.localName.match(/input|textarea/))){
+                        window.document.documentElement.style.setProperty(`${head}-height`,`${window.innerHeight}px`);
                     }
                 };
-                window.addEventListener('load',action,{once:true});
-                window.addEventListener('resize',machine_tool.throttle(action,1000/60));
-                window.addEventListener('resize',machine_tool.throttle(action,350*3));
-                window.addEventListener('orientationchange',(event)=>{
+                set('min');
+                if(window.parseInt(window.document.documentElement.style.getPropertyValue('min-height'))<window.parseInt(window.document.documentElement.style.getPropertyValue('min-width'))){
+                    set('max');
+                    window.document.documentElement.classList.remove('ic_nr_orientation_portrait');
+                    window.document.documentElement.classList.add('ic_nr_orientation_landscape');
+                }else{
+                    window.document.documentElement.style.removeProperty('max-width');
+                    window.document.documentElement.style.removeProperty('max-height');
+                    if(!window.document.documentElement.style[0]){
+                        window.document.documentElement.removeAttribute('style');
+                    }
+                    window.document.documentElement.classList.remove('ic_nr_orientation_landscape');
+                    window.document.documentElement.classList.add('ic_nr_orientation_portrait');
+                }
+                if(event.type==='orientationchange'){
                     window.setTimeout(()=>{
-                        action(event);
+                        window.document.body.style.removeProperty('display');
+                        if(!window.document.body.style[0]){
+                            window.document.body.removeAttribute('style');
+                        }
                     },350);
-                });
-                window.addEventListener('blur',action);
-                window.addEventListener('focus',action);
-            }
+                }
+            };
+            window.addEventListener('load',action,{once:true});
+            window.addEventListener('resize',machine_tool.throttle(action,1000/60));
+            window.addEventListener('resize',machine_tool.throttle(action,350*3));
+            window.addEventListener('orientationchange',(event)=>{
+                window.setTimeout(()=>{
+                    action(event);
+                },350);
+            });
+            window.addEventListener('blur',action);
+            window.addEventListener('focus',action);
             if(window.navigator.userAgent.match('Safari')&&!window.navigator.userAgent.match('Chrome')&&!window.navigator.userAgent.match('Edg')){
                 const action=()=>{
                     window.document.documentElement.scrollIntoView({behavior:'smooth',block:'start',inline:'start'});
@@ -278,9 +272,8 @@
                     window.setTimeout(action,350*3);
                 });
             }
-        }
-        // 🟠 form input focus scroll
-        {
+        },
+        /*🟠*/form$input$focus$scroll(){
             window.addEventListener('pointerdown',(event)=>{
                 if(!event.target.localName.match(/input|textarea/)&&window.document.activeElement.localName.match(/input|textarea/)){
                     window.document.activeElement.blur();
@@ -316,9 +309,8 @@
                     }
                 });
             }
-        }
-        // 🟠 partial scroll
-        {
+        },
+        /*🟠*/partial$scroll(){
             if(!window.CSS.supports('overscroll-behavior:contain')){
                 const action=()=>{
                     for(const item of window.document.querySelectorAll('*')){
@@ -343,7 +335,7 @@
                 });
             }
         }
-    }
+    });
 // #debug
 // #after
     // console
