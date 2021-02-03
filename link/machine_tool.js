@@ -62,7 +62,7 @@
                     },wait);
                 }
             },
-            /*🟠*/async loop(condition,callback,wait=1000/24,count,count_callback){
+            /*🟢*/async loop(condition,callback,wait=1000/24,count,count_callback){
                 const run=async()=>{
                     const condition_result=await condition();
                     if(condition_result){
@@ -111,6 +111,7 @@
                     who_listen.dispatchEvent(insert_event);
                     return origin_function.apply(this,argument);
                 };
+                // remove observe
             },
             /*🔴*/web_assembly(){},
             /*🟢*/uuid_36_to_uuid_22(uuid_36){
@@ -177,7 +178,7 @@
             /*🔴*/database(){},
             /*🔴*/cache(){},
         // network data
-            /*🔴*/async fetch(uri=window.location.href,method,data,callback){
+            /*🔴*/fetch(uri=window.location.href,method,data,callback){
                 switch(method){
                     case'GET':
                         {}
@@ -701,7 +702,7 @@
                             this.listen_url[id].remove();
                             delete this.listen_url[id];
                             if(!window.Object.keys(this.listen_url).length){
-                                // ???
+                                // remove observe
                             }
                         }
                         break;
@@ -787,21 +788,25 @@
     // machine_tool
     if(window.document?.documentElement&&window.location.hostname==='localhost'){
         (async()=>{
-            // window.console.log(await machine_tool.loop(
-            //     ()=>{
-            //         return false;
-            //     },
-            //     ()=>{
-            //         window.console.log('1');
-            //         return 11;
-            //     },
-            //     1000,
-            //     2,
-            //     ()=>{
-            //         window.console.log('2');
-            //         return 22;
-            //     }
-            // ));
+            window.console.log(await machine_tool.loop(
+                ()=>{
+                    return false;
+                },
+                ()=>{
+                    window.console.log('1');
+                    return 11;
+                },
+                1000,
+                2,
+                ()=>{
+                    window.console.log('2');
+                    return 22;
+                }
+            ));
+            window.console.log('2000_');
+            await machine_tool.time_out(()=>{
+                window.console.log('2000');
+            },2000);
             // window.console.log(machine_tool.uuid_36_to_uuid_22('8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3'));
             // window.console.log(machine_tool.uuid_22_to_uuid_36('jvZe6aA5S_Kks2h_zB88ww'));
             // window.console.log(machine_tool.string_to_base64_url_safe_no_pad('8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3'));
