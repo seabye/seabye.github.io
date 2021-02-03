@@ -786,7 +786,7 @@
 // #build
 // #debug
     // machine_tool
-    if(window.document?.documentElement&&window.location.hostname.match(/localhost|seabye.com/)){
+    if(window.document?.documentElement&&window.location.hostname.match(/localhost|bye/)){
         (async()=>{
             window.console.log(await machine_tool.aw_loop(
                 ()=>{
