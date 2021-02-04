@@ -9,4 +9,13 @@
         text-shadow: 0 0 10px #FFFFFF;
     }
 /* #debug */
+    /* ??? */
+    [class^="target"].test_open {
+        outline: 2px solid white !important;
+        outline-offset: -8px !important;
+    }
+    [class^="target"].test_close {
+        outline: 2px solid black !important;
+        outline-offset: -8px !important;
+    }
 /* #after */

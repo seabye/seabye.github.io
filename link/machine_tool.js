@@ -624,7 +624,9 @@
                                     //         [
                                     //             open_state<string/'class class2...'/>,
                                     //             close_state<string/'class class2...'/>,
-                                    //             target_element<element>,
+                                    //             [
+                                    //                 target_element<element>...
+                                    //             ],
                                     //             [
                                     //                 [
                                     //                     start<boolean>,
@@ -639,37 +641,42 @@
                                     const data=argument[0][1];
                                     const open_state=data[0];
                                     const close_state=data[1];
-                                    const target_element=data[2];
-                                    for(const button of data[3]){
-                                        const start=button[0];
-                                        const switch_type=button[1];
-                                        const button_element=button[2];
-                                        const listen_type=button[3];
-                                        const callback=button[4];
+                                    for(const item of data[3]){
+                                        const start=item[0];
+                                        const switch_type=item[1];
+                                        const button_element=item[2];
+                                        const listen_type=item[3];
+                                        const callback=item[4];
                                         if(!callback){
                                             callback=()=>{};
                                         }
                                         const event_function=()=>{
                                             const set_button_state=(_,current)=>{
-                                                for(const button of data[3]){
-                                                    const button_element=button[2];
+                                                for(const item of data[3]){
+                                                    const button_element=item[2];
                                                     this.switch_state(button_element,current,`${open_state} ${close_state}`,true);
                                                 }
                                             };
                                             switch(switch_type){
                                                 case'auto':
                                                     {
-                                                        this.switch_state(target_element,open_state,close_state,undefined,undefined,set_button_state);
+                                                        for(const target_element of data[2]){
+                                                            this.switch_state(target_element,open_state,close_state,undefined,undefined,set_button_state);
+                                                        }
                                                     }
                                                     break;
                                                 case'open':
                                                     {
-                                                        this.switch_state(target_element,open_state,close_state,true,undefined,set_button_state);
+                                                        for(const target_element of data[2]){
+                                                            this.switch_state(target_element,open_state,close_state,true,undefined,set_button_state);
+                                                        }
                                                     }
                                                     break;
                                                 case'close':
                                                     {
-                                                        this.switch_state(target_element,close_state,open_state,true,undefined,set_button_state);
+                                                        for(const target_element of data[2]){
+                                                            this.switch_state(target_element,close_state,open_state,true,undefined,set_button_state);
+                                                        }
                                                     }
                                                     break;
                                                 default:
@@ -913,40 +920,31 @@
                         [
                             'test_open',
                             'test_close',
-                            elements.target,
+                            [
+                                elements.target,
+                                elements.target2,
+                            ],
                             [
                                 [
-                                    true,
+                                    false,
                                     'auto',
-                                    elements.red,
+                                    elements.button,
                                     'pointer_up',
-                                    ()=>{
-                                        window.setTimeout(()=>{
-                                            elements.target.innerHTML=elements.red.classList.value;
-                                        },1000/24);
-                                    }
+                                    ()=>{}
                                 ],
                                 [
                                     false,
                                     'open',
-                                    elements.green,
+                                    elements.button2,
                                     'pointer_up',
-                                    ()=>{
-                                        window.setTimeout(()=>{
-                                            elements.target.innerHTML=elements.green.classList.value;
-                                        },1000/24);
-                                    }
+                                    ()=>{}
                                 ],
                                 [
-                                    false,
+                                    true,
                                     'close',
-                                    elements.blue,
+                                    elements.button3,
                                     'pointer_up',
-                                    ()=>{
-                                        window.setTimeout(()=>{
-                                            elements.target.innerHTML=elements.blue.classList.value;
-                                        },1000/24);
-                                    }
+                                    ()=>{}
                                 ]
                             ]
                         ]
@@ -955,14 +953,17 @@
                 target:{
                     element:[,{style:'width: 100%; height: 48px; background-color: darkgray;'}]
                 },
-                red:{
-                    element:[,{style:'width: 75%; height: 48px; background-color: red;'}]
+                target2:{
+                    element:[,{style:'width: 100%; height: 48px; background-color: darkgray;'}]
                 },
-                green:{
-                    element:[,{style:'width: 75%; height: 48px; background-color: green;'}]
+                button:{
+                    element:[,{style:'width: 75%; height: 48px; background-color: lightgray;'}]
                 },
-                blue:{
-                    element:[,{style:'width: 75%; height: 48px; background-color: blue;'}]
+                button2:{
+                    element:[,{style:'width: 75%; height: 48px; background-color: white;'}]
+                },
+                button3:{
+                    element:[,{style:'width: 75%; height: 48px; background-color: black;'}]
                 }
             },
         },window.document.body);
