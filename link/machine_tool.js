@@ -923,8 +923,8 @@
                 }
                 return window.open(uri,'',`width=${width},height=${height},left=${left},top=${top}`);
             },
-            /*🟢*/local_test(callback,wlh=/localhost|0.0.0.0|127.0.0.1|e.c/i,imuh=/localhost|0.0.0.0|127.0.0.1/i){
-                if(window.document?.documentElement&&window.location.hostname.match(wlh)&&new window.URL(import.meta.url).hostname.match(imuh)){
+            /*🟢*/local_test(callback){
+                if(window.document?.documentElement&&window.location.hostname===new window.URL(import.meta.url).hostname){
                     callback();
                 }
             },
