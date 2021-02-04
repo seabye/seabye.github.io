@@ -923,7 +923,7 @@
                 }
                 return window.open(uri,'',`width=${width},height=${height},left=${left},top=${top}`);
             },
-            /*🟢*/local_test(callback,match_hostname=/localhost|0.0.0.0|127.0.0.1|e.c/){
+            /*🟢*/local_test(callback,match_hostname=/localhost|0.0.0.0|127.0.0.1|e.c/i){
                 if(window.document?.documentElement&&window.location.hostname.match(match_hostname)&&new window.URL(import.meta.url).hostname.match(match_hostname)){
                     callback();
                 }
