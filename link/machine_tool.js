@@ -1040,13 +1040,13 @@
                     ]);
                 },
                 target:{
-                    element:[,{style:'width: 100%; height: 32px; background-color: gray;'}]
+                    element:[,{style:'width: 100%; height: 32px; background-color: white;'}]
                 },
                 target2:{
-                    element:[,{style:'width: 100%; height: 32px; background-color: gray;'}]
+                    element:[,{style:'width: 100%; height: 32px; background-color: white;'}]
                 },
                 button:{
-                    element:[,{style:'width: 100%; height: 32px; background-color: purple;'}]
+                    element:[,{style:'width: 100%; height: 32px; background-color: darkgray;'}]
                 },
                 button2:{
                     element:[,{style:'width: 100%; height: 32px; background-color: red;'}]
@@ -1055,7 +1055,7 @@
                     element:[,{style:'width: 100%; height: 32px; background-color: blue;'}]
                 },
                 button4:{
-                    element:[,{style:'width: 100%; height: 32px; background-color: purple;'}]
+                    element:[,{style:'width: 100%; height: 32px; background-color: darkgray;'}]
                 }
             },
             tab_mode:{
@@ -1123,10 +1123,10 @@
                     element:[,{style:'width: 75%; height: 16px; background-color: white;'}]
                 },
                 red_button:{
-                    element:[,{style:'width: 50%; height: 16px; background-color: red;'}]
+                    element:[,{style:'width: 50%; height: 16px; background-color: darkgray;'}]
                 },
                 red_button2:{
-                    element:[,{style:'width: 25%; height: 16px; background-color: red;'}]
+                    element:[,{style:'width: 25%; height: 16px; background-color: darkgray;'}]
                 },
                 green_target:{
                     element:[,{style:'width: 100%; height: 16px; background-color: white;'}]
@@ -1135,10 +1135,10 @@
                     element:[,{style:'width: 75%; height: 16px; background-color: white;'}]
                 },
                 green_button:{
-                    element:[,{style:'width: 50%; height: 16px; background-color: green;'}]
+                    element:[,{style:'width: 50%; height: 16px; background-color: darkgray;'}]
                 },
                 green_button2:{
-                    element:[,{style:'width: 25%; height: 16px; background-color: green;'}]
+                    element:[,{style:'width: 25%; height: 16px; background-color: darkgray;'}]
                 },
                 blue_target:{
                     element:[,{style:'width: 100%; height: 16px; background-color: white;'}]
@@ -1147,10 +1147,10 @@
                     element:[,{style:'width: 75%; height: 16px; background-color: white;'}]
                 },
                 blue_button:{
-                    element:[,{style:'width: 50%; height: 16px; background-color: blue;'}]
+                    element:[,{style:'width: 50%; height: 16px; background-color: darkgray;'}]
                 },
                 blue_button2:{
-                    element:[,{style:'width: 25%; height: 16px; background-color: blue;'}]
+                    element:[,{style:'width: 25%; height: 16px; background-color: darkgray;'}]
                 }
             }
         },window.document.body);
