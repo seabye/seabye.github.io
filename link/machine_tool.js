@@ -221,11 +221,11 @@
                         {
                             // single mode
                             //     tag<string,undefined='div'>,
-                            //     attribute<{key:'value'...},undefined=false>,
+                            //     attribute<object/{key:'value'...}/,undefined=false>,
                             //     insert_element<element,undefined=false>,
                             //     insert_position<'beforebegin','afterbegin','beforeend','afterend',undefined='beforeend'>,
                             //     content<string,element,undefined=false>,
-                            //     callback<function(result_element),undefined=false>
+                            //     callback<function(element),undefined=false>
                             let tag=argument[0];
                             const attribute=argument[1];
                             const insert_element=argument[2];
@@ -266,19 +266,21 @@
                         {
                             // tree mode
                             //     data<{
-                            //         name_class<name_class,'name_class class2','',' class',' class class2'>:{
+                            //         key&class<char/key&class/,string/'key&class class2...','',' class...',' class class2...'/>:{
                             //             <element:[
                             //                 tag<string,undefined='div'>,
-                            //                 attribute<{key:'value'...},undefined=false>,
+                            //                 attribute<object/{key:'value'...}/,undefined=false>,
                             //                 content<string,element,undefined=false>
                             //             ],undefined=false>,
-                            //             <function:function(result_elements)/this.element===result_elements.name_class/,undefined=false>
-                            //         }
+                            //             <function:function(elements)/this.element===elements.key&class/,undefined=false>,
+                            //             key&class:{}...
+                            //         },
+                            //         key&class:{}...
                             //     },undefined='div'>,
                             //     insert_element<element,undefined=false>,
                             //     insert_position<'beforebegin','afterbegin','beforeend','afterend',undefined='beforeend'>,
-                            //     result_elements<result_elements,undefined=result_elements>,
-                            //     callback<function(result_elements),undefined=false>
+                            //     elements<elements,undefined=elements>,
+                            //     callback<function(elements),undefined=false>
                             const data=argument[0];
                             const insert_element=argument[1];
                             let insert_position=argument[2];
@@ -516,13 +518,13 @@
                 if(argument[0]instanceof window.HTMLElement){
                     // base mode
                     //     element<element>,
-                    //     one<string,undefined=''>,
-                    //     two<string,undefined=''>,
+                    //     one<string/'class class2...'/,undefined=''>,
+                    //     two<string/'class class2...'/,undefined=''>,
                     //     set_one<boolean,undefined=false>,
                     //     two_wait<number,undefined=0>,
-                    //     callback<function,undefined=()=>{}>
+                    //     callback<function(element,/one,two,''/),undefined=()=>{}>
                     // flash mode
-                    //     (element,'',two,true,two_wait,callback)
+                    //     (element<>,'',two<>,true,two_wait<>,callback<>)
                     const element=argument[0];
                     let one=argument[1];
                     let two=argument[2];
@@ -544,50 +546,70 @@
                     if(!callback){
                         callback=()=>{};
                     }
+                    const contains=(data)=>{
+                        for(const item of data.split(' ')){
+                            if(element.classList.contains(item)){
+                                return true;
+                            }
+                        }
+                        return false;
+                    };
+                    const add=(data)=>{
+                        for(const item of data.split(' ')){
+                            element.classList.add(item);
+                        }
+                    };
+                    const remove=(data)=>{
+                        for(const item of data.split(' ')){
+                            element.classList.remove(item);
+                        }
+                    };
                     if(two){
                         if(set_one){
                             if(one){
-                                element.classList.remove(two);
-                                window.setTimeout(()=>{
-                                    element.classList.add(one);
-                                    callback();
-                                },two_wait);
+                                if(!contains(one)){
+                                    remove(two);
+                                    window.setTimeout(()=>{
+                                        add(one);
+                                        callback(element,one);
+                                    },two_wait);
+                                }
                             }else{
-                                element.classList.add(two);
+                                add(two);
                                 window.setTimeout(()=>{
-                                    element.classList.remove(two);
-                                    callback();
+                                    remove(two);
+                                    callback(element,'');
                                 },two_wait);
                             }
                         }else{
-                            if(element.classList.contains(one)){
-                                element.classList.remove(one);
+                            if(contains(one)){
+                                remove(one);
                                 window.setTimeout(()=>{
-                                    element.classList.add(two);
-                                    callback();
+                                    add(two);
+                                    callback(element,two);
                                 },two_wait);
                             }else{
-                                if(element.classList.contains(two)){
-                                    element.classList.remove(two);
+                                if(contains(two)){
+                                    remove(two);
                                     window.setTimeout(()=>{
-                                        element.classList.add(one);
-                                        callback();
+                                        add(one);
+                                        callback(element,one);
                                     },two_wait);
                                 }else{
                                     window.setTimeout(()=>{
-                                        element.classList.add(one);
-                                        callback();
+                                        add(one);
+                                        callback(element,one);
                                     },two_wait);
                                 }
                             }
                         }
                     }else{
-                        if(element.classList.contains(one)){
-                            element.classList.remove(one);
+                        if(contains(one)){
+                            remove(one);
                         }else{
                             window.setTimeout(()=>{
-                                element.classList.add(one);
-                                callback();
+                                add(one);
+                                callback(element,one);
                             },two_wait);
                         }
                     }
@@ -598,22 +620,77 @@
                                 {
                                     // target mode
                                     //     [
-                                    //         'target',[
-                                    //             [string<'open'>,string<'close'>,action<'open','close','auto'>,<boolean><=condition<function>/open/,<boolean><=condition<function>/close/,element...]...,
-                                    //             [string<'open'>,string<'close'>,element...]
+                                    //         'target',
+                                    //         [
+                                    //             open_state<string/'class class2...'/>,
+                                    //             close_state<string/'class class2...'/>,
+                                    //             target_element<element>,
+                                    //             [
+                                    //                 [
+                                    //                     start<boolean>,
+                                    //                     switch_type<'auto','open','close'>,
+                                    //                     button_element<element>,
+                                    //                     listen_type<string>,
+                                    //                     callback<function(event_data),undefined=()=>{}>
+                                    //                 ]...
+                                    //             ]
                                     //         ]
                                     //     ]
                                     const data=argument[0][1];
+                                    const open_state=data[0];
+                                    const close_state=data[1];
+                                    const target_element=data[2];
+                                    for(const button of data[3]){
+                                        const start=button[0];
+                                        const switch_type=button[1];
+                                        const button_element=button[2];
+                                        const listen_type=button[3];
+                                        const callback=button[4];
+                                        if(!callback){
+                                            callback=()=>{};
+                                        }
+                                        const event_function=()=>{
+                                            const set_button_state=(_,current)=>{
+                                                for(const button of data[3]){
+                                                    const button_element=button[2];
+                                                    this.switch_state(button_element,current,`${open_state} ${close_state}`,true);
+                                                }
+                                            };
+                                            switch(switch_type){
+                                                case'auto':
+                                                    {
+                                                        this.switch_state(target_element,open_state,close_state,undefined,undefined,set_button_state);
+                                                    }
+                                                    break;
+                                                case'open':
+                                                    {
+                                                        this.switch_state(target_element,open_state,close_state,true,undefined,set_button_state);
+                                                    }
+                                                    break;
+                                                case'close':
+                                                    {
+                                                        this.switch_state(target_element,close_state,open_state,true,undefined,set_button_state);
+                                                    }
+                                                    break;
+                                                default:
+                                                    break;
+                                            }
+                                        };
+                                        if(start){
+                                            event_function();
+                                            callback();
+                                        }
+                                        this.listen_element('add',button_element,listen_type,event_function);
+                                        this.listen_element('add',button_element,listen_type,callback);
+                                    }
                                 }
                                 break;
                             case'tab':
                                 {
                                     // tab mode
                                     //     [
-                                    //         'tab',[
-                                    //             [,element...],
-                                    //             [,element...]
-                                    //         ]
+                                    //         'tab',
+                                    //         []
                                     //     ]
                                     const data=argument[0][1];
                                 }
@@ -762,6 +839,11 @@
                 }
                 return window.open(uri,'',`width=${width},height=${height},left=${left},top=${top}`);
             },
+            /*🟢*/local_test(callback,match_hostname=/localhost|0.0.0.0|127.0.0.1/){
+                if(window.document?.documentElement&&window.location.hostname.match(match_hostname)){
+                    callback();
+                }
+            },
         // application programming interface
             /*🔴*/listen_port(){},
             /*🔴*/port_receive(uri,method,data,callback,other_data){
@@ -786,109 +868,141 @@
 // #build
 // #debug
     // machine_tool
-    if(window.document?.documentElement&&window.location.hostname.match(/localhost|bye/)){
-        (async()=>{
-            window.console.log(await machine_tool.aw_loop(
-                ()=>{
-                    return false;
-                },
-                ()=>{
-                    window.console.log('1');
-                    return 11;
-                },
-                1000,
-                2,
-                ()=>{
-                    window.console.log('2');
-                    return 22;
-                }
-            ));
-            window.console.log('2000_');
-            await machine_tool.time_out(()=>{
-                window.console.log('2000');
-            },2000);
-            // window.console.log(machine_tool.uuid_36_to_uuid_22('8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3'));
-            // window.console.log(machine_tool.uuid_22_to_uuid_36('jvZe6aA5S_Kks2h_zB88ww'));
-            // window.console.log(machine_tool.string_to_base64_url_safe_no_pad('8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3'));
-            // window.console.log(machine_tool.base64_url_safe_no_pad_to_string('jvZe6aA5S_Kks2h_zB88ww'));
-            // machine_tool.listen_element('add',window.document.documentElement,'observe_intersection',()=>{
-            //     window.console.log('???');
-            // },{});
-            // machine_tool.listen_element('add',window.document.documentElement,'observe_resize',()=>{
-            //     window.console.log('???');
-            // });
-            machine_tool.create_element({
-                test:{
-                    element:[,{style:'position: fixed; left: 0; top: 0; width: 128px; height: 192px; background-color: gray; display: flex; justify-content: center; align-items: center; flex-direction: column;'}],
-                    function(elements){
-                        window.console.log(elements);
-                        machine_tool.switch_state([
-                            'target',
+    machine_tool.local_test(async()=>{
+        // window.console.log(await machine_tool.aw_loop(
+        //     ()=>{
+        //         return false;
+        //     },
+        //     ()=>{
+        //         window.console.log('1');
+        //         return 11;
+        //     },
+        //     1000,
+        //     2,
+        //     ()=>{
+        //         window.console.log('2');
+        //         return 22;
+        //     }
+        // ));
+        // window.console.log('2000_');
+        // await machine_tool.time_out(()=>{
+        //     window.console.log('2000');
+        // },2000);
+        // window.console.log(machine_tool.uuid_36_to_uuid_22('8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3'));
+        // window.console.log(machine_tool.uuid_22_to_uuid_36('jvZe6aA5S_Kks2h_zB88ww'));
+        // window.console.log(machine_tool.string_to_base64_url_safe_no_pad('8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3'));
+        // window.console.log(machine_tool.base64_url_safe_no_pad_to_string('jvZe6aA5S_Kks2h_zB88ww'));
+        // const _func=()=>{
+        //     window.console.log('pointerup');
+        // };
+        // machine_tool.listen_element('add',window.document.documentElement,'pointerup',_func);
+        // machine_tool.listen_element('remove',window.document.documentElement,'pointerup',_func);
+        // machine_tool.listen_element('add',window.document.documentElement,'observe_intersection',()=>{
+        //     window.console.log('observe_intersection');
+        // },{});
+        // machine_tool.listen_element('add',window.document.documentElement,'observe_resize',()=>{
+        //     window.console.log('observe_resize');
+        // });
+        machine_tool.create_element({
+            test:{
+                element:[,{style:'position: fixed; left: 0; top: 0; width: 128px; height: 192px; background-color: gray; display: flex; justify-content: center; align-items: center; flex-direction: column;'}],
+                function(elements){
+                    window.console.log(elements);
+                    machine_tool.switch_state([
+                        'target',
+                        [
+                            'test_open',
+                            'test_close',
+                            elements.target,
                             [
-                                'test_close',
-                                'test_open',
-                                'test_close',
-                                elements.target,
                                 [
-                                    ['auto',elements.red,()=>{}],
-                                    ['open',elements.green,()=>{}],
-                                    ['close',elements.blue,()=>{}]
+                                    true,
+                                    'auto',
+                                    elements.red,
+                                    'pointer_up',
+                                    ()=>{
+                                        window.setTimeout(()=>{
+                                            elements.target.innerHTML=elements.red.classList.value;
+                                        },1000/24);
+                                    }
+                                ],
+                                [
+                                    false,
+                                    'open',
+                                    elements.green,
+                                    'pointer_up',
+                                    ()=>{
+                                        window.setTimeout(()=>{
+                                            elements.target.innerHTML=elements.green.classList.value;
+                                        },1000/24);
+                                    }
+                                ],
+                                [
+                                    false,
+                                    'close',
+                                    elements.blue,
+                                    'pointer_up',
+                                    ()=>{
+                                        window.setTimeout(()=>{
+                                            elements.target.innerHTML=elements.blue.classList.value;
+                                        },1000/24);
+                                    }
                                 ]
                             ]
-                        ]);
-                    },
-                    target:{
-                        element:[,{style:'width: 100%; height: 48px; background-color: white;'}]
-                    },
-                    red:{
-                        element:[,{style:'width: 75%; height: 48px; background-color: red;'}]
-                    },
-                    green:{
-                        element:[,{style:'width: 75%; height: 48px; background-color: green;'}]
-                    },
-                    blue:{
-                        element:[,{style:'width: 75%; height: 48px; background-color: blue;'}]
-                    }
+                        ]
+                    ]);
                 },
-            },window.document.body);
-            machine_tool.create_element({
-                test:{
-                    element:[,{style:'position: fixed; left: 128px; top: 0; width: 128px; height: 192px; background-color: gray; display: flex; justify-content: center; align-items: center; flex-direction: column;'}],
-                    function(elements){
-                        window.console.log(elements);
-                        machine_tool.switch_state([
-                            'tab',
-                            []
-                        ]);
-                    },
-                    red_target:{
-                        element:[,{style:'width: 100%; height: 32px; background-color: white;'}]
-                    },
-                    red_button:{
-                        element:[,{style:'width: 100%; height: 32px; background-color: red;'}]
-                    },
-                    green_target:{
-                        element:[,{style:'width: 75%; height: 32px; background-color: white;'}]
-                    },
-                    green_button:{
-                        element:[,{style:'width: 75%; height: 32px; background-color: green;'}]
-                    },
-                    blue_target:{
-                        element:[,{style:'width: 50%; height: 32px; background-color: white;'}]
-                    },
-                    blue_button:{
-                        element:[,{style:'width: 50%; height: 32px; background-color: blue;'}]
-                    }
+                target:{
+                    element:[,{style:'width: 100%; height: 48px; background-color: darkgray;'}]
                 },
-            },window.document.body);
-            // machine_tool.listen_url('add',(data)=>{
-            //     window.console.log(data);
-            // });
-            // window.history.pushState(null,null,'/x/');
-            // window.history.pushState(null,null,'/');
-            // window.history.replaceState(null,null,window.location.pathname);
-        })();
-    }
+                red:{
+                    element:[,{style:'width: 75%; height: 48px; background-color: red;'}]
+                },
+                green:{
+                    element:[,{style:'width: 75%; height: 48px; background-color: green;'}]
+                },
+                blue:{
+                    element:[,{style:'width: 75%; height: 48px; background-color: blue;'}]
+                }
+            },
+        },window.document.body);
+        machine_tool.create_element({
+            test:{
+                element:[,{style:'position: fixed; left: 128px; top: 0; width: 128px; height: 192px; background-color: gray; display: flex; justify-content: center; align-items: center; flex-direction: column;'}],
+                function(elements){
+                    window.console.log(elements);
+                    machine_tool.switch_state([
+                        'tab',
+                        []
+                    ]);
+                },
+                red_target:{
+                    element:[,{style:'width: 100%; height: 32px; background-color: darkgray;'}]
+                },
+                red_button:{
+                    element:[,{style:'width: 100%; height: 32px; background-color: red;'}]
+                },
+                green_target:{
+                    element:[,{style:'width: 75%; height: 32px; background-color: white;'}]
+                },
+                green_button:{
+                    element:[,{style:'width: 75%; height: 32px; background-color: green;'}]
+                },
+                blue_target:{
+                    element:[,{style:'width: 50%; height: 32px; background-color: white;'}]
+                },
+                blue_button:{
+                    element:[,{style:'width: 50%; height: 32px; background-color: blue;'}]
+                }
+            },
+        },window.document.body);
+        // machine_tool.listen_url('add',(data)=>{
+        //     window.console.log(data);
+        // });
+        // window.history.pushState(null,null,'/x/');
+        // window.history.pushState(null,null,'/');
+        // window.history.replaceState(null,null,window.location.pathname);
+    });
 // #after
     // console
     window.console.log('#### end machine_tool.js');
