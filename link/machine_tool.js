@@ -924,7 +924,7 @@
                 return window.open(uri,'',`width=${width},height=${height},left=${left},top=${top}`);
             },
             /*🟢*/local_test(callback,match_hostname=/localhost|0.0.0.0|127.0.0.1/){
-                if(window.document?.documentElement&&window.location.hostname.match(match_hostname)){
+                if(window.document?.documentElement&&window.location.hostname.match(match_hostname)&&import.meta.url.match(match_hostname)){
                     callback();
                 }
             },
@@ -1049,10 +1049,10 @@
                     element:[,{style:'width: 100%; height: 32px; background-color: darkgray;'}]
                 },
                 button2:{
-                    element:[,{style:'width: 100%; height: 32px; background-color: red;'}]
+                    element:[,{style:'width: 100%; height: 32px; background-color: darkred;'}]
                 },
                 button3:{
-                    element:[,{style:'width: 100%; height: 32px; background-color: blue;'}]
+                    element:[,{style:'width: 100%; height: 32px; background-color: darkblue;'}]
                 },
                 button4:{
                     element:[,{style:'width: 100%; height: 32px; background-color: darkgray;'}]
