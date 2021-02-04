@@ -10,12 +10,14 @@
     }
 /* #debug */
     /* ??? */
-    [class^="target"].test_open {
-        outline: 2px solid white !important;
-        outline-offset: -8px !important;
+    [class^="target"].open_state,
+    [class^="button"].open_state {
+        outline: 2px solid red !important;
+        outline-offset: -6px !important;
     }
-    [class^="target"].test_close {
-        outline: 2px solid black !important;
-        outline-offset: -8px !important;
+    [class^="target"].close_state,
+    [class^="button"].close_state {
+        outline: 2px solid blue !important;
+        outline-offset: -6px !important;
     }
 /* #after */

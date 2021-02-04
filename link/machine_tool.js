@@ -568,14 +568,18 @@
                         if(set_one){
                             if(one){
                                 if(!contains(one)){
-                                    remove(two);
+                                    window.setTimeout(()=>{
+                                        remove(two);
+                                    },0);
                                     window.setTimeout(()=>{
                                         add(one);
                                         callback(element,one);
                                     },two_wait);
                                 }
                             }else{
-                                add(two);
+                                window.setTimeout(()=>{
+                                    add(two);
+                                },0);
                                 window.setTimeout(()=>{
                                     remove(two);
                                     callback(element,'');
@@ -583,14 +587,18 @@
                             }
                         }else{
                             if(contains(one)){
-                                remove(one);
+                                window.setTimeout(()=>{
+                                    remove(one);
+                                },0);
                                 window.setTimeout(()=>{
                                     add(two);
                                     callback(element,two);
                                 },two_wait);
                             }else{
                                 if(contains(two)){
-                                    remove(two);
+                                    window.setTimeout(()=>{
+                                        remove(two);
+                                    },0);
                                     window.setTimeout(()=>{
                                         add(one);
                                         callback(element,one);
@@ -605,7 +613,9 @@
                         }
                     }else{
                         if(contains(one)){
-                            remove(one);
+                            window.setTimeout(()=>{
+                                remove(one);
+                            },0);
                         }else{
                             window.setTimeout(()=>{
                                 add(one);
@@ -631,7 +641,9 @@
                                     //                 [
                                     //                     start<boolean>,
                                     //                     switch_type<'auto','open','close'>,
-                                    //                     button_element<element>,
+                                    //                     [
+                                    //                         button_element<element>...
+                                    //                     ],
                                     //                     listen_type<string>,
                                     //                     callback<function(event_data),undefined=()=>{}>
                                     //                 ]...
@@ -641,41 +653,45 @@
                                     const data=argument[0][1];
                                     const open_state=data[0];
                                     const close_state=data[1];
-                                    for(const item of data[3]){
-                                        const start=item[0];
-                                        const switch_type=item[1];
-                                        const button_element=item[2];
-                                        const listen_type=item[3];
-                                        const callback=item[4];
+                                    const target_element_array=data[2];
+                                    const button_array=data[3];
+                                    for(const button of button_array){
+                                        const start=button[0];
+                                        const switch_type=button[1];
+                                        const button_element_array=button[2];
+                                        const listen_type=button[3];
+                                        const callback=button[4];
                                         if(!callback){
                                             callback=()=>{};
                                         }
                                         const event_function=()=>{
-                                            const set_button_state=(_,current)=>{
-                                                for(const item of data[3]){
-                                                    const button_element=item[2];
-                                                    this.switch_state(button_element,current,`${open_state} ${close_state}`,true);
+                                            const set_button_element=(_,current)=>{
+                                                for(const button of button_array){
+                                                    const button_element_array=button[2];
+                                                    for(const button_element of button_element_array){
+                                                        this.switch_state(button_element,current,`${open_state} ${close_state}`,true);
+                                                    }
                                                 }
                                             };
                                             switch(switch_type){
                                                 case'auto':
                                                     {
-                                                        for(const target_element of data[2]){
-                                                            this.switch_state(target_element,open_state,close_state,undefined,undefined,set_button_state);
+                                                        for(const target_element of target_element_array){
+                                                            this.switch_state(target_element,open_state,close_state,undefined,undefined,set_button_element);
                                                         }
                                                     }
                                                     break;
                                                 case'open':
                                                     {
-                                                        for(const target_element of data[2]){
-                                                            this.switch_state(target_element,open_state,close_state,true,undefined,set_button_state);
+                                                        for(const target_element of target_element_array){
+                                                            this.switch_state(target_element,open_state,close_state,true,undefined,set_button_element);
                                                         }
                                                     }
                                                     break;
                                                 case'close':
                                                     {
-                                                        for(const target_element of data[2]){
-                                                            this.switch_state(target_element,close_state,open_state,true,undefined,set_button_state);
+                                                        for(const target_element of target_element_array){
+                                                            this.switch_state(target_element,close_state,open_state,true,undefined,set_button_element);
                                                         }
                                                     }
                                                     break;
@@ -687,8 +703,10 @@
                                             event_function();
                                             callback();
                                         }
-                                        this.listen_element('add',button_element,listen_type,event_function);
-                                        this.listen_element('add',button_element,listen_type,callback);
+                                        for(const button_element of button_element_array){
+                                            this.listen_element('add',button_element,listen_type,event_function);
+                                            this.listen_element('add',button_element,listen_type,callback);
+                                        }
                                     }
                                 }
                                 break;
@@ -697,9 +715,68 @@
                                     // tab mode
                                     //     [
                                     //         'tab',
-                                    //         []
+                                    //         [
+                                    //             open_state<string/'class class2...'/>,
+                                    //             close_state<string/'class class2...'/>,
+                                    //             [
+                                    //                 [
+                                    //                     start<boolean>,
+                                    //                     [
+                                    //                         target_element<element>...
+                                    //                     ],
+                                    //                     [
+                                    //                         button_element<element>...
+                                    //                     ],
+                                    //                     listen_type<string>,
+                                    //                     callback<function(event_data),undefined=()=>{}>
+                                    //                 ]...
+                                    //             ]
+                                    //         ]
                                     //     ]
                                     const data=argument[0][1];
+                                    const open_state=data[0];
+                                    const close_state=data[1];
+                                    const content_array=data[2];
+                                    for(const content of content_array){
+                                        const start=content[0];
+                                        const target_element_array=content[1];
+                                        const button_element_array=content[2];
+                                        const listen_type=content[3];
+                                        const callback=content[4];
+                                        if(!callback){
+                                            callback=()=>{};
+                                        }
+                                        const event_function=()=>{
+                                            for(const content of content_array){
+                                                const target_element_array_=content[1];
+                                                const button_element_array_=content[2];
+                                                if(target_element_array_!==target_element_array){
+                                                    for(const target_element_ of target_element_array_){
+                                                        this.switch_state(target_element_,close_state,open_state,true);
+                                                    }
+                                                }
+                                                if(button_element_array_!==button_element_array){
+                                                    for(const button_element_ of button_element_array_){
+                                                        this.switch_state(button_element_,close_state,open_state,true);
+                                                    }
+                                                }
+                                            }
+                                            for(const target_element of target_element_array){
+                                                this.switch_state(target_element,open_state,close_state,true);
+                                            }
+                                            for(const button_element of button_element_array){
+                                                this.switch_state(button_element,open_state,close_state,true);
+                                            }
+                                        };
+                                        if(start){
+                                            event_function();
+                                            callback();
+                                        }
+                                        for(const button_element of button_element_array){
+                                            this.listen_element('add',button_element,listen_type,event_function);
+                                            this.listen_element('add',button_element,listen_type,callback);
+                                        }
+                                    }
                                 }
                                 break;
                             default:
@@ -911,109 +988,171 @@
         //     window.console.log('observe_resize');
         // });
         machine_tool.create_element({
-            test:{
+            target_mode:{
                 element:[,{style:'z-index: 1; position: fixed; left: 0; top: 0; width: 128px; height: 192px; background-color: gray; display: flex; justify-content: center; align-items: center; flex-direction: column;'}],
                 function(elements){
-                    window.console.log(elements);
                     machine_tool.switch_state([
                         'target',
                         [
-                            'test_open',
-                            'test_close',
+                            'open_state',
+                            'close_state',
                             [
                                 elements.target,
-                                elements.target2,
+                                elements.target2
                             ],
                             [
                                 [
                                     false,
                                     'auto',
-                                    elements.button,
+                                    [
+                                        elements.button,
+                                        elements.button4
+                                    ],
                                     'pointer_up',
-                                    ()=>{}
+                                    (data)=>{
+                                        window.console.log('1 4 pointer_up',data);
+                                    }
                                 ],
                                 [
                                     false,
                                     'open',
-                                    elements.button2,
+                                    [
+                                        elements.button2,
+                                    ],
                                     'pointer_up',
-                                    ()=>{}
+                                    (data)=>{
+                                        window.console.log('2 pointer_up',data);
+                                    }
                                 ],
                                 [
                                     true,
                                     'close',
-                                    elements.button3,
+                                    [
+                                        elements.button3,
+                                    ],
                                     'pointer_up',
-                                    ()=>{}
+                                    (data)=>{
+                                        window.console.log('3 pointer_up',data);
+                                    }
                                 ]
                             ]
                         ]
                     ]);
                 },
                 target:{
-                    element:[,{style:'width: 100%; height: 48px; background-color: darkgray;'}]
+                    element:[,{style:'width: 100%; height: 32px; background-color: gray;'}]
                 },
                 target2:{
-                    element:[,{style:'width: 100%; height: 48px; background-color: darkgray;'}]
+                    element:[,{style:'width: 100%; height: 32px; background-color: gray;'}]
                 },
                 button:{
-                    element:[,{style:'width: 50%; height: 48px; background-color: lightgray;'}]
+                    element:[,{style:'width: 100%; height: 32px; background-color: purple;'}]
                 },
                 button2:{
-                    element:[,{style:'width: 50%; height: 48px; background-color: white;'}]
+                    element:[,{style:'width: 100%; height: 32px; background-color: red;'}]
                 },
                 button3:{
-                    element:[,{style:'width: 50%; height: 48px; background-color: black;'}]
+                    element:[,{style:'width: 100%; height: 32px; background-color: blue;'}]
+                },
+                button4:{
+                    element:[,{style:'width: 100%; height: 32px; background-color: purple;'}]
                 }
             },
-        },window.document.body);
-        machine_tool.create_element({
-            test:{
+            tab_mode:{
                 element:[,{style:'z-index: 1; position: fixed; left: 128px; top: 0; width: 128px; height: 192px; background-color: gray; display: flex; justify-content: center; align-items: center; flex-direction: column;'}],
                 function(elements){
-                    window.console.log(elements);
                     machine_tool.switch_state([
                         'tab',
-                        []
+                        [
+                            'open_state',
+                            'close_state',
+                            [
+                                [
+                                    true,
+                                    [
+                                        elements.red_target,
+                                        elements.red_target2
+                                    ],
+                                    [
+                                        elements.red_button,
+                                        elements.red_button2
+                                    ],
+                                    'pointer_up',
+                                    (data)=>{
+                                        window.console.log('red pointer_up',data);
+                                    }
+                                ],
+                                [
+                                    false,
+                                    [
+                                        elements.green_target,
+                                        elements.green_target2
+                                    ],
+                                    [
+                                        elements.green_button,
+                                        elements.green_button2
+                                    ],
+                                    'pointer_up',
+                                    (data)=>{
+                                        window.console.log('green pointer_up',data);
+                                    }
+                                ],
+                                [
+                                    false,
+                                    [
+                                        elements.blue_target,
+                                        elements.blue_target2
+                                    ],
+                                    [
+                                        elements.blue_button,
+                                        elements.blue_button2
+                                    ],
+                                    'pointer_up',
+                                    (data)=>{
+                                        window.console.log('blue pointer_up',data);
+                                    }
+                                ]
+                            ]
+                        ]
                     ]);
                 },
                 red_target:{
                     element:[,{style:'width: 100%; height: 16px; background-color: white;'}]
                 },
                 red_target2:{
-                    element:[,{style:'width: 95%; height: 16px; background-color: white;'}]
+                    element:[,{style:'width: 75%; height: 16px; background-color: white;'}]
                 },
                 red_button:{
-                    element:[,{style:'width: 90%; height: 16px; background-color: red;'}]
+                    element:[,{style:'width: 50%; height: 16px; background-color: red;'}]
                 },
                 red_button2:{
-                    element:[,{style:'width: 85%; height: 16px; background-color: red;'}]
+                    element:[,{style:'width: 25%; height: 16px; background-color: red;'}]
                 },
                 green_target:{
-                    element:[,{style:'width: 80%; height: 16px; background-color: white;'}]
+                    element:[,{style:'width: 100%; height: 16px; background-color: white;'}]
                 },
                 green_target2:{
                     element:[,{style:'width: 75%; height: 16px; background-color: white;'}]
                 },
                 green_button:{
-                    element:[,{style:'width: 60%; height: 16px; background-color: green;'}]
+                    element:[,{style:'width: 50%; height: 16px; background-color: green;'}]
                 },
                 green_button2:{
-                    element:[,{style:'width: 55%; height: 16px; background-color: green;'}]
+                    element:[,{style:'width: 25%; height: 16px; background-color: green;'}]
                 },
                 blue_target:{
-                    element:[,{style:'width: 50%; height: 16px; background-color: white;'}]
+                    element:[,{style:'width: 100%; height: 16px; background-color: white;'}]
                 },
                 blue_target2:{
-                    element:[,{style:'width: 45%; height: 16px; background-color: white;'}]
+                    element:[,{style:'width: 75%; height: 16px; background-color: white;'}]
                 },
                 blue_button:{
-                    element:[,{style:'width: 40%; height: 16px; background-color: blue;'}]
+                    element:[,{style:'width: 50%; height: 16px; background-color: blue;'}]
                 },
                 blue_button2:{
-                    element:[,{style:'width: 35%; height: 16px; background-color: blue;'}]
+                    element:[,{style:'width: 25%; height: 16px; background-color: blue;'}]
                 }
-            },
+            }
         },window.document.body);
         // machine_tool.listen_url('add',(data)=>{
         //     window.console.log(data);
