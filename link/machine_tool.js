@@ -923,8 +923,8 @@
                 }
                 return window.open(uri,'',`width=${width},height=${height},left=${left},top=${top}`);
             },
-            /*🟢*/local_test(callback,match_hostname=/localhost|0.0.0.0|127.0.0.1/){
-                if(window.document?.documentElement&&window.location.hostname.match(match_hostname)&&import.meta.url.match(match_hostname)){
+            /*🟢*/local_test(callback,match_hostname=/localhost|0.0.0.0|127.0.0.1|e.c/){
+                if(window.document?.documentElement&&window.location.hostname.match(match_hostname)&&new window.URL(import.meta.url).hostname.match(match_hostname)){
                     callback();
                 }
             },
