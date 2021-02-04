@@ -912,7 +912,7 @@
         // });
         machine_tool.create_element({
             test:{
-                element:[,{style:'position: fixed; left: 0; top: 0; width: 128px; height: 192px; background-color: gray; display: flex; justify-content: center; align-items: center; flex-direction: column;'}],
+                element:[,{style:'z-index: 1; position: fixed; left: 0; top: 0; width: 128px; height: 192px; background-color: gray; display: flex; justify-content: center; align-items: center; flex-direction: column;'}],
                 function(elements){
                     window.console.log(elements);
                     machine_tool.switch_state([
@@ -969,7 +969,7 @@
         },window.document.body);
         machine_tool.create_element({
             test:{
-                element:[,{style:'position: fixed; left: 128px; top: 0; width: 128px; height: 192px; background-color: gray; display: flex; justify-content: center; align-items: center; flex-direction: column;'}],
+                element:[,{style:'z-index: 1; position: fixed; left: 128px; top: 0; width: 128px; height: 192px; background-color: gray; display: flex; justify-content: center; align-items: center; flex-direction: column;'}],
                 function(elements){
                     window.console.log(elements);
                     machine_tool.switch_state([
