@@ -953,7 +953,6 @@
 // #debug
     // machine_tool
     machine_tool.local_test(async()=>{
-        window.console.log(import.meta.url);
         // window.console.log(await machine_tool.aw_loop(
         //     ()=>{
         //         return false;
