@@ -957,13 +957,13 @@
                     element:[,{style:'width: 100%; height: 48px; background-color: darkgray;'}]
                 },
                 button:{
-                    element:[,{style:'width: 75%; height: 48px; background-color: lightgray;'}]
+                    element:[,{style:'width: 50%; height: 48px; background-color: lightgray;'}]
                 },
                 button2:{
-                    element:[,{style:'width: 75%; height: 48px; background-color: white;'}]
+                    element:[,{style:'width: 50%; height: 48px; background-color: white;'}]
                 },
                 button3:{
-                    element:[,{style:'width: 75%; height: 48px; background-color: black;'}]
+                    element:[,{style:'width: 50%; height: 48px; background-color: black;'}]
                 }
             },
         },window.document.body);
@@ -978,22 +978,40 @@
                     ]);
                 },
                 red_target:{
-                    element:[,{style:'width: 100%; height: 32px; background-color: darkgray;'}]
+                    element:[,{style:'width: 100%; height: 16px; background-color: white;'}]
+                },
+                red_target2:{
+                    element:[,{style:'width: 95%; height: 16px; background-color: white;'}]
                 },
                 red_button:{
-                    element:[,{style:'width: 100%; height: 32px; background-color: red;'}]
+                    element:[,{style:'width: 90%; height: 16px; background-color: red;'}]
+                },
+                red_button2:{
+                    element:[,{style:'width: 85%; height: 16px; background-color: red;'}]
                 },
                 green_target:{
-                    element:[,{style:'width: 75%; height: 32px; background-color: white;'}]
+                    element:[,{style:'width: 80%; height: 16px; background-color: white;'}]
+                },
+                green_target2:{
+                    element:[,{style:'width: 75%; height: 16px; background-color: white;'}]
                 },
                 green_button:{
-                    element:[,{style:'width: 75%; height: 32px; background-color: green;'}]
+                    element:[,{style:'width: 60%; height: 16px; background-color: green;'}]
+                },
+                green_button2:{
+                    element:[,{style:'width: 55%; height: 16px; background-color: green;'}]
                 },
                 blue_target:{
-                    element:[,{style:'width: 50%; height: 32px; background-color: white;'}]
+                    element:[,{style:'width: 50%; height: 16px; background-color: white;'}]
+                },
+                blue_target2:{
+                    element:[,{style:'width: 45%; height: 16px; background-color: white;'}]
                 },
                 blue_button:{
-                    element:[,{style:'width: 50%; height: 32px; background-color: blue;'}]
+                    element:[,{style:'width: 40%; height: 16px; background-color: blue;'}]
+                },
+                blue_button2:{
+                    element:[,{style:'width: 35%; height: 16px; background-color: blue;'}]
                 }
             },
         },window.document.body);
