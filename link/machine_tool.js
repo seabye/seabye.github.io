@@ -997,24 +997,24 @@
         //     window.console.log('base64_url_safe_no_pad_to_string()',machine_tool.base64_url_safe_no_pad_to_string('jvZe6aA5S_Kks2h_zB88ww'));
         // },
         listen_element(){
-            machine_tool.listen_element('add',window.document.documentElement,'pointerup',()=>{
-                window.console.log('listen_element()','pointerup');
-            });
-            machine_tool.listen_element('add',window.document.documentElement,'pointer_up',()=>{
-                window.console.log('listen_element()','pointer_up');
-            });
-            machine_tool.listen_element('add',window.document.documentElement,'pointer_track',()=>{
-                window.console.log('listen_element()','pointer_track');
-            });
+            // machine_tool.listen_element('add',window.document.documentElement,'pointerup',()=>{
+            //     window.console.log('listen_element()','pointerup');
+            // });
+            // machine_tool.listen_element('add',window.document.documentElement,'pointer_up',()=>{
+            //     window.console.log('listen_element()','pointer_up');
+            // });
+            // machine_tool.listen_element('add',window.document.documentElement,'pointer_track',()=>{
+            //     window.console.log('listen_element()','pointer_track');
+            // });
             machine_tool.listen_element('add',window.document.documentElement,'observe_mutation',()=>{
                 window.console.log('listen_element()','observe_mutation');
             });
-            machine_tool.listen_element('add',window.document.documentElement,'observe_intersection',()=>{
-                window.console.log('listen_element()','observe_intersection');
-            },{});
-            machine_tool.listen_element('add',window.document.documentElement,'observe_resize',()=>{
-                window.console.log('listen_element()','observe_resize');
-            });
+            // machine_tool.listen_element('add',window.document.documentElement,'observe_intersection',()=>{
+            //     window.console.log('listen_element()','observe_intersection');
+            // },{});
+            // machine_tool.listen_element('add',window.document.documentElement,'observe_resize',()=>{
+            //     window.console.log('listen_element()','observe_resize');
+            // });
         },
         switch_state(){
             machine_tool.create_element({
