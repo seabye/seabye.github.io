@@ -406,16 +406,24 @@
                                             if(typeof extra==='number'){
                                                 if(event.button===extra){
                                                     run();
-                                                }else{
                                                     if(option.once){
-                                                        element.addEventListener('pointerdown',element.machine_tool_listen_element_pointer_up,option);
+                                                        element.removeEventListener('pointerdown',element.machine_tool_listen_element_pointer_up);
+                                                        delete element.machine_tool_listen_element_pointer_up;
                                                     }
                                                 }
                                             }else{
                                                 run();
+                                                if(option.once){
+                                                    element.removeEventListener('pointerdown',element.machine_tool_listen_element_pointer_up);
+                                                    delete element.machine_tool_listen_element_pointer_up;
+                                                }
                                             }
                                         };
-                                        element.addEventListener('pointerdown',element.machine_tool_listen_element_pointer_up,option);
+                                        if(option.once){
+                                            element.addEventListener('pointerdown',element.machine_tool_listen_element_pointer_up);
+                                        }else{
+                                            element.addEventListener('pointerdown',element.machine_tool_listen_element_pointer_up,option);
+                                        }
                                     }
                                     break;
                                 case'remove':
