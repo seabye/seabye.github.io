@@ -1000,6 +1000,40 @@
             window.console.log('<<<< start test');
         },
         // async aw_loop(){
+        //     window.console.log(await machine_tool.aw_loop(
+        //         ()=>{
+        //             return false;
+        //         },
+        //         ()=>{
+        //             window.console.log('aw_loop()','1');
+        //             return 11;
+        //         },
+        //         1000,
+        //         2,
+        //         ()=>{
+        //             window.console.log('aw_loop()','2');
+        //             return 22;
+        //         }
+        //     ));
+        // },
+        // async time_out(){
+        //     window.console.log('time_out()','2000_');
+        //     await machine_tool.time_out(()=>{
+        //         window.console.log('time_out()','2000');
+        //     },2000);
+        // },
+        // uuid_36_to_uuid_22(){
+        //     window.console.log('uuid_36_to_uuid_22()',machine_tool.uuid_36_to_uuid_22('8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3'));
+        // },
+        // uuid_22_to_uuid_36(){
+        //     window.console.log('uuid_22_to_uuid_36()',machine_tool.uuid_22_to_uuid_36('jvZe6aA5S_Kks2h_zB88ww'));
+        // },
+        // string_to_base64_url_safe_no_pad(){
+        //     window.console.log('string_to_base64_url_safe_no_pad()',machine_tool.string_to_base64_url_safe_no_pad('8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3'));
+        // },
+        // base64_url_safe_no_pad_to_string(){
+        //     window.console.log('base64_url_safe_no_pad_to_string()',machine_tool.base64_url_safe_no_pad_to_string('jvZe6aA5S_Kks2h_zB88ww'));
+        // },
         switch_state(){
             this.elements=machine_tool.create_element({
                 target_mode:{
@@ -1181,40 +1215,6 @@
                 }
             },window.document.body);
         },
-        //     window.console.log(await machine_tool.aw_loop(
-        //         ()=>{
-        //             return false;
-        //         },
-        //         ()=>{
-        //             window.console.log('aw_loop()','1');
-        //             return 11;
-        //         },
-        //         1000,
-        //         2,
-        //         ()=>{
-        //             window.console.log('aw_loop()','2');
-        //             return 22;
-        //         }
-        //     ));
-        // },
-        // async time_out(){
-        //     window.console.log('time_out()','2000_');
-        //     await machine_tool.time_out(()=>{
-        //         window.console.log('time_out()','2000');
-        //     },2000);
-        // },
-        // uuid_36_to_uuid_22(){
-        //     window.console.log('uuid_36_to_uuid_22()',machine_tool.uuid_36_to_uuid_22('8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3'));
-        // },
-        // uuid_22_to_uuid_36(){
-        //     window.console.log('uuid_22_to_uuid_36()',machine_tool.uuid_22_to_uuid_36('jvZe6aA5S_Kks2h_zB88ww'));
-        // },
-        // string_to_base64_url_safe_no_pad(){
-        //     window.console.log('string_to_base64_url_safe_no_pad()',machine_tool.string_to_base64_url_safe_no_pad('8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3'));
-        // },
-        // base64_url_safe_no_pad_to_string(){
-        //     window.console.log('base64_url_safe_no_pad_to_string()',machine_tool.base64_url_safe_no_pad_to_string('jvZe6aA5S_Kks2h_zB88ww'));
-        // },
         listen_element(){
             // machine_tool.listen_element('add',window.document.documentElement,'pointerup',()=>{
             //     window.console.log('listen_element()','pointerup');
