@@ -957,7 +957,7 @@
 // #build
 // #debug
     // machine_tool
-    machine_tool.local_test(machine_tool.run_object({
+    machine_tool.local_test(()=>{machine_tool.run_object({
         _start(){
             window.console.log('<<<< start test');
         },
@@ -1196,7 +1196,7 @@
         _end(){
             window.console.log('>>>> end test');
         }
-    }));
+    })});
 // #after
     // console
     window.console.log('#### end machine_tool.js');
