@@ -361,7 +361,7 @@
                         break;
                 }
             },
-            /*🟠*/listen_element(action,element,type,callback,option={}){
+            /*🟠*/listen_element(action,element,type,callback,option={},extra){
                 switch(type){
                     case'pointer_up':
                         {
@@ -369,38 +369,47 @@
                                 case'add':
                                     {
                                         element.machine_tool_listen_element_pointer_up=(event)=>{
-                                            const left=event.target.getBoundingClientRect().left;
-                                            const right=event.target.getBoundingClientRect().right;
-                                            const top=event.target.getBoundingClientRect().top;
-                                            const bottom=event.target.getBoundingClientRect().bottom;
-                                            event.target.parentNode.addEventListener('pointerup',(event_)=>{
-                                                if((event_.target===event.target||event_.target===event.target.parentNode)&&(event_.clientX>=left&&event_.clientX<=right&&event_.clientY>=top&&event_.clientY<=bottom)){
-                                                    if(event_.target.children.length){
-                                                        let block=false;
-                                                        for(const item of event_.target.children){
-                                                            if(window.getComputedStyle(item).pointerEvents!=='none'&&window.getComputedStyle(item).visibility!=='hidden'){
-                                                                block=true;
-                                                                let intersect=false;
-                                                                for(const item of event_.target.children){
-                                                                    if((window.getComputedStyle(item).pointerEvents!=='none'&&window.getComputedStyle(item).visibility!=='hidden')&&(event_.clientX>=item.getBoundingClientRect().left&&event_.clientX<=item.getBoundingClientRect().right&&event_.clientY>=item.getBoundingClientRect().top&&event_.clientY<=item.getBoundingClientRect().bottom)){
-                                                                        intersect=true;
-                                                                        break;
+                                            const run=()=>{
+                                                const left=event.target.getBoundingClientRect().left;
+                                                const right=event.target.getBoundingClientRect().right;
+                                                const top=event.target.getBoundingClientRect().top;
+                                                const bottom=event.target.getBoundingClientRect().bottom;
+                                                event.target.parentNode.addEventListener('pointerup',(event_)=>{
+                                                    if((event_.target===event.target||event_.target===event.target.parentNode)&&(event_.clientX>=left&&event_.clientX<=right&&event_.clientY>=top&&event_.clientY<=bottom)){
+                                                        if(event_.target.children.length){
+                                                            let block=false;
+                                                            for(const item of event_.target.children){
+                                                                if(window.getComputedStyle(item).pointerEvents!=='none'&&window.getComputedStyle(item).visibility!=='hidden'){
+                                                                    block=true;
+                                                                    let intersect=false;
+                                                                    for(const item of event_.target.children){
+                                                                        if((window.getComputedStyle(item).pointerEvents!=='none'&&window.getComputedStyle(item).visibility!=='hidden')&&(event_.clientX>=item.getBoundingClientRect().left&&event_.clientX<=item.getBoundingClientRect().right&&event_.clientY>=item.getBoundingClientRect().top&&event_.clientY<=item.getBoundingClientRect().bottom)){
+                                                                            intersect=true;
+                                                                            break;
+                                                                        }
                                                                     }
+                                                                    if(!intersect){
+                                                                        callback(event);
+                                                                    }
+                                                                    break;
                                                                 }
-                                                                if(!intersect){
-                                                                    callback(event);
-                                                                }
-                                                                break;
                                                             }
-                                                        }
-                                                        if(!block){
+                                                            if(!block){
+                                                                callback(event);
+                                                            }
+                                                        }else{
                                                             callback(event);
                                                         }
-                                                    }else{
-                                                        callback(event);
                                                     }
+                                                },{once:true});
+                                            };
+                                            if(typeof extra==='number'){
+                                                if(event.button===extra){
+                                                    run();
                                                 }
-                                            },{once:true});
+                                            }else{
+                                                run();
+                                            }
                                         };
                                         element.addEventListener('pointerdown',element.machine_tool_listen_element_pointer_up,option);
                                     }
@@ -671,7 +680,9 @@
                                     //                         button_element<element>...
                                     //                     ],
                                     //                     listen_type<string>,
-                                    //                     callback<function(event_data),undefined=()=>{}>
+                                    //                     callback<function(event_data),undefined=()=>{}>,
+                                    //                     option<object,undefined={}>,
+                                    //                     extra<any,undefined>
                                     //                 ]...
                                     //             ]
                                     //         ]
@@ -687,6 +698,8 @@
                                         const button_element_array=button[2];
                                         const listen_type=button[3];
                                         const callback=button[4];
+                                        const option=button[5];
+                                        const extra=button[6];
                                         if(!callback){
                                             callback=()=>{};
                                         }
@@ -730,8 +743,8 @@
                                             callback();
                                         }
                                         for(const button_element of button_element_array){
-                                            this.listen_element('add',button_element,listen_type,event_function);
-                                            this.listen_element('add',button_element,listen_type,callback);
+                                            this.listen_element('add',button_element,listen_type,event_function,option,extra);
+                                            this.listen_element('add',button_element,listen_type,callback,option,extra);
                                         }
                                     }
                                 }
@@ -754,7 +767,9 @@
                                     //                         button_element<element>...
                                     //                     ],
                                     //                     listen_type<string>,
-                                    //                     callback<function(event_data),undefined=()=>{}>
+                                    //                     callback<function(event_data),undefined=()=>{}>,
+                                    //                     option<object,undefined={}>,
+                                    //                     extra<any,undefined>
                                     //                 ]...
                                     //             ]
                                     //         ]
@@ -769,6 +784,8 @@
                                         const button_element_array=content[2];
                                         const listen_type=content[3];
                                         const callback=content[4];
+                                        const option=content[5];
+                                        const extra=content[6];
                                         if(!callback){
                                             callback=()=>{};
                                         }
@@ -799,8 +816,8 @@
                                             callback();
                                         }
                                         for(const button_element of button_element_array){
-                                            this.listen_element('add',button_element,listen_type,event_function);
-                                            this.listen_element('add',button_element,listen_type,callback);
+                                            this.listen_element('add',button_element,listen_type,event_function,option,extra);
+                                            this.listen_element('add',button_element,listen_type,callback,option,extra);
                                         }
                                     }
                                 }
@@ -1008,7 +1025,9 @@
                                         'pointer_up',
                                         (data)=>{
                                             window.console.log('switch_state()','1 4 pointer_up',data);
-                                        }
+                                        },
+                                        ,
+                                        0
                                     ],
                                     [
                                         false,
@@ -1019,7 +1038,9 @@
                                         'pointer_up',
                                         (data)=>{
                                             window.console.log('switch_state()','2 pointer_up',data);
-                                        }
+                                        },
+                                        ,
+                                        0
                                     ],
                                     [
                                         true,
@@ -1030,7 +1051,9 @@
                                         'pointer_up',
                                         (data)=>{
                                             window.console.log('switch_state()','3 pointer_up',data);
-                                        }
+                                        },
+                                        ,
+                                        0
                                     ]
                                 ]
                             ]
@@ -1077,7 +1100,9 @@
                                         'pointer_up',
                                         (data)=>{
                                             window.console.log('switch_state()','red pointer_up',data);
-                                        }
+                                        },
+                                        ,
+                                        0
                                     ],
                                     [
                                         false,
@@ -1092,7 +1117,9 @@
                                         'pointer_up',
                                         (data)=>{
                                             window.console.log('switch_state()','green pointer_up',data);
-                                        }
+                                        },
+                                        ,
+                                        0
                                     ],
                                     [
                                         false,
@@ -1107,7 +1134,9 @@
                                         'pointer_up',
                                         (data)=>{
                                             window.console.log('switch_state()','blue pointer_up',data);
-                                        }
+                                        },
+                                        ,
+                                        0
                                     ]
                                 ]
                             ]
@@ -1192,7 +1221,7 @@
             // });
             // machine_tool.listen_element('add',window.document.documentElement,'pointer_up',()=>{
             //     window.console.log('listen_element()','pointer_up');
-            // });
+            // },undefined,0);
             // machine_tool.listen_element('add',window.document.documentElement,'pointer_track',()=>{
             //     window.console.log('listen_element()','pointer_track');
             // });
