@@ -365,71 +365,80 @@
                 switch(type){
                     case'pointer_up':
                         {
+                            const id='id_'+this.java_string_hash_code(callback.toString()).toString().replace(/[^0-9]/g,'');
                             switch(action){
                                 case'add':
                                     {
-                                        element.machine_tool_listen_element_pointer_up=(event)=>{
-                                            const run=()=>{
-                                                const left=event.target.getBoundingClientRect().left;
-                                                const right=event.target.getBoundingClientRect().right;
-                                                const top=event.target.getBoundingClientRect().top;
-                                                const bottom=event.target.getBoundingClientRect().bottom;
-                                                event.target.parentNode.addEventListener('pointerup',(event_)=>{
-                                                    if((event_.target===event.target||event_.target===event.target.parentNode)&&(event_.clientX>=left&&event_.clientX<=right&&event_.clientY>=top&&event_.clientY<=bottom)){
-                                                        if(event_.target.children.length){
-                                                            let block=false;
-                                                            for(const item of event_.target.children){
-                                                                if(window.getComputedStyle(item).pointerEvents!=='none'&&window.getComputedStyle(item).visibility!=='hidden'){
-                                                                    block=true;
-                                                                    let intersect=false;
-                                                                    for(const item of event_.target.children){
-                                                                        if((window.getComputedStyle(item).pointerEvents!=='none'&&window.getComputedStyle(item).visibility!=='hidden')&&(event_.clientX>=item.getBoundingClientRect().left&&event_.clientX<=item.getBoundingClientRect().right&&event_.clientY>=item.getBoundingClientRect().top&&event_.clientY<=item.getBoundingClientRect().bottom)){
-                                                                            intersect=true;
-                                                                            break;
+                                        if(!this.listen_element.pointer_up){
+                                            this.listen_element.pointer_up={};
+                                        }
+                                        if(!this.listen_element.pointer_up[id]){
+                                            this.listen_element.pointer_up[id]=(event)=>{
+                                                const run=()=>{
+                                                    const left=event.target.getBoundingClientRect().left;
+                                                    const right=event.target.getBoundingClientRect().right;
+                                                    const top=event.target.getBoundingClientRect().top;
+                                                    const bottom=event.target.getBoundingClientRect().bottom;
+                                                    event.target.parentNode.addEventListener('pointerup',(event_)=>{
+                                                        if((event_.target===event.target||event_.target===event.target.parentNode)&&(event_.clientX>=left&&event_.clientX<=right&&event_.clientY>=top&&event_.clientY<=bottom)){
+                                                            if(event_.target.children.length){
+                                                                let block=false;
+                                                                for(const item of event_.target.children){
+                                                                    if(window.getComputedStyle(item).pointerEvents!=='none'&&window.getComputedStyle(item).visibility!=='hidden'){
+                                                                        block=true;
+                                                                        let intersect=false;
+                                                                        for(const item of event_.target.children){
+                                                                            if((window.getComputedStyle(item).pointerEvents!=='none'&&window.getComputedStyle(item).visibility!=='hidden')&&(event_.clientX>=item.getBoundingClientRect().left&&event_.clientX<=item.getBoundingClientRect().right&&event_.clientY>=item.getBoundingClientRect().top&&event_.clientY<=item.getBoundingClientRect().bottom)){
+                                                                                intersect=true;
+                                                                                break;
+                                                                            }
                                                                         }
+                                                                        if(!intersect){
+                                                                            callback(event);
+                                                                        }
+                                                                        break;
                                                                     }
-                                                                    if(!intersect){
-                                                                        callback(event);
-                                                                    }
-                                                                    break;
                                                                 }
-                                                            }
-                                                            if(!block){
+                                                                if(!block){
+                                                                    callback(event);
+                                                                }
+                                                            }else{
                                                                 callback(event);
                                                             }
-                                                        }else{
-                                                            callback(event);
+                                                        }
+                                                    },{once:true});
+                                                };
+                                                if(typeof extra==='number'){
+                                                    if(event.button===extra){
+                                                        run();
+                                                        if(option.once){
+                                                            element.removeEventListener('pointerdown',this.listen_element.pointer_up[id]);
+                                                            delete this.listen_element.pointer_up[id];
                                                         }
                                                     }
-                                                },{once:true});
-                                            };
-                                            if(typeof extra==='number'){
-                                                if(event.button===extra){
+                                                }else{
                                                     run();
                                                     if(option.once){
-                                                        element.removeEventListener('pointerdown',element.machine_tool_listen_element_pointer_up);
-                                                        delete element.machine_tool_listen_element_pointer_up;
+                                                        element.removeEventListener('pointerdown',this.listen_element.pointer_up[id]);
+                                                        delete this.listen_element.pointer_up[id];
                                                     }
                                                 }
+                                            };
+                                            if(option.once){
+                                                element.addEventListener('pointerdown',this.listen_element.pointer_up[id]);
                                             }else{
-                                                run();
-                                                if(option.once){
-                                                    element.removeEventListener('pointerdown',element.machine_tool_listen_element_pointer_up);
-                                                    delete element.machine_tool_listen_element_pointer_up;
-                                                }
+                                                element.addEventListener('pointerdown',this.listen_element.pointer_up[id],option);
                                             }
-                                        };
-                                        if(option.once){
-                                            element.addEventListener('pointerdown',element.machine_tool_listen_element_pointer_up);
-                                        }else{
-                                            element.addEventListener('pointerdown',element.machine_tool_listen_element_pointer_up,option);
                                         }
                                     }
                                     break;
                                 case'remove':
                                     {
-                                        element.removeEventListener('pointerdown',element.machine_tool_listen_element_pointer_up);
-                                        delete element.machine_tool_listen_element_pointer_up;
+                                        element.removeEventListener('pointerdown',this.listen_element.pointer_up[id]);
+                                        delete this.listen_element.pointer_up[id];
+                                        if(!window.Object.keys(this.listen_element.pointer_up).length){
+                                            delete this.listen_element.pointer_up;
+                                        }
                                     }
                                     break;
                                 default:
@@ -497,9 +506,9 @@
                                 case'add':
                                     {
                                         element.machine_tool_listen_element_observe_intersection=new window.IntersectionObserver((entries)=>{
-                                            window.console.log('listen_element().observe_intersection entries',entries);
+                                            // window.console.log('listen_element().observe_intersection entries',entries);
                                             entries.forEach((entry)=>{
-                                                window.console.log('listen_element().observe_intersection entry',entry);
+                                                // window.console.log('listen_element().observe_intersection entry',entry);
                                             });
                                         },option);
                                         element.machine_tool_listen_element_observe_intersection.observe(element);
@@ -522,9 +531,9 @@
                                 case'add':
                                     {
                                         element.machine_tool_listen_element_observe_resize=new window.ResizeObserver((entries)=>{
-                                            window.console.log('listen_element().observe_resize entries',entries);
+                                            // window.console.log('listen_element().observe_resize entries',entries);
                                             entries.forEach((entry)=>{
-                                                window.console.log('listen_element().observe_resize entry',entry);
+                                                // window.console.log('listen_element().observe_resize entry',entry);
                                             });
                                         });
                                         element.machine_tool_listen_element_observe_resize.observe(element);
@@ -561,7 +570,7 @@
                         break;
                 }
             },
-            /*🟠*/switch_state(...argument){
+            /*🟢*/switch_state(...argument){
                 if(argument[0]instanceof window.HTMLElement){
                     // base mode
                     //     element<element>,
