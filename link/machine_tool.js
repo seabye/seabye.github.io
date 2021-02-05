@@ -925,6 +925,7 @@
             },
             /*🟢*/local_test(callback){
                 if(window.document?.documentElement&&window.location.hostname===new window.URL(import.meta.url).hostname){
+                    window.console.log('#### local_test()',window.location.hostname,new window.URL(import.meta.url).hostname);
                     if(typeof callback==='function'){
                         callback();
                     }else{
