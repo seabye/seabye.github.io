@@ -407,7 +407,7 @@
                                                 if(event.button===extra){
                                                     run();
                                                 }else{
-                                                    if(option.once&&option.once===true){
+                                                    if(option.once){
                                                         element.addEventListener('pointerdown',element.machine_tool_listen_element_pointer_up,option);
                                                     }
                                                 }
