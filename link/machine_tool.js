@@ -926,11 +926,7 @@
             /*🟢*/local_test(callback){
                 window.console.log(`#### local_test() '${window.location.hostname}' '${new window.URL(import.meta.url).hostname}'`);
                 if(window.document?.documentElement&&window.location.hostname===new window.URL(import.meta.url).hostname){
-                    if(typeof callback==='function'){
-                        callback();
-                    }else{
-                        callback;
-                    }
+                    callback();
                 }
             },
         // application programming interface
