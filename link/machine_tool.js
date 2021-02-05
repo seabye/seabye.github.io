@@ -406,6 +406,10 @@
                                             if(typeof extra==='number'){
                                                 if(event.button===extra){
                                                     run();
+                                                }else{
+                                                    if(option.once&&option.once===true){
+                                                        element.addEventListener('pointerdown',element.machine_tool_listen_element_pointer_up,option);
+                                                    }
                                                 }
                                             }else{
                                                 run();
