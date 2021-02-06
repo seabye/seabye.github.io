@@ -163,6 +163,12 @@
                 }
                 return result;
             },
+            /*🟢*/is_portrait(width,height){
+                if(width<=height){
+                    return true;
+                }
+                return false;
+            },
             /*🟢*/run_object(object){
                 if(object){
                     for(const item in object){
@@ -534,6 +540,7 @@
                                             // window.console.log('listen_element().observe_intersection entries',entries);
                                             entries.forEach((entry)=>{
                                                 // window.console.log('listen_element().observe_intersection entry',entry);
+                                                callback(entry);
                                             });
                                         },option);
                                         element.machine_tool_listen_element_observe_intersection.observe(element);
@@ -559,6 +566,7 @@
                                             // window.console.log('listen_element().observe_resize entries',entries);
                                             entries.forEach((entry)=>{
                                                 // window.console.log('listen_element().observe_resize entry',entry);
+                                                callback(entry);
                                             });
                                         });
                                         element.machine_tool_listen_element_observe_resize.observe(element);
@@ -956,9 +964,8 @@
                             // this.listen_url[id].count-=1;
                             // if(this.listen_url[id].count===0){
                                 delete this.listen_url[id];
-                                if(!window.Object.keys(this.listen_url).length){
-                                    // remove observe
-                                }
+                                // remove observe
+                                // if(!window.Object.keys(this.listen_url).length){}
                             // }
                         }
                         break;
@@ -1317,12 +1324,12 @@
                             }
                         }
                     },{attributes:true,attributeFilter:['class'],childList:false,subtree:false});
-            // machine_tool.listen_element('add',window.document.documentElement,'observe_intersection',()=>{
-            //     window.console.log('listen_element()','observe_intersection');
+            // machine_tool.listen_element('add',window.document.documentElement,'observe_intersection',(data)=>{
+            //     window.console.log('listen_element()','observe_intersection',data);
             // },{});
-            // machine_tool.listen_element('add',window.document.documentElement,'observe_resize',()=>{
-            //     window.console.log('listen_element()','observe_resize');
-            // });
+            machine_tool.listen_element('add',window.document.documentElement,'observe_resize',(data)=>{
+                window.console.log('listen_element()','observe_resize',data);
+            });
         },
         listen_url(){
             machine_tool.listen_url('add',(data)=>{
