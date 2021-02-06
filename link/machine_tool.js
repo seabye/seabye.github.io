@@ -384,28 +384,28 @@
                                             this.listen_element.pointer_up={};
                                         }
                                         if(!this.listen_element.pointer_up[id]){
-                                            this.listen_element.pointer_up[id]=(event)=>{
+                                            this.listen_element.pointer_up[id]=(data)=>{
                                                 const run=()=>{
-                                                    const left=event.target.getBoundingClientRect().left;
-                                                    const right=event.target.getBoundingClientRect().right;
-                                                    const top=event.target.getBoundingClientRect().top;
-                                                    const bottom=event.target.getBoundingClientRect().bottom;
-                                                    event.target.parentNode.addEventListener('pointerup',(event_)=>{
-                                                        if((event_.target===event.target||event_.target===event.target.parentNode)&&(event_.clientX>=left&&event_.clientX<=right&&event_.clientY>=top&&event_.clientY<=bottom)){
-                                                            if(event_.target.children.length){
+                                                    const left=data.target.getBoundingClientRect().left;
+                                                    const right=data.target.getBoundingClientRect().right;
+                                                    const top=data.target.getBoundingClientRect().top;
+                                                    const bottom=data.target.getBoundingClientRect().bottom;
+                                                    data.target.parentNode.addEventListener('pointerup',(event)=>{
+                                                        if((event.target===data.target||event.target===data.target.parentNode)&&(event.clientX>=left&&event.clientX<=right&&event.clientY>=top&&event.clientY<=bottom)){
+                                                            if(event.target.children.length){
                                                                 let block=false;
-                                                                for(const item of event_.target.children){
+                                                                for(const item of event.target.children){
                                                                     if(window.getComputedStyle(item).pointerEvents!=='none'&&window.getComputedStyle(item).visibility!=='hidden'){
                                                                         block=true;
                                                                         let intersect=false;
-                                                                        for(const item of event_.target.children){
-                                                                            if((window.getComputedStyle(item).pointerEvents!=='none'&&window.getComputedStyle(item).visibility!=='hidden')&&(event_.clientX>=item.getBoundingClientRect().left&&event_.clientX<=item.getBoundingClientRect().right&&event_.clientY>=item.getBoundingClientRect().top&&event_.clientY<=item.getBoundingClientRect().bottom)){
+                                                                        for(const item of event.target.children){
+                                                                            if((window.getComputedStyle(item).pointerEvents!=='none'&&window.getComputedStyle(item).visibility!=='hidden')&&(event.clientX>=item.getBoundingClientRect().left&&event.clientX<=item.getBoundingClientRect().right&&event.clientY>=item.getBoundingClientRect().top&&event.clientY<=item.getBoundingClientRect().bottom)){
                                                                                 intersect=true;
                                                                                 break;
                                                                             }
                                                                         }
                                                                         if(!intersect){
-                                                                            callback(event);
+                                                                            callback(data);
                                                                             if(option.once){
                                                                                 remove();
                                                                             }
@@ -414,13 +414,13 @@
                                                                     }
                                                                 }
                                                                 if(!block){
-                                                                    callback(event);
+                                                                    callback(data);
                                                                     if(option.once){
                                                                         remove();
                                                                     }
                                                                 }
                                                             }else{
-                                                                callback(event);
+                                                                callback(data);
                                                                 if(option.once){
                                                                     remove();
                                                                 }
@@ -429,7 +429,7 @@
                                                     },{once:true});
                                                 };
                                                 if(typeof other==='number'){
-                                                    if(event.button===other){
+                                                    if(data.button===other){
                                                         run();
                                                     }
                                                 }else{
