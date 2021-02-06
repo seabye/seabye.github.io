@@ -361,11 +361,22 @@
                         break;
                 }
             },
-            /*🟠*/listen_element(action,element,type,callback,option={},extra){
+            /*🟠*/listen_element(action,element,type,callback,option={},other=''){
+                const match=/[\r\n\s]/g;
+                const id='id_'+this.java_string_hash_code((element!==window&&element!==window.document?element.outerHTML.toString().replace(match,''):'')+callback.toString().replace(match,'')+option.toString().replace(match,'')+other.toString().replace(match,'')).toString().replace(/[^0-9]/g,'');
                 switch(type){
                     case'pointer_up':
                         {
-                            const id='id_'+this.java_string_hash_code(callback.toString()).toString().replace(/[^0-9]/g,'');
+                            const remove=()=>{
+                                element.removeEventListener('pointerdown',this.listen_element.pointer_up[id]);
+                                this.listen_element.pointer_up[id].count-=1;
+                                if(this.listen_element.pointer_up[id].count===0){
+                                    delete this.listen_element.pointer_up[id];
+                                    if(!window.Object.keys(this.listen_element.pointer_up).length){
+                                        delete this.listen_element.pointer_up;
+                                    }
+                                }
+                            };
                             switch(action){
                                 case'add':
                                     {
@@ -408,37 +419,33 @@
                                                         }
                                                     },{once:true});
                                                 };
-                                                if(typeof extra==='number'){
-                                                    if(event.button===extra){
+                                                if(typeof other==='number'){
+                                                    if(event.button===other){
                                                         run();
                                                         if(option.once){
-                                                            element.removeEventListener('pointerdown',this.listen_element.pointer_up[id]);
-                                                            delete this.listen_element.pointer_up[id];
+                                                            remove();
                                                         }
                                                     }
                                                 }else{
                                                     run();
                                                     if(option.once){
-                                                        element.removeEventListener('pointerdown',this.listen_element.pointer_up[id]);
-                                                        delete this.listen_element.pointer_up[id];
+                                                        remove();
                                                     }
                                                 }
                                             };
-                                            if(option.once){
-                                                element.addEventListener('pointerdown',this.listen_element.pointer_up[id]);
-                                            }else{
-                                                element.addEventListener('pointerdown',this.listen_element.pointer_up[id],option);
-                                            }
+                                            this.listen_element.pointer_up[id].count=0;
                                         }
+                                        if(option.once){
+                                            element.addEventListener('pointerdown',this.listen_element.pointer_up[id]);
+                                        }else{
+                                            element.addEventListener('pointerdown',this.listen_element.pointer_up[id],option);
+                                        }
+                                        this.listen_element.pointer_up[id].count+=1;
                                     }
                                     break;
                                 case'remove':
                                     {
-                                        element.removeEventListener('pointerdown',this.listen_element.pointer_up[id]);
-                                        delete this.listen_element.pointer_up[id];
-                                        if(!window.Object.keys(this.listen_element.pointer_up).length){
-                                            delete this.listen_element.pointer_up;
-                                        }
+                                        remove();
                                     }
                                     break;
                                 default:
@@ -465,34 +472,47 @@
                             switch(action){
                                 case'add':
                                     {
-                                        element.machine_tool_listen_element_observe_mutation=new window.MutationObserver((mutation_list)=>{
-                                            // window.console.log('listen_element().observe_mutation mutation_list',mutation_list);
-                                            mutation_list.forEach((mutation)=>{
-                                                // window.console.log('listen_element().observe_mutation mutation',mutation);
-                                                switch(mutation.type){
-                                                    case'childList':
-                                                        {
-                                                            // window.console.log('listen_element().observe_mutation childList');
-                                                        }
-                                                        break;
-                                                    case'attributes':
-                                                        {
-                                                            // window.console.log('listen_element().observe_mutation attributes');
-                                                            callback();
-                                                        }
-                                                        break;
-                                                    default:
-                                                        break;
-                                                }
+                                        if(!this.listen_element.observe_mutation){
+                                            this.listen_element.observe_mutation={};
+                                        }
+                                        if(!this.listen_element.observe_mutation[id]){
+                                            this.listen_element.observe_mutation[id]=new window.MutationObserver((mutation_list)=>{
+                                                // window.console.log('listen_element().observe_mutation mutation_list',mutation_list);
+                                                mutation_list.forEach((mutation)=>{
+                                                    // window.console.log('listen_element().observe_mutation mutation',mutation);
+                                                    switch(mutation.type){
+                                                        case'childList':
+                                                            {
+                                                                // window.console.log('listen_element().observe_mutation childList');
+                                                            }
+                                                            break;
+                                                        case'attributes':
+                                                            {
+                                                                // window.console.log('listen_element().observe_mutation attributes');
+                                                                callback(mutation);
+                                                            }
+                                                            break;
+                                                        default:
+                                                            break;
+                                                    }
+                                                });
                                             });
-                                        });
-                                        element.machine_tool_listen_element_observe_mutation.observe(element,option);
+                                            this.listen_element.observe_mutation[id].count=0;
+                                        }
+                                        this.listen_element.observe_mutation[id].observe(element,option);
+                                        this.listen_element.observe_mutation[id].count+=1;
                                     }
                                     break;
                                 case'remove':
                                     {
-                                        element.machine_tool_listen_element_observe_mutation.disconnect();
-                                        delete element.machine_tool_listen_element_observe_mutation;
+                                        this.listen_element.observe_mutation[id].count-=1;
+                                        if(this.listen_element.observe_mutation[id].count===0){
+                                            this.listen_element.observe_mutation[id].disconnect();
+                                            delete this.listen_element.observe_mutation[id];
+                                            if(!window.Object.keys(this.listen_element.observe_mutation).length){
+                                                delete this.listen_element.observe_mutation;
+                                            }
+                                        }
                                     }
                                     break;
                                 default:
@@ -702,8 +722,8 @@
                                     //                     ],
                                     //                     listen_type<string>,
                                     //                     callback<function(event_data),undefined=()=>{}>,
-                                    //                     option<object,undefined={}>,
-                                    //                     extra<any,undefined>
+                                    //                     option<object,undefined>,
+                                    //                     other<any,undefined>
                                     //                 ]...
                                     //             ]
                                     //         ]
@@ -720,7 +740,7 @@
                                         const listen_type=button[3];
                                         const callback=button[4];
                                         const option=button[5];
-                                        const extra=button[6];
+                                        const other=button[6];
                                         if(!callback){
                                             callback=()=>{};
                                         }
@@ -764,8 +784,8 @@
                                             callback();
                                         }
                                         for(const button_element of button_element_array){
-                                            this.listen_element('add',button_element,listen_type,event_function,option,extra);
-                                            this.listen_element('add',button_element,listen_type,callback,option,extra);
+                                            this.listen_element('add',button_element,listen_type,event_function,option,other);
+                                            this.listen_element('add',button_element,listen_type,callback,option,other);
                                         }
                                     }
                                 }
@@ -789,8 +809,8 @@
                                     //                     ],
                                     //                     listen_type<string>,
                                     //                     callback<function(event_data),undefined=()=>{}>,
-                                    //                     option<object,undefined={}>,
-                                    //                     extra<any,undefined>
+                                    //                     option<object,undefined>,
+                                    //                     other<any,undefined>
                                     //                 ]...
                                     //             ]
                                     //         ]
@@ -806,7 +826,7 @@
                                         const listen_type=content[3];
                                         const callback=content[4];
                                         const option=content[5];
-                                        const extra=content[6];
+                                        const other=content[6];
                                         if(!callback){
                                             callback=()=>{};
                                         }
@@ -837,8 +857,8 @@
                                             callback();
                                         }
                                         for(const button_element of button_element_array){
-                                            this.listen_element('add',button_element,listen_type,event_function,option,extra);
-                                            this.listen_element('add',button_element,listen_type,callback,option,extra);
+                                            this.listen_element('add',button_element,listen_type,event_function,option,other);
+                                            this.listen_element('add',button_element,listen_type,callback,option,other);
                                         }
                                     }
                                 }
@@ -869,7 +889,7 @@
                 return window.location.href.replace(window.location.origin,'');
             },
             /*🟠*/listen_url(action,callback){
-                const id='id_'+this.java_string_hash_code(callback.toString()).toString().replace(/[^0-9]/g,'');
+                const id='id_'+this.java_string_hash_code(callback.toString().replace(/[\r\n\s]/g,'')).toString().replace(/[^0-9]/g,'');
                 switch(action){
                     case'add':
                         {
@@ -918,17 +938,23 @@
                                     }
                                 }
                                 this.listen_url[id]=new template(callback);
+                                // this.listen_url[id].count=0;
                                 this.listen_url[id].add();
                             }
+                            // this.listen_url[id].add();
+                            // this.listen_url[id].count+=1;
                         }
                         break;
                     case'remove':
                         {
                             this.listen_url[id].remove();
-                            delete this.listen_url[id];
-                            if(!window.Object.keys(this.listen_url).length){
-                                // remove observe
-                            }
+                            // this.listen_url[id].count-=1;
+                            // if(this.listen_url[id].count===0){
+                                delete this.listen_url[id];
+                                if(!window.Object.keys(this.listen_url).length){
+                                    // remove observe
+                                }
+                            // }
                         }
                         break;
                     default:
@@ -1020,41 +1046,41 @@
         _start(){
             window.console.log('<<<< start test');
         },
-        // async aw_loop(){
-        //     window.console.log(await machine_tool.aw_loop(
-        //         ()=>{
-        //             return false;
-        //         },
-        //         ()=>{
-        //             window.console.log('aw_loop()','1');
-        //             return 11;
-        //         },
-        //         1000,
-        //         2,
-        //         ()=>{
-        //             window.console.log('aw_loop()','2');
-        //             return 22;
-        //         }
-        //     ));
-        // },
-        // async time_out(){
-        //     window.console.log('time_out()','2000_');
-        //     await machine_tool.time_out(()=>{
-        //         window.console.log('time_out()','2000');
-        //     },2000);
-        // },
-        // uuid_36_to_uuid_22(){
-        //     window.console.log('uuid_36_to_uuid_22()',machine_tool.uuid_36_to_uuid_22('8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3'));
-        // },
-        // uuid_22_to_uuid_36(){
-        //     window.console.log('uuid_22_to_uuid_36()',machine_tool.uuid_22_to_uuid_36('jvZe6aA5S_Kks2h_zB88ww'));
-        // },
-        // string_to_base64_url_safe_no_pad(){
-        //     window.console.log('string_to_base64_url_safe_no_pad()',machine_tool.string_to_base64_url_safe_no_pad('8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3'));
-        // },
-        // base64_url_safe_no_pad_to_string(){
-        //     window.console.log('base64_url_safe_no_pad_to_string()',machine_tool.base64_url_safe_no_pad_to_string('jvZe6aA5S_Kks2h_zB88ww'));
-        // },
+        async aw_loop(){
+            // window.console.log(await machine_tool.aw_loop(
+            //     ()=>{
+            //         return false;
+            //     },
+            //     ()=>{
+            //         window.console.log('aw_loop()','1');
+            //         return 11;
+            //     },
+            //     1000,
+            //     2,
+            //     ()=>{
+            //         window.console.log('aw_loop()','2');
+            //         return 22;
+            //     }
+            // ));
+        },
+        async time_out(){
+            // window.console.log('time_out()');
+            // await machine_tool.time_out(()=>{
+            //     window.console.log('time_out()','2000');
+            // },2000);
+        },
+        uuid_36_to_uuid_22(){
+            window.console.log('uuid_36_to_uuid_22()',machine_tool.uuid_36_to_uuid_22('8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3'));
+        },
+        uuid_22_to_uuid_36(){
+            window.console.log('uuid_22_to_uuid_36()',machine_tool.uuid_22_to_uuid_36('jvZe6aA5S_Kks2h_zB88ww'));
+        },
+        string_to_base64_url_safe_no_pad(){
+            window.console.log('string_to_base64_url_safe_no_pad()',machine_tool.string_to_base64_url_safe_no_pad('8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3'));
+        },
+        base64_url_safe_no_pad_to_string(){
+            window.console.log('base64_url_safe_no_pad_to_string()',machine_tool.base64_url_safe_no_pad_to_string('jvZe6aA5S_Kks2h_zB88ww'));
+        },
         switch_state(){
             this.elements=machine_tool.create_element({
                 target_mode:{
@@ -1237,12 +1263,12 @@
             },window.document.body);
         },
         listen_element(){
-            // machine_tool.listen_element('add',window.document.documentElement,'pointerup',()=>{
-            //     window.console.log('listen_element()','pointerup');
-            // });
-            // machine_tool.listen_element('add',window.document.documentElement,'pointer_up',()=>{
-            //     window.console.log('listen_element()','pointer_up');
-            // },undefined,0);
+            machine_tool.listen_element('add',window.document.documentElement,'pointerup',()=>{
+                window.console.log('listen_element()','pointerup');
+            });
+            machine_tool.listen_element('add',window.document.documentElement,'pointer_up',()=>{
+                window.console.log('listen_element()','pointer_up');
+            },undefined,0);
             // machine_tool.listen_element('add',window.document.documentElement,'pointer_track',()=>{
             //     window.console.log('listen_element()','pointer_track');
             // });
@@ -1256,6 +1282,36 @@
                     }
                 }
             },{attributes:true,attributeFilter:['class'],childList:false,subtree:false});
+            // machine_tool.listen_element('remove',this.elements.target,'observe_mutation',()=>{
+            //     window.console.log('listen_element()','observe_mutation');
+            //     if(this.elements.target.classList.contains('open_state')){
+            //         machine_tool.switch_state(this.elements.target_mode,'open_state','close_state',true);
+            //     }else{
+            //         if(this.elements.target.classList.contains('close_state')){
+            //             machine_tool.switch_state(this.elements.target_mode,'close_state','open_state',true);
+            //         }
+            //     }
+            // },{attributes:true,attributeFilter:['class'],childList:false,subtree:false});
+                machine_tool.listen_element('add',this.elements.red_target,'observe_mutation',()=>{
+                    window.console.log('listen_element()','observe_mutation');
+                    if(this.elements.target.classList.contains('open_state')){
+                        machine_tool.switch_state(this.elements.target_mode,'open_state','close_state',true);
+                    }else{
+                        if(this.elements.target.classList.contains('close_state')){
+                            machine_tool.switch_state(this.elements.target_mode,'close_state','open_state',true);
+                        }
+                    }
+                },{attributes:true,attributeFilter:['class'],childList:false,subtree:false});
+                    machine_tool.listen_element('remove',this.elements.red_target,'observe_mutation',()=>{
+                        window.console.log('listen_element()','observe_mutation');
+                        if(this.elements.target.classList.contains('open_state')){
+                            machine_tool.switch_state(this.elements.target_mode,'open_state','close_state',true);
+                        }else{
+                            if(this.elements.target.classList.contains('close_state')){
+                                machine_tool.switch_state(this.elements.target_mode,'close_state','open_state',true);
+                            }
+                        }
+                    },{attributes:true,attributeFilter:['class'],childList:false,subtree:false});
             // machine_tool.listen_element('add',window.document.documentElement,'observe_intersection',()=>{
             //     window.console.log('listen_element()','observe_intersection');
             // },{});
@@ -1263,14 +1319,14 @@
             //     window.console.log('listen_element()','observe_resize');
             // });
         },
-        // listen_url(){
-        //     machine_tool.listen_url('add',(data)=>{
-        //         window.console.log('listen_url()',data);
-        //     });
-        //     window.history.pushState(null,null,'/x/');
-        //     window.history.pushState(null,null,'/');
-        //     window.history.replaceState(null,null,window.location.pathname);
-        // },
+        listen_url(){
+            machine_tool.listen_url('add',(data)=>{
+                window.console.log('listen_url()',data);
+            });
+            // window.history.pushState(null,null,'/x/');
+            // window.history.pushState(null,null,'/');
+            window.history.replaceState(null,null,window.location.pathname);
+        },
         _end(){
             window.console.log('>>>> end test');
         }
