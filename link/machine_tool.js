@@ -163,9 +163,15 @@
                 }
                 return result;
             },
-            /*🟢*/is_portrait(width,height){
+            /*🟢*/is_portrait(width,height,true_callback,false_callback){
                 if(width<=height){
+                    if(true_callback){
+                        true_callback();
+                    }
                     return true;
+                }
+                if(false_callback){
+                    false_callback();
                 }
                 return false;
             },
