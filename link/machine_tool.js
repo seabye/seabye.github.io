@@ -417,20 +417,17 @@
                                                                 callback(event);
                                                             }
                                                         }
+                                                        if(option.once){
+                                                            remove();
+                                                        }
                                                     },{once:true});
                                                 };
                                                 if(typeof other==='number'){
                                                     if(event.button===other){
                                                         run();
-                                                        if(option.once){
-                                                            remove();
-                                                        }
                                                     }
                                                 }else{
                                                     run();
-                                                    if(option.once){
-                                                        remove();
-                                                    }
                                                 }
                                             };
                                             this.listen_element.pointer_up[id].count=0;
