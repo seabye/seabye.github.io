@@ -727,8 +727,8 @@
                                     //     [
                                     //         'target',
                                     //         [
-                                    //             open_state<string/'class class2...'/>,
-                                    //             close_state<string/'class class2...'/>,
+                                    //             open_state<string/'class class2...'/,undefined='_'>,
+                                    //             close_state<string/'class class2...'/,undefined='_'>,
                                     //             [
                                     //                 target_element<element>...
                                     //             ],
@@ -748,8 +748,8 @@
                                     //         ]
                                     //     ]
                                     const data=argument[0][1];
-                                    const open_state=data[0];
-                                    const close_state=data[1];
+                                    const open_state=data[0]?data[0]:'_';
+                                    const close_state=data[1]?data[1]:'_';
                                     const target_element_array=data[2];
                                     const button_array=data[3];
                                     for(const button of button_array){
@@ -815,8 +815,8 @@
                                     //     [
                                     //         'tab',
                                     //         [
-                                    //             open_state<string/'class class2...'/>,
-                                    //             close_state<string/'class class2...'/>,
+                                    //             open_state<string/'class class2...'/,undefined='_'>,
+                                    //             close_state<string/'class class2...'/,undefined='_'>,
                                     //             [
                                     //                 [
                                     //                     start<boolean>,
@@ -835,8 +835,8 @@
                                     //         ]
                                     //     ]
                                     const data=argument[0][1];
-                                    const open_state=data[0];
-                                    const close_state=data[1];
+                                    const open_state=data[0]?data[0]:'_';
+                                    const close_state=data[1]?data[1]:'_';
                                     const content_array=data[2];
                                     for(const content of content_array){
                                         const start=content[0];
@@ -1108,7 +1108,7 @@
                             'target',
                             [
                                 'open_state',
-                                'close_state',
+                                ,
                                 [
                                     elements.target,
                                     elements.target2
@@ -1184,7 +1184,7 @@
                             'tab',
                             [
                                 'open_state',
-                                'close_state',
+                                ,
                                 [
                                     [
                                         true,
@@ -1293,10 +1293,10 @@
             machine_tool.listen_element('add',this.elements.target,'observe_mutation',()=>{
                 window.console.log('listen_element()','observe_mutation');
                 if(this.elements.target.classList.contains('open_state')){
-                    machine_tool.switch_state(this.elements.target_mode,'open_state','close_state',true);
+                    machine_tool.switch_state(this.elements.target_mode,'open_state','_',true);
                 }else{
-                    if(this.elements.target.classList.contains('close_state')){
-                        machine_tool.switch_state(this.elements.target_mode,'close_state','open_state',true);
+                    if(this.elements.target.classList.contains('_')){
+                        machine_tool.switch_state(this.elements.target_mode,'_','open_state',true);
                     }
                 }
             },{attributes:true,attributeFilter:['class'],childList:false,subtree:false});
