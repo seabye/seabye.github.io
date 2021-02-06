@@ -50,7 +50,9 @@
             },
             /*🟢*/loop(condition,callback,wait=1000/24){
                 if(condition()){
-                    return callback();
+                    if(callback){
+                        return callback();
+                    }
                 }else{
                     window.setTimeout(()=>{
                         this.loop(condition,callback,wait);
