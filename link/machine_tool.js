@@ -406,19 +406,25 @@
                                                                         }
                                                                         if(!intersect){
                                                                             callback(event);
+                                                                            if(option.once){
+                                                                                remove();
+                                                                            }
                                                                         }
                                                                         break;
                                                                     }
                                                                 }
                                                                 if(!block){
                                                                     callback(event);
+                                                                    if(option.once){
+                                                                        remove();
+                                                                    }
                                                                 }
                                                             }else{
                                                                 callback(event);
+                                                                if(option.once){
+                                                                    remove();
+                                                                }
                                                             }
-                                                        }
-                                                        if(option.once){
-                                                            remove();
                                                         }
                                                     },{once:true});
                                                 };
