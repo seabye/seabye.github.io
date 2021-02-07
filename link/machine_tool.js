@@ -899,17 +899,24 @@
                 }
             },
             /*🟢*/find_outer(find,start,end=window.document.documentElement,true_callback,false_callback){
-                if(start===find){
+                if(find instanceof window.HTMLElement&&start===find){
                     if(true_callback){
-                        true_callback();
+                        true_callback(start);
                     }
-                    return true;
+                    return start;
                 }else{
-                    if(start===end){
-                        if(false_callback){
-                            false_callback();
+                    if(start.classList.contains(find)){
+                        if(true_callback){
+                            true_callback(start);
                         }
-                        return false;
+                        return start;
+                    }else{
+                        if(start===end){
+                            if(false_callback){
+                                false_callback();
+                            }
+                            return false;
+                        }
                     }
                 }
                 return this.find_outer(find,start.parentElement,end,true_callback,false_callback);
