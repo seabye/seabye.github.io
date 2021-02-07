@@ -399,12 +399,15 @@
                                         }
                                         if(!this.listen_element.pointer_up[id]){
                                             this.listen_element.pointer_up[id]=(data)=>{
+                                                const once_id='once_'+id;
+                                                data.target.parentNode.removeEventListener('pointerup',this.listen_element.pointer_up[once_id]);
+                                                delete this.listen_element.pointer_up[once_id];
                                                 const run=()=>{
                                                     const left=data.target.getBoundingClientRect().left;
                                                     const right=data.target.getBoundingClientRect().right;
                                                     const top=data.target.getBoundingClientRect().top;
                                                     const bottom=data.target.getBoundingClientRect().bottom;
-                                                    data.target.parentNode.addEventListener('pointerup',(event)=>{
+                                                    this.listen_element.pointer_up[once_id]=(event)=>{
                                                         if((event.target===data.target||event.target===data.target.parentNode)&&(event.clientX>=left&&event.clientX<=right&&event.clientY>=top&&event.clientY<=bottom)){
                                                             if(event.target.children.length){
                                                                 let block=false;
@@ -440,12 +443,12 @@
                                                                 }
                                                             }
                                                         }
-                                                    },{once:true});
+                                                    };
+                                                    data.target.parentNode.addEventListener('pointerup',this.listen_element.pointer_up[once_id],{once:true});
                                                 };
                                                 if(typeof other==='number'){
                                                     if(data.button===other){
                                                         run();
-                                                        window.console.log('???',data);
                                                     }
                                                 }else{
                                                     run();
