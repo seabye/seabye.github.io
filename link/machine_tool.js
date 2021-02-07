@@ -440,12 +440,12 @@
                                                                 }
                                                             }
                                                         }
-                                                        break;
                                                     },{once:true});
                                                 };
                                                 if(typeof other==='number'){
                                                     if(data.button===other){
                                                         run();
+                                                        window.console.log('???',data);
                                                     }
                                                 }else{
                                                     run();
