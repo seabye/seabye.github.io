@@ -453,6 +453,9 @@
                                                 }else{
                                                     run();
                                                 }
+                                                machine_tool.local_test(()=>{
+                                                    window.console.log('#### listen_element pointer_up length',window.Object.keys(this.listen_element.pointer_up).length);
+                                                });
                                             };
                                             this.listen_element.pointer_up[id].count=0;
                                         }
@@ -472,9 +475,6 @@
                                 default:
                                     break;
                             }
-                            machine_tool.local_test(()=>{
-                                window.console.log('#### listen_element pointer_up length',window.Object.keys(this.listen_element.pointer_up).length);
-                            });
                         }
                         break;
                     case'pointer_track':
