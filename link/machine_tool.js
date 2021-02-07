@@ -1052,7 +1052,7 @@
                 return window.open(uri,'',`width=${width},height=${height},left=${left},top=${top}`);
             },
             /*🟢*/local_test(callback){
-                if(window.document?.documentElement&&window.location.hostname===new window.URL(import.meta.url).hostname){
+                if(window.document?.documentElement&&(window.location.hostname===new window.URL(import.meta.url).hostname||window.document.documentElement.classList.contains('ic_dg')||window.document.documentElement.classList.contains('debug'))){
                     callback();
                 }
             },
