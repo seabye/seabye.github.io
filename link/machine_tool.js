@@ -661,16 +661,14 @@
                     };
                     if(two){
                         if(set_one){
-                            if(one){
-                                if(!contains(one)){
-                                    window.setTimeout(()=>{
-                                        remove(two);
-                                    },0);
-                                    window.setTimeout(()=>{
-                                        add(one);
-                                        callback(element,one);
-                                    },two_wait);
-                                }
+                            if(!contains(one)){
+                                window.setTimeout(()=>{
+                                    remove(two);
+                                },0);
+                                window.setTimeout(()=>{
+                                    add(one);
+                                    callback(element,one);
+                                },two_wait);
                             }else{
                                 window.setTimeout(()=>{
                                     add(two);
