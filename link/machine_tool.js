@@ -390,6 +390,7 @@
                                         delete this.listen_element.pointer_up;
                                     }
                                 }
+                                window.console.dir(this.listen_element.pointer_up);
                             };
                             switch(action){
                                 case'add':
