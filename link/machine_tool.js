@@ -390,7 +390,6 @@
                                         delete this.listen_element.pointer_up;
                                     }
                                 }
-                                window.console.dir(this.listen_element.pointer_up);
                             };
                             switch(action){
                                 case'add':
@@ -469,6 +468,9 @@
                                 default:
                                     break;
                             }
+                            machine_tool.local_test(()=>{
+                                window.console.log('#### listen_element pointer_up length',window.Object.keys(this.listen_element.pointer_up).length);
+                            });
                         }
                         break;
                     case'pointer_track':
