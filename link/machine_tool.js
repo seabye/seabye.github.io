@@ -616,15 +616,15 @@
                     //     one<string/'class class2...'/,undefined=''>,
                     //     two<string/'class class2...'/,undefined=''>,
                     //     set_one<boolean,undefined=false>,
-                    //     two_wait<number,undefined=0>,
+                    //     next_wait<number,undefined=0>,
                     //     callback<function(element,/one,two,''/),undefined=()=>{}>
                     // flash mode
-                    //     (element<>,'',two<>,true,two_wait<>,callback<>)
+                    //     (element<>,'',two<>,true,wait<>,callback<>)
                     const element=argument[0];
                     let one=argument[1];
                     let two=argument[2];
                     let set_one=argument[3];
-                    let two_wait=argument[4];
+                    let next_wait=argument[4];
                     let callback=argument[5];
                     if(!one){
                         one='';
@@ -635,8 +635,8 @@
                     if(set_one!==true){
                         set_one=false;
                     }
-                    if(!two_wait){
-                        two_wait=0;
+                    if(!next_wait){
+                        next_wait=0;
                     }
                     if(!callback){
                         callback=()=>{};
@@ -669,7 +669,7 @@
                                     window.setTimeout(()=>{
                                         add(one);
                                         callback(element,one);
-                                    },two_wait);
+                                    },next_wait);
                                 }
                             }else{
                                 window.setTimeout(()=>{
@@ -678,7 +678,7 @@
                                 window.setTimeout(()=>{
                                     remove(two);
                                     callback(element,'');
-                                },two_wait);
+                                },next_wait);
                             }
                         }else{
                             if(contains(one)){
@@ -688,7 +688,7 @@
                                 window.setTimeout(()=>{
                                     add(two);
                                     callback(element,two);
-                                },two_wait);
+                                },next_wait);
                             }else{
                                 if(contains(two)){
                                     window.setTimeout(()=>{
@@ -697,25 +697,35 @@
                                     window.setTimeout(()=>{
                                         add(one);
                                         callback(element,one);
-                                    },two_wait);
+                                    },next_wait);
                                 }else{
                                     window.setTimeout(()=>{
                                         add(one);
                                         callback(element,one);
-                                    },two_wait);
+                                    },0);
                                 }
                             }
                         }
                     }else{
-                        if(contains(one)){
-                            window.setTimeout(()=>{
-                                remove(one);
-                            },0);
+                        if(set_one){
+                            if(!contains(one)){
+                                window.setTimeout(()=>{
+                                    add(one);
+                                    callback(element,one);
+                                },0);
+                            }
                         }else{
-                            window.setTimeout(()=>{
-                                add(one);
-                                callback(element,one);
-                            },two_wait);
+                            if(contains(one)){
+                                window.setTimeout(()=>{
+                                    remove(one);
+                                    callback(element,'');
+                                },0);
+                            }else{
+                                window.setTimeout(()=>{
+                                    add(one);
+                                    callback(element,one);
+                                },0);
+                            }
                         }
                     }
                 }else{
