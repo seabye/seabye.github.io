@@ -223,11 +223,11 @@
         },
         /*🟢*/html$orientation(){
             const action=()=>{
-                window.document.body.style.setProperty('display','none');
+                // window.document.body.style.setProperty('display','none');
                 window.setTimeout(()=>{
                     window.document.body.style.setProperty('margin','1px');
                     window.setTimeout(()=>{
-                        window.document.body.style.removeProperty('display');
+                        // window.document.body.style.removeProperty('display');
                         window.document.body.style.removeProperty('margin');
                         if(!window.document.body.style[0]){
                             window.document.body.removeAttribute('style');
