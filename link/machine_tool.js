@@ -335,7 +335,7 @@
                                     if(item.split(' ')[0]){
                                         elements[item.split(' ')[0]]=data[item].element=element;
                                     }else{
-                                        data[item].element=element;
+                                        data[item][`air_${window.Math.random().toString().replace('0.','')}`]=element;
                                     }
                                     for(const item_ in data[item]){
                                         if(!item_.match(/element|function/)){
