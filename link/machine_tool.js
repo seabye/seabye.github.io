@@ -163,6 +163,9 @@
                 }
                 return result;
             },
+            /*🟢*/random(){
+                return window.Math.random().toString().replace('0.','');
+            },
             /*🟢*/is_portrait(width,height,true_callback,false_callback){
                 if(width<=height){
                     if(true_callback){
@@ -1122,6 +1125,12 @@
         },
         base64_url_safe_no_pad_to_string(){
             window.console.log('base64_url_safe_no_pad_to_string()',machine_tool.base64_url_safe_no_pad_to_string('jvZe6aA5S_Kks2h_zB88ww'));
+        },
+        create_element(){
+            machine_tool.create_element({
+                '':{},
+                ' _':{}
+            },window.document.body);
         },
         switch_state(){
             this.elements=machine_tool.create_element({

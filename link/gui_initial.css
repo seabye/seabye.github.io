@@ -212,6 +212,9 @@
         touch-action: pan-x pan-y;
         overscroll-behavior: contain;
     }
+    * {
+        max-width: 100%;
+    }
         /* root */
         html,
         body,
