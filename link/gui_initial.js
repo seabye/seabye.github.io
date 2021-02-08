@@ -205,20 +205,18 @@
         /*🟢*/input$scroll(){
             if(!(window.navigator.userAgent.match('Safari')&&!window.navigator.userAgent.match('Chrome')&&!window.navigator.userAgent.match('Edg'))){
                 const blur=()=>{
-                    if(window.document.activeElement.localName.match(/input|textarea/)){
-                        window.document.activeElement.blur();
-                        window.setTimeout(()=>{
-                            window.document.documentElement.style.removeProperty('width');
-                            window.document.documentElement.style.removeProperty('height');
-                            if(!window.document.documentElement.style[0]){
-                                window.document.documentElement.removeAttribute('style');
-                            }
-                            window.document.documentElement.scrollIntoView({behavior:'smooth',block:'start',inline:'start'});
-                            if(window.getComputedStyle(window.document.documentElement).transform!=='none'){
-                                window.scroll({behavior:'smooth',left:0,top:0});
-                            }
-                        },350);
-                    }
+                    window.document.activeElement.blur();
+                    window.setTimeout(()=>{
+                        window.document.documentElement.style.removeProperty('width');
+                        window.document.documentElement.style.removeProperty('height');
+                        if(!window.document.documentElement.style[0]){
+                            window.document.documentElement.removeAttribute('style');
+                        }
+                        window.document.documentElement.scrollIntoView({behavior:'smooth',block:'start',inline:'start'});
+                        if(window.getComputedStyle(window.document.documentElement).transform!=='none'){
+                            window.scroll({behavior:'smooth',left:0,top:0});
+                        }
+                    },350);
                 };
                 window.addEventListener('pointerdown',(event)=>{
                     if(event.target.localName.match(/input|textarea/)){
