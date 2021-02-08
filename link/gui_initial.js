@@ -209,6 +209,9 @@
                         window.document.activeElement.blur();
                         window.document.documentElement.style.removeProperty('width');
                         window.document.documentElement.style.removeProperty('height');
+                        if(!window.document.documentElement.style[0]){
+                            window.document.documentElement.removeAttribute('style');
+                        }
                         window.document.documentElement.scrollIntoView({behavior:'smooth',block:'start',inline:'start'});
                         if(window.getComputedStyle(window.document.documentElement).transform!=='none'){
                             window.scroll({behavior:'smooth',left:0,top:0});
@@ -230,7 +233,7 @@
                         blur();
                     }
                 });
-                window.addEventListener('orientationchange',blur);
+                new window.ResizeObserver(blur).observe(window.document.documentElement);
                 window.addEventListener('keydown',(event)=>{
                     if(event.key==='Enter'){
                         blur();
