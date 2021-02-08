@@ -235,12 +235,12 @@
                         blur();
                     }
                 });
-                new window.ResizeObserver(blur).observe(window.document.documentElement);
                 window.addEventListener('keydown',(event)=>{
                     if(event.key==='Enter'){
                         blur();
                     }
                 });
+                new window.ResizeObserver(blur).observe(window.document.documentElement);
             }
         },
         /*🟢*/partial$scroll(){
