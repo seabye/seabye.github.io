@@ -1156,7 +1156,7 @@
                                         false,
                                         'open',
                                         [
-                                            elements.button2,
+                                            elements.button2
                                         ],
                                         'pointer_up',
                                         (data)=>{
@@ -1169,7 +1169,7 @@
                                         true,
                                         'close',
                                         [
-                                            elements.button3,
+                                            elements.button3
                                         ],
                                         'pointer_up',
                                         (data)=>{
