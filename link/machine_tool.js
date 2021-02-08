@@ -53,14 +53,10 @@
                     }
                 };
             },
-            /*🟢*/loop(condition,callback,wait=1000/24){
-                if(condition()){
-                    if(callback){
-                        return callback();
-                    }
-                }else{
+            /*🟢*/loop(condition,wait=1000/24){
+                if(!condition()){
                     window.setTimeout(()=>{
-                        this.loop(condition,callback,wait);
+                        this.loop(condition,wait);
                     },wait);
                 }
             },
@@ -179,10 +175,8 @@
                 return false;
             },
             /*🟢*/run_object(object){
-                if(object){
-                    for(const item in object){
-                        object[item]();
-                    }
+                for(const item in object){
+                    object[item]();
                 }
             },
         // local data

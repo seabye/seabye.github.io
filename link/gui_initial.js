@@ -28,42 +28,16 @@
     // machine_tool of machine_tool.js
     const machine_tool={
         // base
-            /*🟢*/throttle(callback,wait=1000/24,first=false){
-                let timeout=null;
-                return function(...argument){
-                    const set=()=>{
-                        timeout=window.setTimeout(()=>{
-                            timeout=null;
-                            callback.apply(this,argument);
-                        },wait);
-                    };
-                    if(first){
-                        first=false;
-                        callback.apply(this,argument);
-                        set();
-                    }else{
-                        if(!timeout){
-                            set();
-                        }
-                    }
-                };
-            },
-            /*🟢*/loop(condition,callback,wait=1000/24){
-                if(condition()){
-                    if(callback){
-                        return callback();
-                    }
-                }else{
+            /*🟢*/loop(condition,wait=1000/24){
+                if(!condition()){
                     window.setTimeout(()=>{
-                        this.loop(condition,callback,wait);
+                        this.loop(condition,wait);
                     },wait);
                 }
             },
             /*🟢*/run_object(object){
-                if(object){
-                    for(const item in object){
-                        object[item]();
-                    }
+                for(const item in object){
+                    object[item]();
                 }
             }
     };
@@ -92,29 +66,24 @@
         },
         /*🟢*/opacity(){
             machine_tool.loop(()=>{
-                let result=false;
                 for(const item of window.document.documentElement.children){
                     if(item.localName==='body'){
-                        result=true;
-                        break;
+                        window.document.body.style.setProperty('opacity','0');
+                        return true;
                     }
                 }
-                return result;
-            },()=>{
-                window.document.body.style.setProperty('opacity','0');
+                return false;
             },1000/60);
             window.addEventListener('load',()=>{
                 machine_tool.loop(()=>{
-                    let result=false;
                     if(window.document.body.style.getPropertyValue('opacity')==='0'){
-                        result=true;
+                        window.document.body.style.removeProperty('opacity');
+                        if(!window.document.body.style[0]){
+                            window.document.body.removeAttribute('style');
+                        }
+                        return true;
                     }
-                    return result;
-                },()=>{
-                    window.document.body.style.removeProperty('opacity');
-                    if(!window.document.body.style[0]){
-                        window.document.body.removeAttribute('style');
-                    }
+                    return false;
                 },1000/60);
             },{once:true});
         },
@@ -193,17 +162,14 @@
         /*🟢*/tabindex(){
             window.document.documentElement.setAttribute('tabindex','-1');
             machine_tool.loop(()=>{
-                let result=false;
                 for(const item of window.document.documentElement.children){
                     if(item.localName==='body'){
-                        result=true;
-                        break;
+                        window.document.head.setAttribute('tabindex','-1');
+                        window.document.body.setAttribute('tabindex','-1');
+                        return true;
                     }
                 }
-                return result;
-            },()=>{
-                window.document.head.setAttribute('tabindex','-1');
-                window.document.body.setAttribute('tabindex','-1');
+                return false;
             },1000/60);
         },
         /*🟢*/touch$hov(){
@@ -222,161 +188,75 @@
             });
         },
         /*🟢*/html$orientation(){
-            const action=()=>{
-                // window.document.body.style.setProperty('display','none');
-                window.setTimeout(()=>{
-                    window.document.body.style.setProperty('margin','1px');
-                    window.setTimeout(()=>{
-                        // window.document.body.style.removeProperty('display');
-                        window.document.body.style.removeProperty('margin');
-                        if(!window.document.body.style[0]){
-                            window.document.body.removeAttribute('style');
-                        }
-                        if(window.navigator.userAgent.match('Safari')&&!window.navigator.userAgent.match('Chrome')&&!window.navigator.userAgent.match('Edg')){
-                            window.setTimeout(()=>{
-                                window.document.documentElement.scrollIntoView({behavior:'smooth',block:'start',inline:'start'});
-                                if(window.getComputedStyle(window.document.documentElement).transform!=='none'){
-                                    window.scroll({behavior:'smooth',left:0,top:0});
-                                }
-                            },350*2);
-                        }
-                    },350/2);
-                },350/2);
-            };
             new window.ResizeObserver((data)=>{
                 if(data[0].contentRect.width<=data[0].contentRect.height){
                     if(!window.document.documentElement.classList.contains('ic_nr_orientation_portrait')){
                         window.document.documentElement.classList.remove('ic_nr_orientation_landscape');
                         window.document.documentElement.classList.add('ic_nr_orientation_portrait');
-                        action();
                     }
                 }else{
                     if(!window.document.documentElement.classList.contains('ic_nr_orientation_landscape')){
                         window.document.documentElement.classList.remove('ic_nr_orientation_portrait');
                         window.document.documentElement.classList.add('ic_nr_orientation_landscape');
-                        action();
                     }
                 }
             }).observe(window.document.documentElement);
         },
-        /*🟠*/window$orientation$and$size(){
-            // const action=(event)=>{
-            //     if(event.type==='orientationchange'){
-            //         window.document.body.style.setProperty('display','none');
-            //     }
-            //     const set=(head)=>{
-            //         window.document.documentElement.style.setProperty(`${head}-width`,`${window.innerWidth}px`);
-            //         if(!window.navigator.userAgent.match('Mobile')||(window.navigator.userAgent.match('Mobile')&&!window.document.activeElement.localName.match(/input|textarea/))){
-            //             window.document.documentElement.style.setProperty(`${head}-height`,`${window.innerHeight}px`);
-            //         }
-            //     };
-            //     set('min');
-            //     if(window.parseInt(window.document.documentElement.style.getPropertyValue('min-height'))<window.parseInt(window.document.documentElement.style.getPropertyValue('min-width'))){
-            //         set('max');
-            //         window.document.documentElement.classList.remove('ic_nr_orientation_portrait');
-            //         window.document.documentElement.classList.add('ic_nr_orientation_landscape');
-            //     }else{
-            //         window.document.documentElement.style.removeProperty('max-width');
-            //         window.document.documentElement.style.removeProperty('max-height');
-            //         if(!window.document.documentElement.style[0]){
-            //             window.document.documentElement.removeAttribute('style');
-            //         }
-            //         window.document.documentElement.classList.remove('ic_nr_orientation_landscape');
-            //         window.document.documentElement.classList.add('ic_nr_orientation_portrait');
-            //     }
-            //     if(event.type==='orientationchange'){
-            //         window.setTimeout(()=>{
-            //             window.document.body.style.removeProperty('display');
-            //             if(!window.document.body.style[0]){
-            //                 window.document.body.removeAttribute('style');
-            //             }
-            //         },350);
-            //     }
-            // };
-            // window.addEventListener('load',action,{once:true});
-            // window.addEventListener('resize',machine_tool.throttle(action,1000/60));
-            // window.addEventListener('resize',machine_tool.throttle(action,350*3));
-            // window.addEventListener('orientationchange',(event)=>{
-            //     window.setTimeout(()=>{
-            //         action(event);
-            //     },350);
-            // });
-            // window.addEventListener('blur',action);
-            // window.addEventListener('focus',action);
-            // if(window.navigator.userAgent.match('Safari')&&!window.navigator.userAgent.match('Chrome')&&!window.navigator.userAgent.match('Edg')){
-            //     const action=()=>{
-            //         window.document.documentElement.scrollIntoView({behavior:'smooth',block:'start',inline:'start'});
-            //         if(window.getComputedStyle(window.document.documentElement).transform!=='none'){
-            //             window.scroll({behavior:'smooth',left:0,top:0});
-            //         }
-            //     }
-            //     window.addEventListener('load',action,{once:true});
-            //     window.addEventListener('orientationchange',()=>{
-            //         window.setTimeout(action,350*3);
-            //     });
-            // }
+        /*🟢*/input$scroll(){
+            if(!(window.navigator.userAgent.match('Safari')&&!window.navigator.userAgent.match('Chrome')&&!window.navigator.userAgent.match('Edg'))){
+                const blur=()=>{
+                    if(window.document.activeElement.localName.match(/input|textarea/)){
+                        window.document.activeElement.blur();
+                        window.document.documentElement.style.removeProperty('width');
+                        window.document.documentElement.style.removeProperty('height');
+                        window.document.documentElement.scrollIntoView({behavior:'smooth',block:'start',inline:'start'});
+                        if(window.getComputedStyle(window.document.documentElement).transform!=='none'){
+                            window.scroll({behavior:'smooth',left:0,top:0});
+                        }
+                    }
+                };
+                window.addEventListener('pointerdown',(event)=>{
+                    if(event.target.localName.match(/input|textarea/)){
+                        window.addEventListener('pointerup',(event_)=>{
+                            window.document.documentElement.style.setProperty('width',`${window.innerWidth}px`);
+                            window.document.documentElement.style.setProperty('height',`${window.innerHeight}px`);
+                            if(event.target===event_.target){
+                                window.setTimeout(()=>{
+                                    event.target.scrollIntoView({behavior:'smooth',block:'center',inline:'center'});
+                                },350*2);
+                            }
+                        },{once:true});
+                    }else{
+                        blur();
+                    }
+                });
+                window.addEventListener('orientationchange',blur);
+                window.addEventListener('keydown',(event)=>{
+                    if(event.key==='Enter'){
+                        blur();
+                    }
+                });
+            }
         },
-        /*🟠*/form$input$focus$scroll(){
-            // window.addEventListener('pointerdown',(event)=>{
-            //     if(!event.target.localName.match(/input|textarea/)&&window.document.activeElement.localName.match(/input|textarea/)){
-            //         window.document.activeElement.blur();
-            //         window.setTimeout(()=>{
-            //             window.document.documentElement.scrollIntoView({behavior:'smooth',block:'start',inline:'start'});
-            //             if(window.getComputedStyle(window.document.documentElement).transform!=='none'){
-            //                 window.scroll({behavior:'smooth',left:0,top:0});
-            //             }
-            //         },350);
-            //     }
-            // });
-            // window.addEventListener('orientationchange',()=>{
-            //     if(window.document.activeElement.localName.match(/input|textarea/)){
-            //         window.document.activeElement.blur();
-            //     }
-            // });
-            // window.addEventListener('keydown',(event)=>{
-            //     if(event.key==='Enter'){
-            //         window.setTimeout(()=>{
-            //             window.document.documentElement.scrollIntoView({behavior:'smooth',block:'start',inline:'start'});
-            //             if(window.getComputedStyle(window.document.documentElement).transform!=='none'){
-            //                 window.scroll({behavior:'smooth',left:0,top:0});
-            //             }
-            //         },350);
-            //     }
-            // });
-            // if(!(window.navigator.userAgent.match('Safari')&&!window.navigator.userAgent.match('Chrome')&&!window.navigator.userAgent.match('Edg'))){
-            //     window.addEventListener('pointerdown',(event)=>{
-            //         if(event.target.localName.match(/input|textarea/)){
-            //             window.setTimeout(()=>{
-            //                 event.target.scrollIntoView({behavior:'smooth',block:'center',inline:'center'});
-            //             },350*2);
-            //         }
-            //     });
-            // }
-        },
-        /*🟠*/partial$scroll(){
-            // if(!window.CSS.supports('overscroll-behavior:contain')){
-            //     const action=()=>{
-            //         for(const item of window.document.querySelectorAll('*')){
-            //             if(window.getComputedStyle(item).overflowY.match(/auto|scroll/)){
-            //                 if(item.scrollHeight===item.clientHeight){
-            //                     item.style.setProperty('touch-action','none');
-            //                 }else{
-            //                     item.style.removeProperty('touch-action');
-            //                     if(!item.style[0]){
-            //                         item.removeAttribute('style');
-            //                     }
-            //                 }
-            //             }
-            //         }
-            //     };
-            //     new window.MutationObserver(action).observe(window.document.documentElement,{attributes:true,childList:true,subtree:true});
-            //     window.addEventListener('load',action,{once:true});
-            //     window.addEventListener('resize',machine_tool.throttle(action,1000/60));
-            //     window.addEventListener('resize',machine_tool.throttle(action,350*3));
-            //     window.addEventListener('orientationchange',()=>{
-            //         window.setTimeout(action,350*2);
-            //     });
-            // }
+        /*🟢*/partial$scroll(){
+            if(!window.CSS.supports('overscroll-behavior:contain')){
+                const action=()=>{
+                    for(const item of window.document.querySelectorAll('*')){
+                        if(window.getComputedStyle(item).overflowY.match(/auto|scroll/)){
+                            if(item.scrollHeight===item.clientHeight){
+                                item.style.setProperty('touch-action','none');
+                            }else{
+                                item.style.removeProperty('touch-action');
+                                if(!item.style[0]){
+                                    item.removeAttribute('style');
+                                }
+                            }
+                        }
+                    }
+                };
+                new window.MutationObserver(action).observe(window.document.documentElement,{attributes:true,childList:true,subtree:true});
+                new window.ResizeObserver(action).observe(window.document.documentElement);
+            }
         }
     });
 // #debug
