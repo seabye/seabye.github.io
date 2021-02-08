@@ -336,7 +336,7 @@
         background-color: var(--ic_ve_color_white_transparent);
     }
     ::-webkit-scrollbar-thumb {
-        border: 2px solid var(--ic_ve_color_white_transparent);
+        border: 3px solid var(--ic_ve_color_white_transparent);
         border-radius: 8px;
         background-color: var(--ic_ve_color_black2);
         background-clip: padding-box;
