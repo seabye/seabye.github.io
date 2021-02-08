@@ -222,7 +222,7 @@
                 }
             },1000/60)).observe(window.document.documentElement);
         },
-        /*🟢*/partial$scroll(){
+        /*🟠*/partial$scroll(){
             if(!window.CSS.supports('overscroll-behavior:contain')){
                 const action=()=>{
                     for(const item of window.document.querySelectorAll('*')){
@@ -242,7 +242,7 @@
                 new window.ResizeObserver(machine_tool.throttle(action,1000/60)).observe(window.document.documentElement);
             }
         },
-        /*🟢*/input$scroll(){
+        /*🟠*/input$scroll(){
             if(!(window.navigator.userAgent.match('Safari')&&!window.navigator.userAgent.match('Chrome')&&!window.navigator.userAgent.match('Edg'))){
                 const blur=()=>{
                     window.document.activeElement.blur();
