@@ -212,10 +212,12 @@
                         if(!window.document.documentElement.style[0]){
                             window.document.documentElement.removeAttribute('style');
                         }
-                        window.document.documentElement.scrollIntoView({behavior:'smooth',block:'start',inline:'start'});
-                        if(window.getComputedStyle(window.document.documentElement).transform!=='none'){
-                            window.scroll({behavior:'smooth',left:0,top:0});
-                        }
+                        window.setTimeout(()=>{
+                            window.document.documentElement.scrollIntoView({behavior:'smooth',block:'start',inline:'start'});
+                            if(window.getComputedStyle(window.document.documentElement).transform!=='none'){
+                                window.scroll({behavior:'smooth',left:0,top:0});
+                            }
+                        },350);
                     }
                 };
                 window.addEventListener('pointerdown',(event)=>{
