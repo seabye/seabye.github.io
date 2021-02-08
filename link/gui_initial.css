@@ -262,32 +262,6 @@
                     flex-direction: column;
                     margin: unset;
                 }
-                /* @keyframes ic_an_landscape_body {
-                    0% {
-                        margin: 1px;
-                    }
-                    100% {
-                        margin: unset;
-                    }
-                }
-                @media(orientation:landscape) {
-                    body {
-                        animation: ic_an_landscape_body 175ms cubic-bezier(0.4,0,0.2,1) 175ms both;
-                    }
-                }
-                @keyframes ic_an_portrait_body {
-                    0% {
-                        margin: 1px;
-                    }
-                    100% {
-                        margin: unset;
-                    }
-                }
-                @media(orientation:portrait) {
-                    body {
-                        animation: ic_an_portrait_body 175ms cubic-bezier(0.4,0,0.2,1) 175ms both;
-                    }
-                } */
                     /* iframe */
                     iframe {
                         border: unset;
