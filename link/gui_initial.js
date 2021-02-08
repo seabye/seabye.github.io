@@ -28,6 +28,26 @@
     // machine_tool of machine_tool.js
     const machine_tool={
         // base
+            /*🟢*/throttle(callback,wait=1000/24,first=false){
+                let timeout=null;
+                return function(...argument){
+                    const set=()=>{
+                        timeout=window.setTimeout(()=>{
+                            timeout=null;
+                            callback.apply(this,argument);
+                        },wait);
+                    };
+                    if(first){
+                        first=false;
+                        callback.apply(this,argument);
+                        set();
+                    }else{
+                        if(!timeout){
+                            set();
+                        }
+                    }
+                };
+            },
             /*🟢*/loop(condition,wait=1000/24){
                 if(!condition()){
                     window.setTimeout(()=>{
@@ -188,7 +208,7 @@
             });
         },
         /*🟢*/html$orientation(){
-            new window.ResizeObserver((data)=>{
+            new window.ResizeObserver(machine_tool.throttle((data)=>{
                 if(data[0].contentRect.width<=data[0].contentRect.height){
                     if(!window.document.documentElement.classList.contains('ic_nr_orientation_portrait')){
                         window.document.documentElement.classList.remove('ic_nr_orientation_landscape');
@@ -200,7 +220,7 @@
                         window.document.documentElement.classList.add('ic_nr_orientation_landscape');
                     }
                 }
-            }).observe(window.document.documentElement);
+            },1000/60)).observe(window.document.documentElement);
         },
         /*🟢*/partial$scroll(){
             if(!window.CSS.supports('overscroll-behavior:contain')){
@@ -218,8 +238,8 @@
                         }
                     }
                 };
-                new window.MutationObserver(action).observe(window.document.documentElement,{attributes:true,childList:true,subtree:true});
-                new window.ResizeObserver(action).observe(window.document.documentElement);
+                new window.MutationObserver(machine_tool.throttle(action,1000/60)).observe(window.document.documentElement,{attributes:true,childList:true,subtree:true});
+                new window.ResizeObserver(machine_tool.throttle(action,1000/60)).observe(window.document.documentElement);
             }
         },
         /*🟢*/input$scroll(){
@@ -260,7 +280,7 @@
                         blur();
                     }
                 });
-                new window.ResizeObserver(blur).observe(window.document.documentElement);
+                new window.ResizeObserver(machine_tool.throttle(blur,1000/60)).observe(window.document.documentElement);
             }
         }
     });
