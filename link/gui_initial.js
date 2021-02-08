@@ -223,12 +223,14 @@
                 window.addEventListener('pointerdown',(event)=>{
                     if(event.target.localName.match(/input|textarea/)){
                         window.addEventListener('pointerup',(event_)=>{
-                            window.document.documentElement.style.setProperty('width',`${window.innerWidth}px`);
-                            window.document.documentElement.style.setProperty('height',`${window.innerHeight}px`);
-                            if(event.target===event_.target){
-                                window.setTimeout(()=>{
-                                    event.target.scrollIntoView({behavior:'smooth',block:'center',inline:'center'});
-                                },350*2);
+                            if(!window.document.documentElement.style.getPropertyValue('width')&&!window.document.documentElement.style.getPropertyValue('height')){
+                                window.document.documentElement.style.setProperty('width',`${window.innerWidth}px`);
+                                window.document.documentElement.style.setProperty('height',`${window.innerHeight}px`);
+                                if(event.target===event_.target){
+                                    window.setTimeout(()=>{
+                                        event.target.scrollIntoView({behavior:'smooth',block:'center',inline:'center'});
+                                    },350*2);
+                                }
                             }
                         },{once:true});
                     }else{
