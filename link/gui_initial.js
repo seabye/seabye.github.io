@@ -202,6 +202,26 @@
                 }
             }).observe(window.document.documentElement);
         },
+        /*🟢*/partial$scroll(){
+            if(!window.CSS.supports('overscroll-behavior:contain')){
+                const action=()=>{
+                    for(const item of window.document.querySelectorAll('*')){
+                        if(window.getComputedStyle(item).overflowY.match(/auto|scroll/)){
+                            if(item.scrollHeight===item.clientHeight){
+                                item.style.setProperty('touch-action','none');
+                            }else{
+                                item.style.removeProperty('touch-action');
+                                if(!item.style[0]){
+                                    item.removeAttribute('style');
+                                }
+                            }
+                        }
+                    }
+                };
+                new window.MutationObserver(action).observe(window.document.documentElement,{attributes:true,childList:true,subtree:true});
+                new window.ResizeObserver(action).observe(window.document.documentElement);
+            }
+        },
         /*🟢*/input$scroll(){
             if(!(window.navigator.userAgent.match('Safari')&&!window.navigator.userAgent.match('Chrome')&&!window.navigator.userAgent.match('Edg'))){
                 const blur=()=>{
@@ -241,26 +261,6 @@
                     }
                 });
                 new window.ResizeObserver(blur).observe(window.document.documentElement);
-            }
-        },
-        /*🟢*/partial$scroll(){
-            if(!window.CSS.supports('overscroll-behavior:contain')){
-                const action=()=>{
-                    for(const item of window.document.querySelectorAll('*')){
-                        if(window.getComputedStyle(item).overflowY.match(/auto|scroll/)){
-                            if(item.scrollHeight===item.clientHeight){
-                                item.style.setProperty('touch-action','none');
-                            }else{
-                                item.style.removeProperty('touch-action');
-                                if(!item.style[0]){
-                                    item.removeAttribute('style');
-                                }
-                            }
-                        }
-                    }
-                };
-                new window.MutationObserver(action).observe(window.document.documentElement,{attributes:true,childList:true,subtree:true});
-                new window.ResizeObserver(action).observe(window.document.documentElement);
             }
         }
     });
