@@ -3,6 +3,12 @@ export const _={
     _start(){
         window.console.log('<<<< start machine_tool_.js');
     },
+    loop(){
+        machine_tool.loop(()=>{
+            window.console.log('lloooopp');
+            return true;
+        });
+    },
     async aw_loop(){
         // window.console.log(await machine_tool.aw_loop(
         //     ()=>{
