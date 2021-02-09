@@ -50,6 +50,63 @@ export const _={
             ' _':{}
         },window.document.body);
     },
+    listen_element(){
+        machine_tool.listen_element('add',window.document.documentElement,'pointerup',()=>{
+            window.console.log('listen_element()','pointerup');
+        });
+        machine_tool.listen_element('add',window.document.documentElement,'pointer_up',()=>{
+            window.console.log('listen_element()','pointer_up');
+        },undefined,0);
+        // machine_tool.listen_element('add',window.document.documentElement,'pointer_track',()=>{
+        //     window.console.log('listen_element()','pointer_track');
+        // });
+        machine_tool.listen_element('add',this.elements.target,'observe_mutation',()=>{
+            window.console.log('listen_element()','observe_mutation');
+            if(this.elements.target.classList.contains('open_state')){
+                machine_tool.element_state(this.elements.target_mode,'open_state','_',true);
+            }else{
+                if(this.elements.target.classList.contains('_')){
+                    machine_tool.element_state(this.elements.target_mode,'_','open_state',true);
+                }
+            }
+        },{attributes:true,attributeFilter:['class'],childList:false,subtree:false});
+        // machine_tool.listen_element('remove',this.elements.target,'observe_mutation',()=>{
+        //     window.console.log('listen_element()','observe_mutation');
+        //     if(this.elements.target.classList.contains('open_state')){
+        //         machine_tool.element_state(this.elements.target_mode,'open_state','close_state',true);
+        //     }else{
+        //         if(this.elements.target.classList.contains('close_state')){
+        //             machine_tool.element_state(this.elements.target_mode,'close_state','open_state',true);
+        //         }
+        //     }
+        // },{attributes:true,attributeFilter:['class'],childList:false,subtree:false});
+            machine_tool.listen_element('add',this.elements.red_target,'observe_mutation',()=>{
+                window.console.log('listen_element()','observe_mutation');
+                if(this.elements.target.classList.contains('open_state')){
+                    machine_tool.element_state(this.elements.target_mode,'open_state','close_state',true);
+                }else{
+                    if(this.elements.target.classList.contains('close_state')){
+                        machine_tool.element_state(this.elements.target_mode,'close_state','open_state',true);
+                    }
+                }
+            },{attributes:true,attributeFilter:['class'],childList:false,subtree:false});
+                machine_tool.listen_element('remove',this.elements.red_target,'observe_mutation',()=>{
+                    window.console.log('listen_element()','observe_mutation');
+                    if(this.elements.target.classList.contains('open_state')){
+                        machine_tool.element_state(this.elements.target_mode,'open_state','close_state',true);
+                    }else{
+                        if(this.elements.target.classList.contains('close_state')){
+                            machine_tool.element_state(this.elements.target_mode,'close_state','open_state',true);
+                        }
+                    }
+                },{attributes:true,attributeFilter:['class'],childList:false,subtree:false});
+        // machine_tool.listen_element('add',window.document.documentElement,'observe_intersection',(data)=>{
+        //     window.console.log('listen_element()','observe_intersection',data);
+        // },{});
+        machine_tool.listen_element('add',window.document.documentElement,'observe_resize',(data)=>{
+            window.console.log('listen_element()','observe_resize',data);
+        });
+    },
     element_state(){
         this.elements=machine_tool.element_create({
             target_mode:{
@@ -231,62 +288,8 @@ export const _={
             }
         },window.document.body);
     },
-    listen_element(){
-        machine_tool.listen_element('add',window.document.documentElement,'pointerup',()=>{
-            window.console.log('listen_element()','pointerup');
-        });
-        machine_tool.listen_element('add',window.document.documentElement,'pointer_up',()=>{
-            window.console.log('listen_element()','pointer_up');
-        },undefined,0);
-        // machine_tool.listen_element('add',window.document.documentElement,'pointer_track',()=>{
-        //     window.console.log('listen_element()','pointer_track');
-        // });
-        machine_tool.listen_element('add',this.elements.target,'observe_mutation',()=>{
-            window.console.log('listen_element()','observe_mutation');
-            if(this.elements.target.classList.contains('open_state')){
-                machine_tool.element_state(this.elements.target_mode,'open_state','_',true);
-            }else{
-                if(this.elements.target.classList.contains('_')){
-                    machine_tool.element_state(this.elements.target_mode,'_','open_state',true);
-                }
-            }
-        },{attributes:true,attributeFilter:['class'],childList:false,subtree:false});
-        // machine_tool.listen_element('remove',this.elements.target,'observe_mutation',()=>{
-        //     window.console.log('listen_element()','observe_mutation');
-        //     if(this.elements.target.classList.contains('open_state')){
-        //         machine_tool.element_state(this.elements.target_mode,'open_state','close_state',true);
-        //     }else{
-        //         if(this.elements.target.classList.contains('close_state')){
-        //             machine_tool.element_state(this.elements.target_mode,'close_state','open_state',true);
-        //         }
-        //     }
-        // },{attributes:true,attributeFilter:['class'],childList:false,subtree:false});
-            machine_tool.listen_element('add',this.elements.red_target,'observe_mutation',()=>{
-                window.console.log('listen_element()','observe_mutation');
-                if(this.elements.target.classList.contains('open_state')){
-                    machine_tool.element_state(this.elements.target_mode,'open_state','close_state',true);
-                }else{
-                    if(this.elements.target.classList.contains('close_state')){
-                        machine_tool.element_state(this.elements.target_mode,'close_state','open_state',true);
-                    }
-                }
-            },{attributes:true,attributeFilter:['class'],childList:false,subtree:false});
-                machine_tool.listen_element('remove',this.elements.red_target,'observe_mutation',()=>{
-                    window.console.log('listen_element()','observe_mutation');
-                    if(this.elements.target.classList.contains('open_state')){
-                        machine_tool.element_state(this.elements.target_mode,'open_state','close_state',true);
-                    }else{
-                        if(this.elements.target.classList.contains('close_state')){
-                            machine_tool.element_state(this.elements.target_mode,'close_state','open_state',true);
-                        }
-                    }
-                },{attributes:true,attributeFilter:['class'],childList:false,subtree:false});
-        // machine_tool.listen_element('add',window.document.documentElement,'observe_intersection',(data)=>{
-        //     window.console.log('listen_element()','observe_intersection',data);
-        // },{});
-        machine_tool.listen_element('add',window.document.documentElement,'observe_resize',(data)=>{
-            window.console.log('listen_element()','observe_resize',data);
-        });
+    element_recursion(){
+
     },
     listen_url(){
         machine_tool.listen_url('add',(data)=>{
