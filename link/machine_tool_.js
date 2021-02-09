@@ -1,7 +1,7 @@
 import{machine_tool}from'./machine_tool.js';
 export const _={
     _start(){
-        window.console.log('<<<< start test');
+        window.console.log('<<<< start machine_tool_.js');
     },
     async aw_loop(){
         // window.console.log(await machine_tool.aw_loop(
@@ -291,6 +291,6 @@ export const _={
         window.history.replaceState(null,null,window.location.pathname);
     },
     _end(){
-        window.console.log('>>>> end test');
+        window.console.log('>>>> end machine_tool_.js');
     }
 };
