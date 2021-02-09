@@ -212,15 +212,28 @@
         },
         /*🟢*/html$orientation(){
             new window.ResizeObserver(machine_tool.throttle((data)=>{
+                const jitter=()=>{
+                    window.setTimeout(()=>{
+                        window.document.body.style.setProperty('margin','1px');
+                        window.setTimeout(()=>{
+                            window.document.body.style.removeProperty('margin');
+                            if(!window.document.body.style[0]){
+                                window.document.body.removeAttribute('style');
+                            }
+                        },350/2);
+                    },350/2);
+                };
                 if(data[0].contentRect.width<=data[0].contentRect.height){
                     if(!window.document.documentElement.classList.contains('ic_nr_orientation_portrait')){
                         window.document.documentElement.classList.remove('ic_nr_orientation_landscape');
                         window.document.documentElement.classList.add('ic_nr_orientation_portrait');
+                        jitter();
                     }
                 }else{
                     if(!window.document.documentElement.classList.contains('ic_nr_orientation_landscape')){
                         window.document.documentElement.classList.remove('ic_nr_orientation_portrait');
                         window.document.documentElement.classList.add('ic_nr_orientation_landscape');
+                        jitter();
                     }
                 }
             },1000/60)).observe(window.document.documentElement);
