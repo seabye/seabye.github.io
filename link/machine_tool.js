@@ -234,7 +234,7 @@
             /*🔴*/cli(){},
             /*🔴*/cli_emulator(){},
         // graphical user interface
-            /*🟢*/create_element(...argument){
+            /*🟢*/element_create(...argument){
                 switch(typeof argument[0]){
                     case'string':
                         {
@@ -336,7 +336,7 @@
                                             data[item].element[1]={class:item.trim()};
                                         }
                                     }
-                                    const element=this.create_element(data[item].element[0],data[item].element[1]?data[item].element[1]:undefined,insert_element,insert_position,data[item].element[2]?data[item].element[2]:undefined);
+                                    const element=this.element_create(data[item].element[0],data[item].element[1]?data[item].element[1]:undefined,insert_element,insert_position,data[item].element[2]?data[item].element[2]:undefined);
                                     if(item.split(' ')[0]){
                                         elements[item.split(' ')[0]]=data[item].element=element;
                                     }else{
@@ -375,7 +375,7 @@
                         break;
                     default:
                         {
-                            return this.create_element('div');
+                            return this.element_create('div');
                         }
                         break;
                 }
@@ -621,7 +621,7 @@
                         break;
                 }
             },
-            /*🟢*/switch_state(...argument){
+            /*🟢*/element_state(...argument){
                 if(argument[0]instanceof window.HTMLElement){
                     // base mode
                     //     element<element>,
@@ -790,7 +790,7 @@
                                                 for(const button of button_array){
                                                     const button_element_array=button[2];
                                                     for(const button_element of button_element_array){
-                                                        this.switch_state(button_element,current,`${open_state} ${close_state}`,true);
+                                                        this.element_state(button_element,current,`${open_state} ${close_state}`,true);
                                                     }
                                                 }
                                             };
@@ -798,21 +798,21 @@
                                                 case'auto':
                                                     {
                                                         for(const target_element of target_element_array){
-                                                            this.switch_state(target_element,open_state,close_state,undefined,undefined,set_button_element);
+                                                            this.element_state(target_element,open_state,close_state,undefined,undefined,set_button_element);
                                                         }
                                                     }
                                                     break;
                                                 case'open':
                                                     {
                                                         for(const target_element of target_element_array){
-                                                            this.switch_state(target_element,open_state,close_state,true,undefined,set_button_element);
+                                                            this.element_state(target_element,open_state,close_state,true,undefined,set_button_element);
                                                         }
                                                     }
                                                     break;
                                                 case'close':
                                                     {
                                                         for(const target_element of target_element_array){
-                                                            this.switch_state(target_element,close_state,open_state,true,undefined,set_button_element);
+                                                            this.element_state(target_element,close_state,open_state,true,undefined,set_button_element);
                                                         }
                                                     }
                                                     break;
@@ -877,20 +877,20 @@
                                                 const button_element_array_=content[2];
                                                 if(target_element_array_!==target_element_array){
                                                     for(const target_element_ of target_element_array_){
-                                                        this.switch_state(target_element_,close_state,open_state,true);
+                                                        this.element_state(target_element_,close_state,open_state,true);
                                                     }
                                                 }
                                                 if(button_element_array_!==button_element_array){
                                                     for(const button_element_ of button_element_array_){
-                                                        this.switch_state(button_element_,close_state,open_state,true);
+                                                        this.element_state(button_element_,close_state,open_state,true);
                                                     }
                                                 }
                                             }
                                             for(const target_element of target_element_array){
-                                                this.switch_state(target_element,open_state,close_state,true);
+                                                this.element_state(target_element,open_state,close_state,true);
                                             }
                                             for(const button_element of button_element_array){
-                                                this.switch_state(button_element,open_state,close_state,true);
+                                                this.element_state(button_element,open_state,close_state,true);
                                             }
                                         };
                                         if(start){
@@ -909,6 +909,9 @@
                         }
                     }
                 }
+            },
+            /*🟠*/element_recursion(){
+
             },
             /*🟢*/find_outer(find,start,end=window.document.documentElement,true_callback,false_callback){
                 if(find instanceof window.HTMLElement&&start===find){

@@ -9,7 +9,7 @@
         text-shadow: 0 0 10px #FFFFFF;
     }
 /* #debug */
-    /* switch_state() */
+    /* element_state() */
     div.open_state,
     div.open_state.target_mode {
         outline: 2px solid red !important;

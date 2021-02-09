@@ -44,18 +44,18 @@ export const _={
     base64_url_safe_no_pad_to_string(){
         window.console.log('base64_url_safe_no_pad_to_string()',machine_tool.base64_url_safe_no_pad_to_string('jvZe6aA5S_Kks2h_zB88ww'));
     },
-    create_element(){
-        machine_tool.create_element({
+    element_create(){
+        machine_tool.element_create({
             '':{},
             ' _':{}
         },window.document.body);
     },
-    switch_state(){
-        this.elements=machine_tool.create_element({
+    element_state(){
+        this.elements=machine_tool.element_create({
             target_mode:{
                 element:[,{style:'z-index: 1; position: fixed; left: 0; top: 0; width: 128px; height: 192px; background-color: gray; display: flex; justify-content: center; align-items: center; flex-direction: column;'}],
                 function(elements){
-                    machine_tool.switch_state([
+                    machine_tool.element_state([
                         'target',
                         [
                             'open_state',
@@ -74,7 +74,7 @@ export const _={
                                     ],
                                     'pointer_up',
                                     (data)=>{
-                                        window.console.log('switch_state()','1 4 pointer_up',data);
+                                        window.console.log('element_state()','1 4 pointer_up',data);
                                     },
                                     ,
                                     0
@@ -87,7 +87,7 @@ export const _={
                                     ],
                                     'pointer_up',
                                     (data)=>{
-                                        window.console.log('switch_state()','2 pointer_up',data);
+                                        window.console.log('element_state()','2 pointer_up',data);
                                     },
                                     ,
                                     0
@@ -100,7 +100,7 @@ export const _={
                                     ],
                                     'pointer_up',
                                     (data)=>{
-                                        window.console.log('switch_state()','3 pointer_up',data);
+                                        window.console.log('element_state()','3 pointer_up',data);
                                     },
                                     ,
                                     0
@@ -131,7 +131,7 @@ export const _={
             tab_mode:{
                 element:[,{style:'z-index: 1; position: fixed; left: 128px; top: 0; width: 128px; height: 192px; background-color: gray; display: flex; justify-content: center; align-items: center; flex-direction: column;'}],
                 function(elements){
-                    machine_tool.switch_state([
+                    machine_tool.element_state([
                         'tab',
                         [
                             'open_state',
@@ -149,7 +149,7 @@ export const _={
                                     ],
                                     'pointer_up',
                                     (data)=>{
-                                        window.console.log('switch_state()','red pointer_up',data);
+                                        window.console.log('element_state()','red pointer_up',data);
                                     },
                                     ,
                                     0
@@ -166,7 +166,7 @@ export const _={
                                     ],
                                     'pointer_up',
                                     (data)=>{
-                                        window.console.log('switch_state()','green pointer_up',data);
+                                        window.console.log('element_state()','green pointer_up',data);
                                     },
                                     ,
                                     0
@@ -183,7 +183,7 @@ export const _={
                                     ],
                                     'pointer_up',
                                     (data)=>{
-                                        window.console.log('switch_state()','blue pointer_up',data);
+                                        window.console.log('element_state()','blue pointer_up',data);
                                     },
                                     ,
                                     0
@@ -244,40 +244,40 @@ export const _={
         machine_tool.listen_element('add',this.elements.target,'observe_mutation',()=>{
             window.console.log('listen_element()','observe_mutation');
             if(this.elements.target.classList.contains('open_state')){
-                machine_tool.switch_state(this.elements.target_mode,'open_state','_',true);
+                machine_tool.element_state(this.elements.target_mode,'open_state','_',true);
             }else{
                 if(this.elements.target.classList.contains('_')){
-                    machine_tool.switch_state(this.elements.target_mode,'_','open_state',true);
+                    machine_tool.element_state(this.elements.target_mode,'_','open_state',true);
                 }
             }
         },{attributes:true,attributeFilter:['class'],childList:false,subtree:false});
         // machine_tool.listen_element('remove',this.elements.target,'observe_mutation',()=>{
         //     window.console.log('listen_element()','observe_mutation');
         //     if(this.elements.target.classList.contains('open_state')){
-        //         machine_tool.switch_state(this.elements.target_mode,'open_state','close_state',true);
+        //         machine_tool.element_state(this.elements.target_mode,'open_state','close_state',true);
         //     }else{
         //         if(this.elements.target.classList.contains('close_state')){
-        //             machine_tool.switch_state(this.elements.target_mode,'close_state','open_state',true);
+        //             machine_tool.element_state(this.elements.target_mode,'close_state','open_state',true);
         //         }
         //     }
         // },{attributes:true,attributeFilter:['class'],childList:false,subtree:false});
             machine_tool.listen_element('add',this.elements.red_target,'observe_mutation',()=>{
                 window.console.log('listen_element()','observe_mutation');
                 if(this.elements.target.classList.contains('open_state')){
-                    machine_tool.switch_state(this.elements.target_mode,'open_state','close_state',true);
+                    machine_tool.element_state(this.elements.target_mode,'open_state','close_state',true);
                 }else{
                     if(this.elements.target.classList.contains('close_state')){
-                        machine_tool.switch_state(this.elements.target_mode,'close_state','open_state',true);
+                        machine_tool.element_state(this.elements.target_mode,'close_state','open_state',true);
                     }
                 }
             },{attributes:true,attributeFilter:['class'],childList:false,subtree:false});
                 machine_tool.listen_element('remove',this.elements.red_target,'observe_mutation',()=>{
                     window.console.log('listen_element()','observe_mutation');
                     if(this.elements.target.classList.contains('open_state')){
-                        machine_tool.switch_state(this.elements.target_mode,'open_state','close_state',true);
+                        machine_tool.element_state(this.elements.target_mode,'open_state','close_state',true);
                     }else{
                         if(this.elements.target.classList.contains('close_state')){
-                            machine_tool.switch_state(this.elements.target_mode,'close_state','open_state',true);
+                            machine_tool.element_state(this.elements.target_mode,'close_state','open_state',true);
                         }
                     }
                 },{attributes:true,attributeFilter:['class'],childList:false,subtree:false});
