@@ -49,10 +49,13 @@
                 };
             },
             /*🟢*/loop(condition,wait=1000/24){
-                if(!condition()){
+                const result=condition();
+                if(!result){
                     window.setTimeout(()=>{
                         this.loop(condition,wait);
                     },wait);
+                }else{
+                    return result;
                 }
             },
             /*🟢*/run_object(object){
