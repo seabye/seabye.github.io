@@ -11,14 +11,14 @@
     _md_ / method
     _cr\_ / container
     _cc_ / child container
-    _mk\_ / mark \ :hov .cls state
+    _mk\_ / mark \ :hov .cls $state
     _an_ / animation
     _nr_ / navigator
     _dg\_ / debug
     #build
-        sc_cr .sc_cr
-        #state .sc_cr.sc_mk
-        #child .sc_cr>div .sc_cr>div.sc_mk
+        sc_cr
+        $state
+        ^child
 */
 /* >>>> >>>> >>>> >>>> */
 /* #before */
