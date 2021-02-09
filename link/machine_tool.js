@@ -1085,7 +1085,7 @@
     };
 // #build
 // #debug
-    // machine_tool
+    // machine_tool_
     machine_tool.local_test(()=>{
         if(!import.meta.url.match(/_.js$/)){
             machine_tool.import('./machine_tool_.js',(data)=>{
