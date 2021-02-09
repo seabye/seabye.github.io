@@ -114,7 +114,7 @@
             /*🟢*/import(src,callback){
                 import(src).then((data)=>{
                     callback(data);
-                });
+                }).catch(()=>{});
             },
             /*🔴*/web_assembly(){},
             /*🟢*/uuid_36_to_uuid_22(uuid_36){
