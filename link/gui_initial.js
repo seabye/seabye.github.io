@@ -119,7 +119,7 @@
                 });
             }
         },
-        /*🟢*/$navigator$system$browser(){
+        /*🟢*/$navigator$environment(){
             const user_agent=window.navigator.userAgent;
             const class_=window.document.documentElement.classList;
             if(user_agent.match('Unix')){class_.add('ic_nr_system_unix');}
@@ -133,6 +133,9 @@
             if(user_agent.match('Safari')&&!user_agent.match('Chrome')&&!user_agent.match('Edg')){class_.add('ic_nr_browser_safari');}
             if(user_agent.match('Chrome')&&!user_agent.match('Edg')){class_.add('ic_nr_browser_chrome');}
             if(user_agent.match('Edg')){class_.add('ic_nr_browser_edge');}
+            if(window.location.search.replace(/^\?/,'').split('&').includes('pwa')){
+                window.document.documentElement.classList.add('ic_nr_pwa');
+            }
         },
         /*🟢*/head(){
             this.dataset.config.head_gui_initial_js.insertAdjacentHTML('beforebegin',`

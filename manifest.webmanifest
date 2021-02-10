@@ -2,7 +2,7 @@
     "name": "seabye",
     "short_name": "seabye",
     "description": "seabye.com",
-    "start_url": ".",
+    "start_url": "/?pwa",
     "theme_color": "#000000",
     "background_color": "#000000",
     "orientation": "natural",

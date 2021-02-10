@@ -355,7 +355,7 @@ export const _={
         });
         // window.history.pushState(null,null,'/x/');
         // window.history.pushState(null,null,'/');
-        window.history.replaceState(null,null,window.location.pathname);
+        // window.history.replaceState(null,null,window.location.pathname);
     },
     _end(){
         window.console.log('>>>> end machine_tool_.js');
