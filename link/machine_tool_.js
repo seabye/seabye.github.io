@@ -47,7 +47,16 @@ export const _={
     element_create(){
         machine_tool.element_create({
             '':{},
-            ' _':{}
+            '':{},
+            ' _':{},
+            ' _':{},
+            [machine_tool.random()]:{},
+            [machine_tool.random()]:{},
+            ' _':{
+                function(elements){
+                    window.console.log('element_create()',elements);
+                }
+            }
         },window.document.body);
     },
     element_state(){
