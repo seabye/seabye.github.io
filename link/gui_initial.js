@@ -237,15 +237,6 @@
                         if(!window.document.body.style[0]){
                             window.document.body.removeAttribute('style');
                         }
-                        if(window.navigator.userAgent.match('Safari')&&!window.navigator.userAgent.match('Chrome')&&!window.navigator.userAgent.match('Edg')){
-                            window.setTimeout(()=>{
-                                window.document.documentElement.scrollIntoView({behavior:'smooth',block:'start',inline:'start'});
-                                window.document.body.scrollIntoView({behavior:'smooth',block:'start',inline:'start'});
-                                if(window.getComputedStyle(window.document.documentElement).transform!=='none'){
-                                    window.scroll({behavior:'smooth',left:0,top:0});
-                                }
-                            },350);
-                        }
                     },350/2);
                 },350/2);
             };
