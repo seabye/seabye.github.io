@@ -167,7 +167,7 @@
                     window.document.head.insertAdjacentHTML('beforeend',`<meta name="apple-mobile-web-app-title" content="${this.dataset.config.head_title}">`);
                 }
             }else{
-                const set_prefers_color_scheme=(matches)=>{
+                const set_media_prefers_color_scheme=(matches)=>{
                     if(matches){
                         window.document.documentElement.classList.remove('ic_nr_media_prefers_color_scheme_light');
                         window.document.documentElement.classList.add('ic_nr_media_prefers_color_scheme_dark');
@@ -179,10 +179,10 @@
                 };
                 const element=window.document.createElement('meta');
                 element.setAttribute('name','theme-color');
-                element.setAttribute('content',set_prefers_color_scheme(window.matchMedia('(prefers-color-scheme:dark)').matches));
+                element.setAttribute('content',set_media_prefers_color_scheme(window.matchMedia('(prefers-color-scheme:dark)').matches));
                 const theme_color=window.document.head.insertAdjacentElement('beforeend',element);
                 window.matchMedia('(prefers-color-scheme:dark)').addEventListener('change',(event)=>{
-                    theme_color.setAttribute('content',set_prefers_color_scheme(event.matches));
+                    theme_color.setAttribute('content',set_media_prefers_color_scheme(event.matches));
                 });
             }
             if(this.dataset.config.head_manifest){
@@ -190,7 +190,7 @@
             }
         },
         /*🟢*/$navigator$media$more(){
-            const set_prefers_reduced_motion=(matches)=>{
+            const set_media_prefers_reduced_motion=(matches)=>{
                 if(matches){
                     window.document.documentElement.classList.remove('ic_nr_media_prefers_reduced_motion_false');
                     window.document.documentElement.classList.add('ic_nr_media_prefers_reduced_motion_true');
@@ -199,11 +199,11 @@
                     window.document.documentElement.classList.add('ic_nr_media_prefers_reduced_motion_false');
                 }
             };
-            set_prefers_reduced_motion(window.matchMedia('(prefers-reduced-motion:reduce)').matches);
+            set_media_prefers_reduced_motion(window.matchMedia('(prefers-reduced-motion:reduce)').matches);
             window.matchMedia('(prefers-reduced-motion:reduce)').addEventListener('change',(event)=>{
-                set_prefers_reduced_motion(event.matches);
+                set_media_prefers_reduced_motion(event.matches);
             });
-            const set_prefers_reduced_data=(matches)=>{
+            const set_media_prefers_reduced_data=(matches)=>{
                 if(matches){
                     window.document.documentElement.classList.remove('ic_nr_media_prefers_reduced_data_false');
                     window.document.documentElement.classList.add('ic_nr_media_prefers_reduced_data_true');
@@ -212,11 +212,11 @@
                     window.document.documentElement.classList.add('ic_nr_media_prefers_reduced_data_false');
                 }
             };
-            set_prefers_reduced_data(window.matchMedia('(prefers-reduced-data:reduce)').matches);
+            set_media_prefers_reduced_data(window.matchMedia('(prefers-reduced-data:reduce)').matches);
             window.matchMedia('(prefers-reduced-data:reduce)').addEventListener('change',(event)=>{
-                set_prefers_reduced_data(event.matches);
+                set_media_prefers_reduced_data(event.matches);
             });
-            const set_orientation=(matches)=>{
+            const set_media_orientation=(matches)=>{
                 if(matches){
                     window.document.documentElement.classList.remove('ic_nr_media_orientation_landscape');
                     window.document.documentElement.classList.add('ic_nr_media_orientation_portrait');
@@ -243,9 +243,9 @@
                     },350/2);
                 },350/2);
             };
-            set_orientation(window.matchMedia('(orientation:portrait)').matches);
+            set_media_orientation(window.matchMedia('(orientation:portrait)').matches);
             window.matchMedia('(orientation:portrait)').addEventListener('change',(event)=>{
-                set_orientation(event.matches);
+                set_media_orientation(event.matches);
             });
         },
         /*🟢*/tabindex(){
