@@ -244,6 +244,19 @@
             window.matchMedia('(orientation:portrait)').addEventListener('change',(event)=>{
                 set_media_orientation(event.matches);
             });
+            const set_media_display_mode=(matches)=>{
+                if(matches){
+                    window.document.documentElement.classList.remove('ic_nr_media_display_mode_fullscreen_false');
+                    window.document.documentElement.classList.add('ic_nr_media_display_mode_fullscreen_true');
+                }else{
+                    window.document.documentElement.classList.remove('ic_nr_media_display_mode_fullscreen_true');
+                    window.document.documentElement.classList.add('ic_nr_media_display_mode_fullscreen_false');
+                }
+            };
+            set_media_display_mode(window.matchMedia('(display-mode:fullscreen)').matches);
+            window.matchMedia('(display-mode:fullscreen)').addEventListener('change',(event)=>{
+                set_media_display_mode(event.matches);
+            });
         },
         /*🟢*/tabindex(){
             window.document.documentElement.setAttribute('tabindex','-1');
