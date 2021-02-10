@@ -234,7 +234,7 @@
                 border-top: env(safe-area-inset-top);
                 border-bottom: env(safe-area-inset-bottom);
                 border-style: solid;
-                border-color: var(--ic_ve_color_foreground);
+                border-color: var(--ic_ve_color_white);
                 background-color: var(--ic_ve_color_white);
                 color: var(--ic_ve_color_black8);
                 font-weight: normal;
