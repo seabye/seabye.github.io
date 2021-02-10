@@ -167,29 +167,35 @@
                     window.document.head.insertAdjacentHTML('beforeend',`<meta name="apple-mobile-web-app-title" content="${this.dataset.config.head_title}">`);
                 }
             }else{
-                const set_media_prefers_color_scheme=(matches)=>{
-                    if(matches){
-                        window.document.documentElement.classList.remove('ic_nr_media_prefers_color_scheme_light');
-                        window.document.documentElement.classList.add('ic_nr_media_prefers_color_scheme_dark');
-                    }else{
-                        window.document.documentElement.classList.remove('ic_nr_media_prefers_color_scheme_dark');
-                        window.document.documentElement.classList.add('ic_nr_media_prefers_color_scheme_light');
-                    }
+                const get_media_prefers_color_scheme=(matches)=>{
                     return matches?this.dataset.config.head_theme_color_dark?this.dataset.config.head_theme_color_dark:'#212121':this.dataset.config.head_theme_color_light?this.dataset.config.head_theme_color_light:'#E1E1E1';
                 };
                 const element=window.document.createElement('meta');
                 element.setAttribute('name','theme-color');
-                element.setAttribute('content',set_media_prefers_color_scheme(window.matchMedia('(prefers-color-scheme:dark)').matches));
+                element.setAttribute('content',get_media_prefers_color_scheme(window.matchMedia('(prefers-color-scheme:dark)').matches));
                 const theme_color=window.document.head.insertAdjacentElement('beforeend',element);
                 window.matchMedia('(prefers-color-scheme:dark)').addEventListener('change',(event)=>{
-                    theme_color.setAttribute('content',set_media_prefers_color_scheme(event.matches));
+                    theme_color.setAttribute('content',get_media_prefers_color_scheme(event.matches));
                 });
             }
             if(this.dataset.config.head_manifest){
                 window.document.head.insertAdjacentHTML('beforeend',`<link rel="manifest" href="${this.dataset.config.head_manifest}">`);
             }
         },
-        /*🟢*/$navigator$media$more(){
+        /*🟢*/$navigator$media(){
+            const set_media_prefers_color_scheme=(matches)=>{
+                if(matches){
+                    window.document.documentElement.classList.remove('ic_nr_media_prefers_color_scheme_light');
+                    window.document.documentElement.classList.add('ic_nr_media_prefers_color_scheme_dark');
+                }else{
+                    window.document.documentElement.classList.remove('ic_nr_media_prefers_color_scheme_dark');
+                    window.document.documentElement.classList.add('ic_nr_media_prefers_color_scheme_light');
+                }
+            };
+            set_media_prefers_color_scheme(window.matchMedia('(prefers-color-scheme:dark)').matches);
+            window.matchMedia('(prefers-color-scheme:dark)').addEventListener('change',(event)=>{
+                set_media_prefers_color_scheme(event.matches);
+            });
             const set_media_prefers_reduced_motion=(matches)=>{
                 if(matches){
                     window.document.documentElement.classList.remove('ic_nr_media_prefers_reduced_motion_false');
