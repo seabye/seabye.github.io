@@ -298,7 +298,56 @@ export const _={
         });
     },
     element_recursion(){
-
+        machine_tool.element_create('div',{class:'er0'},window.document.body,undefined,undefined,(data)=>{
+            const er=machine_tool.element_recursion(data,'er');
+            er.add('',{class:'er1'});
+            const er2=er.add('',{class:'er2 fr0'});
+                const fr=machine_tool.element_recursion(er2,'fr');
+                fr.add('',{class:'fr1'});
+                const fr2=fr.add('',{class:'fr2 gr0'});
+                    const gr=machine_tool.element_recursion(fr2,'gr');
+                    gr.add('',{class:'gr1'});
+                    const gr2=gr.add('',{class:'gr2'});
+                        // machine_tool.element_create('div',{class:'er0'},gr2,undefined,undefined,(data)=>{
+                        //     const er=machine_tool.element_recursion(data,'er');
+                        //     er.add('',{class:'er1'});
+                        //     const er2=er.add('',{class:'er2 fr0'});
+                        //         const fr=machine_tool.element_recursion(er2,'fr');
+                        //         fr.add('',{class:'fr1'});
+                        //         const fr2=fr.add('',{class:'fr2 gr0'});
+                        //             const gr=machine_tool.element_recursion(fr2,'gr');
+                        //             gr.add('',{class:'gr1'});
+                        //             gr.add('',{class:'gr2'});
+                        //             gr.add('',{class:'gr3'});
+                        //         fr.add('',{class:'fr3'});
+                        //     er.add('',{class:'er3'});
+                        // });
+                    gr.add('',{class:'gr3'});
+                fr.add('',{class:'fr3'});
+            er.add('',{class:'er3'});
+            // window.setTimeout(()=>{
+            //     er.remove();
+            //     fr.remove();
+            //     gr.remove();
+            //     window.setTimeout(()=>{
+            //         er.add('',{class:'er4'});
+            //         fr.add('',{class:'fr4'});
+            //         gr.add('',{class:'gr4'});
+            //     },3000);
+            // },3000);
+            // er0     - er0
+            // er1     - er1
+            // er2+fr0 - er2+fr0
+            // er3     -     fr1
+            // fr1     -     fr2+gr0
+            // fr2+gr0 -         gr1
+            // fr3     -         gr2
+            // gr1     -         gr3
+            // gr2     -     fr3
+            // gr3     - er3
+            // window.console.log(er.add);
+            // window.console.log(er.remove);
+        });
     },
     listen_url(){
         machine_tool.listen_url('add',(data)=>{

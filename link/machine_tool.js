@@ -289,7 +289,8 @@
                             //             <element:[
                             //                 tag<string,undefined='div'>,
                             //                 attribute<object/{key:'value'...}/,undefined=false>,
-                            //                 content<string,element,undefined=false>
+                            //                 content<string,element,undefined=false>,
+                            //                 callback<function(element),undefined=false>
                             //             ],undefined=false>,
                             //             <function:function(elements)/this.element===elements.key&class/,undefined=false>,
                             //             key&class:{}...
@@ -336,7 +337,7 @@
                                             data[item].element[1]={class:item.trim()};
                                         }
                                     }
-                                    const element=this.element_create(data[item].element[0],data[item].element[1]?data[item].element[1]:undefined,insert_element,insert_position,data[item].element[2]?data[item].element[2]:undefined);
+                                    const element=this.element_create(data[item].element[0],data[item].element[1]?data[item].element[1]:undefined,insert_element,insert_position,data[item].element[2]?data[item].element[2]:undefined,data[item].element[3]?data[item].element[3]:undefined);
                                     if(item.split(' ')[0]){
                                         elements[item.split(' ')[0]]=data[item].element=element;
                                     }else{
@@ -910,8 +911,56 @@
                     }
                 }
             },
-            /*🟠*/element_recursion(){
-
+            /*🟢*/element_recursion(element,group,before,last){
+                if(!group){
+                    group='group';
+                }
+                if(!before){
+                    before='before';
+                }
+                if(!last){
+                    last='last';
+                }
+                if(!this.element_recursion.record){
+                    this.element_recursion.record=[];
+                }
+                class template{
+                    constructor(element){
+                        this.elements=[];
+                        this.elements.push(element);
+                    }
+                    add(tag,attribute,content,callback){
+                        let last_next_element=this.elements[this.elements.length-1];
+                        const last_next=(element)=>{
+                            if(element.nextElementSibling){
+                                for(let i=0,l=machine_tool.element_recursion.record.length;i<l;i++){
+                                    for(let i_=0,l_=machine_tool.element_recursion.record[i].elements.length;i_<l_;i_++){
+                                        if(machine_tool.element_recursion.record[i].elements[i_]===element.nextElementSibling){
+                                            last_next_element=element.nextElementSibling;
+                                            last_next(last_next_element);
+                                        }
+                                    }
+                                }
+                            }
+                        };
+                        last_next(last_next_element);
+                        for(let i=0,l=this.elements.length;i<l;i++){
+                            machine_tool.element_state(this.elements[i],`${group}_${before}`,`${group}_${last}`,true);
+                        }
+                        attribute.class=`${attribute.class}${attribute.class?' ':''}${group}_${last}`;
+                        const new_element=machine_tool.element_create(tag,attribute,last_next_element,'afterend',content,callback);
+                        this.elements.push(new_element);
+                        return new_element;
+                    }
+                    remove(){
+                        const element=this.elements.pop();
+                        element.parentNode.removeChild(element);
+                        machine_tool.element_state(this.elements[this.elements.length-1],`${group}_${last}`,`${group}_${before}`,true);
+                    }
+                }
+                const result=new template(element);
+                this.element_recursion.record.push(result);
+                return result;
             },
             /*🟢*/find_outer(find,start,end=window.document.documentElement,true_callback,false_callback){
                 if(find instanceof window.HTMLElement&&start===find){
