@@ -911,16 +911,7 @@
                     }
                 }
             },
-            /*🟢*/element_recursion(element,group,before,last){
-                if(!group){
-                    group='group';
-                }
-                if(!before){
-                    before='before';
-                }
-                if(!last){
-                    last='last';
-                }
+            /*🟢*/element_recursion(element,group='group',before='before',last='last'){
                 if(!this.element_recursion.record){
                     this.element_recursion.record=[];
                 }
