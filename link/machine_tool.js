@@ -1050,7 +1050,7 @@
                     }
                 }
             },
-            /*🟢*/open_window(uri=window.location.href,width=640,height=480,left,top){
+            /*🟢*/open_window(uri=window.location.href,width=720,height=450,left,top){
                 if(typeof left==='number'){
                     left+=window.screen.availLeft;
                 }else{
