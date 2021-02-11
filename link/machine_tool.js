@@ -970,6 +970,7 @@
                                     for(let i_=0,l_=machine_tool.element_recursion.record[i].elements.length;i_<l_;i_++){
                                         if(machine_tool.element_recursion.record[i].elements[i_].classList.contains(`${group2}_${before2}`)){
                                             last_match=machine_tool.element_recursion.record[i].elements[i_];
+                                            window.console.log(last_match);
                                         }
                                     }
                                 }
