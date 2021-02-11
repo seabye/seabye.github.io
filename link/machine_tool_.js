@@ -308,23 +308,23 @@ export const _={
                     const gr=machine_tool.element_recursion(fr2,'gr');
                     gr.add('',{class:'gr1'});
                     const gr2=gr.add('',{class:'gr2'});
-                        // machine_tool.element_create('div',{class:'er0'},gr2,undefined,undefined,(data)=>{
-                        //     const er=machine_tool.element_recursion(data,'er');
-                        //     er.add('',{class:'er1'});
-                        //     const er2=er.add('',{class:'er2 fr0'});
-                        //         const fr=machine_tool.element_recursion(er2,'fr');
-                        //         fr.add('',{class:'fr1'});
-                        //         const fr2=fr.add('',{class:'fr2 gr0'});
-                        //             const gr=machine_tool.element_recursion(fr2,'gr');
-                        //             gr.add('',{class:'gr1'});
-                        //             gr.add('',{class:'gr2'});
-                        //             gr.add('',{class:'gr3'});
-                        //         fr.add('',{class:'fr3'});
-                        //     er.add('',{class:'er3'});
-                        // });
-                    gr.add('',{class:'gr3'});
-                fr.add('',{class:'fr3'});
+                        machine_tool.element_create('div',{class:'er0'},gr2,undefined,undefined,(data)=>{
+                            const er=machine_tool.element_recursion(data,'er');
+                            er.add('',{class:'er1'});
+                            const er2=er.add('',{class:'er2 fr0'});
+                                const fr=machine_tool.element_recursion(er2,'fr');
+                                fr.add('',{class:'fr1'});
+                                const fr2=fr.add('',{class:'fr2 gr0'});
+                                    const gr=machine_tool.element_recursion(fr2,'gr');
+                                    gr.add('',{class:'gr1'});
+                                    gr.add('',{class:'gr2'});
+                            er.add('',{class:'er3'});
+                                fr.add('',{class:'fr3'});
+                                    gr.add('',{class:'gr3'});
+                        });
             er.add('',{class:'er3'});
+                fr.add('',{class:'fr3'});
+                    gr.add('',{class:'gr3'});
             // window.setTimeout(()=>{
             //     er.remove();
             //     fr.remove();

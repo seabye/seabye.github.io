@@ -926,7 +926,7 @@
                             if(element.nextElementSibling){
                                 for(let i=0,l=machine_tool.element_recursion.record.length;i<l;i++){
                                     for(let i_=0,l_=machine_tool.element_recursion.record[i].elements.length;i_<l_;i_++){
-                                        if(machine_tool.element_recursion.record[i].elements[i_]===element.nextElementSibling){
+                                        if(machine_tool.element_recursion.record[i].elements[i_]===element.nextElementSibling&&machine_tool.element_recursion.record.indexOf(this)<machine_tool.element_recursion.record.indexOf(machine_tool.element_recursion.record[i])){
                                             last_next_element=element.nextElementSibling;
                                             last_next(last_next_element);
                                         }
