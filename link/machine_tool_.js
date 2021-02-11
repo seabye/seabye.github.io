@@ -304,10 +304,10 @@ export const _={
             const er2=er.add('',{class:'er2 fr0'});
                 const fr=machine_tool.element_recursion(er2,'fr');
                 fr.add('',{class:'fr1'});
-                const fr2=fr.add('',{class:'fr2 gr0 hr0'});
-                    const gr=machine_tool.element_recursion(fr2,'gr',undefined,undefined,'gghhii');
-                    const hr=machine_tool.element_recursion(fr2,'hr',undefined,undefined,'gghhii');
-                    const ir=machine_tool.element_recursion(fr2,'ir',undefined,undefined,'gghhii');
+                const fr2=fr.add('',{class:'fr2 gr0 hr0 ir0'});
+                    const gr=machine_tool.element_recursion(fr2,'gr','gghhii');
+                    const hr=machine_tool.element_recursion(fr2,'hr','gghhii');
+                    const ir=machine_tool.element_recursion(fr2,'ir','gghhii');
                     gr.add('',{class:'gr1'});
                     gr.add('',{class:'gr2'});
                     hr.add('',{class:'hr1'});

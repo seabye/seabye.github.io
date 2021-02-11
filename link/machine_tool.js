@@ -911,7 +911,11 @@
                     }
                 }
             },
-            /*🟠*/element_recursion(element,group='group',before='before',last='last',group2,before2='before',last2='last'){
+            /*🟠*/element_recursion(element,group='group',group2){
+                const before='before';
+                const last='last';
+                const before2='before';
+                const last2='last';
                 if(!this.element_recursion.record){
                     this.element_recursion.record=[];
                 }
@@ -919,6 +923,10 @@
                     constructor(element){
                         this.elements=[];
                         this.elements.push(element);
+                        element.classList.add(`${group}_base`);
+                        if(group2){
+                            element.classList.add(`${group2}_base`);
+                        }
                     }
                     add(tag,attribute,content,callback){
                         let last_next_element=this.elements[this.elements.length-1];
