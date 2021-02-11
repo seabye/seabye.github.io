@@ -944,14 +944,18 @@
                         };
                         last_next(last_next_element);
                         for(let i=0,l=this.elements.length;i<l;i++){
-                            machine_tool.element_state(this.elements[i],`${group}_${before}${group2?` ${group2}_${before2}`:''}`,`${group}_${last}${group2?` ${group2}_${last2}`:''}`,true);
+                            window.setTimeout(()=>{
+                                machine_tool.element_state(this.elements[i],`${group}_${before}${group2?` ${group2}_${before2}`:''}`,`${group}_${last}${group2?` ${group2}_${last2}`:''}`,true);
+                            },1000/60);
                         }
                         attribute.class=`${attribute.class}${attribute.class?' ':''}${group}_${last}${group2?` ${group2}_${last2}`:''}`;
                         if(group2){
                             for(let i=0,l=machine_tool.element_recursion.record.length;i<l;i++){
                                 for(let i_=0,l_=machine_tool.element_recursion.record[i].elements.length;i_<l_;i_++){
                                     if(machine_tool.element_recursion.record[i].elements[i_].classList.contains(`${group2}_${last2}`)){
-                                        machine_tool.element_state(machine_tool.element_recursion.record[i].elements[i_],`${group2}_${before2}`,`${group2}_${last2}`,true);
+                                        window.setTimeout(()=>{
+                                            machine_tool.element_state(machine_tool.element_recursion.record[i].elements[i_],`${group2}_${before2}`,`${group2}_${last2}`,true);
+                                        },1000/60);
                                     }
                                 }
                             }
@@ -975,9 +979,13 @@
                                         }
                                     }
                                 }
-                                machine_tool.element_state(last_match,`${group2}_${last2}`,`${group2}_${before2}`,true);
+                                window.setTimeout(()=>{
+                                    machine_tool.element_state(last_match,`${group2}_${last2}`,`${group2}_${before2}`,true);
+                                },1000/60);
                             }
-                            machine_tool.element_state(this.elements[this.elements.length-1],`${group}_${last}`,`${group}_${before}`,true);
+                            window.setTimeout(()=>{
+                                machine_tool.element_state(this.elements[this.elements.length-1],`${group}_${last}`,`${group}_${before}`,true);
+                            },1000/60);
                         },0);
                     }
                 }
