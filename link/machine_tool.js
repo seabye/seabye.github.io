@@ -966,11 +966,12 @@
                         window.setTimeout(()=>{
                             if(group2){
                                 let last_match=null;
+                                const skip=[];
                                 for(let i=0,l=machine_tool.element_recursion.record.length;i<l;i++){
                                     for(let i_=0,l_=machine_tool.element_recursion.record[i].elements.length;i_<l_;i_++){
-                                        if(machine_tool.element_recursion.record[i].elements[i_].classList.contains(`${group2}_${before2}`)){
+                                        if(machine_tool.element_recursion.record[i].elements[i_].classList.contains(`${group2}_${before2}`)&&!skip.includes(machine_tool.element_recursion.record[i].elements[i_])){
                                             last_match=machine_tool.element_recursion.record[i].elements[i_];
-                                            window.console.log(last_match);
+                                            skip.push(last_match);
                                         }
                                     }
                                 }
