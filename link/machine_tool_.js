@@ -305,16 +305,26 @@ export const _={
                 const fr=machine_tool.element_recursion(er2,'fr');
                 fr.add('',{class:'fr1'});
                 const fr2=fr.add('',{class:'fr2 gr0 hr0'});
-                    const gr=machine_tool.element_recursion(fr2,'gr');
-                    const hr=machine_tool.element_recursion(fr2,'hr');
+                    const gr=machine_tool.element_recursion(fr2,'gr',undefined,undefined,'gghhii');
+                    const hr=machine_tool.element_recursion(fr2,'hr',undefined,undefined,'gghhii');
+                    const ir=machine_tool.element_recursion(fr2,'ir',undefined,undefined,'gghhii');
                     gr.add('',{class:'gr1'});
                     gr.add('',{class:'gr2'});
                     hr.add('',{class:'hr1'});
                     hr.add('',{class:'hr2'});
                     hr.add('',{class:'hr3'});
+                    ir.add('',{class:'ir1'});
+                    ir.add('',{class:'ir2'});
+                    ir.add('',{class:'ir3'});
             er.add('',{class:'er3'});
                 fr.add('',{class:'fr3'});
                     gr.add('',{class:'gr3'});
+// er.remove('',{class:'er3'});
+// fr.remove('',{class:'fr3'});
+// gr.remove('',{class:'gr3'});
+//     hr.remove('',{class:'hr3'});
+//     gr.remove('',{class:'gr2'});
+//     gr.remove('',{class:'gr1'});
             // window.setTimeout(()=>{
             //     er.remove();
             //     fr.remove();
