@@ -927,6 +927,12 @@
                         if(group2){
                             element.classList.add(`${group2}_base`,`${group2}_${last2}`);
                         }
+                        window.setTimeout(()=>{
+                            element.classList.add(`${group}_add`);
+                            if(group2){
+                                element.classList.add(`${group2}_add`);
+                            }
+                        },1000/24);
                     }
                     add(tag,attribute,content,callback){
                         let last_next_element=this.elements[this.elements.length-1];
@@ -944,29 +950,37 @@
                         };
                         last_next(last_next_element);
                         for(let i=0,l=this.elements.length;i<l;i++){
-                            window.setTimeout(()=>{
-                                machine_tool.element_state(this.elements[i],`${group}_${before}${group2?` ${group2}_${before2}`:''}`,`${group}_${last}${group2?` ${group2}_${last2}`:''}`,true);
-                            },1000/60);
+                            machine_tool.element_state(this.elements[i],`${group}_${before}${group2?` ${group2}_${before2}`:''}`,`${group}_${last}${group2?` ${group2}_${last2}`:''}`,true);
                         }
                         attribute.class=`${attribute.class}${attribute.class?' ':''}${group}_${last}${group2?` ${group2}_${last2}`:''}`;
                         if(group2){
                             for(let i=0,l=machine_tool.element_recursion.record.length;i<l;i++){
                                 for(let i_=0,l_=machine_tool.element_recursion.record[i].elements.length;i_<l_;i_++){
                                     if(machine_tool.element_recursion.record[i].elements[i_].classList.contains(`${group2}_${last2}`)){
-                                        window.setTimeout(()=>{
-                                            machine_tool.element_state(machine_tool.element_recursion.record[i].elements[i_],`${group2}_${before2}`,`${group2}_${last2}`,true);
-                                        },1000/60);
+                                        machine_tool.element_state(machine_tool.element_recursion.record[i].elements[i_],`${group2}_${before2}`,`${group2}_${last2}`,true);
                                     }
                                 }
                             }
                         }
                         const new_element=machine_tool.element_create(tag,attribute,last_next_element,'afterend',content,callback);
+                        window.setTimeout(()=>{
+                            new_element.classList.add(`${group}_add`);
+                            if(group2){
+                                new_element.classList.add(`${group2}_add`);
+                            }
+                        },1000/24);
                         this.elements.push(new_element);
                         return new_element;
                     }
-                    remove(){
+                    remove(wait=350){
                         const element=this.elements.pop();
-                        element.parentNode.removeChild(element);
+                        element.classList.add(`${group}_remove`);
+                        if(group2){
+                            element.classList.add(`${group2}_remove`);
+                        }
+                        window.setTimeout(()=>{
+                            element.parentNode.removeChild(element);
+                        },wait);
                         window.setTimeout(()=>{
                             if(group2){
                                 let last_match=null;
@@ -979,14 +993,11 @@
                                         }
                                     }
                                 }
-                                window.setTimeout(()=>{
-                                    machine_tool.element_state(last_match,`${group2}_${last2}`,`${group2}_${before2}`,true);
-                                },1000/60);
+                                machine_tool.element_state(last_match,`${group2}_${last2}`,`${group2}_${before2}`,true);
                             }
-                            window.setTimeout(()=>{
-                                machine_tool.element_state(this.elements[this.elements.length-1],`${group}_${last}`,`${group}_${before}`,true);
-                            },1000/60);
+                            machine_tool.element_state(this.elements[this.elements.length-1],`${group}_${last}`,`${group}_${before}`,true);
                         },0);
+                        return element.previousElementSibling;
                     }
                 }
                 const result=new template(element);
