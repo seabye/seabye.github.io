@@ -923,9 +923,9 @@
                     constructor(element){
                         this.elements=[];
                         this.elements.push(element);
-                        element.classList.add(`${group}_base`);
+                        element.classList.add(`${group}_base`,`${group}_${last}`);
                         if(group2){
-                            element.classList.add(`${group2}_base`);
+                            element.classList.add(`${group2}_base`,`${group2}_${last2}`);
                         }
                     }
                     add(tag,attribute,content,callback){
