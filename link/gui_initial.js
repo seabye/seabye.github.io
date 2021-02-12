@@ -292,11 +292,13 @@
         /*🟢*/dot$active(){
             window.addEventListener('pointerdown',(event)=>{
                 event.target.classList.add('ic_active');
-                window.addEventListener('pointerup',()=>{
+                const remove=()=>{
                     event.target.classList.remove('ic_active');
-                },{once:true});
+                };
+                window.addEventListener('pointerup',remove,{once:true});
                 window.addEventListener('touchend',()=>{
                     event.target.classList.remove('ic_active');
+                    window.removeEventListener('pointerup',remove);
                 },{once:true});
             });
         },
