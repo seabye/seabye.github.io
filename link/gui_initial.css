@@ -6,13 +6,14 @@
 /* ==== ==== ==== ==== */
 /*
     ic_ / initial css
+    ic_action / :active
+    ic_nr_ / navigator
     sc_ / style.css
     _ve_ / variable
     _md_ / method
     _cr\_ / container
     _mk\_ / mark \ :hov .cls $state
     _an_ / animation
-    _nr_ / navigator
     _dg\_ / debug
     #build
         sc_cr
