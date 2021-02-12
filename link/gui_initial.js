@@ -233,15 +233,17 @@
                     window.document.documentElement.classList.remove('ic_nr_media_orientation_portrait');
                     window.document.documentElement.classList.add('ic_nr_media_orientation_landscape');
                 }
-                window.setTimeout(()=>{
-                    window.document.body.style.setProperty('margin','1px');
+                if(window.navigator.userAgent.match('Safari')&&!window.navigator.userAgent.match('Chrome')&&!window.navigator.userAgent.match('Edg')){
                     window.setTimeout(()=>{
-                        window.document.body.style.removeProperty('margin');
-                        if(!window.document.body.style[0]){
-                            window.document.body.removeAttribute('style');
-                        }
+                        window.document.body.style.setProperty('margin','1px');
+                        window.setTimeout(()=>{
+                            window.document.body.style.removeProperty('margin');
+                            if(!window.document.body.style[0]){
+                                window.document.body.removeAttribute('style');
+                            }
+                        },350/2);
                     },350/2);
-                },350/2);
+                }
             };
             set_media_orientation(window.matchMedia('(orientation:portrait)').matches);
             window.matchMedia('(orientation:portrait)').addEventListener('change',(event)=>{
