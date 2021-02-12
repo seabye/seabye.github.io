@@ -291,16 +291,25 @@
         },
         /*🟢*/dot$active(){
             window.addEventListener('pointerdown',(event)=>{
-                event.target.classList.add('ic_active');
-                const remove=()=>{
-                    event.target.classList.remove('ic_active');
-                    if(!event.target.getAttribute('class')){
-                        event.target.removeAttribute('class');
+                const add=(element)=>{
+                    element.classList.add('ic_active');
+                    if(element.parentElement){
+                        add(element.parentElement);
+                    }
+                };
+                add(event.target);
+                const remove=(_,element=event.target)=>{
+                    element.classList.remove('ic_active');
+                    if(element.parentElement){
+                        remove(_,element.parentElement);
+                        if(!element.getAttribute('class')){
+                            element.removeAttribute('class');
+                        }
                     }
                 };
                 window.addEventListener('pointerup',remove,{once:true});
                 window.addEventListener('touchend',()=>{
-                    event.target.classList.remove('ic_active');
+                    remove();
                     window.removeEventListener('pointerup',remove);
                 },{once:true});
             });
