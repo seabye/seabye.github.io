@@ -274,8 +274,10 @@
                 return false;
             },1000/60);
         },
-        /*🟢*/touch$hov(){
-            window.addEventListener('pointerdown',()=>{});
+        /*🟢*/context$menu(){
+            window.addEventListener('contextmenu',(event)=>{
+                event.preventDefault();
+            });
         },
         /*🟢*/touchpad$zoom(){
             window.addEventListener('wheel',(event)=>{
@@ -284,9 +286,15 @@
                 }
             },{passive:false});
         },
-        /*🟢*/context$menu(){
-            window.addEventListener('contextmenu',(event)=>{
-                event.preventDefault();
+        /*🟢*/touch$hov(){
+            window.addEventListener('pointerdown',()=>{});
+        },
+        /*🟢*/dot$active(){
+            window.addEventListener('pointerdown',(event)=>{
+                event.target.classList.add('ic_active');
+                window.addEventListener('pointerup',()=>{
+                    event.target.classList.remove('ic_active');
+                },{once:true});
             });
         },
         /*🟠*/partial$scroll(){
