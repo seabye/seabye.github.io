@@ -406,7 +406,7 @@
                                         if(!this.listen_element.pointer_up[id]){
                                             this.listen_element.pointer_up[id]=(data)=>{
                                                 const once_id='once_'+id;
-                                                data.target.parentElement.removeEventListener('pointerup',this.listen_element.pointer_up[once_id]);
+                                                data.target.parentNode.removeEventListener('pointerup',this.listen_element.pointer_up[once_id]);
                                                 delete this.listen_element.pointer_up[once_id];
                                                 const run=()=>{
                                                     const left=data.target.getBoundingClientRect().left;
@@ -414,7 +414,7 @@
                                                     const top=data.target.getBoundingClientRect().top;
                                                     const bottom=data.target.getBoundingClientRect().bottom;
                                                     this.listen_element.pointer_up[once_id]=(event)=>{
-                                                        if((event.target===data.target||event.target===data.target.parentElement)&&(event.clientX>=left&&event.clientX<=right&&event.clientY>=top&&event.clientY<=bottom)){
+                                                        if((event.target===data.target||event.target===data.target.parentNode)&&(event.clientX>=left&&event.clientX<=right&&event.clientY>=top&&event.clientY<=bottom)){
                                                             if(event.target.children.length){
                                                                 let block=false;
                                                                 for(const item of event.target.children){
@@ -450,7 +450,7 @@
                                                             }
                                                         }
                                                     };
-                                                    data.target.parentElement.addEventListener('pointerup',this.listen_element.pointer_up[once_id],{once:true});
+                                                    data.target.parentNode.addEventListener('pointerup',this.listen_element.pointer_up[once_id],{once:true});
                                                 };
                                                 if(typeof other==='number'){
                                                     if(data.button===other){
