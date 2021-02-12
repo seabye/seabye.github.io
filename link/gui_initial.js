@@ -292,9 +292,51 @@
         /*🟢*/dot$active(){
             window.addEventListener('pointerdown',(event)=>{
                 const add=(element)=>{
-                    element.classList.add('ic_active');
-                    if(element.parentElement){
-                        add(element.parentElement);
+                    const next=()=>{
+                        if(element.parentElement){
+                            add(element.parentElement);
+                        }
+                    };
+                    switch(element.style.getPropertyValue('pointer-events')){
+                        case'inherit':
+                            {
+                                const inherit=(element)=>{
+                                    switch(element.style.getPropertyValue('pointer-events')){
+                                        case'inherit':
+                                            {
+                                                return inherit(element.parentElement);
+                                            }
+                                            break;
+                                        case'none':
+                                            {
+                                                return false;
+                                            }
+                                            break;
+                                        default:
+                                            {
+                                                return true;
+                                            }
+                                            break;
+                                    }
+                                };
+                                if(inherit(element)){
+                                    element.classList.add('ic_active');
+                                }else{
+                                    next();
+                                }
+                            }
+                            break;
+                        case'none':
+                            {
+                                next();
+                            }
+                            break;
+                        default:
+                            {
+                                element.classList.add('ic_active');
+                                next();
+                            }
+                            break;
                     }
                 };
                 add(event.target);
