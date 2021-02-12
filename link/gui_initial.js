@@ -294,7 +294,7 @@
                 event.target.classList.add('ic_active');
                 const remove=()=>{
                     event.target.classList.remove('ic_active');
-                    if(event.target.getAttribute('class')){
+                    if(!event.target.getAttribute('class')){
                         event.target.removeAttribute('class');
                     }
                 };
