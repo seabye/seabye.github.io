@@ -295,6 +295,9 @@
                 window.addEventListener('pointerup',()=>{
                     event.target.classList.remove('ic_active');
                 },{once:true});
+                window.addEventListener('touchend',()=>{
+                    event.target.classList.remove('ic_active');
+                },{once:true});
             });
         },
         /*🟠*/partial$scroll(){
