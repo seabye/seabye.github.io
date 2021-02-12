@@ -376,47 +376,47 @@
                 new window.ResizeObserver(machine_tool.throttle(action,1000/60)).observe(window.document.documentElement);
             }
         },
-        // /*🟠*/input$scroll(){
-        //     if(!(window.navigator.userAgent.match('Safari')&&!window.navigator.userAgent.match('Chrome')&&!window.navigator.userAgent.match('Edg'))){
-        //         const blur=()=>{
-        //             window.document.activeElement.blur();
-        //             window.setTimeout(()=>{
-        //                 window.document.documentElement.style.removeProperty('width');
-        //                 window.document.documentElement.style.removeProperty('height');
-        //                 if(!window.document.documentElement.style[0]){
-        //                     window.document.documentElement.removeAttribute('style');
-        //                 }
-        //                 window.document.documentElement.scrollIntoView({behavior:'smooth',block:'start',inline:'start'});
-        //                 if(window.getComputedStyle(window.document.documentElement).transform!=='none'){
-        //                     window.scroll({behavior:'smooth',left:0,top:0});
-        //                 }
-        //             },350);
-        //         };
-        //         window.addEventListener('pointerdown',(event)=>{
-        //             if(event.target.localName.match(/input|textarea/)){
-        //                 window.addEventListener('pointerup',(event_)=>{
-        //                     if(!window.document.documentElement.style.getPropertyValue('width')&&!window.document.documentElement.style.getPropertyValue('height')){
-        //                         window.document.documentElement.style.setProperty('width',`${window.innerWidth}px`);
-        //                         window.document.documentElement.style.setProperty('height',`${window.innerHeight}px`);
-        //                         if(event.target===event_.target){
-        //                             window.setTimeout(()=>{
-        //                                 event.target.scrollIntoView({behavior:'smooth',block:'center',inline:'center'});
-        //                             },350*2);
-        //                         }
-        //                     }
-        //                 },{once:true});
-        //             }else{
-        //                 blur();
-        //             }
-        //         });
-        //         window.addEventListener('keydown',(event)=>{
-        //             if(event.key==='Enter'){
-        //                 blur();
-        //             }
-        //         });
-        //         new window.ResizeObserver(machine_tool.throttle(blur,1000/60)).observe(window.document.documentElement);
-        //     }
-        // }
+        /*🟠*/input$scroll(){
+            // if(!(window.navigator.userAgent.match('Safari')&&!window.navigator.userAgent.match('Chrome')&&!window.navigator.userAgent.match('Edg'))){
+            //     const blur=()=>{
+            //         window.document.activeElement.blur();
+            //         window.setTimeout(()=>{
+            //             window.document.documentElement.style.removeProperty('width');
+            //             window.document.documentElement.style.removeProperty('height');
+            //             if(!window.document.documentElement.style[0]){
+            //                 window.document.documentElement.removeAttribute('style');
+            //             }
+            //             window.document.documentElement.scrollIntoView({behavior:'smooth',block:'start',inline:'start'});
+            //             if(window.getComputedStyle(window.document.documentElement).transform!=='none'){
+            //                 window.scroll({behavior:'smooth',left:0,top:0});
+            //             }
+            //         },350);
+            //     };
+            //     window.addEventListener('pointerdown',(event)=>{
+            //         if(event.target.localName.match(/input|textarea/)){
+            //             window.addEventListener('pointerup',(event_)=>{
+            //                 if(!window.document.documentElement.style.getPropertyValue('width')&&!window.document.documentElement.style.getPropertyValue('height')){
+            //                     window.document.documentElement.style.setProperty('width',`${window.innerWidth}px`);
+            //                     window.document.documentElement.style.setProperty('height',`${window.innerHeight}px`);
+            //                     if(event.target===event_.target){
+            //                         window.setTimeout(()=>{
+            //                             event.target.scrollIntoView({behavior:'smooth',block:'center',inline:'center'});
+            //                         },350*2);
+            //                     }
+            //                 }
+            //             },{once:true});
+            //         }else{
+            //             blur();
+            //         }
+            //     });
+            //     window.addEventListener('keydown',(event)=>{
+            //         if(event.key==='Enter'){
+            //             blur();
+            //         }
+            //     });
+            //     new window.ResizeObserver(machine_tool.throttle(blur,1000/60)).observe(window.document.documentElement);
+            // }
+        }
     });
 // #debug
 // #after
