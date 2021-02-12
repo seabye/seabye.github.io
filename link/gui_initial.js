@@ -292,7 +292,7 @@
         /*🟢*/dot$active(){
             window.addEventListener('pointerdown',(event)=>{
                 const add=(element)=>{
-                    const next=()=>{
+                    const parent=()=>{
                         if(element.parentElement){
                             add(element.parentElement);
                         }
@@ -300,11 +300,11 @@
                     switch(element.style.getPropertyValue('pointer-events')){
                         case'inherit':
                             {
-                                const inherit=(element)=>{
+                                const parent_state=(element)=>{
                                     switch(element.style.getPropertyValue('pointer-events')){
                                         case'inherit':
                                             {
-                                                return inherit(element.parentElement);
+                                                return parent_state(element.parentElement);
                                             }
                                             break;
                                         case'none':
@@ -319,22 +319,22 @@
                                             break;
                                     }
                                 };
-                                if(inherit(element)){
+                                if(parent_state(element)){
                                     element.classList.add('ic_active');
                                 }else{
-                                    next();
+                                    parent();
                                 }
                             }
                             break;
                         case'none':
                             {
-                                next();
+                                parent();
                             }
                             break;
                         default:
                             {
                                 element.classList.add('ic_active');
-                                next();
+                                parent();
                             }
                             break;
                     }
