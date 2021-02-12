@@ -286,7 +286,7 @@
                 }
             },{passive:false});
         },
-        /*🟢*/touch$hov(){
+        /*🟢*/activate$hov(){
             window.addEventListener('pointerdown',()=>{});
         },
         /*🟢*/dot$active(){
