@@ -952,7 +952,14 @@
                         for(let i=0,l=this.elements.length;i<l;i++){
                             machine_tool.element_state(this.elements[i],`${group}_${before}${group2?` ${group2}_${before2}`:''}`,`${group}_${last}${group2?` ${group2}_${last2}`:''}`,true);
                         }
-                        attribute.class=`${attribute.class}${attribute.class?' ':''}${group}_${last}${group2?` ${group2}_${last2}`:''}`;
+                        if(tag instanceof window.HTMLElement){
+                            tag.classList.add(`${group}_${last}`);
+                            if(group2){
+                                tag.classList.add(`${group2}_${last2}`);
+                            }
+                        }else{
+                            attribute.class=`${attribute.class}${attribute.class?' ':''}${group}_${last}${group2?` ${group2}_${last2}`:''}`;
+                        }
                         if(group2){
                             for(let i=0,l=machine_tool.element_recursion.record.length;i<l;i++){
                                 for(let i_=0,l_=machine_tool.element_recursion.record[i].elements.length;i_<l_;i_++){
@@ -962,15 +969,21 @@
                                 }
                             }
                         }
-                        const new_element=machine_tool.element_create(tag,attribute,last_next_element,'afterend',content,callback);
+                        let add_element=null;
+                        if(tag instanceof window.HTMLElement){
+                            add_element=tag;
+                            last_next_element.insertAdjacentElement('afterend',add_element);
+                        }else{
+                            add_element=machine_tool.element_create(tag,attribute,last_next_element,'afterend',content,callback);
+                        }
                         window.setTimeout(()=>{
-                            new_element.classList.add(`${group}_add`);
+                            add_element.classList.add(`${group}_add`);
                             if(group2){
-                                new_element.classList.add(`${group2}_add`);
+                                add_element.classList.add(`${group2}_add`);
                             }
                         },1000/24);
-                        this.elements.push(new_element);
-                        return new_element;
+                        this.elements.push(add_element);
+                        return add_element;
                     }
                     remove(wait=350){
                         const element=this.elements.pop();
