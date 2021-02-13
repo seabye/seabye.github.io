@@ -38,11 +38,11 @@ export const _={
     uuid_22_to_uuid_36(){
         window.console.log('uuid_22_to_uuid_36()',machine_tool.uuid_22_to_uuid_36('jvZe6aA5S_Kks2h_zB88ww'));
     },
-    string_to_base64_url_safe_no_pad(){
-        window.console.log('string_to_base64_url_safe_no_pad()',machine_tool.string_to_base64_url_safe_no_pad('8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3'));
+    string_to_base64_uri_safe_no_pad(){
+        window.console.log('string_to_base64_uri_safe_no_pad()',machine_tool.string_to_base64_uri_safe_no_pad('8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3'));
     },
-    base64_url_safe_no_pad_to_string(){
-        window.console.log('base64_url_safe_no_pad_to_string()',machine_tool.base64_url_safe_no_pad_to_string('jvZe6aA5S_Kks2h_zB88ww'));
+    base64_uri_safe_no_pad_to_string(){
+        window.console.log('base64_uri_safe_no_pad_to_string()',machine_tool.base64_uri_safe_no_pad_to_string('jvZe6aA5S_Kks2h_zB88ww'));
     },
     element_create(){
         machine_tool.element_create({
@@ -349,9 +349,9 @@ export const _={
             // window.console.log(er.remove);
         });
     },
-    listen_url(){
-        machine_tool.listen_url('add',(data)=>{
-            window.console.log('listen_url()',data);
+    listen_uri(){
+        machine_tool.listen_uri('add',(data)=>{
+            window.console.log('listen_uri()',data);
         });
         // window.history.pushState(null,null,'/x/');
         // window.history.pushState(null,null,'/');

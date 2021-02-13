@@ -158,8 +158,8 @@
                     return`${result.substr(0,8)}-${result.substr(8,4)}-${result.substr(12,4)}-${result.substr(16,4)}-${result.substr(20)}`;
                 }
             },
-            /*🔴*/string_to_base64_url_safe_no_pad(){},
-            /*🔴*/base64_url_safe_no_pad_to_string(){},
+            /*🔴*/string_to_base64_uri_safe_no_pad(){},
+            /*🔴*/base64_uri_safe_no_pad_to_string(){},
             /*🟢*/java_string_hash_code(string){
                 let result;
                 for(let i=0;i<string.length;i++){
@@ -1027,15 +1027,15 @@
                 }
                 return this.find_outer(find,start.parentElement,end,true_callback,false_callback);
             },
-            /*🟢*/url_path(){
+            /*🟢*/uri_path(){
                 return window.location.href.replace(window.location.origin,'');
             },
-            /*🟠*/listen_url(action,callback){
+            /*🟠*/listen_uri(action,callback){
                 const id='id_'+this.java_string_hash_code(callback.toString().replace(/[\r\n\s]/g,'')).toString().replace(/[^0-9]/g,'');
                 switch(action){
                     case'add':
                         {
-                            if(!this.listen_url[id]){
+                            if(!this.listen_uri[id]){
                                 class template{
                                     constructor(callback){
                                         if(window.history.pushState.name){
@@ -1053,7 +1053,7 @@
                                     _popstate=(data)=>{
                                         this.callback({
                                             type:data.type,
-                                            path:machine_tool.url_path()
+                                            path:machine_tool.uri_path()
                                         });
                                     }
                                     _pushState=(data)=>{
@@ -1079,22 +1079,22 @@
                                         window.removeEventListener('replaceState',this._replaceState);
                                     }
                                 }
-                                this.listen_url[id]=new template(callback);
-                                // this.listen_url[id].count=0;
-                                this.listen_url[id].add();
+                                this.listen_uri[id]=new template(callback);
+                                // this.listen_uri[id].count=0;
+                                this.listen_uri[id].add();
                             }
-                            // this.listen_url[id].add();
-                            // this.listen_url[id].count+=1;
+                            // this.listen_uri[id].add();
+                            // this.listen_uri[id].count+=1;
                         }
                         break;
                     case'remove':
                         {
-                            this.listen_url[id].remove();
-                            // this.listen_url[id].count-=1;
-                            // if(this.listen_url[id].count===0){
-                                delete this.listen_url[id];
+                            this.listen_uri[id].remove();
+                            // this.listen_uri[id].count-=1;
+                            // if(this.listen_uri[id].count===0){
+                                delete this.listen_uri[id];
                                 // remove observe
-                                // if(!window.Object.keys(this.listen_url).length){}
+                                // if(!window.Object.keys(this.listen_uri).length){}
                             // }
                         }
                         break;
