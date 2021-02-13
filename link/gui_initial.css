@@ -128,7 +128,8 @@
             --ic_ve_color_black3_opaque: rgb(165,165,165);
             --ic_ve_color_black2_opaque: rgb(153,153,153);
             --ic_ve_color_black1_opaque: rgb(140,140,140);
-            --ic_ve_color_background: #090909;
+            /* --ic_ve_color_background: #090909; */
+            --ic_ve_color_background: #101010;
             --ic_ve_color_foreground: #212121;
             --ic_ve_color_highlight: #393939;
             --ic_ve_color_red: #CC0000;
