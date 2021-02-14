@@ -938,7 +938,7 @@
                             },1000/24);
                         }
                     }
-                    add(tag,attribute,content,callback){
+                    add(tag='div',attribute={},content,callback){
                         let insert_element=null;
                         let insert_position=null;
                         if(!this.elements[0]){
@@ -976,7 +976,7 @@
                                 tag.classList.add(`${this.group2}_last`);
                             }
                         }else{
-                            attribute.class=`${attribute.class}${attribute.class?' ':''}${!this.elements[0]?this.group2?`${this.group}_first ${this.group2}_first`:`${this.group}_first`:''}${this.group}_last${this.group2?` ${this.group2}_last`:''}`;
+                            attribute.class=`${attribute.class?`${attribute.class} `:''}${!this.elements[0]?this.group2?`${this.group}_first ${this.group2}_first `:`${this.group}_first `:''}${this.group}_last${this.group2?` ${this.group2}_last`:''}`;
                         }
                         if(this.group2){
                             for(let i=0,l=machine_tool.element_recursion.record.length;i<l;i++){
