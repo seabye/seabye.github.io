@@ -911,109 +911,133 @@
                     }
                 }
             },
-            /*🟠*/element_recursion(element,group='group',group2){
-                const before='before';
-                const last='last';
-                const before2='before';
-                const last2='last';
+            /*🟢*/element_recursion(child,element,group='group',group2){
                 if(!this.element_recursion.record){
                     this.element_recursion.record=[];
                 }
                 class template{
-                    constructor(element){
+                    constructor(child,element,group,group2){
+                        this.child=child;
+                        this.element=element;
+                        this.group=group;
+                        this.group2=group2;
+                        this.prev='prev';
+                        this.prev2='prev';
                         this.elements=[];
-                        this.elements.push(element);
-                        element.classList.add(`${group}_base`,`${group}_${last}`);
-                        if(group2){
-                            element.classList.add(`${group2}_base`,`${group2}_${last2}`);
-                        }
-                        window.setTimeout(()=>{
-                            element.classList.add(`${group}_add`);
+                        if(!child){
+                            this.elements.push(element);
+                            element.classList.add(`${group}_first`,`${group}_last`);
                             if(group2){
-                                element.classList.add(`${group2}_add`);
+                                element.classList.add(`${group2}_first`,`${group2}_last`);
                             }
-                        },1000/24);
+                            window.setTimeout(()=>{
+                                element.classList.add(`${group}_add`);
+                                if(group2){
+                                    element.classList.add(`${group2}_add`);
+                                }
+                            },1000/24);
+                        }
                     }
                     add(tag,attribute,content,callback){
-                        let last_next_element=this.elements[this.elements.length-1];
-                        const last_next=(element)=>{
-                            if(element.nextElementSibling){
-                                for(let i=0,l=machine_tool.element_recursion.record.length;i<l;i++){
-                                    for(let i_=0,l_=machine_tool.element_recursion.record[i].elements.length;i_<l_;i_++){
-                                        if(machine_tool.element_recursion.record[i].elements[i_]===element.nextElementSibling&&machine_tool.element_recursion.record.indexOf(this)<machine_tool.element_recursion.record.indexOf(machine_tool.element_recursion.record[i])){
-                                            last_next_element=element.nextElementSibling;
-                                            last_next(last_next_element);
+                        let insert_element=null;
+                        let insert_position=null;
+                        if(!this.elements[0]){
+                            insert_element=this.element;
+                            insert_position='beforeend';
+                        }else{
+                            insert_element=this.elements[this.elements.length-1];
+                            insert_position='afterend';
+                            const last_element=(element)=>{
+                                if(element.nextElementSibling){
+                                    for(let i=0,l=machine_tool.element_recursion.record.length;i<l;i++){
+                                        for(let i_=0,l_=machine_tool.element_recursion.record[i].elements.length;i_<l_;i_++){
+                                            if(machine_tool.element_recursion.record[i].elements[i_]===element.nextElementSibling&&machine_tool.element_recursion.record.indexOf(this)<machine_tool.element_recursion.record.indexOf(machine_tool.element_recursion.record[i])){
+                                                insert_element=element.nextElementSibling;
+                                                last_element(insert_element);
+                                            }
                                         }
                                     }
                                 }
-                            }
-                        };
-                        last_next(last_next_element);
+                            };
+                            last_element(insert_element);
+                        }
                         for(let i=0,l=this.elements.length;i<l;i++){
-                            machine_tool.element_state(this.elements[i],`${group}_${before}${group2?` ${group2}_${before2}`:''}`,`${group}_${last}${group2?` ${group2}_${last2}`:''}`,true);
+                            machine_tool.element_state(this.elements[i],`${this.group}_${this.prev}${this.group2?` ${this.group2}_${this.prev2}`:''}`,`${this.group}_last${this.group2?` ${this.group2}_last`:''}`,true);
                         }
                         if(tag instanceof window.HTMLElement){
-                            tag.classList.add(`${group}_${last}`);
-                            if(group2){
-                                tag.classList.add(`${group2}_${last2}`);
+                            if(!this.elements[0]){
+                                tag.classList.add(`${this.group}_first`);
+                                if(this.group2){
+                                    tag.classList.add(`${this.group2}_first`);
+                                }
+                            }
+                            tag.classList.add(`${this.group}_last`);
+                            if(this.group2){
+                                tag.classList.add(`${this.group2}_last`);
                             }
                         }else{
-                            attribute.class=`${attribute.class}${attribute.class?' ':''}${group}_${last}${group2?` ${group2}_${last2}`:''}`;
+                            attribute.class=`${attribute.class}${attribute.class?' ':''}${!this.elements[0]?this.group2?`${this.group}_first ${this.group2}_first`:`${this.group}_first`:''}${this.group}_last${this.group2?` ${this.group2}_last`:''}`;
                         }
-                        if(group2){
+                        if(this.group2){
                             for(let i=0,l=machine_tool.element_recursion.record.length;i<l;i++){
                                 for(let i_=0,l_=machine_tool.element_recursion.record[i].elements.length;i_<l_;i_++){
-                                    if(machine_tool.element_recursion.record[i].elements[i_].classList.contains(`${group2}_${last2}`)){
-                                        machine_tool.element_state(machine_tool.element_recursion.record[i].elements[i_],`${group2}_${before2}`,`${group2}_${last2}`,true);
+                                    if(machine_tool.element_recursion.record[i].elements[i_].classList.contains(`${this.group2}_last`)){
+                                        machine_tool.element_state(machine_tool.element_recursion.record[i].elements[i_],`${this.group2}_${this.prev2}`,`${this.group2}_last`,true);
                                     }
                                 }
                             }
                         }
-                        let add_element=null;
+                        let new_element=null;
                         if(tag instanceof window.HTMLElement){
-                            add_element=tag;
-                            last_next_element.insertAdjacentElement('afterend',add_element);
+                            new_element=tag;
+                            insert_element.insertAdjacentElement(insert_position,new_element);
                         }else{
-                            add_element=machine_tool.element_create(tag,attribute,last_next_element,'afterend',content,callback);
+                            new_element=machine_tool.element_create(tag,attribute,insert_element,insert_position,content,callback);
                         }
                         window.setTimeout(()=>{
-                            add_element.classList.add(`${group}_add`);
-                            if(group2){
-                                add_element.classList.add(`${group2}_add`);
+                            new_element.classList.add(`${this.group}_add`);
+                            if(this.group2){
+                                new_element.classList.add(`${this.group2}_add`);
                             }
                         },1000/24);
-                        this.elements.push(add_element);
-                        return add_element;
+                        this.elements.push(new_element);
+                        return new_element;
                     }
                     remove(wait=350){
-                        const element=this.elements.pop();
-                        element.classList.add(`${group}_remove`);
-                        if(group2){
-                            element.classList.add(`${group2}_remove`);
+                        const delete_element=this.elements.pop();
+                        delete_element.classList.add(`${this.group}_remove`);
+                        if(this.group2){
+                            delete_element.classList.add(`${this.group2}_remove`);
                         }
                         window.setTimeout(()=>{
-                            element.parentElement.removeChild(element);
+                            delete_element.parentElement.removeChild(delete_element);
                         },wait);
                         window.setTimeout(()=>{
-                            if(group2){
+                            if(this.group2){
                                 let last_match=null;
                                 const skip=[];
                                 for(let i=0,l=machine_tool.element_recursion.record.length;i<l;i++){
                                     for(let i_=0,l_=machine_tool.element_recursion.record[i].elements.length;i_<l_;i_++){
-                                        if(machine_tool.element_recursion.record[i].elements[i_].classList.contains(`${group2}_${before2}`)&&!skip.includes(machine_tool.element_recursion.record[i].elements[i_])){
+                                        if(machine_tool.element_recursion.record[i].elements[i_].classList.contains(`${this.group2}_${this.prev2}`)&&!skip.includes(machine_tool.element_recursion.record[i].elements[i_])){
                                             last_match=machine_tool.element_recursion.record[i].elements[i_];
                                             skip.push(last_match);
                                         }
                                     }
                                 }
-                                machine_tool.element_state(last_match,`${group2}_${last2}`,`${group2}_${before2}`,true);
+                                machine_tool.element_state(last_match,`${this.group2}_last`,`${this.group2}_${this.prev2}`,true);
                             }
-                            machine_tool.element_state(this.elements[this.elements.length-1],`${group}_${last}`,`${group}_${before}`,true);
+                            machine_tool.element_state(this.elements[this.elements.length-1],`${this.group}_last`,`${this.group}_${this.prev}`,true);
                         },0);
-                        return element.previousElementSibling;
+                        if(!this.elements[0]){
+                            this.element_recursion.record.pop(this);
+                            if(!this.element_recursion.record[0]){
+                                delete this.element_recursion.record;
+                            }
+                        }
+                        return delete_element.previousElementSibling;
                     }
                 }
-                const result=new template(element);
+                const result=new template(child,element,group,group2);
                 this.element_recursion.record.push(result);
                 return result;
             },
