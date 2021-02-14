@@ -298,7 +298,7 @@
                 }
             });
         },
-        /*🟢*/dot$active(){
+        /*🟠*/dot$active(){
             window.addEventListener('pointerdown',(event)=>{
                 // const add_outer=(event)=>{
                 //     if(event.target.classList.contains('ic_active')){
@@ -356,20 +356,20 @@
                                     element.classList.add('ic_active');
                                     // add_outer_event(element);
                                 }else{
-                                    parent();
+                                    // parent();
                                 }
                             }
                             break;
                         case'none':
                             {
-                                parent();
+                                // parent();
                             }
                             break;
                         default:
                             {
                                 element.classList.add('ic_active');
                                 // add_outer_event(element);
-                                parent();
+                                // parent();
                             }
                             break;
                     }
