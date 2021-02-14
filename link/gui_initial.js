@@ -78,7 +78,7 @@
                 }
             }
         },
-        /*🟢*/background$color(){
+        /*🟢*/start$background$color(){
             window.document.documentElement.style.setProperty('background-color',`${window.matchMedia('(prefers-color-scheme:dark)').matches?this.dataset.config.background_color_dark?this.dataset.config.background_color_dark:'#000000':this.dataset.config.background_color_light?this.dataset.config.background_color_light:'#FFFFFF'}`);
             window.addEventListener('load',()=>{
                 window.document.documentElement.style.removeProperty('background-color');
@@ -87,7 +87,7 @@
                 }
             },{once:true});
         },
-        /*🟢*/opacity(){
+        /*🟢*/start$opacity(){
             machine_tool.loop(()=>{
                 for(const item of window.document.documentElement.children){
                     if(item.localName==='body'){
@@ -110,7 +110,7 @@
                 },1000/60);
             },{once:true});
         },
-        /*🟢*/service$worker(){
+        /*🟢*/write$service$worker(){
             if(this.dataset.config.service_worker&&'serviceWorker'in window.navigator){
                 window.navigator.serviceWorker.register(this.dataset.config.service_worker,{scope:'./'}).then((registration)=>{
                     window.console.log('#### Registration successful, scope is:',registration.scope);
@@ -137,7 +137,7 @@
                 window.document.documentElement.classList.add('ic_nr_pwa');
             }
         },
-        /*🟢*/head(){
+        /*🟢*/write$head(){
             this.dataset.config.head_gui_initial_js.insertAdjacentHTML('beforebegin',`
                 <meta name="viewport" content="width=device-width,user-scalable=no,viewport-fit=cover">
                 <meta name="format-detection" content="address=no,email=no,telephone=no">
@@ -263,7 +263,7 @@
                 set_media_display_mode(event.matches);
             });
         },
-        /*🟢*/tabindex(){
+        /*🟢*/tab$index(){
             window.document.documentElement.setAttribute('tabindex','-1');
             machine_tool.loop(()=>{
                 for(const item of window.document.documentElement.children){
@@ -276,34 +276,65 @@
                 return false;
             },1000/60);
         },
-        /*🟢*/context$menu(){
+        /*🟢*/hov(){
+            window.addEventListener('pointerdown',()=>{});
+        },
+        /*🟢*/no$context$menu(){
             window.addEventListener('contextmenu',(event)=>{
                 event.preventDefault();
             });
         },
-        /*🟢*/touchpad$zoom(){
+        /*🟢*/no$touchpad$zoom(){
             window.addEventListener('wheel',(event)=>{
                 if(event.ctrlKey){
                     event.preventDefault();
                 }
             },{passive:false});
         },
-        /*🟢*/activate$hov(){
-            window.addEventListener('pointerdown',()=>{});
+        /*🟢*/no$drag(){
+            window.addEventListener('dragstart',(event)=>{
+                if(event.target.localName.match(/a|img/)){
+                    event.preventDefault();
+                }
+            });
         },
         /*🟢*/dot$active(){
             window.addEventListener('pointerdown',(event)=>{
+                // const add_outer=(event)=>{
+                //     if(event.target.classList.contains('ic_active')){
+                //         event.target.classList.add('ic_active_outer');
+                //     }
+                // };
+                // const remove_outer=(event)=>{
+                //     const remove=(element)=>{
+                //         element.classList.remove('ic_active_outer');
+                //         if(element.parentElement){
+                //             remove(element.parentElement);
+                //         }
+                //     };
+                //     remove(event.target);
+                // };
+                // const add_outer_event=(element)=>{
+                //     element.addEventListener('pointerout',add_outer);
+                //     element.addEventListener('pointerleave',add_outer);
+                //     element.addEventListener('pointerover',remove_outer);
+                // };
+                // const remove_outer_event=(element)=>{
+                //     element.removeEventListener('pointerout',add_outer);
+                //     element.removeEventListener('pointerleave',add_outer);
+                //     element.removeEventListener('pointerover',remove_outer);
+                // };
                 const add=(element)=>{
                     const parent=()=>{
                         if(element.parentElement){
                             add(element.parentElement);
                         }
                     };
-                    switch(element.style.getPropertyValue('pointer-events')){
+                    switch(window.getComputedStyle(element).pointerEvents){
                         case'inherit':
                             {
                                 const parent_state=(element)=>{
-                                    switch(element.style.getPropertyValue('pointer-events')){
+                                    switch(window.getComputedStyle(element).pointerEvents){
                                         case'inherit':
                                             {
                                                 return parent_state(element.parentElement);
@@ -323,6 +354,7 @@
                                 };
                                 if(parent_state(element)){
                                     element.classList.add('ic_active');
+                                    // add_outer_event(element);
                                 }else{
                                     parent();
                                 }
@@ -336,6 +368,7 @@
                         default:
                             {
                                 element.classList.add('ic_active');
+                                // add_outer_event(element);
                                 parent();
                             }
                             break;
@@ -344,11 +377,13 @@
                 add(event.target);
                 const remove=(_,element=event.target)=>{
                     element.classList.remove('ic_active');
+                    // remove_outer_event(element);
+                    // element.classList.remove('ic_active_outer');
+                    if(!element.getAttribute('class')){
+                        element.removeAttribute('class');
+                    }
                     if(element.parentElement){
                         remove(_,element.parentElement);
-                        if(!element.getAttribute('class')){
-                            element.removeAttribute('class');
-                        }
                     }
                 };
                 window.addEventListener('pointerup',remove,{once:true});
@@ -356,6 +391,7 @@
                     remove();
                     window.removeEventListener('pointerup',remove);
                 },{once:true});
+                window.addEventListener('dragend',remove,{once:true});
             });
         },
         /*🟠*/partial$scroll(){
@@ -377,47 +413,6 @@
                 new window.MutationObserver(machine_tool.throttle(action,1000/60)).observe(window.document.documentElement,{attributes:true,childList:true,subtree:true});
                 new window.ResizeObserver(machine_tool.throttle(action,1000/60)).observe(window.document.documentElement);
             }
-        },
-        /*🟠*/input$scroll(){
-            // if(!(window.navigator.userAgent.match('Safari')&&!window.navigator.userAgent.match('Chrome')&&!window.navigator.userAgent.match('Edg'))){
-            //     const blur=()=>{
-            //         window.document.activeElement.blur();
-            //         window.setTimeout(()=>{
-            //             window.document.documentElement.style.removeProperty('width');
-            //             window.document.documentElement.style.removeProperty('height');
-            //             if(!window.document.documentElement.style[0]){
-            //                 window.document.documentElement.removeAttribute('style');
-            //             }
-            //             window.document.documentElement.scrollIntoView({behavior:'smooth',block:'start',inline:'start'});
-            //             if(window.getComputedStyle(window.document.documentElement).transform!=='none'){
-            //                 window.scroll({behavior:'smooth',left:0,top:0});
-            //             }
-            //         },350);
-            //     };
-            //     window.addEventListener('pointerdown',(event)=>{
-            //         if(event.target.localName.match(/input|textarea/)){
-            //             window.addEventListener('pointerup',(event_)=>{
-            //                 if(!window.document.documentElement.style.getPropertyValue('width')&&!window.document.documentElement.style.getPropertyValue('height')){
-            //                     window.document.documentElement.style.setProperty('width',`${window.innerWidth}px`);
-            //                     window.document.documentElement.style.setProperty('height',`${window.innerHeight}px`);
-            //                     if(event.target===event_.target){
-            //                         window.setTimeout(()=>{
-            //                             event.target.scrollIntoView({behavior:'smooth',block:'center',inline:'center'});
-            //                         },350*2);
-            //                     }
-            //                 }
-            //             },{once:true});
-            //         }else{
-            //             blur();
-            //         }
-            //     });
-            //     window.addEventListener('keydown',(event)=>{
-            //         if(event.key==='Enter'){
-            //             blur();
-            //         }
-            //     });
-            //     new window.ResizeObserver(machine_tool.throttle(blur,1000/60)).observe(window.document.documentElement);
-            // }
         }
     });
 // #debug

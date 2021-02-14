@@ -5,7 +5,7 @@
 /* #method */
 /* #build */
     /* ??? */
-    a:hover {
+    a.ic_active {
         text-shadow: 0 0 10px #FFFFFF;
     }
 /* #debug */
