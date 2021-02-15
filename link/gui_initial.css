@@ -261,8 +261,8 @@
                 /* body */
                 body {
                     display: flex;
-                    justify-content: center;
                     align-items: center;
+                    justify-content: center;
                     flex-direction: column;
                     margin: unset;
                 }

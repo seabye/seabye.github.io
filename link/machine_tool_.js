@@ -62,7 +62,7 @@ export const _={
     element_state(){
         this.elements=machine_tool.element_create({
             target_mode:{
-                element:[,{style:'z-index: 1; position: fixed; left: 0; top: 0; width: 128px; height: 192px; background-color: gray; display: flex; justify-content: center; align-items: center; flex-direction: column;'}],
+                element:[,{style:'z-index: 1; position: fixed; left: 0; top: 0; width: 128px; height: 192px; background-color: gray; display: flex; align-items: center; justify-content: center; flex-direction: column;'}],
                 function(elements){
                     machine_tool.element_state([
                         'target',
@@ -138,7 +138,7 @@ export const _={
                 }
             },
             tab_mode:{
-                element:[,{style:'z-index: 1; position: fixed; left: 128px; top: 0; width: 128px; height: 192px; background-color: gray; display: flex; justify-content: center; align-items: center; flex-direction: column;'}],
+                element:[,{style:'z-index: 1; position: fixed; left: 128px; top: 0; width: 128px; height: 192px; background-color: gray; display: flex; align-items: center; justify-content: center; flex-direction: column;'}],
                 function(elements){
                     machine_tool.element_state([
                         'tab',
