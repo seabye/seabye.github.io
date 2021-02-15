@@ -12,12 +12,12 @@
     _ve_ / variable
     _md_ / method
     _cr\_ / container
-    _mk\_ / mark \ :hov .cls $state
+    _mk\_ / mark \ :hov .cls state$
     _an_ / animation
     _dg\_ / debug
     #build
         sc_cr
-        $state
+        state$
         ^child
 */
 /* >>>> >>>> >>>> >>>> */
