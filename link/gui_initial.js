@@ -298,121 +298,22 @@
                 }
             });
         },
-        /*🟠*/dot$active(){
+        /*🟢*/dot$active(){
             window.addEventListener('pointerdown',(event)=>{
-                // const add_outer=(event)=>{
-                //     if(event.target.classList.contains('ic_active')){
-                //         event.target.classList.add('ic_active_outer');
-                //     }
-                // };
-                // const remove_outer=(event)=>{
-                //     const remove=(element)=>{
-                //         element.classList.remove('ic_active_outer');
-                //         if(element.parentElement){
-                //             remove(element.parentElement);
-                //         }
-                //     };
-                //     remove(event.target);
-                // };
-                // const add_outer_event=(element)=>{
-                //     element.addEventListener('pointerout',add_outer);
-                //     element.addEventListener('pointerleave',add_outer);
-                //     element.addEventListener('pointerover',remove_outer);
-                // };
-                // const remove_outer_event=(element)=>{
-                //     element.removeEventListener('pointerout',add_outer);
-                //     element.removeEventListener('pointerleave',add_outer);
-                //     element.removeEventListener('pointerover',remove_outer);
-                // };
-                const add=(element)=>{
-                    const parent=()=>{
-                        if(element.parentElement){
-                            add(element.parentElement);
-                        }
-                    };
-                    switch(window.getComputedStyle(element).pointerEvents){
-                        case'inherit':
-                            {
-                                const parent_state=(element)=>{
-                                    switch(window.getComputedStyle(element).pointerEvents){
-                                        case'inherit':
-                                            {
-                                                return parent_state(element.parentElement);
-                                            }
-                                            break;
-                                        case'none':
-                                            {
-                                                return false;
-                                            }
-                                            break;
-                                        default:
-                                            {
-                                                return true;
-                                            }
-                                            break;
-                                    }
-                                };
-                                if(parent_state(element)){
-                                    element.classList.add('ic_active');
-                                    // add_outer_event(element);
-                                }else{
-                                    // parent();
-                                }
-                            }
-                            break;
-                        case'none':
-                            {
-                                // parent();
-                            }
-                            break;
-                        default:
-                            {
-                                element.classList.add('ic_active');
-                                // add_outer_event(element);
-                                // parent();
-                            }
-                            break;
+                event.target.classList.add('ic_active',`ic_active_${event.button}`);
+                const remove=()=>{
+                    event.target.classList.remove('ic_active',`ic_active_${event.button}`);
+                    if(!event.target.getAttribute('class')){
+                        event.target.removeAttribute('class');
                     }
-                };
-                add(event.target);
-                const remove=(_,element=event.target)=>{
-                    element.classList.remove('ic_active');
-                    // remove_outer_event(element);
-                    // element.classList.remove('ic_active_outer');
-                    if(!element.getAttribute('class')){
-                        element.removeAttribute('class');
-                    }
-                    if(element.parentElement){
-                        remove(_,element.parentElement);
-                    }
+                    window.removeEventListener('pointerup',remove);
+                    window.removeEventListener('touchend',remove);
+                    window.removeEventListener('dragend',remove);
                 };
                 window.addEventListener('pointerup',remove,{once:true});
-                window.addEventListener('touchend',()=>{
-                    remove();
-                    window.removeEventListener('pointerup',remove);
-                },{once:true});
+                window.addEventListener('touchend',remove,{once:true});
                 window.addEventListener('dragend',remove,{once:true});
             });
-        },
-        /*🟠*/partial$scroll(){
-            if(!window.CSS.supports('overscroll-behavior:contain')){
-                const action=()=>{
-                    for(const item of window.document.querySelectorAll('*')){
-                        if(window.getComputedStyle(item).overflowY.match(/auto|scroll/)){
-                            if(item.scrollHeight===item.clientHeight){
-                                item.style.setProperty('touch-action','none');
-                            }else{
-                                item.style.removeProperty('touch-action');
-                                if(!item.style[0]){
-                                    item.removeAttribute('style');
-                                }
-                            }
-                        }
-                    }
-                };
-                new window.MutationObserver(machine_tool.throttle(action,1000/60)).observe(window.document.documentElement,{attributes:true,childList:true,subtree:true});
-                new window.ResizeObserver(machine_tool.throttle(action,1000/60)).observe(window.document.documentElement);
-            }
         }
     });
 // #debug
