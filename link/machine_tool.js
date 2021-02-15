@@ -451,6 +451,12 @@
                                                         }
                                                     };
                                                     data.target.parentNode.addEventListener('pointerup',this.listen_element.pointer_up[once_id],{once:true});
+                                                    data.target.parentNode.addEventListener('touchend',()=>{
+                                                        data.target.parentNode.removeEventListener(this.listen_element.pointer_up[once_id]);
+                                                    },{once:true});
+                                                    data.target.parentNode.addEventListener('dragend',()=>{
+                                                        data.target.parentNode.removeEventListener(this.listen_element.pointer_up[once_id]);
+                                                    },{once:true});
                                                 };
                                                 if(typeof other==='number'){
                                                     if(data.button===other){
