@@ -1030,9 +1030,9 @@
                             machine_tool.element_state(this.elements[this.elements.length-1],`${this.group}_last`,`${this.group}_${this.prev}`,true);
                         },0);
                         if(!this.elements[0]){
-                            this.element_recursion.record.pop(this);
-                            if(!this.element_recursion.record[0]){
-                                delete this.element_recursion.record;
+                            machine_tool.element_recursion.record.pop(this);
+                            if(!machine_tool.element_recursion.record[0]){
+                                delete machine_tool.element_recursion.record;
                             }
                         }
                         return delete_element.previousElementSibling;
