@@ -290,6 +290,8 @@
             outline: unset;
             touch-action: pan-x pan-y;
             overscroll-behavior: contain;
+            /* _ */
+            max-width: 100%;
         }
         input,
         textarea {
