@@ -12,12 +12,12 @@
     _ve_ / variable
     _md_ / method
     _cr\_ / container
-    _mk\_ / mark \ :hov .cls state$
+    _mk\_ / mark \ :hov .cls $state
     _an_ / animation
     _dg\_ / debug
     #build
         sc_cr
-        state$
+        $state
         ^child
 */
 /* >>>> >>>> >>>> >>>> */
@@ -311,20 +311,20 @@
             pointer-events: none;
         }
     /* scroll */
-    ::-webkit-scrollbar {
+    html:not(.ic_nr_system_ios) ::-webkit-scrollbar {
         width: 8px;
         height: 8px;
     }
-    ::-webkit-scrollbar-corner {
+    html:not(.ic_nr_system_ios) ::-webkit-scrollbar-corner {
         background-color: var(--ic_ve_color_white_transparent);
     }
-    ::-webkit-scrollbar-thumb {
+    html:not(.ic_nr_system_ios) ::-webkit-scrollbar-thumb {
         border: 3px solid var(--ic_ve_color_white_transparent);
         border-radius: 8px;
         background-color: var(--ic_ve_color_black2);
         background-clip: padding-box;
     }
-    ::-webkit-scrollbar-thumb:active {
+    html:not(.ic_nr_system_ios) ::-webkit-scrollbar-thumb:active {
         background-color: var(--ic_ve_color_black4);
     }
 /* #debug */
