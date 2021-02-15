@@ -1140,6 +1140,20 @@
                         break;
                 }
             },
+            /*🟢*/remove_empty(element,...attribute){
+                if(attribute[0]){
+                    for(let count=0,length=attribute.length;count<length;count++){
+                        element.removeAttribute(attribute[count]);
+                    }
+                }else{
+                    if(!element.getAttribute('class')){
+                        element.removeAttribute('class');
+                    }
+                    if(!element.style[0]){
+                        element.removeAttribute('style');
+                    }
+                }
+            },
             /*🟢*/full_screen(element=window.document.documentElement,top=false){
                 if(top){
                     if(window.top.document.fullscreenElement||window.top.document.webkitIsFullScreen){
