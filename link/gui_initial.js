@@ -298,6 +298,7 @@
                 }
             });
         },
+        /*🔴*/no$touch$back(){},
         /*🟢*/dot$active(){
             window.addEventListener('pointerdown',(event)=>{
                 event.target.classList.add('ic_active',`ic_active_${event.button}`);
