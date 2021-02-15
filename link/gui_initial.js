@@ -322,6 +322,7 @@
                         for(let i=0,l=element.childElementCount;i<l;i++){
                             if(window.getComputedStyle(element.children[i]).overflowY.match(/auto|scroll/)){
                                 element.children[i].style.setProperty('overflow','hidden');
+                                element.children[i].scroll({behavior:'smooth',left:0,top:0});
                                 element.children[i].style.removeProperty('overflow');
                                 if(!element.children[i].style[0]){
                                     element.children[i].removeAttribute('style');
