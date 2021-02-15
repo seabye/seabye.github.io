@@ -314,6 +314,29 @@
                 window.addEventListener('touchend',remove,{once:true});
                 window.addEventListener('dragend',remove,{once:true});
             });
+        },
+        /*🟢*/scroll$padding(){
+            if(window.navigator.userAgent.match('Safari')&&!window.navigator.userAgent.match('Chrome')&&!window.navigator.userAgent.match('Edg')){
+                new window.MutationObserver((data)=>{
+                    data.forEach((item)=>{
+                        const loop=(element)=>{
+                            for(let i=0,l=element.childElementCount;i<l;i++){
+                                if(window.getComputedStyle(element.children[i]).overflowY.match(/auto|scroll/)){
+                                    element.children[i].style.setProperty('overflow','hidden');
+                                    element.children[i].style.removeProperty('overflow');
+                                    if(!element.children[i].style[0]){
+                                        element.children[i].removeAttribute('style');
+                                    }
+                                }
+                                if(element.children[i].childElementCount){
+                                    loop(element.children[i]);
+                                }
+                            }
+                        };
+                        loop(item.target);
+                    });
+                }).observe(window.document.documentElement,{childList:true,subtree:true});
+            }
         }
     });
 // #debug

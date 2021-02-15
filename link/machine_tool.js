@@ -514,6 +514,7 @@
                                                         case'childList':
                                                             {
                                                                 // window.console.log('listen_element().observe_mutation childList');
+                                                                callback(mutation);
                                                             }
                                                             break;
                                                         case'attributes':
