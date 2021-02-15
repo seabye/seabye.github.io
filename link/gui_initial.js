@@ -315,7 +315,8 @@
                 window.addEventListener('touchend',remove,{once:true});
                 window.addEventListener('dragend',remove,{once:true});
             });
-        }
+        },
+        /*🔴*/partial$scroll(){}
     });
 // #debug
 // #after
