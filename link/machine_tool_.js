@@ -357,6 +357,16 @@ export const _={
         // window.history.pushState(null,null,'/');
         // window.history.replaceState(null,null,window.location.href);
     },
+    for(){
+        let data=['A','B',['D','E']];
+        machine_tool.for(data,(key,value,depth,type)=>{
+            window.console.log(key,value,depth,type);
+        });
+        let data2={a:'A',b:'B',c:{d:'D',e:'E'}};
+        machine_tool.for(data2,(key,value,depth,type)=>{
+            window.console.log(key,value,depth,type);
+        });
+    },
     _end(){
         window.console.log('>>>> end machine_tool_.js');
     }

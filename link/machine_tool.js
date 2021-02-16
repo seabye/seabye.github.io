@@ -187,6 +187,42 @@
                     object[item]();
                 }
             },
+            /*🟢*/for(data,callback){
+                switch(window.Object.prototype.toString.call(data)){
+                    case'[object Array]':
+                        {
+                            let depth=0;
+                            const run=(data)=>{
+                                for(let item=0,length=data.length;item<length;item++){
+                                    callback(item,data[item],depth,window.Object.prototype.toString.call(data[item])==='[object Array]'?'array':depth);
+                                    if(window.Object.prototype.toString.call(data[item])==='[object Array]'){
+                                        depth+=1;
+                                        run(data[item]);
+                                    };
+                                }
+                            };
+                            run(data);
+                        }
+                        break;
+                    case'[object Object]':
+                        {
+                            let depth=0;
+                            const run=(data)=>{
+                                for(const [item,value]of window.Object.entries(data)){
+                                    callback(item,value,depth,window.Object.prototype.toString.call(value)==='[object Object]'?'object':depth);
+                                    if(window.Object.prototype.toString.call(value)==='[object Object]'){
+                                        depth+=1;
+                                        run(value);
+                                    };
+                                }
+                            };
+                            run(data);
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            },
         // local data
             /*🔴*/file(){},
             /*🔴*/local_storage(){},
@@ -1078,9 +1114,9 @@
                 let result='';
                 const run=(element)=>{
                     if(element.parentElement){
-                        for(let count=0,length=element.parentElement.childElementCount;count<length;count++){
-                            if(element.parentElement.children[count]===element){
-                                result=`${count},${result}`;
+                        for(let item=0,length=element.parentElement.childElementCount;item<length;item++){
+                            if(element.parentElement.children[item]===element){
+                                result=`${item},${result}`;
                                 break;
                             }
                         }
@@ -1167,8 +1203,8 @@
             },
             /*🟢*/remove_empty(element,...attribute){
                 if(attribute[0]){
-                    for(let count=0,length=attribute.length;count<length;count++){
-                        element.removeAttribute(attribute[count]);
+                    for(let item=0,length=attribute.length;item<length;item++){
+                        element.removeAttribute(attribute[item]);
                     }
                 }else{
                     if(!element.getAttribute('class')){
