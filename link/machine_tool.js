@@ -1081,6 +1081,7 @@
                         for(let count=0,length=element.parentElement.childElementCount;count<length;count++){
                             if(element.parentElement.children[count]===element){
                                 result=`${count},${result}`;
+                                break;
                             }
                         }
                         run(element.parentElement);
@@ -1217,7 +1218,10 @@
                     }
                 }
             },
-            /*🟢*/open_window(uri=window.location.href,width=720,height=450,left,top){
+            /*🟢*/open_tab(uri=window.location.href,name=''){
+                return window.open(uri,name);
+            },
+            /*🟢*/open_window(uri=window.location.href,name='',width=720,height=450,left,top){
                 if(typeof left==='number'){
                     left+=window.screen.availLeft;
                 }else{
@@ -1228,7 +1232,7 @@
                 }else{
                     top=(window.screen.availHeight-height)/2+window.screen.availTop;
                 }
-                return window.open(uri,'',`width=${width},height=${height},left=${left},top=${top}`);
+                return window.open(uri,name,`width=${width},height=${height},left=${left},top=${top}`);
             },
             /*🟢*/local_test(callback){
                 if(window.document?.documentElement&&(window.location.hostname===new window.URL(import.meta.url).hostname||window.document.documentElement.classList.contains('ic_dg')||window.document.documentElement.classList.contains('debug'))){

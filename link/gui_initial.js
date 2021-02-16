@@ -301,14 +301,35 @@
         /*🔴*/no$touch$back(){},
         /*🟢*/dot$active(){
             window.addEventListener('pointerdown',(event)=>{
-                event.target.classList.add('ic_active',`ic_active_${event.button}`);
+                let target=null;
+                const find_target=(element)=>{
+                    if(window.getComputedStyle(element).content==='"ic_active_skip"'){
+                        if(element.parentElement){
+                            target=element.parentElement;
+                        }else{
+                            target=false;
+                        }
+                    }
+                    if(element.parentElement){
+                        find_target(element.parentElement);
+                    }
+                };
+                find_target(event.target);
+                if(target===null){
+                    target=event.target;
+                }else{
+                    if(target===false){
+                        return false;
+                    }
+                }
+                target.classList.add('ic_active',`ic_active_${event.button}`);
                 const remove=()=>{
                     window.removeEventListener('pointerup',remove);
                     window.removeEventListener('touchend',remove);
                     window.removeEventListener('dragend',remove);
-                    event.target.classList.remove('ic_active',`ic_active_${event.button}`);
-                    if(!event.target.getAttribute('class')){
-                        event.target.removeAttribute('class');
+                    target.classList.remove('ic_active',`ic_active_${event.button}`);
+                    if(!target.getAttribute('class')){
+                        target.removeAttribute('class');
                     }
                 };
                 window.addEventListener('pointerup',remove,{once:true});
