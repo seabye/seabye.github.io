@@ -191,8 +191,8 @@
                 switch(window.Object.prototype.toString.call(data)){
                     case'[object Array]':
                         {
-                            let depth_count=0;
-                            const run=(data,depth)=>{
+                            let depth=0;
+                            const run=(data)=>{
                                 let next=[];
                                 for(let item=0,length=data.length;item<length;item++){
                                     if(typeof condition_depth==='number'){
@@ -207,19 +207,19 @@
                                     };
                                 }
                                 if(next.length){
-                                    depth_count+=1;
+                                    depth+=1;
                                     for(let item=0,length=next.length;item<length;item++){
-                                        run(next[item],depth_count);
+                                        run(next[item]);
                                     }
                                 }
                             };
-                            run(data,depth_count);
+                            run(data);
                         }
                         break;
                     case'[object Object]':
                         {
-                            let depth_count=0;
-                            const run=(data,depth)=>{
+                            let depth=0;
+                            const run=(data)=>{
                                 let next=[];
                                 for(const [item,value]of window.Object.entries(data)){
                                     if(typeof condition_depth==='number'){
@@ -234,13 +234,13 @@
                                     };
                                 }
                                 if(next.length){
-                                    depth_count+=1;
+                                    depth+=1;
                                     for(let item=0,length=next.length;item<length;item++){
-                                        run(next[item],depth_count);
+                                        run(next[item]);
                                     }
                                 }
                             };
-                            run(data,depth_count);
+                            run(data);
                         }
                         break;
                     default:
