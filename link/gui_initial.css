@@ -311,20 +311,25 @@
             pointer-events: none;
         }
     /* scroll */
-    html:not(.ic_nr_system_ios):not(.ic_nr_system_android) ::-webkit-scrollbar {
+    ::-webkit-scrollbar {
         width: 8px;
         height: 8px;
     }
-    html:not(.ic_nr_system_ios):not(.ic_nr_system_android) ::-webkit-scrollbar-corner {
+    html.ic_nr_system_ios ::-webkit-scrollbar,
+    html.ic_nr_system_android ::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+    }
+    ::-webkit-scrollbar-corner {
         background-color: var(--ic_ve_color_white_transparent);
     }
-    html:not(.ic_nr_system_ios):not(.ic_nr_system_android) ::-webkit-scrollbar-thumb {
+    ::-webkit-scrollbar-thumb {
         border: 3px solid var(--ic_ve_color_white_transparent);
         border-radius: 8px;
         background-color: var(--ic_ve_color_black2);
         background-clip: padding-box;
     }
-    html:not(.ic_nr_system_ios):not(.ic_nr_system_android) ::-webkit-scrollbar-thumb:active {
+    ::-webkit-scrollbar-thumb:active {
         background-color: var(--ic_ve_color_black4);
     }
 /* #debug */
