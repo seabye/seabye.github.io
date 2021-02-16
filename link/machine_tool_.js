@@ -358,14 +358,26 @@ export const _={
         // window.history.replaceState(null,null,window.location.href);
     },
     for(){
-        let data=['A','B',['D','E']];
+        let data=['A','B',['D','E'],'AA','BB',['DD','EE']];
         machine_tool.for(data,(key,value,depth,type)=>{
-            window.console.log(key,value,depth,type);
+            window.console.log('all====',key,value,depth,type);
         });
-        let data2={a:'A',b:'B',c:{d:'D',e:'E'}};
+        machine_tool.for(data,(key,value,depth,type)=>{
+            window.console.log('0====',key,value,depth,type);
+        },0);
+        machine_tool.for(data,(key,value,depth,type)=>{
+            window.console.log('1====',key,value,depth,type);
+        },1);
+        let data2={a:'A',b:'B',c:{d:'D',e:'E'},aa:'AA',bb:'BB',cc:{dd:'DD',ee:'EE'}};
         machine_tool.for(data2,(key,value,depth,type)=>{
-            window.console.log(key,value,depth,type);
+            window.console.log('all====',key,value,depth,type);
         });
+        machine_tool.for(data2,(key,value,depth,type)=>{
+            window.console.log('0====',key,value,depth,type);
+        },0);
+        machine_tool.for(data2,(key,value,depth,type)=>{
+            window.console.log('1====',key,value,depth,type);
+        },1);
     },
     _end(){
         window.console.log('>>>> end machine_tool_.js');

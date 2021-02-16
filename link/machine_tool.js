@@ -187,36 +187,60 @@
                     object[item]();
                 }
             },
-            /*🟢*/for(data,callback){
+            /*🟢*/for(data,callback,condition_depth){
                 switch(window.Object.prototype.toString.call(data)){
                     case'[object Array]':
                         {
-                            let depth=0;
-                            const run=(data)=>{
+                            let depth_count=0;
+                            const run=(data,depth)=>{
+                                let next=[];
                                 for(let item=0,length=data.length;item<length;item++){
-                                    callback(item,data[item],depth,window.Object.prototype.toString.call(data[item])==='[object Array]'?'array':depth);
+                                    if(typeof condition_depth==='number'){
+                                        if(condition_depth===depth){
+                                            callback(item,data[item],depth,window.Object.prototype.toString.call(data[item])==='[object Array]'?'array':depth);
+                                        }
+                                    }else{
+                                        callback(item,data[item],depth,window.Object.prototype.toString.call(data[item])==='[object Array]'?'array':depth);
+                                    }
                                     if(window.Object.prototype.toString.call(data[item])==='[object Array]'){
-                                        depth+=1;
-                                        run(data[item]);
+                                        next.push(data[item]);
                                     };
                                 }
+                                if(next.length){
+                                    depth_count+=1;
+                                    for(let item=0,length=next.length;item<length;item++){
+                                        run(next[item],depth_count);
+                                    }
+                                }
                             };
-                            run(data);
+                            run(data,depth_count);
                         }
                         break;
                     case'[object Object]':
                         {
-                            let depth=0;
-                            const run=(data)=>{
+                            let depth_count=0;
+                            const run=(data,depth)=>{
+                                let next=[];
                                 for(const [item,value]of window.Object.entries(data)){
-                                    callback(item,value,depth,window.Object.prototype.toString.call(value)==='[object Object]'?'object':depth);
+                                    if(typeof condition_depth==='number'){
+                                        if(condition_depth===depth){
+                                            callback(item,value,depth,window.Object.prototype.toString.call(value)==='[object Object]'?'object':depth);
+                                        }
+                                    }else{
+                                        callback(item,value,depth,window.Object.prototype.toString.call(value)==='[object Object]'?'object':depth);
+                                    }
                                     if(window.Object.prototype.toString.call(value)==='[object Object]'){
-                                        depth+=1;
-                                        run(value);
+                                        next.push(value);
                                     };
                                 }
+                                if(next.length){
+                                    depth_count+=1;
+                                    for(let item=0,length=next.length;item<length;item++){
+                                        run(next[item],depth_count);
+                                    }
+                                }
                             };
-                            run(data);
+                            run(data,depth_count);
                         }
                         break;
                     default:
