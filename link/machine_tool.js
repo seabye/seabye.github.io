@@ -383,7 +383,7 @@
             },
             /*🟠*/listen_element(action,element,type,callback,option={},other=''){
                 const match=/[\r\n\s]/g;
-                const id='id_'+this.java_string_hash_code((element!==window&&element!==window.document?element.outerHTML.toString().replace(match,''):'')+callback.toString().replace(match,'')+option.toString().replace(match,'')+other.toString().replace(match,'')).toString().replace(/[^0-9]/g,'');
+                const id='id_'+this.java_string_hash_code((element!==window&&element!==window.document?this.element_path(element):'')+callback.toString().replace(match,'')).toString().replace(/[^0-9]/g,'');
                 switch(type){
                     case'pointer_up':
                         {
@@ -1073,6 +1073,21 @@
                     }
                 }
                 return this.find_outer(find,start.parentElement,end,true_callback,false_callback);
+            },
+            /*🟢*/element_path(element){
+                let result='';
+                const run=(element)=>{
+                    if(element.parentElement){
+                        for(let count=0,length=element.parentElement.childElementCount;count<length;count++){
+                            if(element.parentElement.children[count]===element){
+                                result=`${count},${result}`;
+                            }
+                        }
+                        run(element.parentElement);
+                    };
+                };
+                run(element);
+                return result.replace(/,$/,'');
             },
             /*🟢*/uri_path(){
                 return window.location.href.replace(window.location.origin,'');
