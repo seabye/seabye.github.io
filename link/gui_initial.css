@@ -277,6 +277,9 @@
             cursor: default;
         }
         /* form */
+        ::placeholder {
+            color: var(--ic_ve_color_black2);
+        }
         button,
         input,
         textarea,
