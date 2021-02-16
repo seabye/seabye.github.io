@@ -114,6 +114,66 @@
                 };
                 // remove observe
             },
+            /*🟢*/for(data,callback,condition_depth){
+                switch(window.Object.prototype.toString.call(data)){
+                    case'[object Array]':
+                        {
+                            let depth=0;
+                            const run=(data)=>{
+                                let next=[];
+                                for(let item=0,length=data.length;item<length;item++){
+                                    if(typeof condition_depth==='number'){
+                                        if(condition_depth===depth){
+                                            callback(item,data[item],depth,window.Object.prototype.toString.call(data[item])==='[object Array]'?'array':depth);
+                                        }
+                                    }else{
+                                        callback(item,data[item],depth,window.Object.prototype.toString.call(data[item])==='[object Array]'?'array':depth);
+                                    }
+                                    if(window.Object.prototype.toString.call(data[item])==='[object Array]'){
+                                        next.push(data[item]);
+                                    };
+                                }
+                                if(next.length){
+                                    depth+=1;
+                                    for(let item=0,length=next.length;item<length;item++){
+                                        run(next[item]);
+                                    }
+                                }
+                            };
+                            run(data);
+                        }
+                        break;
+                    case'[object Object]':
+                        {
+                            let depth=0;
+                            const run=(data)=>{
+                                let next=[];
+                                for(const [item,value]of window.Object.entries(data)){
+                                    if(typeof condition_depth==='number'){
+                                        if(condition_depth===depth){
+                                            callback(item,value,depth,window.Object.prototype.toString.call(value)==='[object Object]'?'object':depth);
+                                        }
+                                    }else{
+                                        callback(item,value,depth,window.Object.prototype.toString.call(value)==='[object Object]'?'object':depth);
+                                    }
+                                    if(window.Object.prototype.toString.call(value)==='[object Object]'){
+                                        next.push(value);
+                                    };
+                                }
+                                if(next.length){
+                                    depth+=1;
+                                    for(let item=0,length=next.length;item<length;item++){
+                                        run(next[item]);
+                                    }
+                                }
+                            };
+                            run(data);
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            },
             /*🟢*/import(src,callback){
                 import(src).then((data)=>{
                     callback(data);
@@ -185,66 +245,6 @@
             /*🟢*/run_object(object){
                 for(const item in object){
                     object[item]();
-                }
-            },
-            /*🟢*/for(data,callback,condition_depth){
-                switch(window.Object.prototype.toString.call(data)){
-                    case'[object Array]':
-                        {
-                            let depth=0;
-                            const run=(data)=>{
-                                let next=[];
-                                for(let item=0,length=data.length;item<length;item++){
-                                    if(typeof condition_depth==='number'){
-                                        if(condition_depth===depth){
-                                            callback(item,data[item],depth,window.Object.prototype.toString.call(data[item])==='[object Array]'?'array':depth);
-                                        }
-                                    }else{
-                                        callback(item,data[item],depth,window.Object.prototype.toString.call(data[item])==='[object Array]'?'array':depth);
-                                    }
-                                    if(window.Object.prototype.toString.call(data[item])==='[object Array]'){
-                                        next.push(data[item]);
-                                    };
-                                }
-                                if(next.length){
-                                    depth+=1;
-                                    for(let item=0,length=next.length;item<length;item++){
-                                        run(next[item]);
-                                    }
-                                }
-                            };
-                            run(data);
-                        }
-                        break;
-                    case'[object Object]':
-                        {
-                            let depth=0;
-                            const run=(data)=>{
-                                let next=[];
-                                for(const [item,value]of window.Object.entries(data)){
-                                    if(typeof condition_depth==='number'){
-                                        if(condition_depth===depth){
-                                            callback(item,value,depth,window.Object.prototype.toString.call(value)==='[object Object]'?'object':depth);
-                                        }
-                                    }else{
-                                        callback(item,value,depth,window.Object.prototype.toString.call(value)==='[object Object]'?'object':depth);
-                                    }
-                                    if(window.Object.prototype.toString.call(value)==='[object Object]'){
-                                        next.push(value);
-                                    };
-                                }
-                                if(next.length){
-                                    depth+=1;
-                                    for(let item=0,length=next.length;item<length;item++){
-                                        run(next[item]);
-                                    }
-                                }
-                            };
-                            run(data);
-                        }
-                        break;
-                    default:
-                        break;
                 }
             },
         // local data
