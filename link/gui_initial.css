@@ -278,7 +278,7 @@
         }
         /* form */
         ::placeholder {
-            color: var(--ic_ve_color_black2);
+            color: var(--ic_ve_color_black4);
         }
         button,
         input,
