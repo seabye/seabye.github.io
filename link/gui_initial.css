@@ -311,20 +311,20 @@
             pointer-events: none;
         }
     /* scroll */
-    html:not(.ic_nr_system_ios) ::-webkit-scrollbar {
+    html:not(.ic_nr_system_ios):not(.ic_nr_system_android) ::-webkit-scrollbar {
         width: 8px;
         height: 8px;
     }
-    html:not(.ic_nr_system_ios) ::-webkit-scrollbar-corner {
+    html:not(.ic_nr_system_ios):not(.ic_nr_system_android) ::-webkit-scrollbar-corner {
         background-color: var(--ic_ve_color_white_transparent);
     }
-    html:not(.ic_nr_system_ios) ::-webkit-scrollbar-thumb {
+    html:not(.ic_nr_system_ios):not(.ic_nr_system_android) ::-webkit-scrollbar-thumb {
         border: 3px solid var(--ic_ve_color_white_transparent);
         border-radius: 8px;
         background-color: var(--ic_ve_color_black2);
         background-clip: padding-box;
     }
-    html:not(.ic_nr_system_ios) ::-webkit-scrollbar-thumb:active {
+    html:not(.ic_nr_system_ios):not(.ic_nr_system_android) ::-webkit-scrollbar-thumb:active {
         background-color: var(--ic_ve_color_black4);
     }
 /* #debug */
