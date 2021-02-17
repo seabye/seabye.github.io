@@ -241,8 +241,11 @@
                             if(!window.document.body.style[0]){
                                 window.document.body.removeAttribute('style');
                             }
-                        },350);
-                    },350);
+                            window.scroll({behavior:'smooth',left:0,top:0});
+                            window.document.documentElement.scrollIntoView({behavior:'smooth',block:'start',inline:'start'});
+                            window.document.body.scrollIntoView({behavior:'smooth',block:'start',inline:'start'});
+                        },350/2);
+                    },350/2);
                 }
             };
             set_media_orientation(window.matchMedia('(orientation:portrait)').matches);
