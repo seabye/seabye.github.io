@@ -301,6 +301,7 @@
                 }
             });
         },
+        /*🔴*/no$back(){},
         /*🔴*/no$touch$back(){},
         /*🔴*/partial$scroll(){},
         /*🟢*/dot$active(){
