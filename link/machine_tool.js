@@ -1299,6 +1299,7 @@
                     callback();
                 }
             },
+            /*🔴*/hls(){},
         // application programming interface
             /*🔴*/listen_port(){},
             /*🔴*/port_receive(uri,method,data,callback,other_data){
