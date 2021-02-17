@@ -279,13 +279,13 @@
                 return false;
             },1000/60);
         },
-        /*🟢*/hov(){
-            window.addEventListener('pointerdown',()=>{});
-        },
         /*🟢*/no$context$menu(){
             window.addEventListener('contextmenu',(event)=>{
                 event.preventDefault();
             });
+        },
+        /*🟢*/hov(){
+            window.addEventListener('pointerdown',()=>{});
         },
         /*🟢*/no$touchpad$zoom(){
             window.addEventListener('wheel',(event)=>{
@@ -302,6 +302,7 @@
             });
         },
         /*🔴*/no$touch$back(){},
+        /*🔴*/partial$scroll(){},
         /*🟢*/dot$active(){
             window.addEventListener('pointerdown',(event)=>{
                 event.target.classList.add('ic_active',`ic_active_${event.button}`);
@@ -318,8 +319,7 @@
                 window.addEventListener('touchend',remove,{once:true});
                 window.addEventListener('dragend',remove,{once:true});
             });
-        },
-        /*🔴*/partial$scroll(){}
+        }
     });
 // #debug
 // #after
