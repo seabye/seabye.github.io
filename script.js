@@ -21,12 +21,13 @@
                             <div style="transform: rotateY(-60deg);">
                                 <a href="//seabye.com">seabye.com</a>
                                 <div style="color: var(--ic_ve_color_black2);">
-                                    <span style="font-size: 50%;">gui_initial</span>
+                                    <span style="font-size: 61.8%;">gui_initial</span>
                                     <a href="//seabye.com/link/gui_initial.css">.css</a>
                                     <a href="//seabye.com/link/gui_initial.js">.js</a>
                                     <span style="font-size: 38.2%;">🟢90%</span>
                                     <div>
-                                        <a href="//seabye.com/link/machine_tool.js">machine_tool.js</a>
+                                        <span style="font-size: 61.8%;">machine_tool</span>
+                                        <a href="//seabye.com/link/machine_tool.js">.js</a>
                                         <span style="font-size: 38.2%;">🟠50%</span>
                                     </div>
                                 </div>
