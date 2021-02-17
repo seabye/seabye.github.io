@@ -39,6 +39,10 @@
                                 <a href="//w3daze.com">w3daze.com</a>
                                 <span style="font-size: 38.2%;">🔴10%</span>
                             </div>
+                            <div style="color: var(--ic_ve_color_black7); transform: rotateY(-15deg);">
+                                <a>_</a>
+                                <span style="font-size: 38.2%;">🔴40%</span>
+                            </div>
                             <div style="font-size: 125%; color: rgba(255,0,0,0.1875);">Hello, World!</div>
                             <div style="transform: rotateY(30deg);">
                                 <a href="//luojia.me">luojia.me</a>
