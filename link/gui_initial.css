@@ -76,7 +76,9 @@
             --ic_ve_color_background: #F9F9F9;
             --ic_ve_color_background2: #EDEDED;
             --ic_ve_color_foreground: #E1E1E1;
+            --ic_ve_color_foreground2: #D5D5D5;
             --ic_ve_color_highlight: #C9C9C9;
+            --ic_ve_color_highlight2: #BDBDBD;
             --ic_ve_color_red: #CC0000;
             --ic_ve_color_green: #00BB00;
             --ic_ve_color_blue: #0088FF;
@@ -132,7 +134,9 @@
             --ic_ve_color_background: #090909;
             --ic_ve_color_background2: #151515;
             --ic_ve_color_foreground: #212121;
+            --ic_ve_color_foreground2: #2D2D2D;
             --ic_ve_color_highlight: #393939;
+            --ic_ve_color_highlight2: #454545;
             --ic_ve_color_red: #CC0000;
             --ic_ve_color_green: #00BB00;
             --ic_ve_color_blue: #0088FF;
