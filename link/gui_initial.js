@@ -241,8 +241,8 @@
                             if(!window.document.body.style[0]){
                                 window.document.body.removeAttribute('style');
                             }
-                        },350/2);
-                    },350/2);
+                        },350);
+                    },350);
                 }
             };
             set_media_orientation(window.matchMedia('(orientation:portrait)').matches);
