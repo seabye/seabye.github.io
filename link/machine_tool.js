@@ -4,6 +4,7 @@
 // for Browser and Deno
 // machine_tool.js
 // ==== ==== ==== ====
+// script.js
 // import{machine_tool}from'machine_tool.js';
 // >>>> >>>> >>>> >>>>
 // #before

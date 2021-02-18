@@ -37,9 +37,9 @@
 // ~~~~ ~~~~ ~~~~ ~~~~
 // manifest.webmanifest
 // {
-//     "name": "...",
-//     "short_name": "...",
-//     "description": "...",
+//     "name": "~",
+//     "short_name": "~",
+//     "description": "~",
 //     "start_url": "/?pwa",
 //     "theme_color": "#000000",
 //     "background_color": "#000000",
