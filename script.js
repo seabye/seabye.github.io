@@ -20,6 +20,7 @@
                         <div style="font-size: calc(100vmax/25); transform: rotateX(-15deg); text-align: center; perspective: 50vw;">
                             <div style="transform: rotateY(-60deg);">
                                 <a href="//seabye.com">seabye.com</a>
+                                <span style="font-size: 38.2%;">🔴 0%</span>
                                 <div style="color: var(--ic_ve_color_black2);">
                                     <span style="font-size: 61.8%;">gui_initial</span>
                                     <a href="//seabye.com/link/gui_initial.css">.css</a>
@@ -28,6 +29,7 @@
                                     <div>
                                         <span style="font-size: 61.8%;">machine_tool</span>
                                         <a href="//seabye.com/link/machine_tool.js">.js</a>
+                                        <a href="//seabye.com/link/machine_tool_demo.js">_demo.js</a>
                                         <span style="font-size: 38.2%;">🟠 50%</span>
                                     </div>
                                 </div>

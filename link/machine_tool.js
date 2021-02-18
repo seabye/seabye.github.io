@@ -1074,6 +1074,9 @@
                         this.elements.push(new_element);
                         return new_element;
                     }
+                    hide(wait=350){
+
+                    }
                     remove(wait=350){
                         const delete_element=this.elements.pop();
                         delete_element.classList.add(`${this.group}_remove`);
