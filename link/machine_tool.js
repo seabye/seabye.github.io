@@ -1325,8 +1325,10 @@
 // #debug
     // machine_tool_
     machine_tool.local_test(()=>{
-        if(!import.meta.url.match(/_.js$/)){
-            machine_tool.import('./machine_tool_.js',(data)=>{
+        if(!import.meta.url.match('machine_tool_demo.js')){
+            window.machine_tool=machine_tool;
+            window.document.documentElement.classList.add('ic_dg');
+            machine_tool.import('./machine_tool_demo.js',(data)=>{
                 machine_tool.run_object(data._);
             });
         }

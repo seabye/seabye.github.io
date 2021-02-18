@@ -4,6 +4,7 @@
 // for Browser
 // gui_initial.js
 // ==== ==== ==== ====
+// index.html
 // <script src="gui_initial.js" type="application/javascript" data-gui_initial="{
 //     'background_color_light': '</""/=#FFFFFF>',
 //     'background_color_dark': '</""/=#000000>',
@@ -17,6 +18,72 @@
 //     'head_theme_color_dark': '</""/=#212121>',
 //     'head_manifest': 'manifest.webmanifest'
 // }"></script>
+// ~~~~ ~~~~ ~~~~ ~~~~
+// sw.js
+// 'use strict';
+// // #before
+//     // console
+//     self.console.log('#### start sw.js');
+// // #import
+// // #variable
+// // #method
+// // #build
+//     // service worker
+//     self.addEventListener('fetch',()=>{});
+// // #debug
+// // #after
+//     // console
+//     self.console.log('#### end sw.js');
+// ~~~~ ~~~~ ~~~~ ~~~~
+// manifest.webmanifest
+// {
+//     "name": "...",
+//     "short_name": "...",
+//     "description": "...",
+//     "start_url": "/?pwa",
+//     "theme_color": "#000000",
+//     "background_color": "#000000",
+//     "orientation": "natural",
+//     "display": "standalone",
+//     "icons": [
+//         {
+//             "src": "icon-144x144-any.png",
+//             "sizes": "144x144",
+//             "type": "image/png",
+//             "purpose": "any"
+//         },
+//         {
+//             "src": "icon-192x192-any.png",
+//             "sizes": "192x192",
+//             "type": "image/png",
+//             "purpose": "any"
+//         },
+//         {
+//             "src": "icon-512x512-any.png",
+//             "sizes": "512x512",
+//             "type": "image/png",
+//             "purpose": "any"
+//         },
+//         {
+//             "src": "icon-144x144-maskable.png",
+//             "sizes": "144x144",
+//             "type": "image/png",
+//             "purpose": "maskable"
+//         },
+//         {
+//             "src": "icon-192x192-maskable.png",
+//             "sizes": "192x192",
+//             "type": "image/png",
+//             "purpose": "maskable"
+//         },
+//         {
+//             "src": "icon-512x512-maskable.png",
+//             "sizes": "512x512",
+//             "type": "image/png",
+//             "purpose": "maskable"
+//         }
+//     ]
+// }
 // >>>> >>>> >>>> >>>>
 {
 // #before

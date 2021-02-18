@@ -62,8 +62,6 @@
         return false;
     },1000/60);
 // #debug
-    // ic_dg / ic_ debug
-    window.document.documentElement.classList.add('ic_dg');
 // #after
     // console
     window.console.log('#### end script.js');
