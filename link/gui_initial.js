@@ -201,55 +201,7 @@
             if(user_agent.match('Chrome')&&!user_agent.match('Edg')){class_.add('ic_nr_browser_chrome');}
             if(user_agent.match('Edg')){class_.add('ic_nr_browser_edge');}
             if(window.location.search.replace(/^\?/,'').split('&').includes('pwa')){
-                window.document.documentElement.classList.add('ic_nr_pwa');
-            }
-        },
-        /*🟢*/write$head(){
-            this.dataset.config.head_gui_initial_js.insertAdjacentHTML('beforebegin',`
-                <meta name="viewport" content="width=device-width,user-scalable=no,viewport-fit=cover">
-                <meta name="format-detection" content="address=no,email=no,telephone=no">
-            `);
-            if(this.dataset.config.head_title||this.dataset.config.head_title===''){
-                this.dataset.config.head_gui_initial_js.insertAdjacentHTML('beforebegin',`<title>${this.dataset.config.head_title}</title>`);
-            }
-            this.dataset.config.head_gui_initial_js.insertAdjacentHTML('beforebegin',`<link rel="stylesheet" href="${this.dataset.config.head_gui_initial_css_href}">`);
-            if(this.dataset.config.head_style){
-                this.dataset.config.head_gui_initial_js.insertAdjacentHTML('beforebegin',`<link rel="stylesheet" href="${this.dataset.config.head_style}">`);
-            }
-            if(this.dataset.config.head_script){
-                const element=window.document.createElement('script');
-                element.setAttribute('src',this.dataset.config.head_script);
-                element.setAttribute('type','module');
-                window.document.head.insertAdjacentElement('beforeend',element);
-            }
-            if(this.dataset.config.head_icon){
-                window.document.head.insertAdjacentHTML('beforeend',`<link rel="icon" type="image/png" href="${this.dataset.config.head_icon}">`);
-            }
-            if(window.navigator.userAgent.match('Safari')&&!window.navigator.userAgent.match('Chrome')&&!window.navigator.userAgent.match('Edg')){
-                if(this.dataset.config.head_icon_apple){
-                    window.document.head.insertAdjacentHTML('beforeend',`<link rel="apple-touch-icon" href="${this.dataset.config.head_icon_apple}">`);
-                }
-                window.document.head.insertAdjacentHTML('beforeend',`
-                    <meta name="apple-mobile-web-app-capable" content="yes">
-                    <meta name="apple-mobile-web-app-status-bar-style" content="white">
-                `);
-                if(this.dataset.config.head_title||this.dataset.config.head_title===''){
-                    window.document.head.insertAdjacentHTML('beforeend',`<meta name="apple-mobile-web-app-title" content="${this.dataset.config.head_title}">`);
-                }
-            }else{
-                const get_media_prefers_color_scheme=(matches)=>{
-                    return matches?this.dataset.config.head_theme_color_dark?this.dataset.config.head_theme_color_dark:'#212121':this.dataset.config.head_theme_color_light?this.dataset.config.head_theme_color_light:'#E1E1E1';
-                };
-                const element=window.document.createElement('meta');
-                element.setAttribute('name','theme-color');
-                element.setAttribute('content',get_media_prefers_color_scheme(window.matchMedia('(prefers-color-scheme:dark)').matches));
-                const theme_color=window.document.head.insertAdjacentElement('beforeend',element);
-                window.matchMedia('(prefers-color-scheme:dark)').addEventListener('change',(event)=>{
-                    theme_color.setAttribute('content',get_media_prefers_color_scheme(event.matches));
-                });
-            }
-            if(this.dataset.config.head_manifest){
-                window.document.head.insertAdjacentHTML('beforeend',`<link rel="manifest" href="${this.dataset.config.head_manifest}">`);
+                class_.add('ic_nr_pwa');
             }
         },
         /*🟢*/$navigator$media(){
@@ -332,6 +284,54 @@
             window.matchMedia('(display-mode:fullscreen)').addEventListener('change',(event)=>{
                 set_media_display_mode(event.matches);
             });
+        },
+        /*🟢*/write$head(){
+            this.dataset.config.head_gui_initial_js.insertAdjacentHTML('beforebegin',`
+                <meta name="viewport" content="width=device-width,user-scalable=no,viewport-fit=cover">
+                <meta name="format-detection" content="address=no,email=no,telephone=no">
+            `);
+            if(this.dataset.config.head_title||this.dataset.config.head_title===''){
+                this.dataset.config.head_gui_initial_js.insertAdjacentHTML('beforebegin',`<title>${this.dataset.config.head_title}</title>`);
+            }
+            this.dataset.config.head_gui_initial_js.insertAdjacentHTML('beforebegin',`<link rel="stylesheet" href="${this.dataset.config.head_gui_initial_css_href}">`);
+            if(this.dataset.config.head_style){
+                this.dataset.config.head_gui_initial_js.insertAdjacentHTML('beforebegin',`<link rel="stylesheet" href="${this.dataset.config.head_style}">`);
+            }
+            if(this.dataset.config.head_script){
+                const element=window.document.createElement('script');
+                element.setAttribute('src',this.dataset.config.head_script);
+                element.setAttribute('type','module');
+                window.document.head.insertAdjacentElement('beforeend',element);
+            }
+            if(this.dataset.config.head_icon){
+                window.document.head.insertAdjacentHTML('beforeend',`<link rel="icon" type="image/png" href="${this.dataset.config.head_icon}">`);
+            }
+            if(window.navigator.userAgent.match('Safari')&&!window.navigator.userAgent.match('Chrome')&&!window.navigator.userAgent.match('Edg')){
+                if(this.dataset.config.head_icon_apple){
+                    window.document.head.insertAdjacentHTML('beforeend',`<link rel="apple-touch-icon" href="${this.dataset.config.head_icon_apple}">`);
+                }
+                window.document.head.insertAdjacentHTML('beforeend',`
+                    <meta name="apple-mobile-web-app-capable" content="yes">
+                    <meta name="apple-mobile-web-app-status-bar-style" content="white">
+                `);
+                if(this.dataset.config.head_title||this.dataset.config.head_title===''){
+                    window.document.head.insertAdjacentHTML('beforeend',`<meta name="apple-mobile-web-app-title" content="${this.dataset.config.head_title}">`);
+                }
+            }else{
+                const get_media_prefers_color_scheme=(matches)=>{
+                    return matches?this.dataset.config.head_theme_color_dark?this.dataset.config.head_theme_color_dark:'#212121':this.dataset.config.head_theme_color_light?this.dataset.config.head_theme_color_light:'#E1E1E1';
+                };
+                const element=window.document.createElement('meta');
+                element.setAttribute('name','theme-color');
+                element.setAttribute('content',get_media_prefers_color_scheme(window.matchMedia('(prefers-color-scheme:dark)').matches));
+                const theme_color=window.document.head.insertAdjacentElement('beforeend',element);
+                window.matchMedia('(prefers-color-scheme:dark)').addEventListener('change',(event)=>{
+                    theme_color.setAttribute('content',get_media_prefers_color_scheme(event.matches));
+                });
+            }
+            if(this.dataset.config.head_manifest){
+                window.document.head.insertAdjacentHTML('beforeend',`<link rel="manifest" href="${this.dataset.config.head_manifest}">`);
+            }
         },
         /*🟢*/tab$index(){
             window.document.documentElement.setAttribute('tabindex','-1');

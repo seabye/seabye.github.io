@@ -982,9 +982,9 @@
                     }
                 }
             },
-            /*🟢*/element_recursion(child,element,group='group',group2){
-                if(!this.element_recursion.record){
-                    this.element_recursion.record=[];
+            /*🟢*/element_block(child,element,group='group',group2){
+                if(!this.element_block.record){
+                    this.element_block.record=[];
                 }
                 class template{
                     constructor(child,element,group,group2){
@@ -1020,9 +1020,9 @@
                             insert_position='afterend';
                             const last_element=(element)=>{
                                 if(element.nextElementSibling){
-                                    for(let i=0,l=machine_tool.element_recursion.record.length;i<l;i++){
-                                        for(let i_=0,l_=machine_tool.element_recursion.record[i].elements.length;i_<l_;i_++){
-                                            if(machine_tool.element_recursion.record[i].elements[i_]===element.nextElementSibling&&machine_tool.element_recursion.record.indexOf(this)<machine_tool.element_recursion.record.indexOf(machine_tool.element_recursion.record[i])){
+                                    for(let i=0,l=machine_tool.element_block.record.length;i<l;i++){
+                                        for(let i_=0,l_=machine_tool.element_block.record[i].elements.length;i_<l_;i_++){
+                                            if(machine_tool.element_block.record[i].elements[i_]===element.nextElementSibling&&machine_tool.element_block.record.indexOf(this)<machine_tool.element_block.record.indexOf(machine_tool.element_block.record[i])){
                                                 insert_element=element.nextElementSibling;
                                                 last_element(insert_element);
                                             }
@@ -1050,10 +1050,10 @@
                             attribute.class=`${attribute.class?`${attribute.class} `:''}${!this.elements[0]?this.group2?`${this.group}_first ${this.group2}_first `:`${this.group}_first `:''}${this.group}_last${this.group2?` ${this.group2}_last`:''}`;
                         }
                         if(this.group2){
-                            for(let i=0,l=machine_tool.element_recursion.record.length;i<l;i++){
-                                for(let i_=0,l_=machine_tool.element_recursion.record[i].elements.length;i_<l_;i_++){
-                                    if(machine_tool.element_recursion.record[i].elements[i_].classList.contains(`${this.group2}_last`)){
-                                        machine_tool.element_state(machine_tool.element_recursion.record[i].elements[i_],`${this.group2}_${this.prev2}`,`${this.group2}_last`,true);
+                            for(let i=0,l=machine_tool.element_block.record.length;i<l;i++){
+                                for(let i_=0,l_=machine_tool.element_block.record[i].elements.length;i_<l_;i_++){
+                                    if(machine_tool.element_block.record[i].elements[i_].classList.contains(`${this.group2}_last`)){
+                                        machine_tool.element_state(machine_tool.element_block.record[i].elements[i_],`${this.group2}_${this.prev2}`,`${this.group2}_last`,true);
                                     }
                                 }
                             }
@@ -1087,10 +1087,10 @@
                             if(this.group2){
                                 let last_match=null;
                                 const skip=[];
-                                for(let i=0,l=machine_tool.element_recursion.record.length;i<l;i++){
-                                    for(let i_=0,l_=machine_tool.element_recursion.record[i].elements.length;i_<l_;i_++){
-                                        if(machine_tool.element_recursion.record[i].elements[i_].classList.contains(`${this.group2}_${this.prev2}`)&&!skip.includes(machine_tool.element_recursion.record[i].elements[i_])){
-                                            last_match=machine_tool.element_recursion.record[i].elements[i_];
+                                for(let i=0,l=machine_tool.element_block.record.length;i<l;i++){
+                                    for(let i_=0,l_=machine_tool.element_block.record[i].elements.length;i_<l_;i_++){
+                                        if(machine_tool.element_block.record[i].elements[i_].classList.contains(`${this.group2}_${this.prev2}`)&&!skip.includes(machine_tool.element_block.record[i].elements[i_])){
+                                            last_match=machine_tool.element_block.record[i].elements[i_];
                                             skip.push(last_match);
                                         }
                                     }
@@ -1100,16 +1100,16 @@
                             machine_tool.element_state(this.elements[this.elements.length-1],`${this.group}_last`,`${this.group}_${this.prev}`,true);
                         },0);
                         if(!this.elements[0]){
-                            machine_tool.element_recursion.record.pop(this);
-                            if(!machine_tool.element_recursion.record[0]){
-                                delete machine_tool.element_recursion.record;
+                            machine_tool.element_block.record.pop(this);
+                            if(!machine_tool.element_block.record[0]){
+                                delete machine_tool.element_block.record;
                             }
                         }
                         return delete_element.previousElementSibling;
                     }
                 }
                 const result=new template(child,element,group,group2);
-                this.element_recursion.record.push(result);
+                this.element_block.record.push(result);
                 return result;
             },
             /*🟢*/find_outer(find,start,end=window.document.documentElement,true_callback,false_callback){
