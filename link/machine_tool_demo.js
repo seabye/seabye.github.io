@@ -1,7 +1,7 @@
 import{machine_tool}from'./machine_tool.js';
 export const _={
     _start(){
-        window.console.log('<<<< start machine_tool_.js');
+        window.console.log('<<<< start machine_tool_demo.js');
     },
     loop(){
         machine_tool.loop(()=>{
@@ -380,6 +380,6 @@ export const _={
         // window.history.replaceState(null,null,window.location.href);
     },
     _end(){
-        window.console.log('>>>> end machine_tool_.js');
+        window.console.log('>>>> end machine_tool_demo.js');
     }
 };
