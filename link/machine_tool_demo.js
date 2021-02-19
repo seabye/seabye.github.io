@@ -371,19 +371,18 @@ export const _={
             // window.console.log(er.remove);
         });
     },
-    async element_block(){
+    element_block(){
         const block=machine_tool.element_block(window.document.body,'block');
-        const block2=machine_tool.element_block(window.document.body,'block2');
-        await block.add(machine_tool.element_create('div',{class:'b_1'}),1);
-        await block.add(machine_tool.element_create('div',{class:'b_2'}),2);
-        await block.add(machine_tool.element_create('div',{class:'b_3'}));
-        await block.add(machine_tool.element_create('div',{class:'b_4'}));
-        await block.hide();
-        await block.hide();
-        await block.remove();
-        await block.remove();
-        await block2.add(machine_tool.element_create('div',{class:'b2_1'}),1);
-        await block2.add(machine_tool.element_create('div',{class:'b2_2'}),2);
+        block.add(machine_tool.element_create('div',{class:'b_1'}),1);
+        block.add(machine_tool.element_create('div',{class:'b_2'}),2);
+        block.add(machine_tool.element_create('div',{class:'b_3'}),3);
+        block.add(machine_tool.element_create('div',{class:'b_4'}),4);
+        block.add(machine_tool.element_create('div',{class:'b_5'}),5);
+        block.add(machine_tool.element_create('div',{class:'b_6'}),6);
+        block.hide();
+        block.hide();
+        block.remove();
+        block.remove();
     },
     listen_uri(){
         machine_tool.listen_uri('add',(data)=>{
