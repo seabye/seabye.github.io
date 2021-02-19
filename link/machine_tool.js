@@ -1165,7 +1165,7 @@
                                         }
                                         window.setTimeout(()=>{
                                             machine_tool.for(this.elements,(...data)=>{
-                                                if(data[1].classList.contains(`${this.group}_last`)&&this.elements.length>1){
+                                                if(data[1].classList.contains(`${this.group}_last`)&&data[1]!==element){
                                                     machine_tool.element_state(data[1],`${this.group}_prev`,`${this.group}_last`,true);
                                                 }
                                             },0);
@@ -1243,7 +1243,7 @@
                                 this.elements.splice(this.elements.indexOf(element),1);
                                 machine_tool.element_state(element,`${this.group}_remove`,'',true);
                                 window.setTimeout(()=>{
-                                    element.parentElement.removeChild(element);
+                                    element?.parentElement.removeChild(element);
                                 },wait);
                                 let last=null;
                                 machine_tool.for(this.elements,(...data)=>{
