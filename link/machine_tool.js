@@ -442,7 +442,7 @@
                         break;
                     default:
                         {
-                            return this.element_create('div');
+                            return this.element_create('div',argument[1],argument[2],argument[3],argument[4],argument[5]);
                         }
                         break;
                 }
