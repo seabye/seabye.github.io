@@ -746,7 +746,7 @@
                     if(two){
                         if(set_one){
                             if(one){
-                                // if(!contains(one)){
+                                if(!contains(one)){
                                     window.setTimeout(()=>{
                                         remove(two);
                                     },0);
@@ -754,7 +754,7 @@
                                         add(one);
                                         callback(element,one);
                                     },next_wait);
-                                // }
+                                }
                             }else{
                                 if(one===null){
                                     window.setTimeout(()=>{
@@ -1155,9 +1155,6 @@
                                             element.machine_tool.element_block={};
                                             element.machine_tool.element_block.add={};
                                             element.machine_tool.element_block.add.mark=mark;
-                                        }
-                                        if(!this.elements[0]){
-                                            machine_tool.element_state(element,`${this.group}_first`,'',true);
                                         }
                                         if(!mark_state){
                                             this.elements.push(element);

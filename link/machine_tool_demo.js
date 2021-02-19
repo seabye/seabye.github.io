@@ -373,28 +373,20 @@ export const _={
     },
     async element_block(){
         const block=machine_tool.element_block(window.document.body,'block');
-        await block.add(machine_tool.element_create('div',{class:'block_a'}),0);
-        await block.add(machine_tool.element_create('div',{class:'block_b'}),1);
-        await block.add(machine_tool.element_create('div',{class:'block_c'}),2);
-        await block.add(machine_tool.element_create('div',{class:'block_d'}),3);
-        await block.add(machine_tool.element_create('div',{class:'block_e'}),4);
-        await block.add(machine_tool.element_create('div',{class:'block_f'}),5);
+        await block.add(machine_tool.element_create('div',{class:'block_1'}),1);
+        await block.add(machine_tool.element_create('div',{class:'block_2'}),2);
+        await block.add(machine_tool.element_create('div',{class:'block_3'}),3);
+        await block.add(machine_tool.element_create('div',{class:'block_4'}),4);
         await block.remove();
         await block.remove();
         await block.hide();
         await block.hide();
-        await block.add(machine_tool.element_create('div',{class:'block_g'}),6);
-        await block.add(machine_tool.element_create('div',{class:'block_h'}),7);
-        await block.remove();
+        await block.add(machine_tool.element_create('div',{class:'block_5'}),5);
+        await block.add(machine_tool.element_create('div',{class:'block_6'}),6);
         // await block.remove();
-        await block.hide();
+        // await block.remove();
         // await block.hide();
-        await block.add(machine_tool.element_create('div',{class:'block_i'}),8);
-        // await block.remove();
-        await block.hide();
-        await block.add(machine_tool.element_create('div',{class:'block_i'}),8);
-        await block.add(machine_tool.element_create('div',{class:'block_d'}),3);
-        await block.add(machine_tool.element_create('div',{class:'block_j'}),9);
+        // await block.hide();
     },
     listen_uri(){
         machine_tool.listen_uri('add',(data)=>{
