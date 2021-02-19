@@ -1169,7 +1169,7 @@
                                                 }
                                             },0);
                                         },0);
-                                            machine_tool.element_state(element,`${this.group}_last`,`${this.group}_hide`,true);
+                                        machine_tool.element_state(element,`${this.group}_last`,`${this.group}_hide`,true);
                                         if(!mark_state){
                                             this.element.insertAdjacentElement('beforeend',element);
                                         }
@@ -1191,36 +1191,42 @@
                         }
                         hide(wait=350){
                             return new window.Promise((resolve)=>{
-                                this.hide_lock=true;
-                                let element=null;
-                                machine_tool.for(this.elements,(...data)=>{
-                                    if(!data[1].classList.contains(`${this.group}_hide`)&&!data[1].classList.contains(`${this.group}_remove`)){
-                                        element=data[1];
-                                    }
-                                },0);
-                                machine_tool.element_state(element,`${this.group}_remove`,'',true);
-                                window.setTimeout(()=>{
-                                    machine_tool.element_state(element,`${this.group}_hide`,`${this.group}_prev ${this.group}_last ${this.group}_add ${this.group}_remove`,true);
-                                    this.hide_lock=false;
-                                },wait);
-                                let last=null;
-                                machine_tool.for(this.elements,(...data)=>{
-                                    if(!data[1].classList.contains(`${this.group}_hide`)&&!data[1].classList.contains(`${this.group}_remove`)&&data[1]!==element){
-                                        last=data[1];
-                                    }
-                                },0);
-                                if(last){
-                                    machine_tool.element_state(last,`${this.group}_last`,`${this.group}_prev`,true);
-                                    machine_tool.loop(()=>{
-                                        if(last.classList.contains(`${this.group}_last`)){
-                                            resolve(last);
-                                            return true;
+                                machine_tool.loop(()=>{
+                                    if(!this.hide_lock){
+                                        this.hide_lock=true;
+                                        let element=null;
+                                        machine_tool.for(this.elements,(...data)=>{
+                                            if(!data[1].classList.contains(`${this.group}_hide`)&&!data[1].classList.contains(`${this.group}_remove`)){
+                                                element=data[1];
+                                            }
+                                        },0);
+                                        machine_tool.element_state(element,`${this.group}_remove`,'',true);
+                                        window.setTimeout(()=>{
+                                            machine_tool.element_state(element,`${this.group}_hide`,`${this.group}_prev ${this.group}_last ${this.group}_add ${this.group}_remove`,true);
+                                            this.hide_lock=false;
+                                        },wait);
+                                        let last=null;
+                                        machine_tool.for(this.elements,(...data)=>{
+                                            if(!data[1].classList.contains(`${this.group}_hide`)&&!data[1].classList.contains(`${this.group}_remove`)&&data[1]!==element){
+                                                last=data[1];
+                                            }
+                                        },0);
+                                        if(last){
+                                            machine_tool.element_state(last,`${this.group}_last`,`${this.group}_prev`,true);
+                                            machine_tool.loop(()=>{
+                                                if(last.classList.contains(`${this.group}_last`)){
+                                                    resolve(last);
+                                                    return true;
+                                                }
+                                                return false;
+                                            });
+                                        }else{
+                                            resolve(null);
                                         }
-                                        return false;
-                                    });
-                                }else{
-                                    resolve(null);
-                                }
+                                        return true;
+                                    }
+                                    return false;
+                                });
                             });
                         }
                         remove(wait=350){
