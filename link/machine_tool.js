@@ -697,20 +697,20 @@
                 if(argument[0]instanceof window.HTMLElement){
                     // base mode
                     //     element<element>,
-                    //     one<string/'class class2...'/,undefined=''>,
+                    //     one<string/'class class2...'/,null,undefined=''>,
                     //     two<string/'class class2...'/,undefined=''>,
                     //     set_one<boolean,undefined=false>,
                     //     next_wait<number,undefined=0>,
                     //     callback<function(element,/one,two,''/),undefined=()=>{}>
                     // flash mode
-                    //     (element<>,'',two<>,true,wait<>,callback<>)
+                    //     (element<>,null,two<>,true,wait<>,callback<>)
                     const element=argument[0];
                     let one=argument[1];
                     let two=argument[2];
                     let set_one=argument[3];
                     let next_wait=argument[4];
                     let callback=argument[5];
-                    if(!one){
+                    if(!one&&one!==null){
                         one='';
                     }
                     if(!two){
@@ -746,7 +746,7 @@
                     if(two){
                         if(set_one){
                             if(one){
-                                if(!contains(one)){
+                                // if(!contains(one)){
                                     window.setTimeout(()=>{
                                         remove(two);
                                     },0);
@@ -754,15 +754,24 @@
                                         add(one);
                                         callback(element,one);
                                     },next_wait);
-                                }
+                                // }
                             }else{
-                                window.setTimeout(()=>{
-                                    add(two);
-                                },0);
-                                window.setTimeout(()=>{
-                                    remove(two);
-                                    callback(element,'');
-                                },next_wait);
+                                if(one===null){
+                                    window.setTimeout(()=>{
+                                        add(two);
+                                    },0);
+                                    window.setTimeout(()=>{
+                                        remove(two);
+                                        callback(element,'');
+                                    },next_wait);
+                                }else{
+                                    window.setTimeout(()=>{
+                                        remove(two);
+                                    },0);
+                                    window.setTimeout(()=>{
+                                        callback(element,'');
+                                    },next_wait);
+                                }
                             }
                         }else{
                             if(contains(one)){
@@ -785,8 +794,10 @@
                                 }else{
                                     window.setTimeout(()=>{
                                         add(one);
-                                        callback(element,one);
                                     },0);
+                                    window.setTimeout(()=>{
+                                        callback(element,one);
+                                    },next_wait);
                                 }
                             }
                         }
@@ -795,20 +806,26 @@
                             if(!contains(one)){
                                 window.setTimeout(()=>{
                                     add(one);
-                                    callback(element,one);
                                 },0);
+                                window.setTimeout(()=>{
+                                    callback(element,one);
+                                },next_wait);
                             }
                         }else{
                             if(contains(one)){
                                 window.setTimeout(()=>{
                                     remove(one);
-                                    callback(element,'');
                                 },0);
+                                window.setTimeout(()=>{
+                                    callback(element,'');
+                                },next_wait);
                             }else{
                                 window.setTimeout(()=>{
                                     add(one);
-                                    callback(element,one);
                                 },0);
+                                window.setTimeout(()=>{
+                                    callback(element,one);
+                                },next_wait);
                             }
                         }
                     }
@@ -982,136 +999,272 @@
                     }
                 }
             },
-            /*🟢*/element_block(child,element,group='group',group2){
-                if(!this.element_block.record){
-                    this.element_block.record=[];
-                }
-                class template{
-                    constructor(child,element,group,group2){
-                        this.child=child;
-                        this.element=element;
-                        this.group=group;
-                        this.group2=group2;
-                        this.prev='prev';
-                        this.prev2='prev';
-                        this.elements=[];
-                        if(!child){
-                            this.elements.push(element);
-                            element.classList.add(`${group}_first`,`${group}_last`);
-                            if(group2){
-                                element.classList.add(`${group2}_first`,`${group2}_last`);
-                            }
-                            window.setTimeout(()=>{
-                                element.classList.add(`${group}_add`);
+            /*🟢*/element_block_(child,element,group='group',group2){
+                if(!this.element_block_.record){
+                    this.element_block_.record=[];
+                    this.element_block_.template=class template{
+                        constructor(child,element,group,group2){
+                            this.child=child;
+                            this.element=element;
+                            this.group=group;
+                            this.group2=group2;
+                            this.prev='prev';
+                            this.prev2='prev';
+                            this.elements=[];
+                            if(!child){
+                                this.elements.push(element);
+                                element.classList.add(`${group}_first`,`${group}_last`);
                                 if(group2){
-                                    element.classList.add(`${group2}_add`);
+                                    element.classList.add(`${group2}_first`,`${group2}_last`);
                                 }
-                            },1000/24);
+                                window.setTimeout(()=>{
+                                    element.classList.add(`${group}_add`);
+                                    if(group2){
+                                        element.classList.add(`${group2}_add`);
+                                    }
+                                },1000/24);
+                            }
                         }
-                    }
-                    add(tag='div',attribute={},content,callback){
-                        let insert_element=null;
-                        let insert_position=null;
-                        if(!this.elements[0]){
-                            insert_element=this.element;
-                            insert_position='beforeend';
-                        }else{
-                            insert_element=this.elements[this.elements.length-1];
-                            insert_position='afterend';
-                            const last_element=(element)=>{
-                                if(element.nextElementSibling){
-                                    for(let i=0,l=machine_tool.element_block.record.length;i<l;i++){
-                                        for(let i_=0,l_=machine_tool.element_block.record[i].elements.length;i_<l_;i_++){
-                                            if(machine_tool.element_block.record[i].elements[i_]===element.nextElementSibling&&machine_tool.element_block.record.indexOf(this)<machine_tool.element_block.record.indexOf(machine_tool.element_block.record[i])){
-                                                insert_element=element.nextElementSibling;
-                                                last_element(insert_element);
+                        add(tag='div',attribute={},content,callback){
+                            let insert_element=null;
+                            let insert_position=null;
+                            if(!this.elements[0]){
+                                insert_element=this.element;
+                                insert_position='beforeend';
+                            }else{
+                                insert_element=this.elements[this.elements.length-1];
+                                insert_position='afterend';
+                                const last_element=(element)=>{
+                                    if(element.nextElementSibling){
+                                        for(let i=0,l=machine_tool.element_block_.record.length;i<l;i++){
+                                            for(let i_=0,l_=machine_tool.element_block_.record[i].elements.length;i_<l_;i_++){
+                                                if(machine_tool.element_block_.record[i].elements[i_]===element.nextElementSibling&&machine_tool.element_block_.record.indexOf(this)<machine_tool.element_block_.record.indexOf(machine_tool.element_block_.record[i])){
+                                                    insert_element=element.nextElementSibling;
+                                                    last_element(insert_element);
+                                                }
                                             }
                                         }
                                     }
-                                }
-                            };
-                            last_element(insert_element);
-                        }
-                        for(let i=0,l=this.elements.length;i<l;i++){
-                            machine_tool.element_state(this.elements[i],`${this.group}_${this.prev}${this.group2?` ${this.group2}_${this.prev2}`:''}`,`${this.group}_last${this.group2?` ${this.group2}_last`:''}`,true);
-                        }
-                        if(tag instanceof window.HTMLElement){
-                            if(!this.elements[0]){
-                                tag.classList.add(`${this.group}_first`);
-                                if(this.group2){
-                                    tag.classList.add(`${this.group2}_first`);
-                                }
+                                };
+                                last_element(insert_element);
                             }
-                            tag.classList.add(`${this.group}_last`);
-                            if(this.group2){
-                                tag.classList.add(`${this.group2}_last`);
+                            for(let i=0,l=this.elements.length;i<l;i++){
+                                machine_tool.element_state(this.elements[i],`${this.group}_${this.prev}${this.group2?` ${this.group2}_${this.prev2}`:''}`,`${this.group}_last${this.group2?` ${this.group2}_last`:''}`,true);
                             }
-                        }else{
-                            attribute.class=`${attribute.class?`${attribute.class} `:''}${!this.elements[0]?this.group2?`${this.group}_first ${this.group2}_first `:`${this.group}_first `:''}${this.group}_last${this.group2?` ${this.group2}_last`:''}`;
-                        }
-                        if(this.group2){
-                            for(let i=0,l=machine_tool.element_block.record.length;i<l;i++){
-                                for(let i_=0,l_=machine_tool.element_block.record[i].elements.length;i_<l_;i_++){
-                                    if(machine_tool.element_block.record[i].elements[i_].classList.contains(`${this.group2}_last`)){
-                                        machine_tool.element_state(machine_tool.element_block.record[i].elements[i_],`${this.group2}_${this.prev2}`,`${this.group2}_last`,true);
+                            if(tag instanceof window.HTMLElement){
+                                if(!this.elements[0]){
+                                    tag.classList.add(`${this.group}_first`);
+                                    if(this.group2){
+                                        tag.classList.add(`${this.group2}_first`);
                                     }
                                 }
+                                tag.classList.add(`${this.group}_last`);
+                                if(this.group2){
+                                    tag.classList.add(`${this.group2}_last`);
+                                }
+                            }else{
+                                attribute.class=`${attribute.class?`${attribute.class} `:''}${!this.elements[0]?this.group2?`${this.group}_first ${this.group2}_first `:`${this.group}_first `:''}${this.group}_last${this.group2?` ${this.group2}_last`:''}`;
                             }
-                        }
-                        let new_element=null;
-                        if(tag instanceof window.HTMLElement){
-                            new_element=tag;
-                            insert_element.insertAdjacentElement(insert_position,new_element);
-                        }else{
-                            new_element=machine_tool.element_create(tag,attribute,insert_element,insert_position,content,callback);
-                        }
-                        window.setTimeout(()=>{
-                            new_element.classList.add(`${this.group}_add`);
                             if(this.group2){
-                                new_element.classList.add(`${this.group2}_add`);
-                            }
-                        },1000/24);
-                        this.elements.push(new_element);
-                        return new_element;
-                    }
-                    hide(wait=350){
-
-                    }
-                    remove(wait=350){
-                        const delete_element=this.elements.pop();
-                        delete_element.classList.add(`${this.group}_remove`);
-                        if(this.group2){
-                            delete_element.classList.add(`${this.group2}_remove`);
-                        }
-                        window.setTimeout(()=>{
-                            delete_element.parentElement.removeChild(delete_element);
-                        },wait);
-                        window.setTimeout(()=>{
-                            if(this.group2){
-                                let last_match=null;
-                                const skip=[];
-                                for(let i=0,l=machine_tool.element_block.record.length;i<l;i++){
-                                    for(let i_=0,l_=machine_tool.element_block.record[i].elements.length;i_<l_;i_++){
-                                        if(machine_tool.element_block.record[i].elements[i_].classList.contains(`${this.group2}_${this.prev2}`)&&!skip.includes(machine_tool.element_block.record[i].elements[i_])){
-                                            last_match=machine_tool.element_block.record[i].elements[i_];
-                                            skip.push(last_match);
+                                for(let i=0,l=machine_tool.element_block_.record.length;i<l;i++){
+                                    for(let i_=0,l_=machine_tool.element_block_.record[i].elements.length;i_<l_;i_++){
+                                        if(machine_tool.element_block_.record[i].elements[i_].classList.contains(`${this.group2}_last`)){
+                                            machine_tool.element_state(machine_tool.element_block_.record[i].elements[i_],`${this.group2}_${this.prev2}`,`${this.group2}_last`,true);
                                         }
                                     }
                                 }
-                                machine_tool.element_state(last_match,`${this.group2}_last`,`${this.group2}_${this.prev2}`,true);
                             }
-                            machine_tool.element_state(this.elements[this.elements.length-1],`${this.group}_last`,`${this.group}_${this.prev}`,true);
-                        },0);
-                        if(!this.elements[0]){
-                            machine_tool.element_block.record.pop(this);
-                            if(!machine_tool.element_block.record[0]){
-                                delete machine_tool.element_block.record;
+                            let new_element=null;
+                            if(tag instanceof window.HTMLElement){
+                                new_element=tag;
+                                insert_element.insertAdjacentElement(insert_position,new_element);
+                            }else{
+                                new_element=machine_tool.element_create(tag,attribute,insert_element,insert_position,content,callback);
                             }
+                            window.setTimeout(()=>{
+                                new_element.classList.add(`${this.group}_add`);
+                                if(this.group2){
+                                    new_element.classList.add(`${this.group2}_add`);
+                                }
+                            },1000/24);
+                            this.elements.push(new_element);
+                            return new_element;
                         }
-                        return delete_element.previousElementSibling;
+                        remove(wait=350){
+                            const delete_element=this.elements.pop();
+                            delete_element.classList.add(`${this.group}_remove`);
+                            if(this.group2){
+                                delete_element.classList.add(`${this.group2}_remove`);
+                            }
+                            window.setTimeout(()=>{
+                                delete_element.parentElement.removeChild(delete_element);
+                            },wait);
+                            window.setTimeout(()=>{
+                                if(this.group2){
+                                    let last_match=null;
+                                    const skip=[];
+                                    for(let i=0,l=machine_tool.element_block_.record.length;i<l;i++){
+                                        for(let i_=0,l_=machine_tool.element_block_.record[i].elements.length;i_<l_;i_++){
+                                            if(machine_tool.element_block_.record[i].elements[i_].classList.contains(`${this.group2}_${this.prev2}`)&&!skip.includes(machine_tool.element_block_.record[i].elements[i_])){
+                                                last_match=machine_tool.element_block_.record[i].elements[i_];
+                                                skip.push(last_match);
+                                            }
+                                        }
+                                    }
+                                    machine_tool.element_state(last_match,`${this.group2}_last`,`${this.group2}_${this.prev2}`,true);
+                                }
+                                machine_tool.element_state(this.elements[this.elements.length-1],`${this.group}_last`,`${this.group}_${this.prev}`,true);
+                            },0);
+                            if(!this.elements[0]){
+                                machine_tool.element_block_.record.pop(this);
+                                if(!machine_tool.element_block_.record[0]){
+                                    delete machine_tool.element_block_.record;
+                                }
+                            }
+                            return delete_element.previousElementSibling;
+                        }
                     }
                 }
-                const result=new template(child,element,group,group2);
+                const result=new this.element_block_.template(child,element,group,group2);
+                this.element_block_.record.push(result);
+                return result;
+            },
+            /*🟢*/element_block(element,group='group'){
+                if(!this.element_block.record){
+                    this.element_block.record=[];
+                    this.element_block.template=class template{
+                        constructor(element,group){
+                            this.element=element;
+                            this.group=group;
+                            this.elements=[];
+                            this.hide_lock=false;
+                        }
+                        add(element,mark){
+                            return new window.Promise((resolve)=>{
+                                machine_tool.loop(()=>{
+                                    if(!this.hide_lock){
+                                        let mark_state=false;
+                                        machine_tool.for(this.elements,(...data)=>{
+                                            if(data[1].machine_tool.element_block.add.mark===mark){
+                                                mark_state=true;
+                                                element=data[1];
+                                            }
+                                        },0);
+                                        if(!mark_state){
+                                            element.machine_tool={};
+                                            element.machine_tool.element_block={};
+                                            element.machine_tool.element_block.add={};
+                                            element.machine_tool.element_block.add.mark=mark;
+                                        }
+                                        if(!this.elements[0]){
+                                            machine_tool.element_state(element,`${this.group}_first`,'',true);
+                                        }
+                                        if(!mark_state){
+                                            this.elements.push(element);
+                                        }
+                                        window.setTimeout(()=>{
+                                            machine_tool.for(this.elements,(...data)=>{
+                                                if(data[1].classList.contains(`${this.group}_last`)&&this.elements.length>1){
+                                                    machine_tool.element_state(data[1],`${this.group}_prev`,`${this.group}_last`,true);
+                                                }
+                                            },0);
+                                        },0);
+                                            machine_tool.element_state(element,`${this.group}_last`,`${this.group}_hide`,true);
+                                        if(!mark_state){
+                                            this.element.insertAdjacentElement('beforeend',element);
+                                        }
+                                        window.setTimeout(()=>{
+                                            machine_tool.element_state(element,`${this.group}_add`,'',true);
+                                        },1000/24);
+                                        machine_tool.loop(()=>{
+                                            if(element.classList.contains(`${this.group}_add`)){
+                                                resolve(element);
+                                                return true;
+                                            }
+                                            return false;
+                                        });
+                                        return true;
+                                    }
+                                    return false;
+                                });
+                            });
+                        }
+                        hide(wait=350){
+                            return new window.Promise((resolve)=>{
+                                this.hide_lock=true;
+                                let element=null;
+                                machine_tool.for(this.elements,(...data)=>{
+                                    if(!data[1].classList.contains(`${this.group}_hide`)&&!data[1].classList.contains(`${this.group}_remove`)){
+                                        element=data[1];
+                                    }
+                                },0);
+                                machine_tool.element_state(element,`${this.group}_remove`,'',true);
+                                window.setTimeout(()=>{
+                                    machine_tool.element_state(element,`${this.group}_hide`,`${this.group}_prev ${this.group}_last ${this.group}_add ${this.group}_remove`,true);
+                                    this.hide_lock=false;
+                                },wait);
+                                let last=null;
+                                machine_tool.for(this.elements,(...data)=>{
+                                    if(!data[1].classList.contains(`${this.group}_hide`)&&!data[1].classList.contains(`${this.group}_remove`)&&data[1]!==element){
+                                        last=data[1];
+                                    }
+                                },0);
+                                if(last){
+                                    machine_tool.element_state(last,`${this.group}_last`,`${this.group}_prev`,true);
+                                    machine_tool.loop(()=>{
+                                        if(last.classList.contains(`${this.group}_last`)){
+                                            resolve(last);
+                                            return true;
+                                        }
+                                        return false;
+                                    });
+                                }else{
+                                    resolve(null);
+                                }
+                            });
+                        }
+                        remove(wait=350){
+                            return new window.Promise((resolve)=>{
+                                let element=null;
+                                machine_tool.for(this.elements,(...data)=>{
+                                    if(!data[1].classList.contains(`${this.group}_hide`)&&!data[1].classList.contains(`${this.group}_remove`)){
+                                        element=data[1];
+                                    }
+                                },0);
+                                this.elements.splice(this.elements.indexOf(element),1);
+                                machine_tool.element_state(element,`${this.group}_remove`,'',true);
+                                window.setTimeout(()=>{
+                                    element.parentElement.removeChild(element);
+                                },wait);
+                                let last=null;
+                                machine_tool.for(this.elements,(...data)=>{
+                                    if(!data[1].classList.contains(`${this.group}_hide`)&&!data[1].classList.contains(`${this.group}_remove`)&&data[1]!==element){
+                                        last=data[1];
+                                    }
+                                },0);
+                                if(last){
+                                    machine_tool.element_state(last,`${this.group}_last`,`${this.group}_prev`,true);
+                                    machine_tool.loop(()=>{
+                                        if(last.classList.contains(`${this.group}_last`)){
+                                            resolve(last);
+                                            return true;
+                                        }
+                                        return false;
+                                    });
+                                }else{
+                                    resolve(null);
+                                }
+                                if(!this.elements[0]){
+                                    machine_tool.element_block.record.pop(this);
+                                    if(!machine_tool.element_block.record[0]){
+                                        delete machine_tool.element_block.record;
+                                    }
+                                }
+                            });
+                        }
+                    }
+                }
+                const result=new this.element_block.template(element,group);
                 this.element_block.record.push(result);
                 return result;
             },
@@ -1158,55 +1311,57 @@
                 return window.location.href.replace(window.location.origin,'');
             },
             /*🟠*/listen_uri(action,callback){
+                if(!this.listen_uri.template){
+                    this.listen_uri.template=class template{
+                        constructor(callback){
+                            if(window.history.pushState.name){
+                                window.history.pushState=machine_tool.observe_function(window.history.pushState,'pushState',undefined,window,(...argument)=>{
+                                    return argument[2];
+                                });
+                            }
+                            if(window.history.replaceState.name){
+                                window.history.replaceState=machine_tool.observe_function(window.history.replaceState,'replaceState',undefined,window,(...argument)=>{
+                                    return argument[2];
+                                });
+                            }
+                            this.callback=callback;
+                        }
+                        _popstate=(data)=>{
+                            this.callback({
+                                type:data.type,
+                                path:machine_tool.uri_path()
+                            });
+                        }
+                        _pushState=(data)=>{
+                            this.callback({
+                                type:data.type,
+                                path:data.pushState.replace()
+                            });
+                        }
+                        _replaceState=(data)=>{
+                            this.callback({
+                                type:data.type,
+                                path:data.replaceState.replace()
+                            });
+                        }
+                        add(){
+                            window.addEventListener('popstate',this._popstate);
+                            window.addEventListener('pushState',this._pushState);
+                            window.addEventListener('replaceState',this._replaceState);
+                        }
+                        remove(){
+                            window.removeEventListener('popstate',this._popstate);
+                            window.removeEventListener('pushState',this._pushState);
+                            window.removeEventListener('replaceState',this._replaceState);
+                        }
+                    }
+                }
                 const id='id_'+this.java_string_hash_code(callback.toString().replace(/[\r\n\s]/g,'')).toString().replace(/[^0-9]/g,'');
                 switch(action){
                     case'add':
                         {
                             if(!this.listen_uri[id]){
-                                class template{
-                                    constructor(callback){
-                                        if(window.history.pushState.name){
-                                            window.history.pushState=machine_tool.observe_function(window.history.pushState,'pushState',undefined,window,(...argument)=>{
-                                                return argument[2];
-                                            });
-                                        }
-                                        if(window.history.replaceState.name){
-                                            window.history.replaceState=machine_tool.observe_function(window.history.replaceState,'replaceState',undefined,window,(...argument)=>{
-                                                return argument[2];
-                                            });
-                                        }
-                                        this.callback=callback;
-                                    }
-                                    _popstate=(data)=>{
-                                        this.callback({
-                                            type:data.type,
-                                            path:machine_tool.uri_path()
-                                        });
-                                    }
-                                    _pushState=(data)=>{
-                                        this.callback({
-                                            type:data.type,
-                                            path:data.pushState.replace()
-                                        });
-                                    }
-                                    _replaceState=(data)=>{
-                                        this.callback({
-                                            type:data.type,
-                                            path:data.replaceState.replace()
-                                        });
-                                    }
-                                    add(){
-                                        window.addEventListener('popstate',this._popstate);
-                                        window.addEventListener('pushState',this._pushState);
-                                        window.addEventListener('replaceState',this._replaceState);
-                                    }
-                                    remove(){
-                                        window.removeEventListener('popstate',this._popstate);
-                                        window.removeEventListener('pushState',this._pushState);
-                                        window.removeEventListener('replaceState',this._replaceState);
-                                    }
-                                }
-                                this.listen_uri[id]=new template(callback);
+                                this.listen_uri[id]=new this.listen_uri.template(callback);
                                 // this.listen_uri[id].count=0;
                                 this.listen_uri[id].add();
                             }
