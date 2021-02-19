@@ -385,7 +385,7 @@ export const _={
         await block.add(machine_tool.element_create('div',{class:'block_6'}));
         await block.add(machine_tool.element_create('div',{class:'block_7'}),7);
         await block.hide();
-        // await block.add(machine_tool.element_create('div',{class:'block_7'}),7);
+        await block.add(machine_tool.element_create('div',{class:'block_7'}),7);
     },
     listen_uri(){
         machine_tool.listen_uri('add',(data)=>{

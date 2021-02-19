@@ -64,35 +64,37 @@
                     return result;
                 }
             },
-            /*🟢*/async aw_loop(condition,callback,wait=1000/24,count,count_callback){
-                const run=async()=>{
-                    const condition_result=await condition();
-                    if(condition_result){
-                        if(callback){
-                            return callback(condition_result);
+            /*🟢*/aw_loop(condition,callback,wait=1000/24,count,count_callback){
+                return(async()=>{
+                    const run=async()=>{
+                        const condition_result=await condition();
+                        if(condition_result){
+                            if(callback){
+                                return callback(condition_result);
+                            }else{
+                                return condition_result;
+                            }
                         }else{
-                            return condition_result;
+                            return new window.Promise((resolve)=>{
+                                window.setTimeout(()=>{
+                                    resolve(this.aw_loop(condition,callback,wait,count,count_callback));
+                                },wait);
+                            });
+                        }
+                    };
+                    if(typeof count==='number'){
+                        if(count!==0){
+                            count-=1;
+                            return await run();
+                        }else{
+                            if(count_callback){
+                                return count_callback();
+                            }
                         }
                     }else{
-                        return new window.Promise((resolve)=>{
-                            window.setTimeout(()=>{
-                                resolve(this.aw_loop(condition,callback,wait,count,count_callback));
-                            },wait);
-                        });
-                    }
-                };
-                if(typeof count==='number'){
-                    if(count!==0){
-                        count-=1;
                         return await run();
-                    }else{
-                        if(count_callback){
-                            return count_callback();
-                        }
                     }
-                }else{
-                    return await run();
-                }
+                })();
             },
             /*🟢*/time_out(callback,wait=1000/24){
                 return new window.Promise((resolve)=>{
