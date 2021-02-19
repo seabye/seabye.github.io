@@ -1144,13 +1144,15 @@
                                 machine_tool.loop(()=>{
                                     if(!this.hide_lock){
                                         let mark_state=false;
-                                        machine_tool.for(this.elements,(...data)=>{
-                                            if(data[1].machine_tool.element_block.add.mark===mark){
-                                                mark_state=true;
-                                                element=data[1];
-                                            }
-                                        },0);
-                                        if(!mark_state){
+                                        if(mark){
+                                            machine_tool.for(this.elements,(...data)=>{
+                                                if(data[1].machine_tool.element_block.add.mark===mark){
+                                                    mark_state=true;
+                                                    element=data[1];
+                                                }
+                                            },0);
+                                        }
+                                        if(mark&&!mark_state){
                                             element.machine_tool={};
                                             element.machine_tool.element_block={};
                                             element.machine_tool.element_block.add={};
