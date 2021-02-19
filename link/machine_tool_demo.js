@@ -373,19 +373,24 @@ export const _={
     },
     async element_block(){
         const block=machine_tool.element_block(window.document.body,'block');
-        await block.add(machine_tool.element_create('div',{class:'block_1'}),1);
-        await block.add(machine_tool.element_create('div',{class:'block_2'}),2);
-        await block.add(machine_tool.element_create('div',{class:'block_3'}));
-        await block.add(machine_tool.element_create('div',{class:'block_4'}));
+        const block2=machine_tool.element_block(window.document.body,'block2');
+        await block.add(machine_tool.element_create('div',{class:'b_1'}),1);
+        await block.add(machine_tool.element_create('div',{class:'b_2'}),2);
+        await block2.add(machine_tool.element_create('div',{class:'b2_1'}),1);
+        await block2.add(machine_tool.element_create('div',{class:'b2_2'}),2);
+        await block.add(machine_tool.element_create('div',{class:'b_3'}));
+        await block.add(machine_tool.element_create('div',{class:'b_4'}));
         await block.remove();
         await block.remove();
         await block.hide();
         await block.hide();
-        await block.add(machine_tool.element_create('div',{class:'block_5'}));
-        await block.add(machine_tool.element_create('div',{class:'block_6'}));
-        await block.add(machine_tool.element_create('div',{class:'block_7'}),7);
+        await block.add(machine_tool.element_create('div',{class:'b_5'}));
+        await block.add(machine_tool.element_create('div',{class:'b_6'}));
+        await block.add(machine_tool.element_create('div',{class:'b_7'}),7);
         await block.hide();
-        await block.add(machine_tool.element_create('div',{class:'block_7'}),7);
+        await block.add(machine_tool.element_create('div',{class:'b_7'}),7);
+        // await block.add(machine_tool.element_create('div',{class:'b_1'}),1);
+        await block.add(machine_tool.element_create('div',{class:'b_2'}),2);
     },
     listen_uri(){
         machine_tool.listen_uri('add',(data)=>{

@@ -1180,7 +1180,7 @@
                                             machine_tool.element_state(element,`${this.group}_add`,'',true);
                                         },1000/24);
                                         machine_tool.loop(()=>{
-                                            if(element.classList.contains(`${this.group}_add`)){
+                                            if(element.classList.contains(`${this.group}_last`)&&element.classList.contains(`${this.group}_add`)){
                                                 resolve(element);
                                                 return true;
                                             }
