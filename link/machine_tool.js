@@ -174,6 +174,9 @@
                         }
                         break;
                     default:
+                        {
+                            if(data instanceof window.HTMLElement){}
+                        }
                         break;
                 }
             },
