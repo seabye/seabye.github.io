@@ -1170,7 +1170,9 @@
                                                 }
                                             },0);
                                         },0);
-                                        machine_tool.element_state(element,`${this.group}_last`,`${this.group}_hide`,true);
+                                        window.setTimeout(()=>{
+                                            machine_tool.element_state(element,`${this.group}_last`,`${this.group}_hide`,true);
+                                        },0);
                                         if(!mark_state){
                                             this.element.insertAdjacentElement('beforeend',element);
                                         }
