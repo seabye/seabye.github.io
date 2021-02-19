@@ -1146,7 +1146,7 @@
                                         let mark_state=false;
                                         if(mark){
                                             machine_tool.for(this.elements,(...data)=>{
-                                                if(data[1].machine_tool.element_block.add.mark===mark){
+                                                if(data[1].machine_tool?.element_block.add.mark===mark){
                                                     mark_state=true;
                                                     element=data[1];
                                                 }
