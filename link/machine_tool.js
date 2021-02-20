@@ -449,7 +449,7 @@
             },
             /*🟠*/listen_element(action,element,type,callback,option={},other=''){
                 const match=/[\r\n\s]/g;
-                const id='id_'+this.java_string_hash_code((element!==window&&element!==window.document?this.element_path(element):'')+callback.toString().replace(match,'')).toString().replace(/[^0-9]/g,'');
+                const id='id_'+this.java_string_hash_code((element!==window&&element!==window.document?this.element_path(element):'')+callback.toString().replace(match,'')+this.random()).toString().replace(/[^0-9]/g,'');
                 switch(type){
                     case'pointer_up':
                         {
