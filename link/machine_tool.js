@@ -1202,7 +1202,7 @@
                                     this.lock=true;
                                     let element=null;
                                     machine_tool.for(this.elements,(...data)=>{
-                                        if(!data[1].classList.contains(`${this.group}_hide`)&&!data[1].classList.contains(`${this.group}_remove`)){
+                                        if(!data[1].classList.contains(`${this.group}_hide`)&&!data[1].classList.contains(`${this.group}_remove`)&&data[1].classList.contains(`${this.group}_last`)){
                                             element=data[1];
                                         }
                                     },0);
@@ -1233,7 +1233,7 @@
                                     this.lock=true;
                                     let element=null;
                                     machine_tool.for(this.elements,(...data)=>{
-                                        if(!data[1].classList.contains(`${this.group}_hide`)&&!data[1].classList.contains(`${this.group}_remove`)){
+                                        if(!data[1].classList.contains(`${this.group}_hide`)&&!data[1].classList.contains(`${this.group}_remove`)&&data[1].classList.contains(`${this.group}_last`)){
                                             element=data[1];
                                         }
                                     },0);
