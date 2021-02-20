@@ -320,7 +320,7 @@ export const _={
         });
     },
     element_block_(){
-        machine_tool.element_create('div',{class:'er0'},window.document.body,undefined,undefined,(data)=>{
+        machine_tool.element_create('',{class:'er0'},window.document.body,undefined,undefined,(data)=>{
             const er=machine_tool.element_block_(false,data,'er');
             er.add('',{class:'er1'});
             const er2=er.add('',{class:'er2 fr0'});
@@ -373,12 +373,12 @@ export const _={
     },
     element_block(){
         const block=machine_tool.element_block(window.document.body,'block');
-        block.add(machine_tool.element_create('div',{class:'b_1'}),1);
-        block.add(machine_tool.element_create('div',{class:'b_2'}),2);
-        block.add(machine_tool.element_create('div',{class:'b_3'}),3);
-        block.add(machine_tool.element_create('div',{class:'b_4'}),4);
-        block.add(machine_tool.element_create('div',{class:'b_5'}),5);
-        block.add(machine_tool.element_create('div',{class:'b_6'}),6);
+        block.add(machine_tool.element_create('',{class:'b_1'}),1);
+        block.add(machine_tool.element_create('',{class:'b_2'}),2);
+        block.add(machine_tool.element_create('',{class:'b_3'}),3);
+        block.add(machine_tool.element_create('',{class:'b_4'}),4);
+        block.add(machine_tool.element_create('',{class:'b_5'}),5);
+        block.add(machine_tool.element_create('',{class:'b_6'}),6);
         block.hide();
         block.hide();
         block.remove();
