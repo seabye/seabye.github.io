@@ -1166,17 +1166,29 @@
                                     if(!mark_state){
                                         this.elements.push(element);
                                     }
-                                    machine_tool.for(this.elements,(...data)=>{
-                                        if(data[1]!==element&&data[1].classList.contains(`${this.group}_last`)){
-                                            machine_tool.element_state(data[1],`${this.group}_prev`,`${this.group}_last`,true);
+                                    let mark_match=true;
+                                    if(mark_state){
+                                        if(element.classList.contains(`${this.group}_hide`)){
+                                            mark_match=true;
+                                        }else{
+                                            mark_match=false;
                                         }
-                                    },0);
-                                    machine_tool.element_state(element,`${this.group}_last`,`${this.group}_hide`,true);
+                                    }
+                                    if(mark_match){
+                                        machine_tool.for(this.elements,(...data)=>{
+                                            if(data[1]!==element&&data[1].classList.contains(`${this.group}_last`)){
+                                                machine_tool.element_state(data[1],`${this.group}_prev`,`${this.group}_last`,true);
+                                            }
+                                        },0);
+                                        machine_tool.element_state(element,`${this.group}_last`,`${this.group}_hide`,true);
+                                    }
                                     if(!mark_state){
                                         this.element.insertAdjacentElement('beforeend',element);
                                     }
                                     window.setTimeout(()=>{
-                                        machine_tool.element_state(element,`${this.group}_add`,'',true);
+                                        if(mark_match){
+                                            machine_tool.element_state(element,`${this.group}_add`,'',true);
+                                        }
                                         this.lock=false;
                                     },1000/24);
                                     return element;
