@@ -1449,9 +1449,17 @@
                 }
                 return window.open(uri,name,`width=${width},height=${height},left=${left},top=${top}`);
             },
-            /*🟢*/local_test(callback){
-                if(window.document?.documentElement&&(window.location.hostname===new window.URL(import.meta.url).hostname||window.document.documentElement.classList.contains('ic_dg')||window.document.documentElement.classList.contains('debug'))){
-                    callback();
+            /*🟢*/local_test(true_callback){
+                if(window.document?.documentElement){
+                    let remove=false;
+                    const run=()=>{
+                        if(!remove&&window.document.documentElement.classList.contains('debug')){
+                            true_callback();
+                            remove=true;
+                            this.listen_element('remove',window.document.documentElement,'observe_mutation',run);
+                        }
+                    };
+                    this.listen_element('add',window.document.documentElement,'observe_mutation',run,{attributes:true,attributeFilter:['class'],childList:false,subtree:false});
                 }
             },
             /*🔴*/hls(){},
@@ -1478,11 +1486,10 @@
     };
 // #build
 // #debug
-    // machine_tool_
+    // machine_tool_demo
     machine_tool.local_test(()=>{
         if(!import.meta.url.match('machine_tool_demo.js')){
             window.machine_tool=machine_tool;
-            window.document.documentElement.classList.add('ic_dg');
             machine_tool.import('./machine_tool_demo.js',(data)=>{
                 machine_tool.run_object(data._);
             });
