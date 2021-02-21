@@ -1449,12 +1449,12 @@
                 }
                 return window.open(uri,name,`width=${width},height=${height},left=${left},top=${top}`);
             },
-            /*🟢*/local_test(true_callback){
+            /*🟢*/local_test(callback){
                 if(window.document?.documentElement){
                     let remove=false;
                     const run=()=>{
                         if(!remove&&window.document.documentElement.classList.contains('debug')){
-                            true_callback();
+                            callback();
                             remove=true;
                             this.listen_element('remove',window.document.documentElement,'observe_mutation',run);
                         }
