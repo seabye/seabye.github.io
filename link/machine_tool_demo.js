@@ -33,26 +33,46 @@ export const _={
         // },2000);
     },
     for(){
-        let data=['A','B',['D','E'],'AA','BB',['DD','EE']];
-        machine_tool.for(data,(key,value,depth,type)=>{
-            window.console.log('all====',key,value,depth,type);
+        // let data=['A','B',['D','E'],'AA','BB',['DD','EE']];
+        // machine_tool.for(data,(count,key,value,depth,type)=>{
+        //     window.console.log('all====',count,key,value,depth,type);
+        // });
+        // machine_tool.for(data,(count,key,value,depth,type)=>{
+        //     window.console.log('0====',count,key,value,depth,type);
+        // },0);
+        // machine_tool.for(data,(count,key,value,depth,type)=>{
+        //     window.console.log('1====',count,key,value,depth,type);
+        // },1);
+        // let data2={a:'A',b:'B',c:{d:'D',e:'E'},aa:'AA',bb:'BB',cc:{dd:'DD',ee:'EE'}};
+        // machine_tool.for(data2,(count,key,value,depth,type)=>{
+        //     window.console.log('all====',count,key,value,depth,type);
+        // });
+        // machine_tool.for(data2,(count,key,value,depth,type)=>{
+        //     window.console.log('0====',count,key,value,depth,type);
+        // },0);
+        // machine_tool.for(data2,(count,key,value,depth,type)=>{
+        //     window.console.log('1====',count,key,value,depth,type);
+        // },1);
+        let data3={a:'A',b:'B',c:['D','E'],aa:'AA',bb:'BB',cc:['DD','EE']};
+        machine_tool.for(data3,(count,key,value,depth,type)=>{
+            window.console.log('all====',count,key,value,depth,type);
         });
-        machine_tool.for(data,(key,value,depth,type)=>{
-            window.console.log('0====',key,value,depth,type);
-        },0);
-        machine_tool.for(data,(key,value,depth,type)=>{
-            window.console.log('1====',key,value,depth,type);
-        },1);
-        let data2={a:'A',b:'B',c:{d:'D',e:'E'},aa:'AA',bb:'BB',cc:{dd:'DD',ee:'EE'}};
-        machine_tool.for(data2,(key,value,depth,type)=>{
-            window.console.log('all====',key,value,depth,type);
+        // machine_tool.for(data3,(count,key,value,depth,type)=>{
+        //     window.console.log('0====',count,key,value,depth,type);
+        // },0);
+        // machine_tool.for(data3,(count,key,value,depth,type)=>{
+        //     window.console.log('1====',count,key,value,depth,type);
+        // },1);
+        let data4=['A','B',{d:'D',e:'E'},'AA','BB',{dd:'DD',ee:'EE'}];
+        machine_tool.for(data4,(count,key,value,depth,type)=>{
+            window.console.log('all====',count,key,value,depth,type);
         });
-        machine_tool.for(data2,(key,value,depth,type)=>{
-            window.console.log('0====',key,value,depth,type);
-        },0);
-        machine_tool.for(data2,(key,value,depth,type)=>{
-            window.console.log('1====',key,value,depth,type);
-        },1);
+        // machine_tool.for(data4,(count,key,value,depth,type)=>{
+        //     window.console.log('0====',count,key,value,depth,type);
+        // },0);
+        // machine_tool.for(data4,(count,key,value,depth,type)=>{
+        //     window.console.log('1====',count,key,value,depth,type);
+        // },1);
     },
     uuid_36_to_uuid_22(){
         window.console.log('uuid_36_to_uuid_22()',machine_tool.uuid_36_to_uuid_22('8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3'));

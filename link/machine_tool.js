@@ -117,51 +117,51 @@
                 };
                 // remove observe
             },
-            /*🟢*/for(data,callback,condition_depth){
-                switch(window.Object.prototype.toString.call(data)){
-                    case'[object Array]':
+            /*🟢*/for(data,callback,condition_depth,type){
+                switch(typeof type){
+                    case'undefined':
                         {
                             let depth=0;
                             const run=(data)=>{
                                 let next=[];
-                                for(let item=0,length=data.length;item<length;item++){
-                                    if(typeof condition_depth==='number'){
-                                        if(condition_depth===depth){
-                                            callback(item,data[item],depth,window.Object.prototype.toString.call(data[item])==='[object Array]'?'array':depth);
+                                switch(window.Object.prototype.toString.call(data)){
+                                    case'[object Array]':
+                                        {
+                                            for(let item=0,length=data.length;item<length;item++){
+                                                if(typeof condition_depth==='number'){
+                                                    if(condition_depth===depth){
+                                                        callback(item,item,data[item],depth,window.Object.prototype.toString.call(data[item])==='[object Array]'?'array':window.Object.prototype.toString.call(data[item])==='[object Object]'?'object':depth);
+                                                    }
+                                                }else{
+                                                    callback(item,item,data[item],depth,window.Object.prototype.toString.call(data[item])==='[object Array]'?'array':window.Object.prototype.toString.call(data[item])==='[object Object]'?'object':depth);
+                                                }
+                                                if(window.Object.prototype.toString.call(data[item])==='[object Array]'||window.Object.prototype.toString.call(data[item])==='[object Object]'){
+                                                    next.push(data[item]);
+                                                };
+                                            }
                                         }
-                                    }else{
-                                        callback(item,data[item],depth,window.Object.prototype.toString.call(data[item])==='[object Array]'?'array':depth);
-                                    }
-                                    if(window.Object.prototype.toString.call(data[item])==='[object Array]'){
-                                        next.push(data[item]);
-                                    };
-                                }
-                                if(next.length){
-                                    depth+=1;
-                                    for(let item=0,length=next.length;item<length;item++){
-                                        run(next[item]);
-                                    }
-                                }
-                            };
-                            run(data);
-                        }
-                        break;
-                    case'[object Object]':
-                        {
-                            let depth=0;
-                            const run=(data)=>{
-                                let next=[];
-                                for(const [item,value]of window.Object.entries(data)){
-                                    if(typeof condition_depth==='number'){
-                                        if(condition_depth===depth){
-                                            callback(item,value,depth,window.Object.prototype.toString.call(value)==='[object Object]'?'object':depth);
+                                        break;
+                                    case'[object Object]':
+                                        {
+                                            let count=0;
+                                            for(const [item,value]of window.Object.entries(data)){
+                                                if(typeof condition_depth==='number'){
+                                                    if(condition_depth===depth){
+                                                        callback(count,item,value,depth,window.Object.prototype.toString.call(value)==='[object Object]'?'object':window.Object.prototype.toString.call(value)==='[object Array]'?'array':depth);
+                                                        count+=1;
+                                                    }
+                                                }else{
+                                                    callback(count,item,value,depth,window.Object.prototype.toString.call(value)==='[object Object]'?'object':window.Object.prototype.toString.call(value)==='[object Array]'?'array':depth);
+                                                    count+=1;
+                                                }
+                                                if(window.Object.prototype.toString.call(value)==='[object Object]'||window.Object.prototype.toString.call(value)==='[object Array]'){
+                                                    next.push(value);
+                                                };
+                                            }
                                         }
-                                    }else{
-                                        callback(item,value,depth,window.Object.prototype.toString.call(value)==='[object Object]'?'object':depth);
-                                    }
-                                    if(window.Object.prototype.toString.call(value)==='[object Object]'){
-                                        next.push(value);
-                                    };
+                                        break;
+                                    default:
+                                        break;
                                 }
                                 if(next.length){
                                     depth+=1;
@@ -175,7 +175,70 @@
                         break;
                     default:
                         {
-                            if(data instanceof window.HTMLElement){}
+                            switch(window.Object.prototype.toString.call(data)){
+                                case'[object Array]':
+                                    {
+                                        let depth=0;
+                                        const run=(data)=>{
+                                            let next=[];
+                                            for(let item=0,length=data.length;item<length;item++){
+                                                if(typeof condition_depth==='number'){
+                                                    if(condition_depth===depth){
+                                                        callback(item,item,data[item],depth,window.Object.prototype.toString.call(data[item])==='[object Array]'?'array':depth);
+                                                    }
+                                                }else{
+                                                    callback(item,item,data[item],depth,window.Object.prototype.toString.call(data[item])==='[object Array]'?'array':depth);
+                                                }
+                                                if(window.Object.prototype.toString.call(data[item])==='[object Array]'){
+                                                    next.push(data[item]);
+                                                };
+                                            }
+                                            if(next.length){
+                                                depth+=1;
+                                                for(let item=0,length=next.length;item<length;item++){
+                                                    run(next[item]);
+                                                }
+                                            }
+                                        };
+                                        run(data);
+                                    }
+                                    break;
+                                case'[object Object]':
+                                    {
+                                        let depth=0;
+                                        const run=(data)=>{
+                                            let next=[];
+                                            let count=0;
+                                            for(const [item,value]of window.Object.entries(data)){
+                                                if(typeof condition_depth==='number'){
+                                                    if(condition_depth===depth){
+                                                        callback(count,item,value,depth,window.Object.prototype.toString.call(value)==='[object Object]'?'object':depth);
+                                                        count+=1;
+                                                    }
+                                                }else{
+                                                    callback(count,item,value,depth,window.Object.prototype.toString.call(value)==='[object Object]'?'object':depth);
+                                                    count+=1;
+                                                }
+                                                if(window.Object.prototype.toString.call(value)==='[object Object]'){
+                                                    next.push(value);
+                                                };
+                                            }
+                                            if(next.length){
+                                                depth+=1;
+                                                for(let item=0,length=next.length;item<length;item++){
+                                                    run(next[item]);
+                                                }
+                                            }
+                                        };
+                                        run(data);
+                                    }
+                                    break;
+                                default:
+                                    // {
+                                    //     if(data instanceof window.HTMLElement){}
+                                    // }
+                                    break;
+                            }
                         }
                         break;
                 }
@@ -1167,9 +1230,9 @@
                                     let mark_state=false;
                                     if(mark){
                                         machine_tool.for(this.elements,(...data)=>{
-                                            if(data[1].machine_tool?.element_block.add.mark===mark){
+                                            if(data[2].machine_tool?.element_block.add.mark===mark){
                                                 mark_state=true;
-                                                element=data[1];
+                                                element=data[2];
                                             }
                                         },0);
                                     }
@@ -1192,8 +1255,8 @@
                                     }
                                     if(mark_match){
                                         machine_tool.for(this.elements,(...data)=>{
-                                            if(data[1]!==element&&data[1].classList.contains(`${this.group}_last`)){
-                                                machine_tool.element_state(data[1],`${this.group}_prev`,`${this.group}_last`,true);
+                                            if(data[2]!==element&&data[2].classList.contains(`${this.group}_last`)){
+                                                machine_tool.element_state(data[2],`${this.group}_prev`,`${this.group}_last`,true);
                                             }
                                         },0);
                                         machine_tool.element_state(element,`${this.group}_last`,`${this.group}_hide`,true);
@@ -1218,8 +1281,8 @@
                                     this.lock=true;
                                     let element=null;
                                     machine_tool.for(this.elements,(...data)=>{
-                                        if(!data[1].classList.contains(`${this.group}_hide`)&&!data[1].classList.contains(`${this.group}_remove`)&&data[1].classList.contains(`${this.group}_last`)){
-                                            element=data[1];
+                                        if(!data[2].classList.contains(`${this.group}_hide`)&&!data[2].classList.contains(`${this.group}_remove`)&&data[2].classList.contains(`${this.group}_last`)){
+                                            element=data[2];
                                         }
                                     },0);
                                     machine_tool.element_state(element,`${this.group}_remove`,'',true);
@@ -1229,8 +1292,8 @@
                                     },wait);
                                     let last=null;
                                     machine_tool.for(this.elements,(...data)=>{
-                                        if(data[1]!==element&&!data[1].classList.contains(`${this.group}_hide`)&&!data[1].classList.contains(`${this.group}_remove`)){
-                                            last=data[1];
+                                        if(data[2]!==element&&!data[2].classList.contains(`${this.group}_hide`)&&!data[2].classList.contains(`${this.group}_remove`)){
+                                            last=data[2];
                                         }
                                     },0);
                                     if(last){
@@ -1249,8 +1312,8 @@
                                     this.lock=true;
                                     let element=null;
                                     machine_tool.for(this.elements,(...data)=>{
-                                        if(!data[1].classList.contains(`${this.group}_hide`)&&!data[1].classList.contains(`${this.group}_remove`)&&data[1].classList.contains(`${this.group}_last`)){
-                                            element=data[1];
+                                        if(!data[2].classList.contains(`${this.group}_hide`)&&!data[2].classList.contains(`${this.group}_remove`)&&data[2].classList.contains(`${this.group}_last`)){
+                                            element=data[2];
                                         }
                                     },0);
                                     this.elements.splice(this.elements.indexOf(element),1);
@@ -1262,8 +1325,8 @@
                                     },wait);
                                     let last=null;
                                     machine_tool.for(this.elements,(...data)=>{
-                                        if(data[1]!==element&&!data[1].classList.contains(`${this.group}_hide`)&&!data[1].classList.contains(`${this.group}_remove`)){
-                                            last=data[1];
+                                        if(data[2]!==element&&!data[2].classList.contains(`${this.group}_hide`)&&!data[2].classList.contains(`${this.group}_remove`)){
+                                            last=data[2];
                                         }
                                     },0);
                                     if(last){
