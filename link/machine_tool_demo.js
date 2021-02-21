@@ -63,16 +63,20 @@ export const _={
         // machine_tool.for(data3,(count,key,value,depth,type)=>{
         //     window.console.log('1====',count,key,value,depth,type);
         // },1);
-        let data4=['A','B',{d:'D',e:'E'},'AA','BB',{dd:'DD',ee:'EE'}];
-        machine_tool.for(data4,(count,key,value,depth,type)=>{
-            window.console.log('all====',count,key,value,depth,type);
-        });
+        // let data4=['A','B',{d:'D',e:'E'},'AA','BB',{dd:'DD',ee:'EE'}];
+        // machine_tool.for(data4,(count,key,value,depth,type)=>{
+        //     window.console.log('all====',count,key,value,depth,type);
+        // });
         // machine_tool.for(data4,(count,key,value,depth,type)=>{
         //     window.console.log('0====',count,key,value,depth,type);
         // },0);
         // machine_tool.for(data4,(count,key,value,depth,type)=>{
         //     window.console.log('1====',count,key,value,depth,type);
         // },1);
+        let data5={a:'A',b:'B',c:['D','E'],aa:'AA',bb:'BB',cc:['DD','EE']};
+        machine_tool.for(data5,(count,key,value,depth,type)=>{
+            window.console.log('all====',count,key,value,depth,type);
+        },undefined,'');
     },
     uuid_36_to_uuid_22(){
         window.console.log('uuid_36_to_uuid_22()',machine_tool.uuid_36_to_uuid_22('8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3'));
@@ -87,19 +91,20 @@ export const _={
         window.console.log('base64_uri_safe_no_pad_to_string()',machine_tool.base64_uri_safe_no_pad_to_string('jvZe6aA5S_Kks2h_zB88ww'));
     },
     element_create(){
-        machine_tool.element_create({
-            '':{},
+        window.console.log(machine_tool.element_create({
             '':{},
             ' _':{},
-            ' _':{},
             [machine_tool.random()]:{},
-            [machine_tool.random()]:{},
-            ' _':{
-                function(elements){
-                    window.console.log('element_create()',elements);
-                }
-            }
-        },window.document.body);
+            array:[
+                {
+                    element:['',{class:'child'}],
+                    function(){
+                        window.console.log(this.element);
+                    }
+                },
+                {}
+            ]
+        },window.document.body));
     },
     element_state(){
         this.elements=machine_tool.element_create({
