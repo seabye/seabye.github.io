@@ -185,6 +185,22 @@
                     callback(data);
                 }).catch(()=>{});
             },
+            /*🟢*/json(data){
+                switch(typeof data){
+                    case'string':
+                        {
+                            return window.JSON.parse(data);
+                        }
+                        break;
+                    case'object':
+                        {
+                            return window.JSON.stringify(data);
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            },
             /*🔴*/web_assembly(){},
             /*🟢*/uuid_36_to_uuid_22(uuid_36){
                 if(uuid_36.length===36){
