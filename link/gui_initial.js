@@ -180,9 +180,9 @@
         /*🟢*/write$service$worker(){
             if(this.dataset.config.service_worker&&'serviceWorker'in window.navigator){
                 window.navigator.serviceWorker.register(this.dataset.config.service_worker,{scope:'./'}).then((registration)=>{
-                    window.console.log('#### Registration successful, scope is:',registration.scope);
+                    window.console.log('==== ing gui_initial.js Registration successful, scope is:',registration.scope);
                 }).catch((error)=>{
-                    window.console.log('#### Service worker registration failed, error:',error);
+                    window.console.log('==== ing gui_initial.js Service worker registration failed, error:',error);
                 });
             }
         },
