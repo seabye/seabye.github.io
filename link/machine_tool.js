@@ -438,13 +438,13 @@
                             //                 callback<function(element),undefined=false>
                             //             ],undefined=false>,
                             //             <function:function(elements)/this.element===elements.key&class/,undefined=false>,
-                            //             key&class:<{},[{}...]>...
+                            //             key&class:<{},[]>...
                             //         },
-                            //         key&class:<{},[{}...]>...
-                            //     },[{
-                            //         element:[],
-                            //         function(){}
-                            //     }...]>,
+                            //         key&class:<{},[]>...
+                            //     },[
+                            //         function(){},
+                            //         key&class:<{},[]>...
+                            //     ]>,
                             //     insert_element<element,undefined=false>,
                             //     insert_position<'beforebegin','afterbegin','beforeend','afterend',undefined='beforeend'>,
                             //     elements<elements,undefined=elements>,
@@ -460,41 +460,47 @@
                             if(!elements){
                                 elements={};
                             }
+                            let parent_element=null;
                             const element_build=(data,insert_element,insert_position)=>{
                                 for(const item in data){
-                                    const class_=item.trim().split(' ').filter((item)=>{
-                                        return window.isNaN(window.parseInt(item));
-                                    }).join(' ');
-                                    if(data[item].element){
-                                        if(!data[item].element[0]){
-                                            data[item].element[0]='div';
-                                        }
-                                        if(data[item].element[1]){
-                                            if(data[item].element[1].class){
-                                                data[item].element[1].class=window.Array.from(new window.Set(item.trim().split(' ').filter((item)=>{
-                                                    return window.isNaN(window.parseInt(item));
-                                                }).concat(data[item].element[1].class.trim().split(' ')))).join(' ');
+                                    if(typeof data[item]==='function'){
+                                        data[item].element=parent_element;
+                                    }else{
+                                        const class_=item.trim().split(' ').filter((item)=>{
+                                            return window.isNaN(window.parseInt(item));
+                                        }).join(' ');
+                                        if(data[item].element){
+                                            if(!data[item].element[0]){
+                                                data[item].element[0]='div';
+                                            }
+                                            if(data[item].element[1]){
+                                                if(data[item].element[1].class){
+                                                    data[item].element[1].class=window.Array.from(new window.Set(item.trim().split(' ').filter((item)=>{
+                                                        return window.isNaN(window.parseInt(item));
+                                                    }).concat(data[item].element[1].class.trim().split(' ')))).join(' ');
+                                                }else{
+                                                    if(class_){
+                                                        data[item].element[1].class=class_;
+                                                    }
+                                                }
                                             }else{
                                                 if(class_){
-                                                    data[item].element[1].class=class_;
+                                                    data[item].element[1]={class:class_};
                                                 }
                                             }
                                         }else{
+                                            data[item].element=['div'];
                                             if(class_){
                                                 data[item].element[1]={class:class_};
                                             }
                                         }
-                                    }else{
-                                        data[item].element=['div'];
-                                        if(class_){
-                                            data[item].element[1]={class:class_};
+                                        const element=this.element_create(data[item].element[0],data[item].element[1]?data[item].element[1]:undefined,insert_element,insert_position,data[item].element[2]?data[item].element[2]:undefined,data[item].element[3]?data[item].element[3]:undefined);
+                                        if(window.isNaN(item.split(' ')[0])||item.split(' ')[0]===''){
+                                            elements[item.split(' ')[0]]=data[item].element=element;
+                                        }else{
+                                            data[item].element=element;
                                         }
-                                    }
-                                    const element=this.element_create(data[item].element[0],data[item].element[1]?data[item].element[1]:undefined,insert_element,insert_position,data[item].element[2]?data[item].element[2]:undefined,data[item].element[3]?data[item].element[3]:undefined);
-                                    if(window.isNaN(item.split(' ')[0])||item.split(' ')[0]===''){
-                                        elements[item.split(' ')[0]]=data[item].element=element;
-                                    }else{
-                                        data[item].element=element;
+                                        parent_element=element;
                                     }
                                     for(const item_ in data[item]){
                                         if(!item_.match(/element|function/)){
@@ -508,11 +514,12 @@
                             element_build(data,insert_element,insert_position);
                             const function_run=(data)=>{
                                 for(const item in data){
-                                    if(data[item].function){
-                                        data[item].function(elements);
-                                    }
                                     if(typeof data[item]==='function'){
                                         data[item](elements,data[item].element);
+                                    }else{
+                                        if(data[item].function){
+                                            data[item].function(elements);
+                                        }
                                     }
                                     for(const item_ in data[item]){
                                         if(!item_.match(/element|function/)){

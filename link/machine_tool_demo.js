@@ -122,13 +122,14 @@ export const _={
                     [
                         function(elements,element){
                             window.console.log('!!!',this,this.element,elements,element);
-                        }
+                        },
+                        []
                     ]
                 ]
             ],
             {
-                one:{},
-                element:[,{class:'a'}]
+                element:[,{class:'a'}],
+                one:{}
             },
             {}
         ],window.document.body));
