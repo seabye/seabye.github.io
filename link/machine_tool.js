@@ -459,7 +459,7 @@
                             }
                             const element_build=(data,insert_element,insert_position)=>{
                                 for(const item in data){
-                                    let class_=item.trim().split(' ').filter((item)=>{
+                                    const class_=item.trim().split(' ').filter((item)=>{
                                         return window.isNaN(window.parseInt(item));
                                     });
                                     if(data[item].element){
