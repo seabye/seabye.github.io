@@ -117,7 +117,17 @@ export const _={
             ]
         },window.document.body));
         window.console.log(machine_tool.element_create([
+            [
+                [
+                    [
+                        function(elements,element){
+                            window.console.log('!!!',this,this.element,elements,element);
+                        }
+                    ]
+                ]
+            ],
             {
+                one:{},
                 element:[,{class:'a'}]
             },
             {}

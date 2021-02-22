@@ -511,6 +511,9 @@
                                     if(data[item].function){
                                         data[item].function(elements);
                                     }
+                                    if(typeof data[item]==='function'){
+                                        data[item](elements,data[item].element);
+                                    }
                                     for(const item_ in data[item]){
                                         if(!item_.match(/element|function/)){
                                             const data_={};
