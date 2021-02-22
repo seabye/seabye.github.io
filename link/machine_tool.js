@@ -488,7 +488,7 @@
                                         }
                                     }
                                     const element=this.element_create(data[item].element[0],data[item].element[1]?data[item].element[1]:undefined,insert_element,insert_position,data[item].element[2]?data[item].element[2]:undefined,data[item].element[3]?data[item].element[3]:undefined);
-                                    if(window.isNaN(item.split(' ')[0])){
+                                    if(window.isNaN(item.split(' ')[0])||item.split(' ')[0]===''){
                                         elements[item.split(' ')[0]]=data[item].element=element;
                                     }else{
                                         data[item].element=element;
