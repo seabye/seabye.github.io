@@ -438,10 +438,10 @@
                             //                 callback<function(element),undefined=false>
                             //             ],undefined=false>,
                             //             <function:function(elements)/this.element===elements.key&class/,undefined=false>,
-                            //             key&class:{}...
+                            //             key&class:<{},[{}...]>...
                             //         },
-                            //         key&class:{}...
-                            //     },undefined='div'>,
+                            //         key&class:<{},[{}...]>...
+                            //     },[{}...]>,
                             //     insert_element<element,undefined=false>,
                             //     insert_position<'beforebegin','afterbegin','beforeend','afterend',undefined='beforeend'>,
                             //     elements<elements,undefined=elements>,

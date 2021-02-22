@@ -114,6 +114,12 @@ export const _={
                 }
             ]
         },window.document.body));
+        window.console.log(machine_tool.element_create([
+            {
+                element:[,{class:'a'}]
+            },
+            {}
+        ],window.document.body));
     },
     element_state(){
         this.elements=machine_tool.element_create({
