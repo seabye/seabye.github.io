@@ -461,7 +461,7 @@
                                 for(const item in data){
                                     const class_=item.trim().split(' ').filter((item)=>{
                                         return window.isNaN(window.parseInt(item));
-                                    });
+                                    }).join(' ');
                                     if(data[item].element){
                                         if(!data[item].element[0]){
                                             data[item].element[0]='div';
@@ -472,18 +472,18 @@
                                                     return window.isNaN(window.parseInt(item));
                                                 }).concat(data[item].element[1].class.trim().split(' ')))).join(' ');
                                             }else{
-                                                if(class_[0]){
+                                                if(class_){
                                                     data[item].element[1].class=class_;
                                                 }
                                             }
                                         }else{
-                                            if(class_[0]){
+                                            if(class_){
                                                 data[item].element[1]={class:class_};
                                             }
                                         }
                                     }else{
                                         data[item].element=['div'];
-                                        if(class_[0]){
+                                        if(class_){
                                             data[item].element[1]={class:class_};
                                         }
                                     }
