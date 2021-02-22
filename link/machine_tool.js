@@ -307,8 +307,8 @@
             /*🔴*/base64_uri_safe_no_pad_to_string(){},
             /*🟢*/java_string_hash_code(string){
                 let result;
-                for(let i=0;i<string.length;i++){
-                    result=window.Math.imul(31,result)+string.charCodeAt(i)|0;
+                for(let item=0;item<string.length;item++){
+                    result=window.Math.imul(31,result)+string.charCodeAt(item)|0;
                 }
                 return result;
             },
@@ -441,7 +441,10 @@
                             //             key&class:<{},[{}...]>...
                             //         },
                             //         key&class:<{},[{}...]>...
-                            //     },[{}...]>,
+                            //     },[{
+                            //         element:[],
+                            //         function(){}
+                            //     }...]>,
                             //     insert_element<element,undefined=false>,
                             //     insert_position<'beforebegin','afterbegin','beforeend','afterend',undefined='beforeend'>,
                             //     elements<elements,undefined=elements>,
@@ -619,7 +622,7 @@
                                                 }else{
                                                     run();
                                                 }
-                                                machine_tool.local_test(()=>{
+                                                this.local_test(()=>{
                                                     window.console.log('#### listen_element pointer_up length',window.Object.keys(this.listen_element.pointer_up).length);
                                                 });
                                             };
@@ -1126,9 +1129,9 @@
                                 insert_position='afterend';
                                 const last_element=(element)=>{
                                     if(element.nextElementSibling){
-                                        for(let i=0,l=machine_tool.element_block_.record.length;i<l;i++){
-                                            for(let i_=0,l_=machine_tool.element_block_.record[i].elements.length;i_<l_;i_++){
-                                                if(machine_tool.element_block_.record[i].elements[i_]===element.nextElementSibling&&machine_tool.element_block_.record.indexOf(this)<machine_tool.element_block_.record.indexOf(machine_tool.element_block_.record[i])){
+                                        for(let item=0,length=machine_tool.element_block_.record.length;item<length;item++){
+                                            for(let item_=0,length_=machine_tool.element_block_.record[item].elements.length;item_<length_;item_++){
+                                                if(machine_tool.element_block_.record[item].elements[item_]===element.nextElementSibling&&machine_tool.element_block_.record.indexOf(this)<machine_tool.element_block_.record.indexOf(machine_tool.element_block_.record[item])){
                                                     insert_element=element.nextElementSibling;
                                                     last_element(insert_element);
                                                 }
@@ -1138,8 +1141,8 @@
                                 };
                                 last_element(insert_element);
                             }
-                            for(let i=0,l=this.elements.length;i<l;i++){
-                                machine_tool.element_state(this.elements[i],`${this.group}_${this.prev}${this.group2?` ${this.group2}_${this.prev2}`:''}`,`${this.group}_last${this.group2?` ${this.group2}_last`:''}`,true);
+                            for(let item=0,length=this.elements.length;item<length;item++){
+                                machine_tool.element_state(this.elements[item],`${this.group}_${this.prev}${this.group2?` ${this.group2}_${this.prev2}`:''}`,`${this.group}_last${this.group2?` ${this.group2}_last`:''}`,true);
                             }
                             if(tag instanceof window.HTMLElement){
                                 if(!this.elements[0]){
@@ -1156,10 +1159,10 @@
                                 attribute.class=`${attribute.class?`${attribute.class} `:''}${!this.elements[0]?this.group2?`${this.group}_first ${this.group2}_first `:`${this.group}_first `:''}${this.group}_last${this.group2?` ${this.group2}_last`:''}`;
                             }
                             if(this.group2){
-                                for(let i=0,l=machine_tool.element_block_.record.length;i<l;i++){
-                                    for(let i_=0,l_=machine_tool.element_block_.record[i].elements.length;i_<l_;i_++){
-                                        if(machine_tool.element_block_.record[i].elements[i_].classList.contains(`${this.group2}_last`)){
-                                            machine_tool.element_state(machine_tool.element_block_.record[i].elements[i_],`${this.group2}_${this.prev2}`,`${this.group2}_last`,true);
+                                for(let item=0,length=machine_tool.element_block_.record.length;item<length;item++){
+                                    for(let item_=0,length_=machine_tool.element_block_.record[item].elements.length;item_<length_;item_++){
+                                        if(machine_tool.element_block_.record[item].elements[item_].classList.contains(`${this.group2}_last`)){
+                                            machine_tool.element_state(machine_tool.element_block_.record[item].elements[item_],`${this.group2}_${this.prev2}`,`${this.group2}_last`,true);
                                         }
                                     }
                                 }
@@ -1193,10 +1196,10 @@
                                 if(this.group2){
                                     let last_match=null;
                                     const skip=[];
-                                    for(let i=0,l=machine_tool.element_block_.record.length;i<l;i++){
-                                        for(let i_=0,l_=machine_tool.element_block_.record[i].elements.length;i_<l_;i_++){
-                                            if(machine_tool.element_block_.record[i].elements[i_].classList.contains(`${this.group2}_${this.prev2}`)&&!skip.includes(machine_tool.element_block_.record[i].elements[i_])){
-                                                last_match=machine_tool.element_block_.record[i].elements[i_];
+                                    for(let item=0,length=machine_tool.element_block_.record.length;item<length;item++){
+                                        for(let item_=0,length=machine_tool.element_block_.record[item].elements.length;item_<length;item_++){
+                                            if(machine_tool.element_block_.record[item].elements[item_].classList.contains(`${this.group2}_${this.prev2}`)&&!skip.includes(machine_tool.element_block_.record[item].elements[item_])){
+                                                last_match=machine_tool.element_block_.record[item].elements[item_];
                                                 skip.push(last_match);
                                             }
                                         }

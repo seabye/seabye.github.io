@@ -93,9 +93,11 @@ export const _={
     element_create(){
         window.console.log(machine_tool.element_create({
             '':{},
+            _:{},
             ' _':{},
-            ' 0':{},
-            ' 1':{},
+            0:{},
+            1:{},
+            [`x xx`]:{},
             [machine_tool.random()]:{},
             array:[
                 {
