@@ -459,35 +459,40 @@
                             }
                             const element_build=(data,insert_element,insert_position)=>{
                                 for(const item in data){
+                                    let class_=item.trim().split(' ').filter((item)=>{
+                                        return window.isNaN(window.parseInt(item));
+                                    });
                                     if(data[item].element){
                                         if(!data[item].element[0]){
                                             data[item].element[0]='div';
                                         }
                                         if(data[item].element[1]){
                                             if(data[item].element[1].class){
-                                                data[item].element[1].class=window.Array.from(new window.Set(item.trim().split(' ').concat(data[item].element[1].class.trim().split(' ')))).join(' ');
+                                                data[item].element[1].class=window.Array.from(new window.Set(item.trim().split(' ').filter((item)=>{
+                                                    return window.isNaN(window.parseInt(item));
+                                                }).concat(data[item].element[1].class.trim().split(' ')))).join(' ');
                                             }else{
-                                                if(item.trim()){
-                                                    data[item].element[1].class=item.trim();
+                                                if(class_[0]){
+                                                    data[item].element[1].class=class_;
                                                 }
                                             }
                                         }else{
-                                            if(item.trim()){
-                                                data[item].element[1]={class:item.trim()};
+                                            if(class_[0]){
+                                                data[item].element[1]={class:class_};
                                             }
                                         }
                                     }else{
                                         data[item].element=['div'];
-                                        if(item.trim()){
-                                            data[item].element[1]={class:item.trim()};
+                                        if(class_[0]){
+                                            data[item].element[1]={class:class_};
                                         }
                                     }
                                     const element=this.element_create(data[item].element[0],data[item].element[1]?data[item].element[1]:undefined,insert_element,insert_position,data[item].element[2]?data[item].element[2]:undefined,data[item].element[3]?data[item].element[3]:undefined);
-                                    // if(item.split(' ')[0]){
+                                    if(window.isNaN(item.split(' ')[0])){
                                         elements[item.split(' ')[0]]=data[item].element=element;
-                                    // }else{
-                                    //     data[item].element=element;
-                                    // }
+                                    }else{
+                                        data[item].element=element;
+                                    }
                                     for(const item_ in data[item]){
                                         if(!item_.match(/element|function/)){
                                             const data_={};

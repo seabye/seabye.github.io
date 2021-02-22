@@ -94,6 +94,8 @@ export const _={
         window.console.log(machine_tool.element_create({
             '':{},
             ' _':{},
+            ' 0':{},
+            ' 1':{},
             [machine_tool.random()]:{},
             array:[
                 {
@@ -102,7 +104,14 @@ export const _={
                         window.console.log(this.element);
                     }
                 },
-                {}
+                {},
+                {
+                    array2:[
+                        {},
+                        {},
+                        {}
+                    ]
+                }
             ]
         },window.document.body));
     },
