@@ -375,14 +375,23 @@
             window.addEventListener('pointerdown',(event)=>{
                 event.target.classList.add('ic_active',`ic_active_${event.button}`);
                 const remove=()=>{
+                    window.removeEventListener('pointermove',move);
                     window.removeEventListener('pointerup',remove);
                     window.removeEventListener('touchend',remove);
                     window.removeEventListener('dragend',remove);
-                    event.target.classList.remove('ic_active',`ic_active_${event.button}`);
+                    event.target.classList.remove('ic_active',`ic_active_${event.button}`,'ic_active_outer');
                     if(!event.target.getAttribute('class')){
                         event.target.removeAttribute('class');
                     }
                 };
+                const move=(event_)=>{
+                    if(event_.target!==event.target){
+                        event.target.classList.add('ic_active_outer');
+                    }else{
+                        event.target.classList.remove('ic_active_outer');
+                    }
+                };
+                window.addEventListener('pointermove',move);
                 window.addEventListener('pointerup',remove,{once:true});
                 window.addEventListener('touchend',remove,{once:true});
                 window.addEventListener('dragend',remove,{once:true});
