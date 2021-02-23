@@ -1295,6 +1295,24 @@
                                 return false;
                             });
                         }
+                        back(wait=350){
+                            if(!this.lock){
+                                this.lock=true;
+                                let element=null;
+                                machine_tool.for(this.elements,(...data)=>{
+                                    if(!data[2].classList.contains(`${this.group}_hide`)&&!data[2].classList.contains(`${this.group}_remove`)&&data[2].classList.contains(`${this.group}_last`)){
+                                        element=data[2];
+                                    }
+                                },0);
+                                if(element.machine_tool?.element_block.add.mark){
+                                    this.lock=false;
+                                    return this.hide(wait);
+                                }else{
+                                    this.lock=false;
+                                    return this.remove(wait);
+                                }
+                            }
+                        }
                         hide(wait=350){
                             return machine_tool.loop(()=>{
                                 if(!this.lock){
