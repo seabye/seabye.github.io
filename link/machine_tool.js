@@ -1238,6 +1238,7 @@
                         constructor(element,group){
                             this.element=element;
                             this.group=group;
+                            this.insert_position=insert_position;
                             this.elements=[];
                             this.lock=false;
                         }
@@ -1278,7 +1279,7 @@
                                         machine_tool.element_state(element,`${this.group}_last ${this.group}_lock`,`${this.group}_hide`,true);
                                     // }
                                     if(!mark_state){
-                                        this.element.insertAdjacentElement(insert_position,element);
+                                        this.element.insertAdjacentElement(this.insert_position,element);
                                     }
                                     window.setTimeout(()=>{
                                         machine_tool.element_state(element,`${this.group}_add`,'',true);
