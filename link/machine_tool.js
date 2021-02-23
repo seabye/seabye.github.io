@@ -1361,7 +1361,7 @@
                         }
                     }
                 }
-                return new this.element_block.template(element,group);
+                return new this.element_block.template(element,group,insert_position);
             },
             /*🟢*/find_outer(find,start,end=window.document.documentElement,true_callback,false_callback){
                 if(find instanceof window.HTMLElement&&start===find){
