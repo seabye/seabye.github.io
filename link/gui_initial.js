@@ -385,16 +385,16 @@
                     }
                 };
                 const move=(event_)=>{
-                    if(event_.target!==event.target){
+                    if(window.document.elementFromPoint(event_.x,event_.y)!==event.target){
                         event.target.classList.add('ic_active_outer');
                     }else{
                         event.target.classList.remove('ic_active_outer');
                     }
                 };
                 window.addEventListener('pointermove',move);
-                window.addEventListener('pointerup',remove,{once:true});
-                window.addEventListener('touchend',remove,{once:true});
-                window.addEventListener('dragend',remove,{once:true});
+                window.addEventListener('pointerup',remove);
+                window.addEventListener('touchend',remove);
+                window.addEventListener('dragend',remove);
             });
         }
     });
