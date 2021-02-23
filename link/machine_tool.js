@@ -1264,13 +1264,7 @@
                                     if(!mark_state){
                                         this.elements.push(element);
                                     }
-                                    // let match=true;
-                                    // if(mark_state){
-                                    //     if(!element.classList.contains(`${this.group}_hide`)){
-                                    //         match=false;
-                                    //     }
-                                    // }
-                                    // if(match){
+                                    // if(mark_state&&element.classList.contains(`${this.group}_hide`)){
                                         machine_tool.for(this.elements,(...data)=>{
                                             if(data[2]!==element&&data[2].classList.contains(`${this.group}_last`)){
                                                 machine_tool.element_state(data[2],`${this.group}_prev`,`${this.group}_last`,true);
@@ -1285,9 +1279,7 @@
                                         machine_tool.element_state(element,`${this.group}_add`,'',true);
                                     },1000/24);
                                     window.setTimeout(()=>{
-                                        // if(match){
-                                            machine_tool.element_state(element,'',`${this.group}_lock`,true);
-                                        // }
+                                        machine_tool.element_state(element,'',`${this.group}_lock`,true);
                                         this.lock=false;
                                     },wait);
                                     return element;
