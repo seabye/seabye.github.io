@@ -375,14 +375,18 @@
             window.addEventListener('pointerdown',(event)=>{
                 event.target.classList.add('ic_active',`ic_active_${event.button}`);
                 const remove=()=>{
-                    window.removeEventListener('pointermove',move);
-                    window.removeEventListener('pointerup',remove);
-                    window.removeEventListener('touchend',remove);
-                    window.removeEventListener('dragend',remove);
                     event.target.classList.remove('ic_active',`ic_active_${event.button}`,'ic_active_outer');
-                    if(!event.target.getAttribute('class')){
-                        event.target.removeAttribute('class');
-                    }
+                    window.setTimeout(()=>{
+                        window.removeEventListener('pointermove',move);
+                        window.removeEventListener('pointerup',remove);
+                        window.removeEventListener('touchend',remove);
+                        window.removeEventListener('dragend',remove);
+                        window.setTimeout(()=>{
+                            if(!event.target.getAttribute('class')){
+                                event.target.removeAttribute('class');
+                            }
+                        },1000);
+                    },1000/24);
                 };
                 const move=(event_)=>{
                     if(window.document.elementFromPoint(event_.x,event_.y)!==event.target){
