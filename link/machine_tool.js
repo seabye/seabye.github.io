@@ -616,6 +616,9 @@
                                                     };
                                                     data.target.parentNode.addEventListener('pointerup',this.listen_element.pointer_up[once_id],{once:true});
                                                     const remove_event=()=>{
+                                                        window.removeEventListener('pointerup',remove_event);
+                                                        window.removeEventListener('touchend',remove_event);
+                                                        window.removeEventListener('dragend',remove_event);
                                                         window.removeEventListener('pointerup',remove);
                                                         window.removeEventListener('touchend',remove);
                                                         window.removeEventListener('dragend',remove);

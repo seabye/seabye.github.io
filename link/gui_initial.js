@@ -391,7 +391,7 @@
                         event.target.classList.remove('ic_active_outer');
                     }
                 };
-                window.addEventListener('pointermove',machine_tool.throttle(move));
+                window.addEventListener('pointermove',move);
                 window.addEventListener('pointerup',remove);
                 window.addEventListener('touchend',remove);
                 window.addEventListener('dragend',remove);
