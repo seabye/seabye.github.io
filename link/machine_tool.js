@@ -1232,7 +1232,7 @@
                 this.element_block_.record.push(result);
                 return result;
             },
-            /*🟢*/element_block(element,group='group'){
+            /*🟢*/element_block(element,group='group',insert_position='beforeend'){
                 if(!this.element_block.template){
                     this.element_block.template=class template{
                         constructor(element,group){
@@ -1278,7 +1278,7 @@
                                         machine_tool.element_state(element,`${this.group}_last ${this.group}_lock`,`${this.group}_hide`,true);
                                     // }
                                     if(!mark_state){
-                                        this.element.insertAdjacentElement('beforeend',element);
+                                        this.element.insertAdjacentElement(insert_position,element);
                                     }
                                     window.setTimeout(()=>{
                                         machine_tool.element_state(element,`${this.group}_add`,'',true);
