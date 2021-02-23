@@ -1235,7 +1235,7 @@
             /*🟢*/element_block(element,group='group',insert_position='beforeend'){
                 if(!this.element_block.template){
                     this.element_block.template=class template{
-                        constructor(element,group){
+                        constructor(element,group,insert_position){
                             this.element=element;
                             this.group=group;
                             this.insert_position=insert_position;
