@@ -463,7 +463,7 @@
                             let parent_element=null;
                             const element_build=(data,insert_element,insert_position)=>{
                                 for(const item in data){
-                                    if(window.Object.prototype.toString.call(data)==='[object Array]'&&typeof data[item]==='function'){
+                                    if(typeof data[item]==='function'){
                                         data[item].element=parent_element;
                                     }else{
                                         const class_=item.trim().split(' ').filter((item)=>{
@@ -514,11 +514,11 @@
                             element_build(data,insert_element,insert_position);
                             const function_run=(data)=>{
                                 for(const item in data){
-                                    if(window.Object.prototype.toString.call(data)==='[object Array]'&&typeof data[item]==='function'){
+                                    if(typeof data[item]==='function'){
                                         data[item](elements,data[item].element);
                                     }else{
                                         if(data[item].function){
-                                            data[item].function(elements,data[item].element);
+                                            data[item].function(elements);
                                         }
                                     }
                                     for(const item_ in data[item]){
@@ -548,6 +548,34 @@
                 const match=/[\r\n\s]/g;
                 const id='id_'+this.java_string_hash_code((element!==window&&element!==window.document?this.element_path(element):'')+callback.toString().replace(match,'')).toString().replace(/[^0-9]/g,'');
                 switch(type){
+                    case'pointer_down':
+                        {
+                            switch(action){
+                                case'add':
+                                    {}
+                                    break;
+                                case'remove':
+                                    {}
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        break;
+                    case'pointer_move':
+                        {
+                            switch(action){
+                                case'add':
+                                    {}
+                                    break;
+                                case'remove':
+                                    {}
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        break;
                     case'pointer_up':
                         {
                             const id='id_'+this.java_string_hash_code((element!==window&&element!==window.document?this.element_path(element):'')+callback.toString().replace(match,'')+this.random()).toString().replace(/[^0-9]/g,'');
@@ -653,20 +681,6 @@
                                     {
                                         remove();
                                     }
-                                    break;
-                                default:
-                                    break;
-                            }
-                        }
-                        break;
-                    case'pointer_track':
-                        {
-                            switch(action){
-                                case'add':
-                                    {}
-                                    break;
-                                case'remove':
-                                    {}
                                     break;
                                 default:
                                     break;
