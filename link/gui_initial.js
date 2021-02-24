@@ -385,16 +385,15 @@
                             if(!event.target.getAttribute('class')){
                                 event.target.removeAttribute('class');
                             }
-                        },1000);
+                        },1000/24);
                     },1000/24);
                 };
                 const move=(event_)=>{
                     if(window.document.elementFromPoint(event_.x,event_.y)!==event.target&&!event.target.classList.contains('ic_active_outer')){
                         event.target.classList.add('ic_active_outer');
-                    }else{
-                        if(event.target.classList.contains('ic_active_outer')){
-                            event.target.classList.remove('ic_active_outer');
-                        }
+                    }
+                    if(window.document.elementFromPoint(event_.x,event_.y)===event.target&&event.target.classList.contains('ic_active_outer')){
+                        event.target.classList.remove('ic_active_outer');
                     }
                 };
                 window.addEventListener('pointermove',move);
