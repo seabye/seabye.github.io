@@ -389,11 +389,14 @@
                     },1000/24);
                 };
                 const move=(event_)=>{
-                    if(window.document.elementFromPoint(event_.x,event_.y)!==event.target&&!event.target.classList.contains('ic_active_outer')){
-                        event.target.classList.add('ic_active_outer');
-                    }
-                    if(window.document.elementFromPoint(event_.x,event_.y)===event.target&&event.target.classList.contains('ic_active_outer')){
-                        event.target.classList.remove('ic_active_outer');
+                    if(window.document.elementFromPoint(event_.x,event_.y)!==event.target){
+                        if(!event.target.classList.contains('ic_active_outer')){
+                            event.target.classList.add('ic_active_outer');
+                        }
+                    }else{
+                        if(event.target.classList.contains('ic_active_outer')){
+                            event.target.classList.remove('ic_active_outer');
+                        }
                     }
                 };
                 window.addEventListener('pointermove',move);
