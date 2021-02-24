@@ -80,11 +80,11 @@
             --ic_ve_color_highlight: #C9C9C9;
             --ic_ve_color_highlight2: #BDBDBD; */
             /* #B1B1B1 #A5A5A5 */
-            --ic_ve_color_background: #E1E1E1;
-            --ic_ve_color_foreground: #EDEDED;
-            --ic_ve_color_highlight: #F9F9F9;
-            --ic_ve_color_opposite: #DBDBDB;
-            --ic_ve_color_wireframe: #DBDBDB;
+            --ic_ve_color_background: #D5D5D5;
+            --ic_ve_color_foreground: #E1E1E1;
+            --ic_ve_color_highlight: #EDEDED;
+            --ic_ve_color_opposite: #C9C9C9;
+            --ic_ve_color_wireframe: #BDBDBD;
             --ic_ve_color_red: #CC0000;
             --ic_ve_color_green: #00BB00;
             --ic_ve_color_blue: #0088FF;
@@ -145,9 +145,9 @@
             --ic_ve_color_highlight2: #454545; */
             /* #515151 #5D5D5D */
             --ic_ve_color_background: #151515;
-            --ic_ve_color_foreground: #2D2D2D;
-            --ic_ve_color_highlight: #454545;
-            --ic_ve_color_opposite: #454545;
+            --ic_ve_color_foreground: #212121;
+            --ic_ve_color_highlight: #2D2D2D;
+            --ic_ve_color_opposite: #393939;
             --ic_ve_color_wireframe: #090909;
             --ic_ve_color_red: #CC0000;
             --ic_ve_color_green: #00BB00;
