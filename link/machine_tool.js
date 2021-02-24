@@ -463,7 +463,7 @@
                             let parent_element=null;
                             const element_build=(data,insert_element,insert_position)=>{
                                 for(const item in data){
-                                    if(typeof data[item]==='function'){
+                                    if(window.Object.prototype.toString.call(data)==='[object Array]'&&typeof data[item]==='function'){
                                         data[item].element=parent_element;
                                     }else{
                                         const class_=item.trim().split(' ').filter((item)=>{
@@ -514,11 +514,11 @@
                             element_build(data,insert_element,insert_position);
                             const function_run=(data)=>{
                                 for(const item in data){
-                                    if(typeof data[item]==='function'){
+                                    if(window.Object.prototype.toString.call(data)==='[object Array]'&&typeof data[item]==='function'){
                                         data[item](elements,data[item].element);
                                     }else{
                                         if(data[item].function){
-                                            data[item].function(elements);
+                                            data[item].function(elements,data[item].element);
                                         }
                                     }
                                     for(const item_ in data[item]){
