@@ -318,6 +318,9 @@
             user-select: text;
             cursor: auto;
         }
+        input {
+            text-overflow: ellipsis;
+        }
             /* input */
                 /* type search */
                 input[type="search"]::-webkit-search-decoration,
