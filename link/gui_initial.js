@@ -200,6 +200,9 @@
             if(user_agent.match('Safari')&&!user_agent.match('Chrome')&&!user_agent.match('Edg')){class_.add('ic_nr_browser_safari');}
             if(user_agent.match('Chrome')&&!user_agent.match('Edg')){class_.add('ic_nr_browser_chrome');}
             if(user_agent.match('Edg')){class_.add('ic_nr_browser_edge');}
+            if(window.document.createElement('video').canPlayType('application/vnd.apple.mpegurl')){
+                class_.add('ic_nr_video_m3u8');
+            }
             if(window.location.search.replace(/^\?/,'').split('&').includes('pwa')){
                 class_.add('ic_nr_pwa');
             }
