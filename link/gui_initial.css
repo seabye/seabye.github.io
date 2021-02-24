@@ -80,10 +80,10 @@
             --ic_ve_color_highlight: #C9C9C9;
             --ic_ve_color_highlight2: #BDBDBD; */
             /* #B1B1B1 #A5A5A5 */
-            --ic_ve_color_background: #C9C9C9;
-            --ic_ve_color_foreground: #E1E1E1;
+            --ic_ve_color_background: #E1E1E1;
+            --ic_ve_color_foreground: #EDEDED;
             --ic_ve_color_highlight: #F9F9F9;
-            --ic_ve_color_opposite: #BDBDBD;
+            --ic_ve_color_opposite: #D5D5D5;
             --ic_ve_color_red: #CC0000;
             --ic_ve_color_green: #00BB00;
             --ic_ve_color_blue: #0088FF;
