@@ -518,7 +518,7 @@
                                         data[item](elements,data[item].element);
                                     }else{
                                         if(data[item].function){
-                                            data[item].function(elements);
+                                            data[item].function(elements,data[item].element);
                                         }
                                     }
                                     for(const item_ in data[item]){

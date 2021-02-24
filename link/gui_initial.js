@@ -378,12 +378,12 @@
             window.addEventListener('pointerdown',(event)=>{
                 event.target.classList.add('ic_active',`ic_active_${event.button}`);
                 const remove=()=>{
-                    event.target.classList.remove('ic_active',`ic_active_${event.button}`,'ic_active_outer');
+                    window.removeEventListener('pointermove',move);
+                    window.removeEventListener('pointerup',remove);
+                    window.removeEventListener('touchend',remove);
+                    window.removeEventListener('dragend',remove);
                     window.setTimeout(()=>{
-                        window.removeEventListener('pointermove',move);
-                        window.removeEventListener('pointerup',remove);
-                        window.removeEventListener('touchend',remove);
-                        window.removeEventListener('dragend',remove);
+                        event.target.classList.remove('ic_active',`ic_active_${event.button}`,'ic_active_outer');
                         window.setTimeout(()=>{
                             if(!event.target.getAttribute('class')){
                                 event.target.removeAttribute('class');
