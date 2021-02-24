@@ -84,6 +84,7 @@
             --ic_ve_color_foreground: #EDEDED;
             --ic_ve_color_highlight: #F9F9F9;
             --ic_ve_color_opposite: #D5D5D5;
+            --ic_ve_color_wireframe: #D5D5D5;
             --ic_ve_color_red: #CC0000;
             --ic_ve_color_green: #00BB00;
             --ic_ve_color_blue: #0088FF;
@@ -146,7 +147,8 @@
             --ic_ve_color_background: #151515;
             --ic_ve_color_foreground: #2D2D2D;
             --ic_ve_color_highlight: #454545;
-            --ic_ve_color_opposite: #515151;
+            --ic_ve_color_opposite: #5D5D5D;
+            --ic_ve_color_wireframe: #090909;
             --ic_ve_color_red: #CC0000;
             --ic_ve_color_green: #00BB00;
             --ic_ve_color_blue: #0088FF;
