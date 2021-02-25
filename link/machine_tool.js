@@ -1161,6 +1161,8 @@
                                     // }
                                     if(!mark_state){
                                         this.element.insertAdjacentElement(this.insert_position,element);
+                                        window.document.activeElement.blur();
+                                        window.document.activeElement.blur();
                                         window.document.documentElement.focus();
                                     }
                                     window.setTimeout(()=>{
@@ -1206,6 +1208,7 @@
                                     machine_tool.element_state(element,`${this.group}_remove`,'',true);
                                     window.setTimeout(()=>{
                                         machine_tool.element_state(element,`${this.group}_hide`,`${this.group}_last ${this.group}_add ${this.group}_prev ${this.group}_remove`,true);
+                                        window.document.activeElement.blur();
                                         window.document.documentElement.focus();
                                         this.lock=false;
                                     },wait);
@@ -1240,6 +1243,7 @@
                                     window.setTimeout(()=>{
                                         machine_tool.element_state(element,'',`${this.group}_last ${this.group}_add ${this.group}_prev ${this.group}_hide ${this.group}_remove`,true);
                                         element?.parentElement.removeChild(element);
+                                        window.document.activeElement.blur();
                                         window.document.documentElement.focus();
                                         this.lock=false;
                                     },wait);
