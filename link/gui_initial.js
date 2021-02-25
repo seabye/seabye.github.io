@@ -406,6 +406,7 @@
                 },350/2);
                 const remove=()=>{
                     window.removeEventListener('pointermove',move);
+                    window.removeEventListener('touchmove',move);
                     window.removeEventListener('pointerup',remove);
                     window.removeEventListener('touchend',remove);
                     window.removeEventListener('dragend',remove);
@@ -434,6 +435,7 @@
                     }
                 };
                 window.addEventListener('pointermove',move);
+                window.addEventListener('touchmove',move);
                 window.addEventListener('pointerup',remove);
                 window.addEventListener('touchend',remove);
                 window.addEventListener('dragend',remove);
