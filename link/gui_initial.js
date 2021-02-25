@@ -363,7 +363,6 @@
             machine_tool.loop(()=>{
                 for(const item of window.document.documentElement.children){
                     if(item.localName==='body'){
-                        window.document.head.setAttribute('tabindex','-1');
                         window.document.body.setAttribute('tabindex','-1');
                         return true;
                     }
