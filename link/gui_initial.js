@@ -277,7 +277,7 @@
                     window.document.documentElement.classList.remove('ic_nr_media_orientation_portrait');
                     window.document.documentElement.classList.add('ic_nr_media_orientation_landscape');
                 }
-                if(window.document.documentElement.classList.value.match(/ic_nr_system_ios|ic_nr_browser_safari/i)){
+                if(window.document.documentElement.classList.value.match(/ic_nr_system_ios|ic_nr_browser_safari/)){
                     window.setTimeout(()=>{
                         window.document.body.style.setProperty('margin','1px');
                         window.setTimeout(()=>{
@@ -331,7 +331,7 @@
             if(this.dataset.config.head_icon){
                 window.document.head.insertAdjacentHTML('beforeend',`<link rel="icon" type="image/png" href="${this.dataset.config.head_icon}">`);
             }
-            if(window.document.documentElement.classList.value.match(/ic_nr_system_ios|ic_nr_browser_safari/i)){
+            if(window.document.documentElement.classList.value.match(/ic_nr_system_ios|ic_nr_browser_safari/)){
                 if(this.dataset.config.head_icon_apple){
                     window.document.head.insertAdjacentHTML('beforeend',`<link rel="apple-touch-icon" href="${this.dataset.config.head_icon_apple}">`);
                 }
@@ -376,7 +376,7 @@
             });
         },
         /*🟢*/hov(){
-            window.addEventListener('pointerdown',()=>{});
+            window.addEventListener('touchstart',()=>{});
         },
         /*🟢*/no$touchpad$zoom(){
             window.addEventListener('wheel',(event)=>{
