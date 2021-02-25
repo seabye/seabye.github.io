@@ -1161,6 +1161,7 @@
                                     // }
                                     if(!mark_state){
                                         this.element.insertAdjacentElement(this.insert_position,element);
+                                        element.focus();
                                     }
                                     window.setTimeout(()=>{
                                         machine_tool.element_state(element,`${this.group}_add`,'',true);
@@ -1205,6 +1206,7 @@
                                     machine_tool.element_state(element,`${this.group}_remove`,'',true);
                                     window.setTimeout(()=>{
                                         machine_tool.element_state(element,`${this.group}_hide`,`${this.group}_last ${this.group}_add ${this.group}_prev ${this.group}_remove`,true);
+                                        element.focus();
                                         this.lock=false;
                                     },wait);
                                     let last=null;
@@ -1238,6 +1240,7 @@
                                     window.setTimeout(()=>{
                                         machine_tool.element_state(element,'',`${this.group}_last ${this.group}_add ${this.group}_prev ${this.group}_hide ${this.group}_remove`,true);
                                         element?.parentElement.removeChild(element);
+                                        element.focus();
                                         this.lock=false;
                                     },wait);
                                     let last=null;
