@@ -398,7 +398,7 @@
         /*🔴*/partial$scroll(){},
         /*🟢*/dot$active(){
             window.addEventListener('pointerdown',(event)=>{
-                event.target.classList.add('ic_active',`ic_active_${event.button}`);
+                event.target.classList.add('ic_active',`ic_active_${event.button}`,`ic_active_${event.pointerType}`);
                 if(event.pointerType==='mouse'){
                     event.target.classList.add('ic_active_down');
                 }else{
@@ -415,7 +415,7 @@
                     window.removeEventListener('touchend',remove);
                     window.removeEventListener('dragend',remove);
                     window.setTimeout(()=>{
-                        event.target.classList.remove('ic_active',`ic_active_${event.button}`,'ic_active_down','ic_active_move','ic_active_outer');
+                        event.target.classList.remove('ic_active',`ic_active_${event.button}`,`ic_active_${event.pointerType}`,'ic_active_down','ic_active_move','ic_active_outer');
                         window.setTimeout(()=>{
                             if(!event.target.getAttribute('class')){
                                 event.target.removeAttribute('class');
@@ -424,9 +424,11 @@
                     },1000/24);
                 };
                 const move=(event_)=>{
+                    if(!event.target.classList.contains('ic_active_move')){
+                        event.target.classList.add('ic_active_move');
+                    }
                     if(event.target.classList.contains('ic_active_down')){
                         event.target.classList.remove('ic_active_down');
-                        event.target.classList.add('ic_active_move');
                     }
                     if(window.document.elementFromPoint(event_.x||event_.changedTouches[0].clientX,event_.y||event_.changedTouches[0].clientY)!==event.target){
                         if(!event.target.classList.contains('ic_active_outer')){
