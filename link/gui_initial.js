@@ -399,11 +399,15 @@
         /*🟢*/dot$active(){
             window.addEventListener('pointerdown',(event)=>{
                 event.target.classList.add('ic_active',`ic_active_${event.button}`);
-                window.setTimeout(()=>{
-                    if(event.target.classList.contains('ic_active')&&!event.target.classList.contains('ic_active_move')){
-                        event.target.classList.add('ic_active_down');
-                    }
-                },350);
+                if(event.pointerType==='mouse'){
+                    event.target.classList.add('ic_active_down');
+                }else{
+                    window.setTimeout(()=>{
+                        if(event.target.classList.contains('ic_active')&&!event.target.classList.contains('ic_active_move')){
+                            event.target.classList.add('ic_active_down');
+                        }
+                    },350);
+                }
                 const remove=()=>{
                     window.removeEventListener('pointermove',move);
                     window.removeEventListener('touchmove',move);
@@ -424,7 +428,7 @@
                         event.target.classList.remove('ic_active_down');
                         event.target.classList.add('ic_active_move');
                     }
-                    if(window.document.elementFromPoint(event_.x,event_.y)!==event.target){
+                    if(window.document.elementFromPoint(event_.x||event_.changedTouches[0].clientX,event_.y||event_.changedTouches[0].clientY)!==event.target){
                         if(!event.target.classList.contains('ic_active_outer')){
                             event.target.classList.add('ic_active_outer');
                         }
