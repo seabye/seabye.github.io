@@ -372,58 +372,6 @@ export const _={
             window.console.log('listen_element()','observe_resize',data);
         });
     },
-    element_block_(){
-        machine_tool.element_create('',{class:'er0'},window.document.body,undefined,undefined,(data)=>{
-            const er=machine_tool.element_block_(false,data,'er');
-            er.add('',{class:'er1'});
-            const er2=er.add('',{class:'er2 fr0'});
-                const fr=machine_tool.element_block_(false,er2,'fr');
-                fr.add('',{class:'fr1'});
-                const fr2=fr.add('',{class:'fr2 gr0 hr0 ir0'});
-                    const gr=machine_tool.element_block_(false,fr2,'gr','gghhii');
-                    const hr=machine_tool.element_block_(false,fr2,'hr','gghhii');
-                    const ir=machine_tool.element_block_(false,fr2,'ir','gghhii');
-                    gr.add('',{class:'gr1'});
-                    gr.add('',{class:'gr2'});
-                    hr.add('',{class:'hr1'});
-                    hr.add('',{class:'hr2'});
-                    hr.add('',{class:'hr3'});
-                    ir.add('',{class:'ir1'});
-                    ir.add('',{class:'ir2'});
-                    ir.add('',{class:'ir3'});
-            er.add('',{class:'er3'});
-                fr.add('',{class:'fr3'});
-                    gr.add('',{class:'gr3'});
-// er.remove('',{class:'er3'});
-// fr.remove('',{class:'fr3'});
-// gr.remove('',{class:'gr3'});
-//     hr.remove('',{class:'hr3'});
-//     gr.remove('',{class:'gr2'});
-//     gr.remove('',{class:'gr1'});
-            // window.setTimeout(()=>{
-            //     er.remove();
-            //     fr.remove();
-            //     gr.remove();
-            //     window.setTimeout(()=>{
-            //         er.add('',{class:'er4'});
-            //         fr.add('',{class:'fr4'});
-            //         gr.add('',{class:'gr4'});
-            //     },3000);
-            // },3000);
-            // er0     - er0
-            // er1     - er1
-            // er2+fr0 - er2+fr0
-            // er3     -     fr1
-            // fr1     -     fr2+gr0
-            // fr2+gr0 -         gr1
-            // fr3     -         gr2
-            // gr1     -         gr3
-            // gr2     -     fr3
-            // gr3     - er3
-            // window.console.log(er.add);
-            // window.console.log(er.remove);
-        });
-    },
     element_block(){
         const block=machine_tool.element_block(window.document.body,'block');
         block.add(machine_tool.element_create('',{class:'b_1'}),1);
