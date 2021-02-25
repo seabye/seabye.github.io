@@ -424,11 +424,11 @@
                     },1000/24);
                 };
                 const move=(event_)=>{
-                    if(!event.target.classList.contains('ic_active_move')){
-                        event.target.classList.add('ic_active_move');
-                    }
                     if(event.target.classList.contains('ic_active_down')){
                         event.target.classList.remove('ic_active_down');
+                    }
+                    if(!event.target.classList.contains('ic_active_move')){
+                        event.target.classList.add('ic_active_move');
                     }
                     if(window.document.elementFromPoint(event_.x||event_.changedTouches[0].clientX,event_.y||event_.changedTouches[0].clientY)!==event.target){
                         if(!event.target.classList.contains('ic_active_outer')){
