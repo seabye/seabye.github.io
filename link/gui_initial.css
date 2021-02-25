@@ -94,6 +94,10 @@
             --ic_ve_color_blue_translucent: #0088FF99;
             --ic_ve_color_orange_translucent: #FF880099;
         }
+        html.ic_nr_media_prefers_color_scheme_light.ic_nr_system_ios,
+        html.ic_nr_media_prefers_color_scheme_light.ic_nr_system_android {
+            --ic_ve_color_background: #FFFFFF;
+        }
         html.ic_nr_media_prefers_color_scheme_dark {
             --ic_ve_color_white: #000000;
             --ic_ve_color_white_transparent: rgba(0,0,0,0);
@@ -157,6 +161,10 @@
             --ic_ve_color_green_translucent: #00BB0099;
             --ic_ve_color_blue_translucent: #0088FF99;
             --ic_ve_color_orange_translucent: #FF880099;
+        }
+        html.ic_nr_media_prefers_color_scheme_dark.ic_nr_system_ios,
+        html.ic_nr_media_prefers_color_scheme_dark.ic_nr_system_android {
+            --ic_ve_color_background: #000000;
         }
         /* system_brand */
             /* other */
