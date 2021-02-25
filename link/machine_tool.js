@@ -1162,9 +1162,10 @@
                                     if(!mark_state){
                                         this.element.insertAdjacentElement(this.insert_position,element);
                                     }
+                                    window.document.activeElement.blur();
                                     window.setTimeout(()=>{
+                                        window.document.activeElement.blur();
                                         machine_tool.element_state(element,`${this.group}_add`,'',true);
-                                        window.document.documentElement.focus();
                                     },1000/24);
                                     window.setTimeout(()=>{
                                         machine_tool.element_state(element,'',`${this.group}_lock`,true);
