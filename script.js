@@ -20,7 +20,7 @@
                         <div style="font-size: calc(100vmax/25); transform: rotateX(-15deg); text-align: center; perspective: 50vw;">
                             <div style="transform: rotateY(-60deg);">
                                 <a href="//seabye.com">seabye.com</a>
-                                <span style="font-size: 38.2%;">🔴 0%</span>
+                                <span style="font-size: 38.2%;">🔴 10%</span>
                                 <div style="color: var(--ic_ve_color_black2);">
                                     <span style="font-size: 61.8%;">gui_initial</span>
                                     <a href="//seabye.com/link/gui_initial.css">.css</a>
@@ -43,7 +43,7 @@
                             </div>
                             <div style="color: var(--ic_ve_color_black7); transform: rotateY(-15deg);">
                                 <a>_</a>
-                                <span style="font-size: 38.2%;">🔴 40%</span>
+                                <span style="font-size: 38.2%;">🟠 40%</span>
                             </div>
                             <div style="font-size: 125%; color: rgba(255,0,0,0.1875);">Hello, World!</div>
                             <div style="transform: rotateY(30deg);">
