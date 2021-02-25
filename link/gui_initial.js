@@ -398,7 +398,10 @@
         /*🔴*/partial$scroll(){},
         /*🟢*/dot$active(){
             window.addEventListener('pointerdown',(event)=>{
-                event.target.classList.add('ic_active',`ic_active_${event.button}`,'ic_active_down');
+                event.target.classList.add('ic_active',`ic_active_${event.button}`);
+                window.setTimeout(()=>{
+                    event.target.classList.add('ic_active_down');
+                },350/2);
                 const remove=()=>{
                     window.removeEventListener('pointermove',move);
                     window.removeEventListener('pointerup',remove);
