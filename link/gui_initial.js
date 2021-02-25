@@ -400,7 +400,7 @@
             window.addEventListener('pointerdown',(event)=>{
                 event.target.classList.add('ic_active',`ic_active_${event.button}`);
                 window.setTimeout(()=>{
-                    if(!event.target.classList.contains('ic_active_move')){
+                    if(event.target.classList.contains('ic_active')&&!event.target.classList.contains('ic_active_move')){
                         event.target.classList.add('ic_active_down');
                     }
                 },350/2);
