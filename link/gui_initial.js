@@ -359,7 +359,7 @@
         /*🔴*/no$back(){},
         /*🔴*/no$touch$back(){},
         /*🔴*/partial$scroll(){},
-        /*🔴*/form(){
+        /*🟢*/form$input(){
             window.addEventListener('keydown',(event)=>{
                 if(event.key==='Enter'&&event.target.localName==='input'){
                     event.target.blur();
