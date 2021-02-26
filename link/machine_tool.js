@@ -144,7 +144,7 @@
                                     case'[object Object]':
                                         {
                                             let count=0;
-                                            for(const [key,value]of window.Object.entries(data)){
+                                            for(const[key,value]of window.Object.entries(data)){
                                                 if(typeof condition_depth==='number'){
                                                     if(condition_depth===depth){
                                                         callback(count,key,value,depth,window.Object.prototype.toString.call(value)==='[object Object]'?'object':window.Object.prototype.toString.call(value)==='[object Array]'?'array':depth);
@@ -209,7 +209,7 @@
                                         const run=(data)=>{
                                             let next=[];
                                             let count=0;
-                                            for(const [key,value]of window.Object.entries(data)){
+                                            for(const[key,value]of window.Object.entries(data)){
                                                 if(typeof condition_depth==='number'){
                                                     if(condition_depth===depth){
                                                         callback(count,key,value,depth,window.Object.prototype.toString.call(value)==='[object Object]'?'object':depth);
@@ -405,8 +405,8 @@
                             }
                             const element=window.document.createElement(tag);
                             if(attribute){
-                                for(const key in attribute){
-                                    element.setAttribute(key,attribute[key]);
+                                for(const[key,value]of window.Object.entries(attribute)){
+                                    element.setAttribute(key,value);
                                 }
                             }
                             if(content){
@@ -450,7 +450,7 @@
                             //     insert_position<'beforebegin','afterbegin','beforeend','afterend',undefined='beforeend'>,
                             //     elements<elements,undefined=elements>,
                             //     callback<function(elements),undefined=false>
-                            const data=arg[0];
+                            const object=arg[0];
                             const insert_element=arg[1];
                             let insert_position=arg[2];
                             let elements=arg[3];
@@ -461,8 +461,86 @@
                             if(!elements){
                                 elements={};
                             }
+                            // let element_build_start=true;
                             let parent_element=null;
-                            const element_build=(data,insert_element,insert_position)=>{
+                            const element_build=(data,insert_element,insert_position,key='')=>{
+                                // if(element_build_start){
+                                //     element_build_start=false;
+                                //     for(const[key,value]of window.Object.entries(data)){
+                                //         element_build(value,insert_element,insert_position,key);
+                                //     }
+                                // }else{
+                                //     switch(window.Object.prototype.toString.call(data)){
+                                //         case'[object Array]':
+                                //             {
+                                //                 const element=this.element_create('div',undefined,insert_element,insert_position);
+                                //                 for(const value of data){
+                                //                     if(typeof value==='function'){
+                                //                         if(!value.name){
+                                //                             value.element=element;
+                                //                         }
+                                //                     }else{
+                                //                         element_build(value,element,'beforeend',key);
+                                //                     }
+                                //                 }
+                                //             }
+                                //             break;
+                                //         case'[object Object]':
+                                //             {
+                                //                 const class_=key.trim().split(' ').filter((item)=>{
+                                //                     return window.isNaN(window.parseInt(item));
+                                //                 }).join(' ');
+                                //                 if(data.element){
+                                //                     if(!data.element[0]){
+                                //                         data.element[0]='div';
+                                //                     }
+                                //                     if(data.element[1]){
+                                //                         if(data.element[1].class){
+                                //                             data.element[1].class=window.Array.from(new window.Set(key.trim().split(' ').filter((item)=>{
+                                //                                 return window.isNaN(window.parseInt(item));
+                                //                             }).concat(data.element[1].class.trim().split(' ')))).join(' ');
+                                //                         }else{
+                                //                             if(class_){
+                                //                                 data.element[1].class=class_;
+                                //                             }
+                                //                         }
+                                //                     }else{
+                                //                         if(class_){
+                                //                             data.element[1]={class:class_};
+                                //                         }
+                                //                     }
+                                //                 }else{
+                                //                     data.element=['div'];
+                                //                     if(class_){
+                                //                         data.element[1]={class:class_};
+                                //                     }
+                                //                 }
+                                //                 const element=this.element_create(data.element[0],data.element[1]?data.element[1]:undefined,insert_element,insert_position,data.element[2]?data.element[2]:undefined,data.element[3]?data.element[3]:undefined);
+                                //                 if(window.isNaN(key.split(' ')[0])||key.split(' ')[0]===''){
+                                //                     elements[key.split(' ')[0]]=element;
+                                //                 }
+                                //                 for(const[key,value]of window.Object.entries(data)){
+                                //                     if(key==='function'&&value.name==='function'){
+                                //                         value.element=element;
+                                //                     }
+                                //                     if(typeof value!=='function'&&key!=='element'){
+                                //                         element_build(value,element,'beforeend',key);
+                                //                     }
+                                //                 }
+                                //                 // for(const key in data){
+                                //                 //     if(key==='function'&&data[key].name==='function'){
+                                //                 //         data[key].element=element;
+                                //                 //     }
+                                //                 //     if(typeof data[key]!=='function'&&key!=='element'){
+                                //                 //         element_build(data[key],element,'beforeend',key);
+                                //                 //     }
+                                //                 // }
+                                //             }
+                                //             break;
+                                //         default:
+                                //             break;
+                                //     }
+                                // }
                                 for(const key in data){
                                     if(typeof data[key]==='function'){
                                         data[key].element=parent_element;
@@ -512,8 +590,42 @@
                                     }
                                 }
                             };
-                            element_build(data,insert_element,insert_position);
+                            element_build(object,insert_element,insert_position);
+                            // let function_run_start=true;
                             const function_run=(data)=>{
+                                // if(function_run_start){
+                                //     function_run_start=false;
+                                //     for(const value of data){
+                                //         function_run(value);
+                                //     }
+                                // }else{
+                                //     for(const[key,value]of window.Object.entries(data)){
+                                //         if(typeof value==='function'){
+                                //             switch(window.Object.prototype.toString.call(data)){
+                                //                 case'[object Array]':
+                                //                     {
+                                //                         if(!value.name){
+                                //                             value.call(value,elements);
+                                //                         }
+                                //                     }
+                                //                     break;
+                                //                 case'[object Object]':
+                                //                     {
+                                //                         if(key==='function'&&value.name==='function'){
+                                //                             value.call(value,elements);
+                                //                         }
+                                //                     }
+                                //                     break;
+                                //                 default:
+                                //                     break;
+                                //             }
+                                //         }else{
+                                //             if(key!=='element'){
+                                //                 function_run(value);
+                                //             }
+                                //         }
+                                //     }
+                                // }
                                 for(const key in data){
                                     if(typeof data[key]==='function'){
                                         data[key](elements,data[key].element);
@@ -531,7 +643,7 @@
                                     }
                                 }
                             };
-                            function_run(data);
+                            function_run(object);
                             if(callback){
                                 callback(elements);
                             }

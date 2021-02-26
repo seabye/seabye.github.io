@@ -2,6 +2,47 @@ import{machine_tool}from'./machine_tool.js';
 export const _={
     _start(){
         window.console.log('#### start machine_tool_demo.js');
+        // machine_tool.element_create([
+        //     {
+        //         element:['span',{class:'one'},'?'],
+        //         function(els){
+        //             this.element.classList.add('is_me');
+        //             window.console.log(this.element,els);
+        //         },
+        //         '':{},
+        //         '1':{
+        //             function(els){
+        //                 this.element.classList.add('_1');
+        //                 window.console.log('1',this.element,els);
+        //             }
+        //         },
+        //         '2':{
+        //             function(els){
+        //                 this.element.classList.add('_2');
+        //                 window.console.log('2',this.element,els);
+        //             }
+        //         }
+        //     },
+        //     [
+        //         function(els){
+        //             this.element.classList.add('is_me');
+        //             window.console.log(this.element,els);
+        //         },
+        //         [],
+        //         [
+        //             function(els){
+        //                 this.element.classList.add('_1');
+        //                 window.console.log(this.element,els);
+        //             }
+        //         ],
+        //         [
+        //             function(els){
+        //                 this.element.classList.add('_2');
+        //                 window.console.log(this.element,els);
+        //             }
+        //         ]
+        //     ]
+        // ],window.document.body);
     },
     loop(){
         machine_tool.loop(()=>{
@@ -316,15 +357,18 @@ export const _={
         },window.document.body);
     },
     listen_target(){
+        // machine_tool.listen_target('add',window.document.documentElement,'pointer_down',()=>{
+        //     window.console.log('listen_target()','pointer_down');
+        // });
+        // machine_tool.listen_target('add',window.document.documentElement,'pointer_move',()=>{
+        //     window.console.log('listen_target()','pointer_move');
+        // });
         machine_tool.listen_target('add',window.document.documentElement,'pointerup',()=>{
             window.console.log('listen_target()','pointerup');
         });
         machine_tool.listen_target('add',window.document.documentElement,'pointer_up',()=>{
             window.console.log('listen_target()','pointer_up');
         },undefined,0);
-        // machine_tool.listen_target('add',window.document.documentElement,'pointer_track',()=>{
-        //     window.console.log('listen_target()','pointer_track');
-        // });
         machine_tool.listen_target('add',this.elements.target,'observe_mutation',()=>{
             window.console.log('listen_target()','observe_mutation');
             if(this.elements.target.classList.contains('open_state')){
