@@ -144,18 +144,18 @@
                                     case'[object Object]':
                                         {
                                             let count=0;
-                                            for(const[key,value]of window.Object.entries(data)){
+                                            for(const key in data){
                                                 if(typeof condition_depth==='number'){
                                                     if(condition_depth===depth){
-                                                        callback(count,key,value,depth,window.Object.prototype.toString.call(value)==='[object Object]'?'object':window.Object.prototype.toString.call(value)==='[object Array]'?'array':depth);
+                                                        callback(count,key,data[key],depth,window.Object.prototype.toString.call(data[key])==='[object Object]'?'object':window.Object.prototype.toString.call(data[key])==='[object Array]'?'array':depth);
                                                         count+=1;
                                                     }
                                                 }else{
-                                                    callback(count,key,value,depth,window.Object.prototype.toString.call(value)==='[object Object]'?'object':window.Object.prototype.toString.call(value)==='[object Array]'?'array':depth);
+                                                    callback(count,key,data[key],depth,window.Object.prototype.toString.call(data[key])==='[object Object]'?'object':window.Object.prototype.toString.call(data[key])==='[object Array]'?'array':depth);
                                                     count+=1;
                                                 }
-                                                if(window.Object.prototype.toString.call(value)==='[object Object]'||window.Object.prototype.toString.call(value)==='[object Array]'){
-                                                    next.push(value);
+                                                if(window.Object.prototype.toString.call(data[key])==='[object Object]'||window.Object.prototype.toString.call(data[key])==='[object Array]'){
+                                                    next.push(data[key]);
                                                 };
                                             }
                                         }
@@ -209,18 +209,18 @@
                                         const run=(data)=>{
                                             let next=[];
                                             let count=0;
-                                            for(const[key,value]of window.Object.entries(data)){
+                                            for(const key in data){
                                                 if(typeof condition_depth==='number'){
                                                     if(condition_depth===depth){
-                                                        callback(count,key,value,depth,window.Object.prototype.toString.call(value)==='[object Object]'?'object':depth);
+                                                        callback(count,key,data[key],depth,window.Object.prototype.toString.call(data[key])==='[object Object]'?'object':depth);
                                                         count+=1;
                                                     }
                                                 }else{
-                                                    callback(count,key,value,depth,window.Object.prototype.toString.call(value)==='[object Object]'?'object':depth);
+                                                    callback(count,key,data[key],depth,window.Object.prototype.toString.call(data[key])==='[object Object]'?'object':depth);
                                                     count+=1;
                                                 }
-                                                if(window.Object.prototype.toString.call(value)==='[object Object]'){
-                                                    next.push(value);
+                                                if(window.Object.prototype.toString.call(data[key])==='[object Object]'){
+                                                    next.push(data[key]);
                                                 };
                                             }
                                             if(next.length){
