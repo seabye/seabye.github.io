@@ -92,55 +92,16 @@
 // #import
 // #variable
 // #method
-    // machine_tool of machine_tool.js
-    const machine_tool={
-        // base
-            /*🟢*/throttle(callback,wait=1000/24,first=false){
-                let timeout=null;
-                return function(...argument){
-                    const set=()=>{
-                        timeout=window.setTimeout(()=>{
-                            timeout=null;
-                            callback.apply(this,argument);
-                        },wait);
-                    };
-                    if(first){
-                        first=false;
-                        callback.apply(this,argument);
-                        set();
-                    }else{
-                        if(!timeout){
-                            set();
-                        }
-                    }
-                };
-            },
-            /*🟢*/loop(condition,wait=1000/24){
-                const result=condition();
-                if(!result){
-                    window.setTimeout(()=>{
-                        this.loop(condition,wait);
-                    },wait);
-                }else{
-                    return result;
-                }
-            },
-            /*🟢*/run_object(object){
-                for(const item in object){
-                    object[item]();
-                }
-            }
-    };
 // #build
     // gui_initial
-    machine_tool.run_object({
+    const gui_initial={
         /*🟢*/dataset(){
-            for(const item of window.document.scripts){
-                if(item.dataset.gui_initial){
-                    this.dataset.config=window.JSON.parse(item.dataset.gui_initial.replace(/'/g,'"'));
-                    item.removeAttribute('data-gui_initial');
-                    this.dataset.config.head_gui_initial_js=item;
-                    this.dataset.config.head_gui_initial_css_href=item.getAttribute('src').replace('.js','.css');
+            for(const value of window.document.scripts){
+                if(value.dataset.gui_initial){
+                    this.dataset.config=window.JSON.parse(value.dataset.gui_initial.replace(/'/g,'"'));
+                    value.removeAttribute('data-gui_initial');
+                    this.dataset.config.head_gui_initial_js=value;
+                    this.dataset.config.head_gui_initial_css_href=value.getAttribute('src').replace('.js','.css');
                     break;
                 }
             }
@@ -155,26 +116,28 @@
             },{once:true});
         },
         /*🟢*/start$opacity(){
-            machine_tool.loop(()=>{
-                for(const item of window.document.documentElement.children){
-                    if(item.localName==='body'){
+            const loop=()=>{
+                for(const value of window.document.documentElement.children){
+                    if(value.localName==='body'){
                         window.document.body.style.setProperty('opacity','0');
-                        return true;
+                        return false;
                     }
                 }
-                return false;
-            },1000/60);
+                window.setTimeout(loop,1000/24);
+            };
+            loop();
             window.addEventListener('load',()=>{
-                machine_tool.loop(()=>{
+                const loop=()=>{
                     if(window.document.body.style.getPropertyValue('opacity')==='0'){
                         window.document.body.style.removeProperty('opacity');
                         if(!window.document.body.style[0]){
                             window.document.body.removeAttribute('style');
                         }
-                        return true;
+                        return false;
                     }
-                    return false;
-                },1000/60);
+                    window.setTimeout(loop,1000/24);
+                };
+                loop();
             },{once:true});
         },
         /*🟢*/write$service$worker(){
@@ -360,15 +323,16 @@
         },
         /*🟢*/tab$index(){
             window.document.documentElement.setAttribute('tabindex','-1');
-            machine_tool.loop(()=>{
-                for(const item of window.document.documentElement.children){
-                    if(item.localName==='body'){
+            const loop=()=>{
+                for(const value of window.document.documentElement.children){
+                    if(value.localName==='body'){
                         window.document.body.setAttribute('tabindex','-1');
-                        return true;
+                        return false;
                     }
                 }
-                return false;
-            },1000/60);
+                window.setTimeout(loop,1000/24);
+            };
+            loop();
         },
         /*🟢*/no$context$menu(){
             window.addEventListener('contextmenu',(event)=>{
@@ -395,6 +359,13 @@
         /*🔴*/no$back(){},
         /*🔴*/no$touch$back(){},
         /*🔴*/partial$scroll(){},
+        /*🔴*/form(){
+            window.addEventListener('keydown',(event)=>{
+                if(event.key==='Enter'&&event.target.localName==='input'){
+                    event.target.blur();
+                }
+            });
+        },
         /*🟢*/dot$active(){
             window.addEventListener('pointerdown',(event)=>{
                 event.target.classList.add('ic_active',`ic_active_${event.button}`,`ic_active_${event.pointerType}`);
@@ -446,7 +417,10 @@
                 window.addEventListener('dragend',remove);
             });
         }
-    });
+    };
+    for(const key in gui_initial){
+        gui_initial[key]();
+    }
 // #debug
 // #after
     // console

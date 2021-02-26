@@ -315,18 +315,18 @@ export const _={
             }
         },window.document.body);
     },
-    listen_element(){
-        machine_tool.listen_element('add',window.document.documentElement,'pointerup',()=>{
-            window.console.log('listen_element()','pointerup');
+    listen_target(){
+        machine_tool.listen_target('add',window.document.documentElement,'pointerup',()=>{
+            window.console.log('listen_target()','pointerup');
         });
-        machine_tool.listen_element('add',window.document.documentElement,'pointer_up',()=>{
-            window.console.log('listen_element()','pointer_up');
+        machine_tool.listen_target('add',window.document.documentElement,'pointer_up',()=>{
+            window.console.log('listen_target()','pointer_up');
         },undefined,0);
-        // machine_tool.listen_element('add',window.document.documentElement,'pointer_track',()=>{
-        //     window.console.log('listen_element()','pointer_track');
+        // machine_tool.listen_target('add',window.document.documentElement,'pointer_track',()=>{
+        //     window.console.log('listen_target()','pointer_track');
         // });
-        machine_tool.listen_element('add',this.elements.target,'observe_mutation',()=>{
-            window.console.log('listen_element()','observe_mutation');
+        machine_tool.listen_target('add',this.elements.target,'observe_mutation',()=>{
+            window.console.log('listen_target()','observe_mutation');
             if(this.elements.target.classList.contains('open_state')){
                 machine_tool.element_state(this.elements.target_mode,'open_state','_',true);
             }else{
@@ -335,8 +335,8 @@ export const _={
                 }
             }
         },{attributes:true,attributeFilter:['class'],childList:false,subtree:false});
-        // machine_tool.listen_element('remove',this.elements.target,'observe_mutation',()=>{
-        //     window.console.log('listen_element()','observe_mutation');
+        // machine_tool.listen_target('remove',this.elements.target,'observe_mutation',()=>{
+        //     window.console.log('listen_target()','observe_mutation');
         //     if(this.elements.target.classList.contains('open_state')){
         //         machine_tool.element_state(this.elements.target_mode,'open_state','close_state',true);
         //     }else{
@@ -345,8 +345,8 @@ export const _={
         //         }
         //     }
         // },{attributes:true,attributeFilter:['class'],childList:false,subtree:false});
-            machine_tool.listen_element('add',this.elements.red_target,'observe_mutation',()=>{
-                window.console.log('listen_element()','observe_mutation');
+            machine_tool.listen_target('add',this.elements.red_target,'observe_mutation',()=>{
+                window.console.log('listen_target()','observe_mutation');
                 if(this.elements.target.classList.contains('open_state')){
                     machine_tool.element_state(this.elements.target_mode,'open_state','close_state',true);
                 }else{
@@ -355,8 +355,8 @@ export const _={
                     }
                 }
             },{attributes:true,attributeFilter:['class'],childList:false,subtree:false});
-                machine_tool.listen_element('remove',this.elements.red_target,'observe_mutation',()=>{
-                    window.console.log('listen_element()','observe_mutation');
+                machine_tool.listen_target('remove',this.elements.red_target,'observe_mutation',()=>{
+                    window.console.log('listen_target()','observe_mutation');
                     if(this.elements.target.classList.contains('open_state')){
                         machine_tool.element_state(this.elements.target_mode,'open_state','close_state',true);
                     }else{
@@ -365,12 +365,18 @@ export const _={
                         }
                     }
                 },{attributes:true,attributeFilter:['class'],childList:false,subtree:false});
-        // machine_tool.listen_element('add',window.document.documentElement,'observe_intersection',(data)=>{
-        //     window.console.log('listen_element()','observe_intersection',data);
+        // machine_tool.listen_target('add',window.document.documentElement,'observe_intersection',(data)=>{
+        //     window.console.log('listen_target()','observe_intersection',data);
         // },{});
-        machine_tool.listen_element('add',window.document.documentElement,'observe_resize',(data)=>{
-            window.console.log('listen_element()','observe_resize',data);
+        machine_tool.listen_target('add',window.document.documentElement,'observe_resize',(data)=>{
+            window.console.log('listen_target()','observe_resize',data);
         });
+        machine_tool.listen_target('add',(data)=>{
+            window.console.log('listen_target()','uri',data);
+        },'uri');
+        // window.history.pushState(null,null,'/x/');
+        // window.history.pushState(null,null,'/');
+        // window.history.replaceState(null,null,window.location.href);
     },
     element_block(){
         const block=machine_tool.element_block(window.document.body,'block');
@@ -384,14 +390,6 @@ export const _={
         block.hide();
         block.remove();
         block.remove();
-    },
-    listen_uri(){
-        machine_tool.listen_uri('add',(data)=>{
-            window.console.log('listen_uri()',data);
-        });
-        // window.history.pushState(null,null,'/x/');
-        // window.history.pushState(null,null,'/');
-        // window.history.replaceState(null,null,window.location.href);
     },
     _end(){
         window.console.log('#### end machine_tool_demo.js');

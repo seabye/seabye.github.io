@@ -13,8 +13,8 @@
 // #build
     // element
     machine_tool.loop(()=>{
-        for(const item of window.document.documentElement.children){
-            if(item.localName==='body'){
+        for(const value of window.document.documentElement.children){
+            if(value.localName==='body'){
                 window.document.body.insertAdjacentHTML('beforeend',`
                     <div style="perspective: 100vw;">
                         <div style="font-size: calc(100vmax/25); transform: rotateX(-15deg); text-align: center; perspective: 50vw;">
