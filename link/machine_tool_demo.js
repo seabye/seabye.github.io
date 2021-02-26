@@ -2,47 +2,6 @@ import{machine_tool}from'./machine_tool.js';
 export const _={
     _start(){
         window.console.log('#### start machine_tool_demo.js');
-        // machine_tool.element_create([
-        //     {
-        //         element:['span',{class:'one'},'?'],
-        //         function(els){
-        //             this.element.classList.add('is_me');
-        //             window.console.log(this.element,els);
-        //         },
-        //         '':{},
-        //         '1':{
-        //             function(els){
-        //                 this.element.classList.add('_1');
-        //                 window.console.log('1',this.element,els);
-        //             }
-        //         },
-        //         '2':{
-        //             function(els){
-        //                 this.element.classList.add('_2');
-        //                 window.console.log('2',this.element,els);
-        //             }
-        //         }
-        //     },
-        //     [
-        //         function(els){
-        //             this.element.classList.add('is_me');
-        //             window.console.log(this.element,els);
-        //         },
-        //         [],
-        //         [
-        //             function(els){
-        //                 this.element.classList.add('_1');
-        //                 window.console.log(this.element,els);
-        //             }
-        //         ],
-        //         [
-        //             function(els){
-        //                 this.element.classList.add('_2');
-        //                 window.console.log(this.element,els);
-        //             }
-        //         ]
-        //     ]
-        // ],window.document.body);
     },
     loop(){
         machine_tool.loop(()=>{
@@ -132,6 +91,47 @@ export const _={
         window.console.log('base64_uri_safe_no_pad_to_string()',machine_tool.base64_uri_safe_no_pad_to_string('jvZe6aA5S_Kks2h_zB88ww'));
     },
     element_create(){
+        machine_tool.element_create([
+            {
+                element:['span',{class:'one'},'?'],
+                function(els){
+                    this.element.classList.add('is_me');
+                    window.console.log(this.element,els);
+                },
+                '':{},
+                '1':{
+                    function(els){
+                        this.element.classList.add('_1');
+                        window.console.log('1',this.element,els);
+                    }
+                },
+                '2':{
+                    function(els){
+                        this.element.classList.add('_2');
+                        window.console.log('2',this.element,els);
+                    }
+                }
+            },
+            [
+                function(els){
+                    this.element.classList.add('is_me');
+                    window.console.log(this.element,els);
+                },
+                [],
+                [
+                    function(els){
+                        this.element.classList.add('_1');
+                        window.console.log(this.element,els);
+                    }
+                ],
+                [
+                    function(els){
+                        this.element.classList.add('_2');
+                        window.console.log(this.element,els);
+                    }
+                ]
+            ]
+        ],window.document.body);
         window.console.log(machine_tool.element_create({
             '':{},
             _:{},
