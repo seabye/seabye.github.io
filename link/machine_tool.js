@@ -405,8 +405,8 @@
                             }
                             const element=window.document.createElement(tag);
                             if(attribute){
-                                for(const[key,value]of window.Object.entries(attribute)){
-                                    element.setAttribute(key,value);
+                                for(const key in attribute){
+                                    element.setAttribute(key,attribute[key]);
                                 }
                             }
                             if(content){
@@ -438,172 +438,7 @@
                             //                 content<string,element,undefined=false>,
                             //                 callback<function(element),undefined=false>
                             //             ],undefined=false>,
-                            //             <function:function(elements)/this.element===elements.key&class/,undefined=false>,
-                            //             key&class:<{},[]>...
-                            //         },
-                            //         key&class:<{},[]>...
-                            //     },[
-                            //         function(){},
-                            //         key&class:<{},[]>...
-                            //     ]>,
-                            //     insert_element<element,undefined=false>,
-                            //     insert_position<'beforebegin','afterbegin','beforeend','afterend',undefined='beforeend'>,
-                            //     elements<elements,undefined=elements>,
-                            //     callback<function(elements),undefined=false>
-                            const object=arg[0];
-                            const insert_element=arg[1];
-                            let insert_position=arg[2];
-                            let elements=arg[3];
-                            const callback=arg[4];
-                            if(!insert_position){
-                                insert_position='beforeend';
-                            }
-                            if(!elements){
-                                elements={};
-                            }
-                            let parent_element=null;
-                            const element_build=(data,insert_element,insert_position)=>{
-                                for(const key in data){
-                                    if(typeof data[key]==='function'){
-                                        data[key].element=parent_element;
-                                    }else{
-                                        const class_=key.trim().split(' ').filter((item)=>{
-                                            return window.isNaN(window.parseInt(item));
-                                        }).join(' ');
-                                        if(data[key].element){
-                                            if(!data[key].element[0]){
-                                                data[key].element[0]='div';
-                                            }
-                                            if(data[key].element[1]){
-                                                if(data[key].element[1].class){
-                                                    data[key].element[1].class=window.Array.from(new window.Set(key.trim().split(' ').filter((item)=>{
-                                                        return window.isNaN(window.parseInt(item));
-                                                    }).concat(data[key].element[1].class.trim().split(' ')))).join(' ');
-                                                }else{
-                                                    if(class_){
-                                                        data[key].element[1].class=class_;
-                                                    }
-                                                }
-                                            }else{
-                                                if(class_){
-                                                    data[key].element[1]={class:class_};
-                                                }
-                                            }
-                                        }else{
-                                            data[key].element=['div'];
-                                            if(class_){
-                                                data[key].element[1]={class:class_};
-                                            }
-                                        }
-                                        const element=this.element_create(data[key].element[0],data[key].element[1]?data[key].element[1]:undefined,insert_element,insert_position,data[key].element[2]?data[key].element[2]:undefined,data[key].element[3]?data[key].element[3]:undefined);
-                                        if(window.isNaN(key.split(' ')[0])||key.split(' ')[0]===''){
-                                            elements[key.split(' ')[0]]=data[key].element=element;
-                                        }else{
-                                            data[key].element=element;
-                                        }
-                                        parent_element=element;
-                                    }
-                                    for(const key_ in data[key]){
-                                        if(!key_.match(/element|function/)){
-                                            const data_={};
-                                            data_[key_]=data[key][key_];
-                                            element_build(data_,data[key].element,'beforeend');
-                                        }
-                                    }
-                                }
-                            };
-                            element_build(object,insert_element,insert_position);
-                            const function_run=(data)=>{
-                                for(const key in data){
-                                    if(typeof data[key]==='function'){
-                                        data[key](elements,data[key].element);
-                                    }else{
-                                        if(data[key].function){
-                                            data[key].function(elements,data[key].element);
-                                        }
-                                    }
-                                    for(const key_ in data[key]){
-                                        if(!key_.match(/element|function/)){
-                                            const data_={};
-                                            data_[key_]=data[key][key_];
-                                            function_run({data_:data[key][key_]});
-                                        }
-                                    }
-                                }
-                            };
-                            function_run(object);
-                            if(callback){
-                                callback(elements);
-                            }
-                            return elements;
-                        }
-                        break;
-                    default:
-                        {
-                            return this.element_create('div',arg[1],arg[2],arg[3],arg[4],arg[5]);
-                        }
-                        break;
-                }
-            },
-            /*🟠*/element_create_(...arg){
-                switch(typeof arg[0]){
-                    case'string':
-                        {
-                            // single mode
-                            //     tag<string,undefined='div'>,
-                            //     attribute<object/{key:'value'...}/,undefined=false>,
-                            //     insert_element<element,undefined=false>,
-                            //     insert_position<'beforebegin','afterbegin','beforeend','afterend',undefined='beforeend'>,
-                            //     content<string,element,undefined=false>,
-                            //     callback<function(element),undefined=false>
-                            let tag=arg[0];
-                            const attribute=arg[1];
-                            const insert_element=arg[2];
-                            let insert_position=arg[3];
-                            const content=arg[4];
-                            const callback=arg[5];
-                            if(!tag){
-                                tag='div';
-                            }
-                            if(!insert_position){
-                                insert_position='beforeend';
-                            }
-                            const element=window.document.createElement(tag);
-                            if(attribute){
-                                for(const[key,value]of window.Object.entries(attribute)){
-                                    element.setAttribute(key,value);
-                                }
-                            }
-                            if(content){
-                                if(typeof content==='string'){
-                                    element.innerHTML=content;
-                                }else{
-                                    if(content instanceof window.HTMLElement){
-                                        element.insertAdjacentElement('beforeend',content);
-                                    }
-                                }
-                            }
-                            if(insert_element){
-                                insert_element.insertAdjacentElement(insert_position,element);
-                            }
-                            if(callback){
-                                callback(element);
-                            }
-                            return element;
-                        }
-                        break;
-                    case'object':
-                        {
-                            // tree mode
-                            //     data<{
-                            //         key&class<char/key&class/,string/'key&class class2...','',' class...',' class class2...'/>:{
-                            //             <element:[
-                            //                 tag<string,undefined='div'>,
-                            //                 attribute<object/{key:'value'...}/,undefined=false>,
-                            //                 content<string,element,undefined=false>,
-                            //                 callback<function(element),undefined=false>
-                            //             ],undefined=false>,
-                            //             <function:function(elements)/this.element===elements.key&class/,undefined=false>,
+                            //             <function:function(elements,element)/this.element===elements.key&class===element/,undefined=false>,
                             //             key&class:<{},[]>...
                             //         },
                             //         key&class:<{},[]>...
@@ -630,105 +465,58 @@
                             const element_build=(data,insert_element,insert_position,key='')=>{
                                 if(element_build_start){
                                     element_build_start=false;
-                                    for(const[key,value]of window.Object.entries(data)){
-                                        element_build(value,insert_element,insert_position,key);
+                                    for(const key in data){
+                                        if(typeof data[key]!=='function'&&key!=='element'){
+                                            element_build(data[key],insert_element,insert_position,key);
+                                        }
                                     }
                                 }else{
-                                    switch(window.Object.prototype.toString.call(data)){
-                                        case'[object Array]':
-                                            {
-                                                const element=this.element_create('div',undefined,insert_element,insert_position);
-                                                for(const value of data){
-                                                    if(typeof value==='function'){
-                                                        if(!value.name){
-                                                            value.element=element;
-                                                        }
-                                                    }else{
-                                                        element_build(value,element,'beforeend',key);
-                                                    }
-                                                }
-                                            }
-                                            break;
-                                        case'[object Object]':
-                                            {
-                                                const class_=key.trim().split(' ').filter((item)=>{
+                                    const class_=key.trim().split(' ').filter((item)=>{
+                                        return window.isNaN(window.parseInt(item));
+                                    }).join(' ');
+                                    if(data.element){
+                                        if(!data.element[0]){
+                                            data.element[0]='div';
+                                        }
+                                        if(data.element[1]){
+                                            if(data.element[1].class){
+                                                data.element[1].class=window.Array.from(new window.Set(key.trim().split(' ').filter((item)=>{
                                                     return window.isNaN(window.parseInt(item));
-                                                }).join(' ');
-                                                if(data.element){
-                                                    if(!data.element[0]){
-                                                        data.element[0]='div';
-                                                    }
-                                                    if(data.element[1]){
-                                                        if(data.element[1].class){
-                                                            data.element[1].class=window.Array.from(new window.Set(key.trim().split(' ').filter((item)=>{
-                                                                return window.isNaN(window.parseInt(item));
-                                                            }).concat(data.element[1].class.trim().split(' ')))).join(' ');
-                                                        }else{
-                                                            if(class_){
-                                                                data.element[1].class=class_;
-                                                            }
-                                                        }
-                                                    }else{
-                                                        if(class_){
-                                                            data.element[1]={class:class_};
-                                                        }
-                                                    }
-                                                }else{
-                                                    data.element=['div'];
-                                                    if(class_){
-                                                        data.element[1]={class:class_};
-                                                    }
+                                                }).concat(data.element[1].class.trim().split(' ')))).join(' ');
+                                            }else{
+                                                if(class_){
+                                                    data.element[1].class=class_;
                                                 }
-                                                const element=this.element_create(data.element[0],data.element[1]?data.element[1]:undefined,insert_element,insert_position,data.element[2]?data.element[2]:undefined,data.element[3]?data.element[3]:undefined);
-                                                if(window.isNaN(key.split(' ')[0])||key.split(' ')[0]===''){
-                                                    elements[key.split(' ')[0]]=element;
-                                                }
-                                                for(const[key,value]of window.Object.entries(data)){
-                                                    if(key==='function'&&value.name==='function'){
-                                                        value.element=element;
-                                                    }
-                                                    if(typeof value!=='function'&&key!=='element'){
-                                                        element_build(value,element,'beforeend',key);
-                                                    }
-                                                }
-                                                // for(const key in data){
-                                                //     if(key==='function'&&data[key].name==='function'){
-                                                //         data[key].element=element;
-                                                //     }
-                                                //     if(typeof data[key]!=='function'&&key!=='element'){
-                                                //         element_build(data[key],element,'beforeend',key);
-                                                //     }
-                                                // }
                                             }
-                                            break;
-                                        default:
-                                            break;
+                                        }else{
+                                            if(class_){
+                                                data.element[1]={class:class_};
+                                            }
+                                        }
+                                    }else{
+                                        data.element=['div'];
+                                        if(class_){
+                                            data.element[1]={class:class_};
+                                        }
                                     }
-                                }
-                            };
-                            element_build(object,insert_element,insert_position);
-                            let function_run_start=true;
-                            const function_run=(data)=>{
-                                if(function_run_start){
-                                    function_run_start=false;
-                                    for(const value of data){
-                                        function_run(value);
+                                    const element=this.element_create(data.element[0],data.element[1]?data.element[1]:undefined,insert_element,insert_position,data.element[2]?data.element[2]:undefined,data.element[3]?data.element[3]:undefined);
+                                    if(window.isNaN(key.split(' ')[0])||key.split(' ')[0]===''){
+                                        elements[key.split(' ')[0]]=element;
                                     }
-                                }else{
-                                    for(const[key,value]of window.Object.entries(data)){
-                                        if(typeof value==='function'){
+                                    for(const key in data){
+                                        if(typeof data[key]==='function'){
                                             switch(window.Object.prototype.toString.call(data)){
                                                 case'[object Array]':
                                                     {
-                                                        if(!value.name){
-                                                            value.call(value,elements);
+                                                        if(!data[key].name){
+                                                            data[key].element=element;
                                                         }
                                                     }
                                                     break;
                                                 case'[object Object]':
                                                     {
-                                                        if(key==='function'&&value.name==='function'){
-                                                            value.call(value,elements);
+                                                        if(key==='function'&&data[key].name==='function'){
+                                                            data[key].element=element;
                                                         }
                                                     }
                                                     break;
@@ -737,7 +525,46 @@
                                             }
                                         }else{
                                             if(key!=='element'){
-                                                function_run(value);
+                                                element_build(data[key],element,'beforeend',key);
+                                            }
+                                        }
+                                    }
+                                }
+                            };
+                            element_build(object,insert_element,insert_position);
+                            let function_run_start=true;
+                            const function_run=(data)=>{
+                                if(function_run_start){
+                                    function_run_start=false;
+                                    for(const key in data){
+                                        if(typeof data[key]!=='function'&&key!=='element'){
+                                            function_run(data[key]);
+                                        }
+                                    }
+                                }else{
+                                    for(const key in data){
+                                        if(typeof data[key]==='function'){
+                                            switch(window.Object.prototype.toString.call(data)){
+                                                case'[object Array]':
+                                                    {
+                                                        if(!data[key].name){
+                                                            data[key].call(data[key],elements,data[key].element);
+                                                        }
+                                                    }
+                                                    break;
+                                                case'[object Object]':
+                                                    {
+                                                        if(key==='function'&&data[key].name==='function'){
+                                                            data[key].call(data[key],elements,data[key].element);
+                                                        }
+                                                    }
+                                                    break;
+                                                default:
+                                                    break;
+                                            }
+                                        }else{
+                                            if(key!=='element'){
+                                                function_run(data[key]);
                                             }
                                         }
                                     }
@@ -1009,6 +836,9 @@
                     case'uri':
                         {
                             const id='id_'+this.java_string_hash_code(target.toString().replace(/[\r\n\s]/g,'')).toString().replace(/[^0-9]/g,'');
+                            if(!this.listen_target.uri){
+                                this.listen_target.uri={};
+                            }
                             if(!this.listen_target.uri_template){
                                 this.listen_target.uri_template=class template{
                                     constructor(callback){
@@ -1057,21 +887,21 @@
                             switch(action){
                                 case'add':
                                     {
-                                        if(!this.listen_target.uri_template[id]){
-                                            this.listen_target.uri_template[id]=new this.listen_target.uri_template(target);
-                                            // this.listen_target.uri_template[id].count=0;
-                                            this.listen_target.uri_template[id].add();
+                                        if(!this.listen_target.uri[id]){
+                                            this.listen_target.uri[id]=new this.listen_target.uri_template(target);
+                                            // this.listen_target.uri[id].count=0;
+                                            this.listen_target.uri[id].add();
                                         }
-                                        // this.listen_target.uri_template[id].add();
-                                        // this.listen_target.uri_template[id].count+=1;
+                                        // this.listen_target.uri[id].add();
+                                        // this.listen_target.uri[id].count+=1;
                                     }
                                     break;
                                 case'remove':
                                     {
-                                        this.listen_target.uri_template[id].remove();
-                                        // this.listen_target.uri_template[id].count-=1;
-                                        // if(this.listen_target.uri_template[id].count===0){
-                                            delete this.listen_target.uri_template[id];
+                                        this.listen_target.uri[id].remove();
+                                        // this.listen_target.uri[id].count-=1;
+                                        // if(this.listen_target.uri[id].count===0){
+                                            delete this.listen_target.uri[id];
                                             // remove observe
                                             // if(!window.Object.keys(this.listen_target.uri).length){}
                                         // }
