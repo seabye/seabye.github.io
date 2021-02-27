@@ -359,11 +359,17 @@
         /*🔴*/no$back(){},
         /*🔴*/no$touch$back(){},
         /*🟠*/partial$scroll(){
-            // if(!window.CSS.supports('overscroll-behavior:contain')){
+            if(!window.CSS.supports('overscroll-behavior:contain')){
                 window.addEventListener('touchstart',(event)=>{
                     const scroll=(event)=>{
-                        if(event.target.scrollTop===0||event.target.scrollTop===event.target.scrollHeight-event.target.offsetHeight){
+                        if(event.target.scrollTop<0||event.target.scrollTop>event.target.scrollHeight-event.target.offsetHeight){
                             event.target.style.setProperty('overflow-y','hidden');
+                        }
+                        if(event.target.scrollTop>=0||event.target.scrollTop<=event.target.scrollHeight-event.target.offsetHeight){
+                            target.style.removeProperty('overflow-y');
+                            if(!target.style[0]){
+                                target.removeAttribute('style');
+                            }
                         }
                     };
                     const loop=(target)=>{
@@ -386,7 +392,7 @@
                     };
                     loop(event.target);
                 });
-            // }
+            }
         },
         /*🟢*/form$input(){
             window.addEventListener('keydown',(event)=>{
