@@ -1284,7 +1284,7 @@
                                     window.setTimeout(()=>{
                                         machine_tool.element_state(element,`${this.group}_ready`,'',true);
                                         window.setTimeout(()=>{
-                                            machine_tool.element_state(element,`${this.group}_add`,'',true);
+                                            machine_tool.element_state(element,`${this.group}_go`,'',true);
                                         },1000/24);
                                     },1000/24);
                                     window.setTimeout(()=>{
@@ -1326,7 +1326,7 @@
                                     },0);
                                     machine_tool.element_state(element,`${this.group}_remove`,'',true);
                                     window.setTimeout(()=>{
-                                        machine_tool.element_state(element,`${this.group}_hide`,`${this.group}_ready ${this.group}_add ${this.group}_last ${this.group}_prev ${this.group}_remove`,true);
+                                        machine_tool.element_state(element,`${this.group}_hide`,`${this.group}_ready ${this.group}_go ${this.group}_last ${this.group}_prev ${this.group}_remove`,true);
                                         this.lock=false;
                                     },wait);
                                     let last=null;
@@ -1358,7 +1358,7 @@
                                     this.elements.splice(this.elements.indexOf(element),1);
                                     machine_tool.element_state(element,`${this.group}_remove`,'',true);
                                     window.setTimeout(()=>{
-                                        machine_tool.element_state(element,'',`${this.group}_ready ${this.group}_add ${this.group}_last ${this.group}_prev ${this.group}_hide ${this.group}_remove`,true);
+                                        machine_tool.element_state(element,'',`${this.group}_ready ${this.group}_go ${this.group}_last ${this.group}_prev ${this.group}_hide ${this.group}_remove`,true);
                                         element?.parentElement.removeChild(element);
                                         this.lock=false;
                                     },wait);
