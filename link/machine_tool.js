@@ -1277,16 +1277,16 @@
                                             }
                                         },0);
                                         machine_tool.element_state(element,`${this.group}_last ${this.group}_lock`,`${this.group}_hide`,true);
+                                        element.style.setProperty('opacity','0');
                                     // }
                                     if(!mark_state){
                                         this.element.insertAdjacentElement(this.insert_position,element);
                                     }
                                     window.setTimeout(()=>{
-                                        machine_tool.element_state(element,`${this.group}_ready`,'',true);
-                                        window.setTimeout(()=>{
-                                            machine_tool.element_state(element,`${this.group}_go`,'',true);
-                                        },1000/24*2);
-                                    },1000/24*2);
+                                        element.style.removeProperty('opacity');
+                                        machine_tool.remove_empty(element);
+                                        machine_tool.element_state(element,`${this.group}_go`,'',true);
+                                    },1000/24);
                                     window.setTimeout(()=>{
                                         machine_tool.element_state(element,'',`${this.group}_lock`,true);
                                         this.lock=false;
