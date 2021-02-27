@@ -434,6 +434,7 @@
                     }
                 });
                 window.addEventListener('touchend',()=>{
+                    window.removeEventListener('touchmove',preventDefault);
                     window.addEventListener('touchmove',preventDefault,{passive:false});
                     start_y=start_x=scroll_direction=null;
                 });
