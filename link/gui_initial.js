@@ -398,25 +398,26 @@
                     loop(event.target);
                 });
                 window.addEventListener('touchmove',(event)=>{
+                    const move_y=event.changedTouches[0].screenY;
                     if(start_y||start_x){
                         switch(scroll_direction){
                             case'top':
                                 {
-                                    if(event.changedTouches[0].screenY<start_y){
+                                    if(move_y<start_y){
                                         window.removeEventListener('touchmove',preventDefault);
                                     }
                                 }
                                 break;
                             case'bottom':
                                 {
-                                    if(event.changedTouches[0].screenY>start_y){
+                                    if(move_y>start_y){
                                         window.removeEventListener('touchmove',preventDefault);
                                     }
                                 }
                                 break;
                             case'horizontal':
                                 {
-                                    if(event.changedTouches[0].screenY===start_y&&event.changedTouches[0].screenX!==start_x){
+                                    if((move_y<=start_y+10&&move_y>=start_y-10)&&event.changedTouches[0].screenX!==start_x){
                                         window.removeEventListener('touchmove',preventDefault);
                                     }
                                 }
