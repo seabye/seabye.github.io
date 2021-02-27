@@ -360,12 +360,12 @@
         /*🔴*/no$touch$back(){},
         /*🟠*/partial$scroll(){
             // if(!window.CSS.supports('overscroll-behavior:contain')){
-                const scroll=(event)=>{
-                    if(event.target.scrollTop===0||event.target.scrollTop===event.target.scrollHeight-event.target.offsetHeight){
-                        event.target.style.setProperty('overflow-y','hidden');
-                    }
-                };
                 window.addEventListener('touchstart',(event)=>{
+                    const scroll=(event)=>{
+                        if(event.target.scrollTop===0||event.target.scrollTop===event.target.scrollHeight-event.target.offsetHeight){
+                            event.target.style.setProperty('overflow-y','hidden');
+                        }
+                    };
                     const loop=(target)=>{
                         if(window.getComputedStyle(target).overflowY.match(/auto|scroll/)){
                             console.log(target.scrollTop,target.scrollHeight-target.offsetHeight);
