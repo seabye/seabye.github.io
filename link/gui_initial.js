@@ -363,23 +363,29 @@
                 const preventDefault=(event)=>{
                     event.preventDefault();
                 };
-                let start_position=null;
+                let start_y=null;
+                let start_x=null;
                 let scroll_direction=null;
                 window.addEventListener('touchstart',(event)=>{
                     const loop=(target)=>{
-                        if(window.getComputedStyle(target).overflowY.match(/auto|scroll/)){
-                            if(target.scrollHeight!==target.offsetHeight){
-                                if(target.scrollTop<=0){
-                                    start_position=event.changedTouches[0].screenY;
-                                    scroll_direction='top';
-                                }else{
-                                    if(target.scrollTop>=target.scrollHeight-target.offsetHeight){
-                                        start_position=event.changedTouches[0].screenY;
-                                        scroll_direction='bottom';
+                        if(window.getComputedStyle(target).overflowY.match(/auto|scroll/)||window.getComputedStyle(target).overflowX.match(/auto|scroll/)){
+                            if(window.getComputedStyle(target).overflowY.match(/auto|scroll/)){
+                                if(target.scrollHeight!==target.offsetHeight){
+                                    if(target.scrollTop<=0){
+                                        start_y=event.changedTouches[0].screenY;
+                                        scroll_direction='top';
                                     }else{
-                                        window.removeEventListener('touchmove',preventDefault);
+                                        if(target.scrollTop>=target.scrollHeight-target.offsetHeight){
+                                            start_y=event.changedTouches[0].screenY;
+                                            scroll_direction='bottom';
+                                        }else{
+                                            window.removeEventListener('touchmove',preventDefault);
+                                        }
                                     }
                                 }
+                            }else{
+                                start_x=event.changedTouches[0].screenX;
+                                scroll_direction='horizontal';
                             }
                         }else{
                             if(target.parentElement){
@@ -392,18 +398,25 @@
                     loop(event.target);
                 });
                 window.addEventListener('touchmove',(event)=>{
-                    if(start_position!==null){
+                    if(start_y||start_x){
                         switch(scroll_direction){
                             case'top':
                                 {
-                                    if(event.changedTouches[0].screenY<start_position){
+                                    if(event.changedTouches[0].screenY<start_y){
                                         window.removeEventListener('touchmove',preventDefault);
                                     }
                                 }
                                 break;
                             case'bottom':
                                 {
-                                    if(event.changedTouches[0].screenY>start_position){
+                                    if(event.changedTouches[0].screenY>start_y){
+                                        window.removeEventListener('touchmove',preventDefault);
+                                    }
+                                }
+                                break;
+                            case'horizontal':
+                                {
+                                    if(event.changedTouches[0].screenY===start_y&&event.changedTouches[0].screenX!==start_x){
                                         window.removeEventListener('touchmove',preventDefault);
                                     }
                                 }
@@ -411,12 +424,14 @@
                             default:
                                 break;
                         }
-                        start_position=null;
+                        start_y=null;
+                        start_x=null;
                     }
                 });
                 window.addEventListener('touchend',()=>{
                     window.addEventListener('touchmove',preventDefault,{passive:false});
-                    start_position=null;
+                    start_y=null;
+                    start_x=null;
                 });
             }
         },
