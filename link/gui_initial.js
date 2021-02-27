@@ -422,7 +422,7 @@
                             case'horizontal':
                                 {
                                     const move_y=event.changedTouches[0].screenY;
-                                    if((move_y<=start_y+3&&move_y>=start_y-3)&&event.changedTouches[0].screenX!==start_x){
+                                    if((move_y<=start_y+2&&move_y>=start_y-2)&&event.changedTouches[0].screenX!==start_x){
                                         window.removeEventListener('touchmove',preventDefault);
                                         scroll_direction=null;
                                     }
