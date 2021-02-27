@@ -384,9 +384,11 @@
                                     }
                                 }
                             }else{
-                                start_y=event.changedTouches[0].screenY;
-                                start_x=event.changedTouches[0].screenX;
-                                scroll_direction='horizontal';
+                                if(target.scrollWidth!==target.offsetWidth){
+                                    start_y=event.changedTouches[0].screenY;
+                                    start_x=event.changedTouches[0].screenX;
+                                    scroll_direction='horizontal';
+                                }
                             }
                         }else{
                             if(target.parentElement){
