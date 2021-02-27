@@ -420,13 +420,14 @@
                                     console.log(move_y,start_y,start_x);
                                     if((move_y<=start_y+10&&move_y>=start_y-10)&&event.changedTouches[0].screenX!==start_x){
                                         window.removeEventListener('touchmove',preventDefault);
+                                        start_x=null;
                                     }
                                 }
                                 break;
                             default:
                                 break;
                         }
-                        start_y=start_x=null;
+                        start_y=null;
                     }
                 });
                 window.addEventListener('touchend',()=>{
