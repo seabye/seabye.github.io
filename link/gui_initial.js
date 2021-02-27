@@ -358,7 +358,37 @@
         },
         /*🔴*/no$back(){},
         /*🔴*/no$touch$back(){},
-        /*🔴*/partial$scroll(){},
+        /*🟠*/partial$scroll(){
+            // if(!window.CSS.supports('overscroll-behavior:contain')){
+                const scroll=(event)=>{
+                    if(event.target.scrollTop===0||event.target.scrollTop===event.target.scrollHeight-event.target.offsetHeight){
+                        event.target.style.setProperty('overflow-y','hidden');
+                    }
+                };
+                window.addEventListener('touchstart',(event)=>{
+                    const loop=(target)=>{
+                        if(window.getComputedStyle(target).overflowY.match(/auto|scroll/)){
+                            console.log(target.scrollTop,target.scrollHeight-target.offsetHeight);
+                            if(target.scrollTop===0||target.scrollTop===target.scrollHeight-target.offsetHeight){
+                                target.addEventListener('scroll',scroll);
+                                window.addEventListener('touchend',()=>{
+                                    target.removeEventListener('scroll',scroll);
+                                    target.style.removeProperty('overflow-y');
+                                    if(!target.style[0]){
+                                        target.removeAttribute('style');
+                                    }
+                                },{once:true});
+                            }
+                        }else{
+                            if(target.parentElement!==window.document.documentElement){
+                                loop(target.parentElement);
+                            }
+                        }
+                    };
+                    loop(event.target);
+                });
+            // }
+        },
         /*🟢*/form$input(){
             window.addEventListener('keydown',(event)=>{
                 if(event.key==='Enter'&&event.target.localName==='input'){
