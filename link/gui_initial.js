@@ -384,6 +384,7 @@
                                     }
                                 }
                             }else{
+                                start_y=event.changedTouches[0].screenY;
                                 start_x=event.changedTouches[0].screenX;
                                 scroll_direction='horizontal';
                             }
