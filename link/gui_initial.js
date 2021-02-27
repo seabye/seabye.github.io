@@ -368,7 +368,6 @@
                     };
                     const loop=(target)=>{
                         if(window.getComputedStyle(target).overflowY.match(/auto|scroll/)){
-                            console.log(target.scrollTop,target.scrollHeight-target.offsetHeight);
                             if(target.scrollTop===0||target.scrollTop===target.scrollHeight-target.offsetHeight){
                                 target.addEventListener('scroll',scroll);
                                 window.addEventListener('touchend',()=>{
