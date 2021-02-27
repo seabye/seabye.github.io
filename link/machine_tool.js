@@ -1283,9 +1283,9 @@
                                     }
                                     window.setTimeout(()=>{
                                         machine_tool.element_state(element,`${this.group}_ready`,'',true);
-                                    },1000/60);
-                                    window.setTimeout(()=>{
-                                        machine_tool.element_state(element,`${this.group}_add`,'',true);
+                                        window.setTimeout(()=>{
+                                            machine_tool.element_state(element,`${this.group}_add`,'',true);
+                                        },1000/24);
                                     },1000/24);
                                     window.setTimeout(()=>{
                                         machine_tool.element_state(element,'',`${this.group}_lock`,true);
