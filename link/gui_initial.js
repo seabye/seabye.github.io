@@ -417,6 +417,7 @@
                                 break;
                             case'horizontal':
                                 {
+                                    console.log(move_y,start_y,start_x);
                                     if((move_y<=start_y+10&&move_y>=start_y-10)&&event.changedTouches[0].screenX!==start_x){
                                         window.removeEventListener('touchmove',preventDefault);
                                     }
