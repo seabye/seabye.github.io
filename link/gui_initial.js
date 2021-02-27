@@ -399,11 +399,12 @@
                     loop(event.target);
                 });
                 window.addEventListener('touchmove',(event)=>{
+                    const move_y=event.changedTouches[0].screenY;
                     if(scroll_direction){
                         switch(scroll_direction){
                             case'top':
                                 {
-                                    if(event.changedTouches[0].screenY<start_y){
+                                    if(move_y<start_y){
                                         window.removeEventListener('touchmove',preventDefault);
                                         scroll_direction=null;
                                     }
@@ -411,7 +412,7 @@
                                 break;
                             case'bottom':
                                 {
-                                    if(event.changedTouches[0].screenY>start_y){
+                                    if(move_y>start_y){
                                         window.removeEventListener('touchmove',preventDefault);
                                         scroll_direction=null;
                                     }
@@ -419,7 +420,7 @@
                                 break;
                             case'horizontal':
                                 {
-                                    if((event.changedTouches[0].screenY<=start_y+3&&event.changedTouches[0].screenY>=start_y-3)&&event.changedTouches[0].screenX!==start_x){
+                                    if((move_y<=start_y+3&&move_y>=start_y-3)&&event.changedTouches[0].screenX!==start_x){
                                         window.removeEventListener('touchmove',preventDefault);
                                         scroll_direction=null;
                                     }
