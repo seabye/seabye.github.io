@@ -368,7 +368,6 @@
                 window.addEventListener('touchstart',(event)=>{
                     const loop=(target)=>{
                         if(window.getComputedStyle(target).overflowY.match(/auto|scroll/)){
-                            console.log(target,target.scrollHeight,target.offsetHeight);
                             if(target.scrollHeight!==target.offsetHeight){
                                 if(target.scrollTop<=0){
                                     start_position=event.changedTouches[0].screenY;
