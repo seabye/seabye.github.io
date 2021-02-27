@@ -14,10 +14,9 @@
     _an_ / animation
     _md_ / method
     _cr\_ / container
-    _mk\_ / mark \ :hov .cls state$
+    _mk\_ / mark \ :hov .cls
     #build
         sc_cr
-        state$
         ^child
 */
 /* >>>> >>>> >>>> >>>> */
