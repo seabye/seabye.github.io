@@ -424,14 +424,12 @@
                             default:
                                 break;
                         }
-                        start_y=null;
-                        start_x=null;
+                        start_y=start_x=null;
                     }
                 });
                 window.addEventListener('touchend',()=>{
                     window.addEventListener('touchmove',preventDefault,{passive:false});
-                    start_y=null;
-                    start_x=null;
+                    start_y=start_x=null;
                 });
             }
         },
