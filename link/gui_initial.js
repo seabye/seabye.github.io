@@ -185,11 +185,11 @@
             if(user_agent.match(/Edg/i)&&!user_agent.match(/EdgiOS/i)){
                 class_.add('ic_nr_browser_edge');
             }
-            if(window.document.createElement('video').canPlayType('application/vnd.apple.mpegurl')){
-                class_.add('ic_nr_video_m3u8');
-            }
             if(window.location.search.replace(/^\?/,'').split('&').includes('pwa')){
                 class_.add('ic_nr_pwa');
+            }
+            if(window.document.createElement('video').canPlayType('application/vnd.apple.mpegurl')){
+                class_.add('ic_nr_video_m3u8');
             }
         },
         /*🟢*/$navigator$media(){
@@ -363,6 +363,7 @@
                 const preventDefault=(event)=>{
                     event.preventDefault();
                 };
+                window.addEventListener('touchmove',preventDefault,{passive:false});
                 let start_y=null;
                 let start_x=null;
                 let scroll_direction=null;
