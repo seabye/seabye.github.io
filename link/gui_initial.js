@@ -141,13 +141,13 @@
             },{once:true});
         },
         /*🟢*/write$service$worker(){
-            // if(this.dataset.config.service_worker&&'serviceWorker'in window.navigator){
-            //     window.navigator.serviceWorker.register(this.dataset.config.service_worker,{scope:'./'}).then((registration)=>{
-            //         window.console.log('==== ing gui_initial.js Registration successful, scope is:',registration.scope);
-            //     }).catch((error)=>{
-            //         window.console.log('==== ing gui_initial.js Service worker registration failed, error:',error);
-            //     });
-            // }
+            if(this.dataset.config.service_worker&&'serviceWorker'in window.navigator){
+                window.navigator.serviceWorker.register(this.dataset.config.service_worker,{scope:'./'}).then((registration)=>{
+                    window.console.log('==== ing gui_initial.js Registration successful, scope is:',registration.scope);
+                }).catch((error)=>{
+                    window.console.log('==== ing gui_initial.js Service worker registration failed, error:',error);
+                });
+            }
         },
         /*🟢*/$navigator$environment(){
             const user_agent=window.navigator.userAgent;
