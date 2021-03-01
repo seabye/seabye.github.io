@@ -185,7 +185,7 @@
             if(user_agent.match(/Edg/i)&&!user_agent.match(/EdgiOS/i)){
                 class_.add('ic_nr_browser_edge');
             }
-            if(window.location.search.replace(/^\?/,'').split('&').includes('pwa')){
+            if(window.location.search.replace('?','').split('&').includes('pwa')){
                 class_.add('ic_nr_pwa');
             }
             if(window.document.createElement('video').canPlayType('application/vnd.apple.mpegurl')){
