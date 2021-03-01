@@ -1249,6 +1249,7 @@
                             this.lock=false;
                         }
                         add(element,mark,wait=350){
+                            const style=machine_tool.element_create('style',undefined,window.document.head,undefined,'html * { pointer-events: none !important; }');
                             return machine_tool.loop(()=>{
                                 if(!this.lock){
                                     this.lock=true;
@@ -1289,6 +1290,7 @@
                                     },1000/24);
                                     window.setTimeout(()=>{
                                         machine_tool.element_state(element,'',`${this.group}_lock`,true);
+                                        machine_tool.remove_element(style);
                                         this.lock=false;
                                     },wait);
                                     return element;
@@ -1359,7 +1361,9 @@
                                     machine_tool.element_state(element,`${this.group}_remove`,'',true);
                                     window.setTimeout(()=>{
                                         machine_tool.element_state(element,'',`${this.group}_ready ${this.group}_go ${this.group}_last ${this.group}_prev ${this.group}_hide ${this.group}_remove`,true);
-                                        element?.parentElement.removeChild(element);
+                                        if(element){
+                                            machine_tool.remove_element(element);
+                                        }
                                         this.lock=false;
                                     },wait);
                                     let last=null;
@@ -1381,6 +1385,9 @@
                     }
                 }
                 return new this.element_block.template(element,group,insert_position);
+            },
+            /*🟢*/remove_element(element){
+                element.parentElement.removeChild(element);
             },
             /*🟢*/find_outer(find,start,end=window.document.documentElement,true_callback,false_callback){
                 if(find instanceof window.HTMLElement&&start===find){
