@@ -1249,7 +1249,7 @@
                             this.lock=false;
                         }
                         add(element,mark,wait=350){
-                            const style=machine_tool.element_create('style',undefined,window.document.head,undefined,'html, html * { pointer-events: none !important; }');
+                            // const style=machine_tool.element_create('style',undefined,window.document.head,undefined,'html, html * { pointer-events: none !important; }');
                             return machine_tool.loop(()=>{
                                 if(!this.lock){
                                     this.lock=true;
@@ -1289,7 +1289,7 @@
                                         machine_tool.element_state(element,`${this.group}_go`,'',true);
                                         window.setTimeout(()=>{
                                             machine_tool.element_state(element,'',`${this.group}_lock`,true);
-                                            machine_tool.remove_element(style);
+                                            // machine_tool.remove_element(style);
                                             this.lock=false;
                                         },wait-1000/24);
                                     },1000/24);
