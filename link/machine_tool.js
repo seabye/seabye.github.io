@@ -1287,12 +1287,12 @@
                                         element.style.removeProperty('opacity');
                                         machine_tool.remove_empty(element);
                                         machine_tool.element_state(element,`${this.group}_go`,'',true);
+                                        window.setTimeout(()=>{
+                                            machine_tool.element_state(element,'',`${this.group}_lock`,true);
+                                            machine_tool.remove_element(style);
+                                            this.lock=false;
+                                        },wait-1000/24);
                                     },1000/24);
-                                    window.setTimeout(()=>{
-                                        machine_tool.element_state(element,'',`${this.group}_lock`,true);
-                                        machine_tool.remove_element(style);
-                                        this.lock=false;
-                                    },wait);
                                     return element;
                                 }
                                 return false;
