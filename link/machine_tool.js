@@ -1249,7 +1249,7 @@
                             this.lock=false;
                         }
                         add(element,mark,wait=350){
-                            const style=machine_tool.element_create('style',undefined,window.document.head,undefined,'html * { pointer-events: none !important; }');
+                            const style=machine_tool.element_create('style',undefined,window.document.head,undefined,'html, html * { pointer-events: none !important; }');
                             return machine_tool.loop(()=>{
                                 if(!this.lock){
                                     this.lock=true;
