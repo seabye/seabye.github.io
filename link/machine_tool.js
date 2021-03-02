@@ -1253,8 +1253,8 @@
                             if(!this.lock){
                                 this.lock=true;
                                 const style=machine_tool.element_create('style',undefined,window.document.head,undefined,this.style);
-                                if(wait>1000/24){
-                                    wait=wait-1000/24;
+                                if(wait>1000/24*2){
+                                    wait=wait-1000/24*2;
                                 }else{
                                     wait=0;
                                 }
@@ -1292,7 +1292,7 @@
                                         machine_tool.remove_element(style);
                                         this.lock=false;
                                     },wait);
-                                },1000/24);
+                                },1000/24*2);
                                 return element;
                             }
                         }
