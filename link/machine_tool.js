@@ -1247,7 +1247,7 @@
                             this.insert_position=insert_position;
                             this.elements=[];
                             this.lock=false;
-                            this.style='html, html * { overflow: hidden !important; pointer-events: none !important; }';
+                            this.style='html * { pointer-events: none !important; }';
                         }
                         add(element,mark,wait=350){
                             const style=machine_tool.element_create('style',undefined,window.document.head,undefined,this.style);
