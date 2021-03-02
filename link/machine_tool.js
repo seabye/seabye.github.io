@@ -1250,59 +1250,56 @@
                             this.style='html * { pointer-events: none !important; }';
                         }
                         add(element,mark,wait=350){
-                            return machine_tool.loop(()=>{
-                                if(!this.lock){
-                                    this.lock=true;
-                                    const style=machine_tool.element_create('style',undefined,window.document.head,undefined,this.style);
-                                    if(wait>1000/24){
-                                        wait=wait-1000/24;
-                                    }else{
-                                        wait=0;
-                                    }
-                                    let mark_state=false;
-                                    if(mark){
-                                        machine_tool.for(this.elements,(...data)=>{
-                                            if(data[2]?.machine_tool?.element_block?.add?.mark===mark){
-                                                mark_state=true;
-                                                element=data[2];
-                                            }
-                                        },0);
-                                    }
-                                    if(mark&&!mark_state){
-                                        element.machine_tool={};
-                                        element.machine_tool.element_block={};
-                                        element.machine_tool.element_block.add={};
-                                        element.machine_tool.element_block.add.mark=mark;
-                                    }
-                                    if(!mark_state){
-                                        this.elements.push(element);
-                                    }
-                                    // if(mark_state&&element.classList.contains(`${this.group}_hide`)){
-                                        machine_tool.for(this.elements,(...data)=>{
-                                            if(data[2]!==element&&data[2].classList.contains(`${this.group}_last`)){
-                                                machine_tool.element_state(data[2],`${this.group}_prev`,`${this.group}_last`,true);
-                                            }
-                                        },0);
-                                        machine_tool.element_state(element,`${this.group}_last ${this.group}_ready`,`${this.group}_hide`,true);
-                                        element.style.setProperty('opacity','0');
-                                    // }
-                                    if(!mark_state){
-                                        this.element.insertAdjacentElement(this.insert_position,element);
-                                    }
-                                    window.setTimeout(()=>{
-                                        element.style.removeProperty('opacity');
-                                        machine_tool.remove_empty(element);
-                                        machine_tool.element_state(element,`${this.group}_go`,'',true);
-                                        window.setTimeout(()=>{
-                                            machine_tool.element_state(element,'',`${this.group}_ready`,true);
-                                            machine_tool.remove_element(style);
-                                            this.lock=false;
-                                        },wait);
-                                    },1000/24);
-                                    return element;
+                            if(!this.lock){
+                                this.lock=true;
+                                const style=machine_tool.element_create('style',undefined,window.document.head,undefined,this.style);
+                                if(wait>1000/24){
+                                    wait=wait-1000/24;
+                                }else{
+                                    wait=0;
                                 }
-                                return false;
-                            });
+                                let mark_state=false;
+                                if(mark){
+                                    machine_tool.for(this.elements,(...data)=>{
+                                        if(data[2]?.machine_tool?.element_block?.add?.mark===mark){
+                                            mark_state=true;
+                                            element=data[2];
+                                        }
+                                    },0);
+                                }
+                                if(mark&&!mark_state){
+                                    element.machine_tool={};
+                                    element.machine_tool.element_block={};
+                                    element.machine_tool.element_block.add={};
+                                    element.machine_tool.element_block.add.mark=mark;
+                                }
+                                if(!mark_state){
+                                    this.elements.push(element);
+                                }
+                                // if(mark_state&&element.classList.contains(`${this.group}_hide`)){
+                                    machine_tool.for(this.elements,(...data)=>{
+                                        if(data[2]!==element&&data[2].classList.contains(`${this.group}_last`)){
+                                            machine_tool.element_state(data[2],`${this.group}_prev`,`${this.group}_last`,true);
+                                        }
+                                    },0);
+                                    machine_tool.element_state(element,`${this.group}_last ${this.group}_ready`,`${this.group}_hide`,true);
+                                    element.style.setProperty('opacity','0');
+                                // }
+                                if(!mark_state){
+                                    this.element.insertAdjacentElement(this.insert_position,element);
+                                }
+                                window.setTimeout(()=>{
+                                    element.style.removeProperty('opacity');
+                                    machine_tool.remove_empty(element);
+                                    machine_tool.element_state(element,`${this.group}_go`,'',true);
+                                    window.setTimeout(()=>{
+                                        machine_tool.element_state(element,'',`${this.group}_ready`,true);
+                                        machine_tool.remove_element(style);
+                                        this.lock=false;
+                                    },wait);
+                                },1000/24);
+                                return element;
+                            }
                         }
                         back(wait=350){
                             if(!this.lock){
@@ -1323,74 +1320,68 @@
                             }
                         }
                         hide(wait=350){
-                            return machine_tool.loop(()=>{
-                                if(!this.lock){
-                                    this.lock=true;
-                                    const style=machine_tool.element_create('style',undefined,window.document.head,undefined,this.style);
-                                    let element=null;
-                                    machine_tool.for(this.elements,(...data)=>{
-                                        if(!data[2].classList.contains(`${this.group}_hide`)&&!data[2].classList.contains(`${this.group}_remove`)&&data[2].classList.contains(`${this.group}_last`)){
-                                            element=data[2];
-                                        }
-                                    },0);
-                                    machine_tool.element_state(element,`${this.group}_remove`,'',true);
-                                    window.setTimeout(()=>{
-                                        machine_tool.element_state(element,`${this.group}_hide`,`${this.group}_ready ${this.group}_go ${this.group}_last ${this.group}_prev ${this.group}_remove`,true);
-                                        this.lock=false;
-                                    },wait);
-                                    let last=null;
-                                    machine_tool.for(this.elements,(...data)=>{
-                                        if(data[2]!==element&&!data[2].classList.contains(`${this.group}_hide`)&&!data[2].classList.contains(`${this.group}_remove`)){
-                                            last=data[2];
-                                        }
-                                    },0);
-                                    machine_tool.remove_element(style);
-                                    if(last){
-                                        machine_tool.element_state(last,`${this.group}_last`,`${this.group}_prev`,true);
-                                        return last;
-                                    }else{
-                                        return 'null';
+                            if(!this.lock){
+                                this.lock=true;
+                                const style=machine_tool.element_create('style',undefined,window.document.head,undefined,this.style);
+                                let element=null;
+                                machine_tool.for(this.elements,(...data)=>{
+                                    if(!data[2].classList.contains(`${this.group}_hide`)&&!data[2].classList.contains(`${this.group}_remove`)&&data[2].classList.contains(`${this.group}_last`)){
+                                        element=data[2];
                                     }
+                                },0);
+                                machine_tool.element_state(element,`${this.group}_remove`,'',true);
+                                window.setTimeout(()=>{
+                                    machine_tool.element_state(element,`${this.group}_hide`,`${this.group}_ready ${this.group}_go ${this.group}_last ${this.group}_prev ${this.group}_remove`,true);
+                                    this.lock=false;
+                                },wait);
+                                let last=null;
+                                machine_tool.for(this.elements,(...data)=>{
+                                    if(data[2]!==element&&!data[2].classList.contains(`${this.group}_hide`)&&!data[2].classList.contains(`${this.group}_remove`)){
+                                        last=data[2];
+                                    }
+                                },0);
+                                machine_tool.remove_element(style);
+                                if(last){
+                                    machine_tool.element_state(last,`${this.group}_last`,`${this.group}_prev`,true);
+                                    return last;
+                                }else{
+                                    return 'null';
                                 }
-                                return false;
-                            });
+                            }
                         }
                         remove(wait=350){
-                            return machine_tool.loop(()=>{
-                                if(!this.lock){
-                                    this.lock=true;
-                                    const style=machine_tool.element_create('style',undefined,window.document.head,undefined,this.style);
-                                    let element=null;
-                                    machine_tool.for(this.elements,(...data)=>{
-                                        if(!data[2].classList.contains(`${this.group}_hide`)&&!data[2].classList.contains(`${this.group}_remove`)&&data[2].classList.contains(`${this.group}_last`)){
-                                            element=data[2];
-                                        }
-                                    },0);
-                                    this.elements.splice(this.elements.indexOf(element),1);
-                                    machine_tool.element_state(element,`${this.group}_remove`,'',true);
-                                    window.setTimeout(()=>{
-                                        machine_tool.element_state(element,'',`${this.group}_ready ${this.group}_go ${this.group}_last ${this.group}_prev ${this.group}_hide ${this.group}_remove`,true);
-                                        if(element){
-                                            machine_tool.remove_element(element);
-                                        }
-                                        this.lock=false;
-                                    },wait);
-                                    let last=null;
-                                    machine_tool.for(this.elements,(...data)=>{
-                                        if(data[2]!==element&&!data[2].classList.contains(`${this.group}_hide`)&&!data[2].classList.contains(`${this.group}_remove`)){
-                                            last=data[2];
-                                        }
-                                    },0);
-                                    machine_tool.remove_element(style);
-                                    if(last){
-                                        machine_tool.element_state(last,`${this.group}_last`,`${this.group}_prev`,true);
-                                        return last;
-                                    }else{
-                                        return 'null';
+                            if(!this.lock){
+                                this.lock=true;
+                                const style=machine_tool.element_create('style',undefined,window.document.head,undefined,this.style);
+                                let element=null;
+                                machine_tool.for(this.elements,(...data)=>{
+                                    if(!data[2].classList.contains(`${this.group}_hide`)&&!data[2].classList.contains(`${this.group}_remove`)&&data[2].classList.contains(`${this.group}_last`)){
+                                        element=data[2];
                                     }
+                                },0);
+                                this.elements.splice(this.elements.indexOf(element),1);
+                                machine_tool.element_state(element,`${this.group}_remove`,'',true);
+                                window.setTimeout(()=>{
+                                    machine_tool.element_state(element,'',`${this.group}_ready ${this.group}_go ${this.group}_last ${this.group}_prev ${this.group}_hide ${this.group}_remove`,true);
+                                    if(element){
+                                        machine_tool.remove_element(element);
+                                    }
+                                    this.lock=false;
+                                },wait);
+                                let last=null;
+                                machine_tool.for(this.elements,(...data)=>{
+                                    if(data[2]!==element&&!data[2].classList.contains(`${this.group}_hide`)&&!data[2].classList.contains(`${this.group}_remove`)){
+                                        last=data[2];
+                                    }
+                                },0);
+                                machine_tool.remove_element(style);
+                                if(last){
+                                    machine_tool.element_state(last,`${this.group}_last`,`${this.group}_prev`,true);
+                                    return last;
+                                }else{
+                                    return 'null';
                                 }
-                                return false;
-                            });
+                            }
                         }
                     }
                 }
