@@ -1250,15 +1250,15 @@
                             this.style='html * { pointer-events: none !important; }';
                         }
                         add(element,mark,wait=350){
-                            const style=machine_tool.element_create('style',undefined,window.document.head,undefined,this.style);
-                            if(wait>1000/24){
-                                wait=wait-1000/24;
-                            }else{
-                                wait=0;
-                            }
                             return machine_tool.loop(()=>{
                                 if(!this.lock){
                                     this.lock=true;
+                                    const style=machine_tool.element_create('style',undefined,window.document.head,undefined,this.style);
+                                    if(wait>1000/24){
+                                        wait=wait-1000/24;
+                                    }else{
+                                        wait=0;
+                                    }
                                     let mark_state=false;
                                     if(mark){
                                         machine_tool.for(this.elements,(...data)=>{
@@ -1323,10 +1323,10 @@
                             }
                         }
                         hide(wait=350){
-                            const style=machine_tool.element_create('style',undefined,window.document.head,undefined,this.style);
                             return machine_tool.loop(()=>{
                                 if(!this.lock){
                                     this.lock=true;
+                                    const style=machine_tool.element_create('style',undefined,window.document.head,undefined,this.style);
                                     let element=null;
                                     machine_tool.for(this.elements,(...data)=>{
                                         if(!data[2].classList.contains(`${this.group}_hide`)&&!data[2].classList.contains(`${this.group}_remove`)&&data[2].classList.contains(`${this.group}_last`)){
@@ -1356,10 +1356,10 @@
                             });
                         }
                         remove(wait=350){
-                            const style=machine_tool.element_create('style',undefined,window.document.head,undefined,this.style);
                             return machine_tool.loop(()=>{
                                 if(!this.lock){
                                     this.lock=true;
+                                    const style=machine_tool.element_create('style',undefined,window.document.head,undefined,this.style);
                                     let element=null;
                                     machine_tool.for(this.elements,(...data)=>{
                                         if(!data[2].classList.contains(`${this.group}_hide`)&&!data[2].classList.contains(`${this.group}_remove`)&&data[2].classList.contains(`${this.group}_last`)){
