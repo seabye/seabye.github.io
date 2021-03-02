@@ -1252,6 +1252,7 @@
                         add(element,mark,wait=350){
                             if(!this.lock){
                                 this.lock=true;
+                                const style=machine_tool.element_create('style',undefined,window.document.head,undefined,this.style);
                                 if(wait>1000/24){
                                     wait=wait-1000/24;
                                 }else{
@@ -1260,47 +1261,39 @@
                                 let mark_state=false;
                                 if(mark){
                                     machine_tool.for(this.elements,(...data)=>{
-                                        if(data[2]?.machine_tool?.element_block?.add?.mark===mark){
+                                        if(data[2].machine_tool_element_block_add_mark===mark){
                                             mark_state=true;
                                             element=data[2];
                                         }
                                     },0);
                                 }
-                                if(element){
-                                    const style=machine_tool.element_create('style',undefined,window.document.head,undefined,this.style);
-                                    if(mark&&!mark_state){
-                                        element.machine_tool={};
-                                        element.machine_tool.element_block={};
-                                        element.machine_tool.element_block.add={};
-                                        element.machine_tool.element_block.add.mark=mark;
-                                    }
-                                    if(!mark_state){
-                                        this.elements.push(element);
-                                    }
-                                    machine_tool.for(this.elements,(...data)=>{
-                                        if(data[2]!==element&&data[2].classList.contains(`${this.group}_last`)){
-                                            machine_tool.element_state(data[2],`${this.group}_prev`,`${this.group}_last`,true);
-                                        }
-                                    },0);
-                                    machine_tool.element_state(element,`${this.group}_last ${this.group}_ready`,`${this.group}_hide`,true);
-                                    element.style.setProperty('opacity','0');
-                                    if(!mark_state){
-                                        this.element.insertAdjacentElement(this.insert_position,element);
-                                    }
-                                    window.setTimeout(()=>{
-                                        element.style.removeProperty('opacity');
-                                        machine_tool.remove_empty(element);
-                                        machine_tool.element_state(element,`${this.group}_go`,'',true);
-                                        window.setTimeout(()=>{
-                                            machine_tool.element_state(element,'',`${this.group}_ready`,true);
-                                            machine_tool.remove_element(style);
-                                            this.lock=false;
-                                        },wait);
-                                    },1000/24);
-                                    return element;
-                                }else{
-                                    this.lock=false;
+                                if(mark&&!mark_state){
+                                    element.machine_tool_element_block_add_mark=mark;
                                 }
+                                if(!mark_state){
+                                    this.elements.push(element);
+                                }
+                                machine_tool.for(this.elements,(...data)=>{
+                                    if(data[2]!==element&&data[2].classList.contains(`${this.group}_last`)){
+                                        machine_tool.element_state(data[2],`${this.group}_prev`,`${this.group}_last`,true);
+                                    }
+                                },0);
+                                machine_tool.element_state(element,`${this.group}_last ${this.group}_ready`,`${this.group}_hide`,true);
+                                element.style.setProperty('opacity','0');
+                                if(!mark_state){
+                                    this.element.insertAdjacentElement(this.insert_position,element);
+                                }
+                                window.setTimeout(()=>{
+                                    element.style.removeProperty('opacity');
+                                    machine_tool.remove_empty(element);
+                                    machine_tool.element_state(element,`${this.group}_go`,'',true);
+                                    window.setTimeout(()=>{
+                                        machine_tool.element_state(element,'',`${this.group}_ready`,true);
+                                        machine_tool.remove_element(style);
+                                        this.lock=false;
+                                    },wait);
+                                },1000/24);
+                                return element;
                             }
                         }
                         back(wait=350){
@@ -1312,7 +1305,7 @@
                                         element=data[2];
                                     }
                                 },0);
-                                if(element?.machine_tool?.element_block?.add?.mark){
+                                if(element.machine_tool_element_block_add_mark){
                                     this.lock=false;
                                     return this.hide(wait);
                                 }else{
@@ -1334,6 +1327,7 @@
                                 machine_tool.element_state(element,`${this.group}_remove`,'',true);
                                 window.setTimeout(()=>{
                                     machine_tool.element_state(element,`${this.group}_hide`,`${this.group}_ready ${this.group}_go ${this.group}_last ${this.group}_prev ${this.group}_remove`,true);
+                                    machine_tool.remove_element(style);
                                     this.lock=false;
                                 },wait);
                                 let last=null;
@@ -1342,7 +1336,6 @@
                                         last=data[2];
                                     }
                                 },0);
-                                machine_tool.remove_element(style);
                                 if(last){
                                     machine_tool.element_state(last,`${this.group}_last`,`${this.group}_prev`,true);
                                     return last;
@@ -1368,6 +1361,7 @@
                                     if(element){
                                         machine_tool.remove_element(element);
                                     }
+                                    machine_tool.remove_element(style);
                                     this.lock=false;
                                 },wait);
                                 let last=null;
@@ -1376,7 +1370,6 @@
                                         last=data[2];
                                     }
                                 },0);
-                                machine_tool.remove_element(style);
                                 if(last){
                                     machine_tool.element_state(last,`${this.group}_last`,`${this.group}_prev`,true);
                                     return last;
