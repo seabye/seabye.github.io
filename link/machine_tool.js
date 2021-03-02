@@ -1298,6 +1298,8 @@
                                         },wait);
                                     },1000/24);
                                     return element;
+                                }else{
+                                    this.lock=false;
                                 }
                             }
                         }
