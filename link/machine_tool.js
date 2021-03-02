@@ -1247,9 +1247,10 @@
                             this.insert_position=insert_position;
                             this.elements=[];
                             this.lock=false;
+                            this.style='html, html * { overflow: hidden !important; pointer-events: none !important; }';
                         }
                         add(element,mark,wait=350){
-                            const style=machine_tool.element_create('style',undefined,window.document.head,undefined,'html, html * { pointer-events: none !important; }');
+                            const style=machine_tool.element_create('style',undefined,window.document.head,undefined,this.style);
                             if(wait>1000/24){
                                 wait=wait-1000/24;
                             }else{
@@ -1322,7 +1323,7 @@
                             }
                         }
                         hide(wait=350){
-                            const style=machine_tool.element_create('style',undefined,window.document.head,undefined,'html, html * { pointer-events: none !important; }');
+                            const style=machine_tool.element_create('style',undefined,window.document.head,undefined,this.style);
                             return machine_tool.loop(()=>{
                                 if(!this.lock){
                                     this.lock=true;
@@ -1355,7 +1356,7 @@
                             });
                         }
                         remove(wait=350){
-                            const style=machine_tool.element_create('style',undefined,window.document.head,undefined,'html, html * { pointer-events: none !important; }');
+                            const style=machine_tool.element_create('style',undefined,window.document.head,undefined,this.style);
                             return machine_tool.loop(()=>{
                                 if(!this.lock){
                                     this.lock=true;
