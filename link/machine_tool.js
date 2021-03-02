@@ -1277,15 +1277,13 @@
                                     if(!mark_state){
                                         this.elements.push(element);
                                     }
-                                    // if(mark_state&&element.classList.contains(`${this.group}_hide`)){
-                                        machine_tool.for(this.elements,(...data)=>{
-                                            if(data[2]!==element&&data[2].classList.contains(`${this.group}_last`)){
-                                                machine_tool.element_state(data[2],`${this.group}_prev`,`${this.group}_last`,true);
-                                            }
-                                        },0);
-                                        machine_tool.element_state(element,`${this.group}_last ${this.group}_ready`,`${this.group}_hide`,true);
-                                        element.style.setProperty('opacity','0');
-                                    // }
+                                    machine_tool.for(this.elements,(...data)=>{
+                                        if(data[2]!==element&&data[2].classList.contains(`${this.group}_last`)){
+                                            machine_tool.element_state(data[2],`${this.group}_prev`,`${this.group}_last`,true);
+                                        }
+                                    },0);
+                                    machine_tool.element_state(element,`${this.group}_last ${this.group}_ready`,`${this.group}_hide`,true);
+                                    element.style.setProperty('opacity','0');
                                     if(!mark_state){
                                         this.element.insertAdjacentElement(this.insert_position,element);
                                     }
