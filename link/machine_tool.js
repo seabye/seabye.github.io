@@ -1336,7 +1336,6 @@
                                     machine_tool.element_state(element,`${this.group}_remove`,'',true);
                                     window.setTimeout(()=>{
                                         machine_tool.element_state(element,`${this.group}_hide`,`${this.group}_ready ${this.group}_go ${this.group}_last ${this.group}_prev ${this.group}_remove`,true);
-                                        machine_tool.remove_element(style);
                                         this.lock=false;
                                     },wait);
                                     let last=null;
@@ -1345,6 +1344,7 @@
                                             last=data[2];
                                         }
                                     },0);
+                                    machine_tool.remove_element(style);
                                     if(last){
                                         machine_tool.element_state(last,`${this.group}_last`,`${this.group}_prev`,true);
                                         return last;
@@ -1373,7 +1373,6 @@
                                         if(element){
                                             machine_tool.remove_element(element);
                                         }
-                                        machine_tool.remove_element(style);
                                         this.lock=false;
                                     },wait);
                                     let last=null;
@@ -1382,6 +1381,7 @@
                                             last=data[2];
                                         }
                                     },0);
+                                    machine_tool.remove_element(style);
                                     if(last){
                                         machine_tool.element_state(last,`${this.group}_last`,`${this.group}_prev`,true);
                                         return last;
