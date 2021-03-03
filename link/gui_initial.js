@@ -307,7 +307,7 @@
                 }
             }else{
                 const get_media_prefers_color_scheme=(matches)=>{
-                    return matches?this.dataset.config.head_theme_color_dark?this.dataset.config.head_theme_color_dark:'#212121':this.dataset.config.head_theme_color_light?this.dataset.config.head_theme_color_light:'#E1E1E1';
+                    return matches?this.dataset.config.head_theme_color_dark?this.dataset.config.head_theme_color_dark:'#000000':this.dataset.config.head_theme_color_light?this.dataset.config.head_theme_color_light:'#FFFFFF';
                 };
                 const element=window.document.createElement('meta');
                 element.setAttribute('name','theme-color');

@@ -72,20 +72,8 @@
             --ic_ve_color_black3_opaque: rgb(89,89,89);
             --ic_ve_color_black2_opaque: rgb(101,101,101);
             --ic_ve_color_black1_opaque: rgb(114,114,114);
-            /* --ic_ve_color_background: #F9F9F9;
-            --ic_ve_color_background2: #EDEDED;
-            --ic_ve_color_foreground: #E1E1E1;
-            --ic_ve_color_foreground2: #D5D5D5;
-            --ic_ve_color_highlight: #C9C9C9;
-            --ic_ve_color_highlight2: #BDBDBD;
-            --ic_ve_color_x: #B1B1B1;
-            --ic_ve_color_x2: #A5A5A5; */
-            /* --ic_ve_color_background: #D5D5D5;
-            --ic_ve_color_foreground: #E1E1E1;
-            --ic_ve_color_highlight: #EDEDED;
-            --ic_ve_color_opposite: #DBDBDB; */
             --ic_ve_color_background: #D2D2D2;
-            --ic_ve_color_foreground: #E1E1E1;
+            --ic_ve_color_foreground: #E3E3E3;
             --ic_ve_color_highlight: #F7F7F7;
             --ic_ve_color_opposite: #E3E3E3;
             --ic_ve_color_red: #CC0000;
@@ -97,9 +85,6 @@
             --ic_ve_color_blue_translucent: #0088FF99;
             --ic_ve_color_orange_translucent: #FF880099;
         }
-        /* html.ic_nr_media_prefers_color_scheme_light.ic_nr_system_ios.ic_nr_pwa {
-            --ic_ve_color_background: #FFFFFF;
-        } */
         html.ic_nr_media_prefers_color_scheme_dark {
             --ic_ve_color_white: #000000;
             --ic_ve_color_white_transparent: rgba(0,0,0,0);
@@ -143,20 +128,8 @@
             --ic_ve_color_black3_opaque: rgb(165,165,165);
             --ic_ve_color_black2_opaque: rgb(153,153,153);
             --ic_ve_color_black1_opaque: rgb(140,140,140);
-            /* --ic_ve_color_background: #090909;
-            --ic_ve_color_background2: #151515;
-            --ic_ve_color_foreground: #212121;
-            --ic_ve_color_foreground2: #2D2D2D;
-            --ic_ve_color_highlight: #393939;
-            --ic_ve_color_highlight2: #454545;
-            --ic_ve_color_x: #515151;
-            --ic_ve_color_x2: #5D5D5D; */
-            /* --ic_ve_color_background: #151515;
-            --ic_ve_color_foreground: #212121;
-            --ic_ve_color_highlight: #2D2D2D;
-            --ic_ve_color_opposite: #393939; */
             --ic_ve_color_background: #121212;
-            --ic_ve_color_foreground: #212121;
+            --ic_ve_color_foreground: #1E1E1E;
             --ic_ve_color_highlight: #303030;
             --ic_ve_color_opposite: #3D3D3D;
             --ic_ve_color_red: #CC0000;
@@ -168,9 +141,6 @@
             --ic_ve_color_blue_translucent: #0088FF99;
             --ic_ve_color_orange_translucent: #FF880099;
         }
-        /* html.ic_nr_media_prefers_color_scheme_dark.ic_nr_system_ios.ic_nr_pwa {
-            --ic_ve_color_background: #000000;
-        } */
         /* system_brand */
             /* other */
             html {
