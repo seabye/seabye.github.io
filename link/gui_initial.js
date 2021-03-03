@@ -14,8 +14,8 @@
 //     'head_script': 'script.js',
 //     'head_icon': 'icon.png',
 //     'head_icon_apple': 'icon-apple.png',
-//     'head_theme_color_light': '</""/=#E1E1E1>',
-//     'head_theme_color_dark': '</""/=#212121>',
+//     'head_theme_color_light': '</""/=#FFFFFF>',
+//     'head_theme_color_dark': '</""/=#000000>',
 //     'head_manifest': 'manifest.webmanifest'
 // }"></script>
 // ~~~~ ~~~~ ~~~~ ~~~~
