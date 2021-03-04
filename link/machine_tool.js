@@ -1262,18 +1262,19 @@
                     }
                 }
             },
-            /*🟢*/element_block(element,group='group',insert_position='beforeend'){
+            /*🟢*/element_block(element,group='group',insert_position='beforeend',wait=350){
                 if(!this.element_block.template){
                     this.element_block.template=class template{
-                        constructor(element,group,insert_position){
+                        constructor(element,group,insert_position,wait){
                             this.element=element;
                             this.group=group;
                             this.insert_position=insert_position;
+                            this.wait=wait;
                             this.elements=[];
                             this.lock=false;
                             this.style='html * { pointer-events: none !important; }';
                         }
-                        add(element,mark,wait=350){
+                        add(element,mark,wait=this.wait){
                             if(!this.lock){
                                 this.lock=true;
                                 const style=machine_tool.element_create('style',undefined,window.document.head,undefined,this.style);
@@ -1324,7 +1325,7 @@
                                 return element;
                             }
                         }
-                        back(wait=350){
+                        back(wait=this.wait){
                             if(!this.lock){
                                 this.lock=true;
                                 let element=null;
@@ -1342,7 +1343,7 @@
                                 }
                             }
                         }
-                        hide(wait=350){
+                        hide(wait=this.wait){
                             if(!this.lock){
                                 this.lock=true;
                                 const style=machine_tool.element_create('style',undefined,window.document.head,undefined,this.style);
@@ -1408,7 +1409,7 @@
                         }
                     }
                 }
-                return new this.element_block.template(element,group,insert_position);
+                return new this.element_block.template(element,group,insert_position,wait);
             },
             /*🟢*/remove_element(element){
                 element.parentElement.removeChild(element);
