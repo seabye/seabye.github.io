@@ -81,10 +81,6 @@
             --ic_ve_color_black3_opacity: rgba(0,0,0,0.3);
             --ic_ve_color_black2_opacity: rgba(0,0,0,0.2);
             --ic_ve_color_black1_opacity: rgba(0,0,0,0.1);
-            --ic_ve_color_background: #CCCCCC;
-            --ic_ve_color_foreground: #DDDDDD;
-            --ic_ve_color_highlight: #FFFFFF;
-            --ic_ve_color_opposite: #EEEEEE;
             --ic_ve_color_red: #CC0000;
             --ic_ve_color_green: #00BB00;
             --ic_ve_color_blue: #0088FF;
@@ -93,6 +89,18 @@
             --ic_ve_color_green_translucent: #00BB0099;
             --ic_ve_color_blue_translucent: #0088FF99;
             --ic_ve_color_orange_translucent: #FF880099;
+        }
+        html.ic_nr_media_prefers_color_scheme_light.ic_nr_media_orientation_landscape {
+            --ic_ve_color_background: #FFFFFF;
+            --ic_ve_color_foreground: #EEEEEE;
+            --ic_ve_color_highlight: #DDDDDD;
+            --ic_ve_color_opposite: #CCCCCC;
+        }
+        html.ic_nr_media_prefers_color_scheme_light.ic_nr_media_orientation_portrait {
+            --ic_ve_color_background: #CCCCCC;
+            --ic_ve_color_foreground: #DDDDDD;
+            --ic_ve_color_highlight: #FFFFFF;
+            --ic_ve_color_opposite: #EEEEEE;
         }
         html.ic_nr_media_prefers_color_scheme_dark {
             --ic_ve_color_white: #000000;
