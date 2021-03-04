@@ -242,19 +242,35 @@
                     callback(data);
                 }).catch(()=>{});
             },
-            /*🟢*/json(data){
-                switch(typeof data){
+            /*🟢*/json(data,to){
+                switch(to){
                     case'string':
-                        {
-                            return window.JSON.parse(data);
-                        }
-                        break;
-                    case'object':
                         {
                             return window.JSON.stringify(data);
                         }
                         break;
+                    case'object':
+                        {
+                            return window.JSON.parse(data);
+                        }
+                        break;
                     default:
+                        {
+                            switch(typeof data){
+                                case'string':
+                                    {
+                                        return window.JSON.parse(data);
+                                    }
+                                    break;
+                                case'object':
+                                    {
+                                        return window.JSON.stringify(data);
+                                    }
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
                         break;
                 }
             },
@@ -337,7 +353,7 @@
             /*🔴*/database(){},
             /*🔴*/cache(){},
         // network data
-            /*🔴*/fetch(uri=window.location.href,method,data,callback){
+            /*🟠*/fetch(uri=window.location.href,method,data,callback=()=>{}){
                 switch(method){
                     case'GET':
                         {}
@@ -346,7 +362,21 @@
                         {}
                         break;
                     case'POST':
-                        {}
+                        {
+                            let result={};
+                            return window.fetch(uri,{
+                                method:'POST',
+                                headers:{'Content-Type':'application/json; charset=utf-8'},
+                                body:this.json(data,'string'),
+                            }).then((data)=>{
+                                result.status=data.status;
+                                return data.json();
+                            }).then((data)=>{
+                                result.result=data;
+                                callback(result);
+                                return result;
+                            });
+                        }
                         break;
                     case'PUT':
                         {}
@@ -1507,7 +1537,63 @@
                     this.listen_target('add',window.document.documentElement,'observe_mutation',run,{attributes:true,attributeFilter:['class'],childList:false,subtree:false});
                 }
             },
-            /*🔴*/hls_load(){},
+            /*🟢*/hls_load(mode='auto',video,src,poster='',config={}){
+                video.pause();
+                if(!this.hls_load.play){
+                    this.hls_load.play=()=>{
+                        video.hls.startLoad();
+                    };
+                }
+                if(!this.hls_load.pause){
+                    this.hls_load.pause=()=>{
+                        video.hls.stopLoad();
+                    };
+                }
+                video.setAttribute('src',src);
+                video.setAttribute('poster',poster);
+                if(src.match(/.m3u8/i)){
+                    const hls_go=()=>{
+                        if(video.hls){
+                            video.hls.destroy();
+                            delete video.hls;
+                            video.removeEventListener('play',this.hls_load.play);
+                            video.removeEventListener('pause',this.hls_load.pause);
+                        }
+                        const hls=new window.Hls(config);
+                        hls.loadSource(src);
+                        hls.attachMedia(video);
+                        video.addEventListener('play',this.hls_load.play);
+                        video.addEventListener('pause',this.hls_load.pause);
+                        video.hls=hls;
+                        return hls;
+                    };
+                    return this.loop(()=>{
+                        switch(mode){
+                            case'auto':
+                                {
+                                    if(video.canPlayType('application/vnd.apple.mpegurl')){
+                                        return true;
+                                    }else{
+                                        if('Hls'in window&&window.Hls.isSupported()){
+                                            return hls_go();
+                                        }
+                                    }
+                                }
+                                break;
+                            case'hls':
+                                {
+                                    if('Hls'in window&&window.Hls.isSupported()){
+                                        return hls_go();
+                                    }
+                                }
+                                break;
+                            default:
+                                break;
+                        }
+                        return false;
+                    });
+                }
+            },
         // application programming interface
             /*🔴*/listen_port(){},
             /*🔴*/port_receive(uri,method,data,callback,other_data){
@@ -1524,6 +1610,7 @@
                 }
                 return result;
             },
+            /*🔴*/port_return(){},
             /*🔴*/route(){},
             /*🔴*/extract(){},
             /*🔴*/middleware(){},
