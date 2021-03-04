@@ -1277,7 +1277,7 @@
                                     if(data[2]!==element&&data[2].classList.contains(`${this.group}_last`)){
                                         window.setTimeout(()=>{
                                             machine_tool.element_state(data[2],`${this.group}_prev`,`${this.group}_last`,true);
-                                        },1000/24);
+                                        },1000/24*2);
                                     }
                                 },0);
                                 machine_tool.element_state(element,`${this.group}_last ${this.group}_ready`,`${this.group}_hide`,true);
