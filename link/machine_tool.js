@@ -121,8 +121,7 @@
                 switch(typeof type){
                     case'undefined':
                         {
-                            let depth=0;
-                            const run=(data)=>{
+                            const run=(data,depth)=>{
                                 let next=[];
                                 switch(window.Object.prototype.toString.call(data)){
                                     case'[object Array]':
@@ -164,13 +163,12 @@
                                         break;
                                 }
                                 if(next.length){
-                                    depth+=1;
                                     for(let key=0,length=next.length;key<length;key++){
-                                        run(next[key]);
+                                        run(next[key],depth+1);
                                     }
                                 }
                             };
-                            run(data);
+                            run(data,0);
                         }
                         break;
                     default:
@@ -178,8 +176,7 @@
                             switch(window.Object.prototype.toString.call(data)){
                                 case'[object Array]':
                                     {
-                                        let depth=0;
-                                        const run=(data)=>{
+                                        const run=(data,depth)=>{
                                             let next=[];
                                             for(let key=0,length=data.length;key<length;key++){
                                                 if(typeof condition_depth==='number'){
@@ -194,19 +191,17 @@
                                                 };
                                             }
                                             if(next.length){
-                                                depth+=1;
                                                 for(let key=0,length=next.length;key<length;key++){
-                                                    run(next[key]);
+                                                    run(next[key],depth+1);
                                                 }
                                             }
                                         };
-                                        run(data);
+                                        run(data,0);
                                     }
                                     break;
                                 case'[object Object]':
                                     {
-                                        let depth=0;
-                                        const run=(data)=>{
+                                        const run=(data,depth)=>{
                                             let next=[];
                                             let count=0;
                                             for(const key in data){
@@ -224,13 +219,12 @@
                                                 };
                                             }
                                             if(next.length){
-                                                depth+=1;
                                                 for(let key=0,length=next.length;key<length;key++){
-                                                    run(next[key]);
+                                                    run(next[key],depth+1);
                                                 }
                                             }
                                         };
-                                        run(data);
+                                        run(data,0);
                                     }
                                     break;
                                 default:
