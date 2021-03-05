@@ -1598,7 +1598,7 @@
 // #build
 // #debug
     // debug
-    {
+    if(window.document?.documentElement){
         let over=false;
         const run=()=>{
             if(!over&&window.document.documentElement.classList.contains('debug')){
