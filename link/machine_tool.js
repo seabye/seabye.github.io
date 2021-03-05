@@ -339,12 +339,7 @@
                 const result={};
                 return window.fetch(uri,option).then((data)=>{
                     result.status=data.status;
-                    try{
-                        window.JSON.parse(data);
-                        return data.json();
-                    }catch(error){
-                        return data.text();
-                    }
+                    return data.json();
                 }).then((data)=>{
                     result.result=data;
                     callback(result);
