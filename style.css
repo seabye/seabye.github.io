@@ -6,7 +6,7 @@
 /* #build */
     /* uncategorized */
     a.ic_active {
-        text-shadow: 0 0 10px #FFFFFF;
+        text-shadow: 0 0 20px var(--ic_ve_color_black);
     }
 /* #debug */
     /* uncategorized */
