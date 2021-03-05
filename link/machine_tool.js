@@ -1619,14 +1619,14 @@
     };
 // #build
 // #debug
-    // machine_tool_demo
+    // debug
     machine_tool.local_test(()=>{
-        if(!import.meta.url.match('machine_tool_demo.js')){
-            window.machine_tool=machine_tool;
-            machine_tool.import('./machine_tool_demo.js',(data)=>{
-                machine_tool.run_object(data._);
-            });
-        }
+        // window.machine_tool
+        window.machine_tool=machine_tool;
+        // machine_tool_demo
+        machine_tool.import('./machine_tool_demo.js',(data)=>{
+            data.machine_tool_demo(machine_tool);
+        });
     });
 // #after
     // console
