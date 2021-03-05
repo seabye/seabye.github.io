@@ -152,37 +152,34 @@
         /*🟢*/$navigator$environment(){
             const user_agent=window.navigator.userAgent;
             const class_=window.document.documentElement.classList;
-            if(user_agent.match(/Unix/i)){
-                class_.add('ic_nr_system_unix');
-            }
             if(user_agent.match(/Mac OS/i)&&!user_agent.match(/iPhone|iPad/i)){
                 class_.add('ic_nr_system_brand_apple','ic_nr_system_macos');
             }
-            if(user_agent.match(/Windows/i)){
+            else if(user_agent.match(/Windows/i)){
                 class_.add('ic_nr_system_brand_microsoft','ic_nr_system_windows');
             }
-            if(user_agent.match(/Linux/i)&&!user_agent.match(/Android/i)){
+            else if(user_agent.match(/Linux/i)&&!user_agent.match(/Android/i)){
                 class_.add('ic_nr_system_linux');
             }
-            if(user_agent.match(/CrOS/i)){
+            else if(user_agent.match(/CrOS/i)){
                 class_.add('ic_nr_system_brand_google','ic_nr_system_chromeos');
             }
-            if(user_agent.match(/iPhone|iPad/i)){
+            else if(user_agent.match(/iPhone|iPad/i)){
                 class_.add('ic_nr_system_brand_apple','ic_nr_system_ios');
             }
-            if(user_agent.match(/Android/i)){
+            else if(user_agent.match(/Android/i)){
                 class_.add('ic_nr_system_brand_google','ic_nr_system_android');
             }
             if(user_agent.match(/Firefox/i)&&!user_agent.match(/FxiOS/i)){
                 class_.add('ic_nr_browser_firefox');
             }
-            if((user_agent.match(/Safari/i)&&!user_agent.match(/Chrome|Edg/i))||user_agent.match(/FxiOS|CriOS|EdgiOS/i)){
+            else if((user_agent.match(/Safari/i)&&!user_agent.match(/Chrome|Edg/i))||user_agent.match(/FxiOS|CriOS|EdgiOS/i)){
                 class_.add('ic_nr_browser_safari');
             }
-            if(user_agent.match(/Chrome/i)&&!user_agent.match(/CriOS|Edg/i)){
+            else if(user_agent.match(/Chrome/i)&&!user_agent.match(/CriOS|Edg/i)){
                 class_.add('ic_nr_browser_chrome');
             }
-            if(user_agent.match(/Edg/i)&&!user_agent.match(/EdgiOS/i)){
+            else if(user_agent.match(/Edg/i)&&!user_agent.match(/EdgiOS/i)){
                 class_.add('ic_nr_browser_edge');
             }
             if(window.location.search.replace('?','').split('&').includes('pwa')){
