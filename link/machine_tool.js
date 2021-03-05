@@ -375,6 +375,10 @@
                                 result.result=data;
                                 callback(result);
                                 return result;
+                            }).catch((data)=>{
+                                result.result=data;
+                                callback(result);
+                                return result;
                             });
                         }
                         break;
