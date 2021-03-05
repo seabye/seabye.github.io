@@ -14,19 +14,19 @@ export const machine_tool_demo=(machine_tool)=>{
                 return true;
             });
         },
-        async aw_loop(){
-            // window.console.log(await machine_tool.aw_loop(
+        async async_loop(){
+            // window.console.log(await machine_tool.async_loop(
             //     ()=>{
             //         return false;
             //     },
             //     ()=>{
-            //         window.console.log('aw_loop()','1');
+            //         window.console.log('async_loop()','1');
             //         return 11;
             //     },
             //     1000,
             //     2,
             //     ()=>{
-            //         window.console.log('aw_loop()','2');
+            //         window.console.log('async_loop()','2');
             //         return 22;
             //     }
             // ));

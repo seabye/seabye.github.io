@@ -64,7 +64,7 @@
                     return result;
                 }
             },
-            /*🟢*/aw_loop(condition,callback,wait=1000/24,count,count_callback){
+            /*🟢*/async_loop(condition,callback,wait=1000/24,count,count_callback){
                 return(async()=>{
                     const run=async()=>{
                         const condition_result=await condition();
@@ -77,7 +77,7 @@
                         }else{
                             return new window.Promise((resolve)=>{
                                 window.setTimeout(()=>{
-                                    resolve(this.aw_loop(condition,callback,wait,count,count_callback));
+                                    resolve(this.async_loop(condition,callback,wait,count,count_callback));
                                 },wait);
                             });
                         }
