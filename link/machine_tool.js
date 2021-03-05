@@ -353,56 +353,37 @@
             /*🔴*/database(){},
             /*🔴*/cache(){},
         // network data
-            /*🟠*/fetch(uri=window.location.href,method,data,callback=()=>{}){
+            /*🟢*/fetch_json(uri=window.location.origin,method,data,callback=()=>{}){
+                let option=undefined;
                 switch(method){
-                    case'GET':
-                        {}
-                        break;
-                    case'HEAD':
-                        {}
-                        break;
                     case'POST':
                         {
-                            let result={};
-                            return window.fetch(uri,{
+                            option={
                                 method:'POST',
                                 headers:{'Content-Type':'application/json; charset=utf-8'},
-                                body:this.json(data,'string'),
-                            }).then((data)=>{
-                                result.status=data.status;
-                                return data.json();
-                            }).then((data)=>{
-                                result.result=data;
-                                callback(result);
-                                return result;
-                            }).catch((data)=>{
-                                result.result=data;
-                                callback(result);
-                                return result;
-                            });
+                                body:this.json(data,'string')
+                            };
                         }
-                        break;
-                    case'PUT':
-                        {}
-                        break;
-                    case'DELETE':
-                        {}
-                        break;
-                    case'CONNECT':
-                        {}
-                        break;
-                    case'OPTIONS':
-                        {}
-                        break;
-                    case'TRACE':
-                        {}
-                        break;
-                    case'PATCH':
-                        {}
                         break;
                     default:
                         break;
                 }
+                const result={};
+                return window.fetch(uri,option).then((data)=>{
+                    result.status=data.status;
+                    return data.json();
+                }).then((data)=>{
+                    result.result=data;
+                    callback(result);
+                    this.local_test(()=>{
+                        window.console.log('==== ing machine_tool.js fetch result:',result);
+                    });
+                    return result;
+                }).catch((data)=>{
+                    this.local_test(()=>{
+                        window.console.log('==== ing machine_tool.js fetch catch:',data);
+                    });
+                });
             },
         // command line interface
             /*🔴*/cli(){},
@@ -731,7 +712,7 @@
                                                     run();
                                                 }
                                                 this.local_test(()=>{
-                                                    window.console.log('#### listen_target pointer_up length',window.Object.keys(this.listen_target.pointer_up).length);
+                                                    window.console.log('==== ing machine_tool.js listen_target.pointer_up length:',window.Object.keys(this.listen_target.pointer_up).length);
                                                 });
                                             };
                                             this.listen_target.pointer_up[id].count=0;
@@ -765,19 +746,18 @@
                                         }
                                         if(!this.listen_target.observe_mutation[id]){
                                             this.listen_target.observe_mutation[id]=new window.MutationObserver((mutation_list)=>{
-                                                // window.console.log('listen_target().observe_mutation mutation_list',mutation_list);
+                                                this.local_test(()=>{
+                                                    window.console.log('==== ing machine_tool.js listen_target.observe_mutation mutation_list:',mutation_list);
+                                                });
                                                 mutation_list.forEach((mutation)=>{
-                                                    // window.console.log('listen_target().observe_mutation mutation',mutation);
                                                     switch(mutation.type){
                                                         case'childList':
                                                             {
-                                                                // window.console.log('listen_target().observe_mutation childList');
                                                                 callback(mutation);
                                                             }
                                                             break;
                                                         case'attributes':
                                                             {
-                                                                // window.console.log('listen_target().observe_mutation attributes');
                                                                 callback(mutation);
                                                             }
                                                             break;
@@ -815,9 +795,10 @@
                                 case'add':
                                     {
                                         target.machine_tool_listen_target_observe_intersection=new window.IntersectionObserver((entries)=>{
-                                            // window.console.log('listen_target().observe_intersection entries',entries);
+                                            this.local_test(()=>{
+                                                window.console.log('==== ing machine_tool.js listen_target.observe_intersection entries:',entries);
+                                            });
                                             entries.forEach((entry)=>{
-                                                // window.console.log('listen_target().observe_intersection entry',entry);
                                                 callback(entry);
                                             });
                                         },option);
@@ -841,9 +822,10 @@
                                 case'add':
                                     {
                                         target.machine_tool_listen_target_observe_resize=new window.ResizeObserver((entries)=>{
-                                            // window.console.log('listen_target().observe_resize entries',entries);
+                                            this.local_test(()=>{
+                                                window.console.log('==== ing machine_tool.js listen_target.observe_resize entries:',entries);
+                                            });
                                             entries.forEach((entry)=>{
-                                                // window.console.log('listen_target().observe_resize entry',entry);
                                                 callback(entry);
                                             });
                                         });
@@ -1530,16 +1512,8 @@
                 return window.open(uri,name,`width=${width},height=${height},left=${left},top=${top}`);
             },
             /*🟢*/local_test(callback){
-                if(window.document?.documentElement){
-                    let remove=false;
-                    const run=()=>{
-                        if(!remove&&window.document.documentElement.classList.contains('debug')){
-                            callback();
-                            remove=true;
-                            this.listen_target('remove',window.document.documentElement,'observe_mutation',run);
-                        }
-                    };
-                    this.listen_target('add',window.document.documentElement,'observe_mutation',run,{attributes:true,attributeFilter:['class'],childList:false,subtree:false});
+                if(window.document?.documentElement&&window.document.documentElement.classList.contains('debug')){
+                    callback();
                 }
             },
             /*🟢*/hls_load(mode='auto',video,src,poster='',config={}){
@@ -1624,14 +1598,24 @@
 // #build
 // #debug
     // debug
-    machine_tool.local_test(()=>{
-        // window.machine_tool
-        window.machine_tool=machine_tool;
-        // machine_tool_demo
-        machine_tool.import('./machine_tool_demo.js',(data)=>{
-            data.machine_tool_demo(machine_tool);
-        });
-    });
+    {
+        let over=false;
+        const run=()=>{
+            if(!over&&window.document.documentElement.classList.contains('debug')){
+                machine_tool.local_test(()=>{
+                    // window.machine_tool
+                    window.machine_tool=machine_tool;
+                    // machine_tool_demo
+                    machine_tool.import('./machine_tool_demo.js',(data)=>{
+                        data.machine_tool_demo(machine_tool);
+                    });
+                });
+                over=true;
+                machine_tool.listen_target('remove',window.document.documentElement,'observe_mutation',run);
+            }
+        };
+        machine_tool.listen_target('add',window.document.documentElement,'observe_mutation',run,{attributes:true,attributeFilter:['class'],childList:false,subtree:false});
+    }
 // #after
     // console
     window.console.log('#### end machine_tool.js');
