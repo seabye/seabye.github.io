@@ -242,38 +242,6 @@
                     callback(data);
                 }).catch(()=>{});
             },
-            /*🟢*/json(data,to){
-                switch(to){
-                    case'string':
-                        {
-                            return window.JSON.stringify(data);
-                        }
-                        break;
-                    case'object':
-                        {
-                            return window.JSON.parse(data);
-                        }
-                        break;
-                    default:
-                        {
-                            switch(typeof data){
-                                case'string':
-                                    {
-                                        return window.JSON.parse(data);
-                                    }
-                                    break;
-                                case'object':
-                                    {
-                                        return window.JSON.stringify(data);
-                                    }
-                                    break;
-                                default:
-                                    break;
-                            }
-                        }
-                        break;
-                }
-            },
             /*🔴*/web_assembly(){},
             /*🟢*/uuid_36_to_uuid_22(uuid_36){
                 if(uuid_36.length===36){
@@ -361,7 +329,7 @@
                             option={
                                 method:'POST',
                                 headers:{'Content-Type':'application/json; charset=utf-8'},
-                                body:this.json(data,'string')
+                                body:window.JSON.stringify(data)
                             };
                         }
                         break;
