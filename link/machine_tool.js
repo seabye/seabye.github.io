@@ -339,17 +339,22 @@
                 const result={};
                 return window.fetch(uri,option).then((data)=>{
                     result.status=data.status;
-                    return data.json();
+                    try{
+                        window.JSON.parse(data);
+                        return data.json();
+                    }catch(error){
+                        return data.text();
+                    }
                 }).then((data)=>{
                     result.result=data;
                     callback(result);
                     this.local_test(()=>{
-                        window.console.log('==== ing machine_tool.js fetch result:',result);
+                        window.console.log('==== ing machine_tool.js fetch_json result:',result);
                     });
                     return result;
                 }).catch((data)=>{
                     this.local_test(()=>{
-                        window.console.log('==== ing machine_tool.js fetch catch:',data);
+                        window.console.log('==== ing machine_tool.js fetch_json catch:',data);
                     });
                 });
             },
