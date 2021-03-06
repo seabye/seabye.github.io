@@ -240,7 +240,9 @@
             /*🟢*/import(src,callback){
                 import(src).then((data)=>{
                     callback(data);
-                }).catch(()=>{});
+                }).catch((data)=>{
+                    window.console.log('==== import catch:',data);
+                });
             },
             /*🔴*/web_assembly(){},
             /*🟢*/uuid_36_to_uuid_22(uuid_36){
