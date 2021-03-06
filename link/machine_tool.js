@@ -321,7 +321,7 @@
             /*🔴*/database(){},
             /*🔴*/cache(){},
         // network data
-            /*🟢*/fetch_json(uri,method,body,result_type,callback){
+            /*🟢*/fetch_json(uri,method,body,result_type,callback,option_add,headers_add){
                 const option={};
                 option.method=method;
                 switch(typeof body){
@@ -338,6 +338,11 @@
                     default:
                         break;
                 }
+                if(option_add){
+                    this.for(option_add,(...data)=>{
+                        option[data[1]]=data[2];
+                    },0);
+                }
                 switch(typeof result_type){
                     case'json':
                         {
@@ -352,6 +357,15 @@
                     default:
                         break;
                 }
+                if(headers_add){
+                    if(!option.headers){
+                        option.headers={};
+                    }
+                    this.for(headers_add,(...data)=>{
+                        option.headers[`${data[1]}`]=data[2];
+                    },0);
+                }
+                window.console.log(option);
                 const result={};
                 return window.fetch(uri,option).then((data)=>{
                     result.status=data.status;
