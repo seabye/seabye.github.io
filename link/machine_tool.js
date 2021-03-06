@@ -343,7 +343,6 @@
                         option[data[1]]=data[2];
                     },0);
                 }
-                // const headers=new window.Headers();
                 switch(result_type){
                     case'json':
                         {
@@ -351,8 +350,6 @@
                                 option.headers={};
                             }
                             option.headers['Content-Type']='application/json; charset=utf-8';
-                            // option.headers=headers;
-                            // headers.append('Content-Type','application/json; charset=utf-8');
                         }
                         break;
                     case'text':
@@ -361,24 +358,19 @@
                                 option.headers={};
                             }
                             option.headers['Content-Type']='text/html; charset=utf-8';
-                            // option.headers=headers;
-                            // headers.append('Content-Type','text/html; charset=utf-8');
                         }
                         break;
                     default:
                         break;
                 }
                 if(headers_add){
-                    // option.headers=headers;
                     if(!option.headers){
                         option.headers={};
                     }
                     this.for(headers_add,(...data)=>{
-                        // headers.append(data[1],data[2]);
                         option.headers[data[1]]=data[2];
                     },0);
                 }
-                window.console.log(option);
                 const result={};
                 return window.fetch(uri,option).then((data)=>{
                     result.status=data.status;
