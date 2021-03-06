@@ -321,7 +321,7 @@
             /*🔴*/database(){},
             /*🔴*/cache(){},
         // network data
-            /*🟢*/fetch_json(uri=window.location.origin,callback=()=>{},method,data){
+            /*🟢*/fetch_json(uri=window.location.origin,callback,method,data){
                 let option=undefined;
                 switch(method){
                     case'POST':
@@ -340,12 +340,15 @@
                 return window.fetch(uri,option).then((data)=>{
                     result.status=data.status;
                     return data.json();
-                }).then((data)=>{
+                }).then(async(data)=>{
                     result.result=data;
                     this.local_test(()=>{
                         window.console.log('==== fetch_json result:',result);
                     });
-                    return callback(result);
+                    if(callback){
+                        return await callback(result);
+                    }
+                    return result;
                 }).catch((data)=>{
                     this.local_test(()=>{
                         window.console.log('==== fetch_json catch:',data);
