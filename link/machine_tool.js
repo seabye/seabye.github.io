@@ -343,12 +343,12 @@
                 }).then((data)=>{
                     result.result=data;
                     this.local_test(()=>{
-                        window.console.log('==== ing machine_tool.js fetch_json result:',result);
+                        window.console.log('==== fetch_json result:',result);
                     });
                     return callback(result);
                 }).catch((data)=>{
                     this.local_test(()=>{
-                        window.console.log('==== ing machine_tool.js fetch_json catch:',data);
+                        window.console.log('==== fetch_json catch:',data);
                     });
                 });
             },
@@ -679,7 +679,7 @@
                                                     run();
                                                 }
                                                 this.local_test(()=>{
-                                                    window.console.log('==== ing machine_tool.js listen_target.pointer_up length:',window.Object.keys(this.listen_target.pointer_up).length);
+                                                    window.console.log('==== listen_target.pointer_up length:',window.Object.keys(this.listen_target.pointer_up).length);
                                                 });
                                             };
                                             this.listen_target.pointer_up[id].count=0;
@@ -714,7 +714,7 @@
                                         if(!this.listen_target.observe_mutation[id]){
                                             this.listen_target.observe_mutation[id]=new window.MutationObserver((mutation_list)=>{
                                                 this.local_test(()=>{
-                                                    window.console.log('==== ing machine_tool.js listen_target.observe_mutation mutation_list:',mutation_list);
+                                                    window.console.log('==== listen_target.observe_mutation mutation_list:',mutation_list);
                                                 });
                                                 mutation_list.forEach((mutation)=>{
                                                     switch(mutation.type){
@@ -763,7 +763,7 @@
                                     {
                                         target.machine_tool_listen_target_observe_intersection=new window.IntersectionObserver((entries)=>{
                                             this.local_test(()=>{
-                                                window.console.log('==== ing machine_tool.js listen_target.observe_intersection entries:',entries);
+                                                window.console.log('==== listen_target.observe_intersection entries:',entries);
                                             });
                                             entries.forEach((entry)=>{
                                                 callback(entry);
@@ -790,7 +790,7 @@
                                     {
                                         target.machine_tool_listen_target_observe_resize=new window.ResizeObserver((entries)=>{
                                             this.local_test(()=>{
-                                                window.console.log('==== ing machine_tool.js listen_target.observe_resize entries:',entries);
+                                                window.console.log('==== listen_target.observe_resize entries:',entries);
                                             });
                                             entries.forEach((entry)=>{
                                                 callback(entry);
