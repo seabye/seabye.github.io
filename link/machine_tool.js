@@ -332,7 +332,7 @@
                         break;
                     case'string':
                         {
-                            option.body;
+                            option.body=body;
                         }
                         break;
                     default:
