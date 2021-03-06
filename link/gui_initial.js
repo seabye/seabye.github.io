@@ -356,7 +356,7 @@
         /*🔴*/no$back(){},
         /*🔴*/no$touch$back(){},
         /*🟢*/partial$scroll(){
-            // if(!window.CSS.supports('overscroll-behavior:contain')){
+            if(!window.CSS.supports('overscroll-behavior:contain')){
                 const preventDefault=(event)=>{
                     event.preventDefault();
                 };
@@ -436,7 +436,7 @@
                     window.addEventListener('touchmove',preventDefault,{passive:false});
                     start_y=start_x=scroll_direction=null;
                 });
-            // }
+            }
         },
         /*🟢*/form$input(){
             window.addEventListener('keydown',(event)=>{
