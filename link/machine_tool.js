@@ -1491,7 +1491,11 @@
                     callback();
                 }
             },
-            /*🟢*/hls_load(mode='auto',video,src,poster='',config={}){
+            /*🟢*/hls_load(mode='auto',video,src,poster='',config={
+                autoStartLoad:false,
+                maxBufferLength:4,
+                maxBufferSize:8*1000*1000
+            }){
                 video.pause();
                 if(!this.hls_load.play){
                     this.hls_load.play=()=>{
