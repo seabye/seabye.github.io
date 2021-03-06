@@ -321,7 +321,7 @@
             /*🔴*/database(){},
             /*🔴*/cache(){},
         // network data
-            /*🟢*/fetch_json(uri=window.location.origin,method,data,callback=()=>{}){
+            /*🟢*/fetch_json(uri=window.location.origin,callback=()=>{},method,data){
                 let option=undefined;
                 switch(method){
                     case'POST':
