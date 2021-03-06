@@ -350,6 +350,7 @@
                     }
                     return result;
                 }).catch(async(data)=>{
+                    result.status=0;
                     result.result=data;
                     this.local_test(()=>{
                         window.console.log('==== fetch_json catch:',data);
