@@ -1523,6 +1523,7 @@
                 return window.open(uri,name,`width=${width},height=${height},left=${left},top=${top}`);
             },
             /*🟢*/debug(callback){
+                // if(window.document?.documentElement&&window.document.documentElement.classList.contains('debug')){
                 if(window.document&&window.document.documentElement&&window.document.documentElement.classList.contains('debug')){
                     callback();
                 }
@@ -1613,6 +1614,7 @@
 // #build
 // #debug
     // debug
+    // if(window.document?.documentElement){
     if(window.document&&window.document.documentElement){
         let over=false;
         const run=()=>{
