@@ -327,7 +327,7 @@
                 switch(typeof body){
                     case'object':
                         {
-                            option.body=window.JSON.stringify(data);
+                            option.body=window.JSON.stringify(body);
                         }
                         break;
                     case'string':
@@ -343,26 +343,39 @@
                         option[data[1]]=data[2];
                     },0);
                 }
-                switch(typeof result_type){
+                // const headers=new window.Headers();
+                switch(result_type){
                     case'json':
                         {
-                            option.headers={'Content-Type':'application/json; charset=utf-8'}
+                            if(!option.headers){
+                                option.headers={};
+                            }
+                            option.headers['Content-Type']='application/json; charset=utf-8';
+                            // option.headers=headers;
+                            // headers.append('Content-Type','application/json; charset=utf-8');
                         }
                         break;
                     case'text':
                         {
-                            option.headers={'Content-Type':'text/html; charset=utf-8'}
+                            if(!option.headers){
+                                option.headers={};
+                            }
+                            option.headers['Content-Type']='text/html; charset=utf-8';
+                            // option.headers=headers;
+                            // headers.append('Content-Type','text/html; charset=utf-8');
                         }
                         break;
                     default:
                         break;
                 }
                 if(headers_add){
+                    // option.headers=headers;
                     if(!option.headers){
                         option.headers={};
                     }
                     this.for(headers_add,(...data)=>{
-                        option.headers[`${data[1]}`]=data[2];
+                        // headers.append(data[1],data[2]);
+                        option.headers[data[1]]=data[2];
                     },0);
                 }
                 window.console.log(option);
