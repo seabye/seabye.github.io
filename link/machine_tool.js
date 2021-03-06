@@ -321,7 +321,7 @@
             /*🔴*/database(){},
             /*🔴*/cache(){},
         // network data
-            /*🟢*/fetch_json(uri,method,body,result_type,callback,option_add,headers_add){
+            /*🟢*/fetch(uri,method,body,result_type,callback,option_add,headers_add){
                 const option={};
                 option.method=method;
                 switch(typeof body){
@@ -378,7 +378,7 @@
                 }).then(async(data)=>{
                     result.result=data;
                     this.local_test(()=>{
-                        window.console.log('==== fetch_json result:',result);
+                        window.console.log('==== fetch result:',result);
                     });
                     if(callback){
                         return await callback(result);
@@ -388,7 +388,7 @@
                     result.status=0;
                     result.result=data;
                     this.local_test(()=>{
-                        window.console.log('==== fetch_json catch:',data);
+                        window.console.log('==== fetch catch:',data);
                     });
                     if(callback){
                         return await callback(data);
