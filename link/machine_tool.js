@@ -387,9 +387,9 @@
                 }).catch(async(data)=>{
                     result.status=0;
                     result.result=data;
-                    this.local_test(()=>{
+                    // this.local_test(()=>{
                         window.console.log('==== fetch catch:',result);
-                    });
+                    // });
                     if(callback){
                         return await callback(result);
                     }
