@@ -379,7 +379,7 @@
                     return data[result_type]();
                 }).then(async(data)=>{
                     result.result=data;
-                    this.local_test(()=>{
+                    this.debug(()=>{
                         window.console.log('==== fetch result:',result);
                     });
                     if(callback){
@@ -722,7 +722,7 @@
                                                 }else{
                                                     run();
                                                 }
-                                                this.local_test(()=>{
+                                                this.debug(()=>{
                                                     window.console.log('==== listen_target.pointer_up length:',window.Object.keys(this.listen_target.pointer_up).length);
                                                 });
                                             };
@@ -757,7 +757,7 @@
                                         }
                                         if(!this.listen_target.observe_mutation[id]){
                                             this.listen_target.observe_mutation[id]=new window.MutationObserver((mutation_list)=>{
-                                                this.local_test(()=>{
+                                                this.debug(()=>{
                                                     window.console.log('==== listen_target.observe_mutation mutation_list:',mutation_list);
                                                 });
                                                 mutation_list.forEach((mutation)=>{
@@ -806,7 +806,7 @@
                                 case'add':
                                     {
                                         target.machine_tool_listen_target_observe_intersection=new window.IntersectionObserver((entries)=>{
-                                            this.local_test(()=>{
+                                            this.debug(()=>{
                                                 window.console.log('==== listen_target.observe_intersection entries:',entries);
                                             });
                                             entries.forEach((entry)=>{
@@ -833,7 +833,7 @@
                                 case'add':
                                     {
                                         target.machine_tool_listen_target_observe_resize=new window.ResizeObserver((entries)=>{
-                                            this.local_test(()=>{
+                                            this.debug(()=>{
                                                 window.console.log('==== listen_target.observe_resize entries:',entries);
                                             });
                                             entries.forEach((entry)=>{
@@ -1522,7 +1522,7 @@
                 }
                 return window.open(uri,name,`width=${width},height=${height},left=${left},top=${top}`);
             },
-            /*🟢*/local_test(callback){
+            /*🟢*/debug(callback){
                 if(window.document?.documentElement&&window.document.documentElement.classList.contains('debug')){
                     callback();
                 }
@@ -1617,7 +1617,7 @@
         let over=false;
         const run=()=>{
             if(!over&&window.document.documentElement.classList.contains('debug')){
-                machine_tool.local_test(()=>{
+                machine_tool.debug(()=>{
                     // window.machine_tool
                     window.machine_tool=machine_tool;
                     // machine_tool_demo
