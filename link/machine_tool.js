@@ -349,10 +349,15 @@
                         return await callback(result);
                     }
                     return result;
-                }).catch((data)=>{
+                }).catch(async(data)=>{
+                    result.result=data;
                     this.local_test(()=>{
                         window.console.log('==== fetch_json catch:',data);
                     });
+                    if(callback){
+                        return await callback(data);
+                    }
+                    return data;
                 });
             },
         // command line interface
