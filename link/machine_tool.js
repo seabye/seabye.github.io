@@ -342,11 +342,10 @@
                     return data.json();
                 }).then((data)=>{
                     result.result=data;
-                    callback(result);
                     this.local_test(()=>{
                         window.console.log('==== ing machine_tool.js fetch_json result:',result);
                     });
-                    return result;
+                    return callback(result);
                 }).catch((data)=>{
                     this.local_test(()=>{
                         window.console.log('==== ing machine_tool.js fetch_json catch:',data);
