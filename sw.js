@@ -1,7 +1,7 @@
 'use strict';
 // #before
     // console
-    self.console.log('#### start sw.js');
+    self.console.log('#### start: sw.js');
 // #import
 // #variable
 // #method
@@ -11,4 +11,4 @@
 // #debug
 // #after
     // console
-    self.console.log('#### end sw.js');
+    self.console.log('#### end: sw.js');

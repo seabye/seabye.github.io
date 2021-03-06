@@ -1,7 +1,7 @@
 'use strict';
 // #before
     // console
-    window.console.log('#### start machine_tool_demo.js');
+    window.console.log('#### start: machine_tool_demo.js');
 // #import
 // #variable
 // #method
@@ -445,4 +445,4 @@ export const machine_tool_demo=(machine_tool)=>{
 // #debug
 // #after
     // console
-    window.console.log('#### end machine_tool_demo.js');
+    window.console.log('#### end: machine_tool_demo.js');

@@ -23,7 +23,7 @@
 // 'use strict';
 // // #before
 //     // console
-//     self.console.log('#### start sw.js');
+//     self.console.log('#### start: sw.js');
 // // #import
 // // #variable
 // // #method
@@ -33,7 +33,7 @@
 // // #debug
 // // #after
 //     // console
-//     self.console.log('#### end sw.js');
+//     self.console.log('#### end: sw.js');
 // ~~~~ ~~~~ ~~~~ ~~~~
 // manifest.webmanifest
 // {
@@ -88,7 +88,7 @@
 {
 // #before
     // console
-    window.console.log('#### start gui_initial.js');
+    window.console.log('#### start: gui_initial.js');
 // #import
 // #variable
 // #method
@@ -503,5 +503,5 @@
 // #debug
 // #after
     // console
-    window.console.log('#### end gui_initial.js');
+    window.console.log('#### end: gui_initial.js');
 }

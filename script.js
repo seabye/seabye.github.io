@@ -1,7 +1,7 @@
 'use strict';
 // #before
     // console
-    window.console.log('#### start script.js');
+    window.console.log('#### start: script.js');
 // #import
     // machine_tool
     import{machine_tool}from'/link/machine_tool.js';
@@ -70,4 +70,4 @@
     window.document.documentElement.classList.add('debug');
 // #after
     // console
-    window.console.log('#### end script.js');
+    window.console.log('#### end: script.js');

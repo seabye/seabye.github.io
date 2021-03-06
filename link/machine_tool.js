@@ -9,7 +9,7 @@
 // >>>> >>>> >>>> >>>>
 // #before
     // console
-    window.console.log('#### start machine_tool.js');
+    window.console.log('#### start: machine_tool.js');
 // #import
 // #variable
 // #method
@@ -1588,4 +1588,4 @@
     }
 // #after
     // console
-    window.console.log('#### end machine_tool.js');
+    window.console.log('#### end: machine_tool.js');
