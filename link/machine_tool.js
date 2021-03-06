@@ -321,16 +321,32 @@
             /*🔴*/database(){},
             /*🔴*/cache(){},
         // network data
-            /*🟢*/fetch_json(uri=window.location.origin,callback,method,data){
-                let option=undefined;
-                switch(method){
-                    case'POST':
+            /*🟢*/fetch_json(uri,method,body,result_type,callback){
+                const option={};
+                option.method=method;
+                switch(typeof body){
+                    case'object':
                         {
-                            option={
-                                method:'POST',
-                                headers:{'Content-Type':'application/json; charset=utf-8'},
-                                body:window.JSON.stringify(data)
-                            };
+                            option.body=window.JSON.stringify(data);
+                        }
+                        break;
+                    case'string':
+                        {
+                            option.body;
+                        }
+                        break;
+                    default:
+                        break;
+                }
+                switch(typeof result_type){
+                    case'json':
+                        {
+                            option.headers={'Content-Type':'application/json; charset=utf-8'}
+                        }
+                        break;
+                    case'text':
+                        {
+                            option.headers={'Content-Type':'text/html; charset=utf-8'}
                         }
                         break;
                     default:
@@ -339,7 +355,7 @@
                 const result={};
                 return window.fetch(uri,option).then((data)=>{
                     result.status=data.status;
-                    return data.json();
+                    return data[result_type]();
                 }).then(async(data)=>{
                     result.result=data;
                     this.local_test(()=>{
