@@ -1450,29 +1450,16 @@
                 run(element);
                 return result.replace(/,$/,'');
             },
-            /*🟢*/uri_path(search=true,hash=true){
-                switch(search){
+            /*🟢*/uri_path(hash=true){
+                switch(hash){
                     case true:
                         {
-                            switch(hash){
-                                case true:
-                                    {
-                                        return window.location.href.replace(window.location.origin,'');
-                                    }
-                                    break;
-                                case false:
-                                    {
-                                        return window.location.href.replace(window.location.origin,'').replace(window.location.hash,'');
-                                    }
-                                    break;
-                                default:
-                                    break;
-                            }
+                            return window.location.href.replace(window.location.origin,'');
                         }
                         break;
                     case false:
                         {
-                            return window.location.pathname;
+                            return window.location.href.replace(window.location.origin,'').replace(window.location.hash,'');
                         }
                         break;
                     default:
