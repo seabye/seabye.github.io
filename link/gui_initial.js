@@ -108,37 +108,53 @@
         },
         /*🟢*/start$background$color(){
             window.document.documentElement.style.setProperty('background-color',`${window.matchMedia('(prefers-color-scheme:dark)').matches?this.dataset.config.start_background_color_dark?this.dataset.config.start_background_color_dark:'#000000':this.dataset.config.start_background_color_light?this.dataset.config.start_background_color_light:'#FFFFFF'}`);
-            window.addEventListener('load',()=>{
+            const remove=()=>{
                 window.document.documentElement.style.removeProperty('background-color');
-                if(!window.document.documentElement.style[0]){
-                    window.document.documentElement.removeAttribute('style');
-                }
-            },{once:true});
+                window.setTimeout(()=>{
+                    if(!window.document.documentElement.style[0]){
+                        window.document.documentElement.removeAttribute('style');
+                    }
+                },350);
+            };
+            window.addEventListener('load',remove,{once:true});
+            if(window.document.readyState==='complete'){
+                remove();
+            }
         },
         /*🟢*/start$opacity(){
             const loop=()=>{
                 for(const value of window.document.documentElement.children){
                     if(value.localName==='body'){
                         window.document.body.style.setProperty('opacity','0');
-                        return false;
+                        return true;
                     }
                 }
                 window.setTimeout(loop,1000/24);
             };
             loop();
+            const remove=()=>{
+                window.document.body.style.removeProperty('opacity');
+                window.setTimeout(()=>{
+                    if(!window.document.body.style[0]){
+                        window.document.body.removeAttribute('style');
+                    }
+                },350);
+            };
             window.addEventListener('load',()=>{
                 const loop=()=>{
                     if(window.document.body.style.getPropertyValue('opacity')==='0'){
-                        window.document.body.style.removeProperty('opacity');
-                        if(!window.document.body.style[0]){
-                            window.document.body.removeAttribute('style');
-                        }
-                        return false;
+                        remove();
+                        return true;
                     }
                     window.setTimeout(loop,1000/24);
                 };
                 loop();
             },{once:true});
+            if(window.document.readyState==='complete'){
+                if(window.document.body.style.getPropertyValue('opacity')==='0'){
+                    remove();
+                }
+            }
         },
         /*🟢*/write$service$worker(){
             if(this.dataset.config.service_worker&&'serviceWorker'in window.navigator){
@@ -242,9 +258,11 @@
                         window.document.body.style.setProperty('margin','1px');
                         window.setTimeout(()=>{
                             window.document.body.style.removeProperty('margin');
-                            if(!window.document.body.style[0]){
-                                window.document.body.removeAttribute('style');
-                            }
+                            window.setTimeout(()=>{
+                                if(!window.document.body.style[0]){
+                                    window.document.body.removeAttribute('style');
+                                }
+                            },350);
                             window.scroll({behavior:'smooth',top:0,left:0});
                             window.document.documentElement.scrollIntoView({behavior:'smooth',block:'start',inline:'start'});
                             window.document.body.scrollIntoView({behavior:'smooth',block:'start',inline:'start'});
@@ -324,7 +342,7 @@
                 for(const value of window.document.documentElement.children){
                     if(value.localName==='body'){
                         window.document.body.setAttribute('tabindex','-1');
-                        return false;
+                        return true;
                     }
                 }
                 window.setTimeout(loop,1000/24);

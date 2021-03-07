@@ -666,7 +666,7 @@
                                                     const bottom=data.target.getBoundingClientRect().bottom;
                                                     this.listen_target.pointer_up[once_id]=(event)=>{
                                                         if((event.target===data.target||event.target===data.target.parentNode)&&(event.clientX>=left&&event.clientX<=right&&event.clientY>=top&&event.clientY<=bottom)){
-                                                            if(event.target.children.length){
+                                                            if(event.target.childElementCount){
                                                                 let block=false;
                                                                 for(const value of event.target.children){
                                                                     if(window.getComputedStyle(value).pointerEvents!=='none'&&window.getComputedStyle(value).visibility!=='hidden'){
@@ -1588,6 +1588,23 @@
                         return false;
                     });
                 }
+            },
+            /*🔴*/start_load(type,callback){
+                window.document.addEventListener('readystatechange',(event)=>{
+                    switch(event.target.readyState){
+                        case'loading':
+                            {}
+                            break;
+                        case'interactive':
+                            {}
+                            break;
+                        case'complete':
+                            {}
+                            break;
+                        default:
+                            break;
+                    }
+                });
             },
         // application programming interface
             /*🔴*/listen_port(){},
