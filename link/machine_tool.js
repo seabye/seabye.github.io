@@ -1450,8 +1450,34 @@
                 run(element);
                 return result.replace(/,$/,'');
             },
-            /*🟢*/uri_path(){
-                return window.location.href.replace(window.location.origin,'');
+            /*🟢*/uri_path(search=true,hash=true){
+                switch(search){
+                    case true:
+                        {
+                            switch(hash){
+                                case true:
+                                    {
+                                        return window.location.href.replace(window.location.origin,'');
+                                    }
+                                    break;
+                                case false:
+                                    {
+                                        return window.location.href.replace(window.location.origin,'').replace(window.location.hash,'');
+                                    }
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        break;
+                    case false:
+                        {
+                            return window.location.href.replace(window.location.origin,'').replace(window.location.search,'').replace(window.location.hash,'');
+                        }
+                        break;
+                    default:
+                        break;
+                }
             },
             /*🟢*/remove_empty(element,...attribute){
                 if(attribute[0]){
