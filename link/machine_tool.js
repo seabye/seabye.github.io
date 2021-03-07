@@ -1472,7 +1472,7 @@
                         break;
                     case false:
                         {
-                            return window.location.href.replace(window.location.origin,'').replace(window.location.search,'').replace(window.location.hash,'');
+                            return window.location.pathname;
                         }
                         break;
                     default:
