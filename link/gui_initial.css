@@ -84,10 +84,10 @@
             --ic_ve_color_opposite: #CCCCCC;
         }
         html.ic_nr_media_prefers_color_scheme_light.ic_nr_media_orientation_portrait {
-            --ic_ve_color_background: #CCCCCC;
-            --ic_ve_color_foreground: #DDDDDD;
+            --ic_ve_color_background: #EEEEEE;
+            --ic_ve_color_foreground: #CCCCCC;
             --ic_ve_color_highlight: #FFFFFF;
-            --ic_ve_color_opposite: #EEEEEE;
+            --ic_ve_color_opposite: #DDDDDD;
         }
         html.ic_nr_media_prefers_color_scheme_dark {
             --ic_ve_color_white: #000000;
