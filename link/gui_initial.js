@@ -6,8 +6,8 @@
 // ==== ==== ==== ====
 // index.html
 // <script src="gui_initial.js" type="application/javascript" data-gui_initial="{
-//     'background_color_light': '</""/=#FFFFFF>',
-//     'background_color_dark': '</""/=#000000>',
+//     'start_background_color_light': '</""/=#FFFFFF>',
+//     'start_background_color_dark': '</""/=#000000>',
 //     'service_worker': 'sw.js',
 //     'head_title': '</""/="">',
 //     'head_style': 'style.css',
@@ -107,7 +107,7 @@
             }
         },
         /*🟢*/start$background$color(){
-            window.document.documentElement.style.setProperty('background-color',`${window.matchMedia('(prefers-color-scheme:dark)').matches?this.dataset.config.background_color_dark?this.dataset.config.background_color_dark:'#000000':this.dataset.config.background_color_light?this.dataset.config.background_color_light:'#FFFFFF'}`);
+            window.document.documentElement.style.setProperty('background-color',`${window.matchMedia('(prefers-color-scheme:dark)').matches?this.dataset.config.start_background_color_dark?this.dataset.config.start_background_color_dark:'#000000':this.dataset.config.start_background_color_light?this.dataset.config.start_background_color_light:'#FFFFFF'}`);
             window.addEventListener('load',()=>{
                 window.document.documentElement.style.removeProperty('background-color');
                 if(!window.document.documentElement.style[0]){
