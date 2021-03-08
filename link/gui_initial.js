@@ -336,13 +336,13 @@
                 window.document.head.insertAdjacentHTML('beforeend',`<link rel="manifest" href="${this.dataset.config.head_manifest}">`);
             }
         },
+        /*🟢*/hov(){
+            window.addEventListener('touchstart',()=>{});
+        },
         /*🟢*/no$context$menu(){
             window.addEventListener('contextmenu',(event)=>{
                 event.preventDefault();
             });
-        },
-        /*🟢*/hov(){
-            window.addEventListener('touchstart',()=>{});
         },
         /*🟢*/no$dblclick$zoom(){
             window.addEventListener('dblclick',(event)=>{
@@ -365,6 +365,13 @@
         },
         /*🔴*/no$back(){},
         /*🔴*/no$touch$back(){},
+        /*🟢*/form$focus(){
+            window.addEventListener('keydown',(event)=>{
+                if(event.key==='Enter'&&event.target.localName==='input'){
+                    event.target.blur();
+                }
+            });
+        },
         /*🟢*/partial$scroll(){
             if(!window.CSS.supports('overscroll-behavior:contain')){
                 const preventDefault=(event)=>{
@@ -447,13 +454,6 @@
                     start_y=start_x=scroll_direction=null;
                 });
             }
-        },
-        /*🟢*/form$input(){
-            window.addEventListener('keydown',(event)=>{
-                if(event.key==='Enter'&&event.target.localName==='input'){
-                    event.target.blur();
-                }
-            });
         },
         /*🟢*/dot$active(){
             window.addEventListener('pointerdown',(event)=>{
