@@ -302,6 +302,7 @@
                     }
         /* text */
         a {
+            vertical-align: unset;
             color: currentColor;
             text-decoration: unset;
             cursor: default;
