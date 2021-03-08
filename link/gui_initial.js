@@ -344,7 +344,21 @@
                 event.preventDefault();
             });
         },
-        /*🟢*/no$zoom(){
+        /*🟢*/no$double$zoom(){
+            window.addEventListener('touchstart',(event)=>{
+                if(event.touches.length>1){
+                    event.preventDefault();
+                }
+            });
+            let record=0;
+            window.addEventListener('touchend',(event)=>{
+                const now=window.Date.now();
+                if(now-record<=300){
+                    event.preventDefault();
+                }else{
+                    record=now;
+                }
+            });
             window.addEventListener('gesturestart',(event)=>{
                 event.preventDefault();
             });
