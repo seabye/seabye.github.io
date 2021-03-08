@@ -337,17 +337,17 @@
             }
         },
         /*🟢*/tab$index(){
-            window.document.documentElement.setAttribute('tabindex','-1');
-            const loop=()=>{
-                for(const value of window.document.documentElement.children){
-                    if(value.localName==='body'){
-                        window.document.body.setAttribute('tabindex','-1');
-                        return true;
-                    }
-                }
-                window.setTimeout(loop,1000/24);
-            };
-            loop();
+            // window.document.documentElement.setAttribute('tabindex','-1');
+            // const loop=()=>{
+            //     for(const value of window.document.documentElement.children){
+            //         if(value.localName==='body'){
+            //             window.document.body.setAttribute('tabindex','-1');
+            //             return true;
+            //         }
+            //     }
+            //     window.setTimeout(loop,1000/24);
+            // };
+            // loop();
         },
         /*🟢*/no$context$menu(){
             window.addEventListener('contextmenu',(event)=>{
