@@ -344,8 +344,8 @@
                 event.preventDefault();
             });
         },
-        /*🟢*/no$dblclick$zoom(){
-            window.addEventListener('dblclick',(event)=>{
+        /*🟢*/no$zoom(){
+            window.addEventListener('gesturestart',(event)=>{
                 event.preventDefault();
             });
         },
