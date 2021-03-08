@@ -344,6 +344,11 @@
         /*🟢*/hov(){
             window.addEventListener('touchstart',()=>{});
         },
+        /*🟢*/no$dblclick$zoom(){
+            window.addEventListener('dblclick',(event)=>{
+                event.preventDefault();
+            });
+        },
         /*🟢*/no$touchpad$zoom(){
             window.addEventListener('wheel',(event)=>{
                 if(event.ctrlKey){
