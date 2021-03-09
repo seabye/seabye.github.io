@@ -130,41 +130,30 @@
             }
         },
         /*🟢*/start$opacity(){
-            const loop=()=>{
-                if(window.document.body){
-                    window.document.body.style.setProperty('opacity','0');
-                    return true;
-                }
-                window.setTimeout(loop,1000/24);
-            };
-            loop();
-            const remove=()=>{
-                window.document.body.style.removeProperty('opacity');
-                window.setTimeout(()=>{
-                    if(!window.document.body.style[0]){
-                        window.document.body.removeAttribute('style');
-                    }
-                },350);
-            };
             if(window.document.readyState!=='complete'){
+                const loop=()=>{
+                    if(window.document.body){
+                        window.document.body.style.setProperty('opacity','0');
+                        return true;
+                    }
+                    window.setTimeout(loop,1000/24);
+                };
+                loop();
                 window.addEventListener('load',()=>{
                     const loop=()=>{
                         if(window.document.body.style.getPropertyValue('opacity')==='0'){
-                            remove();
+                            window.document.body.style.removeProperty('opacity');
+                            window.setTimeout(()=>{
+                                if(!window.document.body.style[0]){
+                                    window.document.body.removeAttribute('style');
+                                }
+                            },350);
                             return true;
                         }
                         window.setTimeout(loop,1000/24);
                     };
                     loop();
                 },{once:true});
-            }else{
-                const loop=()=>{
-                    if(window.getComputedStyle(window.document.documentElement).getPropertyValue('--ic_ve_color_white')){
-                        remove();
-                        return true;
-                    }
-                    window.setTimeout(loop,1000/24);
-                };
             }
         },
         /*🟢*/write$service$worker(){
