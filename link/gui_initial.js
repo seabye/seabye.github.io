@@ -492,7 +492,7 @@
                     },1000/24);
                 };
                 const move=(event_)=>{
-                    if((event.target.classList.contains('ic_active_down')||!event.target.classList.contains('ic_active_move'))&&(event_.x>=event.x+3||event_.x<=event.x-3||event_.y>=event.y+3||event_.y<=event.y-3)){
+                    if(!event.target.classList.contains('ic_active_move')&&(event_.x>=event.x+3||event_.x<=event.x-3||event_.y>=event.y+3||event_.y<=event.y-3)){
                         event.target.classList.remove('ic_active_down');
                         event.target.classList.add('ic_active_move');
                     }
