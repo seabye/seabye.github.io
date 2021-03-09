@@ -333,9 +333,6 @@
                 window.document.head.insertAdjacentHTML('beforeend',`<link rel="manifest" href="${this.dataset.config.head_manifest}">`);
             }
         },
-        /*🟢*/hov(){
-            window.addEventListener('touchstart',()=>{});
-        },
         /*🟢*/no$context$menu(){
             window.addEventListener('contextmenu',(event)=>{
                 event.preventDefault();
@@ -508,9 +505,9 @@
                 };
                 window.addEventListener('pointermove',move);
                 window.addEventListener('touchmove',move);
-                window.addEventListener('pointerup',remove);
-                window.addEventListener('touchend',remove);
-                window.addEventListener('dragend',remove);
+                window.addEventListener('pointerup',remove,{once:true});
+                window.addEventListener('touchend',remove,{once:true});
+                window.addEventListener('dragend',remove,{once:true});
             });
         }
     };
