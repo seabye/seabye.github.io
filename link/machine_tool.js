@@ -604,7 +604,7 @@
                         break;
                 }
             },
-            /*🟠*/listen_target(action,target,type,callback,option={},other=''){
+            /*🟠*/listen_target(action,target,type,callback,option={},other='',other2=''){
                 const match=/[\r\n\s]/g;
                 switch(type){
                     case'pointer_down':
@@ -703,14 +703,26 @@
                                                     };
                                                     data.target.parentNode.addEventListener('pointerup',this.listen_target.pointer_up[once_id],{once:true});
                                                     const remove_event=()=>{
+                                                        if(other2){
+                                                            window.removeEventListener('pointermove',remove_event);
+                                                            window.removeEventListener('touchmove',remove_event);
+                                                        }
                                                         window.removeEventListener('pointerup',remove_event);
                                                         window.removeEventListener('touchend',remove_event);
                                                         window.removeEventListener('dragend',remove_event);
+                                                        if(other2){
+                                                            window.removeEventListener('pointermove',remove);
+                                                            window.removeEventListener('touchmove',remove);
+                                                        }
                                                         window.removeEventListener('pointerup',remove);
                                                         window.removeEventListener('touchend',remove);
                                                         window.removeEventListener('dragend',remove);
                                                         data.target.parentNode.removeEventListener('pointerup',this.listen_target.pointer_up[once_id]);
                                                     };
+                                                    if(other2){
+                                                        window.addEventListener('pointermove',remove_event,{once:true});
+                                                        window.addEventListener('touchmove',remove_event,{once:true});
+                                                    }
                                                     window.addEventListener('pointerup',remove_event,{once:true});
                                                     window.addEventListener('touchend',remove_event,{once:true});
                                                     window.addEventListener('dragend',remove_event,{once:true});
