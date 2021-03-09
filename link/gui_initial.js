@@ -253,7 +253,7 @@
                     window.document.documentElement.classList.remove('ic_nr_media_orientation_portrait');
                     window.document.documentElement.classList.add('ic_nr_media_orientation_landscape');
                 }
-                if(window.document.documentElement.classList.value.match(/ic_nr_system_ios|ic_nr_browser_safari/)){
+                if(window.document.documentElement.classList.value.match(/ic_nr_system_ios|ic_nr_browser_safari/i)){
                     window.setTimeout(()=>{
                         window.document.body.style.setProperty('margin','1px');
                         window.setTimeout(()=>{
@@ -309,7 +309,7 @@
             if(this.dataset.config.head_icon){
                 window.document.head.insertAdjacentHTML('beforeend',`<link rel="icon" type="image/png" href="${this.dataset.config.head_icon}">`);
             }
-            if(window.document.documentElement.classList.value.match(/ic_nr_system_ios|ic_nr_browser_safari/)){
+            if(window.document.documentElement.classList.value.match(/ic_nr_system_ios|ic_nr_browser_safari/i)){
                 if(this.dataset.config.head_icon_apple){
                     window.document.head.insertAdjacentHTML('beforeend',`<link rel="apple-touch-icon" href="${this.dataset.config.head_icon_apple}">`);
                 }
@@ -370,7 +370,7 @@
         },
         /*🟢*/no$drag(){
             window.addEventListener('dragstart',(event)=>{
-                if(event.target.localName.match(/a|img/)){
+                if(event.target.localName.match(/a|img/i)){
                     event.preventDefault();
                 }
             });
@@ -395,8 +395,8 @@
                 let scroll_direction=null;
                 window.addEventListener('touchstart',(event)=>{
                     const loop=(target)=>{
-                        if(window.getComputedStyle(target).overflowY.match(/auto|scroll/)||window.getComputedStyle(target).overflowX.match(/auto|scroll/)){
-                            if(window.getComputedStyle(target).overflowY.match(/auto|scroll/)){
+                        if(window.getComputedStyle(target).overflowY.match(/auto|scroll/i)||window.getComputedStyle(target).overflowX.match(/auto|scroll/i)){
+                            if(window.getComputedStyle(target).overflowY.match(/auto|scroll/i)){
                                 if(target.scrollHeight!==target.offsetHeight){
                                     if(target.scrollTop<=0){
                                         start_y=event.changedTouches[0].screenY;
