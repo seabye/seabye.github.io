@@ -353,7 +353,7 @@
             let record=0;
             window.addEventListener('touchend',(event)=>{
                 const now=window.Date.now();
-                if(now-record<=350){
+                if(now-record<=350*2){
                     event.preventDefault();
                 }else{
                     record=now;
