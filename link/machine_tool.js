@@ -703,18 +703,21 @@
                                                     };
                                                     data.target.parentNode.addEventListener('pointerup',this.listen_target.pointer_up[once_id],{once:true});
                                                     const remove_event=()=>{
-                                                        if(other2){
-                                                            window.removeEventListener('pointermove',remove_event);
-                                                            window.removeEventListener('touchmove',remove_event);
-                                                        }
                                                         window.removeEventListener('pointerup',remove_event);
                                                         window.removeEventListener('touchend',remove_event);
                                                         window.removeEventListener('dragend',remove_event);
                                                         data.target.parentNode.removeEventListener('pointerup',this.listen_target.pointer_up[once_id]);
                                                     };
                                                     if(other2){
-                                                        window.addEventListener('pointermove',remove_event,{once:true});
-                                                        window.addEventListener('touchmove',remove_event,{once:true});
+                                                        const move=(event)=>{
+                                                            if(event.x>=data.x+3||event.x<=data.x-3||event.y>=data.y+3||event.y<=data.y-3){
+                                                                window.removeEventListener('pointermove',move);
+                                                                window.removeEventListener('touchmove',move);
+                                                                remove_event();
+                                                            }
+                                                        };
+                                                        window.addEventListener('pointermove',move);
+                                                        window.addEventListener('touchmove',move);
                                                     }
                                                     window.addEventListener('pointerup',remove_event,{once:true});
                                                     window.addEventListener('touchend',remove_event,{once:true});
