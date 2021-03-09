@@ -259,7 +259,7 @@
                                 if(!window.document.body.style[0]){
                                     window.document.body.removeAttribute('style');
                                 }
-                            },350);
+                            },350/2);
                             window.scroll({behavior:'smooth',top:0,left:0});
                             window.document.documentElement.scrollIntoView({behavior:'smooth',block:'start',inline:'start'});
                             window.document.body.scrollIntoView({behavior:'smooth',block:'start',inline:'start'});
