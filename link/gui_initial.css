@@ -309,7 +309,7 @@
         }
         /* form */
         ::placeholder {
-            color: var(--ic_ve_color_black6_opacity);
+            color: var(--ic_ve_color_black4_opacity);
         }
         button,
         input,
