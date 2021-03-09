@@ -1275,8 +1275,8 @@
                             if(!this.lock){
                                 this.lock=true;
                                 const style=machine_tool.element_create('style',undefined,window.document.head,undefined,this.style);
-                                if(wait>1000/24*2){
-                                    wait=wait-1000/24*2;
+                                if(wait>1000/12){
+                                    wait=wait-1000/12;
                                 }else{
                                     wait=0;
                                 }
@@ -1299,7 +1299,7 @@
                                     if(data[2]!==element&&data[2].classList.contains(`${this.group}_last`)){
                                         window.setTimeout(()=>{
                                             machine_tool.element_state(data[2],`${this.group}_prev`,`${this.group}_last`,true);
-                                        },1000/24*2);
+                                        },1000/12);
                                     }
                                 },0);
                                 machine_tool.element_state(element,`${this.group}_last ${this.group}_ready`,`${this.group}_hide`,true);
