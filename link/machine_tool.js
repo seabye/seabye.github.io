@@ -500,9 +500,9 @@
                                         }
                                         if(data.element[1]){
                                             if(data.element[1].class){
-                                                data.element[1].class=window.Array.from(new window.Set(key.trim().split(' ').filter((item)=>{
+                                                data.element[1].class=[...new window.Set(key.trim().split(' ').filter((item)=>{
                                                     return window.isNaN(window.parseInt(item));
-                                                }).concat(data.element[1].class.trim().split(' ')))).join(' ');
+                                                }).concat(data.element[1].class.trim().split(' ')))].join(' ');
                                             }else{
                                                 if(class_){
                                                     data.element[1].class=class_;
