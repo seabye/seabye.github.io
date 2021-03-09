@@ -123,11 +123,9 @@
         },
         /*🟢*/start$opacity(){
             const loop=()=>{
-                for(const value of window.document.documentElement.children){
-                    if(value.localName==='body'){
-                        window.document.body.style.setProperty('opacity','0');
-                        return true;
-                    }
+                if(window.document.body){
+                    window.document.body.style.setProperty('opacity','0');
+                    return true;
                 }
                 window.setTimeout(loop,1000/24);
             };
