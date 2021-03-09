@@ -116,9 +116,17 @@
                     }
                 },350);
             };
-            window.addEventListener('load',remove,{once:true});
-            if(window.document.readyState==='complete'){
-                remove();
+            if(window.document.readyState!=='complete'){
+                window.addEventListener('load',remove,{once:true});
+            }else{
+                const loop=()=>{
+                    if(window.getComputedStyle(window.document.documentElement).getPropertyValue('--ic_ve_color_white')){
+                        remove();
+                        return true;
+                    }
+                    window.setTimeout(loop,1000/24);
+                };
+                loop();
             }
         },
         /*🟢*/start$opacity(){
@@ -138,20 +146,25 @@
                     }
                 },350);
             };
-            window.addEventListener('load',()=>{
+            if(window.document.readyState!=='complete'){
+                window.addEventListener('load',()=>{
+                    const loop=()=>{
+                        if(window.document.body.style.getPropertyValue('opacity')==='0'){
+                            remove();
+                            return true;
+                        }
+                        window.setTimeout(loop,1000/24);
+                    };
+                    loop();
+                },{once:true});
+            }else{
                 const loop=()=>{
-                    if(window.document.body.style.getPropertyValue('opacity')==='0'){
+                    if(window.getComputedStyle(window.document.documentElement).getPropertyValue('--ic_ve_color_white')){
                         remove();
                         return true;
                     }
                     window.setTimeout(loop,1000/24);
                 };
-                loop();
-            },{once:true});
-            if(window.document.readyState==='complete'){
-                if(window.document.body.style.getPropertyValue('opacity')==='0'){
-                    remove();
-                }
             }
         },
         /*🟢*/write$service$worker(){
