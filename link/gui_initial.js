@@ -345,18 +345,16 @@
             });
         },
         /*🟢*/no$double$zoom(){
+            let start=null;
             window.addEventListener('touchstart',(event)=>{
+                start=window.Date.now();
                 if(event.touches.length>1){
                     event.preventDefault();
                 }
             });
-            let record=0;
             window.addEventListener('touchend',(event)=>{
-                const now=window.Date.now();
-                if(now-record<=350*2){
+                if(window.Date.now()-start<=350){
                     event.preventDefault();
-                }else{
-                    record=now;
                 }
             });
             window.addEventListener('gesturestart',(event)=>{
