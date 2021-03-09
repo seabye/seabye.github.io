@@ -107,37 +107,51 @@
             }
         },
         /*🟢*/start$background$color(){
-            if(window.document.readyState!=='complete'){
-                window.document.documentElement.style.setProperty('background-color',`${window.matchMedia('(prefers-color-scheme:dark)').matches?this.dataset.config.start_background_color_dark?this.dataset.config.start_background_color_dark:'#000000':this.dataset.config.start_background_color_light?this.dataset.config.start_background_color_light:'#FFFFFF'}`);
-                window.addEventListener('load',()=>{
-                    window.document.documentElement.style.removeProperty('background-color');
-                    window.setTimeout(()=>{
-                        if(!window.document.documentElement.style[0]){
-                            window.document.documentElement.removeAttribute('style');
-                        }
-                    },350);
-                },{once:true});
-            }
-        },
-        /*🟢*/start$opacity(){
-            if(window.document.readyState!=='complete'){
+            window.document.documentElement.style.setProperty('background-color',`${window.matchMedia('(prefers-color-scheme:dark)').matches?this.dataset.config.start_background_color_dark?this.dataset.config.start_background_color_dark:'#000000':this.dataset.config.start_background_color_light?this.dataset.config.start_background_color_light:'#FFFFFF'}`);
+            window.addEventListener('load',()=>{
                 const loop=()=>{
-                    if(window.document.body){
-                        window.document.body.style.setProperty('opacity','0');
+                    if(window.document.documentElement.style.getPropertyValue('background-color')){
+                        window.setTimeout(()=>{
+                            window.document.documentElement.style.removeProperty('background-color');
+                            window.setTimeout(()=>{
+                                if(!window.document.documentElement.style[0]){
+                                    window.document.documentElement.removeAttribute('style');
+                                }
+                            },350/2);
+                        },350/2);
                         return true;
                     }
                     window.setTimeout(loop,1000/24);
                 };
                 loop();
-                window.addEventListener('load',()=>{
-                    window.document.body.style.removeProperty('opacity');
-                    window.setTimeout(()=>{
-                        if(!window.document.body.style[0]){
-                            window.document.body.removeAttribute('style');
-                        }
-                    },350);
-                },{once:true});
-            }
+            },{once:true});
+        },
+        /*🟢*/start$opacity(){
+            const loop=()=>{
+                if(window.document.body){
+                    window.document.body.style.setProperty('opacity','0');
+                    return true;
+                }
+                window.setTimeout(loop,1000/24);
+            };
+            loop();
+            window.addEventListener('load',()=>{
+                const loop=()=>{
+                    if(window.document.body.style.getPropertyValue('opacity')){
+                        window.setTimeout(()=>{
+                            window.document.body.style.removeProperty('opacity');
+                            window.setTimeout(()=>{
+                                if(!window.document.body.style[0]){
+                                    window.document.body.removeAttribute('style');
+                                }
+                            },350/2);
+                        },350/2);
+                        return true;
+                    }
+                    window.setTimeout(loop,1000/24);
+                };
+                loop();
+            },{once:true});
         },
         /*🟢*/write$service$worker(){
             if(this.dataset.config.service_worker&&'serviceWorker'in window.navigator){
