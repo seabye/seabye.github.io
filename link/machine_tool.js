@@ -710,13 +710,6 @@
                                                         window.removeEventListener('pointerup',remove_event);
                                                         window.removeEventListener('touchend',remove_event);
                                                         window.removeEventListener('dragend',remove_event);
-                                                        if(other2){
-                                                            window.removeEventListener('pointermove',remove);
-                                                            window.removeEventListener('touchmove',remove);
-                                                        }
-                                                        window.removeEventListener('pointerup',remove);
-                                                        window.removeEventListener('touchend',remove);
-                                                        window.removeEventListener('dragend',remove);
                                                         data.target.parentNode.removeEventListener('pointerup',this.listen_target.pointer_up[once_id]);
                                                     };
                                                     if(other2){
