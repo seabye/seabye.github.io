@@ -165,6 +165,9 @@
         /*🟢*/$navigator$environment(){
             const user_agent=window.navigator.userAgent;
             const class_=window.document.documentElement.classList;
+            if(user_agent.match(/bot|spider/i)){
+                class_.add('ic_nr_bot');
+            }
             if(user_agent.match(/Mac OS/i)&&!user_agent.match(/iPhone|iPad/i)){
                 class_.add('ic_nr_system_brand_apple','ic_nr_system_macos');
             }

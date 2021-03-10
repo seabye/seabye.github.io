@@ -313,6 +313,21 @@
                 }
             },
             /*🔴*/open_cv_remove_watermark(){},
+            /*🔴*/is_bot(type,data){
+                switch(type){
+                    case'user-agent':
+                        {}
+                        break;
+                    case'location':
+                        {}
+                        break;
+                    case'ip':
+                        {}
+                        break;
+                    default:
+                        break;
+                }
+            },
         // local data
             /*🔴*/file(){},
             /*🔴*/local_storage(){},
@@ -1416,7 +1431,7 @@
                 }
                 return new this.element_block.template(element,group,insert_position,wait);
             },
-            /*🟢*/remove_element(element){
+            /*🟠*/remove_element(element){
                 element.parentElement.removeChild(element);
             },
             /*🟢*/find_outer(find,start,end=window.document.documentElement,true_callback,false_callback){
