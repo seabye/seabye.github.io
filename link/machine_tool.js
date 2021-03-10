@@ -320,6 +320,7 @@
                             if(data.match(/bot|spider/i)){
                                 return true;
                             }
+                            return false;
                         }
                         break;
                     case'location':
