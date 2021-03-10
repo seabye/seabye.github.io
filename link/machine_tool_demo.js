@@ -4,7 +4,7 @@
     window.console.log('#### start: machine_tool_demo.js');
 // #import
 // #variable
-// #method
+// #block
 // #build
 export const machine_tool_demo=(machine_tool)=>{
     machine_tool.run_object({

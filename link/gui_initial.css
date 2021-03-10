@@ -12,7 +12,7 @@
     sc_ / style.css
     _ve_ / variable
     _an_ / animation
-    _md_ / method
+    _bk_ / block
     _cr\_ / container
     _mk\_ / mark \ :hov .cls
     #build
@@ -236,7 +236,7 @@
         --ic_ve_font_family_default: system-ui, -apple-system, BlinkMacSystemFont, PingFang SC, Noto Sans CJK SC, Microsoft YaHei;
         --ic_ve_font_family_monospaced: Consolas, Microsoft YaHei, monospace, Menlo, Monaco, Courier New;
     }
-/* #method */
+/* #block */
 /* #build */
     /* element */
     *,

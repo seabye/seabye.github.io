@@ -12,7 +12,7 @@
     window.console.log('#### start: machine_tool.js');
 // #import
 // #variable
-// #method
+// #block
     // machine_tool
     export const machine_tool={
         // base

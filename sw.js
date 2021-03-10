@@ -4,7 +4,7 @@
     self.console.log('#### start: sw.js');
 // #import
 // #variable
-// #method
+// #block
 // #build
     // service worker
     self.addEventListener('fetch',()=>{});

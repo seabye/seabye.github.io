@@ -9,7 +9,7 @@
     machine_tool.element_create('script',{async:'',src:'https://www.googletagmanager.com/gtag/js?id=G-SBCF7D104D'},window.document.head);
     machine_tool.element_create('script',undefined,window.document.head,undefined,`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-SBCF7D104D');`);
 // #variable
-// #method
+// #block
 // #build
     // element
     machine_tool.loop(()=>{

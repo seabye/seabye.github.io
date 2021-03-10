@@ -26,7 +26,7 @@
 //     self.console.log('#### start: sw.js');
 // // #import
 // // #variable
-// // #method
+// // #block
 // // #build
 //     // service worker
 //     self.addEventListener('fetch',()=>{});
@@ -91,7 +91,7 @@
     window.console.log('#### start: gui_initial.js');
 // #import
 // #variable
-// #method
+// #block
 // #build
     // gui_initial
     const gui_initial={
