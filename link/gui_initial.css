@@ -313,6 +313,7 @@
         /* form */
         ::placeholder {
             color: var(--ic_ve_color_black4_opacity);
+            opacity: unset;
         }
         button,
         input,
