@@ -331,7 +331,7 @@
             /*🟢*/search_object(data=window.location.search){
                 const result={};
                 const search_array=data.replace('?','').split('&');
-                this.for(search_array,(data)=>{
+                this.for(search_array,(...data)=>{
                     const right=data[2].split('=')[1];
                     result[data[2].split('=')[0]]=right?right:'';
                 },0);
