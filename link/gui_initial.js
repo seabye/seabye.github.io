@@ -349,9 +349,8 @@
             window.addEventListener('touchend',(event)=>{
                 if(end-window.Date.now()<=350){
                     event.preventDefault();
-                }else{
-                    end=window.Date.now();
                 }
+                end=window.Date.now();
             });
             window.addEventListener('gesturestart',(event)=>{
                 event.preventDefault();
