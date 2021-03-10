@@ -339,16 +339,18 @@
             });
         },
         /*🟢*/no$double$zoom(){
-            let start=null;
             window.addEventListener('touchstart',(event)=>{
-                start=window.Date.now();
+                end=window.Date.now();
                 if(event.touches.length>1){
                     event.preventDefault();
                 }
             });
+            let end=0;
             window.addEventListener('touchend',(event)=>{
-                if(window.Date.now()-start<=350){
+                if(end-window.Date.now()<=350){
                     event.preventDefault();
+                }else{
+                    end=window.Date.now();
                 }
             });
             window.addEventListener('gesturestart',(event)=>{
