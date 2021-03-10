@@ -354,20 +354,7 @@
             /*🟢*/fetch(uri,method,body,result_type,callback,option_add,headers_add){
                 const option={};
                 option.method=method;
-                switch(typeof body){
-                    case'object':
-                        {
-                            option.body=window.JSON.stringify(body);
-                        }
-                        break;
-                    case'string':
-                        {
-                            option.body=body;
-                        }
-                        break;
-                    default:
-                        break;
-                }
+                option.body=window.JSON.stringify({data:body});
                 if(option_add){
                     this.for(option_add,(...data)=>{
                         option[data[1]]=data[2];
