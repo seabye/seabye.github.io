@@ -351,10 +351,27 @@
             /*🔴*/database(){},
             /*🔴*/cache(){},
         // network data
-            /*🟢*/fetch(uri,method,body,result_type,callback,option_add,headers_add){
+            /*🟢*/fetch(uri,method,type,data,result_type,callback,option_add,headers_add){
                 const option={};
                 option.method=method;
-                option.body=window.JSON.stringify({data:body});
+                if(type){
+                    option.body=window.JSON.stringify({type:type,data:data});
+                }else{
+                    switch(typeof body){
+                        case'object':
+                            {
+                                option.body=window.JSON.stringify(body);
+                            }
+                            break;
+                        case'string':
+                            {
+                                option.body=body;
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                }
                 if(option_add){
                     this.for(option_add,(...data)=>{
                         option[data[1]]=data[2];
