@@ -354,7 +354,7 @@
             /*🟢*/fetch(uri,method,data_description,data,content_type,callback,option_add,headers_add){
                 const option={};
                 option.method=method;
-                if(data_description){
+                if(data_description!==undefined){
                     option.body=window.JSON.stringify({info:data_description,data:data});
                 }else{
                     switch(typeof body){
