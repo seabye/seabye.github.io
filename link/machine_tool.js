@@ -351,11 +351,11 @@
             /*🔴*/database(){},
             /*🔴*/cache(){},
         // network data
-            /*🟢*/fetch(uri,method,type,data,result_type,callback,option_add,headers_add){
+            /*🟢*/fetch(uri,method,data_description,data,content_type,callback,option_add,headers_add){
                 const option={};
                 option.method=method;
-                if(type){
-                    option.body=window.JSON.stringify({type:type,data:data});
+                if(data_description){
+                    option.body=window.JSON.stringify({info:data_description,data:data});
                 }else{
                     switch(typeof body){
                         case'object':
@@ -377,7 +377,7 @@
                         option[data[1]]=data[2];
                     },0);
                 }
-                switch(result_type){
+                switch(content_type){
                     case'json':
                         {
                             if(!option.headers){
@@ -408,7 +408,7 @@
                 const result={};
                 return window.fetch(uri,option).then((data)=>{
                     result.status=data.status;
-                    return data[result_type]();
+                    return data[content_type]();
                 }).then(async(data)=>{
                     result.result=data;
                     this.debug(()=>{
