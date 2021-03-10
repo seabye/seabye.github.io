@@ -351,11 +351,11 @@
             /*🔴*/database(){},
             /*🔴*/cache(){},
         // network data
-            /*🟢*/fetch(uri,method,data_description,data,content_type,callback,option_add,headers_add){
+            /*🟢*/fetch(uri,method,data_info,data,content_type,callback,option_add,headers_add){
                 const option={};
                 option.method=method;
-                if(data_description!==undefined){
-                    option.body=window.JSON.stringify({info:data_description,data:data});
+                if(data_info!==undefined){
+                    option.body=window.JSON.stringify({info:data_info,data:data});
                 }else{
                     switch(typeof body){
                         case'object':
