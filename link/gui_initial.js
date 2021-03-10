@@ -101,7 +101,7 @@
                     this.dataset.config=window.JSON.parse(value.dataset.gui_initial.replace(/'/g,'"'));
                     value.removeAttribute('data-gui_initial');
                     this.dataset.config.head_gui_initial_js=value;
-                    this.dataset.config.head_gui_initial_css_href=value.getAttribute('src').replace('.js','.css');
+                    this.dataset.config.head_gui_initial_css_href=value.getAttribute('src').replace(/\.js/i,'.css');
                     break;
                 }
             }
@@ -198,7 +198,7 @@
             else if(user_agent.match(/Edg/i)&&!user_agent.match(/EdgiOS/i)){
                 class_.add('ic_nr_browser_edge');
             }
-            if(window.location.search.replace('?','').split('&').includes('pwa')){
+            if(window.location.search.replace(/\?/,'').split('&').includes('pwa')){
                 class_.add('ic_nr_pwa');
             }
             if(window.document.createElement('video').canPlayType('application/vnd.apple.mpegurl')){
