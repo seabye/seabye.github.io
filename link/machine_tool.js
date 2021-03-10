@@ -313,10 +313,14 @@
                 }
             },
             /*🔴*/open_cv_remove_watermark(){},
-            /*🔴*/is_bot(type,data){
+            /*🟠*/is_bot(type='user-agent',data=window.navigator.userAgent){
                 switch(type){
                     case'user-agent':
-                        {}
+                        {
+                            if(data.match(/bot|spider/i)){
+                                return true;
+                            }
+                        }
                         break;
                     case'location':
                         {}
