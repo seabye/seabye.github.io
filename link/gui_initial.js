@@ -333,6 +333,9 @@
                 window.document.head.insertAdjacentHTML('beforeend',`<link rel="manifest" href="${this.dataset.config.head_manifest}">`);
             }
         },
+        /*🟢*/hov(){
+            window.addEventListener('touchstart',()=>{});
+        },
         /*🟢*/no$context$menu(){
             window.addEventListener('contextmenu',(event)=>{
                 event.preventDefault();
