@@ -200,6 +200,10 @@
                 --ic_ve_color_system_blue_translucent: #2196F399;
                 --ic_ve_color_system_orange_translucent: #FF980099;
             }
+    /* background */
+    html {
+        --ic_ve_background_cover: center/cover no-repeat;
+    }
     /* shadow */
     html {
         --ic_ve_shadow_2dp_translucent: 0 2px 2px 0 rgba(0,0,0,0),0 1px 5px 0 rgba(0,0,0,0),0 3px 1px -2px rgba(0,0,0,0);
@@ -226,6 +230,11 @@
         --ic_ve_shadow_12dp3: 0 12px 16px 1px rgba(0,0,0,0.05),0 4px 22px 3px rgba(0,0,0,0.04),0 6px 7px -4px rgba(0,0,0,0.13);
         --ic_ve_shadow_16dp3: 0 16px 24px 2px rgba(0,0,0,0.05),0 6px 30px 5px rgba(0,0,0,0.04),0 8px 10px -5px rgba(0,0,0,0.13);
         --ic_ve_shadow_24dp3: 0 24px 38px 3px rgba(0,0,0,0.05),0 9px 46px 8px rgba(0,0,0,0.04),0 11px 15px -7px rgba(0,0,0,0.13);
+    }
+    /* font */
+    html {
+        --ic_ve_font_family_default: system-ui, -apple-system, BlinkMacSystemFont, PingFang SC, Noto Sans CJK SC, Microsoft YaHei;
+        --ic_ve_font_family_monospaced: Consolas, Microsoft YaHei, monospace, Menlo, Monaco, Courier New;
     }
 /* #method */
 /* #build */
@@ -271,13 +280,7 @@
                 color: var(--ic_ve_color_black8_opacity);
                 font-weight: normal;
                 font-size: 16px;
-                font-family:
-                    system-ui,
-                    -apple-system,
-                    BlinkMacSystemFont,
-                    PingFang SC,
-                    Noto Sans CJK SC,
-                    Microsoft YaHei;
+                font-family: var(--ic_ve_font_family_default);
                 overflow-wrap: break-word;
                 -webkit-user-select: none;
                 user-select: none;
