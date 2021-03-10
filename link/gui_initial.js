@@ -346,7 +346,7 @@
             });
             let end=0;
             window.addEventListener('touchend',(event)=>{
-                if(end-window.Date.now()<=350){
+                if(window.Date.now()-end<=350){
                     event.preventDefault();
                 }
                 end=window.Date.now();
