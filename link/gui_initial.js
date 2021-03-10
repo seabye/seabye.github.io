@@ -340,7 +340,6 @@
         },
         /*🟢*/no$double$zoom(){
             window.addEventListener('touchstart',(event)=>{
-                end=window.Date.now();
                 if(event.touches.length>1){
                     event.preventDefault();
                 }
