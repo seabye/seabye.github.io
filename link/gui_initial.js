@@ -338,7 +338,7 @@
                 event.preventDefault();
             });
         },
-        /*🟢*/no$double$zoom(){
+        /*🟢*/no$double$click$zoom(){
             window.addEventListener('touchstart',(event)=>{
                 if(event.touches.length>1){
                     event.preventDefault();
@@ -351,16 +351,16 @@
                 }
                 end=window.Date.now();
             });
-            window.addEventListener('gesturestart',(event)=>{
-                event.preventDefault();
-            });
         },
-        /*🟢*/no$touchpad$zoom(){
+        /*🟢*/no$two$finger$zoom(){
             window.addEventListener('wheel',(event)=>{
                 if(event.ctrlKey){
                     event.preventDefault();
                 }
             },{passive:false});
+            window.addEventListener('gesturestart',(event)=>{
+                event.preventDefault();
+            });
         },
         /*🟢*/no$drag(){
             window.addEventListener('dragstart',(event)=>{
