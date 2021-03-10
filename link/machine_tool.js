@@ -710,7 +710,7 @@
                                                     };
                                                     if(other2){
                                                         const move=(event)=>{
-                                                            if(event.y>=data.y+3||event.y<=data.y-3){
+                                                            if(event.y>=data.y+6||event.y<=data.y-6){
                                                                 window.removeEventListener('pointermove',move);
                                                                 window.removeEventListener('touchmove',move);
                                                                 remove_event();

@@ -333,9 +333,6 @@
                 window.document.head.insertAdjacentHTML('beforeend',`<link rel="manifest" href="${this.dataset.config.head_manifest}">`);
             }
         },
-        /*🟢*/hov(){
-            window.addEventListener('touchstart',()=>{});
-        },
         /*🟢*/no$context$menu(){
             window.addEventListener('contextmenu',(event)=>{
                 event.preventDefault();
@@ -492,7 +489,7 @@
                     },1000/24);
                 };
                 const move=(event_)=>{
-                    if(!event.target.classList.contains('ic_active_move')&&(event_.y>=event.y+3||event_.y<=event.y-3)){
+                    if(!event.target.classList.contains('ic_active_move')&&(event_.y>=event.y+6||event_.y<=event.y-6)){
                         event.target.classList.remove('ic_active_down');
                         event.target.classList.add('ic_active_move');
                     }
