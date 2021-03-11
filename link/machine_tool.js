@@ -1153,7 +1153,8 @@
                                     //                     listen_type<string>,
                                     //                     callback<function(event_data),undefined=()=>{}>,
                                     //                     option<object,undefined>,
-                                    //                     other<any,undefined>
+                                    //                     other<any,undefined>,
+                                    //                     other2<any,undefined>
                                     //                 ]...
                                     //             ]
                                     //         ]
@@ -1168,7 +1169,7 @@
                                         const switch_type=button[1];
                                         const button_element_array=button[2];
                                         const listen_type=button[3];
-                                        const callback=button[4];
+                                        let callback=button[4];
                                         const option=button[5];
                                         const other=button[6];
                                         const other2=button[7];
@@ -1241,7 +1242,8 @@
                                     //                     listen_type<string>,
                                     //                     callback<function(event_data),undefined=()=>{}>,
                                     //                     option<object,undefined>,
-                                    //                     other<any,undefined>
+                                    //                     other<any,undefined>,
+                                    //                     other2<any,undefined>
                                     //                 ]...
                                     //             ]
                                     //         ]
@@ -1255,7 +1257,7 @@
                                         const target_element_array=content[1];
                                         const button_element_array=content[2];
                                         const listen_type=content[3];
-                                        const callback=content[4];
+                                        let callback=content[4];
                                         const option=content[5];
                                         const other=content[6];
                                         const other2=content[7];
