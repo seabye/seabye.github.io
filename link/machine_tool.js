@@ -1216,8 +1216,10 @@
                                             callback();
                                         }
                                         for(const button_element of button_element_array){
-                                            this.listen_target('add',button_element,listen_type,event_function,option,other,other2);
-                                            this.listen_target('add',button_element,listen_type,callback,option,other,other2);
+                                            for(const value of listen_type.split(',')){
+                                                this.listen_target('add',button_element,value,event_function,option,other,other2);
+                                                this.listen_target('add',button_element,value,callback,option,other,other2);
+                                            }
                                         }
                                     }
                                 }
@@ -1291,8 +1293,10 @@
                                             callback();
                                         }
                                         for(const button_element of button_element_array){
-                                            this.listen_target('add',button_element,listen_type,event_function,option,other,other2);
-                                            this.listen_target('add',button_element,listen_type,callback,option,other,other2);
+                                            for(const value of listen_type.split(',')){
+                                                this.listen_target('add',button_element,value,event_function,option,other,other2);
+                                                this.listen_target('add',button_element,value,callback,option,other,other2);
+                                            }
                                         }
                                     }
                                 }
