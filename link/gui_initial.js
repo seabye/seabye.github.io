@@ -256,7 +256,6 @@
                 const style=window.document.createElement('style');
                 style.innerHTML='html * { transition: unset !important; }';
                 window.document.head.insertAdjacentElement('beforeend',style);
-                element.setAttribute('name','theme-color');
                 window.setTimeout(()=>{
                     style.parentElement.removeChild(style);
                 },350);
