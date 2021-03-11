@@ -1150,7 +1150,7 @@
                                     //                     [
                                     //                         button_element<element>...
                                     //                     ],
-                                    //                     listen_type<string>,
+                                    //                     listen_type<string/'item,item2...'/>,
                                     //                     callback<function(event_data),undefined=()=>{}>,
                                     //                     option<object,undefined>,
                                     //                     other<any,undefined>,
@@ -1241,7 +1241,7 @@
                                     //                     [
                                     //                         button_element<element>...
                                     //                     ],
-                                    //                     listen_type<string>,
+                                    //                     listen_type<string/'item,item2...'/>,
                                     //                     callback<function(event_data),undefined=()=>{}>,
                                     //                     option<object,undefined>,
                                     //                     other<any,undefined>,
