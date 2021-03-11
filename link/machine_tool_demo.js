@@ -207,7 +207,7 @@ export const machine_tool_demo=(machine_tool)=>{
                                             window.console.log('element_state()','1 4 pointer_up',data);
                                         },
                                         ,
-                                        0
+                                        0,
                                     ],
                                     [
                                         false,
@@ -220,7 +220,7 @@ export const machine_tool_demo=(machine_tool)=>{
                                             window.console.log('element_state()','2 pointer_up',data);
                                         },
                                         ,
-                                        0
+                                        0,
                                     ],
                                     [
                                         true,
@@ -233,7 +233,7 @@ export const machine_tool_demo=(machine_tool)=>{
                                             window.console.log('element_state()','3 pointer_up',data);
                                         },
                                         ,
-                                        0
+                                        0,
                                     ]
                                 ]
                             ]
@@ -282,7 +282,7 @@ export const machine_tool_demo=(machine_tool)=>{
                                             window.console.log('element_state()','red pointer_up',data);
                                         },
                                         ,
-                                        0
+                                        0,
                                     ],
                                     [
                                         false,
@@ -299,7 +299,7 @@ export const machine_tool_demo=(machine_tool)=>{
                                             window.console.log('element_state()','green pointer_up',data);
                                         },
                                         ,
-                                        0
+                                        0,
                                     ],
                                     [
                                         false,
@@ -316,7 +316,7 @@ export const machine_tool_demo=(machine_tool)=>{
                                             window.console.log('element_state()','blue pointer_up',data);
                                         },
                                         ,
-                                        0
+                                        0,
                                     ]
                                 ]
                             ]

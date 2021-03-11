@@ -1171,6 +1171,7 @@
                                         const callback=button[4];
                                         const option=button[5];
                                         const other=button[6];
+                                        const other2=button[7];
                                         if(!callback){
                                             callback=()=>{};
                                         }
@@ -1214,8 +1215,8 @@
                                             callback();
                                         }
                                         for(const button_element of button_element_array){
-                                            this.listen_target('add',button_element,listen_type,event_function,option,other);
-                                            this.listen_target('add',button_element,listen_type,callback,option,other);
+                                            this.listen_target('add',button_element,listen_type,event_function,option,other,other2);
+                                            this.listen_target('add',button_element,listen_type,callback,option,other,other2);
                                         }
                                     }
                                 }
@@ -1257,6 +1258,7 @@
                                         const callback=content[4];
                                         const option=content[5];
                                         const other=content[6];
+                                        const other2=content[7];
                                         if(!callback){
                                             callback=()=>{};
                                         }
@@ -1287,8 +1289,8 @@
                                             callback();
                                         }
                                         for(const button_element of button_element_array){
-                                            this.listen_target('add',button_element,listen_type,event_function,option,other);
-                                            this.listen_target('add',button_element,listen_type,callback,option,other);
+                                            this.listen_target('add',button_element,listen_type,event_function,option,other,other2);
+                                            this.listen_target('add',button_element,listen_type,callback,option,other,other2);
                                         }
                                     }
                                 }
