@@ -289,10 +289,8 @@
             });
         },
         /*🟢*/write$head(){
-            this.dataset.config.head_gui_initial_js.insertAdjacentHTML('beforebegin',`
-                <meta name="viewport" content="width=device-width,user-scalable=no,viewport-fit=cover">
-                <meta name="format-detection" content="address=no,email=no,telephone=no">
-            `);
+            this.dataset.config.head_gui_initial_js.insertAdjacentHTML('beforebegin','<meta name="viewport" content="width=device-width,user-scalable=no,viewport-fit=cover">');
+            this.dataset.config.head_gui_initial_js.insertAdjacentHTML('beforebegin','<meta name="format-detection" content="address=no,email=no,telephone=no">');
             if(this.dataset.config.head_title||this.dataset.config.head_title===''){
                 this.dataset.config.head_gui_initial_js.insertAdjacentHTML('beforebegin',`<title>${this.dataset.config.head_title}</title>`);
             }
@@ -313,10 +311,8 @@
                 if(this.dataset.config.head_icon_apple){
                     window.document.head.insertAdjacentHTML('beforeend',`<link rel="apple-touch-icon" href="${this.dataset.config.head_icon_apple}">`);
                 }
-                window.document.head.insertAdjacentHTML('beforeend',`
-                    <meta name="apple-mobile-web-app-capable" content="yes">
-                    <meta name="apple-mobile-web-app-status-bar-style" content="white">
-                `);
+                window.document.head.insertAdjacentHTML('beforeend','<meta name="apple-mobile-web-app-capable" content="yes">');
+                window.document.head.insertAdjacentHTML('beforeend','<meta name="apple-mobile-web-app-status-bar-style" content="white">');
                 if(this.dataset.config.head_title||this.dataset.config.head_title===''){
                     window.document.head.insertAdjacentHTML('beforeend',`<meta name="apple-mobile-web-app-title" content="${this.dataset.config.head_title}">`);
                 }
