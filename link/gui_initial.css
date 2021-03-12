@@ -321,8 +321,7 @@
         ::placeholder {
             color: var(--ic_ve_color_black4_opacity);
             opacity: unset;
-            -webkit-user-select: none;
-            user-select: none;
+            pointer-events: none;
         }
         button,
         input,
