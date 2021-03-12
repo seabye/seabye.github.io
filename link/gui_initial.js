@@ -258,7 +258,7 @@
                 window.document.head.insertAdjacentElement('beforeend',style);
                 window.setTimeout(()=>{
                     style.parentElement.removeChild(style);
-                },350);
+                },350/2);
                 if(window.document.documentElement.classList.value.match(/ic_nr_system_ios|ic_nr_browser_safari/i)){
                     window.setTimeout(()=>{
                         window.document.body.style.setProperty('margin','1px');
