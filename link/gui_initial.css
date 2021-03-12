@@ -233,8 +233,8 @@
     }
     /* font */
     html {
-        --ic_ve_font_family_default: system-ui, -apple-system, BlinkMacSystemFont, PingFang SC, Noto Sans CJK SC, Microsoft YaHei;
-        --ic_ve_font_family_monospaced: Consolas, Microsoft YaHei, monospace, Menlo, Monaco, Courier New;
+        --ic_ve_font_family_default: system-ui, -apple-system, BlinkMacSystemFont, PingFang SC, Noto Sans CJK SC, Microsoft YaHei, sans-serif;
+        --ic_ve_font_family_monospaced: Consolas, Microsoft YaHei, monospace, Menlo, Monaco, Courier New, sans-serif;
     }
 /* #block */
 /* #build */
