@@ -248,15 +248,10 @@
             const set_media_orientation=(matches)=>{
                 if(window.document.documentElement.classList.value.match(/ic_nr_system_ios|ic_nr_browser_safari/i)&&window.document.documentElement.classList.value.match(/ic_nr_media_orientation_landscape|ic_nr_media_orientation_portrait/i)){
                     window.setTimeout(()=>{
-                        // window.document.documentElement.style.setProperty('margin','-1px');
                         window.document.body.style.setProperty('margin','1px');
                         window.setTimeout(()=>{
-                            // window.document.documentElement.style.removeProperty('margin');
                             window.document.body.style.removeProperty('margin');
                             window.setTimeout(()=>{
-                                // if(!window.document.documentElement.style[0]){
-                                //     window.document.documentElement.removeAttribute('style');
-                                // }
                                 if(!window.document.body.style[0]){
                                     window.document.body.removeAttribute('style');
                                 }
