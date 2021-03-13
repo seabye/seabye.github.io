@@ -1529,38 +1529,27 @@
                 }
             },
             /*🟢*/full_screen(element=window.document.documentElement,top=false){
-                if(top){
-                    if(window.top.document.fullscreenElement||window.top.document.webkitIsFullScreen){
-                        if('exitFullscreen'in window.top.document){
-                            window.top.document.exitFullscreen();
-                        }else{
-                            if('webkitExitFullscreen'in window.top.document){
-                                window.top.document.webkitExitFullscreen();
-                            }
-                        }
+                const root=top?window.top:window;
+                if(window.navigator.userAgent.match(/iPhone|iPad/i)&&element.webkitSupportsFullscreen){
+                    if(element.webkitDisplayingFullscreen){
+                        element.webkitExitFullScreen();
                     }else{
-                        if('requestFullscreen'in window.top.document.documentElement){
-                            element.requestFullscreen();
-                        }else{
-                            if('webkitRequestFullScreen'in window.top.document.documentElement){
-                                element.webkitRequestFullScreen();
-                            }
-                        }
+                        element.webkitEnterFullScreen();
                     }
                 }else{
-                    if(window.document.fullscreenElement||window.document.webkitIsFullScreen){
-                        if('exitFullscreen'in window.document){
-                            window.document.exitFullscreen();
+                    if(root.document.fullscreenElement||root.document.webkitIsFullScreen){
+                        if('exitFullscreen'in root.document){
+                            root.document.exitFullscreen();
                         }else{
-                            if('webkitExitFullscreen'in window.document){
-                                window.document.webkitExitFullscreen();
+                            if('webkitExitFullscreen'in root.document){
+                                root.document.webkitExitFullscreen();
                             }
                         }
                     }else{
-                        if('requestFullscreen'in window.document.documentElement){
+                        if('requestFullscreen'in root.document.documentElement){
                             element.requestFullscreen();
                         }else{
-                            if('webkitRequestFullScreen'in window.document.documentElement){
+                            if('webkitRequestFullScreen'in root.document.documentElement){
                                 element.webkitRequestFullScreen();
                             }
                         }
