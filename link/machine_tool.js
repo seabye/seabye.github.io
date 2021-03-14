@@ -1599,7 +1599,7 @@
             /*🟢*/hls_load(mode='auto',video,src,poster='',config={
                 autoStartLoad:video.getAttribute('preload')==='auto'?true:false,
                 maxBufferLength:4,
-                maxBufferSize:8*1000*1000
+                maxBufferSize:4*1000*1000
             }){
                 video.pause();
                 if(!this.hls_load.play){
