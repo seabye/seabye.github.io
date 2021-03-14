@@ -353,8 +353,11 @@
                 const second=window.Math.floor(millisecond%(60*1000)/1000);
                 return `${leading_zero[0]?zero(hour):hour}${unit[0]}${leading_zero[1]?zero(minute):minute}${unit[1]}${leading_zero[2]?zero(second):second}${unit[2]}`;
             },
-            /*🟢*/percent(total,current,unit='%'){
-                return `${(current/total*100).toFixed()}${unit}`;
+            /*🟢*/percent(total,current,unit='%',dot=false){
+                if(dot){
+                    return `${(current/total*100).toFixed()}${unit}`;
+                }
+                return current/total*100;
             },
         // local data
             /*🔴*/file(){},
