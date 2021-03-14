@@ -237,8 +237,8 @@
                         break;
                 }
             },
-            /*🟢*/import(src,callback){
-                return import(src).then((data)=>{
+            /*🟢*/async import(src,callback){
+                return await import(src).then((data)=>{
                     callback(data);
                     return data;
                 }).catch((data)=>{
