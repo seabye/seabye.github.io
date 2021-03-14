@@ -284,7 +284,7 @@
                 border-style: solid;
                 border-color: var(--ic_ve_color_white);
                 background-color: var(--ic_ve_color_white);
-                color: var(--ic_ve_color_black9_opacity);
+                color: var(--ic_ve_color_black8_opacity);
                 font-weight: normal;
                 font-size: 16px;
                 font-family: var(--ic_ve_font_family_default);
@@ -319,7 +319,7 @@
         }
         /* form */
         ::placeholder {
-            color: var(--ic_ve_color_black6_opacity);
+            color: var(--ic_ve_color_black4_opacity);
             opacity: unset;
             -webkit-user-select: none;
             user-select: none;
@@ -376,11 +376,11 @@
     html:not(.ic_nr_system_ios):not(.ic_nr_system_android) ::-webkit-scrollbar-thumb {
         border: 3px solid rgba(0,0,0,0);
         border-radius: 8px;
-        background-color: var(--ic_ve_color_black3_opacity);
+        background-color: var(--ic_ve_color_black2_opacity);
         background-clip: padding-box;
     }
     html:not(.ic_nr_system_ios):not(.ic_nr_system_android) ::-webkit-scrollbar-thumb:active {
-        background-color: var(--ic_ve_color_black6_opacity);
+        background-color: var(--ic_ve_color_black4_opacity);
     }
 /* #debug */
     /* wireframe */
