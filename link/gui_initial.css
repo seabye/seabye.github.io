@@ -240,8 +240,8 @@
         --ic_ve_font_family_fantasy: fantasy;
         --ic_ve_font_family_fangsong: Fangsong;
         --ic_ve_font_family_default: system-ui, -apple-system, BlinkMacSystemFont, "PingFang SC", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif;
-        --ic_ve_font_family_code: "Menlo", "Monaco", "Consolas", "Courier New", "Ubuntu Mono", monospace;
-        --ic_ve_font_family_coding: monospace;
+        --ic_ve_font_family_code: "Menlo", "Monaco", "Consolas", "Courier New", "Ubuntu Mono", "Microsoft YaHei", monospace;
+        --ic_ve_font_family_coding: "Consolas", "Microsoft YaHei", monospace;
     }
 /* #block */
 /* #build */
