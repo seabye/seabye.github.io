@@ -246,16 +246,6 @@
                 }).catch((data)=>{
                     window.console.log('==== import catch:',data);
                 });
-                // return new window.Promise((resolve)=>{
-                //     import(src).then((data)=>{
-                //         if(callback){
-                //             callback(data);
-                //         }
-                //         resolve(data);
-                //     }).catch((data)=>{
-                //         window.console.log('==== import catch:',data);
-                //     });
-                // });
             },
             /*🔴*/web_assembly(){},
             /*🟢*/uuid_36_to_uuid_22(uuid_36){
