@@ -237,8 +237,8 @@
                         break;
                 }
             },
-            /*🟢*/async import(src,callback){
-                return await import(src).then((data)=>{
+            /*🟢*/import(src,callback){
+                return import(src).then((data)=>{
                     if(callback){
                         callback(data);
                     }
