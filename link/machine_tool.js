@@ -238,7 +238,7 @@
                 }
             },
             /*🟢*/import(src,callback){
-                return window.import(src).then((data)=>{
+                return import(src).then((data)=>{
                     callback(data);
                     return data;
                 }).catch((data)=>{
