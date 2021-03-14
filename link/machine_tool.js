@@ -237,12 +237,14 @@
                         break;
                 }
             },
-            /*🟢*/async import(src,callback){
-                return await import(src).then((data)=>{
-                    callback(data);
-                    return data;
-                }).catch((data)=>{
-                    window.console.log('==== import catch:',data);
+            /*🟢*/import(src,callback){
+                return new window.Promise((resolve)=>{
+                    import(src).then((data)=>{
+                        callback(data);
+                        resolve(data);
+                    }).catch((data)=>{
+                        window.console.log('==== import catch:',data);
+                    });
                 });
             },
             /*🔴*/web_assembly(){},
