@@ -351,7 +351,7 @@
                 const hour=window.Math.floor(millisecond/(3600*1000));
                 const minute=window.Math.floor(millisecond%(3600*1000)/(60*1000));
                 const second=window.Math.floor(millisecond%(60*1000)/1000);
-                return `${leading_zero[0]?zero(hour):hour}${unit[0]}${leading_zero[0]?zero(minute):minute}${unit[1]}${leading_zero[0]?zero(second):second}${unit[2]}`;
+                return `${leading_zero[0]?zero(hour):hour}${unit[0]}${leading_zero[1]?zero(minute):minute}${unit[1]}${leading_zero[2]?zero(second):second}${unit[2]}`;
             },
         // local data
             /*🔴*/file(){},
