@@ -238,8 +238,9 @@
                 }
             },
             /*🟢*/import(src,callback){
-                import(src).then((data)=>{
+                return window.import(src).then((data)=>{
                     callback(data);
+                    return data;
                 }).catch((data)=>{
                     window.console.log('==== import catch:',data);
                 });
