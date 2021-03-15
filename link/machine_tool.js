@@ -1674,7 +1674,7 @@
                     }
                 });
             },
-            /*🔴*/insert_style(style,wait){
+            /*🟢*/insert_style(style,wait){
                 const element=this.element_create('style',undefined,window.document.head,undefined,style);
                 if(wait){
                     window.setTimeout(()=>{
