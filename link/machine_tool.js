@@ -1337,7 +1337,7 @@
                             this.lock=false;
                             this.style='html * { pointer-events: none !important; }';
                         }
-                        add(element,mark,wait=this.wait){
+                        add(element,record,wait=this.wait){
                             if(!this.lock){
                                 this.lock=true;
                                 const style=machine_tool.element_create('style',undefined,window.document.head,undefined,this.style);
@@ -1346,19 +1346,19 @@
                                 }else{
                                     wait=0;
                                 }
-                                let mark_state=false;
-                                if(mark){
+                                let record_state=false;
+                                if(record){
                                     machine_tool.for(this.elements,(...data)=>{
-                                        if(data[2].machine_tool_element_block_add_mark===mark){
-                                            mark_state=true;
+                                        if(data[2].machine_tool_element_block_add_record===record){
+                                            record_state=true;
                                             element=data[2];
                                         }
                                     },0);
                                 }
-                                if(mark&&!mark_state){
-                                    element.machine_tool_element_block_add_mark=mark;
+                                if(record&&!record_state){
+                                    element.machine_tool_element_block_add_record=record;
                                 }
-                                if(!mark_state){
+                                if(!record_state){
                                     this.elements.push(element);
                                 }
                                 machine_tool.for(this.elements,(...data)=>{
@@ -1371,7 +1371,7 @@
                                 machine_tool.element_state(element,`${this.group}_last ${this.group}_ready`,`${this.group}_hide`,true);
                                 element.style.setProperty('opacity','0');
                                 window.setTimeout(()=>{
-                                    if(!mark_state){
+                                    if(!record_state){
                                         this.element.insertAdjacentElement(this.insert_position,element);
                                     }
                                     window.setTimeout(()=>{
@@ -1397,7 +1397,7 @@
                                         element=data[2];
                                     }
                                 },0);
-                                if(element.machine_tool_element_block_add_mark){
+                                if(element.machine_tool_element_block_add_record){
                                     this.lock=false;
                                     return this.hide(wait);
                                 }else{
