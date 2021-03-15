@@ -1340,7 +1340,7 @@
                         add(element,record,wait=this.wait){
                             if(!this.lock){
                                 this.lock=true;
-                                const style=machine_tool.element_create('style',undefined,window.document.head,undefined,this.style);
+                                const style=machine_tool.insert_style(this.style);
                                 if(wait>1000/12){
                                     wait=wait-1000/12;
                                 }else{
@@ -1409,7 +1409,7 @@
                         hide(wait=this.wait){
                             if(!this.lock){
                                 this.lock=true;
-                                const style=machine_tool.element_create('style',undefined,window.document.head,undefined,this.style);
+                                const style=machine_tool.insert_style(this.style);
                                 let element=null;
                                 machine_tool.for(this.elements,(...data)=>{
                                     if(!data[2].classList.contains(`${this.group}_hide`)&&!data[2].classList.contains(`${this.group}_remove`)&&data[2].classList.contains(`${this.group}_last`)){
@@ -1439,7 +1439,7 @@
                         remove(wait=350){
                             if(!this.lock){
                                 this.lock=true;
-                                const style=machine_tool.element_create('style',undefined,window.document.head,undefined,this.style);
+                                const style=machine_tool.insert_style(this.style);
                                 let element=null;
                                 machine_tool.for(this.elements,(...data)=>{
                                     if(!data[2].classList.contains(`${this.group}_hide`)&&!data[2].classList.contains(`${this.group}_remove`)&&data[2].classList.contains(`${this.group}_last`)){
@@ -1674,7 +1674,15 @@
                     }
                 });
             },
-            /*🔴*/temp_style(style){},
+            /*🔴*/insert_style(style,wait){
+                const element=this.element_create('style',undefined,window.document.head,undefined,style);
+                if(wait){
+                    window.setTimeout(()=>{
+                        this.remove_element(element);
+                    },wait);
+                }
+                return element;
+            },
         // graphics
         // application programming interface
             /*🔴*/listen_port(){},
