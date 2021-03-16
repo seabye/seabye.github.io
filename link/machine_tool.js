@@ -756,7 +756,9 @@
                                                         window.removeEventListener('pointerup',remove_event);
                                                         window.removeEventListener('touchend',remove_event);
                                                         window.removeEventListener('dragend',remove_event);
-                                                        data.target.parentNode.removeEventListener('pointerup',this.listen_target.pointer_up[once_id]);
+                                                        if(data.target.parentNode){
+                                                            data.target.parentNode.removeEventListener('pointerup',this.listen_target.pointer_up[once_id]);
+                                                        }
                                                     };
                                                     if(other2){
                                                         const move=(event)=>{
@@ -1397,7 +1399,8 @@
                                         element=data[2];
                                     }
                                 },0);
-                                if(element.machine_tool_element_block_add_record){
+                                // if(element?.machine_tool_element_block_add_record){
+                                if(element&&element.machine_tool_element_block_add_record){
                                     this.lock=false;
                                     return this.hide(wait);
                                 }else{
