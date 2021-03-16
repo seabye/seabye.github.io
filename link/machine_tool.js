@@ -107,7 +107,7 @@
                     },wait);
                 });
             },
-            /*🟠*/observe_function(origin_function,event_type,event_option={},who_listen,data_plus=()=>{}){
+            /*🟡*/observe_function(origin_function,event_type,event_option={},who_listen,data_plus=()=>{}){
                 const insert_event=new window.CustomEvent(event_type,event_option);
                 return function(...arg){
                     insert_event.function_arg=arg;
@@ -316,7 +316,7 @@
                 }
             },
             /*🔴*/open_cv_remove_watermark(){},
-            /*🟠*/is_bot(type='user-agent',data=window.navigator.userAgent){
+            /*🟡*/is_bot(type='user-agent',data=window.navigator.userAgent){
                 switch(type){
                     case'user-agent':
                         {
@@ -654,7 +654,7 @@
                         break;
                 }
             },
-            /*🟠*/listen_target(action,target,type,callback,option={},other='',other2=''){
+            /*🟡*/listen_target(action,target,type,callback,option={},other='',other2=''){
                 const match=/[\r\n\s]/g;
                 switch(type){
                     case'pointer_down':
@@ -1474,7 +1474,7 @@
                 }
                 return new this.element_block.template(element,group,insert_position,wait);
             },
-            /*🟠*/remove_element(element){
+            /*🟡*/remove_element(element){
                 element.parentElement.removeChild(element);
             },
             /*🟢*/find_outer(find,start,end=window.document.documentElement,true_callback,false_callback){

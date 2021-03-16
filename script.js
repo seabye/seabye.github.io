@@ -30,7 +30,7 @@
                                         <span style="font-size: 61.8%;">machine_tool</span>
                                         <a href="//seabye.com/link/machine_tool.js">.js</a>
                                         <a href="//seabye.com/link/machine_tool_demo.js">_demo.js</a>
-                                        <span style="font-size: 38.2%;">🟠 50%</span>
+                                        <span style="font-size: 38.2%;">🟡 50%</span>
                                     </div>
                                 </div>
                             </div>
@@ -43,7 +43,7 @@
                             </div>
                             <div style="color: var(--ic_ve_color_black7); transform: rotateY(-15deg);">
                                 <a>_</a>
-                                <span style="font-size: 38.2%;">🟠 40%</span>
+                                <span style="font-size: 38.2%;">🟡 40%</span>
                             </div>
                             <div style="font-size: 125%; color: rgba(255,0,0,0.1875);">Hello, World!</div>
                             <div style="transform: rotateY(30deg);">
