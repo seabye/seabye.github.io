@@ -382,6 +382,17 @@
     html:not(.ic_nr_system_ios):not(.ic_nr_system_android) ::-webkit-scrollbar-thumb:active {
         background-color: var(--ic_ve_color_black4_opacity);
     }
+    html:not(.ic_nr_system_ios):not(.ic_nr_system_android) ::-webkit-scrollbar-button:single-button {
+        height: 8px;
+        width: 8px;
+        border: 3px solid rgba(0,0,0,0);
+        border-radius: 100%;
+        background-color: var(--ic_ve_color_black2_opacity);
+        background-clip: padding-box;
+    }
+    html:not(.ic_nr_system_ios):not(.ic_nr_system_android) ::-webkit-scrollbar-button:single-button:active {
+        background-color: var(--ic_ve_color_black4_opacity);
+    }
 /* #debug */
     /* wireframe */
     html.ic_dg,
