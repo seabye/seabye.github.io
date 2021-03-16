@@ -1678,7 +1678,7 @@
                 });
             },
             /*🟢*/insert_style(style,wait){
-                const element=this.element_create('style',{crossorigin:''},window.document.head,undefined,style);
+                const element=this.element_create('style',undefined,window.document.head,undefined,style);
                 if(wait){
                     window.setTimeout(()=>{
                         this.remove_element(element);
