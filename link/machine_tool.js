@@ -756,9 +756,7 @@
                                                         window.removeEventListener('pointerup',remove_event);
                                                         window.removeEventListener('touchend',remove_event);
                                                         window.removeEventListener('dragend',remove_event);
-                                                        if(data.target.parentNode){
-                                                            data.target.parentNode.removeEventListener('pointerup',this.listen_target.pointer_up[once_id]);
-                                                        }
+                                                        data.target.parentNode.removeEventListener('pointerup',this.listen_target.pointer_up[once_id]);
                                                     };
                                                     if(other2){
                                                         const move=(event)=>{
