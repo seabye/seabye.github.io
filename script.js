@@ -12,7 +12,7 @@
 // #block
 // #build
     // font
-    window.document.fonts.add(new window.FontFace('NewYork_','url(/base/font/NewYork.woff2)'));
+    window.document.fonts.add(new window.FontFace('New York_','url(/base/font/NewYork.woff2)'));
     // element
     machine_tool.loop(()=>{
         for(const value of window.document.documentElement.children){
