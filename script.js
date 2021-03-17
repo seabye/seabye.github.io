@@ -11,6 +11,8 @@
 // #variable
 // #block
 // #build
+    // font
+    new window.FontFace('NewYork_','url(/base/font/NewYork.woff2)');
     // element
     machine_tool.loop(()=>{
         for(const value of window.document.documentElement.children){

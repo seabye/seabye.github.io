@@ -5,6 +5,9 @@
 /* #block */
 /* #build */
     /* uncategorized */
+    html {
+        font-family: "NewYork_", var(--ic_ve_font_family_default);
+    }
     a.ic_active {
         text-shadow: 0 0 20px var(--ic_ve_color_black);
     }
