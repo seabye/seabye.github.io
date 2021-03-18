@@ -687,7 +687,7 @@
                         break;
                     case'pointer_up':
                         {
-                            // const id=`id_${this.java_string_hash_code((target!==window&&target!==window.document?this.element_path(target):'')+callback.toString().replace(match,'')).toString().replace(/[^0-9]/g,'')}`;
+                            // const id=`id_${this.java_string_hash_code(`${(target!==window&&target!==window.document?this.element_path(target):'')}${callback.toString().replace(match,'')}`).toString().replace(/[^0-9]/g,'')}`;
                             const id=`id_${this.random()}`;
                             const remove=()=>{
                                 target.removeEventListener('pointerdown',this.listen_target.pointer_up[id]);
@@ -903,7 +903,7 @@
                         break;
                     case'uri':
                         {
-                            const id='id_'+this.java_string_hash_code(target.toString().replace(/[\r\n\s]/g,'')).toString().replace(/[^0-9]/g,'');
+                            const id=`id_${this.java_string_hash_code(target.toString().replace(/[\r\n\s]/g,'')).toString().replace(/[^0-9]/g,'')}`;
                             if(!this.listen_target.uri){
                                 this.listen_target.uri={};
                             }
