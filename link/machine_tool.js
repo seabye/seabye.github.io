@@ -687,7 +687,8 @@
                         break;
                     case'pointer_up':
                         {
-                            const id='id_'+this.java_string_hash_code((target!==window&&target!==window.document?this.element_path(target):'')+callback.toString().replace(match,'')+this.random()).toString().replace(/[^0-9]/g,'');
+                            // const id=`id_${this.java_string_hash_code((target!==window&&target!==window.document?this.element_path(target):'')+callback.toString().replace(match,'')).toString().replace(/[^0-9]/g,'')}`;
+                            const id=`id_${this.random()}`;
                             const remove=()=>{
                                 target.removeEventListener('pointerdown',this.listen_target.pointer_up[id]);
                                 this.listen_target.pointer_up[id].count-=1;
@@ -808,51 +809,37 @@
                         break;
                     case'observe_mutation':
                         {
-                            const id='id_'+this.java_string_hash_code((target!==window&&target!==window.document?this.element_path(target):'')+callback.toString().replace(match,'')).toString().replace(/[^0-9]/g,'');
                             switch(action){
                                 case'add':
                                     {
-                                        if(!this.listen_target.observe_mutation){
-                                            this.listen_target.observe_mutation={};
-                                        }
-                                        if(!this.listen_target.observe_mutation[id]){
-                                            this.listen_target.observe_mutation[id]=new window.MutationObserver((mutation_list)=>{
-                                                this.debug(()=>{
-                                                    window.console.log('==== listen_target.observe_mutation mutation_list:',mutation_list);
-                                                });
-                                                mutation_list.forEach((mutation)=>{
-                                                    switch(mutation.type){
-                                                        case'childList':
-                                                            {
-                                                                callback(mutation);
-                                                            }
-                                                            break;
-                                                        case'attributes':
-                                                            {
-                                                                callback(mutation);
-                                                            }
-                                                            break;
-                                                        default:
-                                                            break;
-                                                    }
-                                                });
+                                        target.machine_tool_listen_target_observe_mutation=new window.MutationObserver((mutation_list)=>{
+                                            this.debug(()=>{
+                                                window.console.log('==== listen_target.observe_mutation mutation_list:',mutation_list);
                                             });
-                                            this.listen_target.observe_mutation[id].count=0;
-                                        }
-                                        this.listen_target.observe_mutation[id].observe(target,option);
-                                        this.listen_target.observe_mutation[id].count+=1;
+                                            mutation_list.forEach((mutation)=>{
+                                                switch(mutation.type){
+                                                    case'childList':
+                                                        {
+                                                            callback(mutation);
+                                                        }
+                                                        break;
+                                                    case'attributes':
+                                                        {
+                                                            callback(mutation);
+                                                        }
+                                                        break;
+                                                    default:
+                                                        break;
+                                                }
+                                            });
+                                        });
+                                        target.machine_tool_listen_target_observe_mutation.observe(target,option);
                                     }
                                     break;
                                 case'remove':
                                     {
-                                        this.listen_target.observe_mutation[id].count-=1;
-                                        if(this.listen_target.observe_mutation[id].count===0){
-                                            this.listen_target.observe_mutation[id].disconnect();
-                                            delete this.listen_target.observe_mutation[id];
-                                            if(!window.Object.keys(this.listen_target.observe_mutation).length){
-                                                delete this.listen_target.observe_mutation;
-                                            }
-                                        }
+                                        target.machine_tool_listen_target_observe_mutation.disconnect();
+                                        delete target.machine_tool_listen_target_observe_mutation;
                                     }
                                     break;
                                 default:
