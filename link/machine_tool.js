@@ -707,7 +707,7 @@
                                         }
                                         if(!this.listen_target.pointer_up[id]){
                                             this.listen_target.pointer_up[id]=(data)=>{
-                                                const once_id='once_'+id;
+                                                const once_id=`once_${id}`;
                                                 data.target.parentNode.removeEventListener('pointerup',this.listen_target.pointer_up[once_id]);
                                                 delete this.listen_target.pointer_up[once_id];
                                                 const run=()=>{
