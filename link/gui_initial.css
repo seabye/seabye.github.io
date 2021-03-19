@@ -341,7 +341,8 @@
             max-width: 100%;
         }
         input,
-        textarea {
+        textarea,
+        [contenteditable] {
             -webkit-user-select: text;
             user-select: text;
             cursor: auto;
