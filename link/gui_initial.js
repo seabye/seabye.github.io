@@ -377,11 +377,13 @@
         /*🔴*/no$back(){},
         /*🔴*/no$touch$back(){},
         /*🟢*/form$focus(){
-            window.addEventListener('keydown',(event)=>{
-                if(event.key==='Enter'&&event.target.localName==='input'){
-                    event.target.blur();
-                }
-            });
+            if(window.document.documentElement.classList.value.match(/ic_nr_system_ios|ic_nr_system_android/i)){
+                window.addEventListener('keydown',(event)=>{
+                    if(event.key==='Enter'&&event.target.localName==='input'){
+                        event.target.blur();
+                    }
+                });
+            }
         },
         /*🟢*/partial$scroll(){
             if(!window.CSS.supports('overscroll-behavior:contain')){
