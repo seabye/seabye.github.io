@@ -318,7 +318,8 @@
             cursor: default;
         }
         /* form */
-        ::placeholder {
+        ::placeholder,
+        [contenteditable]:empty::before {
             color: var(--ic_ve_color_black4_opacity);
             opacity: unset;
             -webkit-user-select: none;
@@ -349,6 +350,9 @@
         }
         input {
             text-overflow: ellipsis;
+        }
+        [contenteditable]:empty::before {
+            content: attr(placeholder);
         }
             /* input */
                 /* type search */
