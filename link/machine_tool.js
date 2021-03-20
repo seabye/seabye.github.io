@@ -520,6 +520,7 @@
                             //     insert_position<'beforebegin','afterbegin','beforeend','afterend',undefined='beforeend'>,
                             //     elements<elements,undefined=elements>,
                             //     callback<function(elements),undefined=false>
+                            //     /machine_tool.element_create()===machine_tool.element_create([{}])._first_===machine_tool.element_create([[]])._first_/
                             const object=arg[0];
                             const insert_element=arg[1];
                             let insert_position=arg[2];
