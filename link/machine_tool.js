@@ -532,6 +532,7 @@
                                 elements={};
                             }
                             let element_build_start=true;
+                            let first=false;
                             const element_build=(data,insert_element,insert_position,key='')=>{
                                 if(element_build_start){
                                     element_build_start=false;
@@ -570,6 +571,10 @@
                                         }
                                     }
                                     const element=this.element_create(data.element[0],data.element[1]?data.element[1]:undefined,insert_element,insert_position,data.element[2]?data.element[2]:undefined,data.element[3]?data.element[3]:undefined);
+                                    if(!first){
+                                        first=true;
+                                        elemets._first_=element;
+                                    }
                                     if(window.isNaN(key.split(' ')[0])||key.split(' ')[0]===''){
                                         elements[key.split(' ')[0]]=element;
                                     }
