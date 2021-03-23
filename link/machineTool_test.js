@@ -8,29 +8,6 @@
 // #build
 export const machineTool_test=(machineTool)=>{
     machineTool.runObject({
-        async asyncLoop(){
-            // window.console.log(await machineTool.asyncLoop(
-            //     ()=>{
-            //         return false;
-            //     },
-            //     ()=>{
-            //         window.console.log('asyncLoop()','1');
-            //         return 11;
-            //     },
-            //     1000,
-            //     2,
-            //     ()=>{
-            //         window.console.log('asyncLoop()','2');
-            //         return 22;
-            //     }
-            // ));
-        },
-        async timeOut(){
-            // window.console.log('timeOut()');
-            // await machineTool.timeOut(()=>{
-            //     window.console.log('timeOut()','2000');
-            // },2000);
-        },
         for(){
             // let data=['A','B',['D','E'],'AA','BB',['DD','EE']];
             // machineTool.for(data,(count,key,value,depth,type)=>{

@@ -1413,7 +1413,6 @@
                                         element=data[2];
                                     }
                                 },0);
-                                // if(element?.machineTool_elementBlock_add_record){
                                 if(element&&element.machineTool_elementBlock_add_record){
                                     this.lock=false;
                                     return this.hide(wait);
@@ -1608,8 +1607,7 @@
                 return window.open(URI,name,`width=${width},height=${height},left=${left},top=${top}`);
             },
             /*🟢*/debug(callback){
-                // if(window.document?.documentElement&&window.document.documentElement.classList.contains('debug')){
-                if(window.document&&window.document.documentElement&&window.document.documentElement.classList.contains('debug')){
+                if(window.document&&window.document.documentElement.classList.contains('debug')){
                     callback();
                 }
             },
@@ -1773,8 +1771,7 @@
 // #build
 // #debug
     // debug
-    // if(window.document?.documentElement){
-    if(window.document&&window.document.documentElement){
+    if(window.document){
         let over=false;
         const run=()=>{
             if(!over&&window.document.documentElement.classList.contains('debug')){

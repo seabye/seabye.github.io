@@ -100,8 +100,7 @@
                 if(value.dataset.gui_initial){
                     this.dataset.config=window.JSON.parse(value.dataset.gui_initial.replace(/'/g,'"'));
                     value.removeAttribute('data-gui_initial');
-                    this.dataset.config.head_GUIInitial_js=value;
-                    this.dataset.config.head_GUIInitial_css_href=value.getAttribute('src').replace(/\.js/i,'.css');
+                    this.dataset.config.GUIInitial_js=value;
                     break;
                 }
             }
@@ -158,7 +157,7 @@
                 window.navigator.serviceWorker.register(this.dataset.config.serviceWorker,{scope:'./'});
             }
         },
-        /*🟢*/navigator_base(){
+        /*🟢*/navigator(){
             const userAgent=window.navigator.userAgent;
             const class_=window.document.documentElement.classList;
             if(userAgent.match(/bot|spider/i)){
@@ -166,32 +165,24 @@
             }
             if(userAgent.match(/Mac OS/i)&&!userAgent.match(/iPhone|iPad/i)){
                 class_.add('ic_nr_system_brand_apple','ic_nr_system_macos');
-            }
-            else if(userAgent.match(/Windows/i)){
+            }else if(userAgent.match(/Windows/i)){
                 class_.add('ic_nr_system_brand_microsoft','ic_nr_system_windows');
-            }
-            else if(userAgent.match(/Linux/i)&&!userAgent.match(/Android/i)){
+            }else if(userAgent.match(/Linux/i)&&!userAgent.match(/Android/i)){
                 class_.add('ic_nr_system_linux');
-            }
-            else if(userAgent.match(/CrOS/i)){
+            }else if(userAgent.match(/CrOS/i)){
                 class_.add('ic_nr_system_brand_google','ic_nr_system_chromeos');
-            }
-            else if(userAgent.match(/iPhone|iPad/i)){
+            }else if(userAgent.match(/iPhone|iPad/i)){
                 class_.add('ic_nr_system_brand_apple','ic_nr_system_ios');
-            }
-            else if(userAgent.match(/Android/i)){
+            }else if(userAgent.match(/Android/i)){
                 class_.add('ic_nr_system_brand_google','ic_nr_system_android');
             }
             if(userAgent.match(/Firefox/i)&&!userAgent.match(/FxiOS/i)){
                 class_.add('ic_nr_browser_firefox');
-            }
-            else if((userAgent.match(/Safari/i)&&!userAgent.match(/Chrome|Edg/i))||userAgent.match(/iPhone|iPad/i)){
+            }else if((userAgent.match(/Safari/i)&&!userAgent.match(/Chrome|Edg/i))||userAgent.match(/iPhone|iPad/i)){
                 class_.add('ic_nr_browser_safari');
-            }
-            else if(userAgent.match(/Chrome/i)&&!userAgent.match(/CriOS|Edg/i)){
+            }else if(userAgent.match(/Chrome/i)&&!userAgent.match(/CriOS|Edg/i)){
                 class_.add('ic_nr_browser_chrome');
-            }
-            else if(userAgent.match(/Edg/i)&&!userAgent.match(/EdgiOS/i)){
+            }else if(userAgent.match(/Edg/i)&&!userAgent.match(/EdgiOS/i)){
                 class_.add('ic_nr_browser_edge');
             }
             if(userAgent.match(/iPhone|iPad|Android|Mobile/i)){
@@ -294,14 +285,14 @@
             });
         },
         /*🟢*/head(){
-            this.dataset.config.head_GUIInitial_js.insertAdjacentHTML('beforebegin','<meta name="viewport" content="width=device-width,user-scalable=no,viewport-fit=cover">');
-            this.dataset.config.head_GUIInitial_js.insertAdjacentHTML('beforebegin','<meta name="format-detection" content="address=no,email=no,telephone=no">');
+            this.dataset.config.GUIInitial_js.insertAdjacentHTML('beforebegin','<meta name="viewport" content="width=device-width,user-scalable=no,viewport-fit=cover">');
+            this.dataset.config.GUIInitial_js.insertAdjacentHTML('beforebegin','<meta name="format-detection" content="address=no,email=no,telephone=no">');
             if(this.dataset.config.head_title||this.dataset.config.head_title===''){
-                this.dataset.config.head_GUIInitial_js.insertAdjacentHTML('beforebegin',`<title>${this.dataset.config.head_title}</title>`);
+                this.dataset.config.GUIInitial_js.insertAdjacentHTML('beforebegin',`<title>${this.dataset.config.head_title}</title>`);
             }
-            this.dataset.config.head_GUIInitial_js.insertAdjacentHTML('beforebegin',`<link rel="stylesheet" href="${this.dataset.config.head_GUIInitial_css_href}" crossorigin>`);
+            this.dataset.config.GUIInitial_js.insertAdjacentHTML('beforebegin',`<link rel="stylesheet" href="${this.dataset.config.GUIInitial_js.getAttribute('src').replace(/\.js/i,'.css')}" crossorigin>`);
             if(this.dataset.config.head_style){
-                this.dataset.config.head_GUIInitial_js.insertAdjacentHTML('beforebegin',`<link rel="stylesheet" href="${this.dataset.config.head_style}" crossorigin>`);
+                this.dataset.config.GUIInitial_js.insertAdjacentHTML('beforebegin',`<link rel="stylesheet" href="${this.dataset.config.head_style}" crossorigin>`);
             }
             if(this.dataset.config.head_script){
                 const element=window.document.createElement('script');
