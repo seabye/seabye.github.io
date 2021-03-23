@@ -1,21 +1,21 @@
 'use strict';
 // #before
     // console
-    window.console.log('#### start: machine_tool_demo.js');
+    window.console.log('#### start: machineTool_demo.js');
 // #import
 // #variable
 // #block
 // #build
-export const machine_tool_demo=(machine_tool)=>{
-    machine_tool.run_object({
+export const machineTool_demo=(machineTool)=>{
+    machineTool.run_object({
         loop(){
-            machine_tool.loop(()=>{
+            machineTool.loop(()=>{
                 window.console.log('lloooopp');
                 return true;
             });
         },
         async async_loop(){
-            // window.console.log(await machine_tool.async_loop(
+            // window.console.log(await machineTool.async_loop(
             //     ()=>{
             //         return false;
             //     },
@@ -33,70 +33,70 @@ export const machine_tool_demo=(machine_tool)=>{
         },
         async time_out(){
             // window.console.log('time_out()');
-            // await machine_tool.time_out(()=>{
+            // await machineTool.time_out(()=>{
             //     window.console.log('time_out()','2000');
             // },2000);
         },
         for(){
             // let data=['A','B',['D','E'],'AA','BB',['DD','EE']];
-            // machine_tool.for(data,(count,key,value,depth,type)=>{
+            // machineTool.for(data,(count,key,value,depth,type)=>{
             //     window.console.log('all====',count,key,value,depth,type);
             // });
-            // machine_tool.for(data,(count,key,value,depth,type)=>{
+            // machineTool.for(data,(count,key,value,depth,type)=>{
             //     window.console.log('0====',count,key,value,depth,type);
             // },0);
-            // machine_tool.for(data,(count,key,value,depth,type)=>{
+            // machineTool.for(data,(count,key,value,depth,type)=>{
             //     window.console.log('1====',count,key,value,depth,type);
             // },1);
             // let data2={a:'A',b:'B',c:{d:'D',e:'E'},aa:'AA',bb:'BB',cc:{dd:'DD',ee:'EE'}};
-            // machine_tool.for(data2,(count,key,value,depth,type)=>{
+            // machineTool.for(data2,(count,key,value,depth,type)=>{
             //     window.console.log('all====',count,key,value,depth,type);
             // });
-            // machine_tool.for(data2,(count,key,value,depth,type)=>{
+            // machineTool.for(data2,(count,key,value,depth,type)=>{
             //     window.console.log('0====',count,key,value,depth,type);
             // },0);
-            // machine_tool.for(data2,(count,key,value,depth,type)=>{
+            // machineTool.for(data2,(count,key,value,depth,type)=>{
             //     window.console.log('1====',count,key,value,depth,type);
             // },1);
             let data3={a:'A',b:'B',c:['D','E'],aa:'AA',bb:'BB',cc:['DD','EE']};
-            machine_tool.for(data3,(count,key,value,depth,type)=>{
+            machineTool.for(data3,(count,key,value,depth,type)=>{
                 window.console.log('all====',count,key,value,depth,type);
             });
-            // machine_tool.for(data3,(count,key,value,depth,type)=>{
+            // machineTool.for(data3,(count,key,value,depth,type)=>{
             //     window.console.log('0====',count,key,value,depth,type);
             // },0);
-            // machine_tool.for(data3,(count,key,value,depth,type)=>{
+            // machineTool.for(data3,(count,key,value,depth,type)=>{
             //     window.console.log('1====',count,key,value,depth,type);
             // },1);
             // let data4=['A','B',{d:'D',e:'E'},'AA','BB',{dd:'DD',ee:'EE'}];
-            // machine_tool.for(data4,(count,key,value,depth,type)=>{
+            // machineTool.for(data4,(count,key,value,depth,type)=>{
             //     window.console.log('all====',count,key,value,depth,type);
             // });
-            // machine_tool.for(data4,(count,key,value,depth,type)=>{
+            // machineTool.for(data4,(count,key,value,depth,type)=>{
             //     window.console.log('0====',count,key,value,depth,type);
             // },0);
-            // machine_tool.for(data4,(count,key,value,depth,type)=>{
+            // machineTool.for(data4,(count,key,value,depth,type)=>{
             //     window.console.log('1====',count,key,value,depth,type);
             // },1);
             let data5={a:'A',b:'B',c:['D','E'],aa:'AA',bb:'BB',cc:['DD','EE']};
-            machine_tool.for(data5,(count,key,value,depth,type)=>{
+            machineTool.for(data5,(count,key,value,depth,type)=>{
                 window.console.log('all====',count,key,value,depth,type);
             },undefined,'');
         },
         uuid_36_to_uuid_22(){
-            window.console.log('uuid_36_to_uuid_22()',machine_tool.uuid_36_to_uuid_22('8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3'));
+            window.console.log('uuid_36_to_uuid_22()',machineTool.uuid_36_to_uuid_22('8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3'));
         },
         uuid_22_to_uuid_36(){
-            window.console.log('uuid_22_to_uuid_36()',machine_tool.uuid_22_to_uuid_36('jvZe6aA5S_Kks2h_zB88ww'));
+            window.console.log('uuid_22_to_uuid_36()',machineTool.uuid_22_to_uuid_36('jvZe6aA5S_Kks2h_zB88ww'));
         },
         string_to_base64_uri_safe_no_pad(){
-            window.console.log('string_to_base64_uri_safe_no_pad()',machine_tool.string_to_base64_uri_safe_no_pad('8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3'));
+            window.console.log('string_to_base64_uri_safe_no_pad()',machineTool.string_to_base64_uri_safe_no_pad('8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3'));
         },
         base64_uri_safe_no_pad_to_string(){
-            window.console.log('base64_uri_safe_no_pad_to_string()',machine_tool.base64_uri_safe_no_pad_to_string('jvZe6aA5S_Kks2h_zB88ww'));
+            window.console.log('base64_uri_safe_no_pad_to_string()',machineTool.base64_uri_safe_no_pad_to_string('jvZe6aA5S_Kks2h_zB88ww'));
         },
         element_create(){
-            machine_tool.element_create([
+            machineTool.element_create([
                 {
                     element:['span',{class:'one'},'?'],
                     function(els){
@@ -137,14 +137,14 @@ export const machine_tool_demo=(machine_tool)=>{
                     ]
                 ]
             ],window.document.body);
-            window.console.log(machine_tool.element_create({
+            window.console.log(machineTool.element_create({
                 '':{},
                 _:{},
                 ' _':{},
                 0:{},
                 1:{},
                 [`x xx`]:{},
-                [machine_tool.random()]:{},
+                [machineTool.random()]:{},
                 array:[
                     {
                         element:['',{class:'child'}],
@@ -162,7 +162,7 @@ export const machine_tool_demo=(machine_tool)=>{
                     }
                 ]
             },window.document.body));
-            window.console.log(machine_tool.element_create([
+            window.console.log(machineTool.element_create([
                 [
                     [
                         [
@@ -181,11 +181,11 @@ export const machine_tool_demo=(machine_tool)=>{
             ],window.document.body));
         },
         element_state(){
-            this.elements=machine_tool.element_create({
+            this.elements=machineTool.element_create({
                 target_mode:{
                     element:[,{style:'z-index: 1; position: fixed; left: 0; top: 0; width: 128px; height: 192px; background-color: gray; display: flex; justify-content: center; align-items: center; flex-direction: column;'}],
                     function(elements){
-                        machine_tool.element_state([
+                        machineTool.element_state([
                             'target',
                             [
                                 'open_state',
@@ -261,7 +261,7 @@ export const machine_tool_demo=(machine_tool)=>{
                 tab_mode:{
                     element:[,{style:'z-index: 1; position: fixed; left: 128px; top: 0; width: 128px; height: 192px; background-color: gray; display: flex; justify-content: center; align-items: center; flex-direction: column;'}],
                     function(elements){
-                        machine_tool.element_state([
+                        machineTool.element_state([
                             'tab',
                             [
                                 'open_state',
@@ -362,65 +362,65 @@ export const machine_tool_demo=(machine_tool)=>{
             },window.document.body);
         },
         listen_target(){
-            // machine_tool.listen_target('add',window.document.documentElement,'pointer_down',()=>{
+            // machineTool.listen_target('add',window.document.documentElement,'pointer_down',()=>{
             //     window.console.log('listen_target()','pointer_down');
             // });
-            // machine_tool.listen_target('add',window.document.documentElement,'pointer_move',()=>{
+            // machineTool.listen_target('add',window.document.documentElement,'pointer_move',()=>{
             //     window.console.log('listen_target()','pointer_move');
             // });
-            machine_tool.listen_target('add',window.document.documentElement,'pointerup',()=>{
+            machineTool.listen_target('add',window.document.documentElement,'pointerup',()=>{
                 window.console.log('listen_target()','pointerup');
             });
-            machine_tool.listen_target('add',window.document.documentElement,'pointer_up',()=>{
+            machineTool.listen_target('add',window.document.documentElement,'pointer_up',()=>{
                 window.console.log('listen_target()','pointer_up');
             },undefined,0);
-            machine_tool.listen_target('add',this.elements.target,'observe_mutation',()=>{
+            machineTool.listen_target('add',this.elements.target,'observe_mutation',()=>{
                 window.console.log('listen_target()','observe_mutation');
                 if(this.elements.target.classList.contains('open_state')){
-                    machine_tool.element_state(this.elements.target_mode,'open_state','_',true);
+                    machineTool.element_state(this.elements.target_mode,'open_state','_',true);
                 }else{
                     if(this.elements.target.classList.contains('_')){
-                        machine_tool.element_state(this.elements.target_mode,'_','open_state',true);
+                        machineTool.element_state(this.elements.target_mode,'_','open_state',true);
                     }
                 }
             },{attributes:true,attributeFilter:['class'],childList:false,subtree:false});
-            // machine_tool.listen_target('remove',this.elements.target,'observe_mutation',()=>{
+            // machineTool.listen_target('remove',this.elements.target,'observe_mutation',()=>{
             //     window.console.log('listen_target()','observe_mutation');
             //     if(this.elements.target.classList.contains('open_state')){
-            //         machine_tool.element_state(this.elements.target_mode,'open_state','close_state',true);
+            //         machineTool.element_state(this.elements.target_mode,'open_state','close_state',true);
             //     }else{
             //         if(this.elements.target.classList.contains('close_state')){
-            //             machine_tool.element_state(this.elements.target_mode,'close_state','open_state',true);
+            //             machineTool.element_state(this.elements.target_mode,'close_state','open_state',true);
             //         }
             //     }
             // },{attributes:true,attributeFilter:['class'],childList:false,subtree:false});
-                machine_tool.listen_target('add',this.elements.red_target,'observe_mutation',()=>{
+                machineTool.listen_target('add',this.elements.red_target,'observe_mutation',()=>{
                     window.console.log('listen_target()','observe_mutation');
                     if(this.elements.target.classList.contains('open_state')){
-                        machine_tool.element_state(this.elements.target_mode,'open_state','close_state',true);
+                        machineTool.element_state(this.elements.target_mode,'open_state','close_state',true);
                     }else{
                         if(this.elements.target.classList.contains('close_state')){
-                            machine_tool.element_state(this.elements.target_mode,'close_state','open_state',true);
+                            machineTool.element_state(this.elements.target_mode,'close_state','open_state',true);
                         }
                     }
                 },{attributes:true,attributeFilter:['class'],childList:false,subtree:false});
-                    machine_tool.listen_target('remove',this.elements.red_target,'observe_mutation',()=>{
+                    machineTool.listen_target('remove',this.elements.red_target,'observe_mutation',()=>{
                         window.console.log('listen_target()','observe_mutation');
                         if(this.elements.target.classList.contains('open_state')){
-                            machine_tool.element_state(this.elements.target_mode,'open_state','close_state',true);
+                            machineTool.element_state(this.elements.target_mode,'open_state','close_state',true);
                         }else{
                             if(this.elements.target.classList.contains('close_state')){
-                                machine_tool.element_state(this.elements.target_mode,'close_state','open_state',true);
+                                machineTool.element_state(this.elements.target_mode,'close_state','open_state',true);
                             }
                         }
                     },{attributes:true,attributeFilter:['class'],childList:false,subtree:false});
-            // machine_tool.listen_target('add',window.document.documentElement,'observe_intersection',(data)=>{
+            // machineTool.listen_target('add',window.document.documentElement,'observe_intersection',(data)=>{
             //     window.console.log('listen_target()','observe_intersection',data);
             // },{});
-            machine_tool.listen_target('add',window.document.documentElement,'observe_resize',(data)=>{
+            machineTool.listen_target('add',window.document.documentElement,'observe_resize',(data)=>{
                 window.console.log('listen_target()','observe_resize',data);
             });
-            machine_tool.listen_target('add',(data)=>{
+            machineTool.listen_target('add',(data)=>{
                 window.console.log('listen_target()','uri',data);
             },'uri');
             // window.history.pushState(null,null,'/x/');
@@ -428,13 +428,13 @@ export const machine_tool_demo=(machine_tool)=>{
             // window.history.replaceState(null,null,window.location.href);
         },
         element_block(){
-            const block=machine_tool.element_block(window.document.body,'block');
-            block.add(machine_tool.element_create('',{class:'b_1'}),1);
-            block.add(machine_tool.element_create('',{class:'b_2'}),2);
-            block.add(machine_tool.element_create('',{class:'b_3'}),3);
-            block.add(machine_tool.element_create('',{class:'b_4'}),4);
-            block.add(machine_tool.element_create('',{class:'b_5'}),5);
-            block.add(machine_tool.element_create('',{class:'b_6'}),6);
+            const block=machineTool.element_block(window.document.body,'block');
+            block.add(machineTool.element_create('',{class:'b_1'}),1);
+            block.add(machineTool.element_create('',{class:'b_2'}),2);
+            block.add(machineTool.element_create('',{class:'b_3'}),3);
+            block.add(machineTool.element_create('',{class:'b_4'}),4);
+            block.add(machineTool.element_create('',{class:'b_5'}),5);
+            block.add(machineTool.element_create('',{class:'b_6'}),6);
             block.hide();
             block.hide();
             block.remove();
@@ -445,4 +445,4 @@ export const machine_tool_demo=(machine_tool)=>{
 // #debug
 // #after
     // console
-    window.console.log('#### end: machine_tool_demo.js');
+    window.console.log('#### end: machineTool_demo.js');

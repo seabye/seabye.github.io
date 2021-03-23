@@ -2,7 +2,7 @@
 /* <<<< <<<< <<<< <<<< */
 /* GUI Initial */
 /* for Browser */
-/* gui_initial.css */
+/* guiInitial.css */
 /* ==== ==== ==== ==== */
 /*
     ic_ / initial css
@@ -25,7 +25,7 @@
 /* #variable */
     /* color */
         /* base */
-        html.ic_nr_media_prefers_color_scheme_light {
+        html.ic_nr_media_prefers_colorScheme_light {
             --ic_ve_color_white: #FFFFFF;
             --ic_ve_color_white_transparent: rgba(255,255,255,0);
             --ic_ve_color_gray: #808080;
@@ -77,19 +77,19 @@
             --ic_ve_color_blue_translucent: #0088FF99;
             --ic_ve_color_orange_translucent: #FF880099;
         }
-        html.ic_nr_media_prefers_color_scheme_light.ic_nr_media_orientation_landscape {
+        html.ic_nr_media_prefers_colorScheme_light.ic_nr_media_orientation_landscape {
             --ic_ve_color_background: #FFFFFF;
             --ic_ve_color_foreground: #EEEEEE;
             --ic_ve_color_highlight: #DDDDDD;
             --ic_ve_color_opposite: #CCCCCC;
         }
-        html.ic_nr_media_prefers_color_scheme_light.ic_nr_media_orientation_portrait {
+        html.ic_nr_media_prefers_colorScheme_light.ic_nr_media_orientation_portrait {
             --ic_ve_color_background: #EEEEEE;
             --ic_ve_color_foreground: #CCCCCC;
             --ic_ve_color_highlight: #FFFFFF;
             --ic_ve_color_opposite: #DDDDDD;
         }
-        html.ic_nr_media_prefers_color_scheme_dark {
+        html.ic_nr_media_prefers_colorScheme_dark {
             --ic_ve_color_white: #000000;
             --ic_ve_color_white_transparent: rgba(0,0,0,0);
             --ic_ve_color_gray: #808080;
@@ -158,7 +158,7 @@
                 --ic_ve_color_system_orange_translucent: var(--ic_ve_color_orange_translucent);
             }
             /* apple */
-            html.ic_nr_system_brand_apple.ic_nr_media_prefers_color_scheme_light {
+            html.ic_nr_system_brand_apple.ic_nr_media_prefers_colorScheme_light {
                 --ic_ve_color_system_red: #FF3B30;
                 --ic_ve_color_system_green: #28CD41;
                 --ic_ve_color_system_blue: #007AFF;
@@ -168,7 +168,7 @@
                 --ic_ve_color_system_blue_translucent: #007AFF99;
                 --ic_ve_color_system_orange_translucent: #FF950099;
             }
-            html.ic_nr_system_brand_apple.ic_nr_media_prefers_color_scheme_dark {
+            html.ic_nr_system_brand_apple.ic_nr_media_prefers_colorScheme_dark {
                 --ic_ve_color_system_red: #FF453A;
                 --ic_ve_color_system_green: #32D74B;
                 --ic_ve_color_system_blue: #0A84FF;
@@ -366,28 +366,27 @@
             pointer-events: none;
         }
     /* scroll */
-    html:not(.ic_nr_system_ios):not(.ic_nr_system_android) ::-webkit-scrollbar {
+    html:not(.ic_nr_platform_mobile) ::-webkit-scrollbar {
         width: 8px;
         height: 8px;
     }
-    html.ic_nr_system_ios ::-webkit-scrollbar,
-    html.ic_nr_system_android ::-webkit-scrollbar {
+    html.ic_nr_platform_mobile ::-webkit-scrollbar {
         width: 0;
         height: 0;
     }
-    html:not(.ic_nr_system_ios):not(.ic_nr_system_android) ::-webkit-scrollbar-corner {
+    html:not(.ic_nr_platform_mobile) ::-webkit-scrollbar-corner {
         background-color: rgba(0,0,0,0);
     }
-    html:not(.ic_nr_system_ios):not(.ic_nr_system_android) ::-webkit-scrollbar-thumb {
+    html:not(.ic_nr_platform_mobile) ::-webkit-scrollbar-thumb {
         border: 3px solid rgba(0,0,0,0);
         border-radius: 8px;
         background-color: var(--ic_ve_color_black2_opacity);
         background-clip: padding-box;
     }
-    html:not(.ic_nr_system_ios):not(.ic_nr_system_android) ::-webkit-scrollbar-thumb:active {
+    html:not(.ic_nr_platform_mobile) ::-webkit-scrollbar-thumb:active {
         background-color: var(--ic_ve_color_black4_opacity);
     }
-    html:not(.ic_nr_system_ios):not(.ic_nr_system_android) ::-webkit-scrollbar-button:single-button {
+    html:not(.ic_nr_platform_mobile) ::-webkit-scrollbar-button:single-button {
         height: 8px;
         width: 8px;
         border: 3px solid rgba(0,0,0,0);
@@ -395,7 +394,7 @@
         background-color: var(--ic_ve_color_black2_opacity);
         background-clip: padding-box;
     }
-    html:not(.ic_nr_system_ios):not(.ic_nr_system_android) ::-webkit-scrollbar-button:single-button:active {
+    html:not(.ic_nr_platform_mobile) ::-webkit-scrollbar-button:single-button:active {
         background-color: var(--ic_ve_color_black4_opacity);
     }
 /* #debug */

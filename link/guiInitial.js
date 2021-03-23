@@ -2,20 +2,20 @@
 // <<<< <<<< <<<< <<<<
 // GUI Initial
 // for Browser
-// gui_initial.js
+// guiInitial.js
 // ==== ==== ==== ====
 // index.html
-// <script src="gui_initial.js" type="application/javascript" data-gui_initial="{
-//     'start_background_color_light': '</""/=#FFFFFF>',
-//     'start_background_color_dark': '</""/=#000000>',
-//     'service_worker': 'sw.js',
+// <script src="guiInitial.js" type="application/javascript" data-guiInitial="{
+//     'startBackgroundColor_light': '</""/=#FFFFFF>',
+//     'startBackgroundColor_dark': '</""/=#000000>',
+//     'serviceWorker': 'sw.js',
 //     'head_title': '</""/="">',
 //     'head_style': 'style.css',
 //     'head_script': 'script.js',
 //     'head_icon': 'icon.png',
 //     'head_icon_apple': 'icon-apple.png',
-//     'head_theme_color_light': '</""/=#FFFFFF>',
-//     'head_theme_color_dark': '</""/=#000000>',
+//     'head_themeColor_light': '</""/=#FFFFFF>',
+//     'head_themeColor_dark': '</""/=#000000>',
 //     'head_manifest': 'manifest.webmanifest'
 // }"></script>
 // ~~~~ ~~~~ ~~~~ ~~~~
@@ -88,26 +88,26 @@
 {
 // #before
     // console
-    window.console.log('#### start: gui_initial.js');
+    window.console.log('#### start: guiInitial.js');
 // #import
 // #variable
 // #block
 // #build
-    // gui_initial
-    const gui_initial={
+    // guiInitial
+    const guiInitial={
         /*🟢*/dataset(){
             for(const value of window.document.scripts){
-                if(value.dataset.gui_initial){
-                    this.dataset.config=window.JSON.parse(value.dataset.gui_initial.replace(/'/g,'"'));
-                    value.removeAttribute('data-gui_initial');
-                    this.dataset.config.head_gui_initial_js=value;
-                    this.dataset.config.head_gui_initial_css_href=value.getAttribute('src').replace(/\.js/i,'.css');
+                if(value.dataset.guiInitial){
+                    this.dataset.config=window.JSON.parse(value.dataset.guiInitial.replace(/'/g,'"'));
+                    value.removeAttribute('data-guiInitial');
+                    this.dataset.config.head_guiInitial_js=value;
+                    this.dataset.config.head_guiInitial_css_href=value.getAttribute('src').replace(/\.js/i,'.css');
                     break;
                 }
             }
         },
-        /*🟢*/start$background$color(){
-            window.document.documentElement.style.setProperty('background-color',`${window.matchMedia('(prefers-color-scheme:dark)').matches?this.dataset.config.start_background_color_dark?this.dataset.config.start_background_color_dark:'#000000':this.dataset.config.start_background_color_light?this.dataset.config.start_background_color_light:'#FFFFFF'}`);
+        /*🟢*/start_backgroundColor(){
+            window.document.documentElement.style.setProperty('background-color',`${window.matchMedia('(prefers-color-scheme:dark)').matches?this.dataset.config.startBackgroundColor_dark?this.dataset.config.startBackgroundColor_dark:'#000000':this.dataset.config.startBackgroundColor_light?this.dataset.config.startBackgroundColor_light:'#FFFFFF'}`);
             window.addEventListener('load',()=>{
                 const loop=()=>{
                     if(window.document.documentElement.style.getPropertyValue('background-color')){
@@ -126,7 +126,7 @@
                 loop();
             },{once:true});
         },
-        /*🟢*/start$opacity(){
+        /*🟢*/start_opacity(){
             const loop=()=>{
                 if(window.document.body){
                     window.document.body.style.setProperty('opacity','0');
@@ -153,50 +153,49 @@
                 loop();
             },{once:true});
         },
-        /*🟢*/write$service$worker(){
-            if(this.dataset.config.service_worker&&'serviceWorker'in window.navigator){
-                window.navigator.serviceWorker.register(this.dataset.config.service_worker,{scope:'./'}).then((registration)=>{
-                    window.console.log('==== Registration successful, scope is:',registration.scope);
-                }).catch((error)=>{
-                    window.console.log('==== Service worker registration failed, error:',error);
-                });
+        /*🟢*/serviceWorker(){
+            if(this.dataset.config.serviceWorker&&'serviceWorker'in window.navigator){
+                window.navigator.serviceWorker.register(this.dataset.config.serviceWorker,{scope:'./'});
             }
         },
-        /*🟢*/$navigator$environment(){
-            const user_agent=window.navigator.userAgent;
+        /*🟢*/navigator_base(){
+            const userAgent=window.navigator.userAgent;
             const class_=window.document.documentElement.classList;
-            if(user_agent.match(/bot|spider/i)){
-                class_.add('ic_nr_bot');
+            if(userAgent.match(/bot|spider/i)){
+                class_.add('ic_nr_user_bot');
             }
-            if(user_agent.match(/Mac OS/i)&&!user_agent.match(/iPhone|iPad/i)){
+            if(userAgent.match(/Mac OS/i)&&!userAgent.match(/iPhone|iPad/i)){
                 class_.add('ic_nr_system_brand_apple','ic_nr_system_macos');
             }
-            else if(user_agent.match(/Windows/i)){
+            else if(userAgent.match(/Windows/i)){
                 class_.add('ic_nr_system_brand_microsoft','ic_nr_system_windows');
             }
-            else if(user_agent.match(/Linux/i)&&!user_agent.match(/Android/i)){
+            else if(userAgent.match(/Linux/i)&&!userAgent.match(/Android/i)){
                 class_.add('ic_nr_system_linux');
             }
-            else if(user_agent.match(/CrOS/i)){
+            else if(userAgent.match(/CrOS/i)){
                 class_.add('ic_nr_system_brand_google','ic_nr_system_chromeos');
             }
-            else if(user_agent.match(/iPhone|iPad/i)){
+            else if(userAgent.match(/iPhone|iPad/i)){
                 class_.add('ic_nr_system_brand_apple','ic_nr_system_ios');
             }
-            else if(user_agent.match(/Android/i)){
+            else if(userAgent.match(/Android/i)){
                 class_.add('ic_nr_system_brand_google','ic_nr_system_android');
             }
-            if(user_agent.match(/Firefox/i)&&!user_agent.match(/FxiOS/i)){
+            if(userAgent.match(/Firefox/i)&&!userAgent.match(/FxiOS/i)){
                 class_.add('ic_nr_browser_firefox');
             }
-            else if((user_agent.match(/Safari/i)&&!user_agent.match(/Chrome|Edg/i))||user_agent.match(/FxiOS|CriOS|EdgiOS/i)){
+            else if((userAgent.match(/Safari/i)&&!userAgent.match(/Chrome|Edg/i))||userAgent.match(/iPhone|iPad/i)){
                 class_.add('ic_nr_browser_safari');
             }
-            else if(user_agent.match(/Chrome/i)&&!user_agent.match(/CriOS|Edg/i)){
+            else if(userAgent.match(/Chrome/i)&&!userAgent.match(/CriOS|Edg/i)){
                 class_.add('ic_nr_browser_chrome');
             }
-            else if(user_agent.match(/Edg/i)&&!user_agent.match(/EdgiOS/i)){
+            else if(userAgent.match(/Edg/i)&&!userAgent.match(/EdgiOS/i)){
                 class_.add('ic_nr_browser_edge');
+            }
+            if(userAgent.match(/iPhone|iPad|Android|Mobile/i)){
+                class_.add('ic_nr_platform_mobile');
             }
             if(window.location.search.replace(/\?/,'').split('&').includes('pwa')){
                 class_.add('ic_nr_pwa');
@@ -205,48 +204,48 @@
                 class_.add('ic_nr_video_m3u8');
             }
         },
-        /*🟢*/$navigator$media(){
-            const set_media_prefers_color_scheme=(matches)=>{
+        /*🟢*/navigator_media(){
+            const set_media_prefers_colorScheme=(matches)=>{
                 if(matches){
-                    window.document.documentElement.classList.remove('ic_nr_media_prefers_color_scheme_light');
-                    window.document.documentElement.classList.add('ic_nr_media_prefers_color_scheme_dark');
+                    window.document.documentElement.classList.remove('ic_nr_media_prefers_colorScheme_light');
+                    window.document.documentElement.classList.add('ic_nr_media_prefers_colorScheme_dark');
                 }else{
-                    window.document.documentElement.classList.remove('ic_nr_media_prefers_color_scheme_dark');
-                    window.document.documentElement.classList.add('ic_nr_media_prefers_color_scheme_light');
+                    window.document.documentElement.classList.remove('ic_nr_media_prefers_colorScheme_dark');
+                    window.document.documentElement.classList.add('ic_nr_media_prefers_colorScheme_light');
                 }
             };
-            set_media_prefers_color_scheme(window.matchMedia('(prefers-color-scheme:dark)').matches);
+            set_media_prefers_colorScheme(window.matchMedia('(prefers-color-scheme:dark)').matches);
             window.matchMedia('(prefers-color-scheme:dark)').addEventListener('change',(event)=>{
-                set_media_prefers_color_scheme(event.matches);
+                set_media_prefers_colorScheme(event.matches);
             });
-            const set_media_prefers_reduced_motion=(matches)=>{
+            const set_media_prefers_reducedMotion=(matches)=>{
                 if(matches){
-                    window.document.documentElement.classList.remove('ic_nr_media_prefers_reduced_motion_false');
-                    window.document.documentElement.classList.add('ic_nr_media_prefers_reduced_motion_true');
+                    window.document.documentElement.classList.remove('ic_nr_media_prefers_reducedMotion_false');
+                    window.document.documentElement.classList.add('ic_nr_media_prefers_reducedMotion_true');
                 }else{
-                    window.document.documentElement.classList.remove('ic_nr_media_prefers_reduced_motion_true');
-                    window.document.documentElement.classList.add('ic_nr_media_prefers_reduced_motion_false');
+                    window.document.documentElement.classList.remove('ic_nr_media_prefers_reducedMotion_true');
+                    window.document.documentElement.classList.add('ic_nr_media_prefers_reducedMotion_false');
                 }
             };
-            set_media_prefers_reduced_motion(window.matchMedia('(prefers-reduced-motion:reduce)').matches);
+            set_media_prefers_reducedMotion(window.matchMedia('(prefers-reduced-motion:reduce)').matches);
             window.matchMedia('(prefers-reduced-motion:reduce)').addEventListener('change',(event)=>{
-                set_media_prefers_reduced_motion(event.matches);
+                set_media_prefers_reducedMotion(event.matches);
             });
-            const set_media_prefers_reduced_data=(matches)=>{
+            const set_media_prefers_reducedData=(matches)=>{
                 if(matches){
-                    window.document.documentElement.classList.remove('ic_nr_media_prefers_reduced_data_false');
-                    window.document.documentElement.classList.add('ic_nr_media_prefers_reduced_data_true');
+                    window.document.documentElement.classList.remove('ic_nr_media_prefers_reducedData_false');
+                    window.document.documentElement.classList.add('ic_nr_media_prefers_reducedData_true');
                 }else{
-                    window.document.documentElement.classList.remove('ic_nr_media_prefers_reduced_data_true');
-                    window.document.documentElement.classList.add('ic_nr_media_prefers_reduced_data_false');
+                    window.document.documentElement.classList.remove('ic_nr_media_prefers_reducedData_true');
+                    window.document.documentElement.classList.add('ic_nr_media_prefers_reducedData_false');
                 }
             };
-            set_media_prefers_reduced_data(window.matchMedia('(prefers-reduced-data:reduce)').matches);
+            set_media_prefers_reducedData(window.matchMedia('(prefers-reduced-data:reduce)').matches);
             window.matchMedia('(prefers-reduced-data:reduce)').addEventListener('change',(event)=>{
-                set_media_prefers_reduced_data(event.matches);
+                set_media_prefers_reducedData(event.matches);
             });
             const set_media_orientation=(matches)=>{
-                if(window.document.documentElement.classList.value.match(/ic_nr_system_ios|ic_nr_browser_safari/i)&&window.document.documentElement.classList.value.match(/ic_nr_media_orientation_landscape|ic_nr_media_orientation_portrait/i)){
+                if(window.document.documentElement.classList.contains('ic_nr_browser_safari')&&window.document.documentElement.classList.value.match(/ic_nr_media_orientation_landscape|ic_nr_media_orientation_portrait/i)){
                     window.setTimeout(()=>{
                         window.document.body.style.setProperty('margin','1px');
                         window.setTimeout(()=>{
@@ -280,29 +279,29 @@
             window.matchMedia('(orientation:portrait)').addEventListener('change',(event)=>{
                 set_media_orientation(event.matches);
             });
-            const set_media_display_mode=(matches)=>{
+            const set_media_displayMode=(matches)=>{
                 if(matches){
-                    window.document.documentElement.classList.remove('ic_nr_media_display_mode_fullscreen_false');
-                    window.document.documentElement.classList.add('ic_nr_media_display_mode_fullscreen_true');
+                    window.document.documentElement.classList.remove('ic_nr_media_displayMode_window');
+                    window.document.documentElement.classList.add('ic_nr_media_displayMode_fullscreen');
                 }else{
-                    window.document.documentElement.classList.remove('ic_nr_media_display_mode_fullscreen_true');
-                    window.document.documentElement.classList.add('ic_nr_media_display_mode_fullscreen_false');
+                    window.document.documentElement.classList.remove('ic_nr_media_displayMode_fullscreen');
+                    window.document.documentElement.classList.add('ic_nr_media_displayMode_window');
                 }
             };
-            set_media_display_mode(window.matchMedia('(display-mode:fullscreen)').matches);
+            set_media_displayMode(window.matchMedia('(display-mode:fullscreen)').matches);
             window.matchMedia('(display-mode:fullscreen)').addEventListener('change',(event)=>{
-                set_media_display_mode(event.matches);
+                set_media_displayMode(event.matches);
             });
         },
-        /*🟢*/write$head(){
-            this.dataset.config.head_gui_initial_js.insertAdjacentHTML('beforebegin','<meta name="viewport" content="width=device-width,user-scalable=no,viewport-fit=cover">');
-            this.dataset.config.head_gui_initial_js.insertAdjacentHTML('beforebegin','<meta name="format-detection" content="address=no,email=no,telephone=no">');
+        /*🟢*/head(){
+            this.dataset.config.head_guiInitial_js.insertAdjacentHTML('beforebegin','<meta name="viewport" content="width=device-width,user-scalable=no,viewport-fit=cover">');
+            this.dataset.config.head_guiInitial_js.insertAdjacentHTML('beforebegin','<meta name="format-detection" content="address=no,email=no,telephone=no">');
             if(this.dataset.config.head_title||this.dataset.config.head_title===''){
-                this.dataset.config.head_gui_initial_js.insertAdjacentHTML('beforebegin',`<title>${this.dataset.config.head_title}</title>`);
+                this.dataset.config.head_guiInitial_js.insertAdjacentHTML('beforebegin',`<title>${this.dataset.config.head_title}</title>`);
             }
-            this.dataset.config.head_gui_initial_js.insertAdjacentHTML('beforebegin',`<link rel="stylesheet" href="${this.dataset.config.head_gui_initial_css_href}" crossorigin>`);
+            this.dataset.config.head_guiInitial_js.insertAdjacentHTML('beforebegin',`<link rel="stylesheet" href="${this.dataset.config.head_guiInitial_css_href}" crossorigin>`);
             if(this.dataset.config.head_style){
-                this.dataset.config.head_gui_initial_js.insertAdjacentHTML('beforebegin',`<link rel="stylesheet" href="${this.dataset.config.head_style}" crossorigin>`);
+                this.dataset.config.head_guiInitial_js.insertAdjacentHTML('beforebegin',`<link rel="stylesheet" href="${this.dataset.config.head_style}" crossorigin>`);
             }
             if(this.dataset.config.head_script){
                 const element=window.document.createElement('script');
@@ -313,7 +312,7 @@
             if(this.dataset.config.head_icon){
                 window.document.head.insertAdjacentHTML('beforeend',`<link rel="icon" type="image/png" href="${this.dataset.config.head_icon}">`);
             }
-            if(window.document.documentElement.classList.value.match(/ic_nr_system_ios|ic_nr_browser_safari/i)){
+            if(window.document.documentElement.classList.contains('ic_nr_browser_safari')){
                 if(this.dataset.config.head_icon_apple){
                     window.document.head.insertAdjacentHTML('beforeend',`<link rel="apple-touch-icon" href="${this.dataset.config.head_icon_apple}">`);
                 }
@@ -323,27 +322,27 @@
                     window.document.head.insertAdjacentHTML('beforeend',`<meta name="apple-mobile-web-app-title" content="${this.dataset.config.head_title}">`);
                 }
             }else{
-                const get_media_prefers_color_scheme=(matches)=>{
-                    return matches?this.dataset.config.head_theme_color_dark?this.dataset.config.head_theme_color_dark:'#000000':this.dataset.config.head_theme_color_light?this.dataset.config.head_theme_color_light:'#FFFFFF';
+                const get_media_prefers_colorScheme=(matches)=>{
+                    return matches?this.dataset.config.head_themeColor_dark?this.dataset.config.head_themeColor_dark:'#000000':this.dataset.config.head_themeColor_light?this.dataset.config.head_themeColor_light:'#FFFFFF';
                 };
                 const element=window.document.createElement('meta');
                 element.setAttribute('name','theme-color');
-                element.setAttribute('content',get_media_prefers_color_scheme(window.matchMedia('(prefers-color-scheme:dark)').matches));
-                const theme_color=window.document.head.insertAdjacentElement('beforeend',element);
+                element.setAttribute('content',get_media_prefers_colorScheme(window.matchMedia('(prefers-color-scheme:dark)').matches));
+                const themeColor=window.document.head.insertAdjacentElement('beforeend',element);
                 window.matchMedia('(prefers-color-scheme:dark)').addEventListener('change',(event)=>{
-                    theme_color.setAttribute('content',get_media_prefers_color_scheme(event.matches));
+                    themeColor.setAttribute('content',get_media_prefers_colorScheme(event.matches));
                 });
             }
             if(this.dataset.config.head_manifest){
                 window.document.head.insertAdjacentHTML('beforeend',`<link rel="manifest" href="${this.dataset.config.head_manifest}">`);
             }
         },
-        /*🟢*/no$context$menu(){
+        /*🟢*/no_contextMenu(){
             window.addEventListener('contextmenu',(event)=>{
                 event.preventDefault();
             });
         },
-        /*🟢*/no$double$click$zoom(){
+        /*🟢*/no_zoom_doubleClick(){
             window.addEventListener('touchstart',(event)=>{
                 if(event.touches.length>1){
                     event.preventDefault();
@@ -357,7 +356,7 @@
                 end=window.Date.now();
             });
         },
-        /*🟢*/no$two$finger$zoom(){
+        /*🟢*/no_zoom_twoFinger(){
             window.addEventListener('wheel',(event)=>{
                 if(event.ctrlKey){
                     event.preventDefault();
@@ -367,17 +366,17 @@
                 event.preventDefault();
             });
         },
-        /*🟢*/no$drag(){
+        /*🟢*/no_drag(){
             window.addEventListener('dragstart',(event)=>{
                 if(event.target.localName.match(/a|img/i)){
                     event.preventDefault();
                 }
             });
         },
-        /*🔴*/no$back(){},
-        /*🔴*/no$touch$back(){},
-        /*🟢*/form$focus(){
-            if(window.document.documentElement.classList.value.match(/ic_nr_system_ios|ic_nr_system_android/i)){
+        /*🔴*/no_back_button(){},
+        /*🔴*/no_back_touch(){},
+        /*🟢*/form_focus(){
+            if(window.document.documentElement.classList.contains('ic_nr_platform_mobile')){
                 window.addEventListener('keydown',(event)=>{
                     if(event.key==='Enter'&&event.target.localName==='input'){
                         event.target.blur();
@@ -385,7 +384,7 @@
                 });
             }
         },
-        /*🟢*/partial$scroll(){
+        /*🟢*/partialScroll(){
             if(!window.CSS.supports('overscroll-behavior:contain')){
                 const preventDefault=(event)=>{
                     event.preventDefault();
@@ -393,7 +392,7 @@
                 window.addEventListener('touchmove',preventDefault,{passive:false});
                 let start_y=null;
                 let start_x=null;
-                let scroll_direction=null;
+                let scrollDirection=null;
                 window.addEventListener('touchstart',(event)=>{
                     const loop=(target)=>{
                         if(window.getComputedStyle(target).overflowY.match(/auto|scroll/i)||window.getComputedStyle(target).overflowX.match(/auto|scroll/i)){
@@ -401,11 +400,11 @@
                                 if(target.scrollHeight!==target.offsetHeight){
                                     if(target.scrollTop<=0){
                                         start_y=event.changedTouches[0].screenY;
-                                        scroll_direction='top';
+                                        scrollDirection='top';
                                     }else{
                                         if(target.scrollTop>=target.scrollHeight-target.offsetHeight){
                                             start_y=event.changedTouches[0].screenY;
-                                            scroll_direction='bottom';
+                                            scrollDirection='bottom';
                                         }else{
                                             window.removeEventListener('touchmove',preventDefault);
                                         }
@@ -415,7 +414,7 @@
                                 if(target.scrollWidth!==target.offsetWidth){
                                     start_y=event.changedTouches[0].screenY;
                                     start_x=event.changedTouches[0].screenX;
-                                    scroll_direction='horizontal';
+                                    scrollDirection='horizontal';
                                 }
                             }
                         }else{
@@ -429,13 +428,13 @@
                     loop(event.target);
                 });
                 window.addEventListener('touchmove',(event)=>{
-                    if(scroll_direction){
-                        switch(scroll_direction){
+                    if(scrollDirection){
+                        switch(scrollDirection){
                             case'top':
                                 {
                                     if(event.changedTouches[0].screenY<start_y){
                                         window.removeEventListener('touchmove',preventDefault);
-                                        scroll_direction=null;
+                                        scrollDirection=null;
                                     }
                                 }
                                 break;
@@ -443,7 +442,7 @@
                                 {
                                     if(event.changedTouches[0].screenY>start_y){
                                         window.removeEventListener('touchmove',preventDefault);
-                                        scroll_direction=null;
+                                        scrollDirection=null;
                                     }
                                 }
                                 break;
@@ -452,7 +451,7 @@
                                     const move_y=event.changedTouches[0].screenY;
                                     if((move_y<=start_y+3&&move_y>=start_y-3)&&event.changedTouches[0].screenX!==start_x){
                                         window.removeEventListener('touchmove',preventDefault);
-                                        scroll_direction=null;
+                                        scrollDirection=null;
                                     }
                                 }
                                 break;
@@ -464,11 +463,11 @@
                 window.addEventListener('touchend',()=>{
                     window.removeEventListener('touchmove',preventDefault);
                     window.addEventListener('touchmove',preventDefault,{passive:false});
-                    start_y=start_x=scroll_direction=null;
+                    start_y=start_x=scrollDirection=null;
                 });
             }
         },
-        /*🟢*/dot$active(){
+        /*🟢*/dotActive(){
             window.addEventListener('pointerdown',(event)=>{
                 event.target.classList.add('ic_active',`ic_active_${event.button}`,`ic_active_${event.pointerType}`);
                 if(event.pointerType==='mouse'){
@@ -518,11 +517,11 @@
             });
         }
     };
-    for(const key in gui_initial){
-        gui_initial[key]();
+    for(const key in guiInitial){
+        guiInitial[key]();
     }
 // #debug
 // #after
     // console
-    window.console.log('#### end: gui_initial.js');
+    window.console.log('#### end: guiInitial.js');
 }
