@@ -1607,7 +1607,7 @@
                 return window.open(URI,name,`width=${width},height=${height},left=${left},top=${top}`);
             },
             /*🟢*/debug(callback){
-                if(window.document&&(window.document.documentElement.classList.contains('debug')||window.location.hostname==='localhost')){
+                if(window.document&&window.document.documentElement.classList.contains('debug')){
                     callback();
                 }
             },
