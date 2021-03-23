@@ -1571,7 +1571,7 @@
                         element.webkitEnterFullScreen();
                     }
                 }else{
-                    if(root.document.fullscreenElement||root.document.webkitIsFullScreen){
+                    if(root.document.fullscreenElement||root.document.webkitCurrentFullScreenElement){
                         if('exitFullscreen'in root.document){
                             root.document.exitFullscreen();
                         }else{
