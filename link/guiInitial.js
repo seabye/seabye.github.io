@@ -5,7 +5,7 @@
 // guiInitial.js
 // ==== ==== ==== ====
 // index.html
-// <script src="guiInitial.js" type="application/javascript" data-guiInitial="{
+// <script src="guiInitial.js" type="application/javascript" data-gui_initial="{
 //     'startBackgroundColor_light': '</""/=#FFFFFF>',
 //     'startBackgroundColor_dark': '</""/=#000000>',
 //     'serviceWorker': 'sw.js',
@@ -97,9 +97,9 @@
     const guiInitial={
         /*🟢*/dataset(){
             for(const value of window.document.scripts){
-                if(value.dataset.guiInitial){
-                    this.dataset.config=window.JSON.parse(value.dataset.guiInitial.replace(/'/g,'"'));
-                    value.removeAttribute('data-guiInitial');
+                if(value.dataset.gui_initial){
+                    this.dataset.config=window.JSON.parse(value.dataset.gui_initial.replace(/'/g,'"'));
+                    value.removeAttribute('data-gui_initial');
                     this.dataset.config.head_guiInitial_js=value;
                     this.dataset.config.head_guiInitial_css_href=value.getAttribute('src').replace(/\.js/i,'.css');
                     break;
