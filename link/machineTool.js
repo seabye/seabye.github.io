@@ -1607,8 +1607,10 @@
                 return window.open(URI,name,`width=${width},height=${height},left=${left},top=${top}`);
             },
             /*🟢*/debug(callback){
-                if(window.document&&window.document.documentElement.classList.contains('debug')){
-                    callback();
+                if(window.document){
+                    if(window.document.documentElement.classList.contains('debug')||window.location.hostname==='localhost'){
+                        callback();
+                    }
                 }
             },
             /*🔴*/startLoad(type,callback){
@@ -1774,7 +1776,7 @@
     if(window.document){
         let over=false;
         const run=()=>{
-            if(!over&&window.document.documentElement.classList.contains('debug')){
+            if(!over){
                 machineTool.debug(()=>{
                     // window.machineTool
                     window.machineTool=machineTool;
