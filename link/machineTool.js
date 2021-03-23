@@ -1607,10 +1607,8 @@
                 return window.open(URI,name,`width=${width},height=${height},left=${left},top=${top}`);
             },
             /*🟢*/debug(callback){
-                if(window.document){
-                    if(window.document.documentElement.classList.contains('debug')||window.location.hostname==='localhost'){
-                        callback();
-                    }
+                if(window.document&&(window.document.documentElement.classList.contains('debug')||window.location.hostname==='localhost')){
+                    callback();
                 }
             },
             /*🔴*/startLoad(type,callback){
@@ -1772,25 +1770,6 @@
     };
 // #build
 // #debug
-    // debug
-    if(window.document){
-        let over=false;
-        const run=()=>{
-            if(!over){
-                machineTool.debug(()=>{
-                    // window.machineTool
-                    window.machineTool=machineTool;
-                    // machineTool_test
-                    machineTool.import('./machineTool_test.js',(data)=>{
-                        data.machineTool_test(machineTool);
-                    });
-                });
-                over=true;
-                machineTool.listenTarget('remove',window.document.documentElement,'observe_mutation',run);
-            }
-        };
-        machineTool.listenTarget('add',window.document.documentElement,'observe_mutation',run,{attributes:true,attributeFilter:['class'],childList:false,subtree:false});
-    }
 // #after
     // console
     window.console.log('#### end: machineTool.js');
