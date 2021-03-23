@@ -12,15 +12,4 @@
         text-shadow: 0 0 20px var(--ic_ve_color_black);
     }
 /* #debug */
-    /* uncategorized */
-    div.open_state,
-    div.open_state.target_mode {
-        outline: 2px solid red !important;
-        outline-offset: -6px !important;
-    }
-    div.close_state,
-    div.close_state.target_mode {
-        outline: 2px solid blue !important;
-        outline-offset: -6px !important;
-    }
 /* #after */

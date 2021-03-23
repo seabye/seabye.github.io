@@ -64,7 +64,7 @@
                     return result;
                 }
             },
-            /*🟢*/async_loop(condition,callback,wait=1000/24,count,count_callback){
+            /*🟢*/asyncLoop(condition,callback,wait=1000/24,count,count_callback){
                 return(async()=>{
                     const run=async()=>{
                         const condition_result=await condition();
@@ -77,7 +77,7 @@
                         }else{
                             return new window.Promise((resolve)=>{
                                 window.setTimeout(()=>{
-                                    resolve(this.async_loop(condition,callback,wait,count,count_callback));
+                                    resolve(this.asyncLoop(condition,callback,wait,count,count_callback));
                                 },wait);
                             });
                         }
@@ -96,7 +96,7 @@
                     }
                 })();
             },
-            /*🟢*/time_out(callback,wait=1000/24){
+            /*🟢*/timeOut(callback,wait=1000/24){
                 return new window.Promise((resolve)=>{
                     window.setTimeout(()=>{
                         if(typeof callback==='function'){
@@ -107,7 +107,7 @@
                     },wait);
                 });
             },
-            /*🟡*/observe_function(origin_function,event_type,event_option={},who_listen,data_plus=()=>{}){
+            /*🟡*/observeFunction(origin_function,event_type,event_option={},who_listen,data_plus=()=>{}){
                 const insert_event=new window.CustomEvent(event_type,event_option);
                 return function(...arg){
                     insert_event.function_arg=arg;
@@ -247,8 +247,8 @@
                     window.console.log('==== import catch:',data);
                 });
             },
-            /*🔴*/web_assembly(){},
-            /*🟢*/uuid_36_to_uuid_22(uuid_36){
+            /*🔴*/webAssembly(){},
+            /*🟢*/UUID36ToUUID22(uuid_36){
                 if(uuid_36.length===36){
                     const uuid_32='0'+uuid_36.replace(/-/g,'');
                     if(uuid_32.length===33){
@@ -263,7 +263,7 @@
                     }
                 }
             },
-            /*🟢*/uuid_22_to_uuid_36(uuid_22){
+            /*🟢*/UUID22ToUUID36(uuid_22){
                 if(uuid_22.length===22){
                     const get_char_index=()=>{
                         const char='0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_-';
@@ -286,9 +286,9 @@
                     return`${result.substr(0,8)}-${result.substr(8,4)}-${result.substr(12,4)}-${result.substr(16,4)}-${result.substr(20)}`;
                 }
             },
-            /*🔴*/string_to_base64_uri_safe_no_pad(){},
-            /*🔴*/base64_uri_safe_no_pad_to_string(){},
-            /*🟢*/java_string_hash_code(string){
+            /*🔴*/stringToBase64URISafeNoPad(){},
+            /*🔴*/base64URISafeNoPadToString(){},
+            /*🟢*/hashCode(string){
                 let result;
                 for(let key=0,length=string.length;key<length;key++){
                     result=window.Math.imul(31,result)+string.charCodeAt(key)|0;
@@ -298,7 +298,7 @@
             /*🟢*/random(){
                 return window.Math.random().toString().replace(/0\./,'');
             },
-            /*🟢*/is_portrait(width,height,true_callback,false_callback){
+            /*🟢*/isPortrait(width,height,true_callback,false_callback){
                 if(width<=height){
                     if(true_callback){
                         true_callback();
@@ -310,12 +310,12 @@
                 }
                 return false;
             },
-            /*🟢*/run_object(object){
+            /*🟢*/runObject(object){
                 for(const key in object){
                     object[key]();
                 }
             },
-            /*🔴*/is_bot(type='user-agent',data=window.navigator.userAgent){
+            /*🔴*/isBot(type='user-agent',data=window.navigator.userAgent){
                 switch(type){
                     case'user-agent':
                         {
@@ -335,7 +335,7 @@
                         break;
                 }
             },
-            /*🟢*/search_object(data=window.location.search){
+            /*🟢*/searchObject(data=window.location.search){
                 const result={};
                 this.for(data.replace(/\?/,'').split('&'),(...data)=>{
                     const right=data[2].split('=')[1];
@@ -343,7 +343,7 @@
                 },0);
                 return result;
             },
-            /*🟢*/human_time(millisecond,leading_zero=[false,true,true],unit=[':',':','']){
+            /*🟢*/humanTime(millisecond,leading_zero=[false,true,true],unit=[':',':','']){
                 const zero=(number)=>{
                     return `${number<10?0:''}${number}`;
                 };
@@ -360,15 +360,15 @@
             },
         // local data
             /*🔴*/file(){},
-            /*🔴*/local_storage(){},
-            /*🔴*/session_storage(){},
-            /*🔴*/indexeddb(){},
-            /*🔴*/web_sql(){},
+            /*🔴*/localStorage(){},
+            /*🔴*/sessionStorage(){},
+            /*🔴*/indexedDB(){},
+            /*🔴*/webSQL(){},
             /*🔴*/cookie(){},
             /*🔴*/database(){},
             /*🔴*/cache(){},
         // network data
-            /*🟢*/fetch(uri,method,data_info,data,content_type,callback,option_add,headers_add){
+            /*🟢*/fetch(URI,method,data_info,data,content_type,callback,option_add,headers_add){
                 const option={};
                 option.method=method;
                 if(data_info!==undefined){
@@ -423,7 +423,7 @@
                     },0);
                 }
                 const result={};
-                return window.fetch(uri,option).then((data)=>{
+                return window.fetch(URI,option).then((data)=>{
                     result.status=data.status;
                     return data[content_type]();
                 }).then(async(data)=>{
@@ -447,9 +447,377 @@
             },
         // command line interface
             /*🔴*/cli(){},
-            /*🔴*/cli_emulator(){},
         // graphical user interface
-            /*🟢*/element_create(...arg){
+            /*🔴*/cliEmulator(){},
+            /*🟡*/doubleKeyContentCount(){
+                if(!this.doubleKeyContentCount.template){
+                    this.doubleKeyContentCount.template=class template{
+                        constructor(){
+                            this.data=[];
+                        }
+                        create(keyOne,keyTwo,content,count){
+                            this.data.push({
+                                keyOne:typeof keyOne==='string'?machineTool.hashCode(keyOne):keyOne,
+                                keyTwo:typeof keyTwo==='string'?machineTool.hashCode(keyTwo):keyTwo,
+                                content:content,
+                                count:count?count:0
+                            });
+                        }
+                        delete(keyOne,keyTwo){}
+                        read(keyOne,keyTwo){}
+                        update(keyOne,keyTwo){}
+                    }
+                }
+                return new this.doubleKeyContentCount.template();
+            },
+            /*🟡*/listenTarget(action,target,type,callback,option={},other='',other2=''){
+                const match=/[\r\n\s]/g;
+                switch(type){
+                    case'pointer_down':
+                        {
+                            switch(action){
+                                case'add':
+                                    {}
+                                    break;
+                                case'remove':
+                                    {}
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        break;
+                    case'pointer_move':
+                        {
+                            switch(action){
+                                case'add':
+                                    {}
+                                    break;
+                                case'remove':
+                                    {}
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        break;
+                    case'pointer_up':
+                        {
+                            // const id=`id_${this.hashCode(`${(target!==window&&target!==window.document?this.elementPath(target):'')}${callback.toString().replace(match,'')}`).toString().replace(/[^0-9]/g,'')}`;
+                            const id=`id_${this.random()}`;
+                            // const id=[target,this.hashCode(`${type}${callback.toString().replace(/[\r\n\s]/g,'')}`).toString().replace(/[^0-9]/g,''),0];
+                            const remove=()=>{
+                                target.removeEventListener('pointerdown',this.listenTarget.pointer_up[id]);
+                                this.listenTarget.pointer_up[id].count-=1;
+                                if(this.listenTarget.pointer_up[id].count===0){
+                                    delete this.listenTarget.pointer_up[id];
+                                    if(!window.Object.keys(this.listenTarget.pointer_up).length){
+                                        delete this.listenTarget.pointer_up;
+                                    }
+                                }
+                            };
+                            switch(action){
+                                case'add':
+                                    {
+                                        if(!this.listenTarget.pointer_up){
+                                            this.listenTarget.pointer_up={};
+                                        }
+                                        if(!this.listenTarget.pointer_up[id]){
+                                            this.listenTarget.pointer_up[id]=(data)=>{
+                                                const once_id=`once_${id}`;
+                                                data.target.parentNode.removeEventListener('pointerup',this.listenTarget.pointer_up[once_id]);
+                                                delete this.listenTarget.pointer_up[once_id];
+                                                const run=()=>{
+                                                    const left=data.target.getBoundingClientRect().left;
+                                                    const right=data.target.getBoundingClientRect().right;
+                                                    const top=data.target.getBoundingClientRect().top;
+                                                    const bottom=data.target.getBoundingClientRect().bottom;
+                                                    this.listenTarget.pointer_up[once_id]=(event)=>{
+                                                        if((event.target===data.target||event.target===data.target.parentNode)&&(event.clientX>=left&&event.clientX<=right&&event.clientY>=top&&event.clientY<=bottom)){
+                                                            if(event.target.childElementCount){
+                                                                let block=false;
+                                                                for(const value of event.target.children){
+                                                                    if(window.getComputedStyle(value).pointerEvents!=='none'&&window.getComputedStyle(value).visibility!=='hidden'){
+                                                                        block=true;
+                                                                        let intersect=false;
+                                                                        for(const value of event.target.children){
+                                                                            if((window.getComputedStyle(value).pointerEvents!=='none'&&window.getComputedStyle(value).visibility!=='hidden')&&(event.clientX>=value.getBoundingClientRect().left&&event.clientX<=value.getBoundingClientRect().right&&event.clientY>=value.getBoundingClientRect().top&&event.clientY<=value.getBoundingClientRect().bottom)){
+                                                                                intersect=true;
+                                                                                break;
+                                                                            }
+                                                                        }
+                                                                        if(!intersect){
+                                                                            callback(data);
+                                                                            if(option.once){
+                                                                                remove();
+                                                                            }
+                                                                        }
+                                                                        break;
+                                                                    }
+                                                                }
+                                                                if(!block){
+                                                                    callback(data);
+                                                                    if(option.once){
+                                                                        remove();
+                                                                    }
+                                                                }
+                                                            }else{
+                                                                callback(data);
+                                                                if(option.once){
+                                                                    remove();
+                                                                }
+                                                            }
+                                                        }
+                                                    };
+                                                    data.target.parentNode.addEventListener('pointerup',this.listenTarget.pointer_up[once_id],{once:true});
+                                                    const remove_event=()=>{
+                                                        window.removeEventListener('pointerup',remove_event);
+                                                        window.removeEventListener('touchend',remove_event);
+                                                        window.removeEventListener('dragend',remove_event);
+                                                        if(data.target.parentNode){
+                                                            data.target.parentNode.removeEventListener('pointerup',this.listenTarget.pointer_up[once_id]);
+                                                        }
+                                                    };
+                                                    if(other2){
+                                                        const move=(event)=>{
+                                                            if(event.y>=data.y+6||event.y<=data.y-6){
+                                                                window.removeEventListener('pointermove',move);
+                                                                window.removeEventListener('touchmove',move);
+                                                                remove_event();
+                                                            }
+                                                        };
+                                                        window.addEventListener('pointermove',move);
+                                                        window.addEventListener('touchmove',move);
+                                                    }
+                                                    window.addEventListener('pointerup',remove_event,{once:true});
+                                                    window.addEventListener('touchend',remove_event,{once:true});
+                                                    window.addEventListener('dragend',remove_event,{once:true});
+                                                };
+                                                if(typeof other==='number'){
+                                                    if(data.button===other){
+                                                        run();
+                                                    }
+                                                }else{
+                                                    run();
+                                                }
+                                                this.debug(()=>{
+                                                    window.console.log('==== listenTarget.pointer_up length:',window.Object.keys(this.listenTarget.pointer_up).length);
+                                                });
+                                            };
+                                            this.listenTarget.pointer_up[id].count=0;
+                                        }
+                                        if(option.once){
+                                            target.addEventListener('pointerdown',this.listenTarget.pointer_up[id]);
+                                        }else{
+                                            target.addEventListener('pointerdown',this.listenTarget.pointer_up[id],option);
+                                        }
+                                        this.listenTarget.pointer_up[id].count+=1;
+                                    }
+                                    break;
+                                case'remove':
+                                    {
+                                        remove();
+                                    }
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        break;
+                    case'observe_mutation':
+                        {
+                            switch(action){
+                                case'add':
+                                    {
+                                        target.machineTool_listenTarget_observe_mutation=new window.MutationObserver((mutation_list)=>{
+                                            this.debug(()=>{
+                                                window.console.log('==== listenTarget.observe_mutation mutation_list:',mutation_list);
+                                            });
+                                            mutation_list.forEach((mutation)=>{
+                                                switch(mutation.type){
+                                                    case'childList':
+                                                        {
+                                                            callback(mutation);
+                                                        }
+                                                        break;
+                                                    case'attributes':
+                                                        {
+                                                            callback(mutation);
+                                                        }
+                                                        break;
+                                                    default:
+                                                        break;
+                                                }
+                                            });
+                                        });
+                                        target.machineTool_listenTarget_observe_mutation.observe(target,option);
+                                    }
+                                    break;
+                                case'remove':
+                                    {
+                                        target.machineTool_listenTarget_observe_mutation.disconnect();
+                                        delete target.machineTool_listenTarget_observe_mutation;
+                                    }
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        break;
+                    case'observe_intersection':
+                        {
+                            switch(action){
+                                case'add':
+                                    {
+                                        target.machineTool_listenTarget_observe_intersection=new window.IntersectionObserver((entries)=>{
+                                            this.debug(()=>{
+                                                window.console.log('==== listenTarget.observe_intersection entries:',entries);
+                                            });
+                                            entries.forEach((entry)=>{
+                                                callback(entry);
+                                            });
+                                        },option);
+                                        target.machineTool_listenTarget_observe_intersection.observe(target);
+                                    }
+                                    break;
+                                case'remove':
+                                    {
+                                        target.machineTool_listenTarget_observe_intersection.disconnect();
+                                        delete target.machineTool_listenTarget_observe_intersection;
+                                    }
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        break;
+                    case'observe_resize':
+                        {
+                            switch(action){
+                                case'add':
+                                    {
+                                        target.machineTool_listenTarget_observe_resize=new window.ResizeObserver((entries)=>{
+                                            this.debug(()=>{
+                                                window.console.log('==== listenTarget.observe_resize entries:',entries);
+                                            });
+                                            entries.forEach((entry)=>{
+                                                callback(entry);
+                                            });
+                                        });
+                                        target.machineTool_listenTarget_observe_resize.observe(target);
+                                    }
+                                    break;
+                                case'remove':
+                                    {
+                                        target.machineTool_listenTarget_observe_resize.disconnect();
+                                        delete target.machineTool_listenTarget_observe_resize;
+                                    }
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        break;
+                    case'URI':
+                        {
+                            const id=`id_${this.hashCode(target.toString().replace(/[\r\n\s]/g,'')).toString().replace(/[^0-9]/g,'')}`;
+                            if(!this.listenTarget.URI){
+                                this.listenTarget.URI={};
+                            }
+                            if(!this.listenTarget.URI_template){
+                                this.listenTarget.URI_template=class template{
+                                    constructor(callback){
+                                        if(window.history.pushState.name){
+                                            window.history.pushState=machineTool.observeFunction(window.history.pushState,'pushState',undefined,window,(...arg)=>{
+                                                return arg[2];
+                                            });
+                                        }
+                                        if(window.history.replaceState.name){
+                                            window.history.replaceState=machineTool.observeFunction(window.history.replaceState,'replaceState',undefined,window,(...arg)=>{
+                                                return arg[2];
+                                            });
+                                        }
+                                        this.callback=callback;
+                                    }
+                                    _popstate=(data)=>{
+                                        this.callback({
+                                            type:data.type,
+                                            path:machineTool.URIPath()
+                                        });
+                                    }
+                                    _pushState=(data)=>{
+                                        this.callback({
+                                            type:data.type,
+                                            path:data.pushState.replace()
+                                        });
+                                    }
+                                    _replaceState=(data)=>{
+                                        this.callback({
+                                            type:data.type,
+                                            path:data.replaceState.replace()
+                                        });
+                                    }
+                                    add(){
+                                        window.addEventListener('popstate',this._popstate);
+                                        window.addEventListener('pushState',this._pushState);
+                                        window.addEventListener('replaceState',this._replaceState);
+                                    }
+                                    remove(){
+                                        window.removeEventListener('popstate',this._popstate);
+                                        window.removeEventListener('pushState',this._pushState);
+                                        window.removeEventListener('replaceState',this._replaceState);
+                                    }
+                                }
+                            }
+                            switch(action){
+                                case'add':
+                                    {
+                                        if(!this.listenTarget.URI[id]){
+                                            this.listenTarget.URI[id]=new this.listenTarget.URI_template(target);
+                                            // this.listenTarget.URI[id].count=0;
+                                            this.listenTarget.URI[id].add();
+                                        }
+                                        // this.listenTarget.URI[id].add();
+                                        // this.listenTarget.URI[id].count+=1;
+                                    }
+                                    break;
+                                case'remove':
+                                    {
+                                        this.listenTarget.URI[id].remove();
+                                        // this.listenTarget.URI[id].count-=1;
+                                        // if(this.listenTarget.URI[id].count===0){
+                                            delete this.listenTarget.URI[id];
+                                            // remove observe
+                                            // if(!window.Object.keys(this.listenTarget.URI).length){}
+                                        // }
+                                    }
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        break;
+                    default:
+                        {
+                            switch(action){
+                                case'add':
+                                    {
+                                        target.addEventListener(type,callback,option);
+                                    }
+                                    break;
+                                case'remove':
+                                    {
+                                        target.removeEventListener(type,callback);
+                                    }
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        break;
+                }
+            },
+            /*🟢*/elementCreate(...arg){
                 switch(typeof arg[0]){
                     case'string':
                         {
@@ -519,7 +887,7 @@
                             //     insert_position<'beforebegin','afterbegin','beforeend','afterend',undefined='beforeend'>,
                             //     elements<elements,undefined=elements>,
                             //     callback<function(elements),undefined=false>
-                            //     /machineTool.element_create()===machineTool.element_create({key&class<...>:{}})._first_===machineTool.element_create([{}])._first_===machineTool.element_create([[]])._first_/
+                            //     /machineTool.elementCreate()===machineTool.elementCreate({key&class<...>:{}})._first_===machineTool.elementCreate([{}])._first_===machineTool.elementCreate([[]])._first_/
                             const object=arg[0];
                             const insert_element=arg[1];
                             let insert_position=arg[2];
@@ -570,7 +938,7 @@
                                             data.element[1]={class:class_};
                                         }
                                     }
-                                    const element=this.element_create(data.element[0],data.element[1]?data.element[1]:undefined,insert_element,insert_position,data.element[2]?data.element[2]:undefined,data.element[3]?data.element[3]:undefined);
+                                    const element=this.elementCreate(data.element[0],data.element[1]?data.element[1]:undefined,insert_element,insert_position,data.element[2]?data.element[2]:undefined,data.element[3]?data.element[3]:undefined);
                                     if(!first){
                                         first=element;
                                         elements._first_=element;
@@ -654,380 +1022,12 @@
                         break;
                     default:
                         {
-                            return this.element_create('div',arg[1],arg[2],arg[3],arg[4],arg[5]);
+                            return this.elementCreate('div',arg[1],arg[2],arg[3],arg[4],arg[5]);
                         }
                         break;
                 }
             },
-            /*🟡*/doubleKeyContentCount(){
-                if(!this.doubleKeyContentCount.template){
-                    this.doubleKeyContentCount.template=class template{
-                        constructor(){
-                            this.data=[];
-                        }
-                        create(keyOne,keyTwo,content,count){
-                            this.data.push({
-                                keyOne:typeof keyOne==='string'?machineTool.java_string_hash_code(keyOne):keyOne,
-                                keyTwo:typeof keyTwo==='string'?machineTool.java_string_hash_code(keyTwo):keyTwo,
-                                content:content,
-                                count:count?count:0
-                            });
-                        }
-                        delete(keyOne,keyTwo){}
-                        read(keyOne,keyTwo){}
-                        update(keyOne,keyTwo){}
-                    }
-                }
-                return new this.doubleKeyContentCount.template();
-            },
-            /*🟡*/listen_target(action,target,type,callback,option={},other='',other2=''){
-                const match=/[\r\n\s]/g;
-                switch(type){
-                    case'pointer_down':
-                        {
-                            switch(action){
-                                case'add':
-                                    {}
-                                    break;
-                                case'remove':
-                                    {}
-                                    break;
-                                default:
-                                    break;
-                            }
-                        }
-                        break;
-                    case'pointer_move':
-                        {
-                            switch(action){
-                                case'add':
-                                    {}
-                                    break;
-                                case'remove':
-                                    {}
-                                    break;
-                                default:
-                                    break;
-                            }
-                        }
-                        break;
-                    case'pointer_up':
-                        {
-                            // const id=`id_${this.java_string_hash_code(`${(target!==window&&target!==window.document?this.element_path(target):'')}${callback.toString().replace(match,'')}`).toString().replace(/[^0-9]/g,'')}`;
-                            const id=`id_${this.random()}`;
-                            // const id=[target,this.java_string_hash_code(`${type}${callback.toString().replace(/[\r\n\s]/g,'')}`).toString().replace(/[^0-9]/g,''),0];
-                            const remove=()=>{
-                                target.removeEventListener('pointerdown',this.listen_target.pointer_up[id]);
-                                this.listen_target.pointer_up[id].count-=1;
-                                if(this.listen_target.pointer_up[id].count===0){
-                                    delete this.listen_target.pointer_up[id];
-                                    if(!window.Object.keys(this.listen_target.pointer_up).length){
-                                        delete this.listen_target.pointer_up;
-                                    }
-                                }
-                            };
-                            switch(action){
-                                case'add':
-                                    {
-                                        if(!this.listen_target.pointer_up){
-                                            this.listen_target.pointer_up={};
-                                        }
-                                        if(!this.listen_target.pointer_up[id]){
-                                            this.listen_target.pointer_up[id]=(data)=>{
-                                                const once_id=`once_${id}`;
-                                                data.target.parentNode.removeEventListener('pointerup',this.listen_target.pointer_up[once_id]);
-                                                delete this.listen_target.pointer_up[once_id];
-                                                const run=()=>{
-                                                    const left=data.target.getBoundingClientRect().left;
-                                                    const right=data.target.getBoundingClientRect().right;
-                                                    const top=data.target.getBoundingClientRect().top;
-                                                    const bottom=data.target.getBoundingClientRect().bottom;
-                                                    this.listen_target.pointer_up[once_id]=(event)=>{
-                                                        if((event.target===data.target||event.target===data.target.parentNode)&&(event.clientX>=left&&event.clientX<=right&&event.clientY>=top&&event.clientY<=bottom)){
-                                                            if(event.target.childElementCount){
-                                                                let block=false;
-                                                                for(const value of event.target.children){
-                                                                    if(window.getComputedStyle(value).pointerEvents!=='none'&&window.getComputedStyle(value).visibility!=='hidden'){
-                                                                        block=true;
-                                                                        let intersect=false;
-                                                                        for(const value of event.target.children){
-                                                                            if((window.getComputedStyle(value).pointerEvents!=='none'&&window.getComputedStyle(value).visibility!=='hidden')&&(event.clientX>=value.getBoundingClientRect().left&&event.clientX<=value.getBoundingClientRect().right&&event.clientY>=value.getBoundingClientRect().top&&event.clientY<=value.getBoundingClientRect().bottom)){
-                                                                                intersect=true;
-                                                                                break;
-                                                                            }
-                                                                        }
-                                                                        if(!intersect){
-                                                                            callback(data);
-                                                                            if(option.once){
-                                                                                remove();
-                                                                            }
-                                                                        }
-                                                                        break;
-                                                                    }
-                                                                }
-                                                                if(!block){
-                                                                    callback(data);
-                                                                    if(option.once){
-                                                                        remove();
-                                                                    }
-                                                                }
-                                                            }else{
-                                                                callback(data);
-                                                                if(option.once){
-                                                                    remove();
-                                                                }
-                                                            }
-                                                        }
-                                                    };
-                                                    data.target.parentNode.addEventListener('pointerup',this.listen_target.pointer_up[once_id],{once:true});
-                                                    const remove_event=()=>{
-                                                        window.removeEventListener('pointerup',remove_event);
-                                                        window.removeEventListener('touchend',remove_event);
-                                                        window.removeEventListener('dragend',remove_event);
-                                                        if(data.target.parentNode){
-                                                            data.target.parentNode.removeEventListener('pointerup',this.listen_target.pointer_up[once_id]);
-                                                        }
-                                                    };
-                                                    if(other2){
-                                                        const move=(event)=>{
-                                                            if(event.y>=data.y+6||event.y<=data.y-6){
-                                                                window.removeEventListener('pointermove',move);
-                                                                window.removeEventListener('touchmove',move);
-                                                                remove_event();
-                                                            }
-                                                        };
-                                                        window.addEventListener('pointermove',move);
-                                                        window.addEventListener('touchmove',move);
-                                                    }
-                                                    window.addEventListener('pointerup',remove_event,{once:true});
-                                                    window.addEventListener('touchend',remove_event,{once:true});
-                                                    window.addEventListener('dragend',remove_event,{once:true});
-                                                };
-                                                if(typeof other==='number'){
-                                                    if(data.button===other){
-                                                        run();
-                                                    }
-                                                }else{
-                                                    run();
-                                                }
-                                                this.debug(()=>{
-                                                    window.console.log('==== listen_target.pointer_up length:',window.Object.keys(this.listen_target.pointer_up).length);
-                                                });
-                                            };
-                                            this.listen_target.pointer_up[id].count=0;
-                                        }
-                                        if(option.once){
-                                            target.addEventListener('pointerdown',this.listen_target.pointer_up[id]);
-                                        }else{
-                                            target.addEventListener('pointerdown',this.listen_target.pointer_up[id],option);
-                                        }
-                                        this.listen_target.pointer_up[id].count+=1;
-                                    }
-                                    break;
-                                case'remove':
-                                    {
-                                        remove();
-                                    }
-                                    break;
-                                default:
-                                    break;
-                            }
-                        }
-                        break;
-                    case'observe_mutation':
-                        {
-                            switch(action){
-                                case'add':
-                                    {
-                                        target.machineTool_listen_target_observe_mutation=new window.MutationObserver((mutation_list)=>{
-                                            this.debug(()=>{
-                                                window.console.log('==== listen_target.observe_mutation mutation_list:',mutation_list);
-                                            });
-                                            mutation_list.forEach((mutation)=>{
-                                                switch(mutation.type){
-                                                    case'childList':
-                                                        {
-                                                            callback(mutation);
-                                                        }
-                                                        break;
-                                                    case'attributes':
-                                                        {
-                                                            callback(mutation);
-                                                        }
-                                                        break;
-                                                    default:
-                                                        break;
-                                                }
-                                            });
-                                        });
-                                        target.machineTool_listen_target_observe_mutation.observe(target,option);
-                                    }
-                                    break;
-                                case'remove':
-                                    {
-                                        target.machineTool_listen_target_observe_mutation.disconnect();
-                                        delete target.machineTool_listen_target_observe_mutation;
-                                    }
-                                    break;
-                                default:
-                                    break;
-                            }
-                        }
-                        break;
-                    case'observe_intersection':
-                        {
-                            switch(action){
-                                case'add':
-                                    {
-                                        target.machineTool_listen_target_observe_intersection=new window.IntersectionObserver((entries)=>{
-                                            this.debug(()=>{
-                                                window.console.log('==== listen_target.observe_intersection entries:',entries);
-                                            });
-                                            entries.forEach((entry)=>{
-                                                callback(entry);
-                                            });
-                                        },option);
-                                        target.machineTool_listen_target_observe_intersection.observe(target);
-                                    }
-                                    break;
-                                case'remove':
-                                    {
-                                        target.machineTool_listen_target_observe_intersection.disconnect();
-                                        delete target.machineTool_listen_target_observe_intersection;
-                                    }
-                                    break;
-                                default:
-                                    break;
-                            }
-                        }
-                        break;
-                    case'observe_resize':
-                        {
-                            switch(action){
-                                case'add':
-                                    {
-                                        target.machineTool_listen_target_observe_resize=new window.ResizeObserver((entries)=>{
-                                            this.debug(()=>{
-                                                window.console.log('==== listen_target.observe_resize entries:',entries);
-                                            });
-                                            entries.forEach((entry)=>{
-                                                callback(entry);
-                                            });
-                                        });
-                                        target.machineTool_listen_target_observe_resize.observe(target);
-                                    }
-                                    break;
-                                case'remove':
-                                    {
-                                        target.machineTool_listen_target_observe_resize.disconnect();
-                                        delete target.machineTool_listen_target_observe_resize;
-                                    }
-                                    break;
-                                default:
-                                    break;
-                            }
-                        }
-                        break;
-                    case'uri':
-                        {
-                            const id=`id_${this.java_string_hash_code(target.toString().replace(/[\r\n\s]/g,'')).toString().replace(/[^0-9]/g,'')}`;
-                            if(!this.listen_target.uri){
-                                this.listen_target.uri={};
-                            }
-                            if(!this.listen_target.uri_template){
-                                this.listen_target.uri_template=class template{
-                                    constructor(callback){
-                                        if(window.history.pushState.name){
-                                            window.history.pushState=machineTool.observe_function(window.history.pushState,'pushState',undefined,window,(...arg)=>{
-                                                return arg[2];
-                                            });
-                                        }
-                                        if(window.history.replaceState.name){
-                                            window.history.replaceState=machineTool.observe_function(window.history.replaceState,'replaceState',undefined,window,(...arg)=>{
-                                                return arg[2];
-                                            });
-                                        }
-                                        this.callback=callback;
-                                    }
-                                    _popstate=(data)=>{
-                                        this.callback({
-                                            type:data.type,
-                                            path:machineTool.uri_path()
-                                        });
-                                    }
-                                    _pushState=(data)=>{
-                                        this.callback({
-                                            type:data.type,
-                                            path:data.pushState.replace()
-                                        });
-                                    }
-                                    _replaceState=(data)=>{
-                                        this.callback({
-                                            type:data.type,
-                                            path:data.replaceState.replace()
-                                        });
-                                    }
-                                    add(){
-                                        window.addEventListener('popstate',this._popstate);
-                                        window.addEventListener('pushState',this._pushState);
-                                        window.addEventListener('replaceState',this._replaceState);
-                                    }
-                                    remove(){
-                                        window.removeEventListener('popstate',this._popstate);
-                                        window.removeEventListener('pushState',this._pushState);
-                                        window.removeEventListener('replaceState',this._replaceState);
-                                    }
-                                }
-                            }
-                            switch(action){
-                                case'add':
-                                    {
-                                        if(!this.listen_target.uri[id]){
-                                            this.listen_target.uri[id]=new this.listen_target.uri_template(target);
-                                            // this.listen_target.uri[id].count=0;
-                                            this.listen_target.uri[id].add();
-                                        }
-                                        // this.listen_target.uri[id].add();
-                                        // this.listen_target.uri[id].count+=1;
-                                    }
-                                    break;
-                                case'remove':
-                                    {
-                                        this.listen_target.uri[id].remove();
-                                        // this.listen_target.uri[id].count-=1;
-                                        // if(this.listen_target.uri[id].count===0){
-                                            delete this.listen_target.uri[id];
-                                            // remove observe
-                                            // if(!window.Object.keys(this.listen_target.uri).length){}
-                                        // }
-                                    }
-                                    break;
-                                default:
-                                    break;
-                            }
-                        }
-                        break;
-                    default:
-                        {
-                            switch(action){
-                                case'add':
-                                    {
-                                        target.addEventListener(type,callback,option);
-                                    }
-                                    break;
-                                case'remove':
-                                    {
-                                        target.removeEventListener(type,callback);
-                                    }
-                                    break;
-                                default:
-                                    break;
-                            }
-                        }
-                        break;
-                }
-            },
-            /*🟢*/element_state(...arg){
+            /*🟢*/elementState(...arg){
                 if(arg[0]instanceof window.HTMLElement){
                     // base mode
                     //     element<element>,
@@ -1215,7 +1215,7 @@
                                                 for(const button of button_array){
                                                     const button_element_array=button[2];
                                                     for(const button_element of button_element_array){
-                                                        this.element_state(button_element,current,`${open_state} ${close_state}`,true);
+                                                        this.elementState(button_element,current,`${open_state} ${close_state}`,true);
                                                     }
                                                 }
                                             };
@@ -1223,21 +1223,21 @@
                                                 case'auto':
                                                     {
                                                         for(const target_element of target_element_array){
-                                                            this.element_state(target_element,open_state,close_state,undefined,undefined,set_button_element);
+                                                            this.elementState(target_element,open_state,close_state,undefined,undefined,set_button_element);
                                                         }
                                                     }
                                                     break;
                                                 case'open':
                                                     {
                                                         for(const target_element of target_element_array){
-                                                            this.element_state(target_element,open_state,close_state,true,undefined,set_button_element);
+                                                            this.elementState(target_element,open_state,close_state,true,undefined,set_button_element);
                                                         }
                                                     }
                                                     break;
                                                 case'close':
                                                     {
                                                         for(const target_element of target_element_array){
-                                                            this.element_state(target_element,close_state,open_state,true,undefined,set_button_element);
+                                                            this.elementState(target_element,close_state,open_state,true,undefined,set_button_element);
                                                         }
                                                     }
                                                     break;
@@ -1251,8 +1251,8 @@
                                         }
                                         for(const button_element of button_element_array){
                                             for(const value of listen_type.split(',')){
-                                                this.listen_target('add',button_element,value,event_function,option,other,other2);
-                                                this.listen_target('add',button_element,value,callback,option,other,other2);
+                                                this.listenTarget('add',button_element,value,event_function,option,other,other2);
+                                                this.listenTarget('add',button_element,value,callback,option,other,other2);
                                             }
                                         }
                                     }
@@ -1306,20 +1306,20 @@
                                                 const button_element_array_=content[2];
                                                 if(target_element_array_!==target_element_array){
                                                     for(const target_element_ of target_element_array_){
-                                                        this.element_state(target_element_,close_state,open_state,true);
+                                                        this.elementState(target_element_,close_state,open_state,true);
                                                     }
                                                 }
                                                 if(button_element_array_!==button_element_array){
                                                     for(const button_element_ of button_element_array_){
-                                                        this.element_state(button_element_,close_state,open_state,true);
+                                                        this.elementState(button_element_,close_state,open_state,true);
                                                     }
                                                 }
                                             }
                                             for(const target_element of target_element_array){
-                                                this.element_state(target_element,open_state,close_state,true);
+                                                this.elementState(target_element,open_state,close_state,true);
                                             }
                                             for(const button_element of button_element_array){
-                                                this.element_state(button_element,open_state,close_state,true);
+                                                this.elementState(button_element,open_state,close_state,true);
                                             }
                                         };
                                         if(start){
@@ -1328,8 +1328,8 @@
                                         }
                                         for(const button_element of button_element_array){
                                             for(const value of listen_type.split(',')){
-                                                this.listen_target('add',button_element,value,event_function,option,other,other2);
-                                                this.listen_target('add',button_element,value,callback,option,other,other2);
+                                                this.listenTarget('add',button_element,value,event_function,option,other,other2);
+                                                this.listenTarget('add',button_element,value,callback,option,other,other2);
                                             }
                                         }
                                     }
@@ -1341,9 +1341,9 @@
                     }
                 }
             },
-            /*🟢*/element_block(element,group='group',insert_position='beforeend',wait=350){
-                if(!this.element_block.template){
-                    this.element_block.template=class template{
+            /*🟢*/elementBlock(element,group='group',insert_position='beforeend',wait=350){
+                if(!this.elementBlock.template){
+                    this.elementBlock.template=class template{
                         constructor(element,group,insert_position,wait){
                             this.element=element;
                             this.group=group;
@@ -1356,7 +1356,7 @@
                         add(element,record,wait=this.wait){
                             if(!this.lock){
                                 this.lock=true;
-                                const style=machineTool.insert_style(this.style);
+                                const style=machineTool.insertStyle(this.style);
                                 if(wait>1000/12){
                                     wait=wait-1000/12;
                                 }else{
@@ -1365,14 +1365,14 @@
                                 let record_state=false;
                                 if(record){
                                     machineTool.for(this.elements,(...data)=>{
-                                        if(data[2].machineTool_element_block_add_record===record){
+                                        if(data[2].machineTool_elementBlock_add_record===record){
                                             record_state=true;
                                             element=data[2];
                                         }
                                     },0);
                                 }
                                 if(record&&!record_state){
-                                    element.machineTool_element_block_add_record=record;
+                                    element.machineTool_elementBlock_add_record=record;
                                 }
                                 if(!record_state){
                                     this.elements.push(element);
@@ -1380,11 +1380,11 @@
                                 machineTool.for(this.elements,(...data)=>{
                                     if(data[2]!==element&&data[2].classList.contains(`${this.group}_last`)){
                                         window.setTimeout(()=>{
-                                            machineTool.element_state(data[2],`${this.group}_prev`,`${this.group}_last`,true);
+                                            machineTool.elementState(data[2],`${this.group}_prev`,`${this.group}_last`,true);
                                         },1000/12);
                                     }
                                 },0);
-                                machineTool.element_state(element,`${this.group}_last ${this.group}_ready`,`${this.group}_hide`,true);
+                                machineTool.elementState(element,`${this.group}_last ${this.group}_ready`,`${this.group}_hide`,true);
                                 element.style.setProperty('opacity','0');
                                 window.setTimeout(()=>{
                                     if(!record_state){
@@ -1392,11 +1392,11 @@
                                     }
                                     window.setTimeout(()=>{
                                         element.style.removeProperty('opacity');
-                                        machineTool.remove_empty(element);
-                                        machineTool.element_state(element,`${this.group}_go`,'',true);
+                                        machineTool.removeEmpty(element);
+                                        machineTool.elementState(element,`${this.group}_go`,'',true);
                                         window.setTimeout(()=>{
-                                            machineTool.element_state(element,'',`${this.group}_ready`,true);
-                                            machineTool.remove_element(style);
+                                            machineTool.elementState(element,'',`${this.group}_ready`,true);
+                                            machineTool.removeElement(style);
                                             this.lock=false;
                                         },wait);
                                     },1000/24);
@@ -1413,8 +1413,8 @@
                                         element=data[2];
                                     }
                                 },0);
-                                // if(element?.machineTool_element_block_add_record){
-                                if(element&&element.machineTool_element_block_add_record){
+                                // if(element?.machineTool_elementBlock_add_record){
+                                if(element&&element.machineTool_elementBlock_add_record){
                                     this.lock=false;
                                     return this.hide(wait);
                                 }else{
@@ -1426,17 +1426,17 @@
                         hide(wait=this.wait){
                             if(!this.lock){
                                 this.lock=true;
-                                const style=machineTool.insert_style(this.style);
+                                const style=machineTool.insertStyle(this.style);
                                 let element=null;
                                 machineTool.for(this.elements,(...data)=>{
                                     if(!data[2].classList.contains(`${this.group}_hide`)&&!data[2].classList.contains(`${this.group}_remove`)&&data[2].classList.contains(`${this.group}_last`)){
                                         element=data[2];
                                     }
                                 },0);
-                                machineTool.element_state(element,`${this.group}_remove`,'',true);
+                                machineTool.elementState(element,`${this.group}_remove`,'',true);
                                 window.setTimeout(()=>{
-                                    machineTool.element_state(element,`${this.group}_hide`,`${this.group}_ready ${this.group}_go ${this.group}_last ${this.group}_prev ${this.group}_remove`,true);
-                                    machineTool.remove_element(style);
+                                    machineTool.elementState(element,`${this.group}_hide`,`${this.group}_ready ${this.group}_go ${this.group}_last ${this.group}_prev ${this.group}_remove`,true);
+                                    machineTool.removeElement(style);
                                     this.lock=false;
                                 },wait);
                                 let last=null;
@@ -1446,7 +1446,7 @@
                                     }
                                 },0);
                                 if(last){
-                                    machineTool.element_state(last,`${this.group}_last`,`${this.group}_prev`,true);
+                                    machineTool.elementState(last,`${this.group}_last`,`${this.group}_prev`,true);
                                     return last;
                                 }else{
                                     return 'null';
@@ -1456,7 +1456,7 @@
                         remove(wait=350){
                             if(!this.lock){
                                 this.lock=true;
-                                const style=machineTool.insert_style(this.style);
+                                const style=machineTool.insertStyle(this.style);
                                 let element=null;
                                 machineTool.for(this.elements,(...data)=>{
                                     if(!data[2].classList.contains(`${this.group}_hide`)&&!data[2].classList.contains(`${this.group}_remove`)&&data[2].classList.contains(`${this.group}_last`)){
@@ -1464,13 +1464,13 @@
                                     }
                                 },0);
                                 this.elements.splice(this.elements.indexOf(element),1);
-                                machineTool.element_state(element,`${this.group}_remove`,'',true);
+                                machineTool.elementState(element,`${this.group}_remove`,'',true);
                                 window.setTimeout(()=>{
-                                    machineTool.element_state(element,'',`${this.group}_ready ${this.group}_go ${this.group}_last ${this.group}_prev ${this.group}_hide ${this.group}_remove`,true);
+                                    machineTool.elementState(element,'',`${this.group}_ready ${this.group}_go ${this.group}_last ${this.group}_prev ${this.group}_hide ${this.group}_remove`,true);
                                     if(element){
-                                        machineTool.remove_element(element);
+                                        machineTool.removeElement(element);
                                     }
-                                    machineTool.remove_element(style);
+                                    machineTool.removeElement(style);
                                     this.lock=false;
                                 },wait);
                                 let last=null;
@@ -1480,7 +1480,7 @@
                                     }
                                 },0);
                                 if(last){
-                                    machineTool.element_state(last,`${this.group}_last`,`${this.group}_prev`,true);
+                                    machineTool.elementState(last,`${this.group}_last`,`${this.group}_prev`,true);
                                     return last;
                                 }else{
                                     return 'null';
@@ -1489,12 +1489,12 @@
                         }
                     }
                 }
-                return new this.element_block.template(element,group,insert_position,wait);
+                return new this.elementBlock.template(element,group,insert_position,wait);
             },
-            /*🟢*/remove_element(element){
+            /*🟢*/removeElement(element){
                 element.parentElement.removeChild(element);
             },
-            /*🟢*/find_outer(find,start,end=window.document.documentElement,true_callback,false_callback){
+            /*🟢*/findOuter(find,start,end=window.document.documentElement,true_callback,false_callback){
                 if(find instanceof window.HTMLElement&&start===find){
                     if(true_callback){
                         true_callback(start);
@@ -1515,9 +1515,9 @@
                         }
                     }
                 }
-                return this.find_outer(find,start.parentElement,end,true_callback,false_callback);
+                return this.findOuter(find,start.parentElement,end,true_callback,false_callback);
             },
-            /*🟢*/element_path(element){
+            /*🟢*/elementPath(element){
                 let result='';
                 const run=(element)=>{
                     if(element.parentElement){
@@ -1533,7 +1533,7 @@
                 run(element);
                 return result.replace(/,$/,'');
             },
-            /*🟢*/uri_path(hash=true){
+            /*🟢*/URIPath(hash=true){
                 switch(hash){
                     case true:
                         {
@@ -1549,7 +1549,7 @@
                         break;
                 }
             },
-            /*🟢*/remove_empty(element,...attribute){
+            /*🟢*/removeEmpty(element,...attribute){
                 if(attribute[0]){
                     for(let key=0,length=attribute.length;key<length;key++){
                         element.removeAttribute(attribute[key]);
@@ -1563,7 +1563,7 @@
                     }
                 }
             },
-            /*🟢*/full_screen(element=window.document.documentElement,top=false){
+            /*🟢*/fullScreen(element=window.document.documentElement,top=false){
                 const root=top?window.top:window;
                 if(window.navigator.userAgent.match(/iPhone|iPad/i)&&element.webkitSupportsFullscreen){
                     if(element.webkitDisplayingFullscreen){
@@ -1591,10 +1591,10 @@
                     }
                 }
             },
-            /*🟢*/open_tab(uri=window.location.href,name=''){
-                return window.open(uri,name);
+            /*🟢*/openTab(URI=window.location.href,name=''){
+                return window.open(URI,name);
             },
-            /*🟢*/open_window(uri=window.location.href,name='',width=720,height=450,left,top){
+            /*🟢*/openWindow(URI=window.location.href,name='',width=720,height=450,left,top){
                 if(typeof left==='number'){
                     left+=window.screen.availLeft;
                 }else{
@@ -1605,7 +1605,7 @@
                 }else{
                     top=(window.screen.availHeight-height)/2+window.screen.availTop;
                 }
-                return window.open(uri,name,`width=${width},height=${height},left=${left},top=${top}`);
+                return window.open(URI,name,`width=${width},height=${height},left=${left},top=${top}`);
             },
             /*🟢*/debug(callback){
                 // if(window.document?.documentElement&&window.document.documentElement.classList.contains('debug')){
@@ -1613,7 +1613,7 @@
                     callback();
                 }
             },
-            /*🔴*/start_load(type,callback){
+            /*🔴*/startLoad(type,callback){
                 window.document.addEventListener('readystatechange',(event)=>{
                     switch(event.target.readyState){
                         case'loading':
@@ -1630,11 +1630,11 @@
                     }
                 });
             },
-            /*🟢*/insert_style(style,wait){
-                const element=this.element_create('style',undefined,window.document.head,undefined,style);
+            /*🟢*/insertStyle(style,wait){
+                const element=this.elementCreate('style',undefined,window.document.head,undefined,style);
                 if(wait){
                     window.setTimeout(()=>{
-                        this.remove_element(element);
+                        this.removeElement(element);
                     },wait);
                 }
                 return element;
@@ -1747,10 +1747,10 @@
         // graphics
             /*🔴*/plugin_openCV_removeWatermark(){},
         // application programming interface
-            /*🔴*/listen_port(){},
-            /*🔴*/port_receive(uri,method,data,callback,other_data){
+            /*🔴*/listenPort(){},
+            /*🔴*/portReceive(URI,method,data,callback,other_data){
                 const result={
-                    uri:uri,
+                    URI:URI,
                     method:method,
                     data:data
                 };
@@ -1762,13 +1762,13 @@
                 }
                 return result;
             },
-            /*🔴*/port_return(){},
+            /*🔴*/portReturn(){},
             /*🔴*/route(){},
             /*🔴*/extract(){},
             /*🔴*/middleware(){},
-            /*🔴*/static_file(){},
-            /*🔴*/siteMap_generator(){},
-            /*🔴*/siteMap_file_generator(){}
+            /*🔴*/staticFile(){},
+            /*🔴*/siteMapGenerator(){},
+            /*🔴*/siteMapFileGenerator(){}
     };
 // #build
 // #debug
@@ -1781,16 +1781,16 @@
                 machineTool.debug(()=>{
                     // window.machineTool
                     window.machineTool=machineTool;
-                    // machineTool_demo
-                    machineTool.import('./machineTool_demo.js',(data)=>{
-                        data.machineTool_demo(machineTool);
+                    // machineTool_test
+                    machineTool.import('./machineTool_test.js',(data)=>{
+                        data.machineTool_test(machineTool);
                     });
                 });
                 over=true;
-                machineTool.listen_target('remove',window.document.documentElement,'observe_mutation',run);
+                machineTool.listenTarget('remove',window.document.documentElement,'observe_mutation',run);
             }
         };
-        machineTool.listen_target('add',window.document.documentElement,'observe_mutation',run,{attributes:true,attributeFilter:['class'],childList:false,subtree:false});
+        machineTool.listenTarget('add',window.document.documentElement,'observe_mutation',run,{attributes:true,attributeFilter:['class'],childList:false,subtree:false});
     }
 // #after
     // console

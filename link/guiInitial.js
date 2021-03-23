@@ -2,10 +2,10 @@
 // <<<< <<<< <<<< <<<<
 // GUI Initial
 // for Browser
-// guiInitial.js
+// GUIInitial.js
 // ==== ==== ==== ====
 // index.html
-// <script src="guiInitial.js" type="application/javascript" data-gui_initial="{
+// <script src="GUIInitial.js" type="application/javascript" data-gui_initial="{
 //     'startBackgroundColor_light': '</""/=#FFFFFF>',
 //     'startBackgroundColor_dark': '</""/=#000000>',
 //     'serviceWorker': 'sw.js',
@@ -88,20 +88,20 @@
 {
 // #before
     // console
-    window.console.log('#### start: guiInitial.js');
+    window.console.log('#### start: GUIInitial.js');
 // #import
 // #variable
 // #block
 // #build
-    // guiInitial
-    const guiInitial={
+    // GUIInitial
+    const GUIInitial={
         /*🟢*/dataset(){
             for(const value of window.document.scripts){
                 if(value.dataset.gui_initial){
                     this.dataset.config=window.JSON.parse(value.dataset.gui_initial.replace(/'/g,'"'));
                     value.removeAttribute('data-gui_initial');
-                    this.dataset.config.head_guiInitial_js=value;
-                    this.dataset.config.head_guiInitial_css_href=value.getAttribute('src').replace(/\.js/i,'.css');
+                    this.dataset.config.head_GUIInitial_js=value;
+                    this.dataset.config.head_GUIInitial_css_href=value.getAttribute('src').replace(/\.js/i,'.css');
                     break;
                 }
             }
@@ -294,14 +294,14 @@
             });
         },
         /*🟢*/head(){
-            this.dataset.config.head_guiInitial_js.insertAdjacentHTML('beforebegin','<meta name="viewport" content="width=device-width,user-scalable=no,viewport-fit=cover">');
-            this.dataset.config.head_guiInitial_js.insertAdjacentHTML('beforebegin','<meta name="format-detection" content="address=no,email=no,telephone=no">');
+            this.dataset.config.head_GUIInitial_js.insertAdjacentHTML('beforebegin','<meta name="viewport" content="width=device-width,user-scalable=no,viewport-fit=cover">');
+            this.dataset.config.head_GUIInitial_js.insertAdjacentHTML('beforebegin','<meta name="format-detection" content="address=no,email=no,telephone=no">');
             if(this.dataset.config.head_title||this.dataset.config.head_title===''){
-                this.dataset.config.head_guiInitial_js.insertAdjacentHTML('beforebegin',`<title>${this.dataset.config.head_title}</title>`);
+                this.dataset.config.head_GUIInitial_js.insertAdjacentHTML('beforebegin',`<title>${this.dataset.config.head_title}</title>`);
             }
-            this.dataset.config.head_guiInitial_js.insertAdjacentHTML('beforebegin',`<link rel="stylesheet" href="${this.dataset.config.head_guiInitial_css_href}" crossorigin>`);
+            this.dataset.config.head_GUIInitial_js.insertAdjacentHTML('beforebegin',`<link rel="stylesheet" href="${this.dataset.config.head_GUIInitial_css_href}" crossorigin>`);
             if(this.dataset.config.head_style){
-                this.dataset.config.head_guiInitial_js.insertAdjacentHTML('beforebegin',`<link rel="stylesheet" href="${this.dataset.config.head_style}" crossorigin>`);
+                this.dataset.config.head_GUIInitial_js.insertAdjacentHTML('beforebegin',`<link rel="stylesheet" href="${this.dataset.config.head_style}" crossorigin>`);
             }
             if(this.dataset.config.head_script){
                 const element=window.document.createElement('script');
@@ -517,11 +517,11 @@
             });
         }
     };
-    for(const key in guiInitial){
-        guiInitial[key]();
+    for(const key in GUIInitial){
+        GUIInitial[key]();
     }
 // #debug
 // #after
     // console
-    window.console.log('#### end: guiInitial.js');
+    window.console.log('#### end: GUIInitial.js');
 }

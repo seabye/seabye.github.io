@@ -6,8 +6,8 @@
     // machineTool
     import{machineTool}from'/link/machineTool.js';
     // Google Analytics
-    machineTool.element_create('script',{async:'',src:'https://www.googletagmanager.com/gtag/js?id=G-SBCF7D104D'},window.document.head);
-    machineTool.element_create('script',undefined,window.document.head,undefined,`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-SBCF7D104D');`);
+    machineTool.elementCreate('script',{async:'',src:'https://www.googletagmanager.com/gtag/js?id=G-SBCF7D104D'},window.document.head);
+    machineTool.elementCreate('script',undefined,window.document.head,undefined,`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-SBCF7D104D');`);
 // #variable
 // #block
 // #build
@@ -24,9 +24,9 @@
                                 <a href="//seabye.com">seabye.com</a>
                                 <span style="font-size: 38.2%;">🔴 10%</span>
                                 <div style="color: var(--ic_ve_color_black2);">
-                                    <span style="font-size: 61.8%;">guiInitial</span>
-                                    <a href="//seabye.com/link/guiInitial.js">.js</a>
-                                    <a href="//seabye.com/link/guiInitial.css">.css</a>
+                                    <span style="font-size: 61.8%;">GUIInitial</span>
+                                    <a href="//seabye.com/link/GUIInitial.js">.js</a>
+                                    <a href="//seabye.com/link/GUIInitial.css">.css</a>
                                     <span style="font-size: 38.2%;">🟢 90%</span>
                                     <div>
                                         <span style="font-size: 61.8%;">machineTool</span>
