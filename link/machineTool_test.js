@@ -8,12 +8,6 @@
 // #build
 export const machineTool_test=(machineTool)=>{
     machineTool.runObject({
-        loop(){
-            machineTool.loop(()=>{
-                window.console.log('lloooopp');
-                return true;
-            });
-        },
         async asyncLoop(){
             // window.console.log(await machineTool.asyncLoop(
             //     ()=>{
