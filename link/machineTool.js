@@ -1770,10 +1770,6 @@
     };
 // #build
 // #debug
-    // window.machineTool
-    machineTool.debug(()=>{
-        window.machineTool=machineTool;
-    });
 // #after
     // console
     window.console.log('#### end: machineTool.js');

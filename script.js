@@ -2,13 +2,6 @@
 // #before
     // console
     window.console.log('#### start: script.js');
-    // debug
-    if(window.location.hostname==='localhost'){
-        // ic_dg
-        window.document.documentElement.classList.add('ic_dg');
-        // debug
-        window.document.documentElement.classList.add('debug');
-    }
 // #import
     // machineTool
     import{machineTool}from'/link/machineTool.js';
@@ -69,6 +62,17 @@
         return false;
     },1000/60);
 // #debug
+    // debug
+    if(window.location.hostname==='localhost'){
+        // ic_dg
+        window.document.documentElement.classList.add('ic_dg');
+        // debug
+        window.document.documentElement.classList.add('debug');
+    }
+    // window.machineTool
+    machineTool.debug(()=>{
+        window.machineTool=machineTool;
+    });
     // machineTool test
     machineTool.debug(()=>{
         machineTool.runObject({
