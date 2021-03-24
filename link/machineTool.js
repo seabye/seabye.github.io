@@ -95,7 +95,7 @@
                     },wait);
                 });
             },
-            /*🟢*/observeFunction(originFunction,eventType,eventOption={},whoListen,dataPlus=()=>{}){
+            /*🟡*/observeFunction(originFunction,eventType,eventOption={},whoListen,dataPlus=()=>{}){
                 const insertEvent=new window.CustomEvent(eventType,eventOption);
                 return function(...arg){
                     insertEvent._arg_=arg;
@@ -349,7 +349,7 @@
             /*🔴*/database(){},
             /*🔴*/cache(){},
         // network data
-            /*🟢*/fetch(URI,method,dataInfo,data,contentType,callback,optionPlus,headersPlus){
+            /*🟡*/fetch(URI,method,dataInfo,data,contentType,callback,optionPlus,headersPlus){
                 const option={};
                 option.method=method;
                 if(dataInfo!==undefined){
@@ -445,7 +445,7 @@
                 }
                 return new this.doubleKeyContentCountSave.template();
             },
-            /*🟢*/listenTarget(action,target,type,callback,option={},option2='',option3=''){
+            /*🟡*/listenTarget(action,target,type,callback,option={},option2='',option3=''){
                 switch(type){
                     case'pointer_down':
                         {
@@ -1717,9 +1717,11 @@
             },
             /*🟢*/plugin_hls_observeLoad(){
                 if(!window.document.createElement('video').canPlayType('application/vnd.apple.mpegurl')){
-                    const script=window.document.createElement('script');
-                    script.setAttribute('src','https://cdn.jsdelivr.net/npm/hls.js@latest');
-                    window.document.head.insertAdjacentElement('beforeend',script);
+                    if(!'Hls'in window){
+                        const script=window.document.createElement('script');
+                        script.setAttribute('src','https://cdn.jsdelivr.net/npm/hls.js@latest');
+                        window.document.head.insertAdjacentElement('beforeend',script);
+                    }
                     const load=(video)=>{
                         if(video._hls_){
                             video._hls_.destroy();
