@@ -77,16 +77,16 @@
     machineTool.debug(()=>{
         machineTool.runObject({
             UUID36ToUUID22(){
-                window.console.log('==== UUID36ToUUID22()',machineTool.UUID36ToUUID22('8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3'));
+                window.console.log('==== 8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3 jvZe6aA5S_Kks2h_zB88ww UUID36ToUUID22()',machineTool.UUID36ToUUID22('8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3'));
             },
             UUID22ToUUID36(){
-                window.console.log('==== UUID22ToUUID36()',machineTool.UUID22ToUUID36('jvZe6aA5S_Kks2h_zB88ww'));
+                window.console.log('==== 8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3 jvZe6aA5S_Kks2h_zB88ww UUID22ToUUID36()',machineTool.UUID22ToUUID36('jvZe6aA5S_Kks2h_zB88ww'));
             },
             stringToBase64URISafeNoPad(){
-                window.console.log('==== stringToBase64URISafeNoPad()',machineTool.stringToBase64URISafeNoPad('8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3'));
+                window.console.log('==== 8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3 jvZe6aA5S_Kks2h_zB88ww stringToBase64URISafeNoPad()',machineTool.stringToBase64URISafeNoPad('8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3'));
             },
             base64URISafeNoPadToString(){
-                window.console.log('==== base64URISafeNoPadToString()',machineTool.base64URISafeNoPadToString('jvZe6aA5S_Kks2h_zB88ww'));
+                window.console.log('==== 8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3 jvZe6aA5S_Kks2h_zB88ww base64URISafeNoPadToString()',machineTool.base64URISafeNoPadToString('jvZe6aA5S_Kks2h_zB88ww'));
             }
         });
     });

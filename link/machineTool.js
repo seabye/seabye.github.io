@@ -325,8 +325,8 @@
                     return`${result.substr(0,8)}-${result.substr(8,4)}-${result.substr(12,4)}-${result.substr(16,4)}-${result.substr(20)}`;
                 }
             },
-            /*🔴*/stringToBase64URISafeNoPad(){},
-            /*🔴*/base64URISafeNoPadToString(){},
+            /*💧🔴*/stringToBase64URISafeNoPad(){},
+            /*💧🔴*/base64URISafeNoPadToString(){},
             /*🟢*/import(src,callback){
                 return import(src).then((data)=>{
                     if(callback){
@@ -337,8 +337,8 @@
                     window.console.log('==== import catch:',data);
                 });
             },
-            /*🔴*/webAssembly(){},
-            /*🔴*/isBot(type='user-agent',data=window.navigator&&window.navigator.userAgent?window.navigator.userAgent:undefined){
+            /*💧🔴*/webAssembly(){},
+            /*💧🔴*/isBot(type='user-agent',data=window.navigator&&window.navigator.userAgent?window.navigator.userAgent:undefined){
                 switch(type){
                     case'user-agent':
                         {
@@ -359,14 +359,14 @@
                 }
             },
         // local data
-            /*🔴*/file(){},
-            /*🔴*/localStorage(){},
-            /*🔴*/sessionStorage(){},
-            /*🔴*/indexedDB(){},
-            /*🔴*/webSQL(){},
-            /*🔴*/cookie(){},
-            /*🔴*/database(){},
-            /*🔴*/cache(){},
+            /*💧🔴*/file(){},
+            /*💧🔴*/localStorage(){},
+            /*💧🔴*/sessionStorage(){},
+            /*💧🔴*/indexedDB(){},
+            /*💧🔴*/webSQL(){},
+            /*💧🔴*/cookie(){},
+            /*💧🔴*/database(){},
+            /*💧🔴*/cache(){},
         // network data
             /*🟢*/fetch(URI,method,data_info,data,content_type,callback,option_add,headers_add){
                 const option={};
@@ -446,9 +446,9 @@
                 });
             },
         // command line interface
-            /*🔴*/cli(){},
+            /*💧🔴*/cli(){},
         // graphical user interface
-            /*🔴*/cliEmulator(){},
+            /*💧🔴*/cliEmulator(){},
             /*🟡*/doubleKeyContentCount(){
                 if(!this.doubleKeyContentCount.template){
                     this.doubleKeyContentCount.template=class template{
@@ -1587,7 +1587,7 @@
                         break;
                 }
             },
-            /*🔴*/startLoad(type,callback){
+            /*💧🔴*/startLoad(type,callback){
                 window.document.addEventListener('readystatechange',(event)=>{
                     switch(event.target.readyState){
                         case'loading':
@@ -1759,10 +1759,10 @@
                 }
             },
         // graphics
-            /*🔴*/plugin_openCV_removeWatermark(){},
+            /*💧🔴*/plugin_openCV_removeWatermark(){},
         // application programming interface
-            /*🔴*/listenPort(){},
-            /*🔴*/portReceive(URI,method,data,callback,data2){
+            /*💧🔴*/listenPort(){},
+            /*💧🔴*/portReceive(URI,method,data,callback,data2){
                 const result={
                     URI:URI,
                     method:method,
@@ -1776,13 +1776,13 @@
                 }
                 return result;
             },
-            /*🔴*/portReturn(){},
-            /*🔴*/route(){},
-            /*🔴*/extract(){},
-            /*🔴*/middleware(){},
-            /*🔴*/staticFile(){},
-            /*🔴*/siteMapGenerator(){},
-            /*🔴*/siteMapFileGenerator(){}
+            /*💧🔴*/portReturn(){},
+            /*💧🔴*/route(){},
+            /*💧🔴*/extract(){},
+            /*💧🔴*/middleware(){},
+            /*💧🔴*/staticFile(){},
+            /*💧🔴*/siteMapGenerator(){},
+            /*💧🔴*/siteMapHTMLGenerator(){}
     };
 // #build
 // #debug
