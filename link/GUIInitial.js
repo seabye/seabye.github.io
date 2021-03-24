@@ -159,40 +159,40 @@
         },
         /*🟢*/navigator(){
             const userAgent=window.navigator.userAgent;
-            const class_=window.document.documentElement.classList;
+            const cls=window.document.documentElement.classList;
             if(userAgent.match(/bot|spider/i)){
-                class_.add('ic_nr_user_bot');
+                cls.add('ic_nr_user_bot');
             }
             if(userAgent.match(/Mac OS/i)&&!userAgent.match(/iPhone|iPad/i)){
-                class_.add('ic_nr_system_brand_apple','ic_nr_system_macos');
+                cls.add('ic_nr_system_brand_apple','ic_nr_system_macos');
             }else if(userAgent.match(/Windows/i)){
-                class_.add('ic_nr_system_brand_microsoft','ic_nr_system_windows');
+                cls.add('ic_nr_system_brand_microsoft','ic_nr_system_windows');
             }else if(userAgent.match(/Linux/i)&&!userAgent.match(/Android/i)){
-                class_.add('ic_nr_system_linux');
+                cls.add('ic_nr_system_linux');
             }else if(userAgent.match(/CrOS/i)){
-                class_.add('ic_nr_system_brand_google','ic_nr_system_chromeos');
+                cls.add('ic_nr_system_brand_google','ic_nr_system_chromeos');
             }else if(userAgent.match(/iPhone|iPad/i)){
-                class_.add('ic_nr_system_brand_apple','ic_nr_system_ios');
+                cls.add('ic_nr_system_brand_apple','ic_nr_system_ios');
             }else if(userAgent.match(/Android/i)){
-                class_.add('ic_nr_system_brand_google','ic_nr_system_android');
+                cls.add('ic_nr_system_brand_google','ic_nr_system_android');
             }
             if(userAgent.match(/Firefox/i)&&!userAgent.match(/FxiOS/i)){
-                class_.add('ic_nr_browser_firefox');
+                cls.add('ic_nr_browser_firefox');
             }else if((userAgent.match(/Safari/i)&&!userAgent.match(/Chrome|Edg/i))||userAgent.match(/iPhone|iPad/i)){
-                class_.add('ic_nr_browser_safari');
+                cls.add('ic_nr_browser_safari');
             }else if(userAgent.match(/Chrome/i)&&!userAgent.match(/CriOS|Edg/i)){
-                class_.add('ic_nr_browser_chrome');
+                cls.add('ic_nr_browser_chrome');
             }else if(userAgent.match(/Edg/i)&&!userAgent.match(/EdgiOS/i)){
-                class_.add('ic_nr_browser_edge');
+                cls.add('ic_nr_browser_edge');
             }
             if(userAgent.match(/iPhone|iPad|Android|Mobile/i)){
-                class_.add('ic_nr_platform_mobile');
+                cls.add('ic_nr_platform_mobile');
             }
             if(window.location.search.replace(/\?/,'').split('&').includes('pwa')){
-                class_.add('ic_nr_pwa');
+                cls.add('ic_nr_pwa');
             }
             if(window.document.createElement('video').canPlayType('application/vnd.apple.mpegurl')){
-                class_.add('ic_nr_video_m3u8');
+                cls.add('ic_nr_video_m3u8');
             }
         },
         /*🟢*/navigator_media(){

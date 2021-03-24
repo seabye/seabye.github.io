@@ -16,12 +16,12 @@
     // machineTool
     export const machineTool={
         // base
-            /*🟢*/throttle(callback,wait=1000/24,first=false){
-                let timeout=null;
+            /*💧🟢*/throttle(callback,wait=1000/24,first=false){
+                let timeOut=null;
                 return function(...arg){
                     const set=()=>{
-                        timeout=window.setTimeout(()=>{
-                            timeout=null;
+                        timeOut=window.setTimeout(()=>{
+                            timeOut=null;
                             callback.apply(this,arg);
                         },wait);
                     };
@@ -30,17 +30,17 @@
                         callback.apply(this,arg);
                         set();
                     }else{
-                        if(!timeout){
+                        if(!timeOut){
                             set();
                         }
                     }
                 };
             },
-            /*🟢*/debounce(callback,wait=1000/24,first=false){
-                let timeout=null;
+            /*💧🟢*/debounce(callback,wait=1000/24,first=false){
+                let timeOut=null;
                 return function(...arg){
                     const set=()=>{
-                        timeout=window.setTimeout(()=>{
+                        timeOut=window.setTimeout(()=>{
                             callback.apply(this,arg);
                         },wait);
                     };
@@ -49,19 +49,19 @@
                         callback.apply(this,arg);
                         set();
                     }else{
-                        window.clearTimeout(timeout);
+                        window.clearTimeout(timeOut);
                         set();
                     }
                 };
             },
             /*🟢*/loop(condition,wait=1000/24){
                 const result=condition();
-                if(!result){
+                if(result){
+                    return result;
+                }else{
                     window.setTimeout(()=>{
                         this.loop(condition,wait);
                     },wait);
-                }else{
-                    return result;
                 }
             },
             /*🟢*/asyncLoop(condition,callback,wait=1000/24,count,count_callback){
@@ -237,17 +237,56 @@
                         break;
                 }
             },
-            /*🟢*/import(src,callback){
-                return import(src).then((data)=>{
-                    if(callback){
-                        callback(data);
-                    }
-                    return data;
-                }).catch((data)=>{
-                    window.console.log('==== import catch:',data);
-                });
+            /*🟢*/runObject(object){
+                for(const key in object){
+                    object[key]();
+                }
             },
-            /*🔴*/webAssembly(){},
+            /*🟢*/random(){
+                return window.Math.random().toString().replace(/0\./,'');
+            },
+            /*🟢*/hashCode(string){
+                let result;
+                for(let key=0,length=string.length;key<length;key++){
+                    result=window.Math.imul(31,result)+string.charCodeAt(key)|0;
+                }
+                return result;
+            },
+            /*🟢*/isPortrait(width,height,true_callback,false_callback){
+                if(width<=height){
+                    if(true_callback){
+                        true_callback();
+                    }
+                    return true;
+                }
+                if(false_callback){
+                    false_callback();
+                }
+                return false;
+            },
+            /*🟢*/searchObject(data=window.location&&window.location.search?window.location.search:undefined){
+                const result={};
+                this.for(data.replace(/\?/,'').split('&'),(...data)=>{
+                    const right=data[2].split('=')[1];
+                    result[data[2].split('=')[0]]=right?right:'';
+                },0);
+                return result;
+            },
+            /*🟢*/humanTime(millisecond,leading_zero=[false,true,true],unit=[':',':','']){
+                const zero=(number)=>{
+                    return `${number<10?0:''}${number}`;
+                };
+                const hour=window.Math.floor(millisecond/(3600*1000));
+                const minute=window.Math.floor(millisecond%(3600*1000)/(60*1000));
+                const second=window.Math.floor(millisecond%(60*1000)/1000);
+                return `${leading_zero[0]?zero(hour):hour}${unit[0]}${leading_zero[1]?zero(minute):minute}${unit[1]}${leading_zero[2]?zero(second):second}${unit[2]}`;
+            },
+            /*🟢*/percent(total,current,integer=true,unit='%'){
+                if(integer){
+                    return `${(current/total*100).toFixed()}${unit}`;
+                }
+                return `${current/total*100}${unit}`;
+            },
             /*🟢*/UUID36ToUUID22(uuid_36){
                 if(uuid_36.length===36){
                     const uuid_32='0'+uuid_36.replace(/-/g,'');
@@ -288,34 +327,18 @@
             },
             /*🔴*/stringToBase64URISafeNoPad(){},
             /*🔴*/base64URISafeNoPadToString(){},
-            /*🟢*/hashCode(string){
-                let result;
-                for(let key=0,length=string.length;key<length;key++){
-                    result=window.Math.imul(31,result)+string.charCodeAt(key)|0;
-                }
-                return result;
-            },
-            /*🟢*/random(){
-                return window.Math.random().toString().replace(/0\./,'');
-            },
-            /*🟢*/isPortrait(width,height,true_callback,false_callback){
-                if(width<=height){
-                    if(true_callback){
-                        true_callback();
+            /*🟢*/import(src,callback){
+                return import(src).then((data)=>{
+                    if(callback){
+                        callback(data);
                     }
-                    return true;
-                }
-                if(false_callback){
-                    false_callback();
-                }
-                return false;
+                    return data;
+                }).catch((data)=>{
+                    window.console.log('==== import catch:',data);
+                });
             },
-            /*🟢*/runObject(object){
-                for(const key in object){
-                    object[key]();
-                }
-            },
-            /*🔴*/isBot(type='user-agent',data=window.navigator.userAgent){
+            /*🔴*/webAssembly(){},
+            /*🔴*/isBot(type='user-agent',data=window.navigator&&window.navigator.userAgent?window.navigator.userAgent:undefined){
                 switch(type){
                     case'user-agent':
                         {
@@ -334,29 +357,6 @@
                     default:
                         break;
                 }
-            },
-            /*🟢*/searchObject(data=window.location.search){
-                const result={};
-                this.for(data.replace(/\?/,'').split('&'),(...data)=>{
-                    const right=data[2].split('=')[1];
-                    result[data[2].split('=')[0]]=right?right:'';
-                },0);
-                return result;
-            },
-            /*🟢*/humanTime(millisecond,leading_zero=[false,true,true],unit=[':',':','']){
-                const zero=(number)=>{
-                    return `${number<10?0:''}${number}`;
-                };
-                const hour=window.Math.floor(millisecond/(3600*1000));
-                const minute=window.Math.floor(millisecond%(3600*1000)/(60*1000));
-                const second=window.Math.floor(millisecond%(60*1000)/1000);
-                return `${leading_zero[0]?zero(hour):hour}${unit[0]}${leading_zero[1]?zero(minute):minute}${unit[1]}${leading_zero[2]?zero(second):second}${unit[2]}`;
-            },
-            /*🟢*/percent(total,current,integer=true,unit='%'){
-                if(integer){
-                    return `${(current/total*100).toFixed()}${unit}`;
-                }
-                return `${current/total*100}${unit}`;
             },
         // local data
             /*🔴*/file(){},
@@ -470,7 +470,7 @@
                 }
                 return new this.doubleKeyContentCount.template();
             },
-            /*🟡*/listenTarget(action,target,type,callback,option={},other='',other2=''){
+            /*🟡*/listenTarget(action,target,type,callback,option={},option2='',option3=''){
                 const match=/[\r\n\s]/g;
                 switch(type){
                     case'pointer_down':
@@ -578,7 +578,7 @@
                                                             data.target.parentNode.removeEventListener('pointerup',this.listenTarget.pointer_up[once_id]);
                                                         }
                                                     };
-                                                    if(other2){
+                                                    if(option3){
                                                         const move=(event)=>{
                                                             if(event.y>=data.y+6||event.y<=data.y-6){
                                                                 window.removeEventListener('pointermove',move);
@@ -593,8 +593,8 @@
                                                     window.addEventListener('touchend',remove_event,{once:true});
                                                     window.addEventListener('dragend',remove_event,{once:true});
                                                 };
-                                                if(typeof other==='number'){
-                                                    if(data.button===other){
+                                                if(typeof option2==='number'){
+                                                    if(data.button===option2){
                                                         run();
                                                     }
                                                 }else{
@@ -1187,8 +1187,8 @@
                                     //                     listen_type<string/'item,item2...'/>,
                                     //                     callback<function(event_data),undefined=()=>{}>,
                                     //                     option<object,undefined>,
-                                    //                     other<any,undefined>,
-                                    //                     other2<any,undefined>
+                                    //                     option2<any,undefined/'pointer_up...'/>,
+                                    //                     option3<any,undefined/'pointer_up...'/>
                                     //                 ]...
                                     //             ]
                                     //         ]
@@ -1205,8 +1205,8 @@
                                         const listen_type=button[3];
                                         let callback=button[4];
                                         const option=button[5];
-                                        const other=button[6];
-                                        const other2=button[7];
+                                        const option2=button[6];
+                                        const option3=button[7];
                                         if(!callback){
                                             callback=()=>{};
                                         }
@@ -1251,8 +1251,8 @@
                                         }
                                         for(const button_element of button_element_array){
                                             for(const value of listen_type.split(',')){
-                                                this.listenTarget('add',button_element,value,event_function,option,other,other2);
-                                                this.listenTarget('add',button_element,value,callback,option,other,other2);
+                                                this.listenTarget('add',button_element,value,event_function,option,option2,option3);
+                                                this.listenTarget('add',button_element,value,callback,option,option2,option3);
                                             }
                                         }
                                     }
@@ -1278,8 +1278,8 @@
                                     //                     listen_type<string/'item,item2...'/>,
                                     //                     callback<function(event_data),undefined=()=>{}>,
                                     //                     option<object,undefined>,
-                                    //                     other<any,undefined>,
-                                    //                     other2<any,undefined>
+                                    //                     option2<any,undefined/'pointer_up...'/>,
+                                    //                     option3<any,undefined/'pointer_up...'/>
                                     //                 ]...
                                     //             ]
                                     //         ]
@@ -1295,8 +1295,8 @@
                                         const listen_type=content[3];
                                         let callback=content[4];
                                         const option=content[5];
-                                        const other=content[6];
-                                        const other2=content[7];
+                                        const option2=content[6];
+                                        const option3=content[7];
                                         if(!callback){
                                             callback=()=>{};
                                         }
@@ -1328,8 +1328,8 @@
                                         }
                                         for(const button_element of button_element_array){
                                             for(const value of listen_type.split(',')){
-                                                this.listenTarget('add',button_element,value,event_function,option,other,other2);
-                                                this.listenTarget('add',button_element,value,callback,option,other,other2);
+                                                this.listenTarget('add',button_element,value,event_function,option,option2,option3);
+                                                this.listenTarget('add',button_element,value,callback,option,option2,option3);
                                             }
                                         }
                                     }
@@ -1493,6 +1493,20 @@
             /*🟢*/removeElement(element){
                 element.parentElement.removeChild(element);
             },
+            /*🟢*/removeEmpty(element,...attribute){
+                if(attribute[0]){
+                    for(let key=0,length=attribute.length;key<length;key++){
+                        element.removeAttribute(attribute[key]);
+                    }
+                }else{
+                    if(!element.getAttribute('class')){
+                        element.removeAttribute('class');
+                    }
+                    if(!element.style[0]){
+                        element.removeAttribute('style');
+                    }
+                }
+            },
             /*🟢*/findOuter(find,start,end=window.document.documentElement,true_callback,false_callback){
                 if(find instanceof window.HTMLElement&&start===find){
                     if(true_callback){
@@ -1515,6 +1529,15 @@
                     }
                 }
                 return this.findOuter(find,start.parentElement,end,true_callback,false_callback);
+            },
+            /*🟢*/insertStyle(style,wait){
+                const element=this.elementCreate('style',undefined,window.document.head,undefined,style);
+                if(wait){
+                    window.setTimeout(()=>{
+                        this.removeElement(element);
+                    },wait);
+                }
+                return element;
             },
             /*🟢*/elementPath(element){
                 let result='';
@@ -1548,19 +1571,38 @@
                         break;
                 }
             },
-            /*🟢*/removeEmpty(element,...attribute){
-                if(attribute[0]){
-                    for(let key=0,length=attribute.length;key<length;key++){
-                        element.removeAttribute(attribute[key]);
-                    }
-                }else{
-                    if(!element.getAttribute('class')){
-                        element.removeAttribute('class');
-                    }
-                    if(!element.style[0]){
-                        element.removeAttribute('style');
-                    }
+            /*🟢*/setURI(type,path){
+                switch(type){
+                    case'push':
+                        {
+                            window.history.pushState(null,null,path);
+                        }
+                        break;
+                    case'replace':
+                        {
+                            window.history.replaceState(null,null,path);
+                        }
+                        break;
+                    default:
+                        break;
                 }
+            },
+            /*🔴*/startLoad(type,callback){
+                window.document.addEventListener('readystatechange',(event)=>{
+                    switch(event.target.readyState){
+                        case'loading':
+                            {}
+                            break;
+                        case'interactive':
+                            {}
+                            break;
+                        case'complete':
+                            {}
+                            break;
+                        default:
+                            break;
+                    }
+                });
             },
             /*🟢*/fullScreen(element=window.document.documentElement,top=false){
                 const root=top?window.top:window;
@@ -1610,32 +1652,6 @@
                 if(window.document&&window.document.documentElement.classList.contains('debug')){
                     callback();
                 }
-            },
-            /*🔴*/startLoad(type,callback){
-                window.document.addEventListener('readystatechange',(event)=>{
-                    switch(event.target.readyState){
-                        case'loading':
-                            {}
-                            break;
-                        case'interactive':
-                            {}
-                            break;
-                        case'complete':
-                            {}
-                            break;
-                        default:
-                            break;
-                    }
-                });
-            },
-            /*🟢*/insertStyle(style,wait){
-                const element=this.elementCreate('style',undefined,window.document.head,undefined,style);
-                if(wait){
-                    window.setTimeout(()=>{
-                        this.removeElement(element);
-                    },wait);
-                }
-                return element;
             },
             /*🟢*/plugin_hls_load(mode='auto',video,src,poster='',config={
                 autoStartLoad:video.getAttribute('preload')==='auto'?true:false,
@@ -1746,14 +1762,14 @@
             /*🔴*/plugin_openCV_removeWatermark(){},
         // application programming interface
             /*🔴*/listenPort(){},
-            /*🔴*/portReceive(URI,method,data,callback,other_data){
+            /*🔴*/portReceive(URI,method,data,callback,data2){
                 const result={
                     URI:URI,
                     method:method,
                     data:data
                 };
-                if(other_data){
-                    window.Object.assign(result,other_data);
+                if(data2){
+                    window.Object.assign(result,data2);
                 }
                 if(callback){
                     callback(result);
