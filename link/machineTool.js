@@ -64,35 +64,34 @@
                             window.console.log('==== loop false, count:',count);
                         }
                     });
+                    const loop=()=>{
+                        return new window.Promise((resolve)=>{
+                            window.setTimeout(()=>{
+                                resolve(this.loop(condition,wait,count,countZeroCallback));
+                            },wait);
+                        });
+                    };
                     if(typeof count==='number'){
                         count-=1;
                         if(count){
-                            return new window.Promise((resolve)=>{
-                                window.setTimeout(async()=>{
-                                    resolve(await this.loop(condition,wait,count,countZeroCallback));
-                                },wait);
-                            });
+                            return loop();
                         }else{
                             if(countZeroCallback){
                                 this.debug(()=>{
                                     window.console.log('==== loop false, countZeroCallback()');
                                 });
-                                return await countZeroCallback();
+                                return countZeroCallback();
                             }
                         }
                     }else{
-                        return new window.Promise((resolve)=>{
-                            window.setTimeout(async()=>{
-                                resolve(await this.loop(condition,wait,count,countZeroCallback));
-                            },wait);
-                        });
+                        return loop();
                     }
                 }
             },
             /*🟢*/timeOut(callback,wait=1000/24){
                 return new window.Promise((resolve)=>{
-                    window.setTimeout(async()=>{
-                        resolve(await callback());
+                    window.setTimeout(()=>{
+                        resolve(callback());
                     },wait);
                 });
             },
@@ -231,15 +230,15 @@
                 }
                 return result;
             },
-            /*🟢*/async isPortrait(width,height,trueCallback,falseCallback){
+            /*🟢*/isPortrait(width,height,trueCallback,falseCallback){
                 if(width<=height){
                     if(trueCallback){
-                        return await trueCallback();
+                        trueCallback();
                     }
                     return true;
                 }
                 if(falseCallback){
-                    return await falseCallback();
+                    falseCallback();
                 }
                 return false;
             },
@@ -307,9 +306,9 @@
             /*🔴*/stringToBase64URISafeNoPad(){},
             /*🔴*/base64URISafeNoPadToString(){},
             /*🟢*/import(src,callback){
-                return import(src).then(async(data)=>{
+                return import(src).then((data)=>{
                     if(callback){
-                        return await callback(data);
+                        return callback(data);
                     }
                     return data;
                 }).catch((data)=>{
@@ -405,13 +404,13 @@
                 return window.fetch(URI,option).then((data)=>{
                     result.status=data.status;
                     return data[contentType]();
-                }).then(async(data)=>{
+                }).then((data)=>{
                     result.result=data;
                     this.debug(()=>{
                         window.console.log('==== fetch result:',result);
                     });
                     if(callback){
-                        return await callback(result);
+                        return callback(result);
                     }
                     return result;
                 }).catch((data)=>{
@@ -1735,7 +1734,7 @@
             /*🔴*/plugin_openCV_removeWatermark(){},
         // application programming interface
             /*🔴*/listenPort(){},
-            /*🔴*/async portReceive(URI,method,data,callback,data2){
+            /*🔴*/portReceive(URI,method,data,callback,data2){
                 const result={
                     URI:URI,
                     method:method,
@@ -1745,7 +1744,7 @@
                     window.Object.assign(result,data2);
                 }
                 if(callback){
-                    return await callback(result);
+                    return callback(result);
                 }
                 return result;
             },
