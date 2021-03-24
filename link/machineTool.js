@@ -16,7 +16,7 @@
     // machineTool
     export const machineTool={
         // base
-            /*💧🟢*/throttle(callback,wait=1000/24,first=false){
+            /*🟢*/throttle(callback,wait=1000/24,first=false){
                 let timeOut=null;
                 return function(...arg){
                     const set=()=>{
@@ -36,7 +36,7 @@
                     }
                 };
             },
-            /*💧🟢*/debounce(callback,wait=1000/24,first=false){
+            /*🟢*/debounce(callback,wait=1000/24,first=false){
                 let timeOut=null;
                 return function(...arg){
                     const set=()=>{
@@ -54,72 +54,56 @@
                     }
                 };
             },
-            /*🟢*/loop(condition,wait=1000/24){
-                const result=condition();
+            /*🚩🟢*/async loop(condition,wait=1000/24,count,overCallback){
+                const result=await condition();
                 if(result){
                     return result;
                 }else{
-                    window.setTimeout(()=>{
-                        this.loop(condition,wait);
-                    },wait);
-                }
-            },
-            /*🟢*/asyncLoop(condition,callback,wait=1000/24,count,count_callback){
-                return(async()=>{
-                    const run=async()=>{
-                        const condition_result=await condition();
-                        if(condition_result){
-                            if(callback){
-                                return callback(condition_result);
-                            }else{
-                                return condition_result;
-                            }
-                        }else{
+                    if(typeof count==='number'){
+                        count-=1;
+                        if(count){
                             return new window.Promise((resolve)=>{
-                                window.setTimeout(()=>{
-                                    resolve(this.asyncLoop(condition,callback,wait,count,count_callback));
+                                window.setTimeout(async()=>{
+                                    resolve(await this.loop(condition,wait,count,overCallback));
                                 },wait);
                             });
-                        }
-                    };
-                    if(typeof count==='number'){
-                        if(count!==0){
-                            count-=1;
-                            return await run();
                         }else{
-                            if(count_callback){
-                                return count_callback();
+                            if(overCallback){
+                                return await overCallback();
                             }
                         }
                     }else{
-                        return await run();
+                        return new window.Promise((resolve)=>{
+                            window.setTimeout(async()=>{
+                                resolve(await this.loop(condition,wait,count,overCallback));
+                            },wait);
+                        });
                     }
-                })();
+                }
             },
             /*🟢*/timeOut(callback,wait=1000/24){
                 return new window.Promise((resolve)=>{
-                    window.setTimeout(()=>{
+                    window.setTimeout(async()=>{
                         if(typeof callback==='function'){
-                            resolve(callback());
+                            resolve(await callback());
                         }else{
-                            resolve(callback);
+                            resolve(await callback);
                         }
                     },wait);
                 });
             },
-            /*🟡*/observeFunction(origin_function,event_type,event_option={},who_listen,data_plus=()=>{}){
-                const insert_event=new window.CustomEvent(event_type,event_option);
+            /*🚩🟡*/observeFunction(originFunction,eventType,eventOption={},whoListen,dataPlus=()=>{}){
+                const insert_event=new window.CustomEvent(eventType,eventOption);
                 return function(...arg){
                     insert_event.function_arg=arg;
-                    insert_event[event_type]=data_plus.apply(this,arg);
-                    who_listen.dispatchEvent(insert_event);
-                    return origin_function.apply(this,arg);
+                    insert_event[eventType]=dataPlus.apply(this,arg);
+                    whoListen.dispatchEvent(insert_event);
+                    return originFunction.apply(this,arg);
                 };
-                // remove observe
             },
-            /*🟢*/for(data,callback,condition_depth,type){
-                switch(typeof type){
-                    case'undefined':
+            /*🟢*/for(data,callback,conditionDepth,type='auto'){
+                switch(type){
+                    case'auto':
                         {
                             const run=(data,depth)=>{
                                 let next=[];
@@ -127,8 +111,8 @@
                                     case'[object Array]':
                                         {
                                             for(let key=0,length=data.length;key<length;key++){
-                                                if(typeof condition_depth==='number'){
-                                                    if(condition_depth===depth){
+                                                if(typeof conditionDepth==='number'){
+                                                    if(conditionDepth===depth){
                                                         callback(key,key,data[key],depth,window.Object.prototype.toString.call(data[key])==='[object Array]'?'array':window.Object.prototype.toString.call(data[key])==='[object Object]'?'object':depth);
                                                     }
                                                 }else{
@@ -144,8 +128,8 @@
                                         {
                                             let count=0;
                                             for(const key in data){
-                                                if(typeof condition_depth==='number'){
-                                                    if(condition_depth===depth){
+                                                if(typeof conditionDepth==='number'){
+                                                    if(conditionDepth===depth){
                                                         callback(count,key,data[key],depth,window.Object.prototype.toString.call(data[key])==='[object Object]'?'object':window.Object.prototype.toString.call(data[key])==='[object Array]'?'array':depth);
                                                         count+=1;
                                                     }
@@ -171,69 +155,60 @@
                             run(data,0);
                         }
                         break;
-                    default:
+                    case'array':
                         {
-                            switch(window.Object.prototype.toString.call(data)){
-                                case'[object Array]':
-                                    {
-                                        const run=(data,depth)=>{
-                                            let next=[];
-                                            for(let key=0,length=data.length;key<length;key++){
-                                                if(typeof condition_depth==='number'){
-                                                    if(condition_depth===depth){
-                                                        callback(key,key,data[key],depth,window.Object.prototype.toString.call(data[key])==='[object Array]'?'array':depth);
-                                                    }
-                                                }else{
-                                                    callback(key,key,data[key],depth,window.Object.prototype.toString.call(data[key])==='[object Array]'?'array':depth);
-                                                }
-                                                if(window.Object.prototype.toString.call(data[key])==='[object Array]'){
-                                                    next.push(data[key]);
-                                                };
-                                            }
-                                            if(next.length){
-                                                for(let key=0,length=next.length;key<length;key++){
-                                                    run(next[key],depth+1);
-                                                }
-                                            }
-                                        };
-                                        run(data,0);
+                            const run=(data,depth)=>{
+                                let next=[];
+                                for(let key=0,length=data.length;key<length;key++){
+                                    if(typeof conditionDepth==='number'){
+                                        if(conditionDepth===depth){
+                                            callback(key,key,data[key],depth,window.Object.prototype.toString.call(data[key])==='[object Array]'?'array':depth);
+                                        }
+                                    }else{
+                                        callback(key,key,data[key],depth,window.Object.prototype.toString.call(data[key])==='[object Array]'?'array':depth);
                                     }
-                                    break;
-                                case'[object Object]':
-                                    {
-                                        const run=(data,depth)=>{
-                                            let next=[];
-                                            let count=0;
-                                            for(const key in data){
-                                                if(typeof condition_depth==='number'){
-                                                    if(condition_depth===depth){
-                                                        callback(count,key,data[key],depth,window.Object.prototype.toString.call(data[key])==='[object Object]'?'object':depth);
-                                                        count+=1;
-                                                    }
-                                                }else{
-                                                    callback(count,key,data[key],depth,window.Object.prototype.toString.call(data[key])==='[object Object]'?'object':depth);
-                                                    count+=1;
-                                                }
-                                                if(window.Object.prototype.toString.call(data[key])==='[object Object]'){
-                                                    next.push(data[key]);
-                                                };
-                                            }
-                                            if(next.length){
-                                                for(let key=0,length=next.length;key<length;key++){
-                                                    run(next[key],depth+1);
-                                                }
-                                            }
-                                        };
-                                        run(data,0);
+                                    if(window.Object.prototype.toString.call(data[key])==='[object Array]'){
+                                        next.push(data[key]);
+                                    };
+                                }
+                                if(next.length){
+                                    for(let key=0,length=next.length;key<length;key++){
+                                        run(next[key],depth+1);
                                     }
-                                    break;
-                                default:
-                                    // {
-                                    //     if(data instanceof window.HTMLElement){}
-                                    // }
-                                    break;
-                            }
+                                }
+                            };
+                            run(data,0);
                         }
+                        break;
+                    case'object':
+                        {
+                            const run=(data,depth)=>{
+                                let next=[];
+                                let count=0;
+                                for(const key in data){
+                                    if(typeof conditionDepth==='number'){
+                                        if(conditionDepth===depth){
+                                            callback(count,key,data[key],depth,window.Object.prototype.toString.call(data[key])==='[object Object]'?'object':depth);
+                                            count+=1;
+                                        }
+                                    }else{
+                                        callback(count,key,data[key],depth,window.Object.prototype.toString.call(data[key])==='[object Object]'?'object':depth);
+                                        count+=1;
+                                    }
+                                    if(window.Object.prototype.toString.call(data[key])==='[object Object]'){
+                                        next.push(data[key]);
+                                    };
+                                }
+                                if(next.length){
+                                    for(let key=0,length=next.length;key<length;key++){
+                                        run(next[key],depth+1);
+                                    }
+                                }
+                            };
+                            run(data,0);
+                        }
+                        break;
+                    default:
                         break;
                 }
             },
@@ -243,7 +218,7 @@
                 }
             },
             /*🟢*/random(){
-                return window.Math.random().toString().replace(/0\./,'');
+                return window.Math.random().toString().replace(/^0\./,'');
             },
             /*🟢*/hashCode(string){
                 let result;
@@ -252,58 +227,58 @@
                 }
                 return result;
             },
-            /*🟢*/isPortrait(width,height,true_callback,false_callback){
+            /*🟢*/async isPortrait(width,height,trueCallback,falseCallback){
                 if(width<=height){
-                    if(true_callback){
-                        true_callback();
+                    if(trueCallback){
+                        return await trueCallback();
                     }
                     return true;
                 }
-                if(false_callback){
-                    false_callback();
+                if(falseCallback){
+                    return await falseCallback();
                 }
                 return false;
             },
             /*🟢*/searchObject(data=window.location&&window.location.search?window.location.search:undefined){
                 const result={};
-                this.for(data.replace(/\?/,'').split('&'),(...data)=>{
+                this.for(data.replace(/^\?/,'').split('&'),(...data)=>{
                     const right=data[2].split('=')[1];
                     result[data[2].split('=')[0]]=right?right:'';
                 },0);
                 return result;
             },
-            /*🟢*/humanTime(millisecond,leading_zero=[false,true,true],unit=[':',':','']){
+            /*🟢*/humanTime(millisecond,leadingZero=[false,true,true],unit=[':',':','']){
                 const zero=(number)=>{
-                    return `${number<10?0:''}${number}`;
+                    return`${number<10?0:''}${number}`;
                 };
                 const hour=window.Math.floor(millisecond/(3600*1000));
                 const minute=window.Math.floor(millisecond%(3600*1000)/(60*1000));
                 const second=window.Math.floor(millisecond%(60*1000)/1000);
-                return `${leading_zero[0]?zero(hour):hour}${unit[0]}${leading_zero[1]?zero(minute):minute}${unit[1]}${leading_zero[2]?zero(second):second}${unit[2]}`;
+                return`${leadingZero[0]?zero(hour):hour}${unit[0]}${leadingZero[1]?zero(minute):minute}${unit[1]}${leadingZero[2]?zero(second):second}${unit[2]}`;
             },
             /*🟢*/percent(total,current,integer=true,unit='%'){
                 if(integer){
-                    return `${(current/total*100).toFixed()}${unit}`;
+                    return`${(current/total*100).toFixed()}${unit}`;
                 }
-                return `${current/total*100}${unit}`;
+                return`${current/total*100}${unit}`;
             },
-            /*🟢*/UUID36ToUUID22(uuid_36){
-                if(uuid_36.length===36){
-                    const uuid_32='0'+uuid_36.replace(/-/g,'');
-                    if(uuid_32.length===33){
+            /*🟢*/UUID36ToUUID22(UUID36){
+                if(UUID36.length===36){
+                    const UUID32='0'+UUID36.replace(/-/g,'');
+                    if(UUID32.length===33){
                         const char='0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_-';
                         let result='';
                         for(let key=0;key<11;key++){
                             const start=key*3;
-                            const str=window.parseInt(uuid_32[start]+uuid_32[start+1]+uuid_32[start+2],16);
+                            const str=window.parseInt(UUID32[start]+UUID32[start+1]+UUID32[start+2],16);
                             result+=char[window.Math.floor(str/64)]+char[str%64];
                         }
                         return result;
                     }
                 }
             },
-            /*🟢*/UUID22ToUUID36(uuid_22){
-                if(uuid_22.length===22){
+            /*🟢*/UUID22ToUUID36(UUID22){
+                if(UUID22.length===22){
                     const get_char_index=()=>{
                         const char='0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_-';
                         let result={};
@@ -313,10 +288,10 @@
                         }
                         return result;
                     };
-                    let char_index=get_char_index();
+                    let charIndex=get_char_index();
                     let result='';
                     for(let key=0;key<22;key+=2){
-                        let u=(char_index[uuid_22[key]]*64+char_index[uuid_22[key+1]]).toString(16).padStart(3,'0');
+                        let u=(charIndex[UUID22[key]]*64+charIndex[UUID22[key+1]]).toString(16).padStart(3,'0');
                         if(key===0&&u[0]==='0'){
                             u=u.substr(1);
                         }
@@ -325,20 +300,20 @@
                     return`${result.substr(0,8)}-${result.substr(8,4)}-${result.substr(12,4)}-${result.substr(16,4)}-${result.substr(20)}`;
                 }
             },
-            /*💧🔴*/stringToBase64URISafeNoPad(){},
-            /*💧🔴*/base64URISafeNoPadToString(){},
+            /*🔴*/stringToBase64URISafeNoPad(){},
+            /*🔴*/base64URISafeNoPadToString(){},
             /*🟢*/import(src,callback){
-                return import(src).then((data)=>{
+                return import(src).then(async(data)=>{
                     if(callback){
-                        callback(data);
+                        return await callback(data);
                     }
                     return data;
                 }).catch((data)=>{
                     window.console.log('==== import catch:',data);
                 });
             },
-            /*💧🔴*/webAssembly(){},
-            /*💧🔴*/isBot(type='user-agent',data=window.navigator&&window.navigator.userAgent?window.navigator.userAgent:undefined){
+            /*🔴*/webAssembly(){},
+            /*🔴*/isBot(type='user-agent',data=window.navigator&&window.navigator.userAgent?window.navigator.userAgent:undefined){
                 switch(type){
                     case'user-agent':
                         {
@@ -359,20 +334,20 @@
                 }
             },
         // local data
-            /*💧🔴*/file(){},
-            /*💧🔴*/localStorage(){},
-            /*💧🔴*/sessionStorage(){},
-            /*💧🔴*/indexedDB(){},
-            /*💧🔴*/webSQL(){},
-            /*💧🔴*/cookie(){},
-            /*💧🔴*/database(){},
-            /*💧🔴*/cache(){},
+            /*🔴*/file(){},
+            /*🔴*/localStorage(){},
+            /*🔴*/sessionStorage(){},
+            /*🔴*/indexedDB(){},
+            /*🔴*/webSQL(){},
+            /*🔴*/cookie(){},
+            /*🔴*/database(){},
+            /*🔴*/cache(){},
         // network data
-            /*🟢*/fetch(URI,method,data_info,data,content_type,callback,option_add,headers_add){
+            /*🟢*/fetch(URI,method,dataInfo,data,contentType,callback,optionPlus,headersPlus){
                 const option={};
                 option.method=method;
-                if(data_info!==undefined){
-                    option.body=window.JSON.stringify({info:data_info,data:data});
+                if(dataInfo!==undefined){
+                    option.body=window.JSON.stringify({info:dataInfo,data:data});
                 }else{
                     switch(typeof body){
                         case'object':
@@ -389,12 +364,12 @@
                             break;
                     }
                 }
-                if(option_add){
-                    this.for(option_add,(...data)=>{
+                if(optionPlus){
+                    this.for(optionPlus,(...data)=>{
                         option[data[1]]=data[2];
                     },0);
                 }
-                switch(content_type){
+                switch(contentType){
                     case'json':
                         {
                             if(!option.headers){
@@ -414,18 +389,18 @@
                     default:
                         break;
                 }
-                if(headers_add){
+                if(headersPlus){
                     if(!option.headers){
                         option.headers={};
                     }
-                    this.for(headers_add,(...data)=>{
+                    this.for(headersPlus,(...data)=>{
                         option.headers[data[1]]=data[2];
                     },0);
                 }
                 const result={};
                 return window.fetch(URI,option).then((data)=>{
                     result.status=data.status;
-                    return data[content_type]();
+                    return data[contentType]();
                 }).then(async(data)=>{
                     result.result=data;
                     this.debug(()=>{
@@ -446,10 +421,10 @@
                 });
             },
         // command line interface
-            /*💧🔴*/cli(){},
+            /*🔴*/cli(){},
         // graphical user interface
-            /*💧🔴*/cliEmulator(){},
-            /*🟡*/doubleKeyContentCount(){
+            /*🔴*/cliEmulator(){},
+            /*🚩🟡*/doubleKeyContentCount(){
                 if(!this.doubleKeyContentCount.template){
                     this.doubleKeyContentCount.template=class template{
                         constructor(){
@@ -470,7 +445,7 @@
                 }
                 return new this.doubleKeyContentCount.template();
             },
-            /*🟡*/listenTarget(action,target,type,callback,option={},option2='',option3=''){
+            /*🚩🟡*/listenTarget(action,target,type,callback,option={},option2='',option3=''){
                 const match=/[\r\n\s]/g;
                 switch(type){
                     case'pointer_down':
@@ -570,10 +545,10 @@
                                                         }
                                                     };
                                                     data.target.parentNode.addEventListener('pointerup',this.listenTarget.pointer_up[once_id],{once:true});
-                                                    const remove_event=()=>{
-                                                        window.removeEventListener('pointerup',remove_event);
-                                                        window.removeEventListener('touchend',remove_event);
-                                                        window.removeEventListener('dragend',remove_event);
+                                                    const remove=()=>{
+                                                        window.removeEventListener('pointerup',remove);
+                                                        window.removeEventListener('touchend',remove);
+                                                        window.removeEventListener('dragend',remove);
                                                         if(data.target.parentNode){
                                                             data.target.parentNode.removeEventListener('pointerup',this.listenTarget.pointer_up[once_id]);
                                                         }
@@ -583,15 +558,15 @@
                                                             if(event.y>=data.y+6||event.y<=data.y-6){
                                                                 window.removeEventListener('pointermove',move);
                                                                 window.removeEventListener('touchmove',move);
-                                                                remove_event();
+                                                                remove();
                                                             }
                                                         };
                                                         window.addEventListener('pointermove',move);
                                                         window.addEventListener('touchmove',move);
                                                     }
-                                                    window.addEventListener('pointerup',remove_event,{once:true});
-                                                    window.addEventListener('touchend',remove_event,{once:true});
-                                                    window.addEventListener('dragend',remove_event,{once:true});
+                                                    window.addEventListener('pointerup',remove,{once:true});
+                                                    window.addEventListener('touchend',remove,{once:true});
+                                                    window.addEventListener('dragend',remove,{once:true});
                                                 };
                                                 if(typeof option2==='number'){
                                                     if(data.button===option2){
@@ -817,28 +792,28 @@
                         break;
                 }
             },
-            /*🟢*/elementCreate(...arg){
+            /*🚩🟢*/elementCreate(...arg){
                 switch(typeof arg[0]){
                     case'string':
                         {
                             // single mode
                             //     tag<string,undefined='div'>,
                             //     attribute<object/{key:'value'...}/,undefined=false>,
-                            //     insert_element<element,undefined=false>,
-                            //     insert_position<'beforebegin','afterbegin','beforeend','afterend',undefined='beforeend'>,
+                            //     insertElement<element,undefined=false>,
+                            //     insertPosition<'beforebegin','afterbegin','beforeend','afterend',undefined='beforeend'>,
                             //     content<string,element,undefined=false>,
                             //     callback<function(element),undefined=false>
                             let tag=arg[0];
                             const attribute=arg[1];
-                            const insert_element=arg[2];
-                            let insert_position=arg[3];
+                            const insertElement=arg[2];
+                            let insertPosition=arg[3];
                             const content=arg[4];
                             const callback=arg[5];
                             if(!tag){
                                 tag='div';
                             }
-                            if(!insert_position){
-                                insert_position='beforeend';
+                            if(!insertPosition){
+                                insertPosition='beforeend';
                             }
                             const element=window.document.createElement(tag);
                             if(attribute){
@@ -855,8 +830,8 @@
                                     }
                                 }
                             }
-                            if(insert_element){
-                                insert_element.insertAdjacentElement(insert_position,element);
+                            if(insertElement){
+                                insertElement.insertAdjacentElement(insertPosition,element);
                             }
                             if(callback){
                                 callback(element);
@@ -883,34 +858,34 @@
                             //         function(){},
                             //         key&class:<{},[]>...
                             //     ]>,
-                            //     insert_element<element,undefined=false>,
-                            //     insert_position<'beforebegin','afterbegin','beforeend','afterend',undefined='beforeend'>,
+                            //     insertElement<element,undefined=false>,
+                            //     insertPosition<'beforebegin','afterbegin','beforeend','afterend',undefined='beforeend'>,
                             //     elements<elements,undefined=elements>,
                             //     callback<function(elements),undefined=false>
                             //     /machineTool.elementCreate()===machineTool.elementCreate({key&class<...>:{}})._first_===machineTool.elementCreate([{}])._first_===machineTool.elementCreate([[]])._first_/
                             const object=arg[0];
-                            const insert_element=arg[1];
-                            let insert_position=arg[2];
+                            const insertElement=arg[1];
+                            let insertPosition=arg[2];
                             let elements=arg[3];
                             const callback=arg[4];
-                            if(!insert_position){
-                                insert_position='beforeend';
+                            if(!insertPosition){
+                                insertPosition='beforeend';
                             }
                             if(!elements){
                                 elements={};
                             }
-                            let element_build_start=true;
+                            let elementBuildTop=true;
                             let first=false;
-                            const element_build=(data,insert_element,insert_position,key='')=>{
-                                if(element_build_start){
-                                    element_build_start=false;
+                            const element_build=(data,insertElement,insertPosition,key='')=>{
+                                if(elementBuildTop){
+                                    elementBuildTop=false;
                                     for(const key in data){
                                         if(typeof data[key]!=='function'&&key!=='element'){
-                                            element_build(data[key],insert_element,insert_position,key);
+                                            element_build(data[key],insertElement,insertPosition,key);
                                         }
                                     }
                                 }else{
-                                    const class_=key.trim().split(' ').filter((item)=>{
+                                    const cls=key.trim().split(' ').filter((item)=>{
                                         return window.isNaN(window.parseInt(item));
                                     }).join(' ');
                                     if(data.element){
@@ -923,22 +898,22 @@
                                                     return window.isNaN(window.parseInt(item));
                                                 }).concat(data.element[1].class.trim().split(' ')))].join(' ');
                                             }else{
-                                                if(class_){
-                                                    data.element[1].class=class_;
+                                                if(cls){
+                                                    data.element[1].class=cls;
                                                 }
                                             }
                                         }else{
-                                            if(class_){
-                                                data.element[1]={class:class_};
+                                            if(cls){
+                                                data.element[1]={class:cls};
                                             }
                                         }
                                     }else{
                                         data.element=['div'];
-                                        if(class_){
-                                            data.element[1]={class:class_};
+                                        if(cls){
+                                            data.element[1]={class:cls};
                                         }
                                     }
-                                    const element=this.elementCreate(data.element[0],data.element[1]?data.element[1]:undefined,insert_element,insert_position,data.element[2]?data.element[2]:undefined,data.element[3]?data.element[3]:undefined);
+                                    const element=this.elementCreate(data.element[0],data.element[1]?data.element[1]:undefined,insertElement,insertPosition,data.element[2]?data.element[2]:undefined,data.element[3]?data.element[3]:undefined);
                                     if(!first){
                                         first=element;
                                         elements._first_=element;
@@ -974,11 +949,11 @@
                                     }
                                 }
                             };
-                            element_build(object,insert_element,insert_position);
-                            let function_run_start=true;
+                            element_build(object,insertElement,insertPosition);
+                            let functionRunTop=true;
                             const function_run=(data)=>{
-                                if(function_run_start){
-                                    function_run_start=false;
+                                if(functionRunTop){
+                                    functionRunTop=false;
                                     for(const key in data){
                                         if(typeof data[key]!=='function'&&key!=='element'){
                                             function_run(data[key]);
@@ -1027,22 +1002,22 @@
                         break;
                 }
             },
-            /*🟢*/elementState(...arg){
+            /*🚩🟢*/elementState(...arg){
                 if(arg[0]instanceof window.HTMLElement){
                     // base mode
                     //     element<element>,
                     //     one<string/'class class2...'/,null,undefined=''>,
                     //     two<string/'class class2...'/,undefined=''>,
-                    //     set_one<boolean,undefined=false>,
-                    //     next_wait<number,undefined=0>,
+                    //     setOne<boolean,undefined=false>,
+                    //     nextWait<number,undefined=0>,
                     //     callback<function(element,/one,two,''/),undefined=()=>{}>
                     // flash mode
                     //     (element<>,null,two<>,true,wait<>,callback<>)
                     const element=arg[0];
                     let one=arg[1];
                     let two=arg[2];
-                    let set_one=arg[3];
-                    let next_wait=arg[4];
+                    let setOne=arg[3];
+                    let nextWait=arg[4];
                     let callback=arg[5];
                     if(!one&&one!==null){
                         one='';
@@ -1050,11 +1025,11 @@
                     if(!two){
                         two='';
                     }
-                    if(set_one!==true){
-                        set_one=false;
+                    if(setOne!==true){
+                        setOne=false;
                     }
-                    if(!next_wait){
-                        next_wait=0;
+                    if(!nextWait){
+                        nextWait=0;
                     }
                     if(!callback){
                         callback=()=>{};
@@ -1078,7 +1053,7 @@
                         }
                     };
                     if(two){
-                        if(set_one){
+                        if(setOne){
                             if(one){
                                 if(!contains(one)){
                                     window.setTimeout(()=>{
@@ -1087,7 +1062,7 @@
                                     window.setTimeout(()=>{
                                         add(one);
                                         callback(element,one);
-                                    },next_wait);
+                                    },nextWait);
                                 }
                             }else{
                                 if(one===null){
@@ -1097,14 +1072,14 @@
                                     window.setTimeout(()=>{
                                         remove(two);
                                         callback(element,'');
-                                    },next_wait);
+                                    },nextWait);
                                 }else{
                                     window.setTimeout(()=>{
                                         remove(two);
                                     },0);
                                     window.setTimeout(()=>{
                                         callback(element,'');
-                                    },next_wait);
+                                    },nextWait);
                                 }
                             }
                         }else{
@@ -1115,7 +1090,7 @@
                                 window.setTimeout(()=>{
                                     add(two);
                                     callback(element,two);
-                                },next_wait);
+                                },nextWait);
                             }else{
                                 if(contains(two)){
                                     window.setTimeout(()=>{
@@ -1124,26 +1099,26 @@
                                     window.setTimeout(()=>{
                                         add(one);
                                         callback(element,one);
-                                    },next_wait);
+                                    },nextWait);
                                 }else{
                                     window.setTimeout(()=>{
                                         add(one);
                                     },0);
                                     window.setTimeout(()=>{
                                         callback(element,one);
-                                    },next_wait);
+                                    },nextWait);
                                 }
                             }
                         }
                     }else{
-                        if(set_one){
+                        if(setOne){
                             if(!contains(one)){
                                 window.setTimeout(()=>{
                                     add(one);
                                 },0);
                                 window.setTimeout(()=>{
                                     callback(element,one);
-                                },next_wait);
+                                },nextWait);
                             }
                         }else{
                             if(contains(one)){
@@ -1152,14 +1127,14 @@
                                 },0);
                                 window.setTimeout(()=>{
                                     callback(element,'');
-                                },next_wait);
+                                },nextWait);
                             }else{
                                 window.setTimeout(()=>{
                                     add(one);
                                 },0);
                                 window.setTimeout(()=>{
                                     callback(element,one);
-                                },next_wait);
+                                },nextWait);
                             }
                         }
                     }
@@ -1172,19 +1147,19 @@
                                     //     [
                                     //         'target',
                                     //         [
-                                    //             open_state<string/'class class2...'/,undefined='_'>,
-                                    //             close_state<string/'class class2...'/,undefined='_'>,
+                                    //             stateOpen<string/'class class2...'/,undefined='_'>,
+                                    //             stateClose<string/'class class2...'/,undefined='_'>,
                                     //             [
-                                    //                 target_element<element>...
+                                    //                 targetElement<element>...
                                     //             ],
                                     //             [
                                     //                 [
                                     //                     start<boolean>,
-                                    //                     switch_type<'auto','open','close'>,
+                                    //                     switchType<'auto','open','close'>,
                                     //                     [
-                                    //                         button_element<element>...
+                                    //                         buttonElement<element>...
                                     //                     ],
-                                    //                     listen_type<string/'item,item2...'/>,
+                                    //                     listenType<string/'item,item2...'/>,
                                     //                     callback<function(event_data),undefined=()=>{}>,
                                     //                     option<object,undefined>,
                                     //                     option2<any,undefined/'pointer_up...'/>,
@@ -1194,15 +1169,15 @@
                                     //         ]
                                     //     ]
                                     const data=arg[0][1];
-                                    const open_state=data[0]?data[0]:'_';
-                                    const close_state=data[1]?data[1]:'_';
-                                    const target_element_array=data[2];
+                                    const stateOpen=data[0]?data[0]:'_';
+                                    const stateClose=data[1]?data[1]:'_';
+                                    const targetElement_array=data[2];
                                     const button_array=data[3];
                                     for(const button of button_array){
                                         const start=button[0];
-                                        const switch_type=button[1];
-                                        const button_element_array=button[2];
-                                        const listen_type=button[3];
+                                        const switchType=button[1];
+                                        const buttonElement_array=button[2];
+                                        const listenType=button[3];
                                         let callback=button[4];
                                         const option=button[5];
                                         const option2=button[6];
@@ -1211,33 +1186,33 @@
                                             callback=()=>{};
                                         }
                                         const event_function=()=>{
-                                            const set_button_element=(_,current)=>{
+                                            const set_buttonElement=(_,current)=>{
                                                 for(const button of button_array){
-                                                    const button_element_array=button[2];
-                                                    for(const button_element of button_element_array){
-                                                        this.elementState(button_element,current,`${open_state} ${close_state}`,true);
+                                                    const buttonElement_array=button[2];
+                                                    for(const buttonElement of buttonElement_array){
+                                                        this.elementState(buttonElement,current,`${stateOpen} ${stateClose}`,true);
                                                     }
                                                 }
                                             };
-                                            switch(switch_type){
+                                            switch(switchType){
                                                 case'auto':
                                                     {
-                                                        for(const target_element of target_element_array){
-                                                            this.elementState(target_element,open_state,close_state,undefined,undefined,set_button_element);
+                                                        for(const targetElement of targetElement_array){
+                                                            this.elementState(targetElement,stateOpen,stateClose,undefined,undefined,set_buttonElement);
                                                         }
                                                     }
                                                     break;
                                                 case'open':
                                                     {
-                                                        for(const target_element of target_element_array){
-                                                            this.elementState(target_element,open_state,close_state,true,undefined,set_button_element);
+                                                        for(const targetElement of targetElement_array){
+                                                            this.elementState(targetElement,stateOpen,stateClose,true,undefined,set_buttonElement);
                                                         }
                                                     }
                                                     break;
                                                 case'close':
                                                     {
-                                                        for(const target_element of target_element_array){
-                                                            this.elementState(target_element,close_state,open_state,true,undefined,set_button_element);
+                                                        for(const targetElement of targetElement_array){
+                                                            this.elementState(targetElement,stateClose,stateOpen,true,undefined,set_buttonElement);
                                                         }
                                                     }
                                                     break;
@@ -1249,10 +1224,10 @@
                                             event_function();
                                             callback();
                                         }
-                                        for(const button_element of button_element_array){
-                                            for(const value of listen_type.split(',')){
-                                                this.listenTarget('add',button_element,value,event_function,option,option2,option3);
-                                                this.listenTarget('add',button_element,value,callback,option,option2,option3);
+                                        for(const buttonElement of buttonElement_array){
+                                            for(const value of listenType.split(',')){
+                                                this.listenTarget('add',buttonElement,value,event_function,option,option2,option3);
+                                                this.listenTarget('add',buttonElement,value,callback,option,option2,option3);
                                             }
                                         }
                                     }
@@ -1264,18 +1239,18 @@
                                     //     [
                                     //         'tab',
                                     //         [
-                                    //             open_state<string/'class class2...'/,undefined='_'>,
-                                    //             close_state<string/'class class2...'/,undefined='_'>,
+                                    //             stateOpen<string/'class class2...'/,undefined='_'>,
+                                    //             stateClose<string/'class class2...'/,undefined='_'>,
                                     //             [
                                     //                 [
                                     //                     start<boolean>,
                                     //                     [
-                                    //                         target_element<element>...
+                                    //                         targetElement<element>...
                                     //                     ],
                                     //                     [
-                                    //                         button_element<element>...
+                                    //                         buttonElement<element>...
                                     //                     ],
-                                    //                     listen_type<string/'item,item2...'/>,
+                                    //                     listenType<string/'item,item2...'/>,
                                     //                     callback<function(event_data),undefined=()=>{}>,
                                     //                     option<object,undefined>,
                                     //                     option2<any,undefined/'pointer_up...'/>,
@@ -1285,14 +1260,14 @@
                                     //         ]
                                     //     ]
                                     const data=arg[0][1];
-                                    const open_state=data[0]?data[0]:'_';
-                                    const close_state=data[1]?data[1]:'_';
+                                    const stateOpen=data[0]?data[0]:'_';
+                                    const stateClose=data[1]?data[1]:'_';
                                     const content_array=data[2];
                                     for(const content of content_array){
                                         const start=content[0];
-                                        const target_element_array=content[1];
-                                        const button_element_array=content[2];
-                                        const listen_type=content[3];
+                                        const targetElement_array=content[1];
+                                        const buttonElement_array=content[2];
+                                        const listenType=content[3];
                                         let callback=content[4];
                                         const option=content[5];
                                         const option2=content[6];
@@ -1302,34 +1277,34 @@
                                         }
                                         const event_function=()=>{
                                             for(const content of content_array){
-                                                const target_element_array_=content[1];
-                                                const button_element_array_=content[2];
-                                                if(target_element_array_!==target_element_array){
-                                                    for(const target_element_ of target_element_array_){
-                                                        this.elementState(target_element_,close_state,open_state,true);
+                                                const targetElement_array_=content[1];
+                                                const buttonElement_array_=content[2];
+                                                if(targetElement_array_!==targetElement_array){
+                                                    for(const targetElement_ of targetElement_array_){
+                                                        this.elementState(targetElement_,stateClose,stateOpen,true);
                                                     }
                                                 }
-                                                if(button_element_array_!==button_element_array){
-                                                    for(const button_element_ of button_element_array_){
-                                                        this.elementState(button_element_,close_state,open_state,true);
+                                                if(buttonElement_array_!==buttonElement_array){
+                                                    for(const buttonElement_ of buttonElement_array_){
+                                                        this.elementState(buttonElement_,stateClose,stateOpen,true);
                                                     }
                                                 }
                                             }
-                                            for(const target_element of target_element_array){
-                                                this.elementState(target_element,open_state,close_state,true);
+                                            for(const targetElement of targetElement_array){
+                                                this.elementState(targetElement,stateOpen,stateClose,true);
                                             }
-                                            for(const button_element of button_element_array){
-                                                this.elementState(button_element,open_state,close_state,true);
+                                            for(const buttonElement of buttonElement_array){
+                                                this.elementState(buttonElement,stateOpen,stateClose,true);
                                             }
                                         };
                                         if(start){
                                             event_function();
                                             callback();
                                         }
-                                        for(const button_element of button_element_array){
-                                            for(const value of listen_type.split(',')){
-                                                this.listenTarget('add',button_element,value,event_function,option,option2,option3);
-                                                this.listenTarget('add',button_element,value,callback,option,option2,option3);
+                                        for(const buttonElement of buttonElement_array){
+                                            for(const value of listenType.split(',')){
+                                                this.listenTarget('add',buttonElement,value,event_function,option,option2,option3);
+                                                this.listenTarget('add',buttonElement,value,callback,option,option2,option3);
                                             }
                                         }
                                     }
@@ -1341,13 +1316,13 @@
                     }
                 }
             },
-            /*🟢*/elementBlock(element,group='group',insert_position='beforeend',wait=350){
+            /*🚩🟢*/elementBlock(element,group='group',insertPosition='beforeend',wait=350){
                 if(!this.elementBlock.template){
                     this.elementBlock.template=class template{
-                        constructor(element,group,insert_position,wait){
+                        constructor(element,group,insertPosition,wait){
                             this.element=element;
                             this.group=group;
-                            this.insert_position=insert_position;
+                            this.insertPosition=insertPosition;
                             this.wait=wait;
                             this.elements=[];
                             this.lock=false;
@@ -1362,19 +1337,19 @@
                                 }else{
                                     wait=0;
                                 }
-                                let record_state=false;
+                                let recordState=false;
                                 if(record){
                                     machineTool.for(this.elements,(...data)=>{
                                         if(data[2].machineTool_elementBlock_add_record===record){
-                                            record_state=true;
+                                            recordState=true;
                                             element=data[2];
                                         }
                                     },0);
                                 }
-                                if(record&&!record_state){
+                                if(record&&!recordState){
                                     element.machineTool_elementBlock_add_record=record;
                                 }
-                                if(!record_state){
+                                if(!recordState){
                                     this.elements.push(element);
                                 }
                                 machineTool.for(this.elements,(...data)=>{
@@ -1387,8 +1362,8 @@
                                 machineTool.elementState(element,`${this.group}_last ${this.group}_ready`,`${this.group}_hide`,true);
                                 element.style.setProperty('opacity','0');
                                 window.setTimeout(()=>{
-                                    if(!record_state){
-                                        this.element.insertAdjacentElement(this.insert_position,element);
+                                    if(!recordState){
+                                        this.element.insertAdjacentElement(this.insertPosition,element);
                                     }
                                     window.setTimeout(()=>{
                                         element.style.removeProperty('opacity');
@@ -1448,7 +1423,7 @@
                                     machineTool.elementState(last,`${this.group}_last`,`${this.group}_prev`,true);
                                     return last;
                                 }else{
-                                    return 'null';
+                                    return'null';
                                 }
                             }
                         }
@@ -1482,13 +1457,13 @@
                                     machineTool.elementState(last,`${this.group}_last`,`${this.group}_prev`,true);
                                     return last;
                                 }else{
-                                    return 'null';
+                                    return'null';
                                 }
                             }
                         }
                     }
                 }
-                return new this.elementBlock.template(element,group,insert_position,wait);
+                return new this.elementBlock.template(element,group,insertPosition,wait);
             },
             /*🟢*/removeElement(element){
                 element.parentElement.removeChild(element);
@@ -1507,28 +1482,28 @@
                     }
                 }
             },
-            /*🟢*/findOuter(find,start,end=window.document.documentElement,true_callback,false_callback){
+            /*🟢*/findOuter(find,start,end=window.document.documentElement,trueCallback,falseCallback){
                 if(find instanceof window.HTMLElement&&start===find){
-                    if(true_callback){
-                        true_callback(start);
+                    if(trueCallback){
+                        trueCallback(start);
                     }
                     return start;
                 }else{
                     if(start.classList.contains(find)){
-                        if(true_callback){
-                            true_callback(start);
+                        if(trueCallback){
+                            trueCallback(start);
                         }
                         return start;
                     }else{
                         if(start===end){
-                            if(false_callback){
-                                false_callback();
+                            if(falseCallback){
+                                falseCallback();
                             }
                             return false;
                         }
                     }
                 }
-                return this.findOuter(find,start.parentElement,end,true_callback,false_callback);
+                return this.findOuter(find,start.parentElement,end,trueCallback,falseCallback);
             },
             /*🟢*/insertStyle(style,wait){
                 const element=this.elementCreate('style',undefined,window.document.head,undefined,style);
@@ -1550,7 +1525,7 @@
                             }
                         }
                         run(element.parentElement);
-                    };
+                    }
                 };
                 run(element);
                 return result.replace(/,$/,'');
@@ -1587,7 +1562,7 @@
                         break;
                 }
             },
-            /*💧🔴*/startLoad(type,callback){
+            /*🔴*/startLoad(type,callback){
                 window.document.addEventListener('readystatechange',(event)=>{
                     switch(event.target.readyState){
                         case'loading':
@@ -1672,7 +1647,7 @@
                 video.setAttribute('src',src);
                 video.setAttribute('poster',poster);
                 if(src.match(/\.m3u8/i)){
-                    const hls_go=()=>{
+                    const hlsGo=()=>{
                         if(video._hls_){
                             video._hls_.destroy();
                             delete video._hls_;
@@ -1695,7 +1670,7 @@
                                         return true;
                                     }else{
                                         if('Hls'in window&&window.Hls.isSupported()){
-                                            return hls_go();
+                                            return hlsGo();
                                         }
                                     }
                                 }
@@ -1703,7 +1678,7 @@
                             case'hls':
                                 {
                                     if('Hls'in window&&window.Hls.isSupported()){
-                                        return hls_go();
+                                        return hlsGo();
                                     }
                                 }
                                 break;
@@ -1759,10 +1734,10 @@
                 }
             },
         // graphics
-            /*💧🔴*/plugin_openCV_removeWatermark(){},
+            /*🔴*/plugin_openCV_removeWatermark(){},
         // application programming interface
-            /*💧🔴*/listenPort(){},
-            /*💧🔴*/portReceive(URI,method,data,callback,data2){
+            /*🔴*/listenPort(){},
+            /*🔴*/async portReceive(URI,method,data,callback,data2){
                 const result={
                     URI:URI,
                     method:method,
@@ -1772,17 +1747,17 @@
                     window.Object.assign(result,data2);
                 }
                 if(callback){
-                    callback(result);
+                    return await callback(result);
                 }
                 return result;
             },
-            /*💧🔴*/portReturn(){},
-            /*💧🔴*/route(){},
-            /*💧🔴*/extract(){},
-            /*💧🔴*/middleware(){},
-            /*💧🔴*/staticFile(){},
-            /*💧🔴*/siteMapGenerator(){},
-            /*💧🔴*/siteMapHTMLGenerator(){}
+            /*🔴*/portReturn(){},
+            /*🔴*/route(){},
+            /*🔴*/extract(){},
+            /*🔴*/middleware(){},
+            /*🔴*/staticFile(){},
+            /*🔴*/siteMapGenerator(){},
+            /*🔴*/siteMapHTMLGenerator(){}
     };
 // #build
 // #debug

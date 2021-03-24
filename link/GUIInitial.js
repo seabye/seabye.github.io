@@ -188,7 +188,7 @@
             if(userAgent.match(/iPhone|iPad|Android|Mobile/i)){
                 cls.add('ic_nr_platform_mobile');
             }
-            if(window.location.search.replace(/\?/,'').split('&').includes('pwa')){
+            if(window.location.search.replace(/^\?/,'').split('&').includes('pwa')){
                 cls.add('ic_nr_pwa');
             }
             if(window.document.createElement('video').canPlayType('application/vnd.apple.mpegurl')){
