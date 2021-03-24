@@ -1314,7 +1314,7 @@
                     }
                 }
             },
-            /*🟡*/elementBlock(element,group='group',insertPosition='beforeend',wait=350){
+            /*🟢*/elementBlock(element,group='group',insertPosition='beforeend',wait=350){
                 if(!this.elementBlock.template){
                     this.elementBlock.template=class template{
                         constructor(element,group,insertPosition,wait){
