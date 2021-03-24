@@ -84,18 +84,14 @@
             /*🟢*/timeOut(callback,wait=1000/24){
                 return new window.Promise((resolve)=>{
                     window.setTimeout(async()=>{
-                        if(typeof callback==='function'){
-                            resolve(await callback());
-                        }else{
-                            resolve(await callback);
-                        }
+                        resolve(await callback());
                     },wait);
                 });
             },
             /*🚩🟡*/observeFunction(originFunction,eventType,eventOption={},whoListen,dataPlus=()=>{}){
                 const insertEvent=new window.CustomEvent(eventType,eventOption);
                 return function(...arg){
-                    insertEvent.function_arg=arg;
+                    insertEvent._arg_=arg;
                     insertEvent[eventType]=dataPlus.apply(this,arg);
                     whoListen.dispatchEvent(insertEvent);
                     return originFunction.apply(this,arg);
@@ -279,7 +275,7 @@
             },
             /*🟢*/UUID22ToUUID36(UUID22){
                 if(UUID22.length===22){
-                    const get_char_index=()=>{
+                    const getCharIndex=()=>{
                         const char='0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_-';
                         let result={};
                         for(let key=0,length=char.length;key<length;key++){
@@ -288,7 +284,7 @@
                         }
                         return result;
                     };
-                    let charIndex=get_char_index();
+                    let charIndex=getCharIndex();
                     let result='';
                     for(let key=0;key<22;key+=2){
                         let u=(charIndex[UUID22[key]]*64+charIndex[UUID22[key+1]]).toString(16).padStart(3,'0');
