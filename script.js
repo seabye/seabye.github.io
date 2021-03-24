@@ -72,26 +72,27 @@
     // window.machineTool
     machineTool.debug(()=>{
         window.machineTool=machineTool;
+        window.console.log('---- window.machineTool:',window.machineTool);
     });
     // machineTool test
     machineTool.debug(()=>{
         machineTool.runObject({
-            async loop(){
-                window.console.log('---- loop: start');
-                let result=await machineTool.loop(()=>{
-                    return machineTool.fetch('https://iptv-org.github.io/iptv/channels.nosj','GET',undefined,undefined,'json');
-                },500,3,()=>{
-                    return machineTool.fetch('https://iptv-org.github.io/iptv/channels.json','GET',undefined,undefined,'json',()=>{
-                        return new window.Promise((resolve)=>{
-                            window.setTimeout(()=>{
-                                resolve('Ok');
-                            },1000);
-                        });
-                    });
-                });
-                window.console.log('---- loop result:',result);
-                window.console.log('---- loop: end');
-            },
+            // async loop(){
+            //     window.console.log('---- loop: start');
+            //     let result=await machineTool.loop(()=>{
+            //         return machineTool.fetch('https://iptv-org.github.io/iptv/channels.nosj','GET',undefined,undefined,'json');
+            //     },500,3,()=>{
+            //         return machineTool.fetch('https://iptv-org.github.io/iptv/channels.json','GET',undefined,undefined,'json',()=>{
+            //             return new window.Promise((resolve)=>{
+            //                 window.setTimeout(()=>{
+            //                     resolve('Ok');
+            //                 },1000);
+            //             });
+            //         });
+            //     });
+            //     window.console.log('---- loop result:',result);
+            //     window.console.log('---- loop: end');
+            // },
             UUID36ToUUID22(){
                 window.console.log('---- 8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3 jvZe6aA5S_Kks2h_zB88ww UUID36ToUUID22()',machineTool.UUID36ToUUID22('8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3'));
             },
