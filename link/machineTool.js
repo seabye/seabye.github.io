@@ -54,28 +54,36 @@
                     }
                 };
             },
-            /*🟡*/async loop(condition,wait=1000/24,count,overCallback){
+            /*🟢*/async loop(condition,wait=1000/24,count,countZeroCallback){
                 const result=await condition();
                 if(result){
                     return result;
                 }else{
+                    this.debug(()=>{
+                        if(count){
+                            window.console.log('==== loop false, count:',count);
+                        }
+                    });
                     if(typeof count==='number'){
                         count-=1;
                         if(count){
                             return new window.Promise((resolve)=>{
                                 window.setTimeout(async()=>{
-                                    resolve(await this.loop(condition,wait,count,overCallback));
+                                    resolve(await this.loop(condition,wait,count,countZeroCallback));
                                 },wait);
                             });
                         }else{
-                            if(overCallback){
-                                return await overCallback();
+                            if(countZeroCallback){
+                                this.debug(()=>{
+                                    window.console.log('==== loop false, countZeroCallback()');
+                                });
+                                return await countZeroCallback();
                             }
                         }
                     }else{
                         return new window.Promise((resolve)=>{
                             window.setTimeout(async()=>{
-                                resolve(await this.loop(condition,wait,count,overCallback));
+                                resolve(await this.loop(condition,wait,count,countZeroCallback));
                             },wait);
                         });
                     }
@@ -88,7 +96,7 @@
                     },wait);
                 });
             },
-            /*🟡*/observeFunction(originFunction,eventType,eventOption={},whoListen,dataPlus=()=>{}){
+            /*🟢*/observeFunction(originFunction,eventType,eventOption={},whoListen,dataPlus=()=>{}){
                 const insertEvent=new window.CustomEvent(eventType,eventOption);
                 return function(...arg){
                     insertEvent._arg_=arg;
@@ -371,7 +379,7 @@
                             if(!option.headers){
                                 option.headers={};
                             }
-                            option.headers['Content-Type']='application/json; charset=utf-8';
+                            // option.headers['Content-Type']='application/json; charset=utf-8';
                         }
                         break;
                     case'text':
@@ -379,7 +387,7 @@
                             if(!option.headers){
                                 option.headers={};
                             }
-                            option.headers['Content-Type']='text/html; charset=utf-8';
+                            // option.headers['Content-Type']='text/html; charset=utf-8';
                         }
                         break;
                     default:
@@ -406,14 +414,8 @@
                         return await callback(result);
                     }
                     return result;
-                }).catch(async(data)=>{
-                    result.status=0;
-                    result.result=data;
-                    window.console.log('==== fetch catch:',result);
-                    if(callback){
-                        return await callback(result);
-                    }
-                    return result;
+                }).catch((data)=>{
+                    window.console.log('==== fetch catch:',data);
                 });
             },
         // command line interface
@@ -788,7 +790,7 @@
                         break;
                 }
             },
-            /*🟡*/elementCreate(...arg){
+            /*🟢*/elementCreate(...arg){
                 switch(typeof arg[0]){
                     case'string':
                         {
@@ -998,7 +1000,7 @@
                         break;
                 }
             },
-            /*🟡*/elementState(...arg){
+            /*🟢*/elementState(...arg){
                 if(arg[0]instanceof window.HTMLElement){
                     // base mode
                     //     element<element>,

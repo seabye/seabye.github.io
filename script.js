@@ -76,17 +76,27 @@
     // machineTool test
     machineTool.debug(()=>{
         machineTool.runObject({
+            async loop(){
+                window.console.log('---- loop: start');
+                let result=await machineTool.loop(async()=>{
+                    return await machineTool.fetch('https://iptv-org.github.io/iptv/channels.nosj','GET',undefined,undefined,'json');
+                },500,2,async()=>{
+                    return await machineTool.fetch('https://iptv-org.github.io/iptv/channels.json','GET',undefined,undefined,'json');
+                });
+                window.console.log('---- loop result:',result);
+                window.console.log('---- loop: end');
+            },
             UUID36ToUUID22(){
-                window.console.log('==== 8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3 jvZe6aA5S_Kks2h_zB88ww UUID36ToUUID22()',machineTool.UUID36ToUUID22('8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3'));
+                window.console.log('---- 8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3 jvZe6aA5S_Kks2h_zB88ww UUID36ToUUID22()',machineTool.UUID36ToUUID22('8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3'));
             },
             UUID22ToUUID36(){
-                window.console.log('==== 8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3 jvZe6aA5S_Kks2h_zB88ww UUID22ToUUID36()',machineTool.UUID22ToUUID36('jvZe6aA5S_Kks2h_zB88ww'));
+                window.console.log('---- 8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3 jvZe6aA5S_Kks2h_zB88ww UUID22ToUUID36()',machineTool.UUID22ToUUID36('jvZe6aA5S_Kks2h_zB88ww'));
             },
             stringToBase64URISafeNoPad(){
-                window.console.log('==== 8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3 jvZe6aA5S_Kks2h_zB88ww stringToBase64URISafeNoPad()',machineTool.stringToBase64URISafeNoPad('8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3'));
+                window.console.log('---- 8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3 jvZe6aA5S_Kks2h_zB88ww stringToBase64URISafeNoPad()',machineTool.stringToBase64URISafeNoPad('8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3'));
             },
             base64URISafeNoPadToString(){
-                window.console.log('==== 8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3 jvZe6aA5S_Kks2h_zB88ww base64URISafeNoPadToString()',machineTool.base64URISafeNoPadToString('jvZe6aA5S_Kks2h_zB88ww'));
+                window.console.log('---- 8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3 jvZe6aA5S_Kks2h_zB88ww base64URISafeNoPadToString()',machineTool.base64URISafeNoPadToString('jvZe6aA5S_Kks2h_zB88ww'));
             }
         });
     });
