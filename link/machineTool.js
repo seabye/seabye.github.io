@@ -573,7 +573,7 @@
                                                     run();
                                                 }
                                                 this.debug(()=>{
-                                                    window.console.log('==== listenTarget pointer_up, length:',window.Object.keys(this.listenTarget.pointer_up_data).length);
+                                                    window.console.log('==== listenTarget pointer_up, pointer_up_data length:',window.Object.keys(this.listenTarget.pointer_up_data).length);
                                                 });
                                             };
                                             this.listenTarget.pointer_up_data[id].count=0;
