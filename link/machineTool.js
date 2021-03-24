@@ -221,7 +221,7 @@
                 }
             },
             /*🟢*/random(){
-                return window.Math.random().toString().replace(/^0\./,'');
+                return window.parseInt(window.Math.random().toString().replace(/^0\./,''));
             },
             /*🟢*/hashCode(string,abs=false){
                 let result;
