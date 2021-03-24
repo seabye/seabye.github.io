@@ -93,11 +93,11 @@
                 });
             },
             /*🚩🟡*/observeFunction(originFunction,eventType,eventOption={},whoListen,dataPlus=()=>{}){
-                const insert_event=new window.CustomEvent(eventType,eventOption);
+                const insertEvent=new window.CustomEvent(eventType,eventOption);
                 return function(...arg){
-                    insert_event.function_arg=arg;
-                    insert_event[eventType]=dataPlus.apply(this,arg);
-                    whoListen.dispatchEvent(insert_event);
+                    insertEvent.function_arg=arg;
+                    insertEvent[eventType]=dataPlus.apply(this,arg);
+                    whoListen.dispatchEvent(insertEvent);
                     return originFunction.apply(this,arg);
                 };
             },
@@ -876,12 +876,12 @@
                             }
                             let elementBuildTop=true;
                             let first=false;
-                            const element_build=(data,insertElement,insertPosition,key='')=>{
+                            const elementBuild=(data,insertElement,insertPosition,key='')=>{
                                 if(elementBuildTop){
                                     elementBuildTop=false;
                                     for(const key in data){
                                         if(typeof data[key]!=='function'&&key!=='element'){
-                                            element_build(data[key],insertElement,insertPosition,key);
+                                            elementBuild(data[key],insertElement,insertPosition,key);
                                         }
                                     }
                                 }else{
@@ -943,20 +943,20 @@
                                             }
                                         }else{
                                             if(key!=='element'){
-                                                element_build(data[key],element,'beforeend',key);
+                                                elementBuild(data[key],element,'beforeend',key);
                                             }
                                         }
                                     }
                                 }
                             };
-                            element_build(object,insertElement,insertPosition);
+                            elementBuild(object,insertElement,insertPosition);
                             let functionRunTop=true;
-                            const function_run=(data)=>{
+                            const functionRun=(data)=>{
                                 if(functionRunTop){
                                     functionRunTop=false;
                                     for(const key in data){
                                         if(typeof data[key]!=='function'&&key!=='element'){
-                                            function_run(data[key]);
+                                            functionRun(data[key]);
                                         }
                                     }
                                 }else{
@@ -982,13 +982,13 @@
                                             }
                                         }else{
                                             if(key!=='element'){
-                                                function_run(data[key]);
+                                                functionRun(data[key]);
                                             }
                                         }
                                     }
                                 }
                             };
-                            function_run(object);
+                            functionRun(object);
                             if(callback){
                                 callback(elements);
                             }
@@ -1147,8 +1147,8 @@
                                     //     [
                                     //         'target',
                                     //         [
-                                    //             stateOpen<string/'class class2...'/,undefined='_'>,
-                                    //             stateClose<string/'class class2...'/,undefined='_'>,
+                                    //             open<string/'class class2...'/,undefined='_'>,
+                                    //             close<string/'class class2...'/,undefined='_'>,
                                     //             [
                                     //                 targetElement<element>...
                                     //             ],
@@ -1169,8 +1169,8 @@
                                     //         ]
                                     //     ]
                                     const data=arg[0][1];
-                                    const stateOpen=data[0]?data[0]:'_';
-                                    const stateClose=data[1]?data[1]:'_';
+                                    const open=data[0]?data[0]:'_';
+                                    const close=data[1]?data[1]:'_';
                                     const targetElement_array=data[2];
                                     const button_array=data[3];
                                     for(const button of button_array){
@@ -1185,12 +1185,12 @@
                                         if(!callback){
                                             callback=()=>{};
                                         }
-                                        const event_function=()=>{
-                                            const set_buttonElement=(_,current)=>{
+                                        const eventFunction=()=>{
+                                            const setButtonElement=(_,current)=>{
                                                 for(const button of button_array){
                                                     const buttonElement_array=button[2];
                                                     for(const buttonElement of buttonElement_array){
-                                                        this.elementState(buttonElement,current,`${stateOpen} ${stateClose}`,true);
+                                                        this.elementState(buttonElement,current,`${open} ${close}`,true);
                                                     }
                                                 }
                                             };
@@ -1198,21 +1198,21 @@
                                                 case'auto':
                                                     {
                                                         for(const targetElement of targetElement_array){
-                                                            this.elementState(targetElement,stateOpen,stateClose,undefined,undefined,set_buttonElement);
+                                                            this.elementState(targetElement,open,close,undefined,undefined,setButtonElement);
                                                         }
                                                     }
                                                     break;
                                                 case'open':
                                                     {
                                                         for(const targetElement of targetElement_array){
-                                                            this.elementState(targetElement,stateOpen,stateClose,true,undefined,set_buttonElement);
+                                                            this.elementState(targetElement,open,close,true,undefined,setButtonElement);
                                                         }
                                                     }
                                                     break;
                                                 case'close':
                                                     {
                                                         for(const targetElement of targetElement_array){
-                                                            this.elementState(targetElement,stateClose,stateOpen,true,undefined,set_buttonElement);
+                                                            this.elementState(targetElement,close,open,true,undefined,setButtonElement);
                                                         }
                                                     }
                                                     break;
@@ -1221,12 +1221,12 @@
                                             }
                                         };
                                         if(start){
-                                            event_function();
+                                            eventFunction();
                                             callback();
                                         }
                                         for(const buttonElement of buttonElement_array){
                                             for(const value of listenType.split(',')){
-                                                this.listenTarget('add',buttonElement,value,event_function,option,option2,option3);
+                                                this.listenTarget('add',buttonElement,value,eventFunction,option,option2,option3);
                                                 this.listenTarget('add',buttonElement,value,callback,option,option2,option3);
                                             }
                                         }
@@ -1239,8 +1239,8 @@
                                     //     [
                                     //         'tab',
                                     //         [
-                                    //             stateOpen<string/'class class2...'/,undefined='_'>,
-                                    //             stateClose<string/'class class2...'/,undefined='_'>,
+                                    //             open<string/'class class2...'/,undefined='_'>,
+                                    //             close<string/'class class2...'/,undefined='_'>,
                                     //             [
                                     //                 [
                                     //                     start<boolean>,
@@ -1260,8 +1260,8 @@
                                     //         ]
                                     //     ]
                                     const data=arg[0][1];
-                                    const stateOpen=data[0]?data[0]:'_';
-                                    const stateClose=data[1]?data[1]:'_';
+                                    const open=data[0]?data[0]:'_';
+                                    const close=data[1]?data[1]:'_';
                                     const content_array=data[2];
                                     for(const content of content_array){
                                         const start=content[0];
@@ -1275,35 +1275,35 @@
                                         if(!callback){
                                             callback=()=>{};
                                         }
-                                        const event_function=()=>{
+                                        const eventFunction=()=>{
                                             for(const content of content_array){
                                                 const targetElement_array_=content[1];
                                                 const buttonElement_array_=content[2];
                                                 if(targetElement_array_!==targetElement_array){
                                                     for(const targetElement_ of targetElement_array_){
-                                                        this.elementState(targetElement_,stateClose,stateOpen,true);
+                                                        this.elementState(targetElement_,close,open,true);
                                                     }
                                                 }
                                                 if(buttonElement_array_!==buttonElement_array){
                                                     for(const buttonElement_ of buttonElement_array_){
-                                                        this.elementState(buttonElement_,stateClose,stateOpen,true);
+                                                        this.elementState(buttonElement_,close,open,true);
                                                     }
                                                 }
                                             }
                                             for(const targetElement of targetElement_array){
-                                                this.elementState(targetElement,stateOpen,stateClose,true);
+                                                this.elementState(targetElement,open,close,true);
                                             }
                                             for(const buttonElement of buttonElement_array){
-                                                this.elementState(buttonElement,stateOpen,stateClose,true);
+                                                this.elementState(buttonElement,open,close,true);
                                             }
                                         };
                                         if(start){
-                                            event_function();
+                                            eventFunction();
                                             callback();
                                         }
                                         for(const buttonElement of buttonElement_array){
                                             for(const value of listenType.split(',')){
-                                                this.listenTarget('add',buttonElement,value,event_function,option,option2,option3);
+                                                this.listenTarget('add',buttonElement,value,eventFunction,option,option2,option3);
                                                 this.listenTarget('add',buttonElement,value,callback,option,option2,option3);
                                             }
                                         }
