@@ -239,7 +239,7 @@
                 }
                 return false;
             },
-            /*🟢*/searchObject(data=window.location&&window.location.search?window.location.search:undefined){
+            /*🟢*/searchObject(data=window.location&&window.location.search?window.location.search:''){
                 const result={};
                 this.for(data.replace(/^\?/,'').split('&'),(...data)=>{
                     const right=data[2].split('=')[1];
@@ -313,7 +313,7 @@
                 });
             },
             /*🔴*/webAssembly(){},
-            /*🔴*/isBot(type='user-agent',data=window.navigator&&window.navigator.userAgent?window.navigator.userAgent:undefined){
+            /*🔴*/isBot(type='user-agent',data=window.navigator&&window.navigator.userAgent?window.navigator.userAgent:''){
                 switch(type){
                     case'user-agent':
                         {
