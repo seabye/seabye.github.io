@@ -61,7 +61,7 @@
                 }else{
                     this.debug(()=>{
                         if(count){
-                            window.console.log('==== loop false, count:',count);
+                            window.console.log('==== loop, false, count:',count);
                         }
                     });
                     const loop=()=>{
@@ -78,7 +78,7 @@
                         }else{
                             if(countZeroCallback){
                                 this.debug(()=>{
-                                    window.console.log('==== loop false, countZeroCallback()');
+                                    window.console.log('==== loop, false, countZeroCallback()');
                                 });
                                 return countZeroCallback();
                             }
@@ -223,10 +223,13 @@
             /*🟢*/random(){
                 return window.Math.random().toString().replace(/^0\./,'');
             },
-            /*🟢*/hashCode(string){
+            /*🟢*/hashCode(string,abs=false){
                 let result;
                 for(let key=0,length=string.length;key<length;key++){
                     result=window.Math.imul(31,result)+string.charCodeAt(key)|0;
+                }
+                if(abs){
+                    result=window.Math.abs(result);
                 }
                 return result;
             },
@@ -312,7 +315,7 @@
                     }
                     return data;
                 }).catch((data)=>{
-                    window.console.log('==== import catch:',data);
+                    window.console.log('==== import, catch:',data);
                 });
             },
             /*🔴*/webAssembly(){},
@@ -407,43 +410,42 @@
                 }).then((data)=>{
                     result.result=data;
                     this.debug(()=>{
-                        window.console.log('==== fetch result:',result);
+                        window.console.log('==== fetch, result:',result);
                     });
                     if(callback){
                         return callback(result);
                     }
                     return result;
                 }).catch((data)=>{
-                    window.console.log('==== fetch catch:',data);
+                    window.console.log('==== fetch, catch:',data);
                 });
             },
         // command line interface
             /*🔴*/cli(){},
         // graphical user interface
             /*🔴*/cliEmulator(){},
-            /*🟡*/doubleKeyContentCount(){
-                if(!this.doubleKeyContentCount.template){
-                    this.doubleKeyContentCount.template=class template{
+            /*🔴*/doubleKeyContentCountSave(){
+                if(!this.doubleKeyContentCountSave.template){
+                    this.doubleKeyContentCountSave.template=class template{
                         constructor(){
                             this.data=[];
                         }
-                        create(keyOne,keyTwo,content,count){
+                        add(keyOne,keyTwo,content,count){
                             this.data.push({
-                                keyOne:typeof keyOne==='string'?machineTool.hashCode(keyOne):keyOne,
-                                keyTwo:typeof keyTwo==='string'?machineTool.hashCode(keyTwo):keyTwo,
+                                keyOne:typeof keyOne==='string'?machineTool.hashCode(keyOne,true):keyOne,
+                                keyTwo:typeof keyTwo==='string'?machineTool.hashCode(keyTwo,true):keyTwo,
                                 content:content,
                                 count:count?count:0
                             });
                         }
-                        delete(keyOne,keyTwo){}
-                        read(keyOne,keyTwo){}
-                        update(keyOne,keyTwo){}
+                        remove(keyOne,keyTwo){}
+                        get(keyOne,keyTwo){}
+                        set(keyOne,keyTwo){}
                     }
                 }
-                return new this.doubleKeyContentCount.template();
+                return new this.doubleKeyContentCountSave.template();
             },
-            /*🟡*/listenTarget(action,target,type,callback,option={},option2='',option3=''){
-                const match=/[\r\n\s]/g;
+            /*🟢*/listenTarget(action,target,type,callback,option={},option2='',option3=''){
                 switch(type){
                     case'pointer_down':
                         {
@@ -475,36 +477,35 @@
                         break;
                     case'pointer_up':
                         {
-                            // const id=`id_${this.hashCode(`${(target!==window&&target!==window.document?this.elementPath(target):'')}${callback.toString().replace(match,'')}`).toString().replace(/[^0-9]/g,'')}`;
+                            // const id=`id_${this.hashCode(callback.toString().replace(/[\r\n\s]/g,''),true)}`;
                             const id=`id_${this.random()}`;
-                            // const id=[target,this.hashCode(`${type}${callback.toString().replace(/[\r\n\s]/g,'')}`).toString().replace(/[^0-9]/g,''),0];
                             const remove=()=>{
-                                target.removeEventListener('pointerdown',this.listenTarget.pointer_up[id]);
-                                this.listenTarget.pointer_up[id].count-=1;
-                                if(this.listenTarget.pointer_up[id].count===0){
-                                    delete this.listenTarget.pointer_up[id];
-                                    if(!window.Object.keys(this.listenTarget.pointer_up).length){
-                                        delete this.listenTarget.pointer_up;
+                                target.removeEventListener('pointerdown',this.listenTarget.pointer_up_data[id]);
+                                this.listenTarget.pointer_up_data[id].count-=1;
+                                if(this.listenTarget.pointer_up_data[id].count===0){
+                                    delete this.listenTarget.pointer_up_data[id];
+                                    if(!window.Object.keys(this.listenTarget.pointer_up_data).length){
+                                        delete this.listenTarget.pointer_up_data;
                                     }
                                 }
                             };
                             switch(action){
                                 case'add':
                                     {
-                                        if(!this.listenTarget.pointer_up){
-                                            this.listenTarget.pointer_up={};
+                                        if(!this.listenTarget.pointer_up_data){
+                                            this.listenTarget.pointer_up_data={};
                                         }
-                                        if(!this.listenTarget.pointer_up[id]){
-                                            this.listenTarget.pointer_up[id]=(data)=>{
+                                        if(!this.listenTarget.pointer_up_data[id]){
+                                            this.listenTarget.pointer_up_data[id]=(data)=>{
                                                 const once_id=`once_${id}`;
-                                                data.target.parentNode.removeEventListener('pointerup',this.listenTarget.pointer_up[once_id]);
-                                                delete this.listenTarget.pointer_up[once_id];
+                                                data.target.parentNode.removeEventListener('pointerup',this.listenTarget.pointer_up_data[once_id]);
+                                                delete this.listenTarget.pointer_up_data[once_id];
                                                 const run=()=>{
                                                     const left=data.target.getBoundingClientRect().left;
                                                     const right=data.target.getBoundingClientRect().right;
                                                     const top=data.target.getBoundingClientRect().top;
                                                     const bottom=data.target.getBoundingClientRect().bottom;
-                                                    this.listenTarget.pointer_up[once_id]=(event)=>{
+                                                    this.listenTarget.pointer_up_data[once_id]=(event)=>{
                                                         if((event.target===data.target||event.target===data.target.parentNode)&&(event.clientX>=left&&event.clientX<=right&&event.clientY>=top&&event.clientY<=bottom)){
                                                             if(event.target.childElementCount){
                                                                 let block=false;
@@ -541,13 +542,13 @@
                                                             }
                                                         }
                                                     };
-                                                    data.target.parentNode.addEventListener('pointerup',this.listenTarget.pointer_up[once_id],{once:true});
+                                                    data.target.parentNode.addEventListener('pointerup',this.listenTarget.pointer_up_data[once_id],{once:true});
                                                     const remove=()=>{
                                                         window.removeEventListener('pointerup',remove);
                                                         window.removeEventListener('touchend',remove);
                                                         window.removeEventListener('dragend',remove);
                                                         if(data.target.parentNode){
-                                                            data.target.parentNode.removeEventListener('pointerup',this.listenTarget.pointer_up[once_id]);
+                                                            data.target.parentNode.removeEventListener('pointerup',this.listenTarget.pointer_up_data[once_id]);
                                                         }
                                                     };
                                                     if(option3){
@@ -573,17 +574,17 @@
                                                     run();
                                                 }
                                                 this.debug(()=>{
-                                                    window.console.log('==== listenTarget.pointer_up length:',window.Object.keys(this.listenTarget.pointer_up).length);
+                                                    window.console.log('==== listenTarget pointer_up, length:',window.Object.keys(this.listenTarget.pointer_up_data).length);
                                                 });
                                             };
-                                            this.listenTarget.pointer_up[id].count=0;
+                                            this.listenTarget.pointer_up_data[id].count=0;
                                         }
                                         if(option.once){
-                                            target.addEventListener('pointerdown',this.listenTarget.pointer_up[id]);
+                                            target.addEventListener('pointerdown',this.listenTarget.pointer_up_data[id]);
                                         }else{
-                                            target.addEventListener('pointerdown',this.listenTarget.pointer_up[id],option);
+                                            target.addEventListener('pointerdown',this.listenTarget.pointer_up_data[id],option);
                                         }
-                                        this.listenTarget.pointer_up[id].count+=1;
+                                        this.listenTarget.pointer_up_data[id].count+=1;
                                     }
                                     break;
                                 case'remove':
@@ -601,9 +602,12 @@
                             switch(action){
                                 case'add':
                                     {
+                                        this.debug(()=>{
+                                            window.console.log('==== listenTarget observe_mutation, add, target:',target);
+                                        });
                                         target.machineTool_listenTarget_observe_mutation=new window.MutationObserver((mutation_list)=>{
                                             this.debug(()=>{
-                                                window.console.log('==== listenTarget.observe_mutation mutation_list:',mutation_list);
+                                                window.console.log('==== listenTarget observe_mutation, mutation_list:',mutation_list);
                                             });
                                             mutation_list.forEach((mutation)=>{
                                                 switch(mutation.type){
@@ -621,12 +625,14 @@
                                                         break;
                                                 }
                                             });
-                                        });
-                                        target.machineTool_listenTarget_observe_mutation.observe(target,option);
+                                        }).observe(target,option);
                                     }
                                     break;
                                 case'remove':
                                     {
+                                        this.debug(()=>{
+                                            window.console.log('==== listenTarget observe_mutation, remove, target:',target);
+                                        });
                                         target.machineTool_listenTarget_observe_mutation.disconnect();
                                         delete target.machineTool_listenTarget_observe_mutation;
                                     }
@@ -641,19 +647,24 @@
                             switch(action){
                                 case'add':
                                     {
+                                        this.debug(()=>{
+                                            window.console.log('==== listenTarget observe_intersection, add, target:',target);
+                                        });
                                         target.machineTool_listenTarget_observe_intersection=new window.IntersectionObserver((entries)=>{
                                             this.debug(()=>{
-                                                window.console.log('==== listenTarget.observe_intersection entries:',entries);
+                                                window.console.log('==== listenTarget observe_intersection, entries:',entries);
                                             });
                                             entries.forEach((entry)=>{
                                                 callback(entry);
                                             });
-                                        },option);
-                                        target.machineTool_listenTarget_observe_intersection.observe(target);
+                                        },option).observe(target);
                                     }
                                     break;
                                 case'remove':
                                     {
+                                        this.debug(()=>{
+                                            window.console.log('==== listenTarget observe_intersection, remove, target:',target);
+                                        });
                                         target.machineTool_listenTarget_observe_intersection.disconnect();
                                         delete target.machineTool_listenTarget_observe_intersection;
                                     }
@@ -668,19 +679,24 @@
                             switch(action){
                                 case'add':
                                     {
+                                        this.debug(()=>{
+                                            window.console.log('==== listenTarget observe_resize, add, target:',target);
+                                        });
                                         target.machineTool_listenTarget_observe_resize=new window.ResizeObserver((entries)=>{
                                             this.debug(()=>{
-                                                window.console.log('==== listenTarget.observe_resize entries:',entries);
+                                                window.console.log('==== listenTarget observe_resize, entries:',entries);
                                             });
                                             entries.forEach((entry)=>{
                                                 callback(entry);
                                             });
-                                        });
-                                        target.machineTool_listenTarget_observe_resize.observe(target);
+                                        }).observe(target);
                                     }
                                     break;
                                 case'remove':
                                     {
+                                        this.debug(()=>{
+                                            window.console.log('==== listenTarget observe_resize, remove, target:',target);
+                                        });
                                         target.machineTool_listenTarget_observe_resize.disconnect();
                                         delete target.machineTool_listenTarget_observe_resize;
                                     }
@@ -692,10 +708,6 @@
                         break;
                     case'URI':
                         {
-                            const id=`id_${this.hashCode(target.toString().replace(/[\r\n\s]/g,'')).toString().replace(/[^0-9]/g,'')}`;
-                            if(!this.listenTarget.URI){
-                                this.listenTarget.URI={};
-                            }
                             if(!this.listenTarget.URI_template){
                                 this.listenTarget.URI_template=class template{
                                     constructor(callback){
@@ -712,18 +724,27 @@
                                         this.callback=callback;
                                     }
                                     _popstate=(data)=>{
+                                        machineTool.debug(()=>{
+                                            window.console.log('==== listenTarget URI, popstate:',data.type,machineTool.URIPath());
+                                        });
                                         this.callback({
                                             type:data.type,
                                             path:machineTool.URIPath()
                                         });
                                     }
                                     _pushState=(data)=>{
+                                        machineTool.debug(()=>{
+                                            window.console.log('==== listenTarget URI, pushState:',data.type,data.pushState.replace());
+                                        });
                                         this.callback({
                                             type:data.type,
                                             path:data.pushState.replace()
                                         });
                                     }
                                     _replaceState=(data)=>{
+                                        machineTool.debug(()=>{
+                                            window.console.log('==== listenTarget URI, replaceState:',data.type,data.replaceState.replace());
+                                        });
                                         this.callback({
                                             type:data.type,
                                             path:data.replaceState.replace()
@@ -741,27 +762,35 @@
                                     }
                                 }
                             }
+                            const callback=target;
+                            const id=`id_${this.hashCode(callback.toString().replace(/[\r\n\s]/g,''),true)}`;
+                            if(!this.listenTarget.URI_data){
+                                this.listenTarget.URI_data={};
+                            }
                             switch(action){
                                 case'add':
                                     {
-                                        if(!this.listenTarget.URI[id]){
-                                            this.listenTarget.URI[id]=new this.listenTarget.URI_template(target);
-                                            // this.listenTarget.URI[id].count=0;
-                                            this.listenTarget.URI[id].add();
+                                        if(!this.listenTarget.URI_data[id]){
+                                            this.listenTarget.URI_data[id]=new this.listenTarget.URI_template(callback);
+                                            this.listenTarget.URI_data[id].add();
+                                            this.debug(()=>{
+                                                window.console.log('==== listenTarget URI, add, listenTarget.URI_data:',this.listenTarget.URI_data);
+                                            });
                                         }
-                                        // this.listenTarget.URI[id].add();
-                                        // this.listenTarget.URI[id].count+=1;
                                     }
                                     break;
                                 case'remove':
                                     {
-                                        this.listenTarget.URI[id].remove();
-                                        // this.listenTarget.URI[id].count-=1;
-                                        // if(this.listenTarget.URI[id].count===0){
-                                            delete this.listenTarget.URI[id];
-                                            // remove observe
-                                            // if(!window.Object.keys(this.listenTarget.URI).length){}
-                                        // }
+                                        if(this.listenTarget.URI_data[id]){
+                                            this.listenTarget.URI_data[id].remove();
+                                            delete this.listenTarget.URI_data[id];
+                                            if(!window.Object.keys(this.listenTarget.URI_data).length){
+                                                delete this.listenTarget.URI_data;
+                                            }
+                                            this.debug(()=>{
+                                                window.console.log('==== listenTarget URI, remove, listenTarget.URI_data:',this.listenTarget.URI_data);
+                                            });
+                                        }
                                     }
                                     break;
                                 default:
