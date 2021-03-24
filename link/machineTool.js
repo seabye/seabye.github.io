@@ -477,7 +477,6 @@
                         break;
                     case'pointer_up':
                         {
-                            // const id=`id_${this.hashCode(callback.toString().replace(/[\r\n\s]/g,''),true)}`;
                             const id=`id_${this.random()}`;
                             const remove=()=>{
                                 target.removeEventListener('pointerdown',this.listenTarget.pointer_up_data[id]);
@@ -625,7 +624,8 @@
                                                         break;
                                                 }
                                             });
-                                        }).observe(target,option);
+                                        });
+                                        target.machineTool_listenTarget_observe_mutation.observe(target,option);
                                     }
                                     break;
                                 case'remove':
@@ -657,7 +657,8 @@
                                             entries.forEach((entry)=>{
                                                 callback(entry);
                                             });
-                                        },option).observe(target);
+                                        },option);
+                                        target.machineTool_listenTarget_observe_intersection.observe(target);
                                     }
                                     break;
                                 case'remove':
@@ -689,7 +690,8 @@
                                             entries.forEach((entry)=>{
                                                 callback(entry);
                                             });
-                                        }).observe(target);
+                                        });
+                                        target.machineTool_listenTarget_observe_resize.observe(target);
                                     }
                                     break;
                                 case'remove':
