@@ -54,7 +54,7 @@
                     }
                 };
             },
-            /*🚩🟢*/async loop(condition,wait=1000/24,count,overCallback){
+            /*🟡*/async loop(condition,wait=1000/24,count,overCallback){
                 const result=await condition();
                 if(result){
                     return result;
@@ -88,7 +88,7 @@
                     },wait);
                 });
             },
-            /*🚩🟡*/observeFunction(originFunction,eventType,eventOption={},whoListen,dataPlus=()=>{}){
+            /*🟡*/observeFunction(originFunction,eventType,eventOption={},whoListen,dataPlus=()=>{}){
                 const insertEvent=new window.CustomEvent(eventType,eventOption);
                 return function(...arg){
                     insertEvent._arg_=arg;
@@ -420,7 +420,7 @@
             /*🔴*/cli(){},
         // graphical user interface
             /*🔴*/cliEmulator(){},
-            /*🚩🟡*/doubleKeyContentCount(){
+            /*🟡*/doubleKeyContentCount(){
                 if(!this.doubleKeyContentCount.template){
                     this.doubleKeyContentCount.template=class template{
                         constructor(){
@@ -441,7 +441,7 @@
                 }
                 return new this.doubleKeyContentCount.template();
             },
-            /*🚩🟡*/listenTarget(action,target,type,callback,option={},option2='',option3=''){
+            /*🟡*/listenTarget(action,target,type,callback,option={},option2='',option3=''){
                 const match=/[\r\n\s]/g;
                 switch(type){
                     case'pointer_down':
@@ -788,7 +788,7 @@
                         break;
                 }
             },
-            /*🚩🟢*/elementCreate(...arg){
+            /*🟡*/elementCreate(...arg){
                 switch(typeof arg[0]){
                     case'string':
                         {
@@ -998,7 +998,7 @@
                         break;
                 }
             },
-            /*🚩🟢*/elementState(...arg){
+            /*🟡*/elementState(...arg){
                 if(arg[0]instanceof window.HTMLElement){
                     // base mode
                     //     element<element>,
@@ -1312,7 +1312,7 @@
                     }
                 }
             },
-            /*🚩🟢*/elementBlock(element,group='group',insertPosition='beforeend',wait=350){
+            /*🟡*/elementBlock(element,group='group',insertPosition='beforeend',wait=350){
                 if(!this.elementBlock.template){
                     this.elementBlock.template=class template{
                         constructor(element,group,insertPosition,wait){
