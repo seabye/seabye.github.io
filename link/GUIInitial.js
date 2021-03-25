@@ -154,7 +154,7 @@
         },
         /*🟢*/serviceWorker(){
             if(this.dataset.config.serviceWorker&&'serviceWorker'in window.navigator){
-                window.navigator.serviceWorker.register(this.dataset.config.serviceWorker,{scope:'./'});
+                window.navigator.serviceWorker.register(this.dataset.config.serviceWorker,{scope:'/'});
             }
         },
         /*🟢*/navigator(){
