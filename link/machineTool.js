@@ -314,8 +314,8 @@
                         return callback(data);
                     }
                     return data;
-                }).catch((data)=>{
-                    window.console.log('==== import, catch:',data);
+                }).catch((error)=>{
+                    window.console.log('==== import, catch:',error);
                 });
             },
             /*🔴*/webAssembly(){},
@@ -416,8 +416,8 @@
                         return callback(result);
                     }
                     return result;
-                }).catch((data)=>{
-                    window.console.log('==== fetch, catch:',data);
+                }).catch((error)=>{
+                    window.console.log('==== fetch, catch:',error);
                 });
             },
         // command line interface
