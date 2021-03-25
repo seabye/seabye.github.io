@@ -77,22 +77,22 @@
     // machineTool test
     machineTool.debug(()=>{
         machineTool.runObject({
-            // async loop(){
-            //     window.console.log('---- loop: start');
-            //     let result=await machineTool.loop(()=>{
-            //         return machineTool.fetch('https://iptv-org.github.io/iptv/channels.nosj','GET',undefined,undefined,'json');
-            //     },500,3,()=>{
-            //         return machineTool.fetch('https://iptv-org.github.io/iptv/channels.json','GET',undefined,undefined,'json',()=>{
-            //             return new window.Promise((resolve)=>{
-            //                 window.setTimeout(()=>{
-            //                     resolve('Ok');
-            //                 },1000);
-            //             });
-            //         });
-            //     });
-            //     window.console.log('---- loop result:',result);
-            //     window.console.log('---- loop: end');
-            // },
+            async loop(){
+                window.console.log('---- loop: start');
+                let result=await machineTool.loop(()=>{
+                    return machineTool.fetch('https://iptv-org.github.io/iptv/channels.nosj','GET',undefined,undefined,undefined,'json');
+                },500,3,()=>{
+                    return machineTool.fetch('https://iptv-org.github.io/iptv/channels.json','GET',undefined,undefined,undefined,'json',()=>{
+                        return new window.Promise((resolve)=>{
+                            window.setTimeout(()=>{
+                                resolve('Ok');
+                            },1000);
+                        });
+                    });
+                });
+                window.console.log('---- loop result:',result);
+                window.console.log('---- loop: end');
+            },
             // listenTarget_URI(){
             //     machineTool.listenTarget('add',()=>{},'URI');
             //     machineTool.setURI('push',window.location.pathname);

@@ -349,7 +349,7 @@
             /*🔴*/database(){},
             /*🔴*/cache(){},
         // network data
-            /*🟡*/fetch(URI,method,dataInfo,data,contentType,callback,optionPlus,headersPlus){
+            /*🟢*/fetch(URI,method,data,dataInfo,requestDataType,responseDataType,callback,optionPlus,optionHeadersPlus){
                 const option={};
                 option.method=method;
                 if(dataInfo!==undefined){
@@ -375,49 +375,65 @@
                         option[data[1]]=data[2];
                     },0);
                 }
-                switch(contentType){
-                    case'json':
-                        {
-                            if(!option.headers){
-                                option.headers={};
+                if(requestDataType!==undefined){
+                    switch(requestDataType){
+                        case'plain':
+                            {
+                                option.headers={
+                                    'Content-Type':'text/plain; charset=utf-8'
+                                };
                             }
-                            option.headers['Content-Type']='application/json; charset=utf-8';
-                        }
-                        break;
-                    case'text':
-                        {
-                            if(!option.headers){
-                                option.headers={};
+                            break;
+                        case'html':
+                            {
+                                option.headers={
+                                    'Content-Type':'text/html; charset=utf-8'
+                                };
                             }
-                            option.headers['Content-Type']='text/html; charset=utf-8';
-                        }
-                        break;
-                    default:
-                        break;
+                            break;
+                        case'json':
+                            {
+                                option.headers={
+                                    'Content-Type':'application/json; charset=utf-8'
+                                };
+                            }
+                            break;
+                        default:
+                            {
+                                option.headers={
+                                    'Content-Type':`${requestDataType}; charset=utf-8`
+                                };
+                            }
+                            break;
+                    }
                 }
-                if(headersPlus){
+                if(optionHeadersPlus){
                     if(!option.headers){
                         option.headers={};
                     }
-                    this.for(headersPlus,(...data)=>{
+                    this.for(optionHeadersPlus,(...data)=>{
                         option.headers[data[1]]=data[2];
                     },0);
                 }
                 const result={};
+                this.debug(()=>{
+                    window.console.log('==== fetch, request, URI:',URI);
+                    window.console.log('==== fetch, request, option:',option);
+                });
                 return window.fetch(URI,option).then((data)=>{
                     result.status=data.status;
-                    return data[contentType]();
+                    return data[responseDataType]();
                 }).then((data)=>{
                     result.result=data;
                     this.debug(()=>{
-                        window.console.log('==== fetch, result:',result);
+                        window.console.log('==== fetch, response, result:',result);
                     });
                     if(callback){
                         return callback(result);
                     }
                     return result;
                 }).catch((error)=>{
-                    window.console.log('==== fetch, catch:',error);
+                    window.console.log('==== fetch, response, catch:',error);
                 });
             },
         // command line interface
