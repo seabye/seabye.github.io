@@ -381,7 +381,7 @@
                             if(!option.headers){
                                 option.headers={};
                             }
-                            // option.headers['Content-Type']='application/json; charset=utf-8';
+                            option.headers['Content-Type']='application/json; charset=utf-8';
                         }
                         break;
                     case'text':
@@ -389,7 +389,7 @@
                             if(!option.headers){
                                 option.headers={};
                             }
-                            // option.headers['Content-Type']='text/html; charset=utf-8';
+                            option.headers['Content-Type']='text/html; charset=utf-8';
                         }
                         break;
                     default:
