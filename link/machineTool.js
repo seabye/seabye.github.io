@@ -216,12 +216,15 @@
                 }
             },
             /*🟢*/runObject(object,excludePrefix){
-                let re=null;
                 if(excludePrefix){
-                    re=new window.RegExp(`^${excludePrefix}`);
-                }
-                for(const key in object){
-                    if(!re||(re&&!key.match(re))){
+                    let re=new window.RegExp(`^${excludePrefix}`);
+                    for(const key in object){
+                        if(!key.match(re)){
+                            object[key]();
+                        }
+                    }
+                }else{
+                    for(const key in object){
                         object[key]();
                     }
                 }
