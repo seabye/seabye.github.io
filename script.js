@@ -93,9 +93,9 @@
                 window.console.log('---- loop, result:',result);
                 window.console.log('---- loop: end');
             },
-            listenTarget_observe_resize(){
+            _listenTarget_observe_resize(){
                 machineTool.listenTarget('add',window.document.body,'observe_resize',(data)=>{
-                    window.console.log(data);
+                    window.console.log('---- listenTarget, observe_resize, data:',data);
                 });
             },
             _listenTarget_URI(){
