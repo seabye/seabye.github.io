@@ -77,41 +77,56 @@
     // machineTool test
     machineTool.debug(()=>{
         machineTool.runObject({
-            // async loop(){
-            //     window.console.log('---- loop: start');
-            //     let result=await machineTool.loop(()=>{
-            //         return machineTool.fetch('https://iptv-org.github.io/iptv/channels.nosj','GET',undefined,undefined,undefined,'json');
-            //     },500,3,()=>{
-            //         return machineTool.fetch('https://iptv-org.github.io/iptv/channels.json','GET',undefined,undefined,undefined,'json',()=>{
-            //             return new window.Promise((resolve)=>{
-            //                 window.setTimeout(()=>{
-            //                     resolve('Ok');
-            //                 },1000);
-            //             });
-            //         });
-            //     });
-            //     window.console.log('---- loop result:',result);
-            //     window.console.log('---- loop: end');
-            // },
-            // listenTarget_URI(){
-            //     machineTool.listenTarget('add',()=>{},'URI');
-            //     machineTool.setURI('push',window.location.pathname);
-            //     machineTool.setURI('replace',window.location.pathname);
-            //     machineTool.listenTarget('remove',()=>{},'URI');
-            // },
+            async _loop(){
+                window.console.log('---- loop: start');
+                let result=await machineTool.loop(()=>{
+                    return machineTool.fetch('https://iptv-org.github.io/iptv/channels.nosj','GET',undefined,undefined,undefined,'json');
+                },500,3,()=>{
+                    return machineTool.fetch('https://iptv-org.github.io/iptv/channels.json','GET',undefined,undefined,undefined,'json',()=>{
+                        return new window.Promise((resolve)=>{
+                            window.setTimeout(()=>{
+                                resolve('Ok');
+                            },1000);
+                        });
+                    });
+                });
+                window.console.log('---- loop, result:',result);
+                window.console.log('---- loop: end');
+            },
+            _listenTarget_URI(){
+                machineTool.listenTarget('add',()=>{},'URI');
+                machineTool.setURI('push',window.location.pathname);
+                machineTool.setURI('replace',window.location.pathname);
+                machineTool.listenTarget('remove',()=>{},'URI');
+            },
+            _elementCreate(){},
+            _elementState(){},
+            async _elementBlock(){
+                const block=machineTool.elementBlock(window.document.body,'block');
+                await block.add(machineTool.elementCreate(undefined,{class:'b_1'},undefined,undefined,'1'),1);
+                await block.add(machineTool.elementCreate(undefined,{class:'b_2'},undefined,undefined,'2'),2);
+                await block.add(machineTool.elementCreate(undefined,{class:'b_3'},undefined,undefined,'3'),3);
+                await block.hide();
+                await block.remove();
+                window.console.log('---- elementBlock, get 3 machineTool_elementBlock_prev:',block.get(3).machineTool_elementBlock_prev);
+                block.set(machineTool.elementCreate(undefined,undefined,undefined,undefined,'3Plus'),3);
+                await block.add(machineTool.elementCreate(undefined,{class:'b_4'},undefined,undefined,'4'));
+                await block.back();
+            },
+            _doubleKeyContentCountSave(){},
             UUID36ToUUID22(){
-                window.console.log('---- 8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3 jvZe6aA5S_Kks2h_zB88ww UUID36ToUUID22',machineTool.UUID36ToUUID22('8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3'));
+                window.console.log('---- 8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3 jvZe6aA5S_Kks2h_zB88ww, UUID36ToUUID22:',machineTool.UUID36ToUUID22('8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3'));
             },
             UUID22ToUUID36(){
-                window.console.log('---- 8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3 jvZe6aA5S_Kks2h_zB88ww UUID22ToUUID36',machineTool.UUID22ToUUID36('jvZe6aA5S_Kks2h_zB88ww'));
+                window.console.log('---- 8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3 jvZe6aA5S_Kks2h_zB88ww, UUID22ToUUID36:',machineTool.UUID22ToUUID36('jvZe6aA5S_Kks2h_zB88ww'));
             },
             stringToBase64URISafeNoPad(){
-                window.console.log('---- 8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3 jvZe6aA5S_Kks2h_zB88ww stringToBase64URISafeNoPad',machineTool.stringToBase64URISafeNoPad('8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3'));
+                window.console.log('---- 8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3 jvZe6aA5S_Kks2h_zB88ww, stringToBase64URISafeNoPad:',machineTool.stringToBase64URISafeNoPad('8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3'));
             },
             base64URISafeNoPadToString(){
-                window.console.log('---- 8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3 jvZe6aA5S_Kks2h_zB88ww base64URISafeNoPadToString',machineTool.base64URISafeNoPadToString('jvZe6aA5S_Kks2h_zB88ww'));
+                window.console.log('---- 8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3 jvZe6aA5S_Kks2h_zB88ww, base64URISafeNoPadToString:',machineTool.base64URISafeNoPadToString('jvZe6aA5S_Kks2h_zB88ww'));
             }
-        });
+        },'_');
     });
 // #after
     // console
