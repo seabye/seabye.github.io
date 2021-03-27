@@ -93,6 +93,11 @@
                 window.console.log('---- loop, result:',result);
                 window.console.log('---- loop: end');
             },
+            listenTarget_observe_resize(){
+                machineTool.listenTarget('add',window.document.body,'observe_resize',(data)=>{
+                    window.console.log(data);
+                });
+            },
             _listenTarget_URI(){
                 machineTool.listenTarget('add',()=>{},'URI');
                 machineTool.setURI('push',window.location.pathname);

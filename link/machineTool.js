@@ -221,7 +221,7 @@
                     re=new window.RegExp(`^${excludePrefix}`);
                 }
                 for(const key in object){
-                    if(re&&!key.match(re)){
+                    if(!re||(re&&!key.match(re))){
                         object[key]();
                     }
                 }
