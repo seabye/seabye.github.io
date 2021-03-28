@@ -261,8 +261,8 @@
         top: 0;
         bottom: 0;
         margin: auto;
-        width: 32px;
-        height: 32px;
+        width: 20px;
+        height: 20px;
         /* animation: 0.6s steps(12) 0s infinite ic_an_loading_spinner; */
         animation: 0.6s steps(8) 0s infinite ic_an_loading_spinner;
     }
