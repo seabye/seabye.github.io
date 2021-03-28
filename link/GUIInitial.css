@@ -262,7 +262,7 @@
         margin: auto;
         width: 16px;
         height: 16px;
-        animation: ic_an_apple_loading_spinner 1000ms linear infinite;
+        animation: 0.6s steps(12) 0s infinite ic_an_apple_loading_spinner;
     }
     html.ic_nr_media_prefers_colorScheme_dark.ic_an_apple_loading_spinner::before,
     html.ic_nr_media_prefers_colorScheme_dark .ic_an_apple_loading_spinner::before {
