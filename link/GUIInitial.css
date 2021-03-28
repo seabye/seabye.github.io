@@ -264,7 +264,7 @@
         width: 20px;
         height: 20px;
         /* animation: 0.6s steps(12) 0s infinite ic_an_loading_spinner; */
-        animation: 1s steps(8) 0s infinite ic_an_loading_spinner;
+        animation: 0.8s steps(8) 0s infinite ic_an_loading_spinner;
     }
     html.ic_nr_media_prefers_colorScheme_dark.ic_an_loading_spinner::before,
     html.ic_nr_media_prefers_colorScheme_dark .ic_an_loading_spinner::before {
