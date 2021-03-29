@@ -281,7 +281,7 @@
         width: 16px;
         height: 16px;
         /* animation: 0.6s steps(12) 0s infinite ic_bk_progressIndicatorCircular_indeterminate; */
-        animation: 1s steps(8) 0s infinite ic_bk_progressIndicatorCircular_indeterminate;
+        animation: calc(1s/3*2) steps(8) 0s infinite ic_bk_progressIndicatorCircular_indeterminate;
     }
     html.ic_nr_media_prefers_colorScheme_dark[class*="ic_bk_progressIndicatorCircular_indeterminate"]::before,
     html.ic_nr_media_prefers_colorScheme_dark [class*="ic_bk_progressIndicatorCircular_indeterminate"]::before {
@@ -290,12 +290,12 @@
     .ic_bk_progressIndicatorCircular_indeterminate_8::before {
         width: 16px;
         height: 16px;
-        animation: 1s steps(8) 0s infinite ic_bk_progressIndicatorCircular_indeterminate_8;
+        animation: calc(1s/3*2) steps(8) 0s infinite ic_bk_progressIndicatorCircular_indeterminate_8;
     }
     .ic_bk_progressIndicatorCircular_indeterminate_12::before {
         width: 16px;
         height: 16px;
-        animation: 1s steps(8) 0s infinite ic_bk_progressIndicatorCircular_indeterminate_12;
+        animation: calc(1s/3*2) steps(8) 0s infinite ic_bk_progressIndicatorCircular_indeterminate_12;
     }
     .ic_bk_progressIndicatorCircular_indeterminate_16::before {
         width: 16px;
