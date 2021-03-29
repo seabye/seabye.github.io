@@ -246,26 +246,26 @@
 /* #block */
     /* ic_bk_progressIndicatorCircular_indeterminate */
     @keyframes ic_bk_progressIndicatorCircular_indeterminate {
-        from {
+        0% {
             transform: rotate(0deg);
         }
-        to {
+        100% {
             transform: rotate(360deg);
         }
     }
     @keyframes ic_bk_progressIndicatorCircular_indeterminate_8 {
-        from {
+        0% {
             transform: scale(0.5)rotate(0deg);
         }
-        to {
+        100% {
             transform: scale(0.5)rotate(360deg);
         }
     }
     @keyframes ic_bk_progressIndicatorCircular_indeterminate_12 {
-        from {
+        0% {
             transform: scale(0.75)rotate(0deg);
         }
-        to {
+        100% {
             transform: scale(0.75)rotate(360deg);
         }
     }
