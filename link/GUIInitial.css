@@ -274,7 +274,7 @@
     [class*="ic_bk_progressIndicatorCircular_indeterminate"] * {
         pointer-events: none !important;
     }
-    [class*="ic_bk_progressIndicatorCircular_indeterminate"]::before {
+    [class*="ic_bk_progressIndicatorCircular_indeterminate"]::after {
         /* content: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-1 -1 2 2'><rect x='0.45625' y='-0.09099' width='0.54375' height='0.18198' rx='0.09099' ry='0.09099' fill-opacity='0.16863' transform='rotate(0)'></rect><rect x='0.45625' y='-0.09099' width='0.54375' height='0.18198' rx='0.09099' ry='0.09099' fill-opacity='0.2' transform='rotate(30)'></rect><rect x='0.45625' y='-0.09099' width='0.54375' height='0.18198' rx='0.09099' ry='0.09099' fill-opacity='0.21961' transform='rotate(60)'></rect><rect x='0.45625' y='-0.09099' width='0.54375' height='0.18198' rx='0.09099' ry='0.09099' fill-opacity='0.25882' transform='rotate(90)'></rect><rect x='0.45625' y='-0.09099' width='0.54375' height='0.18198' rx='0.09099' ry='0.09099' fill-opacity='0.32157' transform='rotate(120)'></rect><rect x='0.45625' y='-0.09099' width='0.54375' height='0.18198' rx='0.09099' ry='0.09099' fill-opacity='0.38039' transform='rotate(150)'></rect><rect x='0.45625' y='-0.09099' width='0.54375' height='0.18198' rx='0.09099' ry='0.09099' fill-opacity='0.43137' transform='rotate(180)'></rect><rect x='0.45625' y='-0.09099' width='0.54375' height='0.18198' rx='0.09099' ry='0.09099' fill-opacity='0.54118' transform='rotate(210)'></rect><rect x='0.45625' y='-0.09099' width='0.54375' height='0.18198' rx='0.09099' ry='0.09099' fill-opacity='0.65098' transform='rotate(240)'></rect><rect x='0.45625' y='-0.09099' width='0.54375' height='0.18198' rx='0.09099' ry='0.09099' fill-opacity='0.76078' transform='rotate(270)'></rect><rect x='0.45625' y='-0.09099' width='0.54375' height='0.18198' rx='0.09099' ry='0.09099' fill-opacity='0.90196' transform='rotate(300)'></rect><rect x='0.45625' y='-0.09099' width='0.54375' height='0.18198' rx='0.09099' ry='0.09099' fill-opacity='1' transform='rotate(330)'></rect></svg>"); */
         content: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-1 -1 2 2'><rect x='0.38' y='-0.125' width='0.62' height='0.25' rx='0.125' ry='0.125' fill-opacity='0.125' transform='rotate(0)'></rect><rect x='0.38' y='-0.125' width='0.62' height='0.25' rx='0.125' ry='0.125' fill-opacity='0.25' transform='rotate(45)'></rect><rect x='0.38' y='-0.125' width='0.62' height='0.25' rx='0.125' ry='0.125' fill-opacity='0.375' transform='rotate(90)'></rect><rect x='0.38' y='-0.125' width='0.62' height='0.25' rx='0.125' ry='0.125' fill-opacity='0.5' transform='rotate(135)'></rect><rect x='0.38' y='-0.125' width='0.62' height='0.25' rx='0.125' ry='0.125' fill-opacity='0.625' transform='rotate(180)'></rect><rect x='0.38' y='-0.125' width='0.62' height='0.25' rx='0.125' ry='0.125' fill-opacity='0.75' transform='rotate(225)'></rect><rect x='0.38' y='-0.125' width='0.62' height='0.25' rx='0.125' ry='0.125' fill-opacity='0.875' transform='rotate(270)'></rect><rect x='0.38' y='-0.125' width='0.62' height='0.25' rx='0.125' ry='0.125' fill-opacity='1' transform='rotate(315)'></rect></svg>");
         z-index: 999;
@@ -290,48 +290,48 @@
         /* animation: 0.6s steps(12) 0s infinite ic_bk_progressIndicatorCircular_indeterminate; */
         animation: calc(1s/3*2) steps(8) 0s infinite ic_bk_progressIndicatorCircular_indeterminate;
     }
-    html:not(.ic_nr_media_prefers_colorScheme_dark)[class*="ic_bk_progressIndicatorCircular_indeterminate_invert"]::before,
-    html:not(.ic_nr_media_prefers_colorScheme_dark) [class*="ic_bk_progressIndicatorCircular_indeterminate_invert"]::before {
+    html:not(.ic_nr_media_prefers_colorScheme_dark)[class*="ic_bk_progressIndicatorCircular_indeterminate_invert"]::after,
+    html:not(.ic_nr_media_prefers_colorScheme_dark) [class*="ic_bk_progressIndicatorCircular_indeterminate_invert"]::after {
         filter: opacity(0.8)invert(1);
     }
-    html.ic_nr_media_prefers_colorScheme_dark[class*="ic_bk_progressIndicatorCircular_indeterminate"]:not([class*="ic_bk_progressIndicatorCircular_indeterminate_invert"])::before,
-    html.ic_nr_media_prefers_colorScheme_dark [class*="ic_bk_progressIndicatorCircular_indeterminate"]:not([class*="ic_bk_progressIndicatorCircular_indeterminate_invert"])::before {
+    html.ic_nr_media_prefers_colorScheme_dark[class*="ic_bk_progressIndicatorCircular_indeterminate"]:not([class*="ic_bk_progressIndicatorCircular_indeterminate_invert"])::after,
+    html.ic_nr_media_prefers_colorScheme_dark [class*="ic_bk_progressIndicatorCircular_indeterminate"]:not([class*="ic_bk_progressIndicatorCircular_indeterminate_invert"])::after {
         filter: opacity(0.625)invert(1);
     }
-    [class*="ic_bk_progressIndicatorCircular_indeterminate_8"]::before,
-    [class*="ic_bk_progressIndicatorCircular_indeterminate_invert_8"]::before {
+    [class*="ic_bk_progressIndicatorCircular_indeterminate_8"]::after,
+    [class*="ic_bk_progressIndicatorCircular_indeterminate_invert_8"]::after {
         width: 16px;
         height: 16px;
         animation: calc(1s/3*2) steps(8) 0s infinite ic_bk_progressIndicatorCircular_indeterminate_8;
     }
-    [class*="ic_bk_progressIndicatorCircular_indeterminate_12"]::before,
-    [class*="ic_bk_progressIndicatorCircular_indeterminate_invert_12"]::before {
+    [class*="ic_bk_progressIndicatorCircular_indeterminate_12"]::after,
+    [class*="ic_bk_progressIndicatorCircular_indeterminate_invert_12"]::after {
         width: 16px;
         height: 16px;
         animation: calc(1s/3*2) steps(8) 0s infinite ic_bk_progressIndicatorCircular_indeterminate_12;
     }
-    [class*="ic_bk_progressIndicatorCircular_indeterminate_16"]::before,
-    [class*="ic_bk_progressIndicatorCircular_indeterminate_invert_16"]::before {
+    [class*="ic_bk_progressIndicatorCircular_indeterminate_16"]::after,
+    [class*="ic_bk_progressIndicatorCircular_indeterminate_invert_16"]::after {
         width: 16px;
         height: 16px;
     }
-    [class*="ic_bk_progressIndicatorCircular_indeterminate_20"]::before,
-    [class*="ic_bk_progressIndicatorCircular_indeterminate_invert_20"]::before {
+    [class*="ic_bk_progressIndicatorCircular_indeterminate_20"]::after,
+    [class*="ic_bk_progressIndicatorCircular_indeterminate_invert_20"]::after {
         width: 20px;
         height: 20px;
     }
-    [class*="ic_bk_progressIndicatorCircular_indeterminate_24"]::before,
-    [class*="ic_bk_progressIndicatorCircular_indeterminate_invert_24"]::before {
+    [class*="ic_bk_progressIndicatorCircular_indeterminate_24"]::after,
+    [class*="ic_bk_progressIndicatorCircular_indeterminate_invert_24"]::after {
         width: 24px;
         height: 24px;
     }
-    [class*="ic_bk_progressIndicatorCircular_indeterminate_28"]::before,
-    [class*="ic_bk_progressIndicatorCircular_indeterminate_invert_28"]::before {
+    [class*="ic_bk_progressIndicatorCircular_indeterminate_28"]::after,
+    [class*="ic_bk_progressIndicatorCircular_indeterminate_invert_28"]::after {
         width: 28px;
         height: 28px;
     }
-    [class*="ic_bk_progressIndicatorCircular_indeterminate_32"]::before,
-    [class*="ic_bk_progressIndicatorCircular_indeterminate_invert_32"]::before {
+    [class*="ic_bk_progressIndicatorCircular_indeterminate_32"]::after,
+    [class*="ic_bk_progressIndicatorCircular_indeterminate_invert_32"]::after {
         width: 32px;
         height: 32px;
     }
