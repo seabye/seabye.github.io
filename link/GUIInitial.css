@@ -244,7 +244,7 @@
         --ic_ve_font_family_coding: "Consolas", "Microsoft YaHei", monospace;
     }
 /* #block */
-    /* loading_spinner */
+    /* ic_bk_progressIndicatorCircular_indeterminate */
     @keyframes ic_bk_progressIndicatorCircular_indeterminate {
         from {
             transform: rotate(0deg);
@@ -428,7 +428,7 @@
             content: attr(placeholder);
         }
             /* input */
-                /* type search */
+                /* search */
                 input[type="search"]::-webkit-search-decoration,
                 input[type="search"]::-webkit-search-cancel-button {
                     display: none;
