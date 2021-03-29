@@ -232,17 +232,18 @@
         --ic_ve_shadow_24dp3: 0 24px 38px 3px rgba(0,0,0,0.05),0 9px 46px 8px rgba(0,0,0,0.04),0 11px 15px -7px rgba(0,0,0,0.13);
     }
     /* font */
-    html {
-        --ic_ve_font_family_sansSerif: sans-serif;
-        --ic_ve_font_family_serif: serif;
-        --ic_ve_font_family_monospace: monospace;
-        --ic_ve_font_family_cursive: cursive;
-        --ic_ve_font_family_fantasy: fantasy;
-        --ic_ve_font_family_fangsong: Fangsong;
-        --ic_ve_font_family_default: system-ui, -apple-system, BlinkMacSystemFont, "PingFang SC", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif;
-        --ic_ve_font_family_code: "Menlo", "Monaco", "Consolas", "Courier New", "Ubuntu Mono", "Microsoft YaHei", monospace;
-        --ic_ve_font_family_coding: "Consolas", "Microsoft YaHei", monospace;
-    }
+        /* family */
+        html {
+            --ic_ve_font_family_sansSerif: sans-serif;
+            --ic_ve_font_family_serif: serif;
+            --ic_ve_font_family_monospace: monospace;
+            --ic_ve_font_family_cursive: cursive;
+            --ic_ve_font_family_fantasy: fantasy;
+            --ic_ve_font_family_fangsong: Fangsong;
+            --ic_ve_font_family_default: system-ui, -apple-system, BlinkMacSystemFont, "PingFang SC", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif;
+            --ic_ve_font_family_code: "Menlo", "Monaco", "Consolas", "Courier New", "Ubuntu Mono", "Microsoft YaHei", monospace;
+            --ic_ve_font_family_coding: "Consolas", "Microsoft YaHei", monospace;
+        }
 /* #block */
     /* ic_bk_progressIndicatorCircular_indeterminate */
     @keyframes ic_bk_progressIndicatorCircular_indeterminate {
