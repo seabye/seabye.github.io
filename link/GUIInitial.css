@@ -410,7 +410,7 @@
         }
         /* form */
         ::placeholder,
-        [contenteditable]:empty::before {
+        [contenteditable]:empty::after {
             color: var(--ic_ve_color_black4_opacity);
             opacity: unset;
             -webkit-user-select: none;
@@ -442,7 +442,7 @@
         input {
             text-overflow: ellipsis;
         }
-        [contenteditable]:empty::before {
+        [contenteditable]:empty::after {
             content: attr(placeholder);
         }
             /* input */
