@@ -146,7 +146,7 @@
             --ic_ve_color_orange_translucent: #FF880099;
         }
         /* system_brand */
-            /* other */
+            /* ic_ve */
             html {
                 --ic_ve_color_system_red: var(--ic_ve_color_red);
                 --ic_ve_color_system_green: var(--ic_ve_color_green);
