@@ -407,7 +407,7 @@
                 });
                 return window.fetch(URI,option).then((data)=>{
                     result.status=data.status;
-                    if(responseDataType.match(/arrayBuffer|blob|formData|json|text/i)){
+                    if(responseDataType&&responseDataType.match(/arrayBuffer|blob|formData|json|text/i)){
                         return data[responseDataType]();
                     }
                     return data;
