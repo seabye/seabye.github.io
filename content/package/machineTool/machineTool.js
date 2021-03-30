@@ -387,7 +387,7 @@
                         option[data[1]]=data[2];
                     },0);
                 }
-                if(requestDataType!==undefined){
+                if(requestDataType){
                     option.headers={
                         'Content-Type':`${requestDataType}; charset=utf-8`
                     };
