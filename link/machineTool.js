@@ -445,15 +445,15 @@
                     }
                     return result;
                 }).catch((error)=>{
+                    window.console.log('==== fetch, response, catch:',error);
                     if(!result.status){
-                        result.status=null;
+                        result.status=0;
                     }
                     if(!result.result){
-                        result.result=null;
+                        result.result='';
                     }
-                    window.console.log('==== fetch, response, catch:',error);
                     if(callback){
-                        callback(result);
+                        return callback(result);
                     }
                 });
             },
