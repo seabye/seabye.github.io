@@ -77,7 +77,7 @@
     // machineTool test
     machineTool.debug(()=>{
         machineTool.runObject({
-            async loop(){
+            async _loop(){
                 window.console.log('---- loop: start');
                 let result=await machineTool.loop(()=>{
                     return machineTool.fetch('https://iptv-org.github.io/iptv/channels.nosj','GET',undefined,undefined,undefined,'json',(data)=>{
