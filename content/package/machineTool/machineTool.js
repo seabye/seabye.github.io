@@ -388,36 +388,9 @@
                     },0);
                 }
                 if(requestDataType!==undefined){
-                    switch(requestDataType){
-                        case'plain':
-                            {
-                                option.headers={
-                                    'Content-Type':'text/plain; charset=utf-8'
-                                };
-                            }
-                            break;
-                        case'html':
-                            {
-                                option.headers={
-                                    'Content-Type':'text/html; charset=utf-8'
-                                };
-                            }
-                            break;
-                        case'json':
-                            {
-                                option.headers={
-                                    'Content-Type':'application/json; charset=utf-8'
-                                };
-                            }
-                            break;
-                        default:
-                            {
-                                option.headers={
-                                    'Content-Type':`${requestDataType}; charset=utf-8`
-                                };
-                            }
-                            break;
-                    }
+                    option.headers={
+                        'Content-Type':`${requestDataType}; charset=utf-8`
+                    };
                 }
                 if(optionHeadersPlus){
                     if(!option.headers){
@@ -434,7 +407,10 @@
                 });
                 return window.fetch(URI,option).then((data)=>{
                     result.status=data.status;
-                    return data[responseDataType]();
+                    if(responseDataType.match(/arrayBuffer|blob|formData|json|text/i)){
+                        return data[responseDataType]();
+                    }
+                    return data;
                 }).then((data)=>{
                     result.result=data;
                     this.debug(()=>{
