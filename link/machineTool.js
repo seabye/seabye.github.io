@@ -450,7 +450,7 @@
                         result.status=0;
                     }
                     if(!result.result){
-                        result.result='';
+                        result.result=null;
                     }
                     if(callback){
                         return callback(result);
