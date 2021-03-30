@@ -1426,7 +1426,7 @@
                                 }
                             });
                         }
-                        back(wait=this.wait){
+                        back(wait=this.wait,record){
                             return new window.Promise((resolve)=>{
                                 if(!this.lock){
                                     this.lock=true;
@@ -1446,7 +1446,7 @@
                                 }
                             });
                         }
-                        hide(wait=this.wait){
+                        hide(wait=this.wait,record){
                             return new window.Promise((resolve)=>{
                                 if(!this.lock){
                                     this.lock=true;
@@ -1480,7 +1480,7 @@
                                 }
                             });
                         }
-                        remove(wait=350){
+                        remove(wait=this.wait,record){
                             return new window.Promise((resolve)=>{
                                 if(!this.lock){
                                     this.lock=true;

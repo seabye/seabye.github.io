@@ -4,7 +4,7 @@
     window.console.log('#### start: script.js');
 // #import
     // machineTool
-    import{machineTool}from'/link/machineTool.js';
+    import{machineTool}from'/content/package/machineTool/machineTool.js';
     // Google Analytics
     machineTool.elementCreate('script',{async:'',src:'https://www.googletagmanager.com/gtag/js?id=G-SBCF7D104D'},window.document.head);
     machineTool.elementCreate('script',undefined,window.document.head,undefined,`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-SBCF7D104D');`);
@@ -12,7 +12,7 @@
 // #block
 // #build
     // font
-    window.document.fonts.add(new window.FontFace('New York_','url(/link/font/NewYork.woff2)'));
+    window.document.fonts.add(new window.FontFace('New York_','url(/content/resource/font/apple/NewYork.woff2)'));
     // element
     machineTool.loop(()=>{
         for(const value of window.document.documentElement.children){
@@ -25,12 +25,12 @@
                                 <span style="font-size: 38.2%;">🔴 10%</span>
                                 <div style="color: var(--ic_ve_color_black2);">
                                     <span style="font-size: 61.8%;">GUIInitial</span>
-                                    <a href="//seabye.com/link/GUIInitial.js">.js</a>
-                                    <a href="//seabye.com/link/GUIInitial.css">.css</a>
+                                    <a href="//seabye.com/content/package/GUIInitial/GUIInitial.js">.js</a>
+                                    <a href="//seabye.com/content/package/GUIInitial/GUIInitial.css">.css</a>
                                     <span style="font-size: 38.2%;">🟢 90%</span>
                                     <div>
                                         <span style="font-size: 61.8%;">machineTool</span>
-                                        <a href="//seabye.com/link/machineTool.js">.js</a>
+                                        <a href="//seabye.com/content/package/machineTool/machineTool.js">.js</a>
                                         <span style="font-size: 38.2%;">🟡 50%</span>
                                     </div>
                                 </div>
