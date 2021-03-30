@@ -77,12 +77,15 @@
     // machineTool test
     machineTool.debug(()=>{
         machineTool.runObject({
-            async _loop(){
+            async loop(){
                 window.console.log('---- loop: start');
                 let result=await machineTool.loop(()=>{
-                    return machineTool.fetch('https://iptv-org.github.io/iptv/channels.nosj','GET',undefined,undefined,undefined,'json');
+                    return machineTool.fetch('https://iptv-org.github.io/iptv/channels.nosj','GET',undefined,undefined,undefined,'json',(data)=>{
+                        window.console.log('---- loop, response data:',data);
+                    });
                 },500,3,()=>{
-                    return machineTool.fetch('https://iptv-org.github.io/iptv/channels.json','GET',undefined,undefined,undefined,'json',()=>{
+                    return machineTool.fetch('https://iptv-org.github.io/iptv/channels.json','GET',undefined,undefined,undefined,'json',(data)=>{
+                        window.console.log('---- loop, response data:',data);
                         return new window.Promise((resolve)=>{
                             window.setTimeout(()=>{
                                 resolve('Ok');

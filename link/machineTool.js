@@ -56,6 +56,9 @@
             },
             /*🟢*/async loop(condition,wait=1000/24,count,countZeroCallback){
                 const result=await condition();
+                this.debug(()=>{
+                    window.console.log('==== loop, condition() result:',result);
+                });
                 if(result){
                     return result;
                 }else{
@@ -442,7 +445,16 @@
                     }
                     return result;
                 }).catch((error)=>{
+                    if(!result.status){
+                        result.status=null;
+                    }
+                    if(!result.result){
+                        result.result=null;
+                    }
                     window.console.log('==== fetch, response, catch:',error);
+                    if(callback){
+                        callback(result);
+                    }
                 });
             },
         // command line interface
