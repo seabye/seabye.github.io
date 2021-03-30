@@ -1215,640 +1215,640 @@
                         }
                       };
                       switch(switchType){
-                                          case'auto':
-                                                    {
-                                                        for(const targetElement of targetElement_array){
-                                                            this.elementState(targetElement,open,close,undefined,undefined,setButtonElement);
-                                                        }
-                                                    }
-                                                    break;
-                                                case'open':
-                                                    {
-                                                        for(const targetElement of targetElement_array){
-                                                            this.elementState(targetElement,open,close,true,undefined,setButtonElement);
-                                                        }
-                                                    }
-                                                    break;
-                                                case'close':
-                                                    {
-                                                        for(const targetElement of targetElement_array){
-                                                            this.elementState(targetElement,close,open,true,undefined,setButtonElement);
-                                                        }
-                                                    }
-                                                    break;
-                                                default:
-                                                    break;
-                                            }
-                                        };
-                                        if(start){
-                                            eventFunction();
-                                            callback();
-                                        }
-                                        for(const buttonElement of buttonElement_array){
-                                            for(const value of listenType.split(',')){
-                                                this.listenTarget('add',buttonElement,value,eventFunction,option,option2,option3);
-                                                this.listenTarget('add',buttonElement,value,callback,option,option2,option3);
-                                            }
-                                        }
-                                    }
-                                }
-                                break;
-                            case'tab':
-                                {
-                                    // tab mode
-                                    //     [
-                                    //         'tab',
-                                    //         [
-                                    //             open<string/'class class2...'/,undefined='_'>,
-                                    //             close<string/'class class2...'/,undefined='_'>,
-                                    //             [
-                                    //                 [
-                                    //                     start<boolean>,
-                                    //                     [
-                                    //                         targetElement<element>...
-                                    //                     ],
-                                    //                     [
-                                    //                         buttonElement<element>...
-                                    //                     ],
-                                    //                     listenType<string/'item,item2...'/>,
-                                    //                     callback<function(event_data),undefined=()=>{}>,
-                                    //                     option<object,undefined>,
-                                    //                     option2<any,undefined/'pointer_up...'/>,
-                                    //                     option3<any,undefined/'pointer_up...'/>
-                                    //                 ]...
-                                    //             ]
-                                    //         ]
-                                    //     ]
-                                    const data=arg[0][1];
-                                    const open=data[0]?data[0]:'_';
-                                    const close=data[1]?data[1]:'_';
-                                    const content_array=data[2];
-                                    for(const content of content_array){
-                                        const start=content[0];
-                                        const targetElement_array=content[1];
-                                        const buttonElement_array=content[2];
-                                        const listenType=content[3];
-                                        let callback=content[4];
-                                        const option=content[5];
-                                        const option2=content[6];
-                                        const option3=content[7];
-                                        if(!callback){
-                                            callback=()=>{};
-                                        }
-                                        const eventFunction=()=>{
-                                            for(const content of content_array){
-                                                const targetElement_array_=content[1];
-                                                const buttonElement_array_=content[2];
-                                                if(targetElement_array_!==targetElement_array){
-                                                    for(const targetElement_ of targetElement_array_){
-                                                        this.elementState(targetElement_,close,open,true);
-                                                    }
-                                                }
-                                                if(buttonElement_array_!==buttonElement_array){
-                                                    for(const buttonElement_ of buttonElement_array_){
-                                                        this.elementState(buttonElement_,close,open,true);
-                                                    }
-                                                }
-                                            }
-                                            for(const targetElement of targetElement_array){
-                                                this.elementState(targetElement,open,close,true);
-                                            }
-                                            for(const buttonElement of buttonElement_array){
-                                                this.elementState(buttonElement,open,close,true);
-                                            }
-                                        };
-                                        if(start){
-                                            eventFunction();
-                                            callback();
-                                        }
-                                        for(const buttonElement of buttonElement_array){
-                                            for(const value of listenType.split(',')){
-                                                this.listenTarget('add',buttonElement,value,eventFunction,option,option2,option3);
-                                                this.listenTarget('add',buttonElement,value,callback,option,option2,option3);
-                                            }
-                                        }
-                                    }
-                                }
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-                }
-            },
-            /*🟢*/elementBlock(element,group='group',insertPosition='beforeend',wait=350){
-                if(!this.elementBlock.template){
-                    this.elementBlock.template=class template{
-                        constructor(element,group,insertPosition,wait){
-                            this.element=element;
-                            this.group=group;
-                            this.insertPosition=insertPosition;
-                            this.wait=wait;
-                            this.elements=[];
-                            this.lock=false;
-                            this.style='html * { pointer-events: none !important; }';
-                        }
-                        add(element,record,wait=this.wait){
-                            return new window.Promise((resolve)=>{
-                                if(!this.lock){
-                                    this.lock=true;
-                                    const style=machineTool.insertStyle(this.style);
-                                    if(wait>1000/12){
-                                        wait=wait-1000/12;
-                                    }else{
-                                        wait=0;
-                                    }
-                                    let recordState=false;
-                                    if(record){
-                                        machineTool.for(this.elements,(...data)=>{
-                                            if(data[2].machineTool_elementBlock_persistentRecord===record){
-                                                recordState=true;
-                                                element=data[2];
-                                            }
-                                        },0);
-                                    }
-                                    if(record&&!recordState){
-                                        element.machineTool_elementBlock_persistentRecord=record;
-                                    }
-                                    if(!recordState){
-                                        this.elements.push(element);
-                                        element.machineTool_elementBlock_prev=this.elements.indexOf(element)===0?null:this.elements[this.elements.indexOf(element)-1];
-                                    }
-                                    machineTool.for(this.elements,(...data)=>{
-                                        if(data[2]!==element&&data[2].classList.contains(`${this.group}_last`)){
-                                            window.setTimeout(()=>{
-                                                machineTool.elementState(data[2],`${this.group}_prev`,`${this.group}_last`,true);
-                                            },1000/12);
-                                        }
-                                    },0);
-                                    machineTool.elementState(element,`${this.group}_last ${this.group}_ready`,`${this.group}_hide`,true);
-                                    element.style.setProperty('opacity','0');
-                                    window.setTimeout(()=>{
-                                        if(!recordState){
-                                            this.element.insertAdjacentElement(this.insertPosition,element);
-                                        }
-                                        window.setTimeout(()=>{
-                                            element.style.removeProperty('opacity');
-                                            machineTool.removeEmpty(element);
-                                            machineTool.elementState(element,`${this.group}_go`,'',true);
-                                            window.setTimeout(()=>{
-                                                machineTool.elementState(element,'',`${this.group}_ready`,true);
-                                                machineTool.removeElement(style);
-                                                this.lock=false;
-                                                resolve(element);
-                                            },wait);
-                                        },1000/24);
-                                    },1000/24);
-                                }
-                            });
-                        }
-                        back(wait=this.wait,record){
-                            return new window.Promise((resolve)=>{
-                                if(!this.lock){
-                                    this.lock=true;
-                                    let element=null;
-                                    machineTool.for(this.elements,(...data)=>{
-                                        if(!data[2].classList.contains(`${this.group}_hide`)&&!data[2].classList.contains(`${this.group}_remove`)&&data[2].classList.contains(`${this.group}_last`)){
-                                            element=data[2];
-                                        }
-                                    },0);
-                                    if(element&&element.machineTool_elementBlock_persistentRecord){
-                                        this.lock=false;
-                                        resolve(this.hide(wait));
-                                    }else{
-                                        this.lock=false;
-                                        resolve(this.remove(wait));
-                                    }
-                                }
-                            });
-                        }
-                        hide(wait=this.wait,record){
-                            return new window.Promise((resolve)=>{
-                                if(!this.lock){
-                                    this.lock=true;
-                                    const style=machineTool.insertStyle(this.style);
-                                    let element=null;
-                                    machineTool.for(this.elements,(...data)=>{
-                                        if(!data[2].classList.contains(`${this.group}_hide`)&&!data[2].classList.contains(`${this.group}_remove`)&&data[2].classList.contains(`${this.group}_last`)){
-                                            element=data[2];
-                                        }
-                                    },0);
-                                    machineTool.elementState(element,`${this.group}_remove`,'',true);
-                                    window.setTimeout(()=>{
-                                        machineTool.elementState(element,`${this.group}_hide`,`${this.group}_ready ${this.group}_go ${this.group}_last ${this.group}_prev ${this.group}_remove`,true);
-                                        machineTool.removeElement(style);
-                                        this.lock=false;
-                                        if(last){
-                                            resolve(last);
-                                        }else{
-                                            resolve('null');
-                                        }
-                                    },wait);
-                                    let last=null;
-                                    machineTool.for(this.elements,(...data)=>{
-                                        if(data[2]!==element&&!data[2].classList.contains(`${this.group}_hide`)&&!data[2].classList.contains(`${this.group}_remove`)){
-                                            last=data[2];
-                                        }
-                                    },0);
-                                    if(last){
-                                        machineTool.elementState(last,`${this.group}_last`,`${this.group}_prev`,true);
-                                    }
-                                }
-                            });
-                        }
-                        remove(wait=this.wait,record){
-                            return new window.Promise((resolve)=>{
-                                if(!this.lock){
-                                    this.lock=true;
-                                    const style=machineTool.insertStyle(this.style);
-                                    let element=null;
-                                    let next=null;
-                                    machineTool.for(this.elements,(...data)=>{
-                                        if(element&&!next){
-                                            next=data[2];
-                                        }
-                                        if(!data[2].classList.contains(`${this.group}_hide`)&&!data[2].classList.contains(`${this.group}_remove`)&&data[2].classList.contains(`${this.group}_last`)){
-                                            element=data[2];
-                                        }
-                                    },0);
-                                    if(next){
-                                        next.machineTool_elementBlock_prev=element.machineTool_elementBlock_prev;
-                                    }
-                                    this.elements.splice(this.elements.indexOf(element),1);
-                                    machineTool.elementState(element,`${this.group}_remove`,'',true);
-                                    window.setTimeout(()=>{
-                                        machineTool.elementState(element,'',`${this.group}_ready ${this.group}_go ${this.group}_last ${this.group}_prev ${this.group}_hide ${this.group}_remove`,true);
-                                        if(element){
-                                            machineTool.removeElement(element);
-                                        }
-                                        machineTool.removeElement(style);
-                                        this.lock=false;
-                                        if(last){
-                                            resolve(last);
-                                        }else{
-                                            resolve('null');
-                                        }
-                                    },wait);
-                                    let last=null;
-                                    machineTool.for(this.elements,(...data)=>{
-                                        if(data[2]!==element&&!data[2].classList.contains(`${this.group}_hide`)&&!data[2].classList.contains(`${this.group}_remove`)){
-                                            last=data[2];
-                                        }
-                                    },0);
-                                    if(last){
-                                        machineTool.elementState(last,`${this.group}_last`,`${this.group}_prev`,true);
-                                    }
-                                }
-                            });
-                        }
-                        get(record){
-                            let element=null;
-                            machineTool.for(this.elements,(...data)=>{
-                                if(data[2].machineTool_elementBlock_persistentRecord===record){
-                                    element=data[2];
-                                }
-                            },0);
-                            if(element){
-                                return element;
+                        case'auto':
+                          {
+                            for(const targetElement of targetElement_array){
+                              this.elementState(targetElement,open,close,undefined,undefined,setButtonElement);
                             }
-                            return null;
-                        }
-                        set(newElement,record){
-                            let element=null;
-                            machineTool.for(this.elements,(...data)=>{
-                                if(data[2].machineTool_elementBlock_persistentRecord===record){
-                                    element=data[2];
-                                }
-                            },0);
-                            if(element){
-                                element.innerHTML=newElement.innerHTML;
-                                return element;
+                          }
+                          break;
+                        case'open':
+                          {
+                            for(const targetElement of targetElement_array){
+                              this.elementState(targetElement,open,close,true,undefined,setButtonElement);
                             }
-                            return null;
-                        }
-                    }
-                }
-                return new this.elementBlock.template(element,group,insertPosition,wait);
-            },
-            /*🔴*/doubleKeyContentCountSave(){
-                if(!this.doubleKeyContentCountSave.template){
-                    this.doubleKeyContentCountSave.template=class template{
-                        constructor(){
-                            this.data=[];
-                        }
-                        add(keyOne,keyTwo,content,count){
-                            this.data.push({
-                                keyOne:typeof keyOne==='string'?machineTool.hashCode(keyOne,true):keyOne,
-                                keyTwo:typeof keyTwo==='string'?machineTool.hashCode(keyTwo,true):keyTwo,
-                                content:content,
-                                count:count?count:0
-                            });
-                        }
-                        remove(keyOne,keyTwo){}
-                        get(keyOne,keyTwo){}
-                        set(keyOne,keyTwo){}
-                    }
-                }
-                return new this.doubleKeyContentCountSave.template();
-            },
-            /*🟢*/insertStyle(style,wait){
-                const element=this.elementCreate('style',undefined,window.document.head,undefined,style);
-                if(wait){
-                    window.setTimeout(()=>{
-                        this.removeElement(element);
-                    },wait);
-                }
-                return element;
-            },
-            /*🟢*/removeElement(element){
-                element.parentElement.removeChild(element);
-            },
-            /*🟢*/removeEmpty(element,...attribute){
-                if(attribute[0]){
-                    for(let key=0,length=attribute.length;key<length;key++){
-                        element.removeAttribute(attribute[key]);
-                    }
-                }else{
-                    if(!element.getAttribute('class')){
-                        element.removeAttribute('class');
-                    }
-                    if(!element.style[0]){
-                        element.removeAttribute('style');
-                    }
-                }
-            },
-            /*🟢*/findOuter(find,start,end=window.document.documentElement,trueCallback,falseCallback){
-                if(find instanceof window.HTMLElement&&start===find){
-                    if(trueCallback){
-                        trueCallback(start);
-                    }
-                    return start;
-                }else{
-                    if(start.classList.contains(find)){
-                        if(trueCallback){
-                            trueCallback(start);
-                        }
-                        return start;
-                    }else{
-                        if(start===end){
-                            if(falseCallback){
-                                falseCallback();
+                          }
+                          break;
+                        case'close':
+                          {
+                            for(const targetElement of targetElement_array){
+                              this.elementState(targetElement,close,open,true,undefined,setButtonElement);
                             }
-                            return false;
-                        }
-                    }
-                }
-                return this.findOuter(find,start.parentElement,end,trueCallback,falseCallback);
-            },
-            /*🟢*/elementPath(element){
-                let result='';
-                const run=(element)=>{
-                    if(element.parentElement){
-                        for(let key=0,length=element.parentElement.childElementCount;key<length;key++){
-                            if(element.parentElement.children[key]===element){
-                                result=`${key},${result}`;
-                                break;
-                            }
-                        }
-                        run(element.parentElement);
-                    }
-                };
-                run(element);
-                return result.replace(/,$/,'');
-            },
-            /*🟢*/URIPath(hash=true){
-                switch(hash){
-                    case true:
-                        {
-                            return window.location.href.replace(window.location.origin,'');
-                        }
-                        break;
-                    case false:
-                        {
-                            return window.location.href.replace(window.location.origin,'').replace(window.location.hash,'');
-                        }
-                        break;
-                    default:
-                        break;
-                }
-            },
-            /*🟢*/setURI(type,path){
-                switch(type){
-                    case'push':
-                        {
-                            window.history.pushState(null,null,path);
-                        }
-                        break;
-                    case'replace':
-                        {
-                            window.history.replaceState(null,null,path);
-                        }
-                        break;
-                    default:
-                        break;
-                }
-            },
-            /*🔴*/startLoad(type,callback){
-                window.document.addEventListener('readystatechange',(event)=>{
-                    switch(event.target.readyState){
-                        case'loading':
-                            {}
-                            break;
-                        case'interactive':
-                            {}
-                            break;
-                        case'complete':
-                            {}
-                            break;
+                          }
+                          break;
                         default:
-                            break;
+                          break;
+                      }
+                    };
+                    if(start){
+                      eventFunction();
+                      callback();
                     }
-                });
-            },
-            /*🟢*/fullScreen(element=window.document.documentElement,top=false){
-                const root=top?window.top:window;
-                if(window.navigator.userAgent.match(/iPhone|iPad/i)&&element.webkitSupportsFullscreen){
-                    if(element.webkitDisplayingFullscreen){
-                        element.webkitExitFullScreen();
+                    for(const buttonElement of buttonElement_array){
+                      for(const value of listenType.split(',')){
+                        this.listenTarget('add',buttonElement,value,eventFunction,option,option2,option3);
+                        this.listenTarget('add',buttonElement,value,callback,option,option2,option3);
+                      }
+                    }
+                  }
+                }
+                break;
+              case'tab':
+                {
+                  // tab mode
+                  //   [
+                  //     'tab',
+                  //     [
+                  //       open<string/'class class2...'/,undefined='_'>,
+                  //       close<string/'class class2...'/,undefined='_'>,
+                  //       [
+                  //         [
+                  //           start<boolean>,
+                  //           [
+                  //             targetElement<element>...
+                  //           ],
+                  //           [
+                  //             buttonElement<element>...
+                  //           ],
+                  //           listenType<string/'item,item2...'/>,
+                  //           callback<function(event_data),undefined=()=>{}>,
+                  //           option<object,undefined>,
+                  //           option2<any,undefined/'pointer_up...'/>,
+                  //           option3<any,undefined/'pointer_up...'/>
+                  //         ]...
+                  //       ]
+                  //     ]
+                  //   ]
+                  const data=arg[0][1];
+                  const open=data[0]?data[0]:'_';
+                  const close=data[1]?data[1]:'_';
+                  const content_array=data[2];
+                  for(const content of content_array){
+                    const start=content[0];
+                    const targetElement_array=content[1];
+                    const buttonElement_array=content[2];
+                    const listenType=content[3];
+                    let callback=content[4];
+                    const option=content[5];
+                    const option2=content[6];
+                    const option3=content[7];
+                    if(!callback){
+                      callback=()=>{};
+                    }
+                    const eventFunction=()=>{
+                      for(const content of content_array){
+                        const targetElement_array_=content[1];
+                        const buttonElement_array_=content[2];
+                        if(targetElement_array_!==targetElement_array){
+                          for(const targetElement_ of targetElement_array_){
+                            this.elementState(targetElement_,close,open,true);
+                          }
+                        }
+                        if(buttonElement_array_!==buttonElement_array){
+                          for(const buttonElement_ of buttonElement_array_){
+                            this.elementState(buttonElement_,close,open,true);
+                          }
+                        }
+                      }
+                      for(const targetElement of targetElement_array){
+                        this.elementState(targetElement,open,close,true);
+                      }
+                      for(const buttonElement of buttonElement_array){
+                        this.elementState(buttonElement,open,close,true);
+                      }
+                    };
+                    if(start){
+                      eventFunction();
+                      callback();
+                    }
+                    for(const buttonElement of buttonElement_array){
+                      for(const value of listenType.split(',')){
+                        this.listenTarget('add',buttonElement,value,eventFunction,option,option2,option3);
+                        this.listenTarget('add',buttonElement,value,callback,option,option2,option3);
+                      }
+                    }
+                  }
+                }
+                break;
+              default:
+                break;
+            }
+          }
+        }
+      },
+      /*🟢*/elementBlock(element,group='group',insertPosition='beforeend',wait=350){
+        if(!this.elementBlock.template){
+          this.elementBlock.template=class template{
+            constructor(element,group,insertPosition,wait){
+              this.element=element;
+              this.group=group;
+              this.insertPosition=insertPosition;
+              this.wait=wait;
+              this.elements=[];
+              this.lock=false;
+              this.style='html * { pointer-events: none !important; }';
+            }
+            add(element,record,wait=this.wait){
+              return new window.Promise((resolve)=>{
+                if(!this.lock){
+                  this.lock=true;
+                  const style=machineTool.insertStyle(this.style);
+                  if(wait>1000/12){
+                    wait=wait-1000/12;
+                  }else{
+                    wait=0;
+                  }
+                  let recordState=false;
+                  if(record){
+                    machineTool.for(this.elements,(...data)=>{
+                      if(data[2].machineTool_elementBlock_persistentRecord===record){
+                        recordState=true;
+                        element=data[2];
+                      }
+                    },0);
+                  }
+                  if(record&&!recordState){
+                    element.machineTool_elementBlock_persistentRecord=record;
+                  }
+                  if(!recordState){
+                    this.elements.push(element);
+                    element.machineTool_elementBlock_prev=this.elements.indexOf(element)===0?null:this.elements[this.elements.indexOf(element)-1];
+                  }
+                  machineTool.for(this.elements,(...data)=>{
+                    if(data[2]!==element&&data[2].classList.contains(`${this.group}_last`)){
+                      window.setTimeout(()=>{
+                        machineTool.elementState(data[2],`${this.group}_prev`,`${this.group}_last`,true);
+                      },1000/12);
+                    }
+                  },0);
+                  machineTool.elementState(element,`${this.group}_last ${this.group}_ready`,`${this.group}_hide`,true);
+                  element.style.setProperty('opacity','0');
+                  window.setTimeout(()=>{
+                    if(!recordState){
+                      this.element.insertAdjacentElement(this.insertPosition,element);
+                    }
+                    window.setTimeout(()=>{
+                      element.style.removeProperty('opacity');
+                      machineTool.removeEmpty(element);
+                      machineTool.elementState(element,`${this.group}_go`,'',true);
+                      window.setTimeout(()=>{
+                        machineTool.elementState(element,'',`${this.group}_ready`,true);
+                        machineTool.removeElement(style);
+                        this.lock=false;
+                        resolve(element);
+                      },wait);
+                    },1000/24);
+                  },1000/24);
+                }
+              });
+            }
+            back(wait=this.wait,record){
+              return new window.Promise((resolve)=>{
+                if(!this.lock){
+                  this.lock=true;
+                  let element=null;
+                  machineTool.for(this.elements,(...data)=>{
+                    if(!data[2].classList.contains(`${this.group}_hide`)&&!data[2].classList.contains(`${this.group}_remove`)&&data[2].classList.contains(`${this.group}_last`)){
+                      element=data[2];
+                    }
+                  },0);
+                  if(element&&element.machineTool_elementBlock_persistentRecord){
+                    this.lock=false;
+                    resolve(this.hide(wait));
+                  }else{
+                    this.lock=false;
+                    resolve(this.remove(wait));
+                  }
+                }
+              });
+            }
+            hide(wait=this.wait,record){
+              return new window.Promise((resolve)=>{
+                if(!this.lock){
+                  this.lock=true;
+                  const style=machineTool.insertStyle(this.style);
+                  let element=null;
+                  machineTool.for(this.elements,(...data)=>{
+                    if(!data[2].classList.contains(`${this.group}_hide`)&&!data[2].classList.contains(`${this.group}_remove`)&&data[2].classList.contains(`${this.group}_last`)){
+                      element=data[2];
+                    }
+                  },0);
+                  machineTool.elementState(element,`${this.group}_remove`,'',true);
+                  window.setTimeout(()=>{
+                    machineTool.elementState(element,`${this.group}_hide`,`${this.group}_ready ${this.group}_go ${this.group}_last ${this.group}_prev ${this.group}_remove`,true);
+                    machineTool.removeElement(style);
+                    this.lock=false;
+                    if(last){
+                      resolve(last);
                     }else{
-                        element.webkitEnterFullScreen();
+                      resolve('null');
                     }
-                }else{
-                    if(root.document.fullscreenElement||root.document.webkitCurrentFullScreenElement){
-                        if('exitFullscreen'in root.document){
-                            root.document.exitFullscreen();
-                        }else{
-                            if('webkitExitFullscreen'in root.document){
-                                root.document.webkitExitFullscreen();
-                            }
-                        }
+                  },wait);
+                  let last=null;
+                  machineTool.for(this.elements,(...data)=>{
+                    if(data[2]!==element&&!data[2].classList.contains(`${this.group}_hide`)&&!data[2].classList.contains(`${this.group}_remove`)){
+                      last=data[2];
+                    }
+                  },0);
+                  if(last){
+                    machineTool.elementState(last,`${this.group}_last`,`${this.group}_prev`,true);
+                  }
+                }
+              });
+            }
+            remove(wait=this.wait,record){
+              return new window.Promise((resolve)=>{
+                if(!this.lock){
+                  this.lock=true;
+                  const style=machineTool.insertStyle(this.style);
+                  let element=null;
+                  let next=null;
+                  machineTool.for(this.elements,(...data)=>{
+                    if(element&&!next){
+                      next=data[2];
+                    }
+                    if(!data[2].classList.contains(`${this.group}_hide`)&&!data[2].classList.contains(`${this.group}_remove`)&&data[2].classList.contains(`${this.group}_last`)){
+                      element=data[2];
+                    }
+                  },0);
+                  if(next){
+                    next.machineTool_elementBlock_prev=element.machineTool_elementBlock_prev;
+                  }
+                  this.elements.splice(this.elements.indexOf(element),1);
+                  machineTool.elementState(element,`${this.group}_remove`,'',true);
+                  window.setTimeout(()=>{
+                    machineTool.elementState(element,'',`${this.group}_ready ${this.group}_go ${this.group}_last ${this.group}_prev ${this.group}_hide ${this.group}_remove`,true);
+                    if(element){
+                      machineTool.removeElement(element);
+                    }
+                    machineTool.removeElement(style);
+                    this.lock=false;
+                    if(last){
+                      resolve(last);
                     }else{
-                        if('requestFullscreen'in root.document.documentElement){
-                            element.requestFullscreen();
-                        }else{
-                            if('webkitRequestFullScreen'in root.document.documentElement){
-                                element.webkitRequestFullScreen();
-                            }
-                        }
+                      resolve('null');
                     }
-                }
-            },
-            /*🟢*/openTab(URI=window.location.href,name=''){
-                return window.open(URI,name);
-            },
-            /*🟢*/openWindow(URI=window.location.href,name='',width=720,height=450,left,top){
-                if(typeof left==='number'){
-                    left+=window.screen.availLeft;
-                }else{
-                    left=(window.screen.availWidth-width)/2+window.screen.availLeft;
-                }
-                if(typeof top==='number'){
-                    top+=window.screen.availTop;
-                }else{
-                    top=(window.screen.availHeight-height)/2+window.screen.availTop;
-                }
-                return window.open(URI,name,`width=${width},height=${height},left=${left},top=${top}`);
-            },
-            /*🟢*/debug(callback){
-                if(window.document&&window.document.documentElement.classList.contains('debug')){
-                    callback();
-                }
-            },
-            /*🟢*/plugin_hls_load(mode='auto',video,src,poster='',config={
-                autoStartLoad:video.getAttribute('preload')==='auto'?true:false,
-                maxBufferLength:4,
-                maxBufferSize:4*1000*1000
-            }){
-                video.pause();
-                if(!this.plugin_hls_load.play){
-                    this.plugin_hls_load.play=()=>{
-                        video._hls_.startLoad();
-                    };
-                }
-                if(!this.plugin_hls_load.pause){
-                    this.plugin_hls_load.pause=()=>{
-                        video._hls_.stopLoad();
-                    };
-                }
-                video.setAttribute('src',src);
-                video.setAttribute('poster',poster);
-                if(src.match(/\.m3u8/i)){
-                    const hlsGo=()=>{
-                        if(video._hls_){
-                            video._hls_.destroy();
-                            delete video._hls_;
-                            video.removeEventListener('play',this.plugin_hls_load.play);
-                            video.removeEventListener('pause',this.plugin_hls_load.pause);
-                        }
-                        const hls=new window.Hls(config);
-                        hls.loadSource(src);
-                        hls.attachMedia(video);
-                        video.addEventListener('play',this.plugin_hls_load.play);
-                        video.addEventListener('pause',this.plugin_hls_load.pause);
-                        video._hls_=hls;
-                        return hls;
-                    };
-                    return this.loop(()=>{
-                        switch(mode){
-                            case'auto':
-                                {
-                                    if(video.canPlayType('application/vnd.apple.mpegurl')){
-                                        return true;
-                                    }else{
-                                        if('Hls'in window&&window.Hls.isSupported()){
-                                            return hlsGo();
-                                        }
-                                    }
-                                }
-                                break;
-                            case'hls':
-                                {
-                                    if('Hls'in window&&window.Hls.isSupported()){
-                                        return hlsGo();
-                                    }
-                                }
-                                break;
-                            default:
-                                break;
-                        }
-                        return false;
-                    });
-                }
-            },
-            /*🟢*/plugin_hls_observeLoad(){
-                if(!window.document.createElement('video').canPlayType('application/vnd.apple.mpegurl')){
-                    if(!'Hls'in window){
-                        const script=window.document.createElement('script');
-                        script.setAttribute('src','https://cdn.jsdelivr.net/npm/hls.js@latest');
-                        window.document.head.insertAdjacentElement('beforeend',script);
+                  },wait);
+                  let last=null;
+                  machineTool.for(this.elements,(...data)=>{
+                    if(data[2]!==element&&!data[2].classList.contains(`${this.group}_hide`)&&!data[2].classList.contains(`${this.group}_remove`)){
+                      last=data[2];
                     }
-                    const load=(video)=>{
-                        if(video._hls_){
-                            video._hls_.destroy();
-                            delete video._hls_;
-                        }
-                        if(video.hasAttribute('src')&&video.getAttribute('src').match(/\.m3u8/i)){
-                            if('Hls'in window&&window.Hls.isSupported()){
-                                const hls=new window.Hls();
-                                hls.loadSource(video.getAttribute('src'));
-                                hls.attachMedia(video);
-                                video._hls_=hls;
-                            }
-                        }
-                    };
-                    const query=()=>{
-                        window.document.querySelectorAll('body *').forEach((target)=>{
-                            if(target.localName==='video'){
-                                load(target);
-                            }
-                        });
-                    };
-                    const observe=()=>{
-                        new window.MutationObserver((mutation_list)=>{
-                            mutation_list.forEach((mutation)=>{
-                                if(mutation.type==='attributes'&&mutation.target.localName==='video'){
-                                    load(mutation.target);
-                                }
-                            });
-                        }).observe(window.document.body,{attributes:true,attributeFilter:['src'],childList:true,subtree:true});
-                    };
-                    if(window.document.readyState==='complete'){
-                        query();
-                        observe();
-                    }else{
-                        window.document.addEventListener('load',query,{once:true});
-                        window.document.addEventListener('load',observe,{once:true});
+                  },0);
+                  if(last){
+                    machineTool.elementState(last,`${this.group}_last`,`${this.group}_prev`,true);
+                  }
+                }
+              });
+            }
+            get(record){
+              let element=null;
+              machineTool.for(this.elements,(...data)=>{
+                if(data[2].machineTool_elementBlock_persistentRecord===record){
+                  element=data[2];
+                }
+              },0);
+              if(element){
+                return element;
+              }
+              return null;
+            }
+            set(newElement,record){
+              let element=null;
+              machineTool.for(this.elements,(...data)=>{
+                if(data[2].machineTool_elementBlock_persistentRecord===record){
+                  element=data[2];
+                }
+              },0);
+              if(element){
+                element.innerHTML=newElement.innerHTML;
+                return element;
+              }
+              return null;
+            }
+          }
+        }
+        return new this.elementBlock.template(element,group,insertPosition,wait);
+      },
+      /*🔴*/doubleKeyContentCountSave(){
+        if(!this.doubleKeyContentCountSave.template){
+          this.doubleKeyContentCountSave.template=class template{
+            constructor(){
+              this.data=[];
+            }
+            add(keyOne,keyTwo,content,count){
+              this.data.push({
+                keyOne:typeof keyOne==='string'?machineTool.hashCode(keyOne,true):keyOne,
+                keyTwo:typeof keyTwo==='string'?machineTool.hashCode(keyTwo,true):keyTwo,
+                content:content,
+                count:count?count:0
+              });
+            }
+            remove(keyOne,keyTwo){}
+            get(keyOne,keyTwo){}
+            set(keyOne,keyTwo){}
+          }
+        }
+        return new this.doubleKeyContentCountSave.template();
+      },
+      /*🟢*/insertStyle(style,wait){
+        const element=this.elementCreate('style',undefined,window.document.head,undefined,style);
+        if(wait){
+          window.setTimeout(()=>{
+            this.removeElement(element);
+          },wait);
+        }
+        return element;
+      },
+      /*🟢*/removeElement(element){
+        element.parentElement.removeChild(element);
+      },
+      /*🟢*/removeEmpty(element,...attribute){
+        if(attribute[0]){
+          for(let key=0,length=attribute.length;key<length;key++){
+            element.removeAttribute(attribute[key]);
+          }
+        }else{
+          if(!element.getAttribute('class')){
+            element.removeAttribute('class');
+          }
+          if(!element.style[0]){
+            element.removeAttribute('style');
+          }
+        }
+      },
+      /*🟢*/findOuter(find,start,end=window.document.documentElement,trueCallback,falseCallback){
+        if(find instanceof window.HTMLElement&&start===find){
+          if(trueCallback){
+            trueCallback(start);
+          }
+          return start;
+        }else{
+          if(start.classList.contains(find)){
+            if(trueCallback){
+              trueCallback(start);
+            }
+            return start;
+          }else{
+            if(start===end){
+              if(falseCallback){
+                falseCallback();
+              }
+              return false;
+            }
+          }
+        }
+        return this.findOuter(find,start.parentElement,end,trueCallback,falseCallback);
+      },
+      /*🟢*/elementPath(element){
+        let result='';
+        const run=(element)=>{
+          if(element.parentElement){
+            for(let key=0,length=element.parentElement.childElementCount;key<length;key++){
+              if(element.parentElement.children[key]===element){
+                result=`${key},${result}`;
+                break;
+              }
+            }
+            run(element.parentElement);
+          }
+        };
+        run(element);
+        return result.replace(/,$/,'');
+      },
+      /*🟢*/URIPath(hash=true){
+        switch(hash){
+          case true:
+            {
+              return window.location.href.replace(window.location.origin,'');
+            }
+            break;
+          case false:
+            {
+              return window.location.href.replace(window.location.origin,'').replace(window.location.hash,'');
+            }
+            break;
+          default:
+            break;
+        }
+      },
+      /*🟢*/setURI(type,path){
+        switch(type){
+          case'push':
+            {
+              window.history.pushState(null,null,path);
+            }
+            break;
+          case'replace':
+            {
+              window.history.replaceState(null,null,path);
+            }
+            break;
+          default:
+            break;
+        }
+      },
+      /*🔴*/startLoad(type,callback){
+        window.document.addEventListener('readystatechange',(event)=>{
+          switch(event.target.readyState){
+            case'loading':
+              {}
+              break;
+            case'interactive':
+              {}
+              break;
+            case'complete':
+              {}
+              break;
+            default:
+              break;
+          }
+        });
+      },
+      /*🟢*/fullScreen(element=window.document.documentElement,top=false){
+        const root=top?window.top:window;
+        if(window.navigator.userAgent.match(/iPhone|iPad/i)&&element.webkitSupportsFullscreen){
+          if(element.webkitDisplayingFullscreen){
+            element.webkitExitFullScreen();
+          }else{
+            element.webkitEnterFullScreen();
+          }
+        }else{
+          if(root.document.fullscreenElement||root.document.webkitCurrentFullScreenElement){
+            if('exitFullscreen'in root.document){
+              root.document.exitFullscreen();
+            }else{
+              if('webkitExitFullscreen'in root.document){
+                root.document.webkitExitFullscreen();
+              }
+            }
+          }else{
+            if('requestFullscreen'in root.document.documentElement){
+              element.requestFullscreen();
+            }else{
+              if('webkitRequestFullScreen'in root.document.documentElement){
+                element.webkitRequestFullScreen();
+              }
+            }
+          }
+        }
+      },
+      /*🟢*/openTab(URI=window.location.href,name=''){
+        return window.open(URI,name);
+      },
+      /*🟢*/openWindow(URI=window.location.href,name='',width=720,height=450,left,top){
+        if(typeof left==='number'){
+          left+=window.screen.availLeft;
+        }else{
+          left=(window.screen.availWidth-width)/2+window.screen.availLeft;
+        }
+        if(typeof top==='number'){
+          top+=window.screen.availTop;
+        }else{
+          top=(window.screen.availHeight-height)/2+window.screen.availTop;
+        }
+        return window.open(URI,name,`width=${width},height=${height},left=${left},top=${top}`);
+      },
+      /*🟢*/debug(callback){
+        if(window.document&&window.document.documentElement.classList.contains('debug')){
+          callback();
+        }
+      },
+      /*🟢*/plugin_hls_load(mode='auto',video,src,poster='',config={
+        autoStartLoad:video.getAttribute('preload')==='auto'?true:false,
+        maxBufferLength:4,
+        maxBufferSize:4*1000*1000
+      }){
+        video.pause();
+        if(!this.plugin_hls_load.play){
+          this.plugin_hls_load.play=()=>{
+            video._hls_.startLoad();
+          };
+        }
+        if(!this.plugin_hls_load.pause){
+          this.plugin_hls_load.pause=()=>{
+            video._hls_.stopLoad();
+          };
+        }
+        video.setAttribute('src',src);
+        video.setAttribute('poster',poster);
+        if(src.match(/\.m3u8/i)){
+          const hlsGo=()=>{
+            if(video._hls_){
+              video._hls_.destroy();
+              delete video._hls_;
+              video.removeEventListener('play',this.plugin_hls_load.play);
+              video.removeEventListener('pause',this.plugin_hls_load.pause);
+            }
+            const hls=new window.Hls(config);
+            hls.loadSource(src);
+            hls.attachMedia(video);
+            video.addEventListener('play',this.plugin_hls_load.play);
+            video.addEventListener('pause',this.plugin_hls_load.pause);
+            video._hls_=hls;
+            return hls;
+          };
+          return this.loop(()=>{
+            switch(mode){
+              case'auto':
+                {
+                  if(video.canPlayType('application/vnd.apple.mpegurl')){
+                    return true;
+                  }else{
+                    if('Hls'in window&&window.Hls.isSupported()){
+                      return hlsGo();
                     }
+                  }
                 }
-            },
-        // graphics
-            /*🔴*/plugin_openCV_removeWatermark(){},
-        // application programming interface
-            /*🔴*/listenPort(){},
-            /*🔴*/portReceive(URI,method,data,callback,data2){
-                const result={
-                    URI:URI,
-                    method:method,
-                    data:data
-                };
-                if(data2){
-                    window.Object.assign(result,data2);
+                break;
+              case'hls':
+                {
+                  if('Hls'in window&&window.Hls.isSupported()){
+                    return hlsGo();
+                  }
                 }
-                if(callback){
-                    return callback(result);
+                break;
+              default:
+                break;
+            }
+            return false;
+          });
+        }
+      },
+      /*🟢*/plugin_hls_observeLoad(){
+        if(!window.document.createElement('video').canPlayType('application/vnd.apple.mpegurl')){
+          if(!'Hls'in window){
+            const script=window.document.createElement('script');
+            script.setAttribute('src','https://cdn.jsdelivr.net/npm/hls.js@latest');
+            window.document.head.insertAdjacentElement('beforeend',script);
+          }
+          const load=(video)=>{
+            if(video._hls_){
+              video._hls_.destroy();
+              delete video._hls_;
+            }
+            if(video.hasAttribute('src')&&video.getAttribute('src').match(/\.m3u8/i)){
+              if('Hls'in window&&window.Hls.isSupported()){
+                const hls=new window.Hls();
+                hls.loadSource(video.getAttribute('src'));
+                hls.attachMedia(video);
+                video._hls_=hls;
+              }
+            }
+          };
+          const query=()=>{
+            window.document.querySelectorAll('body *').forEach((target)=>{
+              if(target.localName==='video'){
+                load(target);
+              }
+            });
+          };
+          const observe=()=>{
+            new window.MutationObserver((mutation_list)=>{
+              mutation_list.forEach((mutation)=>{
+                if(mutation.type==='attributes'&&mutation.target.localName==='video'){
+                  load(mutation.target);
                 }
-                return result;
-            },
-            /*🔴*/portReturn(){},
-            /*🔴*/route(){},
-            /*🔴*/extract(){},
-            /*🔴*/middleware(){},
-            /*🔴*/staticFile(){},
-            /*🔴*/siteMapGenerator(){},
-            /*🔴*/siteMapHTMLGenerator(){}
-    };
+              });
+            }).observe(window.document.body,{attributes:true,attributeFilter:['src'],childList:true,subtree:true});
+          };
+          if(window.document.readyState==='complete'){
+            query();
+            observe();
+          }else{
+            window.document.addEventListener('load',query,{once:true});
+            window.document.addEventListener('load',observe,{once:true});
+          }
+        }
+      },
+    // graphics
+      /*🔴*/plugin_openCV_removeWatermark(){},
+    // application programming interface
+      /*🔴*/listenPort(){},
+      /*🔴*/portReceive(URI,method,data,callback,data2){
+        const result={
+          URI:URI,
+          method:method,
+          data:data
+        };
+        if(data2){
+          window.Object.assign(result,data2);
+        }
+        if(callback){
+          return callback(result);
+        }
+        return result;
+      },
+      /*🔴*/portReturn(){},
+      /*🔴*/route(){},
+      /*🔴*/extract(){},
+      /*🔴*/middleware(){},
+      /*🔴*/staticFile(){},
+      /*🔴*/siteMapGenerator(){},
+      /*🔴*/siteMapHTMLGenerator(){}
+  };
 // #build
 // #debug
 // #after
-    // console
-    window.console.log('#### end: machineTool.js');
+  // console
+  window.console.log('#### end: machineTool.js');
