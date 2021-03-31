@@ -232,6 +232,27 @@
           }
         }
       },
+      /*🔴*/doubleKeyContentCountSave(){
+        if(!this.doubleKeyContentCountSave.template){
+          this.doubleKeyContentCountSave.template=class template{
+            constructor(){
+              this.data=[];
+            }
+            add(keyOne,keyTwo,content,count){
+              this.data.push({
+                keyOne:typeof keyOne==='string'?machineTool.hashCode(keyOne,true):keyOne,
+                keyTwo:typeof keyTwo==='string'?machineTool.hashCode(keyTwo,true):keyTwo,
+                content:content,
+                count:count?count:0
+              });
+            }
+            remove(keyOne,keyTwo){}
+            get(keyOne,keyTwo){}
+            set(keyOne,keyTwo){}
+          }
+        }
+        return new this.doubleKeyContentCountSave.template();
+      },
       /*🟢*/random(){
         return window.parseInt(window.Math.random().toString().replace(/^0\./,''));
       },
@@ -1048,6 +1069,7 @@
             break;
         }
       },
+      /*🔴*/elementTree(){},
       /*🔴*/elementEvent(){},
       /*🟢*/elementState(...arg){
         if(arg[0]instanceof window.HTMLElement){
@@ -1557,27 +1579,7 @@
         }
         return new this.elementBlock.template(element,group,insertPosition,wait);
       },
-      /*🔴*/doubleKeyContentCountSave(){
-        if(!this.doubleKeyContentCountSave.template){
-          this.doubleKeyContentCountSave.template=class template{
-            constructor(){
-              this.data=[];
-            }
-            add(keyOne,keyTwo,content,count){
-              this.data.push({
-                keyOne:typeof keyOne==='string'?machineTool.hashCode(keyOne,true):keyOne,
-                keyTwo:typeof keyTwo==='string'?machineTool.hashCode(keyTwo,true):keyTwo,
-                content:content,
-                count:count?count:0
-              });
-            }
-            remove(keyOne,keyTwo){}
-            get(keyOne,keyTwo){}
-            set(keyOne,keyTwo){}
-          }
-        }
-        return new this.doubleKeyContentCountSave.template();
-      },
+      /*🔴*/elementViewport(){},
       /*🟢*/insertStyle(style,wait){
         const element=this.elementCreate('style',undefined,window.document.head,undefined,style);
         if(wait){
