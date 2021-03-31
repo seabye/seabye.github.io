@@ -356,6 +356,7 @@
       /*🔴*/localStorage(){},
       /*🔴*/sessionStorage(){},
       /*🔴*/indexedDB(){},
+      /*🔴*/indexedDB_query(taskTransfer){},
       /*🔴*/webSQL(){},
       /*🔴*/cookie(){},
       /*🔴*/database(){},
@@ -433,6 +434,31 @@
           }
         });
       },
+    // application programming interface
+      /*🔴*/listenPort(){},
+      /*🔴*/portReceive(URI,method,data,callback,data2){
+        const result={
+          URI:URI,
+          method:method,
+          data:data
+        };
+        if(data2){
+          window.Object.assign(result,data2);
+        }
+        if(callback){
+          return callback(result);
+        }
+        return result;
+      },
+      /*🔴*/portReturn(){},
+      /*🔴*/route(){},
+      /*🔴*/extract(){},
+      /*🔴*/middleware(){},
+      /*🔴*/staticFile(){},
+      /*🔴*/siteMapGenerator(){},
+      /*🔴*/siteMapHTMLGenerator(){},
+    // graphics
+      /*🔴*/plugin_openCV_removeWatermark(){},
     // command line interface
       /*🔴*/cli(){},
     // graphical user interface
@@ -1823,32 +1849,9 @@
         }
       },
     // user interface
-      /*🔴*/ui_(){},
-    // graphics
-      /*🔴*/plugin_openCV_removeWatermark(){},
-    // application programming interface
-      /*🔴*/listenPort(){},
-      /*🔴*/portReceive(URI,method,data,callback,data2){
-        const result={
-          URI:URI,
-          method:method,
-          data:data
-        };
-        if(data2){
-          window.Object.assign(result,data2);
-        }
-        if(callback){
-          return callback(result);
-        }
-        return result;
-      },
-      /*🔴*/portReturn(){},
-      /*🔴*/route(){},
-      /*🔴*/extract(){},
-      /*🔴*/middleware(){},
-      /*🔴*/staticFile(){},
-      /*🔴*/siteMapGenerator(){},
-      /*🔴*/siteMapHTMLGenerator(){}
+      /*🔴*/ui(){},
+    // other
+      /*🔴*/mediaQuery(mediaType,URI,inData,outDataType,taskTransfer){}
   };
 // #build
 // #debug
