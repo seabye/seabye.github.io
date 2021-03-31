@@ -1022,6 +1022,7 @@
             break;
         }
       },
+      /*🔴*/elementEvent(){},
       /*🟢*/elementState(...arg){
         if(arg[0]instanceof window.HTMLElement){
           // base mode
@@ -1821,6 +1822,8 @@
           }
         }
       },
+    // user interface
+      /*🔴*/ui_(){},
     // graphics
       /*🔴*/plugin_openCV_removeWatermark(){},
     // application programming interface
