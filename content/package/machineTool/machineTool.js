@@ -253,7 +253,7 @@
         }
         return new this.doubleKeyContentCountSave.template();
       },
-      /*🔴*/taskTransfer(){},
+      /*🔴💧*/taskTransfer(){},
       /*🟢*/random(){
         return window.parseInt(window.Math.random().toString().replace(/^0\./,''));
       },
@@ -377,7 +377,7 @@
       /*🔴*/file(){},
       /*🔴*/localStorage(){},
       /*🔴*/sessionStorage(){},
-      /*🔴*/indexedDB(){},
+      /*🔴💧*/indexedDB(){},
       /*🔴*/webSQL(){},
       /*🔴*/cookie(){},
       /*🔴*/database(){},
@@ -1854,7 +1854,7 @@
     // user interface
       /*🔴*/ui(){},
     // other
-      /*🔴*/mediaQuery(mediaType,URI,inData,outDataType,outDataFilter,taskTransfer){
+      /*🔴💧*/mediaQuery(mediaType,URI,inData,outDataType,outDataFilter,taskTransfer){
         switch(mediaType){
           case'video':
             {}
