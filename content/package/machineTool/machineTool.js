@@ -253,6 +253,7 @@
         }
         return new this.doubleKeyContentCountSave.template();
       },
+      /*🔴*/taskTransfer(){},
       /*🟢*/random(){
         return window.parseInt(window.Math.random().toString().replace(/^0\./,''));
       },
@@ -377,7 +378,6 @@
       /*🔴*/localStorage(){},
       /*🔴*/sessionStorage(){},
       /*🔴*/indexedDB(){},
-      /*🔴*/indexedDB_query(taskTransfer){},
       /*🔴*/webSQL(){},
       /*🔴*/cookie(){},
       /*🔴*/database(){},
@@ -1580,6 +1580,7 @@
         return new this.elementBlock.template(element,group,insertPosition,wait);
       },
       /*🔴*/elementViewport(){},
+      /*🔴*/DOM(){},
       /*🟢*/insertStyle(style,wait){
         const element=this.elementCreate('style',undefined,window.document.head,undefined,style);
         if(wait){
@@ -1853,7 +1854,23 @@
     // user interface
       /*🔴*/ui(){},
     // other
-      /*🔴*/mediaQuery(mediaType,URI,inData,outDataType,taskTransfer){}
+      /*🔴*/mediaQuery(mediaType,URI,inData,outDataType,outDataFilter,taskTransfer){
+        switch(mediaType){
+          case'video':
+            {}
+            break;
+          case'audio':
+            {}
+          case'image':
+            {}
+            break;
+          case'text':
+            {}
+            break;
+          default:
+            break;
+        }
+      }
   };
 // #build
 // #debug
