@@ -96,16 +96,16 @@
         window.console.log('---- loop, result:',result);
         window.console.log('---- loop: end');
       },
-      _listenTarget_observe_resize(){
-        machineTool.listenTarget('add',window.document.body,'observe_resize',(data)=>{
-          window.console.log('---- listenTarget, observe_resize, data:',data);
+      _listenDOM_observe_resize(){
+        machineTool.listenDOM('add',window.document.body,'observe_resize',(data)=>{
+          window.console.log('---- listenDOM, observe_resize, data:',data);
         });
       },
-      _listenTarget_URI(){
-        machineTool.listenTarget('add',()=>{},'URI');
+      _listenDOM_URI(){
+        machineTool.listenDOM('add',()=>{},'URI');
         machineTool.setURI('push',window.location.pathname);
         machineTool.setURI('replace',window.location.pathname);
-        machineTool.listenTarget('remove',()=>{},'URI');
+        machineTool.listenDOM('remove',()=>{},'URI');
       },
       _elementCreate(){},
       _elementState(){},

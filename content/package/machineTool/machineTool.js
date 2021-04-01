@@ -373,15 +373,22 @@
         });
       },
       /*🔴*/webAssembly(){},
+    // graphics
+      /*🔴*/plugin_openCV_removeWatermark(){},
     // local data
       /*🔴*/file(){},
+      /*🔴*/fileSystem(){},
       /*🔴*/localStorage(){},
       /*🔴*/sessionStorage(){},
       /*🔴💧*/indexedDB(){},
-      /*🔴*/webSQL(){},
       /*🔴*/cookie(){},
-      /*🔴*/database(){},
       /*🔴*/cache(){},
+      /*🔴*/redis(){},
+      /*🔴*/mongoDB(){},
+      /*🔴*/memcached(){},
+      /*🔴💧*/SQLite(){},
+      /*🔴*/postgreSQL(){},
+      /*🔴*/mySQL(){},
     // network data
       /*🟢*/fetch(URI,method,data,dataInfo,requestDataType,responseDataType,callback,optionPlus,optionHeadersPlus){
         const option={};
@@ -471,20 +478,18 @@
         }
         return result;
       },
-      /*🔴*/portReturn(){},
+      /*🔴*/portSend(){},
       /*🔴*/route(){},
       /*🔴*/extract(){},
       /*🔴*/middleware(){},
       /*🔴*/staticFile(){},
       /*🔴*/siteMapGenerator(){},
       /*🔴*/siteMapHTMLGenerator(){},
-    // graphics
-      /*🔴*/plugin_openCV_removeWatermark(){},
     // command line interface
       /*🔴*/cli(){},
     // graphical user interface
       /*🔴*/cliEmulator(){},
-      /*🟡*/listenTarget(action,target,type,callback,option={},option2='',option3=''){
+      /*🟡*/listenDOM(action,target,type,callback,option={},option2='',option3=''){
         switch(type){
           case'pointer_down':
             {
@@ -518,32 +523,32 @@
             {
               const id=`id_${this.random()}`;
               const remove=()=>{
-                target.removeEventListener('pointerdown',this.listenTarget.pointer_up_data[id]);
-                this.listenTarget.pointer_up_data[id].count-=1;
-                if(this.listenTarget.pointer_up_data[id].count===0){
-                  delete this.listenTarget.pointer_up_data[id];
-                  if(!window.Object.keys(this.listenTarget.pointer_up_data).length){
-                    delete this.listenTarget.pointer_up_data;
+                target.removeEventListener('pointerdown',this.listenDOM.pointer_up_data[id]);
+                this.listenDOM.pointer_up_data[id].count-=1;
+                if(this.listenDOM.pointer_up_data[id].count===0){
+                  delete this.listenDOM.pointer_up_data[id];
+                  if(!window.Object.keys(this.listenDOM.pointer_up_data).length){
+                    delete this.listenDOM.pointer_up_data;
                   }
                 }
               };
               switch(action){
                 case'add':
                   {
-                    if(!this.listenTarget.pointer_up_data){
-                      this.listenTarget.pointer_up_data={};
+                    if(!this.listenDOM.pointer_up_data){
+                      this.listenDOM.pointer_up_data={};
                     }
-                    if(!this.listenTarget.pointer_up_data[id]){
-                      this.listenTarget.pointer_up_data[id]=(data)=>{
+                    if(!this.listenDOM.pointer_up_data[id]){
+                      this.listenDOM.pointer_up_data[id]=(data)=>{
                         const once_id=`once_${id}`;
-                        data.target.parentNode.removeEventListener('pointerup',this.listenTarget.pointer_up_data[once_id]);
-                        delete this.listenTarget.pointer_up_data[once_id];
+                        data.target.parentNode.removeEventListener('pointerup',this.listenDOM.pointer_up_data[once_id]);
+                        delete this.listenDOM.pointer_up_data[once_id];
                         const run=()=>{
                           const left=data.target.getBoundingClientRect().left;
                           const right=data.target.getBoundingClientRect().right;
                           const top=data.target.getBoundingClientRect().top;
                           const bottom=data.target.getBoundingClientRect().bottom;
-                          this.listenTarget.pointer_up_data[once_id]=(event)=>{
+                          this.listenDOM.pointer_up_data[once_id]=(event)=>{
                             if((event.target===data.target||event.target===data.target.parentNode)&&(event.clientX>=left&&event.clientX<=right&&event.clientY>=top&&event.clientY<=bottom)){
                               if(event.target.childElementCount){
                                 let block=false;
@@ -580,13 +585,13 @@
                               }
                             }
                           };
-                          data.target.parentNode.addEventListener('pointerup',this.listenTarget.pointer_up_data[once_id],{once:true});
+                          data.target.parentNode.addEventListener('pointerup',this.listenDOM.pointer_up_data[once_id],{once:true});
                           const remove=()=>{
                             window.removeEventListener('pointerup',remove);
                             window.removeEventListener('touchend',remove);
                             window.removeEventListener('dragend',remove);
                             if(data.target.parentNode){
-                              data.target.parentNode.removeEventListener('pointerup',this.listenTarget.pointer_up_data[once_id]);
+                              data.target.parentNode.removeEventListener('pointerup',this.listenDOM.pointer_up_data[once_id]);
                             }
                           };
                           if(option3){
@@ -612,17 +617,17 @@
                           run();
                         }
                         this.debug(()=>{
-                          window.console.log('==== listenTarget, pointer_up, pointer_up_data length:',window.Object.keys(this.listenTarget.pointer_up_data).length);
+                          window.console.log('==== listenDOM, pointer_up, pointer_up_data length:',window.Object.keys(this.listenDOM.pointer_up_data).length);
                         });
                       };
-                      this.listenTarget.pointer_up_data[id].count=0;
+                      this.listenDOM.pointer_up_data[id].count=0;
                     }
                     if(option.once){
-                      target.addEventListener('pointerdown',this.listenTarget.pointer_up_data[id]);
+                      target.addEventListener('pointerdown',this.listenDOM.pointer_up_data[id]);
                     }else{
-                      target.addEventListener('pointerdown',this.listenTarget.pointer_up_data[id],option);
+                      target.addEventListener('pointerdown',this.listenDOM.pointer_up_data[id],option);
                     }
-                    this.listenTarget.pointer_up_data[id].count+=1;
+                    this.listenDOM.pointer_up_data[id].count+=1;
                   }
                   break;
                 case'remove':
@@ -641,11 +646,11 @@
                 case'add':
                   {
                     this.debug(()=>{
-                      window.console.log('==== listenTarget, observe_mutation, add, target:',target);
+                      window.console.log('==== listenDOM, observe_mutation, add, target:',target);
                     });
-                    target.machineTool_listenTarget_observe_mutation=new window.MutationObserver((mutation_list)=>{
+                    target.machineTool_listenDOM_observe_mutation=new window.MutationObserver((mutation_list)=>{
                       this.debug(()=>{
-                        window.console.log('==== listenTarget, observe_mutation, mutation_list:',mutation_list);
+                        window.console.log('==== listenDOM, observe_mutation, mutation_list:',mutation_list);
                       });
                       mutation_list.forEach((mutation)=>{
                         switch(mutation.type){
@@ -664,16 +669,16 @@
                         }
                       });
                     });
-                    target.machineTool_listenTarget_observe_mutation.observe(target,option);
+                    target.machineTool_listenDOM_observe_mutation.observe(target,option);
                   }
                   break;
                 case'remove':
                   {
                     this.debug(()=>{
-                      window.console.log('==== listenTarget, observe_mutation, remove, target:',target);
+                      window.console.log('==== listenDOM, observe_mutation, remove, target:',target);
                     });
-                    target.machineTool_listenTarget_observe_mutation.disconnect();
-                    delete target.machineTool_listenTarget_observe_mutation;
+                    target.machineTool_listenDOM_observe_mutation.disconnect();
+                    delete target.machineTool_listenDOM_observe_mutation;
                   }
                   break;
                 default:
@@ -687,26 +692,26 @@
                 case'add':
                   {
                     this.debug(()=>{
-                      window.console.log('==== listenTarget, observe_intersection, add, target:',target);
+                      window.console.log('==== listenDOM, observe_intersection, add, target:',target);
                     });
-                    target.machineTool_listenTarget_observe_intersection=new window.IntersectionObserver((entries)=>{
+                    target.machineTool_listenDOM_observe_intersection=new window.IntersectionObserver((entries)=>{
                       this.debug(()=>{
-                        window.console.log('==== listenTarget, observe_intersection, entries:',entries);
+                        window.console.log('==== listenDOM, observe_intersection, entries:',entries);
                       });
                       entries.forEach((entry)=>{
                         callback(entry);
                       });
                     },option);
-                    target.machineTool_listenTarget_observe_intersection.observe(target);
+                    target.machineTool_listenDOM_observe_intersection.observe(target);
                   }
                   break;
                 case'remove':
                   {
                     this.debug(()=>{
-                      window.console.log('==== listenTarget, observe_intersection, remove, target:',target);
+                      window.console.log('==== listenDOM, observe_intersection, remove, target:',target);
                     });
-                    target.machineTool_listenTarget_observe_intersection.disconnect();
-                    delete target.machineTool_listenTarget_observe_intersection;
+                    target.machineTool_listenDOM_observe_intersection.disconnect();
+                    delete target.machineTool_listenDOM_observe_intersection;
                   }
                   break;
                 default:
@@ -720,26 +725,26 @@
                 case'add':
                   {
                     this.debug(()=>{
-                      window.console.log('==== listenTarget, observe_resize, add, target:',target);
+                      window.console.log('==== listenDOM, observe_resize, add, target:',target);
                     });
-                    target.machineTool_listenTarget_observe_resize=new window.ResizeObserver((entries)=>{
+                    target.machineTool_listenDOM_observe_resize=new window.ResizeObserver((entries)=>{
                       this.debug(()=>{
-                        window.console.log('==== listenTarget, observe_resize, entries:',entries);
+                        window.console.log('==== listenDOM, observe_resize, entries:',entries);
                       });
                       entries.forEach((entry)=>{
                         callback(entry);
                       });
                     });
-                    target.machineTool_listenTarget_observe_resize.observe(target);
+                    target.machineTool_listenDOM_observe_resize.observe(target);
                   }
                   break;
                 case'remove':
                   {
                     this.debug(()=>{
-                      window.console.log('==== listenTarget, observe_resize, remove, target:',target);
+                      window.console.log('==== listenDOM, observe_resize, remove, target:',target);
                     });
-                    target.machineTool_listenTarget_observe_resize.disconnect();
-                    delete target.machineTool_listenTarget_observe_resize;
+                    target.machineTool_listenDOM_observe_resize.disconnect();
+                    delete target.machineTool_listenDOM_observe_resize;
                   }
                   break;
                 default:
@@ -749,8 +754,8 @@
             break;
           case'URI':
             {
-              if(!this.listenTarget.URI_template){
-                this.listenTarget.URI_template=class template{
+              if(!this.listenDOM.URI_template){
+                this.listenDOM.URI_template=class template{
                   constructor(callback){
                     if(window.history.pushState.name){
                       window.history.pushState=machineTool.observeFunction(window.history.pushState,'pushState',undefined,window,(...arg)=>{
@@ -766,7 +771,7 @@
                   }
                   _popstate=(data)=>{
                     machineTool.debug(()=>{
-                      window.console.log('==== listenTarget, URI, popstate:',data.type,machineTool.URIPath());
+                      window.console.log('==== listenDOM, URI, popstate:',data.type,machineTool.URIPath());
                     });
                     this.callback({
                       type:data.type,
@@ -775,7 +780,7 @@
                   }
                   _pushState=(data)=>{
                     machineTool.debug(()=>{
-                      window.console.log('==== listenTarget, URI, pushState:',data.type,data.pushState.replace());
+                      window.console.log('==== listenDOM, URI, pushState:',data.type,data.pushState.replace());
                     });
                     this.callback({
                       type:data.type,
@@ -784,7 +789,7 @@
                   }
                   _replaceState=(data)=>{
                     machineTool.debug(()=>{
-                      window.console.log('==== listenTarget, URI, replaceState:',data.type,data.replaceState.replace());
+                      window.console.log('==== listenDOM, URI, replaceState:',data.type,data.replaceState.replace());
                     });
                     this.callback({
                       type:data.type,
@@ -805,31 +810,31 @@
               }
               const callback=target;
               const id=`id_${this.hashCode(callback.toString().replace(/[\r\n\s]/g,''),true)}`;
-              if(!this.listenTarget.URI_data){
-                this.listenTarget.URI_data={};
+              if(!this.listenDOM.URI_data){
+                this.listenDOM.URI_data={};
               }
               switch(action){
                 case'add':
                   {
-                    if(!this.listenTarget.URI_data[id]){
-                      this.listenTarget.URI_data[id]=new this.listenTarget.URI_template(callback);
-                      this.listenTarget.URI_data[id].add();
+                    if(!this.listenDOM.URI_data[id]){
+                      this.listenDOM.URI_data[id]=new this.listenDOM.URI_template(callback);
+                      this.listenDOM.URI_data[id].add();
                       this.debug(()=>{
-                        window.console.log('==== listenTarget, URI, add, listenTarget.URI_data:',this.listenTarget.URI_data);
+                        window.console.log('==== listenDOM, URI, add, listenDOM.URI_data:',this.listenDOM.URI_data);
                       });
                     }
                   }
                   break;
                 case'remove':
                   {
-                    if(this.listenTarget.URI_data[id]){
-                      this.listenTarget.URI_data[id].remove();
-                      delete this.listenTarget.URI_data[id];
-                      if(!window.Object.keys(this.listenTarget.URI_data).length){
-                        delete this.listenTarget.URI_data;
+                    if(this.listenDOM.URI_data[id]){
+                      this.listenDOM.URI_data[id].remove();
+                      delete this.listenDOM.URI_data[id];
+                      if(!window.Object.keys(this.listenDOM.URI_data).length){
+                        delete this.listenDOM.URI_data;
                       }
                       this.debug(()=>{
-                        window.console.log('==== listenTarget, URI, remove, listenTarget.URI_data:',this.listenTarget.URI_data);
+                        window.console.log('==== listenDOM, URI, remove, listenDOM.URI_data:',this.listenDOM.URI_data);
                       });
                     }
                   }
@@ -1295,8 +1300,8 @@
                     }
                     for(const buttonElement of buttonElement_array){
                       for(const value of listenType.split(',')){
-                        this.listenTarget('add',buttonElement,value,eventFunction,option,option2,option3);
-                        this.listenTarget('add',buttonElement,value,callback,option,option2,option3);
+                        this.listenDOM('add',buttonElement,value,eventFunction,option,option2,option3);
+                        this.listenDOM('add',buttonElement,value,callback,option,option2,option3);
                       }
                     }
                   }
@@ -1372,8 +1377,8 @@
                     }
                     for(const buttonElement of buttonElement_array){
                       for(const value of listenType.split(',')){
-                        this.listenTarget('add',buttonElement,value,eventFunction,option,option2,option3);
-                        this.listenTarget('add',buttonElement,value,callback,option,option2,option3);
+                        this.listenDOM('add',buttonElement,value,eventFunction,option,option2,option3);
+                        this.listenDOM('add',buttonElement,value,callback,option,option2,option3);
                       }
                     }
                   }
@@ -1723,6 +1728,7 @@
           }
         }
       },
+      /*🔴*/iframe(){},
       /*🟢*/openTab(URI=window.location.href,name=''){
         return window.open(URI,name);
       },
