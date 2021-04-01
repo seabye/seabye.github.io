@@ -253,7 +253,7 @@
         }
         return new this.doubleKeyContentCountSave.template();
       },
-      /*🔴💧*/taskTransfer(){},
+      /*🔴*/taskTransfer(){},
       /*🟢*/random(){
         return window.parseInt(window.Math.random().toString().replace(/^0\./,''));
       },
@@ -380,13 +380,13 @@
       /*🔴*/fileSystem(){},
       /*🔴*/localStorage(){},
       /*🔴*/sessionStorage(){},
-      /*🔴💧*/indexedDB(){},
+      /*🔴*/indexedDB(){},
       /*🔴*/cookie(){},
       /*🔴*/cache(){},
       /*🔴*/redis(){},
       /*🔴*/mongoDB(){},
       /*🔴*/memcached(){},
-      /*🔴💧*/SQLite(){},
+      /*🔴*/SQLite(){},
       /*🔴*/postgreSQL(){},
       /*🔴*/mySQL(){},
     // network data
@@ -1860,7 +1860,7 @@
     // user interface
       /*🔴*/ui(){},
     // other
-      /*🔴💧*/mediaQuery(mediaType,URI,inData,outDataType,outDataFilter,taskTransfer){
+      /*🔴*/mediaQuery(mediaType,URI,inData,outDataType,outDataFilter,taskTransfer){
         switch(mediaType){
           case'video':
             {}
