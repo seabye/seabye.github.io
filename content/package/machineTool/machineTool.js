@@ -1074,8 +1074,6 @@
             break;
         }
       },
-      /*🔴*/elementTree(){},
-      /*🔴*/elementEvent(){},
       /*🟢*/elementState(...arg){
         if(arg[0]instanceof window.HTMLElement){
           // base mode
@@ -1584,7 +1582,6 @@
         }
         return new this.elementBlock.template(element,group,insertPosition,wait);
       },
-      /*🔴*/elementViewport(){},
       /*🔴*/DOM(){},
       /*🟢*/insertStyle(style,wait){
         const element=this.elementCreate('style',undefined,window.document.head,undefined,style);
