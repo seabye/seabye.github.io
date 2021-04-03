@@ -246,6 +246,9 @@
     }
 /* #block */
   /* ic_bk_progressIndicatorCircular_indeterminate */
+  html {
+    --ic_bk_progressIndicatorCircular_indeterminate_size: 16px;
+  }
   @keyframes ic_bk_progressIndicatorCircular_indeterminate {
     0% {
       transform: rotate(0deg);
@@ -284,8 +287,8 @@
     top: 0;
     bottom: 0;
     margin: auto;
-    width: var(--ic_bk_progressIndicatorCircular_indeterminate_size,16px);
-    height: var(--ic_bk_progressIndicatorCircular_indeterminate_size,16px);
+    width: var(--ic_bk_progressIndicatorCircular_indeterminate_size);
+    height: var(--ic_bk_progressIndicatorCircular_indeterminate_size);
     filter: opacity(0.8);
     /* animation: 0.6s steps(12) 0s infinite ic_bk_progressIndicatorCircular_indeterminate; */
     animation: calc(1s/3*2) steps(8) 0s infinite ic_bk_progressIndicatorCircular_indeterminate;
