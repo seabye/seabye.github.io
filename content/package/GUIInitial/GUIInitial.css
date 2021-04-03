@@ -251,26 +251,38 @@
   }
   @keyframes ic_bk_progressIndicatorCircular_indeterminate {
     0% {
-      transform: rotate(0deg);
+      /* transform: rotate(0deg); */
+      /* transform: rotate(-60deg); */
+      transform: rotate(-45deg);
     }
     100% {
-      transform: rotate(360deg);
+      /* transform: rotate(360deg); */
+      /* transform: rotate(300deg); */
+      transform: rotate(315deg);
     }
   }
   @keyframes ic_bk_progressIndicatorCircular_indeterminate_8 {
     0% {
-      transform: scale(0.5)rotate(0deg);
+      /* transform: scale(0.5)rotate(0deg); */
+      /* transform: scale(0.5)rotate(-60deg); */
+      transform: scale(0.5)rotate(-45deg);
     }
     100% {
-      transform: scale(0.5)rotate(360deg);
+      /* transform: scale(0.5)rotate(360deg); */
+      /* transform: scale(0.5)rotate(300deg); */
+      transform: scale(0.5)rotate(315deg);
     }
   }
   @keyframes ic_bk_progressIndicatorCircular_indeterminate_12 {
     0% {
-      transform: scale(0.75)rotate(0deg);
+      /* transform: scale(0.75)rotate(0deg); */
+      /* transform: scale(0.75)rotate(-60deg); */
+      transform: scale(0.75)rotate(-45deg);
     }
     100% {
-      transform: scale(0.75)rotate(360deg);
+      /* transform: scale(0.75)rotate(360deg); */
+      /* transform: scale(0.75)rotate(300deg); */
+      transform: scale(0.75)rotate(315deg);
     }
   }
   [class*="ic_bk_progressIndicatorCircular_indeterminate"],
