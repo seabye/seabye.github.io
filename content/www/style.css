@@ -9,7 +9,7 @@
     font-family: "New York_", var(--ic_ve_font_family_default);
   }
   a.ic_active_0 {
-    text-shadow: 0 0 16px var(--ic_ve_color_black);
+    border-bottom: 2px solid var(--ic_ve_color_red);
   }
 /* #debug */
 /* #after */
