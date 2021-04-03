@@ -1857,12 +1857,54 @@
     // user interface
       /*🔴*/ui(){},
     // other
-      /*🔴*/mediaQuery(mediaType,URI,inData,outDataType,outDataFilter,taskTransfer){
+      /*🔴*/mediaQuery(mediaType,queryURI,queryType,queryCondition,resultFilter,singlePageCount,startPage,endPage){
         switch(mediaType){
           case'video':
             {
-
+              switch(queryType){
+                case'categoryInfo':
+                  // ?pg=999999999
+                  {}
+                  break;
+                case'allIndex':
+                  // ?pg=Number
+                  // ?pg=Number&ac=detail
+                  {}
+                  break;
+                case'categoryIndex':
+                  // ?t=Number&pg=Number
+                  // ?t=Number&pg=Number&ac=detail
+                  {}
+                  break;
+                case'searchIndex':
+                  // ?wd=String&pg=Number
+                  {}
+                  break;
+                case'single':
+                  // ?ids=Number&ac=detail
+                  {}
+                  break;
+                default:
+                  break;
+              }
             }
+            break;
+          case'audio':
+            {}
+          case'image':
+            {}
+            break;
+          case'text':
+            {}
+            break;
+          default:
+            break;
+        }
+      },
+      /*🔴*/mediaMatch(mediaType){
+        switch(mediaType){
+          case'video':
+            {}
             break;
           case'audio':
             {}
