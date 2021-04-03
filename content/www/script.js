@@ -19,23 +19,26 @@
       if(value.localName==='body'){
         window.document.body.insertAdjacentHTML('beforeend',`
           <div style="perspective: 100vw;">
-            <div style="font-size: calc(100vmax/25); transform: rotateX(-15deg); text-align: center; perspective: 50vw;">
+            <div style="font-size: calc(100vmax/25); transform: rotateX(-15deg); text-align: center; perspective: 61.8vw;">
               <div style="transform: rotateY(-60deg);">
                 <a href="//seabye.com">seabye.com</a>
                 <span style="font-size: 38.2%;">🔴 10%</span>
-                <div style="color: var(--ic_ve_color_black2);">
-                  <span style="font-size: 61.8%;">GUIInitial</span>
-                  <a href="//seabye.com/content/package/GUIInitial/GUIInitial.js">.js</a>
-                  <a href="//seabye.com/content/package/GUIInitial/GUIInitial.css">.css</a>
-                  <span style="font-size: 38.2%;">🟢 90%</span>
+                <div style="font-size: 61.8%; color: var(--ic_ve_color_black2);">
                   <div>
-                    <span style="font-size: 61.8%;">machineTool</span>
+                    <span>GUIInitial</span>
+                    <a href="//seabye.com/content/package/GUIInitial/GUIInitial.js">.js</a>
+                    <a href="//seabye.com/content/package/GUIInitial/GUIInitial.css">.css</a>
+                    <span style="font-size: 38.2%;">🟢 90%</span>
+                  </div>
+                  <div>
+                    <span>machineTool</span>
                     <a href="//seabye.com/content/package/machineTool/machineTool.js">.js</a>
+                    <a href="//seabye.com/content/package/machineTool/machineTool.css">.css</a>
                     <span style="font-size: 38.2%;">🟡 50%</span>
                   </div>
                 </div>
               </div>
-              <div style="font-size: 75%; color: var(--ic_ve_color_black4); transform: rotateY(-45deg);">
+              <div style="font-size: 61.8%; color: var(--ic_ve_color_black4); transform: rotateY(-45deg);">
                 <a href="//github.com/seabye">github.com/seabye</a>
               </div>
               <div style="color: var(--ic_ve_color_black6); transform: rotateY(-30deg);">
@@ -44,9 +47,9 @@
               </div>
               <div style="color: var(--ic_ve_color_black7); transform: rotateY(-15deg)rotateY(180deg);">
                 <a>planC</a>
-                <span style="font-size: 38.2%;">🟡 40%</span>
+                <span style="font-size: 38.2%;">🟡 50%</span>
               </div>
-              <div style="font-size: 125%; color: rgba(255,0,0,0.1875);">Hello, World!</div>
+              <div style="font-size: 138.2%; color: rgba(255,0,0,0.1875);">Hello, World!</div>
               <div style="transform: rotateY(30deg);">
                 <a href="//luojia.me">luojia.me</a>
               </div>

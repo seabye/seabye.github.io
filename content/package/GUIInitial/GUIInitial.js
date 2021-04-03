@@ -151,6 +151,16 @@
         loop();
       },{once:true});
     },
+    /*🟢*/start_progress(){
+      window.document.documentElement.classList.add('ic_bk_progressIndicatorCircular_indeterminate');
+      window.addEventListener('load',()=>{
+        if(window.document.documentElement.classList.contains('ic_bk_progressIndicatorCircular_indeterminate')){
+          window.setTimeout(()=>{
+            window.document.documentElement.classList.remove('ic_bk_progressIndicatorCircular_indeterminate');
+          },350/2);
+        }
+      },{once:true});
+    },
     /*🟢*/serviceWorker(){
       if(this.dataset.config.serviceWorker&&'serviceWorker'in window.navigator){
         window.navigator.serviceWorker.register(this.dataset.config.serviceWorker,{scope:'/'});
