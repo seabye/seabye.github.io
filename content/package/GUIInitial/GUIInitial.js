@@ -152,11 +152,11 @@
       },{once:true});
     },
     /*🟢*/start_progress(){
-      window.document.documentElement.classList.add('ic_bk_progressIndicatorCircular_indeterminate');
+      window.document.documentElement.classList.add('GUIInitial_ic_bk_progressIndicatorCircular_indeterminate_GUIInitial');
       window.addEventListener('load',()=>{
-        if(window.document.documentElement.classList.contains('ic_bk_progressIndicatorCircular_indeterminate')){
+        if(window.document.documentElement.classList.contains('GUIInitial_ic_bk_progressIndicatorCircular_indeterminate_GUIInitial')){
           window.setTimeout(()=>{
-            window.document.documentElement.classList.remove('ic_bk_progressIndicatorCircular_indeterminate');
+            window.document.documentElement.classList.remove('GUIInitial_ic_bk_progressIndicatorCircular_indeterminate_GUIInitial');
           },350/2);
         }
       },{once:true});
