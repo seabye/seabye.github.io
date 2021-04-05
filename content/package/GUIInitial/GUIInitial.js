@@ -373,8 +373,8 @@
         }
       });
     },
-    /*🔴*/no_back_button(){},
     /*🔴*/no_back_touch(){},
+    /*🔴*/no_back_button(){},
     /*🟢*/form_focus(){
       if(window.document.documentElement.classList.contains('ic_nr_platform_mobile')){
         window.addEventListener('keydown',(event)=>{
