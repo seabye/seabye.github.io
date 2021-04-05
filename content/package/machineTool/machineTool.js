@@ -220,9 +220,9 @@
       },
       /*🟢*/runObject(object,excludePrefix){
         if(excludePrefix){
-          let re=new window.RegExp(`^${excludePrefix}`);
+          let RE=new window.RegExp(`^${excludePrefix}`);
           for(const key in object){
-            if(!key.match(re)){
+            if(!key.match(RE)){
               object[key]();
             }
           }
@@ -254,6 +254,9 @@
         return new this.doubleKeyContentCountSave.template();
       },
       /*🔴*/taskTransfer(){},
+      /*🟢*/notMatchRE(RE){
+        return new window.RegExp(`^((?!${RE.toString().replace(RE.toString().split('/')[RE.toString().split('/').length-1],'').replace(/^\//,'').replace(/\/$/,'')}).)*$`,RE.toString().split('/')[RE.toString().split('/').length-1]);
+      },
       /*🟢*/random(){
         return window.parseInt(window.Math.random().toString().replace(/^0\./,''));
       },
@@ -1857,66 +1860,110 @@
     // user interface
       /*🔴*/ui(){},
     // other
-      /*🔴*/mediaQuery(mediaType,queryURI,queryType,queryCondition,resultFilter,singlePageCount,startPage,endPage){
-        switch(mediaType){
-          case'video':
-            {
-              switch(queryType){
-                case'categoryInfo':
-                  // ?pg=999999999
-                  {}
-                  break;
-                case'allIndex':
-                  // ?pg=Number
-                  // ?pg=Number&ac=detail
-                  {}
-                  break;
-                case'categoryIndex':
-                  // ?t=Number&pg=Number
-                  // ?t=Number&pg=Number&ac=detail
-                  {}
-                  break;
-                case'searchIndex':
-                  // ?wd=String&pg=Number
-                  {}
-                  break;
-                case'single':
-                  // ?ids=Number&ac=detail
-                  {}
-                  break;
-                default:
-                  break;
+      /*🔴*/mediaQuery:{
+        async _(arg,callback){
+          switch(window.Object.prototype.toString.call(arg[0])){
+            case'[object String]':
+              {
+                return callback(arg);
               }
-            }
-            break;
-          case'audio':
-            {}
-          case'image':
-            {}
-            break;
-          case'text':
-            {}
-            break;
-          default:
-            break;
-        }
+              break;
+            case'[object Array]':
+              {
+                const result=[];
+                for await(const value of (async function*(){
+                  for(let key=0,length=arg[0].length;key<length;key++){
+                    const value_=await callback(arg[0][key],arg);
+                    yield [arg[0][key],value_];
+                  }
+                })()){
+                  result.push(value);
+                }
+                return result;
+              }
+              break;
+            default:
+              break;
+          }
+        },
+// queryURI
+// resultInfoMatchFilter
+// singlePageCountLimit
+// startPageCount
+// endPageCount
+// IDModeStartID
+// IDModeEndID
+        video:{
+// ?pg=999999999
+          // machineTool.mediaQuery.video.categoryInfo(queryURI,resultInfoMatchFilter)
+          // queryURI<String,Array>
+          // resultInfoMatchFilter<{key:RegExp}>
+          categoryInfo(...arg){
+            return machineTool.mediaQuery._(arg,(queryURI,...arg)=>{
+              const resultInfoMatchFilter=arg[0][1];
+              return machineTool.fetch(`${queryURI}?pg=999999999`,'GET',undefined,undefined,undefined,'json',(data)=>{
+                const result=[];
+                if(data.result){
+                  if(resultInfoMatchFilter){
+                    machineTool.for(data.result.class,(...data)=>{
+                      let match=[];
+                      machineTool.for(resultInfoMatchFilter,(...data_)=>{
+                        if(data[2][data_[1]].toString().match(data_[2])){
+                          match.push(true);
+                        }else{
+                          match.push(false);
+                        }
+                      },0);
+                      if(!match.includes(false)){
+                        result.push([window.parseInt(data[2].type_id),data[2].type_name.trim()]);
+                      }
+                    },0);
+                  }else{
+                    machineTool.for(data.result.class,(...data)=>{
+                      result.push([window.parseInt(data[2].type_id),data[2].type_name.trim()]);
+                    },0);
+                  }
+                }
+                return result;
+              });
+            });
+          },
+          allIndex(...arg){
+// ?pg=Number
+// ?pg=Number&ac=detail
+            // machineTool.mediaQuery.video.allIndex(queryURI,);
+            // queryURI<String,Array>
+          },
+          categoryIndex(...arg){
+// ?t=Number&pg=Number
+// ?t=Number&pg=Number&ac=detail
+            // machineTool.mediaQuery.video.categoryIndex(queryURI,);
+            // queryURI<String,Array>
+          },
+          searchIndex(...arg){
+// ?wd=String&pg=Number
+            // machineTool.mediaQuery.video.searchIndex(queryURI,);
+            // queryURI<String,Array>
+          },
+          single(...arg){
+// ?ids=Number&ac=detail
+          },
+          iterator(...arg){
+
+          },
+          append(...arg){
+
+          }
+        },
+        audio:{},
+        image:{},
+        text:{}
       },
-      /*🔴*/mediaMatch(mediaType){
-        switch(mediaType){
-          case'video':
-            {}
-            break;
-          case'audio':
-            {}
-          case'image':
-            {}
-            break;
-          case'text':
-            {}
-            break;
-          default:
-            break;
-        }
+      /*🔴*/mediaMatch:{
+        video:{},
+        audio:{},
+        image:{},
+        text:{}
       }
   };
 // #build
