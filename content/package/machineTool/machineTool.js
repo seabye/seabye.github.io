@@ -1586,6 +1586,7 @@
         return new this.elementBlock.template(element,group,insertPosition,wait);
       },
       /*🔴*/DOM(){},
+      /*🔴*/fixedInput(){},
       /*🟢*/insertStyle(style,wait){
         const element=this.elementCreate('style',undefined,window.document.head,undefined,style);
         if(wait){
@@ -1728,7 +1729,9 @@
           }
         }
       },
+      /*🔴*/orientationSwitch(){},
       /*🔴*/iframe(){},
+      /*🔴*/languageSwitch(){},
       /*🟢*/openTab(URI=window.location.href,name=''){
         return window.open(URI,name);
       },
@@ -1859,6 +1862,8 @@
       },
     // user interface
       /*🔴*/ui(){},
+    // w3daze
+      /*🔴*/applicationPackage(){},
     // other
       /*🔴*/mediaQuery:{
         async _(arg,callback){
@@ -1886,19 +1891,12 @@
               break;
           }
         },
-// queryURI
-// resultInfoMatchFilter
-// singlePageCountLimit
-// startPageCount
-// endPageCount
-// IDModeStartID
-// IDModeEndID
         video:{
-// ?pg=999999999
-          // machineTool.mediaQuery.video.categoryInfo(queryURI,resultInfoMatchFilter)
-          // queryURI<String,Array>
-          // resultInfoMatchFilter<{key:RegExp}>
           categoryInfo(...arg){
+// ?pg=999999999
+            // machineTool.mediaQuery.video.categoryInfo(queryURI,resultInfoMatchFilter)
+            // queryURI<String,Array>
+            // resultInfoMatchFilter<{key:RegExp}>
             return machineTool.mediaQuery._(arg,(queryURI,...arg)=>{
               const resultInfoMatchFilter=arg[0][1];
               return machineTool.fetch(`${queryURI}?pg=999999999`,'GET',undefined,undefined,undefined,'json',(data)=>{
@@ -1931,28 +1929,41 @@
           allIndex(...arg){
 // ?pg=Number
 // ?pg=Number&ac=detail
-            // machineTool.mediaQuery.video.allIndex(queryURI,);
+            // machineTool.mediaQuery.video.allIndex(queryURI,resultInfoMatchFilter);
             // queryURI<String,Array>
+            // resultInfoMatchFilter<{key:RegExp}>
+// singlePageCountLimit
+// startPageCount
+// endPageCount
           },
           categoryIndex(...arg){
 // ?t=Number&pg=Number
 // ?t=Number&pg=Number&ac=detail
-            // machineTool.mediaQuery.video.categoryIndex(queryURI,);
+            // machineTool.mediaQuery.video.categoryIndex(queryURI,resultInfoMatchFilter);
             // queryURI<String,Array>
+            // resultInfoMatchFilter<{key:RegExp}>
           },
           searchIndex(...arg){
 // ?wd=String&pg=Number
-            // machineTool.mediaQuery.video.searchIndex(queryURI,);
+            // machineTool.mediaQuery.video.searchIndex(queryURI,resultInfoMatchFilter);
             // queryURI<String,Array>
+            // resultInfoMatchFilter<{key:RegExp}>
           },
           single(...arg){
 // ?ids=Number&ac=detail
+            // machineTool.mediaQuery.video.single(queryURI,resultInfoMatchFilter);
+            // queryURI<String>
+            // resultInfoMatchFilter<{key:RegExp}>
           },
           iterator(...arg){
-
+            // machineTool.mediaQuery.video.iterator(queryURI,resultInfoMatchFilter);
+            // queryURI<String>
+            // resultInfoMatchFilter<{key:RegExp}>
           },
           append(...arg){
-
+            // machineTool.mediaQuery.video.append(queryURI,resultInfoMatchFilter);
+            // queryURI<String>
+            // resultInfoMatchFilter<{key:RegExp}>
           }
         },
         audio:{},
@@ -1960,6 +1971,12 @@
         text:{}
       },
       /*🔴*/mediaMatch:{
+        video:{},
+        audio:{},
+        image:{},
+        text:{}
+      },
+      /*🔴*/mediaSync:{
         video:{},
         audio:{},
         image:{},
