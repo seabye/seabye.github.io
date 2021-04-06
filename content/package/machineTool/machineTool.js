@@ -1929,7 +1929,7 @@
             }
             return result;
           },
-          info(...arg){
+          /*🟢*/info(...arg){
             // machineTool.mediaQuery.video.info(URI,filter)
             // URI<String,Array>
             // filter<{key:RegExp}>
@@ -1945,7 +1945,7 @@
               });
             });
           },
-          all(...arg){
+          /*🔴*/all(...arg){
             // machineTool.mediaQuery.video.all(URI,filter,limit,start,end);
             // URI<String,Array>
             // filter<{key:RegExp}>
@@ -1970,7 +1970,7 @@
               });
             });
           },
-          category(...arg){
+          /*🔴*/category(...arg){
             // machineTool.mediaQuery.video.category(URI,filter,category,limit,start,end);
             // URI<String,Array>
             // filter<{key:RegExp}>
@@ -1998,7 +1998,7 @@
               });
             });
           },
-          search(...arg){
+          /*🔴*/search(...arg){
             // machineTool.mediaQuery.video.search(URI,filter,search,limit,start,end);
             // URI<String,Array>
             // filter<{key:RegExp}>
@@ -2026,7 +2026,7 @@
               });
             });
           },
-          single(...arg){
+          /*🟢*/single(...arg){
             // machineTool.mediaQuery.video.single(URI,filter,start,end);
             // URI<String>
             // filter<{key:RegExp}>
