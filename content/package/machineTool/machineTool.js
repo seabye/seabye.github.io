@@ -1875,14 +1875,14 @@
               break;
             case'[object Array]':
               {
-                const result=[];
+                const result={};
                 for await(const value of (async function*(){
                   for(let key=0,length=arg[0].length;key<length;key++){
                     const value_=await callback(arg[0][key],arg);
                     yield [arg[0][key],value_];
                   }
                 })()){
-                  result.push(value);
+                  result[value[0]]=value[1];
                 }
                 return result;
               }
@@ -1900,11 +1900,12 @@
             return machineTool.mediaQuery._(arg,(queryURI,...arg)=>{
               const resultInfoMatchFilter=arg[0][1];
               return machineTool.fetch(`${queryURI}?pg=999999999`,'GET',undefined,undefined,undefined,'json',(data)=>{
-                const result=[];
+                let result={};
                 if(data.result){
+                  const array=[];
                   if(resultInfoMatchFilter){
                     machineTool.for(data.result.class,(...data)=>{
-                      let match=[];
+                      const match=[];
                       machineTool.for(resultInfoMatchFilter,(...data_)=>{
                         if(data[2][data_[1]].toString().match(data_[2])){
                           match.push(true);
@@ -1913,14 +1914,21 @@
                         }
                       },0);
                       if(!match.includes(false)){
-                        result.push([window.parseInt(data[2].type_id),data[2].type_name.trim()]);
+                        array.push([window.parseInt(data[2].type_id),data[2].type_name.trim()]);
                       }
                     },0);
                   }else{
                     machineTool.for(data.result.class,(...data)=>{
-                      result.push([window.parseInt(data[2].type_id),data[2].type_name.trim()]);
+                      array.push([window.parseInt(data[2].type_id),data[2].type_name.trim()]);
                     },0);
                   }
+                  result.array=array;
+                  result.limit=data.result.limit;
+                  result.page=data.result.page;
+                  result.pagecount=data.result.pagecount;
+                  result.total=data.result.total;
+                }else{
+                  result=null;
                 }
                 return result;
               });
@@ -1932,9 +1940,6 @@
             // machineTool.mediaQuery.video.allIndex(queryURI,resultInfoMatchFilter);
             // queryURI<String,Array>
             // resultInfoMatchFilter<{key:RegExp}>
-// singlePageCountLimit
-// startPageCount
-// endPageCount
           },
           categoryIndex(...arg){
 // ?t=Number&pg=Number
