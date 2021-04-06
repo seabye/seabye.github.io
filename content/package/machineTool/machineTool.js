@@ -1947,8 +1947,8 @@
               });
             });
           },
-          index(...arg){
-            // machineTool.mediaQuery.video.index(URI,filter,mode,start,end,limit);
+          all(...arg){
+            // machineTool.mediaQuery.video.all(URI,filter,mode,start,end,limit);
             // URI<String,Array>
             // filter<{key:RegExp}>
             // mode<'list','detail'>
@@ -1977,6 +1977,12 @@
           },
           search(...arg){
             // machineTool.mediaQuery.video.search(URI,filter,mode);
+            // URI<String,Array>
+            // filter<{key:RegExp}>
+            // mode<'list','detail'>
+          },
+          category(...arg){
+            // machineTool.mediaQuery.video.category(URI,filter,mode);
             // URI<String,Array>
             // filter<{key:RegExp}>
             // mode<'list','detail'>
