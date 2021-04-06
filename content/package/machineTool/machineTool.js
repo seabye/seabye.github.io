@@ -1866,7 +1866,7 @@
       /*🔴*/applicationPackage(){},
     // other
       /*🔴*/mediaQuery:{
-        async _mode(arg,callback){
+        async _URIMode(arg,callback){
           switch(window.Object.prototype.toString.call(arg[0])){
             case'[object String]':
               {
@@ -1931,12 +1931,12 @@
             }
             return result;
           },
-          categoryInfo(...arg){
+          info(...arg){
             // // ?pg=999999999
-            // machineTool.mediaQuery.video.categoryInfo(URI,filter)
+            // machineTool.mediaQuery.video.info(URI,filter)
             // URI<String,Array>
             // filter<{key:RegExp}>
-            return machineTool.mediaQuery._mode(arg,(URI,...arg)=>{
+            return machineTool.mediaQuery._URIMode(arg,(URI,...arg)=>{
               const filter=arg[0][1];
               return machineTool.fetch(`${URI}?pg=999999999`,'GET',undefined,undefined,undefined,'json',(data)=>{
                 const result=this._filter(data,'class',filter,true);
@@ -1948,8 +1948,17 @@
               });
             });
           },
-          _index(arg){
-            return machineTool.mediaQuery._mode(arg,(URI,...arg)=>{
+          index(...arg){
+            // // ?pg=Number
+            // // ?pg=Number&ac=detail
+            // machineTool.mediaQuery.video.index(URI,filter,limit,start,end,detail);
+            // URI<String,Array>
+            // filter<{key:RegExp}>
+            // limit<Number>
+            // start<Number>
+            // end<Number>
+            // detail<Boolean>
+            return machineTool.mediaQuery._URIMode(arg,(URI,...arg)=>{
               const filter=arg[0][1];
               const limit=arg[0][2];
               const start=arg[0][3];
@@ -1969,38 +1978,11 @@
               });
             });
           },
-          allIndex(...arg){
-            // // ?pg=Number
-            // // ?pg=Number&ac=detail
-            // machineTool.mediaQuery.video.allIndex(URI,filter,limit,start,end,detail);
-            // URI<String,Array>
-            // filter<{key:RegExp}>
-            // limit<Number>
-            // start<Number>
-            // end<Number>
-            // detail<Boolean>
-            this._index('allIndex',arg);
-          },
-          categoryIndex(...arg){
-            // // ?t=Number&pg=Number
-            // // ?t=Number&pg=Number&ac=detail
-            // machineTool.mediaQuery.video.categoryIndex(URI,filter);
-            // URI<String,Array>
-            // filter<{key:RegExp}>
-            this._index('categoryIndex',arg);
-          },
-          searchIndex(...arg){
+          search(...arg){
             // // ?wd=String&pg=Number
-            // machineTool.mediaQuery.video.searchIndex(URI,filter);
+            // machineTool.mediaQuery.video.search(URI,filter);
             // URI<String,Array>
             // filter<{key:RegExp}>
-            this._index('searchIndex',arg);
-          },
-          newIndex(...arg){
-            // machineTool.mediaQuery.video.newIndex(URI,filter);
-            // URI<String,Array>
-            // filter<{key:RegExp}>
-            this._index('newIndex',arg);
           },
           single(...arg){
             // // ?ids=Number&ac=detail
@@ -2009,7 +1991,7 @@
             // filter<{key:RegExp}>
             // startID<Number>
             // endID<Number,undefined=startID>
-            return machineTool.mediaQuery._mode(arg,async(URI,...arg)=>{
+            return machineTool.mediaQuery._URIMode(arg,async(URI,...arg)=>{
               const filter=arg[0][1];
               const startID=arg[0][2];
               const endID=arg[0][3]?arg[0][3]:arg[0][2];
