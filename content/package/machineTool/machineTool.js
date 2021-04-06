@@ -1866,11 +1866,11 @@
       /*🔴*/applicationPackage(){},
     // other
       /*🔴*/mediaQuery:{
-        async _(arg,callback){
+        async __(arg,callback){
           switch(window.Object.prototype.toString.call(arg[0])){
             case'[object String]':
               {
-                return callback(arg);
+                return callback(arg[0],arg);
               }
               break;
             case'[object Array]':
@@ -1894,20 +1894,20 @@
         video:{
           categoryInfo(...arg){
 // ?pg=999999999
-            // machineTool.mediaQuery.video.categoryInfo(queryURI,resultInfoMatchFilter)
-            // queryURI<String,Array>
-            // resultInfoMatchFilter<{key:RegExp}>
-            return machineTool.mediaQuery._(arg,(queryURI,...arg)=>{
-              const resultInfoMatchFilter=arg[0][1];
-              return machineTool.fetch(`${queryURI}?pg=999999999`,'GET',undefined,undefined,undefined,'json',(data)=>{
+            // machineTool.mediaQuery.video.categoryInfo(URI,filter)
+            // URI<String,Array>
+            // filter<{key:RegExp}>
+            return machineTool.mediaQuery.__(arg,(URI,...arg)=>{
+              const filter=arg[0][1];
+              return machineTool.fetch(`${URI}?pg=999999999`,'GET',undefined,undefined,undefined,'json',(data)=>{
                 let result={};
                 if(data.result){
                   const array=[];
-                  if(resultInfoMatchFilter){
+                  if(filter){
                     machineTool.for(data.result.class,(...data)=>{
                       const match=[];
-                      machineTool.for(resultInfoMatchFilter,(...data_)=>{
-                        if(data[2][data_[1]].toString().match(data_[2])){
+                      machineTool.for(filter,(...data_)=>{
+                        if(data[2][data_[1]].toString().trim().match(data_[2])){
                           match.push(true);
                         }else{
                           match.push(false);
@@ -1922,11 +1922,65 @@
                       array.push([window.parseInt(data[2].type_id),data[2].type_name.trim()]);
                     },0);
                   }
-                  result.array=array;
-                  result.limit=data.result.limit;
-                  result.page=data.result.page;
-                  result.pagecount=data.result.pagecount;
-                  result.total=data.result.total;
+                  result.in_URI=URI;
+                  result.in_filter=filter;
+                  result.result=array;
+                  result._limit_=window.parseInt(data.result.limit);
+                  result._page_=window.parseInt(data.result.page);
+                  result._pagecount_=window.parseInt(data.result.pagecount);
+                  result._total_=window.parseInt(data.result.total);
+                }else{
+                  result=null;
+                }
+                return result;
+              });
+            });
+          },
+          _index(arg){
+            return machineTool.mediaQuery.__(arg,(URI,...arg)=>{
+              const filter=arg[0][1];
+              const limit=arg[0][2];
+              const start=arg[0][3];
+              const end=arg[0][4];
+              const detail=arg[0][5];
+              return machineTool.fetch(`${URI}?pg=${start}${detail?'&ac=detail':''}`,'GET',undefined,undefined,undefined,'json',(data)=>{
+                let result={};
+                if(data.result){
+                  const array=[];
+                  if(filter){
+                    machineTool.for(data.result.list,(...data)=>{
+                      const match=[];
+                      machineTool.for(filter,(...data_)=>{
+                        if(data[2][data_[1]].toString().trim().match(data_[2])){
+                          match.push(true);
+                        }else{
+                          match.push(false);
+                        }
+                      },0);
+                      if(!match.includes(false)){
+                        data[2].type_id=window.parseInt(data[2].type_id);
+                        data[2].type_name=data[2].type_name.trim();
+                        array.push(data[2]);
+                      }
+                    },0);
+                  }else{
+                    machineTool.for(data.result.list,(...data)=>{
+                      data[2].type_id=window.parseInt(data[2].type_id);
+                      data[2].type_name=data[2].type_name.trim();
+                      array.push(data[2]);
+                    },0);
+                  }
+                  result.in_URI=URI;
+                  result.in_filter=filter;
+                  result.in_limit=limit;
+                  result.in_start=start;
+                  result.in_end=end;
+                  result.in_detail=detail;
+                  result.result=array;
+                  result._limit_=window.parseInt(data.result.limit);
+                  result._page_=window.parseInt(data.result.page);
+                  result._pagecount_=window.parseInt(data.result.pagecount);
+                  result._total_=window.parseInt(data.result.total);
                 }else{
                   result=null;
                 }
@@ -1937,38 +1991,46 @@
           allIndex(...arg){
 // ?pg=Number
 // ?pg=Number&ac=detail
-            // machineTool.mediaQuery.video.allIndex(queryURI,resultInfoMatchFilter);
-            // queryURI<String,Array>
-            // resultInfoMatchFilter<{key:RegExp}>
+            // machineTool.mediaQuery.video.allIndex(URI,filter,limit,start,end,detail);
+            // URI<String,Array>
+            // filter<{key:RegExp}>
+            // limit<Number>
+            // start<Number>
+            // end<Number>
+            // detail<Boolean>
+            this._index('allIndex',arg);
           },
           categoryIndex(...arg){
 // ?t=Number&pg=Number
 // ?t=Number&pg=Number&ac=detail
-            // machineTool.mediaQuery.video.categoryIndex(queryURI,resultInfoMatchFilter);
-            // queryURI<String,Array>
-            // resultInfoMatchFilter<{key:RegExp}>
+            // machineTool.mediaQuery.video.categoryIndex(URI,filter);
+            // URI<String,Array>
+            // filter<{key:RegExp}>
+            this._index('categoryIndex',arg);
           },
           searchIndex(...arg){
 // ?wd=String&pg=Number
-            // machineTool.mediaQuery.video.searchIndex(queryURI,resultInfoMatchFilter);
-            // queryURI<String,Array>
-            // resultInfoMatchFilter<{key:RegExp}>
+            // machineTool.mediaQuery.video.searchIndex(URI,filter);
+            // URI<String,Array>
+            // filter<{key:RegExp}>
+            this._index('searchIndex',arg);
+          },
+          newIndex(...arg){
+            // machineTool.mediaQuery.video.newIndex(URI,filter);
+            // URI<String,Array>
+            // filter<{key:RegExp}>
+            this._index('newIndex',arg);
           },
           single(...arg){
 // ?ids=Number&ac=detail
-            // machineTool.mediaQuery.video.single(queryURI,resultInfoMatchFilter);
-            // queryURI<String>
-            // resultInfoMatchFilter<{key:RegExp}>
+            // machineTool.mediaQuery.video.single(URI,filter);
+            // URI<String>
+            // filter<{key:RegExp}>
           },
           iterator(...arg){
-            // machineTool.mediaQuery.video.iterator(queryURI,resultInfoMatchFilter);
-            // queryURI<String>
-            // resultInfoMatchFilter<{key:RegExp}>
-          },
-          append(...arg){
-            // machineTool.mediaQuery.video.append(queryURI,resultInfoMatchFilter);
-            // queryURI<String>
-            // resultInfoMatchFilter<{key:RegExp}>
+            // machineTool.mediaQuery.video.iterator(URI,filter);
+            // URI<String>
+            // filter<{key:RegExp}>
           }
         },
         audio:{},
