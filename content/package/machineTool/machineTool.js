@@ -1975,14 +1975,14 @@
               });
             });
           },
-          search(...arg){
-            // machineTool.mediaQuery.video.search(URI,filter,mode);
+          category(...arg){
+            // machineTool.mediaQuery.video.category(URI,filter,mode);
             // URI<String,Array>
             // filter<{key:RegExp}>
             // mode<'list','detail'>
           },
-          category(...arg){
-            // machineTool.mediaQuery.video.category(URI,filter,mode);
+          search(...arg){
+            // machineTool.mediaQuery.video.search(URI,filter,mode);
             // URI<String,Array>
             // filter<{key:RegExp}>
             // mode<'list','detail'>
