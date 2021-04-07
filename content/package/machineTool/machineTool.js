@@ -1930,16 +1930,21 @@
             return result;
           },
           /*🟢*/info(...arg){
-            // machineTool.mediaQuery.video.info(URI,filter)
+            // machineTool.mediaQuery.video.info(URI,filter,iterator)
             // URI<String,Array>
-            // filter<{key:RegExp}>
+            // filter<{key:RegExp},undefined>
+            // iterator<function,undefined>
             return machineTool.mediaQuery._URIMode(arg,(URI,...arg)=>{
               const filter=arg[0][1];
+              const iterator=arg[0][2];
               return machineTool.fetch(`${URI}?pg=999999999&ac=list`,'GET',undefined,undefined,undefined,'json',(data)=>{
                 const result=this._filter(data,'class',filter,true);
-                if(result){
-                  result.in_URI=URI;
-                  result.in_filter=filter;
+                result.in_URI=URI;
+                result.in_filter=filter;
+                if(iterator){
+                  machineTool.for(result.result,(...data)=>{
+                    iterator(data[2]);
+                  },0);
                 }
                 return result;
               });
@@ -1948,7 +1953,7 @@
           /*🔴*/all(...arg){
             // machineTool.mediaQuery.video.all(URI,filter,limit,start,end);
             // URI<String,Array>
-            // filter<{key:RegExp}>
+            // filter<{key:RegExp},undefined>
             // limit<Number>
             // start<Number>
             // end<Number,undefined=start>
@@ -1959,13 +1964,11 @@
               const end=arg[0][4]?arg[0][4]:arg[0][3];
               return machineTool.fetch(`${URI}?pg=${start}&ac=list`,'GET',undefined,undefined,undefined,'json',(data)=>{
                 const result=this._filter(data,'list',filter,true);
-                if(result){
-                  result.in_URI=URI;
-                  result.in_filter=filter;
-                  result.in_limit=limit;
-                  result.in_start=start;
-                  result.in_end=end;
-                }
+                result.in_URI=URI;
+                result.in_filter=filter;
+                result.in_limit=limit;
+                result.in_start=start;
+                result.in_end=end;
                 return result;
               });
             });
@@ -1973,7 +1976,7 @@
           /*🔴*/category(...arg){
             // machineTool.mediaQuery.video.category(URI,filter,category,limit,start,end);
             // URI<String,Array>
-            // filter<{key:RegExp}>
+            // filter<{key:RegExp},undefined>
             // category<Number>
             // limit<Number>
             // start<Number>
@@ -1986,14 +1989,12 @@
               const end=arg[0][5]?arg[0][5]:arg[0][4];
               return machineTool.fetch(`${URI}?t=${category}&pg=${start}&ac=list`,'GET',undefined,undefined,undefined,'json',(data)=>{
                 const result=this._filter(data,'list',filter,true);
-                if(result){
-                  result.in_URI=URI;
-                  result.in_filter=filter;
-                  result.in_category=category;
-                  result.in_limit=limit;
-                  result.in_start=start;
-                  result.in_end=end;
-                }
+                result.in_URI=URI;
+                result.in_filter=filter;
+                result.in_category=category;
+                result.in_limit=limit;
+                result.in_start=start;
+                result.in_end=end;
                 return result;
               });
             });
@@ -2001,7 +2002,7 @@
           /*🔴*/search(...arg){
             // machineTool.mediaQuery.video.search(URI,filter,search,limit,start,end);
             // URI<String,Array>
-            // filter<{key:RegExp}>
+            // filter<{key:RegExp},undefined>
             // search<String>
             // limit<Number>
             // start<Number>
@@ -2014,28 +2015,28 @@
               const end=arg[0][5]?arg[0][5]:arg[0][4];
               return machineTool.fetch(`${URI}?wd=${search}&pg=${start}&ac=list`,'GET',undefined,undefined,undefined,'json',(data)=>{
                 const result=this._filter(data,'list',filter,true);
-                if(result){
-                  result.in_URI=URI;
-                  result.in_filter=filter;
-                  result.in_search=search;
-                  result.in_limit=limit;
-                  result.in_start=start;
-                  result.in_end=end;
-                }
+                result.in_URI=URI;
+                result.in_filter=filter;
+                result.in_search=search;
+                result.in_limit=limit;
+                result.in_start=start;
+                result.in_end=end;
                 return result;
               });
             });
           },
           /*🟢*/single(...arg){
-            // machineTool.mediaQuery.video.single(URI,filter,start,end);
+            // machineTool.mediaQuery.video.single(URI,filter,start,end,iterator);
             // URI<String>
-            // filter<{key:RegExp}>
+            // filter<{key:RegExp},undefined>
             // start<Number>
             // end<Number,undefined=start>
+            // iterator<function,undefined>
             return machineTool.mediaQuery._URIMode(arg,async(URI,...arg)=>{
               const filter=arg[0][1];
               const start=arg[0][2];
               const end=arg[0][3]?arg[0][3]:arg[0][2];
+              const iterator=arg[0][4];
               const result_={
                 result:[]
               };
@@ -2043,11 +2044,14 @@
                 for(let key=start,length=end;key<=length;key++){
                   yield machineTool.fetch(`${URI}?ids=${key}&ac=detail`,'GET',undefined,undefined,undefined,'json',(data)=>{
                     const result=machineTool.mediaQuery.video._filter(data,'list',filter,false);
-                    if(!result_.in_URI&&result){
+                    if(!result_.in_URI){
                       result_.in_URI=URI;
                       result_.in_filter=filter;
                       result_.in_start=start;
                       result_.in_end=end;
+                    }
+                    if(iterator){
+                      iterator(result.result[0]);
                     }
                     return result;
                   });
