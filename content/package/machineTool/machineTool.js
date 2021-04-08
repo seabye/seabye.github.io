@@ -1908,14 +1908,14 @@
                     }
                   },0);
                   if(!match.includes(false)){
-                    data[2].type_id=window.parseInt(data[2].type_id);
+                    data[2].type_id=data[2].type_id;
                     data[2].type_name=data[2].type_name.trim();
                     result.result.push(data[2]);
                   }
                 },0);
               }else{
                 machineTool.for(data.result[dataProperty],(...data)=>{
-                  data[2].type_id=window.parseInt(data[2].type_id);
+                  data[2].type_id=data[2].type_id;
                   data[2].type_name=data[2].type_name.trim();
                   result.result.push(data[2]);
                 },0);
