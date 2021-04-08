@@ -1937,14 +1937,19 @@
             return machineTool.mediaQuery._URIMode(arg,(URI,...arg)=>{
               const filter=arg[0][1];
               const iterator=arg[0][2];
-              return machineTool.fetch(`${URI}?pg=999999999&ac=list`,'GET',undefined,undefined,undefined,'json',(data)=>{
+              return machineTool.fetch(`${URI}?pg=999999999&ac=list`,'GET',undefined,undefined,undefined,'json',async(data)=>{
                 const result=this._filter(data,'class',filter,true);
                 result.in_URI=URI;
                 result.in_filter=filter;
                 if(iterator){
-                  machineTool.for(result.result,(...data)=>{
-                    iterator(data[2]);
-                  },0);
+                  // machineTool.for(result.result,(...data)=>{
+                  //   iterator(data[2]);
+                  // },0);
+                  for await(const value of (function*(){
+                    for(let key=0,length=result.result.length;key<length;key++){
+                      yield iterator(result.result[key]);
+                    }
+                  })()){}
                 }
                 return result;
               });
