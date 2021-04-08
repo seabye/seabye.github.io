@@ -1865,7 +1865,7 @@
     // w3daze
       /*🔴*/applicationPackage(){},
     // other
-      /*🔴*/mediaQuery:{
+      /*🟢*/mediaQuery:{
         async _URIMode(arg,callback){
           switch(window.Object.prototype.toString.call(arg[0])){
             case'[object String]':
@@ -1893,9 +1893,7 @@
         },
         video:{
           _filter(data,dataProperty,filter,info){
-            let result={
-              result:[]
-            };
+            let result={result:[]};
             if(data.result){
               if(filter){
                 machineTool.for(data.result[dataProperty],(...data)=>{
@@ -1942,9 +1940,6 @@
                 result.in_URI=URI;
                 result.in_filter=filter;
                 if(iterator){
-                  // machineTool.for(result.result,(...data)=>{
-                  //   iterator(data[2]);
-                  // },0);
                   for await(const value of (function*(){
                     for(let key=0,length=result.result.length;key<length;key++){
                       yield iterator(result.result[key]);
@@ -2042,9 +2037,7 @@
               const start=arg[0][2];
               const end=arg[0][3]?arg[0][3]:arg[0][2];
               const iterator=arg[0][4];
-              const result_={
-                result:[]
-              };
+              const result_={result:[]};
               for await(const value of (function*(){
                 for(let key=start,length=end;key<=length;key++){
                   yield machineTool.fetch(`${URI}?ids=${key}&ac=detail`,'GET',undefined,undefined,undefined,'json',async(data)=>{
