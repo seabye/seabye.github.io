@@ -2047,7 +2047,7 @@
               };
               for await(const value of (function*(){
                 for(let key=start,length=end;key<=length;key++){
-                  yield machineTool.fetch(`${URI}?ids=${key}&ac=detail`,'GET',undefined,undefined,undefined,'json',(data)=>{
+                  yield machineTool.fetch(`${URI}?ids=${key}&ac=detail`,'GET',undefined,undefined,undefined,'json',async(data)=>{
                     const result=machineTool.mediaQuery.video._filter(data,'list',filter,false);
                     if(!result_.in_URI){
                       result_.in_URI=URI;
@@ -2056,7 +2056,7 @@
                       result_.in_end=end;
                     }
                     if(iterator){
-                      iterator(result.result[0]);
+                      await iterator(result.result[0]);
                     }
                     return result;
                   });
