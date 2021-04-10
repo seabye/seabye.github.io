@@ -126,7 +126,7 @@
                         }
                         if(window.Object.prototype.toString.call(data[key])==='[object Array]'||window.Object.prototype.toString.call(data[key])==='[object Object]'){
                           next.push(data[key]);
-                        };
+                        }
                       }
                     }
                     break;
@@ -145,7 +145,7 @@
                         }
                         if(window.Object.prototype.toString.call(data[key])==='[object Object]'||window.Object.prototype.toString.call(data[key])==='[object Array]'){
                           next.push(data[key]);
-                        };
+                        }
                       }
                     }
                     break;
@@ -175,7 +175,7 @@
                   }
                   if(window.Object.prototype.toString.call(data[key])==='[object Array]'){
                     next.push(data[key]);
-                  };
+                  }
                 }
                 if(next.length){
                   for(let key=0,length=next.length;key<length;key++){
@@ -203,7 +203,7 @@
                   }
                   if(window.Object.prototype.toString.call(data[key])==='[object Object]'){
                     next.push(data[key]);
-                  };
+                  }
                 }
                 if(next.length){
                   for(let key=0,length=next.length;key<length;key++){
@@ -282,10 +282,7 @@
         switch(type){
           case'user-agent':
             {
-              if(data.match(/bot|spider/i)){
-                return true;
-              }
-              return false;
+              return (/bot|spider/i).test(data);
             }
             break;
           case'location':
@@ -1906,14 +1903,14 @@
                     }
                   },0);
                   if(!match.includes(false)){
-                    data[2].type_id=data[2].type_id;
+                    // data[2].type_id=data[2].type_id;
                     data[2].type_name=data[2].type_name.trim();
                     result.result.push(data[2]);
                   }
                 },0);
               }else{
                 machineTool.for(data.result[dataProperty],(...data)=>{
-                  data[2].type_id=data[2].type_id;
+                  // data[2].type_id=data[2].type_id;
                   data[2].type_name=data[2].type_name.trim();
                   result.result.push(data[2]);
                 },0);
