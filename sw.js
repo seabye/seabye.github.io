@@ -6,7 +6,7 @@
 // #variable
 // #block
 // #build
-  // service worker
+  // auto cache
   const version='auto';
   self.addEventListener('install',(event)=>{
     event.waitUntil(self.caches.open(version).then((cache)=>{
