@@ -232,6 +232,21 @@
           }
         }
       },
+      /*🔴*/worker(type){
+        switch(type){
+          case'dedicated':
+            {}
+            break;
+          case'shared':
+            {}
+            break;
+          case'service':
+            {}
+            break;
+          default:
+            break;
+        }
+      },
       /*🔴*/doubleKeyContentCountSave(){
         if(!this.doubleKeyContentCountSave.template){
           this.doubleKeyContentCountSave.template=class template{
@@ -270,12 +285,23 @@
         }
         return result;
       },
-      /*🟢*/searchObject(data=window.location&&window.location.search?window.location.search:''){
-        const result={};
-        this.for(data.replace(/^\?/,'').split('&'),(...data)=>{
-          const right=data[2].split('=')[1];
-          result[data[2].split('=')[0]]=right?right:'';
-        },0);
+      /*🟢*/URIObject(data=window.location&&(window.location.search||window.location.hash)?`${window.location.search}${window.location.hash}`:''){
+        const result={
+          search:{},
+          hash:{}
+        };
+        if(data.match(/^\?/)){
+          this.for(data.split('#')[0].replace(/^\?/,'').split('&'),(...data)=>{
+            const right=data[2].split('=')[1];
+            result.search[data[2].split('=')[0]]=right?right:'';
+          },0);
+        }
+        if(data.match(/\#/)){
+          this.for(data.split('#')[1].split('&'),(...data)=>{
+            const right=data[2].split('=')[1];
+            result.hash[data[2].split('=')[0]]=right?right:'';
+          },0);
+        }
         return result;
       },
       /*🟢*/isBot(type='user-agent',data=window.navigator&&window.navigator.userAgent?window.navigator.userAgent:''){
@@ -373,8 +399,6 @@
         });
       },
       /*🔴*/webAssembly(){},
-    // graphics
-      /*🔴*/plugin_openCV_removeWatermark(){},
     // local data
       /*🔴*/file(){},
       /*🔴*/fileSystem(){},
@@ -383,12 +407,12 @@
       /*🔴*/indexedDB(){},
       /*🔴*/cookie(){},
       /*🔴*/cache(){},
-      /*🔴*/redis(){},
-      /*🔴*/mongoDB(){},
-      /*🔴*/memcached(){},
       /*🔴*/SQLite(){},
       /*🔴*/postgreSQL(){},
       /*🔴*/mySQL(){},
+      /*🔴*/redis(){},
+      /*🔴*/mongoDB(){},
+      /*🔴*/memcached(){},
     // network data
       /*🟢*/fetch(URI,method,data,dataPack,requestDataType,responseDataType,callback,optionPlus,optionHeadersPlus){
         const option={};
@@ -485,11 +509,13 @@
       /*🔴*/staticFile(){},
       /*🔴*/siteMapGenerator(){},
       /*🔴*/siteMapHTMLGenerator(){},
+    // graphics
+      /*🔴*/plugin_openCV_removeWatermark(){},
     // command line interface
       /*🔴*/cli(){},
     // graphical user interface
       /*🔴*/cliEmulator(){},
-      /*🟡*/listenDOM(action,target,type,callback,option={},option2='',option3=''){
+      /*🟡💠*/listenDOM(action,target,type,callback,option={},option2='',option3=''){
         switch(type){
           case'pointer_down':
             {
@@ -1388,6 +1414,7 @@
           }
         }
       },
+      /*🔴💠*/DOMState(){},
       /*🟢*/elementBlock(element,group='group',insertPosition='beforeend',wait=350){
         if(!this.elementBlock.template){
           this.elementBlock.template=class template{
@@ -1582,7 +1609,7 @@
         }
         return new this.elementBlock.template(element,group,insertPosition,wait);
       },
-      /*🔴*/DOM(){},
+      /*🔴💠*/DOM(){},
       /*🔴*/fixedInput(){},
       /*🟢*/insertStyle(style,wait){
         const element=this.elementCreate('style',undefined,window.document.head,undefined,style);
@@ -1858,10 +1885,12 @@
         }
       },
     // user interface
-      /*🔴*/ui(){},
+      /*🔴💠*/UI:{
+        /*🔴*/grid(){}
+      },
     // w3daze
       /*🔴*/applicationPackage(){},
-    // other
+    // unknown
       /*🟢*/mediaQuery:{
         async _URIMode(arg,callback){
           switch(window.Object.prototype.toString.call(arg[0])){

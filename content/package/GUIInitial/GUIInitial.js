@@ -39,7 +39,7 @@
 // {
 //   "name": "~",
 //   "short_name": "~",
-//   "start_url": "/?pwa",
+//   "start_url": "/#pwa",
 //   "theme_color": "#000000",
 //   "background_color": "#000000",
 //   "orientation": "natural",
@@ -197,7 +197,7 @@
       if(userAgent.match(/iPhone|iPad|Android|Mobile/i)){
         cls.add('ic_nr_platform_mobile');
       }
-      if(window.location.search.replace(/^\?/,'').split('&').includes('pwa')){
+      if(window.location.search.replace(/^\?/,'').split('&').includes('pwa')||window.location.hash.replace(/^\#/,'').split('&').includes('pwa')){
         cls.add('ic_nr_pwa');
       }
       if(window.document.createElement('video').canPlayType('application/vnd.apple.mpegurl')){
