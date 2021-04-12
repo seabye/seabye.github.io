@@ -66,7 +66,7 @@
 // {
 //   "name": "~",
 //   "short_name": "~",
-//   "start_url": "/#pwa",
+//   "start_url": "/?pwa",
 //   "theme_color": "#000000",
 //   "background_color": "#000000",
 //   "orientation": "natural",
