@@ -6,11 +6,7 @@
 // #variable
 // #block
 // #build
-  // // service worker
-  // self.addEventListener('fetch',()=>{});
   // service worker
-  // const date=new self.Date();
-  // const version=`${date.getFullYear()}${date.getMonth()}${date.getDate()}${date.getMinutes()}`;
   const version='auto';
   self.addEventListener('install',(event)=>{
     event.waitUntil(self.caches.open(version).then((cache)=>{
@@ -22,7 +18,7 @@
       return self.fetch(event.request).then((response)=>{
         const responseClone=response.clone();
         self.caches.open(version).then((cache)=>{
-            cache.put(event.request,responseClone);
+          cache.put(event.request,responseClone);
         });
         return response;
       }).catch((error)=>{
