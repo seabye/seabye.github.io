@@ -6,15 +6,15 @@
 // #variable
 // #block
 // #build
-  // auto cache
-  const version='auto';
+  // online priority basic cache
+  const version='basic';
   self.addEventListener('install',(event)=>{
     event.waitUntil(self.caches.open(version).then((cache)=>{
       return cache.addAll([]);
     }));
   });
   self.addEventListener('fetch',(event)=>{
-    event.respondWith(self.caches.match(event.request).then((respond)=>{
+    event.respondWith(self.caches.match(event.request).then((resp)=>{
       return self.fetch(event.request).then((response)=>{
         const responseClone=response.clone();
         self.caches.open(version).then((cache)=>{
@@ -22,7 +22,7 @@
         });
         return response;
       }).catch((error)=>{
-        return respond;
+        return resp;
       });
     }));
   });
