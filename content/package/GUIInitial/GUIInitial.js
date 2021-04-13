@@ -5,6 +5,7 @@
 // GUIInitial.js
 // ==== ==== ==== ====
 // index.html
+// ~~~~ ~~~~ ~~~~ ~~~~
 // <script src="/GUIInitial.js" type="application/javascript" data-gui_initial="{
 //   'startBackgroundColor_light': '</""/=#FFFFFF>',
 //   'startBackgroundColor_dark': '</""/=#000000>',
@@ -18,8 +19,9 @@
 //   'head_themeColor_dark': '</""/=#000000>',
 //   'head_manifest': '/manifest.webmanifest'
 // }"></script>
-// ~~~~ ~~~~ ~~~~ ~~~~
+// ==== ==== ==== ====
 // sw.js
+// ~~~~ ~~~~ ~~~~ ~~~~
 // 'use strict';
 // // #before
 //   // console
@@ -61,8 +63,9 @@
 // // #after
 //   // console
 //   self.console.log('#### end: sw.js');
-// ~~~~ ~~~~ ~~~~ ~~~~
+// ==== ==== ==== ====
 // manifest.webmanifest
+// ~~~~ ~~~~ ~~~~ ~~~~
 // {
 //   "name": "~",
 //   "short_name": "~",
@@ -110,6 +113,19 @@
 //     }
 //   ]
 // }
+// ==== ==== ==== ====
+// 'use strict';
+// // #before
+//   // console
+//   window.console.log('#### start: ~.js');
+// // #import
+// // #variable
+// // #block
+// // #build
+// // #debug
+// // #after
+//   // console
+//   window.console.log('#### end: ~.js');
 // >>>> >>>> >>>> >>>>
 {
 // #before
