@@ -125,11 +125,11 @@
         await block.back();
       },
       _doubleKeyContentCountSave(){},
-      UUID36ToUUID22(){
-        window.console.log('++++ 8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3 jvZe6aA5S_Kks2h_zB88ww, UUID36ToUUID22:',machineTool.UUID36ToUUID22('8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3'));
+      UUID36ToBLOb22(){
+        window.console.log('++++ 8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3 jvZe6aA5S_Kks2h_zB88ww, UUID36ToBLOb22:',machineTool.UUID36ToBLOb22('8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3'));
       },
-      UUID22ToUUID36(){
-        window.console.log('++++ 8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3 jvZe6aA5S_Kks2h_zB88ww, UUID22ToUUID36:',machineTool.UUID22ToUUID36('jvZe6aA5S_Kks2h_zB88ww'));
+      BLOb22ToUUID36(){
+        window.console.log('++++ 8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3 jvZe6aA5S_Kks2h_zB88ww, BLOb22ToUUID36:',machineTool.BLOb22ToUUID36('jvZe6aA5S_Kks2h_zB88ww'));
       },
       stringToBase64URISafeNoPad(){
         window.console.log('++++ 8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3 jvZe6aA5S_Kks2h_zB88ww, stringToBase64URISafeNoPad:',machineTool.stringToBase64URISafeNoPad('8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3'));

@@ -348,7 +348,7 @@
         }
         return`${current/total*100}${unit}`;
       },
-      /*🟢*/UUID36ToUUID22(UUID36){
+      /*🟢*/UUID36ToBLOb22(UUID36){
         if(UUID36.length===36){
           const UUID32='0'+UUID36.replace(/-/g,'');
           if(UUID32.length===33){
@@ -363,8 +363,8 @@
           }
         }
       },
-      /*🟢*/UUID22ToUUID36(UUID22){
-        if(UUID22.length===22){
+      /*🟢*/BLOb22ToUUID36(BLOb22){
+        if(BLOb22.length===22){
           const getCharIndex=()=>{
             const char='0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_-';
             let result={};
@@ -377,7 +377,7 @@
           let charIndex=getCharIndex();
           let result='';
           for(let key=0;key<22;key+=2){
-            let u=(charIndex[UUID22[key]]*64+charIndex[UUID22[key+1]]).toString(16).padStart(3,'0');
+            let u=(charIndex[BLOb22[key]]*64+charIndex[BLOb22[key+1]]).toString(16).padStart(3,'0');
             if(key===0&&u[0]==='0'){
               u=u.substr(1);
             }
