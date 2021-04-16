@@ -4,4 +4,4 @@
 
 cd $(dirname $0)
 cargo build --release
-./target/debug/machine-tool
+./target/release/machine_tool_rust
