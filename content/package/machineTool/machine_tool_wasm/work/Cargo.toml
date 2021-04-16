@@ -1,5 +1,5 @@
 [package]
-name = "machine_tool_wasm"
+name = "work"
 version = "0.1.0"
 authors = ["seabye <seabye@live.com>"]
 edition = "2018"
@@ -9,16 +9,10 @@ edition = "2018"
 # [dependencies]
 
 # #### start
-[lib]
-crate-type = ["cdylib", "rlib"]
+# [[bin]]
+# name = "machine_tool_wasm"
+# path = "src/main.rs"
 
 [dependencies]
-wasm-bindgen = "0.2.73"
-base64 = "0.13.0"
-uuid = { version = "0.8.2", features = ["v4"] }
-
-[workspace]
-members = ["work"]
-
-# [profile.release]
-# lto = true
+# machine_tool_wasm = "0.1.0"
+# structopt = "0.3.21"

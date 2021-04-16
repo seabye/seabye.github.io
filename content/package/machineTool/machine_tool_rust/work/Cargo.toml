@@ -1,5 +1,5 @@
 [package]
-name = "machine_tool_rust"
+name = "work"
 version = "0.1.0"
 authors = ["seabye <seabye@live.com>"]
 edition = "2018"
@@ -10,9 +10,3 @@ edition = "2018"
 
 # #### start
 [dependencies]
-
-[workspace]
-members = ["work"]
-
-# [profile.release]
-# lto = true

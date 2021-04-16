@@ -352,7 +352,7 @@
         if(UUID36.length===36){
           const UUID32='0'+UUID36.replace(/-/g,'');
           if(UUID32.length===33){
-            const char='0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_-';
+            const char='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_-';
             let result='';
             for(let key=0;key<11;key++){
               const start=key*3;
@@ -366,7 +366,7 @@
       /*🟢*/BLOb22ToUUID36(BLOb22){
         if(BLOb22.length===22){
           const getCharIndex=()=>{
-            const char='0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_-';
+            const char='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_-';
             let result={};
             for(let key=0,length=char.length;key<length;key++){
               const char0=char[key];
@@ -389,13 +389,25 @@
       /*🔴*/stringToBase64URISafeNoPad(){},
       /*🔴*/base64URISafeNoPadToString(){},
       /*🟢*/import(src,callback){
-        return import(src).then((data)=>{
+        return import(src).then((module)=>{
           if(callback){
-            return callback(data);
+            return callback(module);
           }
-          return data;
+          return module;
         }).catch((error)=>{
           window.console.log('==== import, catch:',error);
+        });
+      },
+      /*🟢*/wasm(src,callback){
+        return this.import(src,(module)=>{
+          return module.default().then(()=>{
+            if(callback){
+              return callback(module);
+            }
+            return module;
+          });
+        }).catch((error)=>{
+          window.console.log('==== wasm, catch:',error);
         });
       },
       /*🔴*/webAssembly(){},

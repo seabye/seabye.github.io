@@ -4,4 +4,4 @@
 
 cd %~dp0
 cargo build --release
-.\target\debug\machine_tool_rust.exe
+..\target\debug\work.exe

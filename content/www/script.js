@@ -136,6 +136,11 @@
       },
       base64URISafeNoPadToString(){
         window.console.log('++++ 8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3 jvZe6aA5S_Kks2h_zB88ww, base64URISafeNoPadToString:',machineTool.base64URISafeNoPadToString('jvZe6aA5S_Kks2h_zB88ww'));
+      },
+      wasm(){
+        machineTool.wasm('/content/package/machineTool/machine_tool_wasm/pkg/machine_tool_wasm.js',(module)=>{
+          window.console.log('++++ wasm, wasm.uuid_to_blob:',module.uuid_to_blob('8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3'));
+        });
       }
     },'_');
   });
