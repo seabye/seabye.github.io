@@ -10,3 +10,7 @@ edition = "2018"
 
 # #### start
 [dependencies]
+machine_tool_rust = { path = "../" }
+
+# [profile.release]
+# lto = true

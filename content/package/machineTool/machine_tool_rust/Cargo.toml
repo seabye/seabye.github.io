@@ -9,10 +9,10 @@ edition = "2018"
 # [dependencies]
 
 # #### start
-[dependencies]
-
 [workspace]
 members = ["work"]
+
+[dependencies]
 
 # [profile.release]
 # lto = true

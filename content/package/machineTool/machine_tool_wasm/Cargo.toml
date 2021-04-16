@@ -9,16 +9,14 @@ edition = "2018"
 # [dependencies]
 
 # #### start
+[workspace]
+members = ["work"]
+
 [lib]
 crate-type = ["cdylib", "rlib"]
 
 [dependencies]
 wasm-bindgen = "0.2.73"
-base64 = "0.13.0"
-uuid = { version = "0.8.2", features = ["v4"] }
-
-[workspace]
-members = ["work"]
 
 # [profile.release]
 # lto = true

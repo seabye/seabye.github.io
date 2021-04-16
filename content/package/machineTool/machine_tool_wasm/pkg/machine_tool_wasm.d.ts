@@ -1,20 +1,17 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
-* @param {string} uuid
-* @returns {string}
+* @param {number} a
+* @param {number} b
+* @returns {number}
 */
-export function uuid_to_blob(uuid: string): string;
+export function test(a: number, b: number): number;
 
 export type InitInput = RequestInfo | URL | Response | BufferSource | WebAssembly.Module;
 
 export interface InitOutput {
   readonly memory: WebAssembly.Memory;
-  readonly uuid_to_blob: (a: number, b: number, c: number) => void;
-  readonly __wbindgen_add_to_stack_pointer: (a: number) => number;
-  readonly __wbindgen_malloc: (a: number) => number;
-  readonly __wbindgen_realloc: (a: number, b: number, c: number) => number;
-  readonly __wbindgen_free: (a: number, b: number) => void;
+  readonly test: (a: number, b: number) => number;
 }
 
 /**

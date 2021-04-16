@@ -9,10 +9,8 @@ edition = "2018"
 # [dependencies]
 
 # #### start
-# [[bin]]
-# name = "machine_tool_wasm"
-# path = "src/main.rs"
-
 [dependencies]
-# machine_tool_wasm = "0.1.0"
-# structopt = "0.3.21"
+machine_tool_wasm = { path = "../" }
+
+# [profile.release]
+# lto = true
