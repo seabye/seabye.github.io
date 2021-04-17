@@ -9,6 +9,6 @@
 // #### start
 use wasm_bindgen::prelude::*;
 #[wasm_bindgen]
-pub fn test(a:u32,b:u32)->u32{
+pub fn machine_tool_wasm_test(a:u32,b:u32)->u32{
   a+b
 }

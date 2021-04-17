@@ -5,13 +5,13 @@
 * @param {number} b
 * @returns {number}
 */
-export function test(a: number, b: number): number;
+export function machine_tool_wasm_test(a: number, b: number): number;
 
 export type InitInput = RequestInfo | URL | Response | BufferSource | WebAssembly.Module;
 
 export interface InitOutput {
   readonly memory: WebAssembly.Memory;
-  readonly test: (a: number, b: number) => number;
+  readonly machine_tool_wasm_test: (a: number, b: number) => number;
 }
 
 /**

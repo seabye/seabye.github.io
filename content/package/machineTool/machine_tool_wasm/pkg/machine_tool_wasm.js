@@ -6,8 +6,8 @@ let wasm;
 * @param {number} b
 * @returns {number}
 */
-export function test(a, b) {
-    var ret = wasm.test(a, b);
+export function machine_tool_wasm_test(a, b) {
+    var ret = wasm.machine_tool_wasm_test(a, b);
     return ret >>> 0;
 }
 
