@@ -6,8 +6,8 @@ let wasm;
 * @param {number} b
 * @returns {number}
 */
-export function machine_tool_wasm_test(a, b) {
-    var ret = wasm.machine_tool_wasm_test(a, b);
+export function test(a, b) {
+    var ret = wasm.test(a, b);
     return ret >>> 0;
 }
 
@@ -44,7 +44,7 @@ async function load(module, imports) {
 
 async function init(input) {
     if (typeof input === 'undefined') {
-        input = new URL('machine_tool_wasm_bg.wasm', import.meta.url);
+        input = new URL('wasm_bg.wasm', import.meta.url);
     }
     const imports = {};
 

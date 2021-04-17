@@ -1,5 +1,5 @@
 [package]
-name = "machine_tool_wasm"
+name = "work"
 version = "0.1.0"
 authors = ["seabye <seabye@live.com>"]
 edition = "2018"
@@ -9,15 +9,8 @@ edition = "2018"
 # [dependencies]
 
 # #### start
-[workspace]
-members = ["work"]
-
-[lib]
-crate-type = ["cdylib", "rlib"]
-
 [dependencies]
-wasm-bindgen = "0.2.73"
-# web-sys = "0.3.50"
+wasm = { path = "../" }
 
 # [profile.release]
 # lto = true

@@ -42,3 +42,7 @@ fn machinetool_pg_rust_uuid_blob()->String{
     }
   }
 }
+#[pg_extern]
+fn machinetool_pg_rust_table_data()->String{
+  r#"{"a":"a","b":"b","c":"c"}"#.to_string()
+}
