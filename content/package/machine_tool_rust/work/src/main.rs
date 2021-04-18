@@ -3,6 +3,8 @@
 // }
 
 // #### start
-fn main() {
-    println!("Hello, world!");
+fn main(){
+  println!("Hello, world!");
+  let data=json::parse(r#"{"a":"a"}"#).unwrap();
+  println!("{}",data["a"]);
 }

@@ -34,7 +34,7 @@
 use pgx::*;
 pg_module_magic!();
 #[pg_extern]
-fn machinetool_pg_rust_uuid_blob()->String{
+fn machinetool_pg_rust_uuid_blob(data:&str)->String{
   loop{
     let blob=blob_uuid::random_blob();
     if !blob.contains("_")&!blob.contains("-"){
@@ -43,6 +43,7 @@ fn machinetool_pg_rust_uuid_blob()->String{
   }
 }
 #[pg_extern]
-fn machinetool_pg_rust_table_data()->String{
-  r#"{"a":"a","b":"b","c":"c"}"#.to_string()
+fn machinetool_pg_rust_table_data(data:&str)->String{
+  let data_=json::parse(&data).unwrap();
+  std::fs::read_to_string(data_["path"].to_string()).expect("error")
 }
