@@ -33,10 +33,11 @@
 // #### start
 use pgx::*;
 pg_module_magic!();
+// build
 #[pg_extern]
 fn machinetool_pg_rust_uuid_blob(data:&str)->String{
   loop{
-    let blob=blob_uuid::random_blob();
+    let blob:std::string::String=blob_uuid::random_blob();
     if !blob.contains("_")&!blob.contains("-"){
       break blob;
     }
@@ -44,6 +45,33 @@ fn machinetool_pg_rust_uuid_blob(data:&str)->String{
 }
 #[pg_extern]
 fn machinetool_pg_rust_table_data(data:&str)->String{
-  let data_=json::parse(&data).unwrap();
-  std::fs::read_to_string(data_["path"].to_string()).expect("error")
+  std::fs::read_to_string(json::parse(data).unwrap()["path"].to_string()).expect("error")
+}
+#[pg_extern]
+fn machinetool_pg_rust_router_post(data:&str)->String{
+  // let data_:json::JsonValue=json::parse(data).unwrap();
+  // let account:std::string::String=data_["account"].to_string();
+  // let permission:std::string::String=data_["permission"].to_string();
+  // let query:std::string::String=data_["query"].to_string();
+  data.to_string()
+}
+#[pg_extern]
+fn machinetool_pg_rust_router_delete(data:&str)->String{
+  // let data:json::JsonValue=json::parse(data).unwrap();
+  data.to_string()
+}
+#[pg_extern]
+fn machinetool_pg_rust_router_get(data:&str)->String{
+  // let data:json::JsonValue=json::parse(data).unwrap();
+  data.to_string()
+}
+#[pg_extern]
+fn machinetool_pg_rust_router_put(data:&str)->String{
+  // let data:json::JsonValue=json::parse(data).unwrap();
+  data.to_string()
+}
+#[pg_extern]
+fn machinetool_pg_rust_router_patch(data:&str)->String{
+  // let data:json::JsonValue=json::parse(data).unwrap();
+  data.to_string()
 }
