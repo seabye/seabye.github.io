@@ -953,7 +953,7 @@
             {
               // tree mode
               //   data<{
-              //     key&class<char=(key&class),string=('key&class class2...','',' class...',' class class2...')>:{
+              //     key&class<string/~single~/=(key&class),string=('key&class class2...','',' class...',' class class2...')>:{
               //       <element:[
               //         tag<string,undefined='div'>,
               //         attribute<object=({key:'value'...}),undefined=false>,
@@ -961,12 +961,12 @@
               //         callback<function(element),undefined=false>
               //       ],undefined=false>,
               //       <function:function(elements,element)/~this.element===elements.key&class===element~/,undefined=false>,
-              //       key&class:<{},[]>...
+              //       key&class:<object,array>...
               //     },
-              //     key&class:<{},[]>...
+              //     key&class:<object,array>...
               //   },[
               //     function(){},
-              //     key&class:<{},[]>...
+              //     key&class:<object,array>...
               //   ]>,
               //   insertElement<element,undefined=false>,
               //   insertPosition<'beforebegin','afterbegin','beforeend','afterend',undefined='beforeend'>,
