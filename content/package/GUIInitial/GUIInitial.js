@@ -7,16 +7,16 @@
 // index.html
 // ~~~~ ~~~~ ~~~~ ~~~~
 // <script src="/GUIInitial.js" type="application/javascript" data-gui_initial="{
-//   'startBackgroundColor_light': '</""/=#FFFFFF>',
-//   'startBackgroundColor_dark': '</""/=#000000>',
+//   'startBackgroundColor_light': '<""=#FFFFFF>',
+//   'startBackgroundColor_dark': '<""=#000000>',
 //   'serviceWorker': '/sw.js',
-//   'head_title': '</""/="">',
+//   'head_title': '<""="">',
 //   'head_style': '/style.css',
 //   'head_script': '/script.js',
 //   'head_icon': '/icon.png',
 //   'head_icon_apple': '/icon-apple.png',
-//   'head_themeColor_light': '</""/=#FFFFFF>',
-//   'head_themeColor_dark': '</""/=#000000>',
+//   'head_themeColor_light': '<""=#FFFFFF>',
+//   'head_themeColor_dark': '<""=#000000>',
 //   'head_manifest': '/manifest.webmanifest'
 // }"></script>
 // ==== ==== ==== ====

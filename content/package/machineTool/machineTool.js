@@ -908,7 +908,7 @@
             {
               // single mode
               //   tag<string,undefined='div'>,
-              //   attribute<object/{key:'value'...}/,undefined=false>,
+              //   attribute<object=({key:'value'...}),undefined=false>,
               //   insertElement<element,undefined=false>,
               //   insertPosition<'beforebegin','afterbegin','beforeend','afterend',undefined='beforeend'>,
               //   content<string,element,undefined=false>,
@@ -953,14 +953,14 @@
             {
               // tree mode
               //   data<{
-              //     key&class<char/key&class/,string/'key&class class2...','',' class...',' class class2...'/>:{
+              //     key&class<char=(key&class),string=('key&class class2...','',' class...',' class class2...')>:{
               //       <element:[
               //         tag<string,undefined='div'>,
-              //         attribute<object/{key:'value'...}/,undefined=false>,
+              //         attribute<object=({key:'value'...}),undefined=false>,
               //         content<string,element,undefined=false>,
               //         callback<function(element),undefined=false>
               //       ],undefined=false>,
-              //       <function:function(elements,element)/this.element===elements.key&class===element/,undefined=false>,
+              //       <function:function(elements,element)/~this.element===elements.key&class===element~/,undefined=false>,
               //       key&class:<{},[]>...
               //     },
               //     key&class:<{},[]>...
@@ -972,7 +972,7 @@
               //   insertPosition<'beforebegin','afterbegin','beforeend','afterend',undefined='beforeend'>,
               //   elements<elements,undefined=elements>,
               //   callback<function(elements),undefined=false>
-              //   /machineTool.elementCreate()===machineTool.elementCreate({key&class<...>:{}})._first_===machineTool.elementCreate([{}])._first_===machineTool.elementCreate([[]])._first_/
+              //   /~machineTool.elementCreate()===machineTool.elementCreate({key&class<...>:{}})._first_===machineTool.elementCreate([{}])._first_===machineTool.elementCreate([[]])._first_~/
               const object=arg[0];
               const insertElement=arg[1];
               let insertPosition=arg[2];
@@ -1116,11 +1116,11 @@
         if(arg[0]instanceof window.HTMLElement){
           // base mode
           //   element<element>,
-          //   one<string/'class class2...'/,null,undefined=''>,
-          //   two<string/'class class2...'/,undefined=''>,
+          //   one<string=('class class2...'),null,undefined=''>,
+          //   two<string=('class class2...'),undefined=''>,
           //   setOne<boolean,undefined=false>,
           //   nextWait<number,undefined=0>,
-          //   callback<function(element,/one,two,''/),undefined=()=>{}>
+          //   callback<function(element,=(one,two,'')),undefined=()=>{}>
           // flash mode
           //   (element<>,null,two<>,true,wait<>,callback<>)
           const element=arg[0];
@@ -1257,8 +1257,8 @@
                   //   [
                   //     'target',
                   //     [
-                  //       open<string/'class class2...'/,undefined='_'>,
-                  //       close<string/'class class2...'/,undefined='_'>,
+                  //       open<string=('class class2...'),undefined='_'>,
+                  //       close<string=('class class2...'),undefined='_'>,
                   //       [
                   //         targetElement<element>...
                   //       ],
@@ -1269,11 +1269,11 @@
                   //           [
                   //             buttonElement<element>...
                   //           ],
-                  //           listenType<string/'item,item2...'/>,
+                  //           listenType<string=('item,item2...')>,
                   //           callback<function(event_data),undefined=()=>{}>,
                   //           option<object,undefined>,
-                  //           option2<any,undefined/'pointer_up...'/>,
-                  //           option3<any,undefined/'pointer_up...'/>
+                  //           option2<any,undefined/~'pointer_up...'~/>,
+                  //           option3<any,undefined/~'pointer_up...'~/>
                   //         ]...
                   //       ]
                   //     ]
@@ -1349,8 +1349,8 @@
                   //   [
                   //     'tab',
                   //     [
-                  //       open<string/'class class2...'/,undefined='_'>,
-                  //       close<string/'class class2...'/,undefined='_'>,
+                  //       open<string=('class class2...'),undefined='_'>,
+                  //       close<string=('class class2...'),undefined='_'>,
                   //       [
                   //         [
                   //           start<boolean>,
@@ -1360,11 +1360,11 @@
                   //           [
                   //             buttonElement<element>...
                   //           ],
-                  //           listenType<string/'item,item2...'/>,
+                  //           listenType<string=('item,item2...')>,
                   //           callback<function(event_data),undefined=()=>{}>,
                   //           option<object,undefined>,
-                  //           option2<any,undefined/'pointer_up...'/>,
-                  //           option3<any,undefined/'pointer_up...'/>
+                  //           option2<any,undefined/~'pointer_up...'~/>,
+                  //           option3<any,undefined/~'pointer_up...'~/>
                   //         ]...
                   //       ]
                   //     ]
@@ -1967,8 +1967,8 @@
           },
           /*🟢*/info(...arg){
             // machineTool.mediaQuery.video.info(URI,filter,iterator)
-            // URI<String,Array>
-            // filter<{key:RegExp},undefined>
+            // URI<string,array>
+            // filter<object=({key:RE}),undefined>
             // iterator<function,undefined>
             return machineTool.mediaQuery._URIMode(arg,(URI,...arg)=>{
               const filter=arg[0][1];
@@ -1990,11 +1990,11 @@
           },
           /*🔴*/all(...arg){
             // machineTool.mediaQuery.video.all(URI,filter,limit,start,end);
-            // URI<String,Array>
-            // filter<{key:RegExp},undefined>
-            // limit<Number>
-            // start<Number>
-            // end<Number,undefined=start>
+            // URI<string,array>
+            // filter<object=({key:RE}),undefined>
+            // limit<number>
+            // start<number>
+            // end<number,undefined=start>
             return machineTool.mediaQuery._URIMode(arg,(URI,...arg)=>{
               const filter=arg[0][1];
               const limit=arg[0][2];
@@ -2013,12 +2013,12 @@
           },
           /*🔴*/category(...arg){
             // machineTool.mediaQuery.video.category(URI,filter,category,limit,start,end);
-            // URI<String,Array>
-            // filter<{key:RegExp},undefined>
-            // category<Number>
-            // limit<Number>
-            // start<Number>
-            // end<Number,undefined=start>
+            // URI<string,array>
+            // filter<object=({key:RE}),undefined>
+            // category<number>
+            // limit<number>
+            // start<number>
+            // end<number,undefined=start>
             return machineTool.mediaQuery._URIMode(arg,(URI,...arg)=>{
               const filter=arg[0][1];
               const category=arg[0][2];
@@ -2039,12 +2039,12 @@
           },
           /*🔴*/search(...arg){
             // machineTool.mediaQuery.video.search(URI,filter,search,limit,start,end);
-            // URI<String,Array>
-            // filter<{key:RegExp},undefined>
-            // search<String>
-            // limit<Number>
-            // start<Number>
-            // end<Number,undefined=start>
+            // URI<string,array>
+            // filter<object=({key:RE}),undefined>
+            // search<string>
+            // limit<number>
+            // start<number>
+            // end<number,undefined=start>
             return machineTool.mediaQuery._URIMode(arg,(URI,...arg)=>{
               const filter=arg[0][1];
               const search=arg[0][2];
@@ -2065,10 +2065,10 @@
           },
           /*🟢*/single(...arg){
             // machineTool.mediaQuery.video.single(URI,filter,start,end,iterator);
-            // URI<String>
-            // filter<{key:RegExp},undefined>
-            // start<Number>
-            // end<Number,undefined=start>
+            // URI<string>
+            // filter<object=({key:RE}),undefined>
+            // start<number>
+            // end<number,undefined=start>
             // iterator<function,undefined>
             return machineTool.mediaQuery._URIMode(arg,async(URI,...arg)=>{
               const filter=arg[0][1];
