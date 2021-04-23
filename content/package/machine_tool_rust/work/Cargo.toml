@@ -12,6 +12,3 @@ edition = "2018"
 [dependencies]
 machine_tool_rust = { path = "../" }
 json = "0.12.4"
-
-# [profile.release]
-# lto = true

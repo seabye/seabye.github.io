@@ -11,6 +11,3 @@ edition = "2018"
 # #### start
 [dependencies]
 wasm = { path = "../" }
-
-# [profile.release]
-# lto = true

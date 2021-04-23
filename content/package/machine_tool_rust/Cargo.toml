@@ -13,6 +13,3 @@ edition = "2018"
 members = ["work"]
 
 [dependencies]
-
-# [profile.release]
-# lto = true
