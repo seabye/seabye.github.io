@@ -17,9 +17,8 @@ pg_test = []
 [dependencies]
 pgx = "0.1.20"
 pgx-macros = "0.1.20"
-# +
-blob-uuid = "0.4.0"
-json = "0.12.4"
+blob-uuid = "0.4.0" # +
+json = "0.12.4" # +
 
 [dev-dependencies]
 pgx-tests = "0.1.20"
@@ -29,7 +28,8 @@ panic = "unwind"
 
 [profile.release]
 panic = "unwind"
-opt-level = 3
+# opt-level = 3 # -
+opt-level = "z" # +
 lto = "fat"
 codegen-units = 1
 

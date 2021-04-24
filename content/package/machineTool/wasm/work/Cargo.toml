@@ -11,3 +11,8 @@ edition = "2018"
 # #### start
 [dependencies]
 wasm = { path = "../" }
+
+[profile.release]
+lto = true
+opt-level = "z"
+codegen-units = 1
