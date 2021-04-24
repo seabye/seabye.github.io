@@ -35,7 +35,7 @@ use pgx::*;
 pg_module_magic!();
 // build
 #[pg_extern]
-fn machine_tool_pg_rust_blob_uuid(_data:&str)->String{
+fn machine_tool_pg_rust_blob_uuid(data:&str)->String{
   loop{
     let blob:std::string::String=blob_uuid::random_blob();
     if !blob.contains("_")&!blob.contains("-"){
