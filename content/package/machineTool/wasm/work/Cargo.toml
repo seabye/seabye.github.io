@@ -11,6 +11,7 @@ edition = "2018"
 # #### start
 [dependencies]
 wasm = { path = "../" }
+# json = "0.12.4"
 
 [profile.release]
 lto = true
