@@ -37,7 +37,7 @@ pg_module_magic!();
 #[pg_extern]
 fn machine_tool_pg_rust_blob_uuid(data:&str)->String{
   loop{
-    let blob:std::string::String=blob_uuid::random_blob();
+    let blob=blob_uuid::random_blob();
     if !blob.contains("_")&!blob.contains("-"){
       break blob;
     }
@@ -49,8 +49,8 @@ fn machine_tool_pg_rust_json_file(data:&str)->String{
 }
 #[pg_extern]
 fn machine_tool_pg_rust_session_account(data:&str)->String{
-  let data:json::JsonValue=json::parse(data).unwrap();
-  let session_account:std::string::String=Spi::get_one::<&str>(format!(
+  let data=json::parse(data).unwrap();
+  let session_account=Spi::get_one::<&str>(format!(
     r#"select coalesce((select {} from {}.{} where {}='{}' and {}@>'{{"delete":null}}'),'no');"#,
     data["session_account_column"],
     data["session_schema"],
@@ -74,6 +74,6 @@ fn machine_tool_pg_rust_session_account(data:&str)->String{
 }
 #[pg_extern]
 fn machine_tool_pg_rust_account_permission(data:&str)->String{
-  // let data:json::JsonValue=json::parse(data).unwrap();
+  // let data=json::parse(data).unwrap();
   data.to_string()
 }
