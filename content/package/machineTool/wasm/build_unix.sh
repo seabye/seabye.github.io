@@ -6,4 +6,4 @@
 
 cd $(dirname $0)
 wasm-pack build --release --target web
-rm ./pkg/.gitignore
+rm pkg/.gitignore

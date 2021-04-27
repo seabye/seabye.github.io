@@ -4,4 +4,6 @@
 
 cd %~dp0
 cargo build --release
-..\target\debug\work.exe
+: ..\target\release\work.exe
+cp -r ..\target\release\work.exe result
+result\work.exe
