@@ -18,38 +18,46 @@
     for(const value of window.document.documentElement.children){
       if(value.localName==='body'){
         window.document.body.insertAdjacentHTML('beforeend',`
-          <div style="perspective: 100vw;">
-            <div style="font-size: calc(100vmax/25); transform: rotateX(-15deg); text-align: center; perspective: 61.8vw;">
+          <div style="background-color: #1F2023BF; perspective: 100vw;">
+            <div style="font-size: calc(100vmax/25); background-color: #1F2023BF; transform: rotateX(-15deg); text-align: center; perspective: 61.8vw;">
               <div style="transform: rotateY(-60deg);">
                 <a href="//seabye.com">seabye.com</a>
-                <span style="font-size: 38.2%;">🔴 10%</span>
-                <div style="font-size: 61.8%; color: var(--ic_ve_color_black2);">
+                <span style="font-size: 38.2%; color: #E2378A;">꩜ 10%</span>
+                <div style="font-size: 61.8%;">
                   <div>
                     <span>GUIInitial</span>
                     <a href="//seabye.com/content/package/GUIInitial/GUIInitial.js">.js</a>
                     <a href="//seabye.com/content/package/GUIInitial/GUIInitial.css">.css</a>
-                    <span style="font-size: 38.2%;">🟢 90%</span>
+                    <span style="font-size: 38.2%; color: #64A963;">꩜ 90%</span>
                   </div>
                   <div>
                     <span>machineTool</span>
                     <a href="//seabye.com/content/package/machineTool/machineTool.js">.js</a>
                     <a href="//seabye.com/content/package/machineTool/machineTool.css">.css</a>
-                    <span style="font-size: 38.2%;">🟡 50%</span>
+                    <span style="font-size: 38.2%; color: #DEA615;">꩜ 50%</span>
+                  </div>
+                  <div>
+                    <span>machine_tool_rust</span>
+                    <span style="font-size: 38.2%; color: #E2378A;">꩜ 10%</span>
+                  </div>
+                  <div>
+                    <span>machine_tool_pg_rust</span>
+                    <span style="font-size: 38.2%; color: #E2378A;">꩜ 10%</span>
                   </div>
                 </div>
               </div>
-              <div style="font-size: 61.8%; color: var(--ic_ve_color_black4); transform: rotateY(-45deg);">
+              <div style="font-size: 61.8%; transform: rotateY(-45deg);">
                 <a href="//github.com/seabye">github.com/seabye</a>
               </div>
-              <div style="color: var(--ic_ve_color_black6); transform: rotateY(-30deg);">
+              <div style="transform: rotateY(-30deg);">
                 <a href="//w3daze.com">w3daze.com</a>
-                <span style="font-size: 38.2%;">🔴 10%</span>
+                <span style="font-size: 38.2%; color: #E2378A;">꩜ 10%</span>
               </div>
-              <div style="color: var(--ic_ve_color_black7); transform: rotateY(-15deg)rotateY(180deg);">
+              <div style="transform: rotateY(-15deg)rotateY(180deg);">
                 <a>planC</a>
-                <span style="font-size: 38.2%;">🟡 50%</span>
+                <span style="font-size: 38.2%; color: #DEA615;">꩜ 50%</span>
               </div>
-              <div style="font-size: 138.2%; color: rgba(255,0,0,0.1875);">Hello, World!</div>
+              <div style="font-size: 138.2%; color: #707C74;">Hello, World!</div>
               <div style="transform: rotateY(30deg);">
                 <a href="//luojia.me">luojia.me</a>
               </div>

@@ -7,9 +7,13 @@
   /* uncategorized */
   html {
     font-family: "New York_", var(--ic_ve_font_family_default);
+    color: #BCB38B;
+  }
+  a {
+    color: #53B1DE;
   }
   a.ic_active_0 {
-    border-bottom: 2px solid var(--ic_ve_color_red);
+    border-bottom: 2px solid #E88448;
   }
 /* #debug */
 /* #after */
