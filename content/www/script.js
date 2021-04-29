@@ -26,14 +26,15 @@
                 <div style="font-size: 61.8%;">
                   <div>
                     <span>GUIInitial</span>
-                    <a href="//seabye.com/content/package/GUIInitial/GUIInitial.js">.js</a>
-                    <a href="//seabye.com/content/package/GUIInitial/GUIInitial.css">.css</a>
+                    <a href="/content/package/GUIInitial/GUIInitial.js">.js</a>
+                    <a href="/content/package/GUIInitial/GUIInitial.css">.css</a>
                     <span style="font-size: 38.2%; color: #64A963;">꩜ 90%</span>
                   </div>
                   <div>
                     <span>machineTool</span>
-                    <a href="//seabye.com/content/package/machineTool/machineTool.js">.js</a>
-                    <a href="//seabye.com/content/package/machineTool/machineTool.css">.css</a>
+                    <a href="/content/package/machineTool/machineTool.js">.js</a>
+                    <a href="/content/package/machineTool/wasm/src/lib.rs">.rs</a>
+                    <a href="/content/package/machineTool/machineTool.css">.css</a>
                     <span style="font-size: 38.2%; color: #DEA615;">꩜ 50%</span>
                   </div>
                   <div>
@@ -54,7 +55,7 @@
                 <span style="font-size: 38.2%; color: #E2378A;">꩜ 10%</span>
               </div>
               <div style="transform: rotateY(-15deg)rotateY(180deg);">
-                <a>planC</a>
+                <span>planC</span>
                 <span style="font-size: 38.2%; color: #DEA615;">꩜ 50%</span>
               </div>
               <div style="font-size: 138.2%; color: #707C74;">Hello, World!</div>
@@ -139,17 +140,29 @@
       BLOb22ToUUID36(){
         window.console.log('++++ 8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3 jvZe6aA5S_Kks2h_zB88ww, BLOb22ToUUID36:',machineTool.BLOb22ToUUID36('jvZe6aA5S_Kks2h_zB88ww'));
       },
-      stringToBase64URISafeNoPad(){
-        window.console.log('++++ 8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3 jvZe6aA5S_Kks2h_zB88ww, stringToBase64URISafeNoPad:',machineTool.stringToBase64URISafeNoPad('8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3'));
+      webAssembly(){
+        window.console.log('++++ machineTool webAssembly module, test():',machineTool.test());
+        window.console.log('++++ machineTool webAssembly module, test._isWebAssembly_:',machineTool.test._isWebAssembly_);
       },
-      base64URISafeNoPadToString(){
-        window.console.log('++++ 8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3 jvZe6aA5S_Kks2h_zB88ww, base64URISafeNoPadToString:',machineTool.base64URISafeNoPadToString('jvZe6aA5S_Kks2h_zB88ww'));
-      },
-      wasm(){
-        machineTool.wasm('/content/package/machineTool/wasm/pkg/wasm.js',(module)=>{
-          window.console.log('++++ wasm, wasm.js, test:',module.test(1,1));
-          // window.console.log('++++ 8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3 jvZe6aA5S_Kks2h_zB88ww, wasm, wasm.uuid_to_blob:',module.uuid_to_blob('8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3'));
+      file(){
+        const inputElement=machineTool.elementCreate('input',{type:'file',multiple:'',accept:'image/*'},window.document.body);
+        inputElement.addEventListener('change',function(){
+          const files=this.files;
+          for(let key=0,length=files.length;key<length;key++){
+            const file=files[key];
+            let thumbnail=window.document.createElement('img');
+            thumbnail.file=file;
+            window.document.body.insertAdjacentElement('beforeend',thumbnail);
+            let reader=new window.FileReader();
+            reader.onload=((thumbnail)=>{
+              return(event)=>{
+                thumbnail.src=event.target.result;
+              };
+            })(thumbnail);
+            reader.readAsDataURL(file);
+          }
         });
+        machineTool.file(inputElement);
       }
     },'_');
   });

@@ -1,0 +1,15 @@
+{
+  "name": "machine_tool_wasm_rust",
+  "collaborators": [
+    "seabye <seabye@live.com>"
+  ],
+  "version": "0.1.0",
+  "files": [
+    "machine_tool_wasm_rust_bg.wasm",
+    "machine_tool_wasm_rust.js",
+    "machine_tool_wasm_rust.d.ts"
+  ],
+  "module": "machine_tool_wasm_rust.js",
+  "types": "machine_tool_wasm_rust.d.ts",
+  "sideEffects": false
+}

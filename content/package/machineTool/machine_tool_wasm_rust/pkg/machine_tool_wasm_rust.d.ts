@@ -1,17 +1,17 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
-* @param {number} a
-* @param {number} b
-* @returns {number}
+* @returns {string}
 */
-export function test(a: number, b: number): number;
+export function test(): string;
 
 export type InitInput = RequestInfo | URL | Response | BufferSource | WebAssembly.Module;
 
 export interface InitOutput {
   readonly memory: WebAssembly.Memory;
-  readonly test: (a: number, b: number) => number;
+  readonly test: (a: number) => void;
+  readonly __wbindgen_add_to_stack_pointer: (a: number) => number;
+  readonly __wbindgen_free: (a: number, b: number) => void;
 }
 
 /**

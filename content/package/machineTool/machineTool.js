@@ -386,8 +386,6 @@
           return`${result.substr(0,8)}-${result.substr(8,4)}-${result.substr(12,4)}-${result.substr(16,4)}-${result.substr(20)}`;
         }
       },
-      /*🔴*/stringToBase64URISafeNoPad(){},
-      /*🔴*/base64URISafeNoPadToString(){},
       /*🟢*/import(src,callback){
         return import(src).then((module)=>{
           if(callback){
@@ -398,7 +396,7 @@
           window.console.log('==== import, catch:',error);
         });
       },
-      /*🟢*/wasm(src,callback){
+      /*🟢*/webAssembly(src,callback){
         return this.import(src,(module)=>{
           return module.default().then(()=>{
             if(callback){
@@ -407,12 +405,18 @@
             return module;
           });
         }).catch((error)=>{
-          window.console.log('==== wasm, catch:',error);
+          window.console.log('==== webAssembly, catch:',error);
         });
       },
-      /*🔴*/webAssembly(){},
     // local data
-      /*🔴*/file(){},
+      /*🔴*//**
+       * @param {*} inputElement
+       * @param {*} resultType
+       * @return {*}
+       */
+      file(inputElement,resultType){
+        window.console.log('==== file');
+      },
       /*🔴*/fileSystem(){},
       /*🔴*/localStorage(){},
       /*🔴*/sessionStorage(){},
@@ -498,6 +502,7 @@
           }
         });
       },
+      /*🔴*/upload(){},
     // application programming interface
       /*🔴*/listenPort(){},
       /*🔴*/portReceive(URI,method,data,callback,data2){
@@ -523,6 +528,7 @@
       /*🔴*/siteMapHTMLGenerator(){},
     // graphics
       /*🔴*/plugin_openCV_removeWatermark(){},
+    // graphics engine
     // command line interface
       /*🔴*/cli(){},
     // graphical user interface
@@ -2117,7 +2123,15 @@
         image:{},
         text:{}
       }
+    // other
   };
+  // merge webAssembly module
+  await machineTool.webAssembly('./machine_tool_wasm_rust/pkg/machine_tool_wasm_rust.js',(module)=>{
+    for(const key in module){
+      module[key]._isWebAssembly_=true;
+    }
+    window.Object.assign(machineTool,module);
+  });
 // #build
 // #debug
 // #after

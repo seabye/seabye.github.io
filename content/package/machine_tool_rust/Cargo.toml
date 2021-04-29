@@ -13,4 +13,5 @@ edition = "2018"
 members = ["work"]
 
 [dependencies]
-# json = "0.12.4"
+# regex = "1.4.6"
+json = "0.12.4"
