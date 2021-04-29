@@ -154,20 +154,22 @@
           const files=this.files;
           for(let key=0,length=files.length;key<length;key++){
             const file=files[key];
-            let thumbnail=window.document.createElement('img');
-            thumbnail.file=file;
-            window.document.body.insertAdjacentElement('beforeend',thumbnail);
+            let element=window.document.createElement('img');
+            // element.file=file;
+            element.src=window.URL.createObjectURL(file);
+            window.document.body.insertAdjacentElement('beforeend',element);
             let reader=new window.FileReader();
-            reader.onload=((thumbnail)=>{
-              return(event)=>{
-                window.console.log(event.target.result);
-                thumbnail.src=event.target.result;
-              };
-            })(thumbnail);
+            reader.onload=((element)=>{
+              // return(event)=>{
+              //   // window.console.log(event.target.result);
+              //   element.src=event.target.result;
+              // };
+              window.URL.revokeObjectURL(element.src);
+            })(element);
             // reader.readAsDataURL(file);
-            reader.readAsArrayBuffer(file);
-            // reader.readAsText(file);
-            // reader.readAsBinaryString(file);
+            // // reader.readAsArrayBuffer(file);
+            // // reader.readAsText(file);
+            // // reader.readAsBinaryString(file);
           }
         });
         machineTool.file(inputElement);
