@@ -1,6 +1,6 @@
 'use strict';
 // <<<< <<<< <<<< <<<<
-// GUI Initial
+// GUI Initial ~ JavaScript
 // for Browser
 // GUIInitial.js
 // ==== ==== ==== ====

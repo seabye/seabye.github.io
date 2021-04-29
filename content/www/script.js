@@ -141,8 +141,12 @@
         window.console.log('++++ 8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3 jvZe6aA5S_Kks2h_zB88ww, BLOb22ToUUID36:',machineTool.BLOb22ToUUID36('jvZe6aA5S_Kks2h_zB88ww'));
       },
       webAssembly(){
-        window.console.log('++++ machineTool webAssembly module, test():',machineTool.test());
-        window.console.log('++++ machineTool webAssembly module, test._isWebAssembly_:',machineTool.test._isWebAssembly_);
+        window.console.log('++++ machineTool webAssembly rust module, test():',machineTool.test());
+        window.console.log('++++ machineTool webAssembly rust module, test._isWebAssembly_:',machineTool.test._isWebAssembly_);
+        window.console.log('++++ machineTool webAssembly rust module, test._webAssemblyType_:',machineTool.test._webAssemblyType_);
+        // window.console.log('++++ machineTool webAssembly c module, test():',machineTool.test());
+        // window.console.log('++++ machineTool webAssembly c module, test._isWebAssembly_:',machineTool.test._isWebAssembly_);
+        // window.console.log('++++ machineTool webAssembly c module, test._webAssemblyType_:',machineTool.test._webAssemblyType_);
       },
       file(){
         const inputElement=machineTool.elementCreate('input',{type:'file',multiple:'',accept:'image/*'},window.document.body);
@@ -156,10 +160,14 @@
             let reader=new window.FileReader();
             reader.onload=((thumbnail)=>{
               return(event)=>{
+                window.console.log(event.target.result);
                 thumbnail.src=event.target.result;
               };
             })(thumbnail);
-            reader.readAsDataURL(file);
+            // reader.readAsDataURL(file);
+            reader.readAsArrayBuffer(file);
+            // reader.readAsText(file);
+            // reader.readAsBinaryString(file);
           }
         });
         machineTool.file(inputElement);

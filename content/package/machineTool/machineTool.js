@@ -1,6 +1,6 @@
 'use strict';
 // <<<< <<<< <<<< <<<<
-// Machine Tool
+// Machine Tool ~ JavaScript
 // for Browser and Deno and NodeJS
 // machineTool.js
 // ==== ==== ==== ====
@@ -410,11 +410,11 @@
       },
     // local data
       /*🔴*//**
-       * @param {*} inputElement
-       * @param {*} resultType
-       * @return {*}
+       * @param {object} inputElement element
+       * @param {string} resultType 'objectURL','dataURL','arrayBuffer','text','binaryString',undefined='objectURL'
+       * @return {*} :resultType
        */
-      file(inputElement,resultType){
+      file(inputElement,resultType='objectURL'){
         window.console.log('==== file');
       },
       /*🔴*/fileSystem(){},
@@ -2125,13 +2125,22 @@
       }
     // other
   };
-  // merge webAssembly module
-  await machineTool.webAssembly('./machine_tool_wasm_rust/pkg/machine_tool_wasm_rust.js',(module)=>{
+  // merge webAssembly rust module
+  await machineTool.webAssembly('./machine_tool_wasm_rust/result/machine_tool_wasm_rust.js',(module)=>{
     for(const key in module){
       module[key]._isWebAssembly_=true;
+      module[key]._webAssemblyType_='rust';
     }
     window.Object.assign(machineTool,module);
   });
+  // // merge webAssembly c module
+  // await machineTool.webAssembly('./machine_tool_wasm_c/result/machine_tool_wasm_c.js',(module)=>{
+  //   for(const key in module){
+  //     module[key]._isWebAssembly_=true;
+  //     module[key]._webAssemblyType_='c';
+  //   }
+  //   window.Object.assign(machineTool,module);
+  // });
 // #build
 // #debug
 // #after

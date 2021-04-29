@@ -1,7 +1,12 @@
+# system
 .DS_Store
+# IDE
 .idea
-target
+# language
 Cargo.lock
-pkg/.gitignore
+target
+pkg
 package-lock.json
 node_modules
+# my
+_package
