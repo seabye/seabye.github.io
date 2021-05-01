@@ -416,7 +416,7 @@
        * @return {*} :resultType
        */
       file(listenElement,progressCallback,resultType='objectURL'){
-        console.log('==== file');
+        console.log('==== file, ???');
       },
       /*🔴*/fileSystem(){},
       /*🔴*/localStorage(){},
@@ -1842,6 +1842,8 @@
                   }else{
                     if('Hls'in window&&Hls.isSupported()){
                       return hlsGo();
+                    }else{
+
                     }
                   }
                 }
@@ -1850,6 +1852,8 @@
                 {
                   if('Hls'in window&&Hls.isSupported()){
                     return hlsGo();
+                  }else{
+
                   }
                 }
                 break;

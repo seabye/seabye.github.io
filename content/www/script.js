@@ -147,47 +147,54 @@
         // console.log('++++ machineTool webAssembly c module, test._isWebAssembly_:',machineTool.test._isWebAssembly_);
         // console.log('++++ machineTool webAssembly c module, test._webAssemblyType_:',machineTool.test._webAssemblyType_);
       },
-      file(){
-        const inputElement=machineTool.elementCreate('input',{type:'file',multiple:'',accept:'image/*'},document.body);
-        inputElement.addEventListener('change',function(){
-          const files=this.files;
-          for(let key=0,length=files.length;key<length;key++){
-            const file=files[key];
-            let element=document.createElement('img');
-            element.file=file;
-            document.body.insertAdjacentElement('beforeend',element);
-            let reader=new FileReader();
-            reader.onload=((element)=>{
-              return(event)=>{
-                console.log(event.target.result);
-                element.src=event.target.result;
-              };
-            })(element);
-            // reader.readAsDataURL(file);
-            // reader.readAsArrayBuffer(file);
-            // reader.readAsText(file);
-            reader.readAsBinaryString(file);
-          }
+      file_(){
+        // machineTool.file();
+        machineTool.elementCreate('input',{type:'file',multiple:'',accept:'image/*'},document.body,undefined,undefined,(input)=>{
+          input.addEventListener('change',function(){
+            for(let key=0,length=this.files.length;key<length;key++){
+              // BLObFile
+              const BLObFile=this.files[key];
+              console.log(BLObFile);
+              // objectURL
+              const objectURL=URL.createObjectURL(BLObFile);
+              console.log(objectURL);
+              // arrayBuffer
+              const arrayBuffer=new FileReader();
+              arrayBuffer.readAsArrayBuffer(BLObFile);
+              arrayBuffer.addEventListener('load',function(){
+                console.log(this.result);
+              });
+              // dataURL ~ base64
+              const dataURL=new FileReader();
+              dataURL.readAsDataURL(BLObFile);
+              dataURL.addEventListener('load',function(){
+                console.log(this.result);
+              });
+                // objectURL
+                machineTool.elementCreate('img',{src:objectURL},document.body,undefined,undefined,(element)=>{
+                  element.addEventListener('load',()=>{
+                    URL.revokeObjectURL(objectURL);
+                  });
+                });
+                // arrayBuffer ~ objectURL
+                arrayBuffer.addEventListener('load',function(){
+                  const objectURL=URL.createObjectURL(new Blob([this.result],{type:BLObFile.type}));
+                  machineTool.elementCreate('img',{src:objectURL},document.body,undefined,undefined,(element)=>{
+                    element.addEventListener('load',()=>{
+                      URL.revokeObjectURL(objectURL);
+                    });
+                  });
+                });
+                // dataURL
+                dataURL.addEventListener('load',function(){
+                  machineTool.elementCreate('img',{src:this.result},document.body);
+                });
+            }
+          });
         });
-        machineTool.file(inputElement);
       },
-      file2(){
-        const inputElement=machineTool.elementCreate('input',{type:'file',multiple:'',accept:'image/*'},document.body);
-        inputElement.addEventListener('change',function(){
-          const files=this.files;
-          for(let key=0,length=files.length;key<length;key++){
-            const file=files[key];
-            let element=document.createElement('img');
-            element.src=URL.createObjectURL(file);
-            document.body.insertAdjacentElement('beforeend',element);
-            let reader=new FileReader();
-            reader.onload=(()=>{
-              console.log(this.src);
-              URL.revokeObjectURL(this.src);
-            })(element);
-          }
-        });
-        machineTool.file(inputElement);
+      file(){
+        machineTool.file();
       }
     },'_');
   });
