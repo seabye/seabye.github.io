@@ -1805,7 +1805,7 @@
         maxBufferSize:4*1000*1000
       }){
         if(!('Hls'in window)){
-          this.elementCreate('script',{async:'',src:'https://cdn.jsdelivr.net/npm/hls.js@latest'},document.head);
+          this.elementCreate('script',{async:'',src:`${import.meta.url.replace('main/machineTool','package/hls/hls')}`},document.head);
         }
         this.loop(()=>{
           if('Hls'in window){
