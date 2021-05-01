@@ -1804,69 +1804,74 @@
         maxBufferLength:4,
         maxBufferSize:4*1000*1000
       }){
-        video.pause();
-        if(!this.plugin_hls_load.play){
-          this.plugin_hls_load.play=()=>{
-            video._hls_.startLoad();
-          };
+        if(!('Hls'in window)){
+          this.elementCreate('script',{async:'',src:'../package/hls/hls.js'},document.head);
         }
-        if(!this.plugin_hls_load.pause){
-          this.plugin_hls_load.pause=()=>{
-            video._hls_.stopLoad();
-          };
-        }
-        video.setAttribute('src',src);
-        video.setAttribute('poster',poster);
-        if(src.match(/\.m3u8/i)){
-          const hlsGo=()=>{
-            if(video._hls_){
-              video._hls_.destroy();
-              delete video._hls_;
-              video.removeEventListener('play',this.plugin_hls_load.play);
-              video.removeEventListener('pause',this.plugin_hls_load.pause);
+        this.loop(()=>{
+          if('Hls'in window){
+            video.pause();
+            if(!this.plugin_hls_load.play){
+              this.plugin_hls_load.play=()=>{
+                video._hls_.startLoad();
+              };
             }
-            const hls=new Hls(config);
-            hls.loadSource(src);
-            hls.attachMedia(video);
-            video.addEventListener('play',this.plugin_hls_load.play);
-            video.addEventListener('pause',this.plugin_hls_load.pause);
-            video._hls_=hls;
-            return hls;
-          };
-          return this.loop(()=>{
-            switch(mode){
-              case'auto':
-                {
-                  if(video.canPlayType('application/vnd.apple.mpegurl')){
-                    return true;
-                  }else{
-                    if('Hls'in window&&Hls.isSupported()){
-                      return hlsGo();
-                    }else{
-                      this.elementCreate('script',{async:'',src:'../package/hls/hls.js'},document.head);
+            if(!this.plugin_hls_load.pause){
+              this.plugin_hls_load.pause=()=>{
+                video._hls_.stopLoad();
+              };
+            }
+            video.setAttribute('src',src);
+            video.setAttribute('poster',poster);
+            if(src.match(/\.m3u8/i)){
+              const hlsGo=()=>{
+                if(video._hls_){
+                  video._hls_.destroy();
+                  delete video._hls_;
+                  video.removeEventListener('play',this.plugin_hls_load.play);
+                  video.removeEventListener('pause',this.plugin_hls_load.pause);
+                }
+                const hls=new Hls(config);
+                hls.loadSource(src);
+                hls.attachMedia(video);
+                video.addEventListener('play',this.plugin_hls_load.play);
+                video.addEventListener('pause',this.plugin_hls_load.pause);
+                video._hls_=hls;
+                return hls;
+              };
+              return this.loop(()=>{
+                switch(mode){
+                  case'auto':
+                    {
+                      if(video.canPlayType('application/vnd.apple.mpegurl')){
+                        return true;
+                      }else{
+                        if(Hls.isSupported()){
+                          return hlsGo();
+                        }
+                      }
                     }
-                  }
+                    break;
+                  case'hls':
+                    {
+                      if(Hls.isSupported()){
+                        return hlsGo();
+                      }
+                    }
+                    break;
+                  default:
+                    break;
                 }
-                break;
-              case'hls':
-                {
-                  if('Hls'in window&&Hls.isSupported()){
-                    return hlsGo();
-                  }else{
-                    this.elementCreate('script',{async:'',src:'../package/hls/hls.js'},document.head);
-                  }
-                }
-                break;
-              default:
-                break;
+                return false;
+              });
             }
-            return false;
-          });
-        }
+            return true;
+          }
+          return false;
+        });
       },
       /*🟢*/plugin_hls_observeLoad(){
         if(!document.createElement('video').canPlayType('application/vnd.apple.mpegurl')){
-          if(!'Hls'in window){
+          if(!('Hls'in window)){
             const script=document.createElement('script');
             script.setAttribute('sync','');
             script.setAttribute('src','https://cdn.jsdelivr.net/npm/hls.js@latest');
@@ -1878,7 +1883,7 @@
               delete video._hls_;
             }
             if(video.hasAttribute('src')&&video.getAttribute('src').match(/\.m3u8/i)){
-              if('Hls'in window&&Hls.isSupported()){
+              if(Hls.isSupported()){
                 const hls=new Hls({
                   autoStartLoad:video.getAttribute('preload')==='auto'?true:false,
                   maxBufferLength:4,
