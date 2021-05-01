@@ -1805,7 +1805,7 @@
         maxBufferSize:4*1000*1000
       }){
         if(!('Hls'in window)){
-          this.elementCreate('script',{async:'',src:'../package/hls/hls.js'},document.head);
+          this.elementCreate('script',{async:'',src:'https://cdn.jsdelivr.net/npm/hls.js@latest'},document.head);
         }
         this.loop(()=>{
           if('Hls'in window){
@@ -1845,7 +1845,7 @@
                       if(video.canPlayType('application/vnd.apple.mpegurl')){
                         return true;
                       }else{
-                        if(Hls.isSupported()){
+                        if('Hls'in window&Hls.isSupported()){
                           return hlsGo();
                         }
                       }
@@ -1853,7 +1853,7 @@
                     break;
                   case'hls':
                     {
-                      if(Hls.isSupported()){
+                      if('Hls'in window&Hls.isSupported()){
                         return hlsGo();
                       }
                     }
@@ -1873,7 +1873,7 @@
         if(!document.createElement('video').canPlayType('application/vnd.apple.mpegurl')){
           if(!('Hls'in window)){
             const script=document.createElement('script');
-            script.setAttribute('sync','');
+            script.setAttribute('async','');
             script.setAttribute('src','https://cdn.jsdelivr.net/npm/hls.js@latest');
             document.head.insertAdjacentElement('beforeend',script);
           }
@@ -1883,7 +1883,7 @@
               delete video._hls_;
             }
             if(video.hasAttribute('src')&&video.getAttribute('src').match(/\.m3u8/i)){
-              if(Hls.isSupported()){
+              if('Hls'in window&Hls.isSupported()){
                 const hls=new Hls({
                   autoStartLoad:video.getAttribute('preload')==='auto'?true:false,
                   maxBufferLength:4,
