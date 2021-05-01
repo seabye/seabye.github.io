@@ -504,9 +504,9 @@
           }
         });
       },
-      /*🔴💠*/HTTP(){},
-      /*🔴*/byteDown(){},
-      /*🔴*/byteUp(){},
+      /*🔴*/HTTP(){},
+      /*🔴*/byteUpload(){},
+      /*🔴*/byteDownload(){},
     // application programming interface
       /*🔴*/listenPort(){},
       /*🔴*/portReceive(URI,method,data,callback,data2){
@@ -537,7 +537,7 @@
       /*🔴*/cli(){},
     // graphical user interface
       /*🔴*/cliEmulator(){},
-      /*🟡💠*/listenDOM(action,target,type,callback,option={},option2='',option3=''){
+      /*🟡*/listenDOM(action,target,type,callback,option={},option2='',option3=''){
         switch(type){
           case'pointer_down':
             {
@@ -1436,7 +1436,7 @@
           }
         }
       },
-      /*🔴💠*/DOMState(){},
+      /*🔴*/DOMState(){},
       /*🟢*/elementBlock(element,group='group',insertPosition='beforeend',wait=350){
         if(!this.elementBlock.template){
           this.elementBlock.template=class template{
@@ -1631,7 +1631,7 @@
         }
         return new this.elementBlock.template(element,group,insertPosition,wait);
       },
-      /*🔴💠*/DOM(){},
+      /*🔴*/DOM(){},
       /*🔴*/fixedInput(){},
       /*🟢*/insertStyle(style,wait){
         const element=this.elementCreate('style',undefined,document.head,undefined,style);
@@ -1911,11 +1911,16 @@
         }
       },
     // user interface
-      /*🔴💠*/UI:{
-        /*🔴*/grid(){}
-      },
-    // w3daze
+      /*🔴*/unit(){},
+      /*🔴*/grid(){},
+      /*🔴*/dictionaryColorVSC(){},
+      /*🔴*/pageEditor(){},
+      /*🔴*/uploadListEditor(){},
+      /*🔴*/downloadListEditor(){},
+    // package
       /*🔴*/applicationPackage(){},
+      /*🔴*/bookPackage(){},
+      /*🔴*/bookletPackage(){},
     // unknown
       /*🟢*/mediaQuery:{
         async _URIMode(arg,callback){
@@ -2134,7 +2139,7 @@
     // other
   };
   // merge webAssembly rust
-  await machineTool.webAssembly('./machine_tool_wasm_rust/result/machine_tool_wasm_rust.js',(module)=>{
+  await machineTool.webAssembly('../module/machine_tool_wasm_rust/result/machine_tool_wasm_rust.js',(module)=>{
     for(const key in module){
       module[key]._isWebAssembly_=true;
       module[key]._webAssemblyType_='rust';
@@ -2142,7 +2147,7 @@
     Object.assign(machineTool,module);
   });
   // // merge webAssembly c
-  // await machineTool.webAssembly('./machine_tool_wasm_c/result/machine_tool_wasm_c.js',(module)=>{
+  // await machineTool.webAssembly('../module/machine_tool_wasm_c/result/machine_tool_wasm_c.js',(module)=>{
   //   for(const key in module){
   //     module[key]._isWebAssembly_=true;
   //     module[key]._webAssemblyType_='c';
@@ -2150,7 +2155,7 @@
   //   Object.assign(machineTool,module);
   // });
   // merge underscore
-  await machineTool.import('./package/underscore/underscore-esm-min.js',(module)=>{
+  await machineTool.import('../package/underscore/underscore-esm-min.js',(module)=>{
     machineTool._=module;
   });
 // #build

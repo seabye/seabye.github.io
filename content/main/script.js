@@ -4,7 +4,7 @@
   console.log('#### start: script.js');
 // #import
   // machineTool
-  import{machineTool}from'/content/package/machineTool/machineTool.js';
+  import{machineTool}from'/content/module/machineTool/content/main/machineTool.js';
   // Google Analytics
   machineTool.elementCreate('script',{async:'',src:'https://www.googletagmanager.com/gtag/js?id=G-SBCF7D104D'},document.head);
   machineTool.elementCreate('script',undefined,document.head,undefined,`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-SBCF7D104D');`);
@@ -12,7 +12,7 @@
 // #block
 // #build
   // font
-  document.fonts.add(new FontFace('New York_','url(/content/resource/font/apple/NewYork.woff2)'));
+  document.fonts.add(new FontFace('New York_','url(/content/module/machineTool/content/asset/font/apple/NewYork.woff2)'));
   // element
   machineTool.loop(()=>{
     for(const value of document.documentElement.children){
@@ -26,14 +26,14 @@
                 <div style="font-size: 61.8%;">
                   <div>
                     <span>GUIInitial</span>
-                    <a href="/content/package/GUIInitial/GUIInitial.js">.js</a>
-                    <a href="/content/package/GUIInitial/GUIInitial.css">.css</a>
+                    <a href="/content/module/GUIInitial/GUIInitial.js">.js</a>
+                    <a href="/content/module/GUIInitial/GUIInitial.css">.css</a>
                     <span style="font-size: 38.2%; color: #64A963;">꩜ 90%</span>
                   </div>
                   <div>
                     <span>machineTool</span>
-                    <a href="/content/package/machineTool/machineTool.js">.js</a>
-                    <a href="/content/package/machineTool/machineTool.css">.css</a>
+                    <a href="/content/module/machineTool/content/main/machineTool.js">.js</a>
+                    <a href="/content/module/machineTool/content/main/machineTool.css">.css</a>
                     <span style="font-size: 38.2%; color: #DEA615;">꩜ 50%</span>
                   </div>
                   <div>
