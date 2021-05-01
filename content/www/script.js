@@ -148,7 +148,6 @@
         // console.log('++++ machineTool webAssembly c module, test._webAssemblyType_:',machineTool.test._webAssemblyType_);
       },
       file_(){
-        // machineTool.file();
         machineTool.elementCreate('input',{type:'file',multiple:'',accept:'image/*'},document.body,undefined,undefined,(input)=>{
           input.addEventListener('change',function(){
             for(let key=0,length=this.files.length;key<length;key++){
