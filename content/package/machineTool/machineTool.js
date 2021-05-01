@@ -1,7 +1,7 @@
 'use strict';
 // <<<< <<<< <<<< <<<<
 // Machine Tool ~ JavaScript
-// for Browser and Deno and NodeJS
+// for JavaScript
 // machineTool.js
 // ==== ==== ==== ====
 // script.js

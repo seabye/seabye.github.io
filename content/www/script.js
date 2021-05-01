@@ -33,7 +33,6 @@
                   <div>
                     <span>machineTool</span>
                     <a href="/content/package/machineTool/machineTool.js">.js</a>
-                    <a href="/content/package/machineTool/wasm/src/lib.rs">.rs</a>
                     <a href="/content/package/machineTool/machineTool.css">.css</a>
                     <span style="font-size: 38.2%; color: #DEA615;">꩜ 50%</span>
                   </div>
