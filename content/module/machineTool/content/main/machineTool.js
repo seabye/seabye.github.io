@@ -1843,7 +1843,7 @@
                     if('Hls'in window&&Hls.isSupported()){
                       return hlsGo();
                     }else{
-
+                      this.elementCreate('script',{async:'',src:'../package/hls/hls.js'},document.head);
                     }
                   }
                 }
@@ -1853,7 +1853,7 @@
                   if('Hls'in window&&Hls.isSupported()){
                     return hlsGo();
                   }else{
-
+                    this.elementCreate('script',{async:'',src:'../package/hls/hls.js'},document.head);
                   }
                 }
                 break;
@@ -1868,6 +1868,7 @@
         if(!document.createElement('video').canPlayType('application/vnd.apple.mpegurl')){
           if(!'Hls'in window){
             const script=document.createElement('script');
+            script.setAttribute('sync','');
             script.setAttribute('src','https://cdn.jsdelivr.net/npm/hls.js@latest');
             document.head.insertAdjacentElement('beforeend',script);
           }
@@ -1878,7 +1879,11 @@
             }
             if(video.hasAttribute('src')&&video.getAttribute('src').match(/\.m3u8/i)){
               if('Hls'in window&&Hls.isSupported()){
-                const hls=new Hls();
+                const hls=new Hls({
+                  autoStartLoad:video.getAttribute('preload')==='auto'?true:false,
+                  maxBufferLength:4,
+                  maxBufferSize:4*1000*1000
+                });
                 hls.loadSource(video.getAttribute('src'));
                 hls.attachMedia(video);
                 video._hls_=hls;
