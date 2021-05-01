@@ -9,7 +9,7 @@
 // >>>> >>>> >>>> >>>>
 // #before
   // console
-  window.console.log('#### start: machineTool.js');
+  console.log('#### start: machineTool.js');
 // #import
 // #variable
 // #block
@@ -20,7 +20,7 @@
         let timeOut=null;
         return function(...arg){
           const set=()=>{
-            timeOut=window.setTimeout(()=>{
+            timeOut=setTimeout(()=>{
               timeOut=null;
               callback.apply(this,arg);
             },wait);
@@ -40,7 +40,7 @@
         let timeOut=null;
         return function(...arg){
           const set=()=>{
-            timeOut=window.setTimeout(()=>{
+            timeOut=setTimeout(()=>{
               callback.apply(this,arg);
             },wait);
           };
@@ -49,7 +49,7 @@
             callback.apply(this,arg);
             set();
           }else{
-            window.clearTimeout(timeOut);
+            clearTimeout(timeOut);
             set();
           }
         };
@@ -57,19 +57,19 @@
       /*🟢*/async loop(condition,wait=1000/24,count,countZeroCallback){
         const result=await condition();
         this.debug(()=>{
-          window.console.log('==== loop, condition() result:',result);
+          console.log('==== loop, condition() result:',result);
         });
         if(result){
           return result;
         }else{
           this.debug(()=>{
             if(count){
-              window.console.log('==== loop, false, count:',count);
+              console.log('==== loop, false, count:',count);
             }
           });
           const loop=()=>{
-            return new window.Promise((resolve)=>{
-              window.setTimeout(()=>{
+            return new Promise((resolve)=>{
+              setTimeout(()=>{
                 resolve(this.loop(condition,wait,count,countZeroCallback));
               },wait);
             });
@@ -81,7 +81,7 @@
             }else{
               if(countZeroCallback){
                 this.debug(()=>{
-                  window.console.log('==== loop, false, countZeroCallback()');
+                  console.log('==== loop, false, countZeroCallback()');
                 });
                 return countZeroCallback();
               }
@@ -92,14 +92,14 @@
         }
       },
       /*🟢*/timeOut(callback,wait=1000/24){
-        return new window.Promise((resolve)=>{
-          window.setTimeout(()=>{
+        return new Promise((resolve)=>{
+          setTimeout(()=>{
             resolve(callback());
           },wait);
         });
       },
       /*🟡*/observeFunction(originFunction,eventType,eventOption={},whoListen,dataPlus=()=>{}){
-        const insertEvent=new window.CustomEvent(eventType,eventOption);
+        const insertEvent=new CustomEvent(eventType,eventOption);
         return function(...arg){
           insertEvent._arg_=arg;
           insertEvent[eventType]=dataPlus.apply(this,arg);
@@ -113,18 +113,18 @@
             {
               const run=(data,depth)=>{
                 let next=[];
-                switch(window.Object.prototype.toString.call(data)){
+                switch(Object.prototype.toString.call(data)){
                   case'[object Array]':
                     {
                       for(let key=0,length=data.length;key<length;key++){
                         if(typeof conditionDepth==='number'){
                           if(conditionDepth===depth){
-                            callback(key,key,data[key],depth,window.Object.prototype.toString.call(data[key])==='[object Array]'?'array':window.Object.prototype.toString.call(data[key])==='[object Object]'?'object':depth);
+                            callback(key,key,data[key],depth,Object.prototype.toString.call(data[key])==='[object Array]'?'array':Object.prototype.toString.call(data[key])==='[object Object]'?'object':depth);
                           }
                         }else{
-                          callback(key,key,data[key],depth,window.Object.prototype.toString.call(data[key])==='[object Array]'?'array':window.Object.prototype.toString.call(data[key])==='[object Object]'?'object':depth);
+                          callback(key,key,data[key],depth,Object.prototype.toString.call(data[key])==='[object Array]'?'array':Object.prototype.toString.call(data[key])==='[object Object]'?'object':depth);
                         }
-                        if(window.Object.prototype.toString.call(data[key])==='[object Array]'||window.Object.prototype.toString.call(data[key])==='[object Object]'){
+                        if(Object.prototype.toString.call(data[key])==='[object Array]'||Object.prototype.toString.call(data[key])==='[object Object]'){
                           next.push(data[key]);
                         }
                       }
@@ -136,14 +136,14 @@
                       for(const key in data){
                         if(typeof conditionDepth==='number'){
                           if(conditionDepth===depth){
-                            callback(count,key,data[key],depth,window.Object.prototype.toString.call(data[key])==='[object Object]'?'object':window.Object.prototype.toString.call(data[key])==='[object Array]'?'array':depth);
+                            callback(count,key,data[key],depth,Object.prototype.toString.call(data[key])==='[object Object]'?'object':Object.prototype.toString.call(data[key])==='[object Array]'?'array':depth);
                             count+=1;
                           }
                         }else{
-                          callback(count,key,data[key],depth,window.Object.prototype.toString.call(data[key])==='[object Object]'?'object':window.Object.prototype.toString.call(data[key])==='[object Array]'?'array':depth);
+                          callback(count,key,data[key],depth,Object.prototype.toString.call(data[key])==='[object Object]'?'object':Object.prototype.toString.call(data[key])==='[object Array]'?'array':depth);
                           count+=1;
                         }
-                        if(window.Object.prototype.toString.call(data[key])==='[object Object]'||window.Object.prototype.toString.call(data[key])==='[object Array]'){
+                        if(Object.prototype.toString.call(data[key])==='[object Object]'||Object.prototype.toString.call(data[key])==='[object Array]'){
                           next.push(data[key]);
                         }
                       }
@@ -168,12 +168,12 @@
                 for(let key=0,length=data.length;key<length;key++){
                   if(typeof conditionDepth==='number'){
                     if(conditionDepth===depth){
-                      callback(key,key,data[key],depth,window.Object.prototype.toString.call(data[key])==='[object Array]'?'array':depth);
+                      callback(key,key,data[key],depth,Object.prototype.toString.call(data[key])==='[object Array]'?'array':depth);
                     }
                   }else{
-                    callback(key,key,data[key],depth,window.Object.prototype.toString.call(data[key])==='[object Array]'?'array':depth);
+                    callback(key,key,data[key],depth,Object.prototype.toString.call(data[key])==='[object Array]'?'array':depth);
                   }
-                  if(window.Object.prototype.toString.call(data[key])==='[object Array]'){
+                  if(Object.prototype.toString.call(data[key])==='[object Array]'){
                     next.push(data[key]);
                   }
                 }
@@ -194,14 +194,14 @@
                 for(const key in data){
                   if(typeof conditionDepth==='number'){
                     if(conditionDepth===depth){
-                      callback(count,key,data[key],depth,window.Object.prototype.toString.call(data[key])==='[object Object]'?'object':depth);
+                      callback(count,key,data[key],depth,Object.prototype.toString.call(data[key])==='[object Object]'?'object':depth);
                       count+=1;
                     }
                   }else{
-                    callback(count,key,data[key],depth,window.Object.prototype.toString.call(data[key])==='[object Object]'?'object':depth);
+                    callback(count,key,data[key],depth,Object.prototype.toString.call(data[key])==='[object Object]'?'object':depth);
                     count+=1;
                   }
-                  if(window.Object.prototype.toString.call(data[key])==='[object Object]'){
+                  if(Object.prototype.toString.call(data[key])==='[object Object]'){
                     next.push(data[key]);
                   }
                 }
@@ -220,7 +220,7 @@
       },
       /*🟢*/runObject(object,excludePrefix){
         if(excludePrefix){
-          let RE=new window.RegExp(`^${excludePrefix}`);
+          let RE=new RegExp(`^${excludePrefix}`);
           for(const key in object){
             if(!key.match(RE)){
               object[key]();
@@ -270,22 +270,22 @@
       },
       /*🔴*/taskTransfer(){},
       /*🟢*/notMatchRE(RE){
-        return new window.RegExp(`^((?!${RE.toString().replace(RE.toString().split('/')[RE.toString().split('/').length-1],'').replace(/^\//,'').replace(/\/$/,'')}).)*$`,RE.toString().split('/')[RE.toString().split('/').length-1]);
+        return new RegExp(`^((?!${RE.toString().replace(RE.toString().split('/')[RE.toString().split('/').length-1],'').replace(/^\//,'').replace(/\/$/,'')}).)*$`,RE.toString().split('/')[RE.toString().split('/').length-1]);
       },
       /*🟢*/random(){
-        return window.parseInt(window.Math.random().toString().replace(/^0\./,''));
+        return parseInt(Math.random().toString().replace(/^0\./,''));
       },
       /*🟢*/hashCode(string,abs=false){
         let result;
         for(let key=0,length=string.length;key<length;key++){
-          result=window.Math.imul(31,result)+string.charCodeAt(key)|0;
+          result=Math.imul(31,result)+string.charCodeAt(key)|0;
         }
         if(abs){
-          result=window.Math.abs(result);
+          result=Math.abs(result);
         }
         return result;
       },
-      /*🟢*/URIObject(data=window.location&&(window.location.search||window.location.hash)?`${window.location.search}${window.location.hash}`:''){
+      /*🟢*/URIObject(data=location&&(location.search||location.hash)?`${location.search}${location.hash}`:''){
         const result={
           search:{},
           hash:{}
@@ -304,7 +304,7 @@
         }
         return result;
       },
-      /*🟢*/isBot(type='user-agent',data=window.navigator&&window.navigator.userAgent?window.navigator.userAgent:''){
+      /*🟢*/isBot(type='user-agent',data=navigator&&navigator.userAgent?navigator.userAgent:''){
         switch(type){
           case'user-agent':
             {
@@ -337,9 +337,9 @@
         const zero=(number)=>{
           return`${number<10?0:''}${number}`;
         };
-        const hour=window.Math.floor(millisecond/(3600*1000));
-        const minute=window.Math.floor(millisecond%(3600*1000)/(60*1000));
-        const second=window.Math.floor(millisecond%(60*1000)/1000);
+        const hour=Math.floor(millisecond/(3600*1000));
+        const minute=Math.floor(millisecond%(3600*1000)/(60*1000));
+        const second=Math.floor(millisecond%(60*1000)/1000);
         return`${leadingZero[0]?zero(hour):hour}${unit[0]}${leadingZero[1]?zero(minute):minute}${unit[1]}${leadingZero[2]?zero(second):second}${unit[2]}`;
       },
       /*🟢*/percent(total,current,integer=true,unit='%'){
@@ -356,8 +356,8 @@
             let result='';
             for(let key=0;key<11;key++){
               const start=key*3;
-              const str=window.parseInt(UUID32[start]+UUID32[start+1]+UUID32[start+2],16);
-              result+=char[window.Math.floor(str/64)]+char[str%64];
+              const str=parseInt(UUID32[start]+UUID32[start+1]+UUID32[start+2],16);
+              result+=char[Math.floor(str/64)]+char[str%64];
             }
             return result;
           }
@@ -393,7 +393,7 @@
           }
           return module;
         }).catch((error)=>{
-          window.console.log('==== import, catch:',error);
+          console.log('==== import, catch:',error);
         });
       },
       /*🟢*/webAssembly(src,callback){
@@ -405,23 +405,25 @@
             return module;
           });
         }).catch((error)=>{
-          window.console.log('==== webAssembly, catch:',error);
+          console.log('==== webAssembly, catch:',error);
         });
       },
     // local data
       /*🔴*//**
-       * @param {object} inputElement element
-       * @param {string} resultType 'objectURL','dataURL','arrayBuffer','text','binaryString',undefined='objectURL'
+       * @param {object} listenElement element
+       * @param {function} progressCallback
+       * @param {string} [resultType='objectURL'] 'objectURL','dataURL','arrayBuffer','text','binaryString',undefined='objectURL'
        * @return {*} :resultType
        */
-      file(inputElement,resultType='objectURL'){
-        window.console.log('==== file');
+      file(listenElement,progressCallback,resultType='objectURL'){
+        console.log('==== file');
       },
       /*🔴*/fileSystem(){},
       /*🔴*/localStorage(){},
       /*🔴*/sessionStorage(){},
       /*🔴*/indexedDB(){},
       /*🔴*/cookie(){},
+      /*🔴*/token(){},
       /*🔴*/cache(){},
       /*🔴*/SQLite(){},
       /*🔴*/postgreSQL(){},
@@ -434,12 +436,12 @@
         const option={};
         option.method=method;
         if(dataPack!==undefined){
-          option.body=window.JSON.stringify({info:dataPack,data:data});
+          option.body=JSON.stringify({info:dataPack,data:data});
         }else{
           switch(typeof body){
             case'object':
               {
-                option.body=window.JSON.stringify(body);
+                option.body=JSON.stringify(body);
               }
               break;
             case'string':
@@ -471,10 +473,10 @@
         }
         const result={};
         this.debug(()=>{
-          window.console.log('==== fetch, request, URI:',URI);
-          window.console.log('==== fetch, request, option:',option);
+          console.log('==== fetch, request, URI:',URI);
+          console.log('==== fetch, request, option:',option);
         });
-        return window.fetch(URI,option).then((data)=>{
+        return fetch(URI,option).then((data)=>{
           result.status=data.status;
           if(responseDataType&&responseDataType.match(/arrayBuffer|blob|formData|json|text/i)){
             return data[responseDataType]();
@@ -483,14 +485,14 @@
         }).then((data)=>{
           result.result=data;
           this.debug(()=>{
-            window.console.log('==== fetch, response, result:',result);
+            console.log('==== fetch, response, result:',result);
           });
           if(callback){
             return callback(result);
           }
           return result;
         }).catch((error)=>{
-          window.console.log('==== fetch, response, catch:',error);
+          console.log('==== fetch, response, catch:',error);
           if(!result.status){
             result.status=0;
           }
@@ -502,7 +504,9 @@
           }
         });
       },
-      /*🔴*/upload(){},
+      /*🔴💠*/HTTP(){},
+      /*🔴*/byteDown(){},
+      /*🔴*/byteUp(){},
     // application programming interface
       /*🔴*/listenPort(){},
       /*🔴*/portReceive(URI,method,data,callback,data2){
@@ -512,7 +516,7 @@
           data:data
         };
         if(data2){
-          window.Object.assign(result,data2);
+          Object.assign(result,data2);
         }
         if(callback){
           return callback(result);
@@ -571,7 +575,7 @@
                 this.listenDOM.pointer_up_data[id].count-=1;
                 if(this.listenDOM.pointer_up_data[id].count===0){
                   delete this.listenDOM.pointer_up_data[id];
-                  if(!window.Object.keys(this.listenDOM.pointer_up_data).length){
+                  if(!Object.keys(this.listenDOM.pointer_up_data).length){
                     delete this.listenDOM.pointer_up_data;
                   }
                 }
@@ -597,11 +601,11 @@
                               if(event.target.childElementCount){
                                 let block=false;
                                 for(const value of event.target.children){
-                                  if(window.getComputedStyle(value).pointerEvents!=='none'&&window.getComputedStyle(value).visibility!=='hidden'){
+                                  if(getComputedStyle(value).pointerEvents!=='none'&&getComputedStyle(value).visibility!=='hidden'){
                                     block=true;
                                     let intersect=false;
                                     for(const value of event.target.children){
-                                      if((window.getComputedStyle(value).pointerEvents!=='none'&&window.getComputedStyle(value).visibility!=='hidden')&&(event.clientX>=value.getBoundingClientRect().left&&event.clientX<=value.getBoundingClientRect().right&&event.clientY>=value.getBoundingClientRect().top&&event.clientY<=value.getBoundingClientRect().bottom)){
+                                      if((getComputedStyle(value).pointerEvents!=='none'&&getComputedStyle(value).visibility!=='hidden')&&(event.clientX>=value.getBoundingClientRect().left&&event.clientX<=value.getBoundingClientRect().right&&event.clientY>=value.getBoundingClientRect().top&&event.clientY<=value.getBoundingClientRect().bottom)){
                                         intersect=true;
                                         break;
                                       }
@@ -631,9 +635,9 @@
                           };
                           data.target.parentNode.addEventListener('pointerup',this.listenDOM.pointer_up_data[once_id],{once:true});
                           const remove=()=>{
-                            window.removeEventListener('pointerup',remove);
-                            window.removeEventListener('touchend',remove);
-                            window.removeEventListener('dragend',remove);
+                            removeEventListener('pointerup',remove);
+                            removeEventListener('touchend',remove);
+                            removeEventListener('dragend',remove);
                             if(data.target.parentNode){
                               data.target.parentNode.removeEventListener('pointerup',this.listenDOM.pointer_up_data[once_id]);
                             }
@@ -641,17 +645,17 @@
                           if(option3){
                             const move=(event)=>{
                               if(event.y>=data.y+6||event.y<=data.y-6){
-                                window.removeEventListener('pointermove',move);
-                                window.removeEventListener('touchmove',move);
+                                removeEventListener('pointermove',move);
+                                removeEventListener('touchmove',move);
                                 remove();
                               }
                             };
-                            window.addEventListener('pointermove',move);
-                            window.addEventListener('touchmove',move);
+                            addEventListener('pointermove',move);
+                            addEventListener('touchmove',move);
                           }
-                          window.addEventListener('pointerup',remove,{once:true});
-                          window.addEventListener('touchend',remove,{once:true});
-                          window.addEventListener('dragend',remove,{once:true});
+                          addEventListener('pointerup',remove,{once:true});
+                          addEventListener('touchend',remove,{once:true});
+                          addEventListener('dragend',remove,{once:true});
                         };
                         if(typeof option2==='number'){
                           if(data.button===option2){
@@ -661,7 +665,7 @@
                           run();
                         }
                         this.debug(()=>{
-                          window.console.log('==== listenDOM, pointer_up, pointer_up_data length:',window.Object.keys(this.listenDOM.pointer_up_data).length);
+                          console.log('==== listenDOM, pointer_up, pointer_up_data length:',Object.keys(this.listenDOM.pointer_up_data).length);
                         });
                       };
                       this.listenDOM.pointer_up_data[id].count=0;
@@ -690,11 +694,11 @@
                 case'add':
                   {
                     this.debug(()=>{
-                      window.console.log('==== listenDOM, observe_mutation, add, target:',target);
+                      console.log('==== listenDOM, observe_mutation, add, target:',target);
                     });
-                    target.machineTool_listenDOM_observe_mutation=new window.MutationObserver((mutation_list)=>{
+                    target.machineTool_listenDOM_observe_mutation=new MutationObserver((mutation_list)=>{
                       this.debug(()=>{
-                        window.console.log('==== listenDOM, observe_mutation, mutation_list:',mutation_list);
+                        console.log('==== listenDOM, observe_mutation, mutation_list:',mutation_list);
                       });
                       mutation_list.forEach((mutation)=>{
                         switch(mutation.type){
@@ -719,7 +723,7 @@
                 case'remove':
                   {
                     this.debug(()=>{
-                      window.console.log('==== listenDOM, observe_mutation, remove, target:',target);
+                      console.log('==== listenDOM, observe_mutation, remove, target:',target);
                     });
                     target.machineTool_listenDOM_observe_mutation.disconnect();
                     delete target.machineTool_listenDOM_observe_mutation;
@@ -736,11 +740,11 @@
                 case'add':
                   {
                     this.debug(()=>{
-                      window.console.log('==== listenDOM, observe_intersection, add, target:',target);
+                      console.log('==== listenDOM, observe_intersection, add, target:',target);
                     });
-                    target.machineTool_listenDOM_observe_intersection=new window.IntersectionObserver((entries)=>{
+                    target.machineTool_listenDOM_observe_intersection=new IntersectionObserver((entries)=>{
                       this.debug(()=>{
-                        window.console.log('==== listenDOM, observe_intersection, entries:',entries);
+                        console.log('==== listenDOM, observe_intersection, entries:',entries);
                       });
                       entries.forEach((entry)=>{
                         callback(entry);
@@ -752,7 +756,7 @@
                 case'remove':
                   {
                     this.debug(()=>{
-                      window.console.log('==== listenDOM, observe_intersection, remove, target:',target);
+                      console.log('==== listenDOM, observe_intersection, remove, target:',target);
                     });
                     target.machineTool_listenDOM_observe_intersection.disconnect();
                     delete target.machineTool_listenDOM_observe_intersection;
@@ -769,11 +773,11 @@
                 case'add':
                   {
                     this.debug(()=>{
-                      window.console.log('==== listenDOM, observe_resize, add, target:',target);
+                      console.log('==== listenDOM, observe_resize, add, target:',target);
                     });
-                    target.machineTool_listenDOM_observe_resize=new window.ResizeObserver((entries)=>{
+                    target.machineTool_listenDOM_observe_resize=new ResizeObserver((entries)=>{
                       this.debug(()=>{
-                        window.console.log('==== listenDOM, observe_resize, entries:',entries);
+                        console.log('==== listenDOM, observe_resize, entries:',entries);
                       });
                       entries.forEach((entry)=>{
                         callback(entry);
@@ -785,7 +789,7 @@
                 case'remove':
                   {
                     this.debug(()=>{
-                      window.console.log('==== listenDOM, observe_resize, remove, target:',target);
+                      console.log('==== listenDOM, observe_resize, remove, target:',target);
                     });
                     target.machineTool_listenDOM_observe_resize.disconnect();
                     delete target.machineTool_listenDOM_observe_resize;
@@ -801,13 +805,13 @@
               if(!this.listenDOM.URI_template){
                 this.listenDOM.URI_template=class template{
                   constructor(callback){
-                    if(window.history.pushState.name){
-                      window.history.pushState=machineTool.observeFunction(window.history.pushState,'pushState',undefined,window,(...arg)=>{
+                    if(history.pushState.name){
+                      history.pushState=machineTool.observeFunction(history.pushState,'pushState',undefined,window,(...arg)=>{
                         return arg[2];
                       });
                     }
-                    if(window.history.replaceState.name){
-                      window.history.replaceState=machineTool.observeFunction(window.history.replaceState,'replaceState',undefined,window,(...arg)=>{
+                    if(history.replaceState.name){
+                      history.replaceState=machineTool.observeFunction(history.replaceState,'replaceState',undefined,window,(...arg)=>{
                         return arg[2];
                       });
                     }
@@ -815,7 +819,7 @@
                   }
                   _popstate=(data)=>{
                     machineTool.debug(()=>{
-                      window.console.log('==== listenDOM, URI, popstate:',data.type,machineTool.URIPath());
+                      console.log('==== listenDOM, URI, popstate:',data.type,machineTool.URIPath());
                     });
                     this.callback({
                       type:data.type,
@@ -824,7 +828,7 @@
                   }
                   _pushState=(data)=>{
                     machineTool.debug(()=>{
-                      window.console.log('==== listenDOM, URI, pushState:',data.type,data.pushState.replace());
+                      console.log('==== listenDOM, URI, pushState:',data.type,data.pushState.replace());
                     });
                     this.callback({
                       type:data.type,
@@ -833,7 +837,7 @@
                   }
                   _replaceState=(data)=>{
                     machineTool.debug(()=>{
-                      window.console.log('==== listenDOM, URI, replaceState:',data.type,data.replaceState.replace());
+                      console.log('==== listenDOM, URI, replaceState:',data.type,data.replaceState.replace());
                     });
                     this.callback({
                       type:data.type,
@@ -841,14 +845,14 @@
                     });
                   }
                   add(){
-                    window.addEventListener('popstate',this._popstate);
-                    window.addEventListener('pushState',this._pushState);
-                    window.addEventListener('replaceState',this._replaceState);
+                    addEventListener('popstate',this._popstate);
+                    addEventListener('pushState',this._pushState);
+                    addEventListener('replaceState',this._replaceState);
                   }
                   remove(){
-                    window.removeEventListener('popstate',this._popstate);
-                    window.removeEventListener('pushState',this._pushState);
-                    window.removeEventListener('replaceState',this._replaceState);
+                    removeEventListener('popstate',this._popstate);
+                    removeEventListener('pushState',this._pushState);
+                    removeEventListener('replaceState',this._replaceState);
                   }
                 }
               }
@@ -864,7 +868,7 @@
                       this.listenDOM.URI_data[id]=new this.listenDOM.URI_template(callback);
                       this.listenDOM.URI_data[id].add();
                       this.debug(()=>{
-                        window.console.log('==== listenDOM, URI, add, listenDOM.URI_data:',this.listenDOM.URI_data);
+                        console.log('==== listenDOM, URI, add, listenDOM.URI_data:',this.listenDOM.URI_data);
                       });
                     }
                   }
@@ -874,11 +878,11 @@
                     if(this.listenDOM.URI_data[id]){
                       this.listenDOM.URI_data[id].remove();
                       delete this.listenDOM.URI_data[id];
-                      if(!window.Object.keys(this.listenDOM.URI_data).length){
+                      if(!Object.keys(this.listenDOM.URI_data).length){
                         delete this.listenDOM.URI_data;
                       }
                       this.debug(()=>{
-                        window.console.log('==== listenDOM, URI, remove, listenDOM.URI_data:',this.listenDOM.URI_data);
+                        console.log('==== listenDOM, URI, remove, listenDOM.URI_data:',this.listenDOM.URI_data);
                       });
                     }
                   }
@@ -931,7 +935,7 @@
               if(!insertPosition){
                 insertPosition='beforeend';
               }
-              const element=window.document.createElement(tag);
+              const element=document.createElement(tag);
               if(attribute){
                 for(const key in attribute){
                   element.setAttribute(key,attribute[key]);
@@ -941,7 +945,7 @@
                 if(typeof content==='string'){
                   element.innerHTML=content;
                 }else{
-                  if(content instanceof window.HTMLElement){
+                  if(content instanceof HTMLElement){
                     element.insertAdjacentElement('beforeend',content);
                   }
                 }
@@ -1002,7 +1006,7 @@
                   }
                 }else{
                   const cls=key.trim().split(' ').filter((item)=>{
-                    return window.isNaN(window.parseInt(item));
+                    return isNaN(parseInt(item));
                   }).join(' ');
                   if(data.element){
                     if(!data.element[0]){
@@ -1010,8 +1014,8 @@
                     }
                     if(data.element[1]){
                       if(data.element[1].class){
-                        data.element[1].class=[...new window.Set(key.trim().split(' ').filter((item)=>{
-                          return window.isNaN(window.parseInt(item));
+                        data.element[1].class=[...new Set(key.trim().split(' ').filter((item)=>{
+                          return isNaN(parseInt(item));
                         }).concat(data.element[1].class.trim().split(' ')))].join(' ');
                       }else{
                         if(cls){
@@ -1034,12 +1038,12 @@
                     first=element;
                     elements._first_=element;
                   }
-                  if(window.isNaN(key.split(' ')[0])||key.split(' ')[0]===''){
+                  if(isNaN(key.split(' ')[0])||key.split(' ')[0]===''){
                     elements[key.split(' ')[0]]=element;
                   }
                   for(const key in data){
                     if(typeof data[key]==='function'){
-                      switch(window.Object.prototype.toString.call(data)){
+                      switch(Object.prototype.toString.call(data)){
                         case'[object Array]':
                           {
                             if(!data[key].name){
@@ -1078,7 +1082,7 @@
                 }else{
                   for(const key in data){
                     if(typeof data[key]==='function'){
-                      switch(window.Object.prototype.toString.call(data)){
+                      switch(Object.prototype.toString.call(data)){
                         case'[object Array]':
                           {
                             if(!data[key].name){
@@ -1119,7 +1123,7 @@
         }
       },
       /*🟢*/elementState(...arg){
-        if(arg[0]instanceof window.HTMLElement){
+        if(arg[0]instanceof HTMLElement){
           // base mode
           //   element<element>,
           //   one<string=('class class2...'),null,undefined=''>,
@@ -1172,55 +1176,55 @@
             if(setOne){
               if(one){
                 if(!contains(one)){
-                  window.setTimeout(()=>{
+                  setTimeout(()=>{
                     remove(two);
                   },0);
-                  window.setTimeout(()=>{
+                  setTimeout(()=>{
                     add(one);
                     callback(element,one);
                   },nextWait);
                 }
               }else{
                 if(one===null){
-                  window.setTimeout(()=>{
+                  setTimeout(()=>{
                     add(two);
                   },0);
-                  window.setTimeout(()=>{
+                  setTimeout(()=>{
                     remove(two);
                     callback(element,'');
                   },nextWait);
                 }else{
-                  window.setTimeout(()=>{
+                  setTimeout(()=>{
                     remove(two);
                   },0);
-                  window.setTimeout(()=>{
+                  setTimeout(()=>{
                     callback(element,'');
                   },nextWait);
                 }
               }
             }else{
               if(contains(one)){
-                window.setTimeout(()=>{
+                setTimeout(()=>{
                   remove(one);
                 },0);
-                window.setTimeout(()=>{
+                setTimeout(()=>{
                   add(two);
                   callback(element,two);
                 },nextWait);
               }else{
                 if(contains(two)){
-                  window.setTimeout(()=>{
+                  setTimeout(()=>{
                     remove(two);
                   },0);
-                  window.setTimeout(()=>{
+                  setTimeout(()=>{
                     add(one);
                     callback(element,one);
                   },nextWait);
                 }else{
-                  window.setTimeout(()=>{
+                  setTimeout(()=>{
                     add(one);
                   },0);
-                  window.setTimeout(()=>{
+                  setTimeout(()=>{
                     callback(element,one);
                   },nextWait);
                 }
@@ -1229,33 +1233,33 @@
           }else{
             if(setOne){
               if(!contains(one)){
-                window.setTimeout(()=>{
+                setTimeout(()=>{
                   add(one);
                 },0);
-                window.setTimeout(()=>{
+                setTimeout(()=>{
                   callback(element,one);
                 },nextWait);
               }
             }else{
               if(contains(one)){
-                window.setTimeout(()=>{
+                setTimeout(()=>{
                   remove(one);
                 },0);
-                window.setTimeout(()=>{
+                setTimeout(()=>{
                   callback(element,'');
                 },nextWait);
               }else{
-                window.setTimeout(()=>{
+                setTimeout(()=>{
                   add(one);
                 },0);
-                window.setTimeout(()=>{
+                setTimeout(()=>{
                   callback(element,one);
                 },nextWait);
               }
             }
           }
         }else{
-          if(window.Array.isArray(arg[0])){
+          if(Array.isArray(arg[0])){
             switch(arg[0][0]){
               case'target':
                 {
@@ -1446,7 +1450,7 @@
               this.style='html * { pointer-events: none !important; }';
             }
             add(element,record,wait=this.wait){
-              return new window.Promise((resolve)=>{
+              return new Promise((resolve)=>{
                 if(!this.lock){
                   this.lock=true;
                   const style=machineTool.insertStyle(this.style);
@@ -1473,22 +1477,22 @@
                   }
                   machineTool.for(this.elements,(...data)=>{
                     if(data[2]!==element&&data[2].classList.contains(`${this.group}_last`)){
-                      window.setTimeout(()=>{
+                      setTimeout(()=>{
                         machineTool.elementState(data[2],`${this.group}_prev`,`${this.group}_last`,true);
                       },1000/12);
                     }
                   },0);
                   machineTool.elementState(element,`${this.group}_last ${this.group}_ready`,`${this.group}_hide`,true);
                   element.style.setProperty('opacity','0');
-                  window.setTimeout(()=>{
+                  setTimeout(()=>{
                     if(!recordState){
                       this.element.insertAdjacentElement(this.insertPosition,element);
                     }
-                    window.setTimeout(()=>{
+                    setTimeout(()=>{
                       element.style.removeProperty('opacity');
                       machineTool.removeEmpty(element);
                       machineTool.elementState(element,`${this.group}_go`,'',true);
-                      window.setTimeout(()=>{
+                      setTimeout(()=>{
                         machineTool.elementState(element,'',`${this.group}_ready`,true);
                         machineTool.removeElement(style);
                         this.lock=false;
@@ -1500,7 +1504,7 @@
               });
             }
             back(wait=this.wait,record){
-              return new window.Promise((resolve)=>{
+              return new Promise((resolve)=>{
                 if(!this.lock){
                   this.lock=true;
                   let element=null;
@@ -1520,7 +1524,7 @@
               });
             }
             hide(wait=this.wait,record){
-              return new window.Promise((resolve)=>{
+              return new Promise((resolve)=>{
                 if(!this.lock){
                   this.lock=true;
                   const style=machineTool.insertStyle(this.style);
@@ -1531,7 +1535,7 @@
                     }
                   },0);
                   machineTool.elementState(element,`${this.group}_remove`,'',true);
-                  window.setTimeout(()=>{
+                  setTimeout(()=>{
                     machineTool.elementState(element,`${this.group}_hide`,`${this.group}_ready ${this.group}_go ${this.group}_last ${this.group}_prev ${this.group}_remove`,true);
                     machineTool.removeElement(style);
                     this.lock=false;
@@ -1554,7 +1558,7 @@
               });
             }
             remove(wait=this.wait,record){
-              return new window.Promise((resolve)=>{
+              return new Promise((resolve)=>{
                 if(!this.lock){
                   this.lock=true;
                   const style=machineTool.insertStyle(this.style);
@@ -1573,7 +1577,7 @@
                   }
                   this.elements.splice(this.elements.indexOf(element),1);
                   machineTool.elementState(element,`${this.group}_remove`,'',true);
-                  window.setTimeout(()=>{
+                  setTimeout(()=>{
                     machineTool.elementState(element,'',`${this.group}_ready ${this.group}_go ${this.group}_last ${this.group}_prev ${this.group}_hide ${this.group}_remove`,true);
                     if(element){
                       machineTool.removeElement(element);
@@ -1630,9 +1634,9 @@
       /*🔴💠*/DOM(){},
       /*🔴*/fixedInput(){},
       /*🟢*/insertStyle(style,wait){
-        const element=this.elementCreate('style',undefined,window.document.head,undefined,style);
+        const element=this.elementCreate('style',undefined,document.head,undefined,style);
         if(wait){
-          window.setTimeout(()=>{
+          setTimeout(()=>{
             this.removeElement(element);
           },wait);
         }
@@ -1655,8 +1659,8 @@
           }
         }
       },
-      /*🟢*/findOuter(find,start,end=window.document.documentElement,trueCallback,falseCallback){
-        if(find instanceof window.HTMLElement&&start===find){
+      /*🟢*/findOuter(find,start,end=document.documentElement,trueCallback,falseCallback){
+        if(find instanceof HTMLElement&&start===find){
           if(trueCallback){
             trueCallback(start);
           }
@@ -1698,12 +1702,12 @@
         switch(hash){
           case true:
             {
-              return window.location.href.replace(window.location.origin,'');
+              return location.href.replace(location.origin,'');
             }
             break;
           case false:
             {
-              return window.location.href.replace(window.location.origin,'').replace(window.location.hash,'');
+              return location.href.replace(location.origin,'').replace(location.hash,'');
             }
             break;
           default:
@@ -1714,12 +1718,12 @@
         switch(type){
           case'push':
             {
-              window.history.pushState(null,null,path);
+              history.pushState(null,null,path);
             }
             break;
           case'replace':
             {
-              window.history.replaceState(null,null,path);
+              history.replaceState(null,null,path);
             }
             break;
           default:
@@ -1727,7 +1731,7 @@
         }
       },
       /*🔴*/startLoad(type,callback){
-        window.document.addEventListener('readystatechange',(event)=>{
+        document.addEventListener('readystatechange',(event)=>{
           switch(event.target.readyState){
             case'loading':
               {}
@@ -1743,9 +1747,9 @@
           }
         });
       },
-      /*🟢*/fullScreen(element=window.document.documentElement,top=false){
-        const root=top?window.top:window;
-        if(window.navigator.userAgent.match(/iPhone|iPad/i)&&element.webkitSupportsFullscreen){
+      /*🟢*/fullScreen(element=document.documentElement,top=false){
+        const root=top?top:window;
+        if(navigator.userAgent.match(/iPhone|iPad/i)&&element.webkitSupportsFullscreen){
           if(element.webkitDisplayingFullscreen){
             element.webkitExitFullScreen();
           }else{
@@ -1774,24 +1778,24 @@
       /*🔴*/orientationSwitch(){},
       /*🔴*/iframe(){},
       /*🔴*/languageSwitch(){},
-      /*🟢*/openTab(URI=window.location.href,name=''){
-        return window.open(URI,name);
+      /*🟢*/openTab(URI=location.href,name=''){
+        return open(URI,name);
       },
-      /*🟢*/openWindow(URI=window.location.href,name='',width=720,height=450,left,top){
+      /*🟢*/openWindow(URI=location.href,name='',width=720,height=450,left,top){
         if(typeof left==='number'){
-          left+=window.screen.availLeft;
+          left+=screen.availLeft;
         }else{
-          left=(window.screen.availWidth-width)/2+window.screen.availLeft;
+          left=(screen.availWidth-width)/2+screen.availLeft;
         }
         if(typeof top==='number'){
-          top+=window.screen.availTop;
+          top+=screen.availTop;
         }else{
-          top=(window.screen.availHeight-height)/2+window.screen.availTop;
+          top=(screen.availHeight-height)/2+screen.availTop;
         }
-        return window.open(URI,name,`width=${width},height=${height},left=${left},top=${top}`);
+        return open(URI,name,`width=${width},height=${height},left=${left},top=${top}`);
       },
       /*🟢*/debug(callback){
-        if(window.document&&window.document.documentElement.classList.contains('debug')){
+        if(document&&document.documentElement.classList.contains('debug')){
           callback();
         }
       },
@@ -1821,7 +1825,7 @@
               video.removeEventListener('play',this.plugin_hls_load.play);
               video.removeEventListener('pause',this.plugin_hls_load.pause);
             }
-            const hls=new window.Hls(config);
+            const hls=new Hls(config);
             hls.loadSource(src);
             hls.attachMedia(video);
             video.addEventListener('play',this.plugin_hls_load.play);
@@ -1836,7 +1840,7 @@
                   if(video.canPlayType('application/vnd.apple.mpegurl')){
                     return true;
                   }else{
-                    if('Hls'in window&&window.Hls.isSupported()){
+                    if('Hls'in window&&Hls.isSupported()){
                       return hlsGo();
                     }
                   }
@@ -1844,7 +1848,7 @@
                 break;
               case'hls':
                 {
-                  if('Hls'in window&&window.Hls.isSupported()){
+                  if('Hls'in window&&Hls.isSupported()){
                     return hlsGo();
                   }
                 }
@@ -1857,11 +1861,11 @@
         }
       },
       /*🟢*/plugin_hls_observeLoad(){
-        if(!window.document.createElement('video').canPlayType('application/vnd.apple.mpegurl')){
+        if(!document.createElement('video').canPlayType('application/vnd.apple.mpegurl')){
           if(!'Hls'in window){
-            const script=window.document.createElement('script');
+            const script=document.createElement('script');
             script.setAttribute('src','https://cdn.jsdelivr.net/npm/hls.js@latest');
-            window.document.head.insertAdjacentElement('beforeend',script);
+            document.head.insertAdjacentElement('beforeend',script);
           }
           const load=(video)=>{
             if(video._hls_){
@@ -1869,8 +1873,8 @@
               delete video._hls_;
             }
             if(video.hasAttribute('src')&&video.getAttribute('src').match(/\.m3u8/i)){
-              if('Hls'in window&&window.Hls.isSupported()){
-                const hls=new window.Hls();
+              if('Hls'in window&&Hls.isSupported()){
+                const hls=new Hls();
                 hls.loadSource(video.getAttribute('src'));
                 hls.attachMedia(video);
                 video._hls_=hls;
@@ -1878,27 +1882,27 @@
             }
           };
           const query=()=>{
-            window.document.querySelectorAll('body *').forEach((target)=>{
+            document.querySelectorAll('body *').forEach((target)=>{
               if(target.localName==='video'){
                 load(target);
               }
             });
           };
           const observe=()=>{
-            new window.MutationObserver((mutation_list)=>{
+            new MutationObserver((mutation_list)=>{
               mutation_list.forEach((mutation)=>{
                 if(mutation.type==='attributes'&&mutation.target.localName==='video'){
                   load(mutation.target);
                 }
               });
-            }).observe(window.document.body,{attributes:true,attributeFilter:['src'],childList:true,subtree:true});
+            }).observe(document.body,{attributes:true,attributeFilter:['src'],childList:true,subtree:true});
           };
-          if(window.document.readyState==='complete'){
+          if(document.readyState==='complete'){
             query();
             observe();
           }else{
-            window.document.addEventListener('load',query,{once:true});
-            window.document.addEventListener('load',observe,{once:true});
+            document.addEventListener('load',query,{once:true});
+            document.addEventListener('load',observe,{once:true});
           }
         }
       },
@@ -1911,7 +1915,7 @@
     // unknown
       /*🟢*/mediaQuery:{
         async _URIMode(arg,callback){
-          switch(window.Object.prototype.toString.call(arg[0])){
+          switch(Object.prototype.toString.call(arg[0])){
             case'[object String]':
               {
                 return callback(arg[0],arg);
@@ -1963,10 +1967,10 @@
                 },0);
               }
               if(info){
-                result._page_=window.parseInt(data.result.page);
-                result._pagecount_=window.parseInt(data.result.pagecount);
-                result._limit_=window.parseInt(data.result.limit);
-                result._total_=window.parseInt(data.result.total);
+                result._page_=parseInt(data.result.page);
+                result._pagecount_=parseInt(data.result.pagecount);
+                result._limit_=parseInt(data.result.limit);
+                result._total_=parseInt(data.result.total);
               }
             }
             return result;
@@ -2125,24 +2129,28 @@
       }
     // other
   };
-  // merge webAssembly rust module
+  // merge webAssembly rust
   await machineTool.webAssembly('./machine_tool_wasm_rust/result/machine_tool_wasm_rust.js',(module)=>{
     for(const key in module){
       module[key]._isWebAssembly_=true;
       module[key]._webAssemblyType_='rust';
     }
-    window.Object.assign(machineTool,module);
+    Object.assign(machineTool,module);
   });
-  // // merge webAssembly c module
+  // // merge webAssembly c
   // await machineTool.webAssembly('./machine_tool_wasm_c/result/machine_tool_wasm_c.js',(module)=>{
   //   for(const key in module){
   //     module[key]._isWebAssembly_=true;
   //     module[key]._webAssemblyType_='c';
   //   }
-  //   window.Object.assign(machineTool,module);
+  //   Object.assign(machineTool,module);
   // });
+  // merge underscore
+  await machineTool.import('./package/underscore/underscore-esm-min.js',(module)=>{
+    machineTool._=module;
+  });
 // #build
 // #debug
 // #after
   // console
-  window.console.log('#### end: machineTool.js');
+  console.log('#### end: machineTool.js');
