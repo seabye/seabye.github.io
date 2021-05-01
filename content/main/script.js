@@ -142,10 +142,8 @@
       webAssembly(){
         console.log('++++ machineTool webAssembly rust module, test():',machineTool.test());
         console.log('++++ machineTool webAssembly rust module, test._isWebAssembly_:',machineTool.test._isWebAssembly_);
-        console.log('++++ machineTool webAssembly rust module, test._webAssemblyType_:',machineTool.test._webAssemblyType_);
         // console.log('++++ machineTool webAssembly c module, test():',machineTool.test());
         // console.log('++++ machineTool webAssembly c module, test._isWebAssembly_:',machineTool.test._isWebAssembly_);
-        // console.log('++++ machineTool webAssembly c module, test._webAssemblyType_:',machineTool.test._webAssemblyType_);
       },
       file_(){
         machineTool.elementCreate('input',{type:'file',multiple:'',accept:'image/*'},document.body,undefined,undefined,(input)=>{
@@ -163,31 +161,32 @@
               arrayBuffer.addEventListener('load',function(){
                 console.log(this.result);
               });
-              // dataURL ~ base64
+              // dataURL
               const dataURL=new FileReader();
               dataURL.readAsDataURL(BLObFile);
               dataURL.addEventListener('load',function(){
                 console.log(this.result);
               });
-                // objectURL
+              /* ~~~~ ~~~~ ~~~~ ~~~~ */
+              // objectURL
+              machineTool.elementCreate('img',{src:objectURL},document.body,undefined,undefined,(element)=>{
+                element.addEventListener('load',()=>{
+                  URL.revokeObjectURL(objectURL);
+                });
+              });
+              // arrayBuffer ~ objectURL
+              arrayBuffer.addEventListener('load',function(){
+                const objectURL=URL.createObjectURL(new Blob([this.result],{type:BLObFile.type}));
                 machineTool.elementCreate('img',{src:objectURL},document.body,undefined,undefined,(element)=>{
                   element.addEventListener('load',()=>{
                     URL.revokeObjectURL(objectURL);
                   });
                 });
-                // arrayBuffer ~ objectURL
-                arrayBuffer.addEventListener('load',function(){
-                  const objectURL=URL.createObjectURL(new Blob([this.result],{type:BLObFile.type}));
-                  machineTool.elementCreate('img',{src:objectURL},document.body,undefined,undefined,(element)=>{
-                    element.addEventListener('load',()=>{
-                      URL.revokeObjectURL(objectURL);
-                    });
-                  });
-                });
-                // dataURL
-                dataURL.addEventListener('load',function(){
-                  machineTool.elementCreate('img',{src:this.result},document.body);
-                });
+              });
+              // dataURL
+              dataURL.addEventListener('load',function(){
+                machineTool.elementCreate('img',{src:this.result},document.body);
+              });
             }
           });
         });

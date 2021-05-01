@@ -409,13 +409,9 @@
         });
       },
     // local data
-      /*🔴*//**
-       * @param {object} listenElement element
-       * @param {function} progressCallback
-       * @param {string} [resultType='objectURL'] 'objectURL','dataURL','arrayBuffer','text','binaryString',undefined='objectURL'
-       * @return {*} :resultType
-       */
-      file(listenElement,progressCallback,resultType='objectURL'){
+      /*🔴*/
+      file(listenElement,progressCallback,resultType='arrayBuffer'){
+        // resultType<'BLObFile','objectURL','arrayBuffer','dataURL',undefined='arrayBuffer'>
         console.log('==== file, ???');
       },
       /*🔴*/fileSystem(){},
@@ -531,7 +527,9 @@
       /*🔴*/siteMapGenerator(){},
       /*🔴*/siteMapHTMLGenerator(){},
     // graphics
-      /*🔴*/plugin_openCV_removeWatermark(){},
+      /*🔴*/plugin_openCV_removeWatermark(){
+        this.plugin_openCV_removeWatermark._includePackage_='openCV';
+      },
     // graphics engine
     // command line interface
       /*🔴*/cli(){},
@@ -1804,8 +1802,9 @@
         maxBufferLength:4,
         maxBufferSize:4*1000*1000
       }){
+        this.plugin_hls_load._includePackage_='hls';
         if(!('Hls'in window)){
-          this.elementCreate('script',{async:'',src:`${import.meta.url.replace('main/machineTool','package/hls/hls')}`},document.head);
+          this.elementCreate('script',{async:'',src:`${import.meta.url.replace('/main/machineTool.js','/package/hls@1.0.2/hls.min.js')}`},document.head);
         }
         this.loop(()=>{
           if('Hls'in window){
@@ -1870,6 +1869,7 @@
         });
       },
       /*🟢*/plugin_hls_observeLoad(){
+        this.plugin_hls_observeLoad._includePackage_='hls';
         if(!document.createElement('video').canPlayType('application/vnd.apple.mpegurl')){
           if(!('Hls'in window)){
             const script=document.createElement('script');
@@ -1925,6 +1925,8 @@
       /*🔴*/grid(){},
       /*🔴*/dictionaryColorVSC(){},
       /*🔴*/pageEditor(){},
+      /*🔴*/pageEncode(){},
+      /*🔴*/pageDecode(){},
       /*🔴*/uploadListEditor(){},
       /*🔴*/downloadListEditor(){},
     // package
@@ -1996,9 +1998,9 @@
           },
           /*🟢*/info(...arg){
             // machineTool.mediaQuery.video.info(URI,filter,iterator)
-            // URI<string,array>
-            // filter<object=({key:RE}),undefined>
-            // iterator<function,undefined>
+            //   URI<string,array>,
+            //   filter<object=({key:RE}),undefined>,
+            //   iterator<function,undefined>
             return machineTool.mediaQuery._URIMode(arg,(URI,...arg)=>{
               const filter=arg[0][1];
               const iterator=arg[0][2];
@@ -2019,11 +2021,11 @@
           },
           /*🔴*/all(...arg){
             // machineTool.mediaQuery.video.all(URI,filter,limit,start,end);
-            // URI<string,array>
-            // filter<object=({key:RE}),undefined>
-            // limit<number>
-            // start<number>
-            // end<number,undefined=start>
+            //   URI<string,array>,
+            //   filter<object=({key:RE}),undefined>,
+            //   limit<number>,
+            //   start<number>,
+            //   end<number,undefined=start>
             return machineTool.mediaQuery._URIMode(arg,(URI,...arg)=>{
               const filter=arg[0][1];
               const limit=arg[0][2];
@@ -2042,12 +2044,12 @@
           },
           /*🔴*/category(...arg){
             // machineTool.mediaQuery.video.category(URI,filter,category,limit,start,end);
-            // URI<string,array>
-            // filter<object=({key:RE}),undefined>
-            // category<number>
-            // limit<number>
-            // start<number>
-            // end<number,undefined=start>
+            //   URI<string,array>,
+            //   filter<object=({key:RE}),undefined>,
+            //   category<number>,
+            //   limit<number>,
+            //   start<number>,
+            //   end<number,undefined=start>
             return machineTool.mediaQuery._URIMode(arg,(URI,...arg)=>{
               const filter=arg[0][1];
               const category=arg[0][2];
@@ -2068,12 +2070,12 @@
           },
           /*🔴*/search(...arg){
             // machineTool.mediaQuery.video.search(URI,filter,search,limit,start,end);
-            // URI<string,array>
-            // filter<object=({key:RE}),undefined>
-            // search<string>
-            // limit<number>
-            // start<number>
-            // end<number,undefined=start>
+            //   URI<string,array>,
+            //   filter<object=({key:RE}),undefined>,
+            //   search<string>,
+            //   limit<number>,
+            //   start<number>,
+            //   end<number,undefined=start>
             return machineTool.mediaQuery._URIMode(arg,(URI,...arg)=>{
               const filter=arg[0][1];
               const search=arg[0][2];
@@ -2094,11 +2096,11 @@
           },
           /*🟢*/single(...arg){
             // machineTool.mediaQuery.video.single(URI,filter,start,end,iterator);
-            // URI<string>
-            // filter<object=({key:RE}),undefined>
-            // start<number>
-            // end<number,undefined=start>
-            // iterator<function,undefined>
+            //   URI<string>,
+            //   filter<object=({key:RE}),undefined>,
+            //   start<number>,
+            //   end<number,undefined=start>,
+            //   iterator<function,undefined>
             return machineTool.mediaQuery._URIMode(arg,async(URI,...arg)=>{
               const filter=arg[0][1];
               const start=arg[0][2];
@@ -2151,23 +2153,27 @@
   // merge webAssembly rust
   await machineTool.webAssembly('../module/machine_tool_wasm_rust/result/machine_tool_wasm_rust.js',(module)=>{
     for(const key in module){
-      module[key]._isWebAssembly_=true;
-      module[key]._webAssemblyType_='rust';
+      module[key]._isWebAssembly_='rust';
     }
     Object.assign(machineTool,module);
   });
   // // merge webAssembly c
   // await machineTool.webAssembly('../module/machine_tool_wasm_c/result/machine_tool_wasm_c.js',(module)=>{
   //   for(const key in module){
-  //     module[key]._isWebAssembly_=true;
-  //     module[key]._webAssemblyType_='c';
+  //     module[key]._isWebAssembly_='c';
   //   }
   //   Object.assign(machineTool,module);
   // });
-  // merge underscore
-  await machineTool.import('../package/underscore/underscore-esm-min.js',(module)=>{
+  // add underscore
+  await machineTool.import('../package/underscore@1.13.1/underscore-esm-min.js',(module)=>{
     machineTool._=module;
+    machineTool._._isPackage_='underscore';
   });
+  // // add quill
+  // await machineTool.import('../package/quill@1.3.7/quill.min.js',(module)=>{
+  //   machineTool.quill=module;
+  //   machineTool.quill._isPackage_='quill';
+  // });
 // #build
 // #debug
 // #after
