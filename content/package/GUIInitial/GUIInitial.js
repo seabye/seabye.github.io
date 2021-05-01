@@ -25,7 +25,7 @@
 // 'use strict';
 // // #before
 //   // console
-//   self.console.log('#### start: sw.js');
+//   console.log('#### start: sw.js');
 // // #import
 // // #variable
 // // #block
@@ -62,7 +62,7 @@
 // // #debug
 // // #after
 //   // console
-//   self.console.log('#### end: sw.js');
+//   console.log('#### end: sw.js');
 // ==== ==== ==== ====
 // manifest.webmanifest
 // ~~~~ ~~~~ ~~~~ ~~~~
