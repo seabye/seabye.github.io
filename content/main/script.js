@@ -139,13 +139,13 @@
       BLOb22ToUUID36(){
         console.log('++++ 8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3 jvZe6aA5S_Kks2h_zB88ww, BLOb22ToUUID36:',machineTool.BLOb22ToUUID36('jvZe6aA5S_Kks2h_zB88ww'));
       },
-      webAssembly(){
+      _webAssembly(){
         console.log('++++ machineTool webAssembly rust module, test():',machineTool.test());
         console.log('++++ machineTool webAssembly rust module, test._isWebAssembly_:',machineTool.test._isWebAssembly_);
         // console.log('++++ machineTool webAssembly c module, test():',machineTool.test());
         // console.log('++++ machineTool webAssembly c module, test._isWebAssembly_:',machineTool.test._isWebAssembly_);
       },
-      file_(){
+      _file_(){
         machineTool.elementCreate('input',{type:'file',multiple:'',accept:'image/*'},document.body,undefined,undefined,(input)=>{
           input.addEventListener('change',function(){
             for(let key=0,length=this.files.length;key<length;key++){
@@ -191,11 +191,21 @@
           });
         });
       },
-      file(){
+      _file(){
         machineTool.file();
       }
     },'_');
   });
+  machineTool.runObject({
+    async plugin_quill_create(){
+      //
+      document.documentElement.classList.remove('ic_dg','debug');
+      document.body.innerHTML='';
+      globalThis.machineTool=machineTool;
+      //
+      globalThis.editor=await machineTool.plugin_quill_create(document.body,undefined,undefined,'在此输入内容');
+    }
+  },'_');
 // #after
   // console
   console.log('#### end: script.js');

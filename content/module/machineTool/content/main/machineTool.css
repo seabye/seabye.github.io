@@ -8,6 +8,42 @@
 /* #import */
 /* #variable */
 /* #block */
+  /* 💠 base */
+  /* 💠 local data */
+  /* 💠 network data */
+  /* 💠 application programming interface */
+  /* 💠 graphics */
+  /* 💠 graphics engine */
+  /* 💠 command line interface */
+  /* 💠 graphical user interface */
+  /* 💠 user interface */
+    /* 💧 machineTool_plugin_quill */
+      /* overwrite */
+      .ql-toolbar.ql-snow,
+      .ql-container.ql-snow {
+        border-color: #80808080 !important;
+      }
+      .ql-toolbar.ql-snow .ql-formats:not(:first-child) {
+        margin-left: 15px !important;
+      }
+      .ql-toolbar.ql-snow .ql-formats {
+        margin-right: unset !important;
+      }
+      .ql-snow .ql-editor img {
+        border: 1px dashed #80808040 !important;
+      }
+      /* custom */
+      .machineTool_plugin_quill_container {
+        margin-top: -42px;
+        max-width: calc(100% - 4px);
+        max-height: calc(100% - 42px - 4px);
+      }
+      .machineTool_plugin_quill_container * {
+        line-height: unset;
+      }
+  /* 💠 package */
+  /* 💠 unknown */
+  /* 💠 other */
 /* #build */
 /* #debug */
 /* #after */

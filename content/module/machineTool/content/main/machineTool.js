@@ -527,9 +527,8 @@
       /*🔴*/siteMapGenerator(){},
       /*🔴*/siteMapHTMLGenerator(){},
     // graphics
-      /*🔴*/plugin_openCV_removeWatermark(){
-        this.plugin_openCV_removeWatermark._includePackage_='openCV';
-      },
+      /*🔴*/_plugin_openCV_load_(){},
+      /*🔴*/plugin_openCV_removeWatermark(){},
     // graphics engine
     // command line interface
       /*🔴*/cli(){},
@@ -1797,25 +1796,24 @@
           callback();
         }
       },
-      /*🟢*/plugin_hls_load(mode='auto',video,src,poster='',config={
+      /*🟢*/plugin_hls_play(mode='auto',video,src,poster='',config={
         autoStartLoad:video.getAttribute('preload')==='auto'?true:false,
         maxBufferLength:4,
         maxBufferSize:4*1000*1000
       }){
-        this.plugin_hls_load._includePackage_='hls';
         if(!('Hls'in window)){
           this.elementCreate('script',{async:'',src:`${import.meta.url.replace('/main/machineTool.js','/package/hls@1.0.2/hls.min.js')}`},document.head);
         }
         this.loop(()=>{
           if('Hls'in window){
             video.pause();
-            if(!this.plugin_hls_load.play){
-              this.plugin_hls_load.play=()=>{
+            if(!this.plugin_hls_play.play){
+              this.plugin_hls_play.play=()=>{
                 video._hls_.startLoad();
               };
             }
-            if(!this.plugin_hls_load.pause){
-              this.plugin_hls_load.pause=()=>{
+            if(!this.plugin_hls_play.pause){
+              this.plugin_hls_play.pause=()=>{
                 video._hls_.stopLoad();
               };
             }
@@ -1826,14 +1824,14 @@
                 if(video._hls_){
                   video._hls_.destroy();
                   delete video._hls_;
-                  video.removeEventListener('play',this.plugin_hls_load.play);
-                  video.removeEventListener('pause',this.plugin_hls_load.pause);
+                  video.removeEventListener('play',this.plugin_hls_play.play);
+                  video.removeEventListener('pause',this.plugin_hls_play.pause);
                 }
                 const hls=new Hls(config);
                 hls.loadSource(src);
                 hls.attachMedia(video);
-                video.addEventListener('play',this.plugin_hls_load.play);
-                video.addEventListener('pause',this.plugin_hls_load.pause);
+                video.addEventListener('play',this.plugin_hls_play.play);
+                video.addEventListener('pause',this.plugin_hls_play.pause);
                 video._hls_=hls;
                 return hls;
               };
@@ -1868,13 +1866,12 @@
           return false;
         });
       },
-      /*🟢*/plugin_hls_observeLoad(){
-        this.plugin_hls_observeLoad._includePackage_='hls';
+      /*🟢*/plugin_hls_observePlay(){
         if(!document.createElement('video').canPlayType('application/vnd.apple.mpegurl')){
           if(!('Hls'in window)){
             const script=document.createElement('script');
             script.setAttribute('async','');
-            script.setAttribute('src','https://cdn.jsdelivr.net/npm/hls.js@latest');
+            script.setAttribute('src',`${import.meta.url.replace('/main/machineTool.js','/package/hls@1.0.2/hls.min.js')}`);
             document.head.insertAdjacentElement('beforeend',script);
           }
           const load=(video)=>{
@@ -1929,6 +1926,164 @@
       /*🔴*/pageDecode(){},
       /*🔴*/uploadListEditor(){},
       /*🔴*/downloadListEditor(){},
+      /*🟢*/plugin_quill_create(insertElement,insertPosition,mode=[
+        ['bold','italic','underline','strike'],
+        [{'script':'sub'},{'script':'super'}],
+        ['image'],
+        ['clean']
+      ],placeholder='Compose an epic...',content='',readOnly=false){
+        if(!('Quill'in window)){
+          this.elementCreate('link',{rel:'stylesheet',href:`${import.meta.url.replace('/main/machineTool.js','/package/katex@0.13.3/katex.min.css')}`,crossorigin:''},document.head);
+          this.elementCreate('script',{async:'',src:`${import.meta.url.replace('/main/machineTool.js','/package/katex@0.13.3/katex.min.js')}`},document.head);
+          this.elementCreate('link',{rel:'stylesheet',href:`${import.meta.url.replace('/main/machineTool.js','/package/highlight@9.12.0/build/styles/monokai-sublime.min.css')}`,crossorigin:''},document.head);
+          this.elementCreate('script',{async:'',src:`${import.meta.url.replace('/main/machineTool.js','/package/highlight@9.12.0/build/highlight.min.js')}`},document.head);
+          this.elementCreate('link',{rel:'stylesheet',href:`${import.meta.url.replace('/main/machineTool.js','/package/quill@1.3.7/quill.snow.css')}`,crossorigin:''},document.head);
+          this.elementCreate('script',{async:'',src:`${import.meta.url.replace('/main/machineTool.js','/package/quill@1.3.7/quill.min.js')}`},document.head);
+          this.loop(()=>{
+            if('hljs'in window){
+              hljs.configure({
+                useBR:false
+              });
+              hljs.initHighlightingOnLoad();
+              return true;
+            }
+            return false;
+          });
+        }
+        let HTML='';
+        switch(mode){
+          case'full':
+            {
+              HTML=
+`<div class="machineTool_plugin_quill_full_toolbar">
+  <span class="ql-formats">
+    <select class="ql-font"></select>
+    <select class="ql-size"></select>
+  </span>
+  <span class="ql-formats">
+    <button class="ql-bold"></button>
+    <button class="ql-italic"></button>
+    <button class="ql-underline"></button>
+    <button class="ql-strike"></button>
+  </span>
+  <span class="ql-formats">
+    <select class="ql-color"></select>
+    <select class="ql-background"></select>
+  </span>
+  <span class="ql-formats">
+    <button class="ql-script" value="sub"></button>
+    <button class="ql-script" value="super"></button>
+  </span>
+  <span class="ql-formats">
+    <button class="ql-header" value="1"></button>
+    <button class="ql-header" value="2"></button>
+    <button class="ql-blockquote"></button>
+    <button class="ql-code-block"></button>
+  </span>
+  <span class="ql-formats">
+    <button class="ql-list" value="ordered"></button>
+    <button class="ql-list" value="bullet"></button>
+    <button class="ql-indent" value="-1"></button>
+    <button class="ql-indent" value="+1"></button>
+  </span>
+  <span class="ql-formats">
+    <button class="ql-direction" value="rtl"></button>
+    <select class="ql-align"></select>
+  </span>
+  <span class="ql-formats">
+    <button class="ql-link"></button>
+    <button class="ql-image"></button>
+    <button class="ql-video"></button>
+    <button class="ql-formula"></button>
+  </span>
+  <span class="ql-formats">
+    <button class="ql-clean"></button>
+  </span>
+</div>
+<div class="machineTool_plugin_quill_full_container">${content}</div>`
+              ;
+            }
+            break;
+          case'snow':
+            {
+              HTML=`<div class="machineTool_plugin_quill_snow_container">${content}</div>`;
+            }
+            break;
+          case'bubble':
+            {
+              HTML=`<div class="machineTool_plugin_quill_bubble_container">${content}</div>`;
+            }
+            break;
+          default:
+            {
+              HTML=`<div class="machineTool_plugin_quill_custom_container">${content}</div>`;
+            }
+            break;
+        }
+        return this.loop(()=>{
+          if('Quill'in window){
+            return machineTool.elementCreate('div',{class:'machineTool_plugin_quill_container'},insertElement,insertPosition,HTML,(element)=>{
+              switch(mode){
+                case'full':
+                  {
+                    element.machineTool_plugin_quill=new Quill('.machineTool_plugin_quill_full_container',{
+                      modules:{
+                        formula:true,
+                        syntax:true,
+                        toolbar:'.machineTool_plugin_quill_full_toolbar'
+                      },
+                      placeholder:placeholder,
+                      readOnly:readOnly,
+                      theme:'snow'
+                    });
+                  }
+                  break;
+                case'snow':
+                  {
+                    element.machineTool_plugin_quill=new Quill('.machineTool_plugin_quill_snow_container',{
+                      modules:{
+                        formula:true,
+                        syntax:true
+                      },
+                      placeholder:placeholder,
+                      readOnly:readOnly,
+                      theme:'snow'
+                    });
+                  }
+                  break;
+                case'bubble':
+                  {
+                    element.machineTool_plugin_quill=new Quill('.machineTool_plugin_quill_bubble_container',{
+                      modules:{
+                        formula:true,
+                        syntax:true
+                      },
+                      placeholder:placeholder,
+                      readOnly:readOnly,
+                      theme:'bubble'
+                    });
+                  }
+                  break;
+                default:
+                  {
+                    element.machineTool_plugin_quill=new Quill('.machineTool_plugin_quill_custom_container',{
+                      modules:{
+                        formula:true,
+                        syntax:true,
+                        toolbar:mode
+                      },
+                      placeholder:placeholder,
+                      readOnly:readOnly,
+                      theme:'snow'
+                    });
+                  }
+                  break;
+              }
+            });
+          }
+          return false;
+        });
+      },
     // package
       /*🔴*/applicationPackage(){},
       /*🔴*/bookPackage(){},
@@ -2150,13 +2305,15 @@
       }
     // other
   };
-  // merge webAssembly rust
-  await machineTool.webAssembly('../module/machine_tool_wasm_rust/result/machine_tool_wasm_rust.js',(module)=>{
-    for(const key in module){
-      module[key]._isWebAssembly_='rust';
-    }
-    Object.assign(machineTool,module);
-  });
+  // CSS
+  machineTool.elementCreate('link',{rel:'stylesheet',href:`${import.meta.url.replace('machineTool.js','machineTool.css')}`,crossorigin:''},document.head);
+  // // merge webAssembly rust
+  // await machineTool.webAssembly('../module/machine_tool_wasm_rust/result/machine_tool_wasm_rust.js',(module)=>{
+  //   for(const key in module){
+  //     module[key]._isWebAssembly_='rust';
+  //   }
+  //   Object.assign(machineTool,module);
+  // });
   // // merge webAssembly c
   // await machineTool.webAssembly('../module/machine_tool_wasm_c/result/machine_tool_wasm_c.js',(module)=>{
   //   for(const key in module){
@@ -2164,15 +2321,10 @@
   //   }
   //   Object.assign(machineTool,module);
   // });
-  // add underscore
-  await machineTool.import('../package/underscore@1.13.1/underscore-esm-min.js',(module)=>{
-    machineTool._=module;
-    machineTool._._isPackage_='underscore';
-  });
-  // // add quill
-  // await machineTool.import('../package/quill@1.3.7/quill.min.js',(module)=>{
-  //   machineTool.quill=module;
-  //   machineTool.quill._isPackage_='quill';
+  // // add underscore
+  // await machineTool.import('../package/underscore@1.13.1/underscore-esm-min.js',(module)=>{
+  //   machineTool._=module;
+  //   machineTool._._isPackage_='underscore';
   // });
 // #build
 // #debug
