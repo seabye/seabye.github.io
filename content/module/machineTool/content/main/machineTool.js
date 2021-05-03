@@ -1751,7 +1751,7 @@
         });
       },
       /*🟢*/fullScreen(element=document.documentElement,top=false){
-        const root=top?top:window;
+        const root=top?top:globalThis;
         if(navigator.userAgent.match(/iPhone|iPad/i)&&element.webkitSupportsFullscreen){
           if(element.webkitDisplayingFullscreen){
             element.webkitExitFullScreen();
@@ -1807,11 +1807,11 @@
         maxBufferLength:4,
         maxBufferSize:4*1000*1000
       }){
-        if(!('Hls'in window)){
+        if(!('Hls'in globalThis)){
           this.elementCreate('script',{async:'',src:`${import.meta.url.replace('/main/machineTool.js','/package/hls@1.0.2/hls.min.js')}`},document.head);
         }
         this.loop(()=>{
-          if('Hls'in window){
+          if('Hls'in globalThis){
             video.pause();
             if(!this.plugin_hls_play.play){
               this.plugin_hls_play.play=()=>{
@@ -1848,7 +1848,7 @@
                       if(video.canPlayType('application/vnd.apple.mpegurl')){
                         return true;
                       }else{
-                        if('Hls'in window&Hls.isSupported()){
+                        if('Hls'in globalThis&&Hls.isSupported()){
                           return hlsGo();
                         }
                       }
@@ -1856,7 +1856,7 @@
                     break;
                   case'hls':
                     {
-                      if('Hls'in window&Hls.isSupported()){
+                      if('Hls'in globalThis&&Hls.isSupported()){
                         return hlsGo();
                       }
                     }
@@ -1874,7 +1874,7 @@
       },
       /*🟢*/plugin_hls_observePlay(){
         if(!document.createElement('video').canPlayType('application/vnd.apple.mpegurl')){
-          if(!('Hls'in window)){
+          if(!('Hls'in globalThis)){
             const script=document.createElement('script');
             script.setAttribute('async','');
             script.setAttribute('src',`${import.meta.url.replace('/main/machineTool.js','/package/hls@1.0.2/hls.min.js')}`);
@@ -1886,7 +1886,7 @@
               delete video._hls_;
             }
             if(video.hasAttribute('src')&&video.getAttribute('src').match(/\.m3u8/i)){
-              if('Hls'in window&Hls.isSupported()){
+              if('Hls'in globalThis&&Hls.isSupported()){
                 const hls=new Hls({
                   autoStartLoad:video.getAttribute('preload')==='auto'?true:false,
                   maxBufferLength:4,
@@ -1939,7 +1939,7 @@
           ['image'],
           ['clean']
         ],placeholder='Compose an epic...',content='',readOnly=false){
-        if(!('Quill'in window)){
+        if(!('Quill'in globalThis)){
           this.elementCreate('link',{rel:'stylesheet',href:`${import.meta.url.replace('/main/machineTool.js','/package/katex@0.13.3/katex.min.css')}`,crossorigin:''},document.head);
           this.elementCreate('script',{async:'',src:`${import.meta.url.replace('/main/machineTool.js','/package/katex@0.13.3/katex.min.js')}`},document.head);
           this.elementCreate('link',{rel:'stylesheet',href:`${import.meta.url.replace('/main/machineTool.js','/package/highlight@9.12.0/build/styles/monokai-sublime.min.css')}`,crossorigin:''},document.head);
@@ -1948,7 +1948,7 @@
           this.elementCreate('link',{rel:'stylesheet',href:`${import.meta.url.replace('/main/machineTool.js','/package/quill@1.3.7/quill.bubble.css')}`,crossorigin:''},document.head);
           this.elementCreate('script',{async:'',src:`${import.meta.url.replace('/main/machineTool.js','/package/quill@1.3.7/quill.min.js')}`},document.head);
           this.loop(()=>{
-            if('hljs'in window){
+            if('hljs'in globalThis){
               hljs.configure({
                 useBR:false
               });
@@ -1986,7 +1986,7 @@
           }
         }
         return this.loop(()=>{
-          if('katex'in window&'hljs'in window&'Quill'in window){
+          if('katex'in globalThis&&'hljs'in globalThis&&'Quill'in globalThis){
             return machineTool.elementCreate(
               'div',
               {
