@@ -429,7 +429,7 @@
           }
     /* text */
     a {
-      vertical-align: unset;
+      /* vertical-align: unset; */
       color: currentColor;
       text-decoration: unset;
       cursor: default;
@@ -503,7 +503,7 @@
   html:not(.ic_nr_platform_mobile) ::-webkit-scrollbar-thumb:active {
     background-color: var(--ic_ve_color_black4_opacity);
   }
-  html:not(.ic_nr_platform_mobile) ::-webkit-scrollbar-button:single-button {
+  /* html:not(.ic_nr_platform_mobile) ::-webkit-scrollbar-button:single-button {
     height: 8px;
     width: 8px;
     border: 3px solid rgba(0,0,0,0);
@@ -513,7 +513,7 @@
   }
   html:not(.ic_nr_platform_mobile) ::-webkit-scrollbar-button:single-button:active {
     background-color: var(--ic_ve_color_black4_opacity);
-  }
+  } */
 /* #debug */
   /* wireframe */
   html.ic_dg,

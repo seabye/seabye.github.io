@@ -348,6 +348,12 @@
         }
         return`${current/total*100}${unit}`;
       },
+      /*🟢*/UUID(){
+        const objectURL=URL.createObjectURL(new Blob([''],{type:'text/plain'}));
+        const result=objectURL.match(/.+\/(.+)/).pop();
+        URL.revokeObjectURL(objectURL);
+        return result;
+      },
       /*🟢*/UUID36ToBLOb22(UUID36){
         if(UUID36.length===36){
           const UUID32='0'+UUID36.replace(/-/g,'');
@@ -1927,17 +1933,19 @@
       /*🔴*/uploadListEditor(){},
       /*🔴*/downloadListEditor(){},
       /*🟢*/plugin_quill_create(insertElement,insertPosition,mode=[
-        ['bold','italic','underline','strike'],
-        [{'script':'sub'},{'script':'super'}],
-        ['image'],
-        ['clean']
-      ],placeholder='Compose an epic...',content='',readOnly=false){
+          ['bold','italic','underline','strike'],
+          [{'script':'sub'},{'script':'super'}],
+          [{'list':'ordered'},{'list':'bullet'},{'indent':'-1'},{'indent':'+1'}],
+          ['image'],
+          ['clean']
+        ],placeholder='Compose an epic...',content='',readOnly=false){
         if(!('Quill'in window)){
           this.elementCreate('link',{rel:'stylesheet',href:`${import.meta.url.replace('/main/machineTool.js','/package/katex@0.13.3/katex.min.css')}`,crossorigin:''},document.head);
           this.elementCreate('script',{async:'',src:`${import.meta.url.replace('/main/machineTool.js','/package/katex@0.13.3/katex.min.js')}`},document.head);
           this.elementCreate('link',{rel:'stylesheet',href:`${import.meta.url.replace('/main/machineTool.js','/package/highlight@9.12.0/build/styles/monokai-sublime.min.css')}`,crossorigin:''},document.head);
           this.elementCreate('script',{async:'',src:`${import.meta.url.replace('/main/machineTool.js','/package/highlight@9.12.0/build/highlight.min.js')}`},document.head);
           this.elementCreate('link',{rel:'stylesheet',href:`${import.meta.url.replace('/main/machineTool.js','/package/quill@1.3.7/quill.snow.css')}`,crossorigin:''},document.head);
+          this.elementCreate('link',{rel:'stylesheet',href:`${import.meta.url.replace('/main/machineTool.js','/package/quill@1.3.7/quill.bubble.css')}`,crossorigin:''},document.head);
           this.elementCreate('script',{async:'',src:`${import.meta.url.replace('/main/machineTool.js','/package/quill@1.3.7/quill.min.js')}`},document.head);
           this.loop(()=>{
             if('hljs'in window){
@@ -1950,135 +1958,38 @@
             return false;
           });
         }
-        let HTML='';
-        switch(mode){
-          case'full':
-            {
-              HTML=
-`<div class="machineTool_plugin_quill_full_toolbar">
-  <span class="ql-formats">
-    <select class="ql-font"></select>
-    <select class="ql-size"></select>
-  </span>
-  <span class="ql-formats">
-    <button class="ql-bold"></button>
-    <button class="ql-italic"></button>
-    <button class="ql-underline"></button>
-    <button class="ql-strike"></button>
-  </span>
-  <span class="ql-formats">
-    <select class="ql-color"></select>
-    <select class="ql-background"></select>
-  </span>
-  <span class="ql-formats">
-    <button class="ql-script" value="sub"></button>
-    <button class="ql-script" value="super"></button>
-  </span>
-  <span class="ql-formats">
-    <button class="ql-header" value="1"></button>
-    <button class="ql-header" value="2"></button>
-    <button class="ql-blockquote"></button>
-    <button class="ql-code-block"></button>
-  </span>
-  <span class="ql-formats">
-    <button class="ql-list" value="ordered"></button>
-    <button class="ql-list" value="bullet"></button>
-    <button class="ql-indent" value="-1"></button>
-    <button class="ql-indent" value="+1"></button>
-  </span>
-  <span class="ql-formats">
-    <button class="ql-direction" value="rtl"></button>
-    <select class="ql-align"></select>
-  </span>
-  <span class="ql-formats">
-    <button class="ql-link"></button>
-    <button class="ql-image"></button>
-    <button class="ql-video"></button>
-    <button class="ql-formula"></button>
-  </span>
-  <span class="ql-formats">
-    <button class="ql-clean"></button>
-  </span>
-</div>
-<div class="machineTool_plugin_quill_full_container">${content}</div>`
-              ;
-            }
-            break;
-          case'snow':
-            {
-              HTML=`<div class="machineTool_plugin_quill_snow_container">${content}</div>`;
-            }
-            break;
-          case'bubble':
-            {
-              HTML=`<div class="machineTool_plugin_quill_bubble_container">${content}</div>`;
-            }
-            break;
-          default:
-            {
-              HTML=`<div class="machineTool_plugin_quill_custom_container">${content}</div>`;
-            }
-            break;
-        }
+        const UUID=this.UUID();
+        const HTML=`<div class="machineTool_plugin_quill_${typeof mode==='string'?mode:'custom'}_container machineTool_plugin_quill_UUID_${UUID}">${content}</div>`;
         return this.loop(()=>{
-          if('Quill'in window){
+          if('katex'in window&'hljs'in window&'Quill'in window){
             return machineTool.elementCreate('div',{class:'machineTool_plugin_quill_container'},insertElement,insertPosition,HTML,(element)=>{
-              switch(mode){
-                case'full':
-                  {
-                    element.machineTool_plugin_quill=new Quill('.machineTool_plugin_quill_full_container',{
-                      modules:{
-                        formula:true,
-                        syntax:true,
-                        toolbar:'.machineTool_plugin_quill_full_toolbar'
-                      },
-                      placeholder:placeholder,
-                      readOnly:readOnly,
-                      theme:'snow'
-                    });
-                  }
-                  break;
-                case'snow':
-                  {
-                    element.machineTool_plugin_quill=new Quill('.machineTool_plugin_quill_snow_container',{
-                      modules:{
-                        formula:true,
-                        syntax:true
-                      },
-                      placeholder:placeholder,
-                      readOnly:readOnly,
-                      theme:'snow'
-                    });
-                  }
-                  break;
-                case'bubble':
-                  {
-                    element.machineTool_plugin_quill=new Quill('.machineTool_plugin_quill_bubble_container',{
-                      modules:{
-                        formula:true,
-                        syntax:true
-                      },
-                      placeholder:placeholder,
-                      readOnly:readOnly,
-                      theme:'bubble'
-                    });
-                  }
-                  break;
-                default:
-                  {
-                    element.machineTool_plugin_quill=new Quill('.machineTool_plugin_quill_custom_container',{
-                      modules:{
-                        formula:true,
-                        syntax:true,
-                        toolbar:mode
-                      },
-                      placeholder:placeholder,
-                      readOnly:readOnly,
-                      theme:'snow'
-                    });
-                  }
-                  break;
+              const option={
+                modules:{
+                  formula:true,
+                  syntax:true
+                },
+                placeholder:placeholder,
+                readOnly:readOnly,
+                theme:mode==='bubble'?'bubble':'snow'
+              };
+              if(mode==='full'){
+                option.modules.toolbar=[
+                  [{'font':[]},{'size':[]}],
+                  ['bold','italic','underline','strike'],
+                  ['color','background'],
+                  [{'script':'sub'},{'script':'super'}],
+                  [{'header':'1'},{'header':'2'},'blockquote','code-block'],
+                  [{'list':'ordered'},{'list':'bullet'},{'indent':'-1'},{'indent':'+1'}],
+                  [{'direction':'rtl'},'align'],
+                  ['link','image','video','formula'],
+                  ['clean']
+                ];
+              }else{
+                if(typeof mode!=='string'){
+                  option.modules.toolbar=mode;
+                }
               }
+              element.machineTool_plugin_quill=new Quill(`.machineTool_plugin_quill_${typeof mode==='string'?mode:'custom'}_container.machineTool_plugin_quill_UUID_${UUID}`,option);
             });
           }
           return false;

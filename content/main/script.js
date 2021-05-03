@@ -18,7 +18,7 @@
     for(const value of document.documentElement.children){
       if(value.localName==='body'){
         document.body.insertAdjacentHTML('beforeend',`
-          <div style="background-color: #1F2023BF; perspective: 100vw;">
+          <div class="seabye" style="background-color: #1F2023BF; perspective: 100vw;">
             <div style="font-size: calc(100vmax/25); background-color: #1F2023BF; transform: rotateX(-15deg); text-align: center; perspective: 61.8vw;">
               <div style="transform: rotateY(-60deg);">
                 <a href="//seabye.com">seabye.com</a>
@@ -203,7 +203,11 @@
       document.body.innerHTML='';
       globalThis.machineTool=machineTool;
       //
+      globalThis.editor=await machineTool.plugin_quill_create(document.body,undefined,'full','在此输入内容');
+      globalThis.editor=await machineTool.plugin_quill_create(document.body,undefined,'snow','在此输入内容');
+      globalThis.editor=await machineTool.plugin_quill_create(document.body,undefined,'bubble','在此输入内容');
       globalThis.editor=await machineTool.plugin_quill_create(document.body,undefined,undefined,'在此输入内容');
+      globalThis.editor=await machineTool.plugin_quill_create(document.body,undefined,['clean','clear'],'在此输入内容');
     }
   },'_');
 // #after
