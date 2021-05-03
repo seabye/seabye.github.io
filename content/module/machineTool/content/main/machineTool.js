@@ -1935,24 +1935,27 @@
       /*🟢*/plugin_quill_create(insertElement,insertPosition,mode=[
           ['bold','italic','underline','strike'],
           [{'script':'sub'},{'script':'super'}],
+          [{'header':'1'},{'header':'2'},'blockquote','code-block'],
           [{'list':'ordered'},{'list':'bullet'},{'indent':'-1'},{'indent':'+1'}],
-          ['image'],
+          ['link','image','video','formula'],
           ['clean']
-        ],placeholder='Compose an epic...',content='',readOnly=false){
+        ],placeholder='...',content='',readOnly=false,width,height,important){
         if(!('Quill'in globalThis)){
           this.elementCreate('link',{rel:'stylesheet',href:`${import.meta.url.replace('/main/machineTool.js','/package/katex@0.13.3/katex.min.css')}`,crossorigin:''},document.head);
           this.elementCreate('script',{async:'',src:`${import.meta.url.replace('/main/machineTool.js','/package/katex@0.13.3/katex.min.js')}`},document.head);
-          this.elementCreate('link',{rel:'stylesheet',href:`${import.meta.url.replace('/main/machineTool.js','/package/highlight@9.12.0/build/styles/monokai-sublime.min.css')}`,crossorigin:''},document.head);
-          this.elementCreate('script',{async:'',src:`${import.meta.url.replace('/main/machineTool.js','/package/highlight@9.12.0/build/highlight.min.js')}`},document.head);
+          this.elementCreate('link',{rel:'stylesheet',href:`${import.meta.url.replace('/main/machineTool.js','/package/highlight@10.7.2/build/styles/monokai-sublime.min.css')}`,crossorigin:''},document.head);
+          this.elementCreate('script',{async:'module',src:`${import.meta.url.replace('/main/machineTool.js','/package/highlight@10.7.2/build/highlight.min.js')}`},document.head);
           this.elementCreate('link',{rel:'stylesheet',href:`${import.meta.url.replace('/main/machineTool.js','/package/quill@1.3.7/quill.snow.css')}`,crossorigin:''},document.head);
           this.elementCreate('link',{rel:'stylesheet',href:`${import.meta.url.replace('/main/machineTool.js','/package/quill@1.3.7/quill.bubble.css')}`,crossorigin:''},document.head);
-          this.elementCreate('script',{async:'',src:`${import.meta.url.replace('/main/machineTool.js','/package/quill@1.3.7/quill.min.js')}`},document.head);
+          setTimeout(()=>{
+            this.elementCreate('script',{async:'',src:`${import.meta.url.replace('/main/machineTool.js','/package/quill@1.3.7/quill.min.js')}`},document.head);
+          },350);
           this.loop(()=>{
             if('hljs'in globalThis){
               hljs.configure({
                 useBR:false
               });
-              hljs.initHighlightingOnLoad();
+              hljs.highlightAll();
               return true;
             }
             return false;
@@ -1987,14 +1990,18 @@
         }
         return this.loop(()=>{
           if('katex'in globalThis&&'hljs'in globalThis&&'Quill'in globalThis){
-            return machineTool.elementCreate(
+            const attribute={
+              class:'machineTool_plugin_quill_container'
+            };
+            if(width||height){
+              attribute.style=`${width?`width: ${width}; `:''}${height?`height: ${height};`:''}`;
+            }
+            const result=machineTool.elementCreate(
               'div',
-              {
-                class:'machineTool_plugin_quill_container'
-              },
+              attribute,
               insertElement,
               insertPosition,
-              `<div class="machineTool_plugin_quill_${typeof mode==='string'?mode:'custom'}_container machineTool_plugin_quill_UUID_${UUID}">${content}</div>`,
+              `<div class="machineTool_plugin_quill_${typeof mode==='string'?mode:'custom'}_container machineTool_plugin_quill_UUID_${UUID}">${typeof content==='string'?content:''}</div>`,
               (element)=>{
                 element.machineTool_plugin_quill=new Quill(
                   `.machineTool_plugin_quill_${typeof mode==='string'?mode:'custom'}_container.machineTool_plugin_quill_UUID_${UUID}`,
@@ -2002,6 +2009,10 @@
                 );
               }
             );
+            if(typeof content==='object'){
+              result.machineTool_plugin_quill.setContents(content);
+            }
+            return result;
           }
           return false;
         });

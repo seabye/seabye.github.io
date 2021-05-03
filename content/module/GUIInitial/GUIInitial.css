@@ -241,6 +241,11 @@
     --ic_ve_shadow_24dp3: 0 24px 38px 3px rgba(0,0,0,0.05),0 9px 46px 8px rgba(0,0,0,0.04),0 11px 15px -7px rgba(0,0,0,0.13);
   }
   /* font */
+    /* lineHeight */
+    html {
+      --ic_ve_font_lineHeight_initial: 100%;
+      --ic_ve_font_lineHeight_text: 138.2%;
+    }
     /* family */
     html {
       --ic_ve_font_family_sansSerif: sans-serif;
@@ -367,7 +372,7 @@
   ::before,
   ::after {
     box-sizing: border-box;
-    line-height: 100%;
+    line-height: var(--ic_ve_font_lineHeight_initial);
     /* vertical-align: middle; */
     outline: unset;
     touch-action: pan-x pan-y;
