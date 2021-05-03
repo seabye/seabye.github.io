@@ -1959,38 +1959,49 @@
           });
         }
         const UUID=this.UUID();
-        const HTML=`<div class="machineTool_plugin_quill_${typeof mode==='string'?mode:'custom'}_container machineTool_plugin_quill_UUID_${UUID}">${content}</div>`;
+        const option={
+          modules:{
+            formula:true,
+            syntax:true
+          },
+          placeholder:placeholder,
+          readOnly:readOnly,
+          theme:mode==='bubble'?'bubble':'snow'
+        };
+        if(mode==='full'){
+          option.modules.toolbar=[
+            [{'font':[]},{'size':[]}],
+            ['bold','italic','underline','strike'],
+            ['color','background'],
+            [{'script':'sub'},{'script':'super'}],
+            [{'header':'1'},{'header':'2'},'blockquote','code-block'],
+            [{'list':'ordered'},{'list':'bullet'},{'indent':'-1'},{'indent':'+1'}],
+            [{'direction':'rtl'},'align'],
+            ['link','image','video','formula'],
+            ['clean']
+          ];
+        }else{
+          if(typeof mode!=='string'){
+            option.modules.toolbar=mode;
+          }
+        }
         return this.loop(()=>{
           if('katex'in window&'hljs'in window&'Quill'in window){
-            return machineTool.elementCreate('div',{class:'machineTool_plugin_quill_container'},insertElement,insertPosition,HTML,(element)=>{
-              const option={
-                modules:{
-                  formula:true,
-                  syntax:true
-                },
-                placeholder:placeholder,
-                readOnly:readOnly,
-                theme:mode==='bubble'?'bubble':'snow'
-              };
-              if(mode==='full'){
-                option.modules.toolbar=[
-                  [{'font':[]},{'size':[]}],
-                  ['bold','italic','underline','strike'],
-                  ['color','background'],
-                  [{'script':'sub'},{'script':'super'}],
-                  [{'header':'1'},{'header':'2'},'blockquote','code-block'],
-                  [{'list':'ordered'},{'list':'bullet'},{'indent':'-1'},{'indent':'+1'}],
-                  [{'direction':'rtl'},'align'],
-                  ['link','image','video','formula'],
-                  ['clean']
-                ];
-              }else{
-                if(typeof mode!=='string'){
-                  option.modules.toolbar=mode;
-                }
+            return machineTool.elementCreate(
+              'div',
+              {
+                class:'machineTool_plugin_quill_container'
+              },
+              insertElement,
+              insertPosition,
+              `<div class="machineTool_plugin_quill_${typeof mode==='string'?mode:'custom'}_container machineTool_plugin_quill_UUID_${UUID}">${content}</div>`,
+              (element)=>{
+                element.machineTool_plugin_quill=new Quill(
+                  `.machineTool_plugin_quill_${typeof mode==='string'?mode:'custom'}_container.machineTool_plugin_quill_UUID_${UUID}`,
+                  option
+                );
               }
-              element.machineTool_plugin_quill=new Quill(`.machineTool_plugin_quill_${typeof mode==='string'?mode:'custom'}_container.machineTool_plugin_quill_UUID_${UUID}`,option);
-            });
+            );
           }
           return false;
         });

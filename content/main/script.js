@@ -203,11 +203,11 @@
       document.body.innerHTML='';
       globalThis.machineTool=machineTool;
       //
-      globalThis.editor=await machineTool.plugin_quill_create(document.body,undefined,'full','在此输入内容');
-      globalThis.editor=await machineTool.plugin_quill_create(document.body,undefined,'snow','在此输入内容');
-      globalThis.editor=await machineTool.plugin_quill_create(document.body,undefined,'bubble','在此输入内容');
-      globalThis.editor=await machineTool.plugin_quill_create(document.body,undefined,undefined,'在此输入内容');
-      globalThis.editor=await machineTool.plugin_quill_create(document.body,undefined,['clean','clear'],'在此输入内容');
+      globalThis.editor_full=await machineTool.plugin_quill_create(document.body,undefined,'full','在此输入内容');
+      // globalThis.editor_snow=await machineTool.plugin_quill_create(document.body,undefined,'snow','在此输入内容');
+      // globalThis.editor_buble=await machineTool.plugin_quill_create(document.body,undefined,'bubble','在此输入内容');
+      globalThis.editor_default=await machineTool.plugin_quill_create(document.body,undefined,undefined,'在此输入内容');
+      // globalThis.editor_custom=await machineTool.plugin_quill_create(document.body,undefined,['clean','clear'],'在此输入内容');
     }
   },'_');
 // #after
