@@ -1,136 +1,128 @@
 'use strict';
-// <<<< <<<< <<<< <<<<
-// GUI Initial ~ JavaScript
-// for Browser JavaScript
-// GUIInitial.js
-// ==== ==== ==== ====
-// index.html
-// ~~~~ ~~~~ ~~~~ ~~~~
-// <script src="/GUIInitial.js" type="application/javascript" data-gui_initial="{
-//   'startBackgroundColor_light': '<""=#FFFFFF>',
-//   'startBackgroundColor_dark': '<""=#000000>',
-//   'serviceWorker': '/sw.js',
-//   'head_title': '<""="">',
-//   'head_style': '/style.css',
-//   'head_script': '/script.js',
-//   'head_icon': '/icon.png',
-//   'head_icon_apple': '/icon-apple.png',
-//   'head_themeColor_light': '<""=#FFFFFF>',
-//   'head_themeColor_dark': '<""=#000000>',
-//   'head_manifest': '/manifest.webmanifest'
-// }"></script>
-// ==== ==== ==== ====
-// sw.js
-// ~~~~ ~~~~ ~~~~ ~~~~
-// 'use strict';
-// // #before
-//   // console
-//   console.log('#### start: sw.js');
-// // #import
-// // #variable
-// // #block
-// // #build
-//   // online priority basic cache
-//   const version='basic';
-//   addEventListener('install',(event)=>{
-//     event.waitUntil(caches.open(version).then((cache)=>{
-//       return cache.addAll([]);
-//     }));
-//   });
-//   addEventListener('fetch',(event)=>{
-//     event.respondWith(caches.match(event.request).then((resp)=>{
-//       return fetch(event.request).then((response)=>{
-//         const responseClone=response.clone();
-//         caches.open(version).then((cache)=>{
-//           cache.put(event.request,responseClone);
-//         });
-//         return response;
-//       }).catch((error)=>{
-//         return resp;
-//       });
-//     }));
-//   });
-//   addEventListener('activate',(event)=>{
-//     event.waitUntil(caches.keys().then((keyList)=>{
-//       return Promise.all(keyList.map((key)=>{
-//         if([version].indexOf(key)===-1){
-//           return caches.delete(key);
-//         }
-//       }));
-//     }));
-//   });
-// // #debug
-// // #after
-//   // console
-//   console.log('#### end: sw.js');
-// ==== ==== ==== ====
-// manifest.webmanifest
-// ~~~~ ~~~~ ~~~~ ~~~~
-// {
-//   "name": "~",
-//   "short_name": "~",
-//   "start_url": "/#pwa",
-//   "theme_color": "#000000",
-//   "background_color": "#000000",
-//   "orientation": "natural",
-//   "display": "standalone",
-//   "icons": [
-//     {
-//       "src": "/icon-144x144-any.png",
-//       "sizes": "144x144",
-//       "type": "image/png",
-//       "purpose": "any"
-//     },
-//     {
-//       "src": "/icon-192x192-any.png",
-//       "sizes": "192x192",
-//       "type": "image/png",
-//       "purpose": "any"
-//     },
-//     {
-//       "src": "/icon-512x512-any.png",
-//       "sizes": "512x512",
-//       "type": "image/png",
-//       "purpose": "any"
-//     },
-//     {
-//       "src": "/icon-144x144-maskable.png",
-//       "sizes": "144x144",
-//       "type": "image/png",
-//       "purpose": "maskable"
-//     },
-//     {
-//       "src": "/icon-192x192-maskable.png",
-//       "sizes": "192x192",
-//       "type": "image/png",
-//       "purpose": "maskable"
-//     },
-//     {
-//       "src": "/icon-512x512-maskable.png",
-//       "sizes": "512x512",
-//       "type": "image/png",
-//       "purpose": "maskable"
-//     }
-//   ]
-// }
-// ==== ==== ==== ====
-// 'use strict';
-// // #before
-//   // console
-//   console.log('#### start: ~.js');
-// // #import
-// // #variable
-// // #block
-// // #build
-// // #debug
-// // #after
-//   // console
-//   console.log('#### end: ~.js');
-// >>>> >>>> >>>> >>>>
+/* <<<< <<<< <<<< <<<<
+  GUI Initial ~ JavaScript
+  for Browser JavaScript
+  GUIInitial.js
+==== ==== ==== ====
+  index.html
+~~~~ ~~~~ ~~~~ ~~~~
+  <script src="/GUIInitial.js" type="application/javascript" data-gui_initial="{
+    'startBackgroundColor_light': '<""=#FFFFFF>',
+    'startBackgroundColor_dark': '<""=#000000>',
+    'serviceWorker': '/sw.js',
+    'head_title': '<""="">',
+    'head_style': '/style.css',
+    'head_script': '/script.js',
+    'head_icon': '/icon.png',
+    'head_icon_apple': '/icon-apple.png',
+    'head_themeColor_light': '<""=#FFFFFF>',
+    'head_themeColor_dark': '<""=#000000>',
+    'head_manifest': '/manifest.webmanifest'
+  }"></script>
+==== ==== ==== ====
+  sw.js
+~~~~ ~~~~ ~~~~ ~~~~
+  'use strict';
+  // #before
+  // #import
+  // #variable
+  // #block
+  // #build
+    // online priority basic cache
+    const version='basic';
+    addEventListener('install',(event)=>{
+      event.waitUntil(caches.open(version).then((cache)=>{
+        return cache.addAll([]);
+      }));
+    });
+    addEventListener('fetch',(event)=>{
+      event.respondWith(caches.match(event.request).then((resp)=>{
+        return fetch(event.request).then((response)=>{
+          const responseClone=response.clone();
+          caches.open(version).then((cache)=>{
+            cache.put(event.request,responseClone);
+          });
+          return response;
+        }).catch((error)=>{
+          return resp;
+        });
+      }));
+    });
+    addEventListener('activate',(event)=>{
+      event.waitUntil(caches.keys().then((keyList)=>{
+        return Promise.all(keyList.map((key)=>{
+          if([version].indexOf(key)===-1){
+            return caches.delete(key);
+          }
+        }));
+      }));
+    });
+  // #debug
+  // #after
+==== ==== ==== ====
+  manifest.webmanifest
+~~~~ ~~~~ ~~~~ ~~~~
+  {
+    "name": "~",
+    "short_name": "~",
+    "start_url": "/#pwa",
+    "theme_color": "#000000",
+    "background_color": "#000000",
+    "orientation": "natural",
+    "display": "standalone",
+    "icons": [
+      {
+        "src": "/icon-144x144-any.png",
+        "sizes": "144x144",
+        "type": "image/png",
+        "purpose": "any"
+      },
+      {
+        "src": "/icon-192x192-any.png",
+        "sizes": "192x192",
+        "type": "image/png",
+        "purpose": "any"
+      },
+      {
+        "src": "/icon-512x512-any.png",
+        "sizes": "512x512",
+        "type": "image/png",
+        "purpose": "any"
+      },
+      {
+        "src": "/icon-144x144-maskable.png",
+        "sizes": "144x144",
+        "type": "image/png",
+        "purpose": "maskable"
+      },
+      {
+        "src": "/icon-192x192-maskable.png",
+        "sizes": "192x192",
+        "type": "image/png",
+        "purpose": "maskable"
+      },
+      {
+        "src": "/icon-512x512-maskable.png",
+        "sizes": "512x512",
+        "type": "image/png",
+        "purpose": "maskable"
+      }
+    ]
+  }
+==== ==== ==== ====
+  template
+~~~~ ~~~~ ~~~~ ~~~~
+  'use strict';
+  // #before
+  // #import
+  // #variable
+  // #block
+  // #build
+  // #debug
+  // #after
+>>>> >>>> >>>> >>>> */
 {
 // #before
-  // console
-  console.log('#### start: GUIInitial.js');
 // #import
 // #variable
 // #block
@@ -565,6 +557,4 @@
   }
 // #debug
 // #after
-  // console
-  console.log('#### end: GUIInitial.js');
 }

@@ -1,9 +1,9 @@
 @charset "UTF-8";
-/* <<<< <<<< <<<< <<<< */
-/* Machine Tool ~ CSS */
-/* for CSS */
-/* machineTool.css */
-/* >>>> >>>> >>>> >>>> */
+/* <<<< <<<< <<<< <<<<
+  Machine Tool ~ CSS
+  for CSS
+  machineTool.css
+>>>> >>>> >>>> >>>> */
 /* #before */
 /* #import */
 /* #variable */
@@ -17,9 +17,9 @@
   /* 💠 command line interface */
   /* 💠 graphical user interface */
   /* 💠 user interface */
-    /* 💧 machineTool_plugin_quill */
+    /* 💧 machineTool_package_quill */
       /* custom */
-      .machineTool_plugin_quill_container {
+      .machineTool_package_quill_container {
         display: flex;
         flex-direction: column;
         min-width: 320px;
@@ -96,7 +96,7 @@
         border: 1px solid !important;
         border-color: var(--ic_ve_color_black2_opacity) !important;
         border-radius: 2px !important;
-        transform: scale(0.5)!important;
+        transform: scale(0.5) !important;
       }
   /* 💠 package */
   /* 💠 unknown */

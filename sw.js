@@ -1,7 +1,5 @@
 'use strict';
 // #before
-  // console
-  console.log('#### start: sw.js');
 // #import
 // #variable
 // #block
@@ -37,5 +35,3 @@
   });
 // #debug
 // #after
-  // console
-  console.log('#### end: sw.js');

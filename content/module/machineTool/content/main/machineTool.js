@@ -1,15 +1,14 @@
 'use strict';
-// <<<< <<<< <<<< <<<<
-// Machine Tool ~ JavaScript
-// for JavaScript
-// machineTool.js
-// ==== ==== ==== ====
-// script.js
-// import{machineTool}from'machineTool.js';
-// >>>> >>>> >>>> >>>>
+/* <<<< <<<< <<<< <<<<
+  Machine Tool ~ JavaScript
+  for JavaScript
+  machineTool.js
+==== ==== ==== ====
+  script.js
+~~~~ ~~~~ ~~~~ ~~~~
+  import{machineTool}from'machineTool.js';
+>>>> >>>> >>>> >>>> */
 // #before
-  // console
-  console.log('#### start: machineTool.js');
 // #import
 // #variable
 // #block
@@ -57,14 +56,14 @@
       /*🟢*/async loop(condition,wait=1000/24,count,countZeroCallback){
         const result=await condition();
         this.debug(()=>{
-          console.log('==== loop, condition() result:',result);
+          console.log('#### loop, condition() result:',result);
         });
         if(result){
           return result;
         }else{
           this.debug(()=>{
             if(count){
-              console.log('==== loop, false, count:',count);
+              console.log('#### loop, false, count:',count);
             }
           });
           const loop=()=>{
@@ -81,7 +80,7 @@
             }else{
               if(countZeroCallback){
                 this.debug(()=>{
-                  console.log('==== loop, false, countZeroCallback()');
+                  console.log('#### loop, false, countZeroCallback()');
                 });
                 return countZeroCallback();
               }
@@ -399,7 +398,7 @@
           }
           return module;
         }).catch((error)=>{
-          console.log('==== import, catch:',error);
+          console.log('#### import, catch:',error);
         });
       },
       /*🟢*/webAssembly(src,callback){
@@ -411,14 +410,14 @@
             return module;
           });
         }).catch((error)=>{
-          console.log('==== webAssembly, catch:',error);
+          console.log('#### webAssembly, catch:',error);
         });
       },
     // local data
       /*🔴*/
       file(listenElement,progressCallback,resultType='arrayBuffer'){
         // resultType<'BLObFile','objectURL','arrayBuffer','dataURL',undefined='arrayBuffer'>
-        console.log('==== file, ???');
+        console.log('#### file, ???');
       },
       /*🔴*/fileSystem(){},
       /*🔴*/localStorage(){},
@@ -475,8 +474,8 @@
         }
         const result={};
         this.debug(()=>{
-          console.log('==== fetch, request, URI:',URI);
-          console.log('==== fetch, request, option:',option);
+          console.log('#### fetch, request, URI:',URI);
+          console.log('#### fetch, request, option:',option);
         });
         return fetch(URI,option).then((data)=>{
           result.status=data.status;
@@ -487,14 +486,14 @@
         }).then((data)=>{
           result.result=data;
           this.debug(()=>{
-            console.log('==== fetch, response, result:',result);
+            console.log('#### fetch, response, result:',result);
           });
           if(callback){
             return callback(result);
           }
           return result;
         }).catch((error)=>{
-          console.log('==== fetch, response, catch:',error);
+          console.log('#### fetch, response, catch:',error);
           if(!result.status){
             result.status=0;
           }
@@ -533,8 +532,8 @@
       /*🔴*/siteMapGenerator(){},
       /*🔴*/siteMapHTMLGenerator(){},
     // graphics
-      /*🔴*/_plugin_openCV_load_(){},
-      /*🔴*/plugin_openCV_removeWatermark(){},
+      /*🔴*/_package_openCV_load_(){},
+      /*🔴*/package_openCV_removeWatermark(){},
     // graphics engine
     // command line interface
       /*🔴*/cli(){},
@@ -668,7 +667,7 @@
                           run();
                         }
                         this.debug(()=>{
-                          console.log('==== listenDOM, pointer_up, pointer_up_data length:',Object.keys(this.listenDOM.pointer_up_data).length);
+                          console.log('#### listenDOM, pointer_up, pointer_up_data length:',Object.keys(this.listenDOM.pointer_up_data).length);
                         });
                       };
                       this.listenDOM.pointer_up_data[id].count=0;
@@ -697,11 +696,11 @@
                 case'add':
                   {
                     this.debug(()=>{
-                      console.log('==== listenDOM, observe_mutation, add, target:',target);
+                      console.log('#### listenDOM, observe_mutation, add, target:',target);
                     });
                     target.machineTool_listenDOM_observe_mutation=new MutationObserver((mutation_list)=>{
                       this.debug(()=>{
-                        console.log('==== listenDOM, observe_mutation, mutation_list:',mutation_list);
+                        console.log('#### listenDOM, observe_mutation, mutation_list:',mutation_list);
                       });
                       mutation_list.forEach((mutation)=>{
                         switch(mutation.type){
@@ -726,7 +725,7 @@
                 case'remove':
                   {
                     this.debug(()=>{
-                      console.log('==== listenDOM, observe_mutation, remove, target:',target);
+                      console.log('#### listenDOM, observe_mutation, remove, target:',target);
                     });
                     target.machineTool_listenDOM_observe_mutation.disconnect();
                     delete target.machineTool_listenDOM_observe_mutation;
@@ -743,11 +742,11 @@
                 case'add':
                   {
                     this.debug(()=>{
-                      console.log('==== listenDOM, observe_intersection, add, target:',target);
+                      console.log('#### listenDOM, observe_intersection, add, target:',target);
                     });
                     target.machineTool_listenDOM_observe_intersection=new IntersectionObserver((entries)=>{
                       this.debug(()=>{
-                        console.log('==== listenDOM, observe_intersection, entries:',entries);
+                        console.log('#### listenDOM, observe_intersection, entries:',entries);
                       });
                       entries.forEach((entry)=>{
                         callback(entry);
@@ -759,7 +758,7 @@
                 case'remove':
                   {
                     this.debug(()=>{
-                      console.log('==== listenDOM, observe_intersection, remove, target:',target);
+                      console.log('#### listenDOM, observe_intersection, remove, target:',target);
                     });
                     target.machineTool_listenDOM_observe_intersection.disconnect();
                     delete target.machineTool_listenDOM_observe_intersection;
@@ -776,11 +775,11 @@
                 case'add':
                   {
                     this.debug(()=>{
-                      console.log('==== listenDOM, observe_resize, add, target:',target);
+                      console.log('#### listenDOM, observe_resize, add, target:',target);
                     });
                     target.machineTool_listenDOM_observe_resize=new ResizeObserver((entries)=>{
                       this.debug(()=>{
-                        console.log('==== listenDOM, observe_resize, entries:',entries);
+                        console.log('#### listenDOM, observe_resize, entries:',entries);
                       });
                       entries.forEach((entry)=>{
                         callback(entry);
@@ -792,7 +791,7 @@
                 case'remove':
                   {
                     this.debug(()=>{
-                      console.log('==== listenDOM, observe_resize, remove, target:',target);
+                      console.log('#### listenDOM, observe_resize, remove, target:',target);
                     });
                     target.machineTool_listenDOM_observe_resize.disconnect();
                     delete target.machineTool_listenDOM_observe_resize;
@@ -822,7 +821,7 @@
                   }
                   _popstate=(data)=>{
                     machineTool.debug(()=>{
-                      console.log('==== listenDOM, URI, popstate:',data.type,machineTool.URIPath());
+                      console.log('#### listenDOM, URI, popstate:',data.type,machineTool.URIPath());
                     });
                     this.callback({
                       type:data.type,
@@ -831,7 +830,7 @@
                   }
                   _pushState=(data)=>{
                     machineTool.debug(()=>{
-                      console.log('==== listenDOM, URI, pushState:',data.type,data.pushState.replace());
+                      console.log('#### listenDOM, URI, pushState:',data.type,data.pushState.replace());
                     });
                     this.callback({
                       type:data.type,
@@ -840,7 +839,7 @@
                   }
                   _replaceState=(data)=>{
                     machineTool.debug(()=>{
-                      console.log('==== listenDOM, URI, replaceState:',data.type,data.replaceState.replace());
+                      console.log('#### listenDOM, URI, replaceState:',data.type,data.replaceState.replace());
                     });
                     this.callback({
                       type:data.type,
@@ -871,7 +870,7 @@
                       this.listenDOM.URI_data[id]=new this.listenDOM.URI_template(callback);
                       this.listenDOM.URI_data[id].add();
                       this.debug(()=>{
-                        console.log('==== listenDOM, URI, add, listenDOM.URI_data:',this.listenDOM.URI_data);
+                        console.log('#### listenDOM, URI, add, listenDOM.URI_data:',this.listenDOM.URI_data);
                       });
                     }
                   }
@@ -885,7 +884,7 @@
                         delete this.listenDOM.URI_data;
                       }
                       this.debug(()=>{
-                        console.log('==== listenDOM, URI, remove, listenDOM.URI_data:',this.listenDOM.URI_data);
+                        console.log('#### listenDOM, URI, remove, listenDOM.URI_data:',this.listenDOM.URI_data);
                       });
                     }
                   }
@@ -1802,7 +1801,7 @@
           callback();
         }
       },
-      /*🟢*/plugin_hls_play(mode='auto',video,src,poster='',config={
+      /*🟢*/package_hls_play(mode='auto',video,src,poster='',config={
         autoStartLoad:video.getAttribute('preload')==='auto'?true:false,
         maxBufferLength:4,
         maxBufferSize:4*1000*1000
@@ -1813,13 +1812,13 @@
         this.loop(()=>{
           if('Hls'in globalThis){
             video.pause();
-            if(!this.plugin_hls_play.play){
-              this.plugin_hls_play.play=()=>{
+            if(!this.package_hls_play.play){
+              this.package_hls_play.play=()=>{
                 video._hls_.startLoad();
               };
             }
-            if(!this.plugin_hls_play.pause){
-              this.plugin_hls_play.pause=()=>{
+            if(!this.package_hls_play.pause){
+              this.package_hls_play.pause=()=>{
                 video._hls_.stopLoad();
               };
             }
@@ -1830,14 +1829,14 @@
                 if(video._hls_){
                   video._hls_.destroy();
                   delete video._hls_;
-                  video.removeEventListener('play',this.plugin_hls_play.play);
-                  video.removeEventListener('pause',this.plugin_hls_play.pause);
+                  video.removeEventListener('play',this.package_hls_play.play);
+                  video.removeEventListener('pause',this.package_hls_play.pause);
                 }
                 const hls=new Hls(config);
                 hls.loadSource(src);
                 hls.attachMedia(video);
-                video.addEventListener('play',this.plugin_hls_play.play);
-                video.addEventListener('pause',this.plugin_hls_play.pause);
+                video.addEventListener('play',this.package_hls_play.play);
+                video.addEventListener('pause',this.package_hls_play.pause);
                 video._hls_=hls;
                 return hls;
               };
@@ -1872,7 +1871,7 @@
           return false;
         });
       },
-      /*🟢*/plugin_hls_observePlay(){
+      /*🟢*/package_hls_observePlay(){
         if(!document.createElement('video').canPlayType('application/vnd.apple.mpegurl')){
           if(!('Hls'in globalThis)){
             const script=document.createElement('script');
@@ -1932,7 +1931,7 @@
       /*🔴*/pageDecode(){},
       /*🔴*/uploadListEditor(){},
       /*🔴*/downloadListEditor(){},
-      /*🟢*/plugin_quill_create(insertElement,insertPosition,mode=[
+      /*🟢*/package_quill_create(insertElement,insertPosition,mode=[
           ['bold','italic','underline','strike'],
           [{'script':'sub'},{'script':'super'}],
           [{'header':'1'},{'header':'2'},'blockquote','code-block'],
@@ -1991,7 +1990,7 @@
         return this.loop(()=>{
           if('katex'in globalThis&&'hljs'in globalThis&&'Quill'in globalThis){
             const attribute={
-              class:'machineTool_plugin_quill_container'
+              class:'machineTool_package_quill_container'
             };
             if(width||height){
               attribute.style=`${width?`width: ${width}; `:''}${height?`height: ${height};`:''}`;
@@ -2001,16 +2000,16 @@
               attribute,
               insertElement,
               insertPosition,
-              `<div class="machineTool_plugin_quill_${typeof mode==='string'?mode:'custom'}_container machineTool_plugin_quill_UUID_${UUID}">${typeof content==='string'?content:''}</div>`,
+              `<div class="machineTool_package_quill_${typeof mode==='string'?mode:'custom'}_container machineTool_package_quill_UUID_${UUID}">${typeof content==='string'?content:''}</div>`,
               (element)=>{
-                element.machineTool_plugin_quill=new Quill(
-                  `.machineTool_plugin_quill_${typeof mode==='string'?mode:'custom'}_container.machineTool_plugin_quill_UUID_${UUID}`,
+                element.machineTool_package_quill=new Quill(
+                  `.machineTool_package_quill_${typeof mode==='string'?mode:'custom'}_container.machineTool_package_quill_UUID_${UUID}`,
                   option
                 );
               }
             );
             if(typeof content==='object'){
-              result.machineTool_plugin_quill.setContents(content);
+              result.machineTool_package_quill.setContents(content);
             }
             return result;
           }
@@ -2262,5 +2261,3 @@
 // #build
 // #debug
 // #after
-  // console
-  console.log('#### end: machineTool.js');
