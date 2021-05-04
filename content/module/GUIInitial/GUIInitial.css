@@ -4,7 +4,7 @@
   for CSS
   GUIInitial.css
 ==== ==== ==== ====
-  prefix
+  prefix...
 ~~~~ ~~~~ ~~~~ ~~~~
   ic_ / initial css
   ic_nr_ / navigator
@@ -17,9 +17,9 @@
   _cr\_ / container
   _mk\_ / mark \ :hov .cls
   #build
-    sc_cr
-    ^child
-==== ==== ==== ====
+    /* sc_cr */
+    /* ^child */
+/* ==== ==== ==== ====
   HTML elements reference
   https://developer.mozilla.org/en-US/docs/Web/HTML/Element
 ~~~~ ~~~~ ~~~~ ~~~~
