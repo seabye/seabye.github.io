@@ -411,7 +411,6 @@
   /* package */
     /* fontAwesome */
     .fas {
-      font-style: unset;
       pointer-events: none;
     }
   /* scroll */
@@ -517,18 +516,11 @@
       cursor: default;
     }
     /* form */
-    ::placeholder,
-    [contenteditable]:empty::after {
-      color: var(--ic_ve_color_black4_opacity);
-      opacity: unset;
-      -webkit-user-select: none;
-      user-select: none;
-    }
     button,
     input,
     textarea,
     select {
-      /* _ */
+      /* <_ */
       all: unset;
       /* _ */
       box-sizing: border-box;
@@ -537,7 +529,7 @@
       outline: unset;
       touch-action: pan-x pan-y;
       overscroll-behavior: contain;
-      /* _ */
+      /* _> */
       max-width: 100%;
     }
     input,
@@ -547,11 +539,18 @@
       user-select: text;
       cursor: auto;
     }
-    input {
-      text-overflow: ellipsis;
+    ::placeholder,
+    [contenteditable]:empty::after {
+      color: var(--ic_ve_color_black4_opacity);
+      opacity: unset;
+      -webkit-user-select: none;
+      user-select: none;
     }
     [contenteditable]:empty::after {
       content: attr(placeholder);
+    }
+    input {
+      text-overflow: ellipsis;
     }
     input[type="search"]::-webkit-search-decoration,
     input[type="search"]::-webkit-search-cancel-button {
