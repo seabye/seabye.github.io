@@ -2238,7 +2238,9 @@
     // other
   };
   // CSS
-  machineTool.elementCreate('link',{rel:'stylesheet',href:`${import.meta.url.replace('machineTool.js','machineTool.css')}`,crossorigin:''},document.head);
+  if(document){
+    machineTool.elementCreate('link',{rel:'stylesheet',href:`${import.meta.url.replace('machineTool.js','machineTool.css')}`,crossorigin:''},document.head);
+  }
   // // merge webAssembly rust
   // await machineTool.webAssembly('../module/machine_tool_wasm_rust/result/machine_tool_wasm_rust.js',(module)=>{
   //   for(const key in module){
