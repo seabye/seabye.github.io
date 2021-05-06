@@ -1801,44 +1801,44 @@
           callback();
         }
       },
-      /*🟢*/package_hls_play(mode='auto',video,src,poster='',config={
+      /*🟢*/package_HLS_play(mode='auto',video,src,poster='',config={
         autoStartLoad:video.getAttribute('preload')==='auto'?true:false,
         maxBufferLength:4,
         maxBufferSize:4*1000*1000
       }){
         if(!('Hls'in globalThis)){
-          this.elementCreate('script',{async:'',src:`${import.meta.url.replace('/main/machineTool.js','/package/hls@1.0.2/hls.min.js')}`},document.head);
+          this.elementCreate('script',{async:'',src:`${import.meta.url.replace('/main/machineTool.js','/package/HLS@1.0.2/hls.min.js')}`},document.head);
         }
         this.loop(()=>{
           if('Hls'in globalThis){
             video.pause();
-            if(!this.package_hls_play.play){
-              this.package_hls_play.play=()=>{
-                video._hls_.startLoad();
+            if(!this.package_HLS_play.play){
+              this.package_HLS_play.play=()=>{
+                video._HLS_.startLoad();
               };
             }
-            if(!this.package_hls_play.pause){
-              this.package_hls_play.pause=()=>{
-                video._hls_.stopLoad();
+            if(!this.package_HLS_play.pause){
+              this.package_HLS_play.pause=()=>{
+                video._HLS_.stopLoad();
               };
             }
             video.setAttribute('src',src);
             video.setAttribute('poster',poster);
             if(src.match(/\.m3u8/i)){
-              const hlsGo=()=>{
-                if(video._hls_){
-                  video._hls_.destroy();
-                  delete video._hls_;
-                  video.removeEventListener('play',this.package_hls_play.play);
-                  video.removeEventListener('pause',this.package_hls_play.pause);
+              const HLSGo=()=>{
+                if(video._HLS_){
+                  video._HLS_.destroy();
+                  delete video._HLS_;
+                  video.removeEventListener('play',this.package_HLS_play.play);
+                  video.removeEventListener('pause',this.package_HLS_play.pause);
                 }
-                const hls=new Hls(config);
-                hls.loadSource(src);
-                hls.attachMedia(video);
-                video.addEventListener('play',this.package_hls_play.play);
-                video.addEventListener('pause',this.package_hls_play.pause);
-                video._hls_=hls;
-                return hls;
+                const HLS=new Hls(config);
+                HLS.loadSource(src);
+                HLS.attachMedia(video);
+                video.addEventListener('play',this.package_HLS_play.play);
+                video.addEventListener('pause',this.package_HLS_play.pause);
+                video._HLS_=HLS;
+                return HLS;
               };
               return this.loop(()=>{
                 switch(mode){
@@ -1848,15 +1848,15 @@
                         return true;
                       }else{
                         if('Hls'in globalThis&&Hls.isSupported()){
-                          return hlsGo();
+                          return HLSGo();
                         }
                       }
                     }
                     break;
-                  case'hls':
+                  case'HLS':
                     {
                       if('Hls'in globalThis&&Hls.isSupported()){
-                        return hlsGo();
+                        return HLSGo();
                       }
                     }
                     break;
@@ -1871,29 +1871,29 @@
           return false;
         });
       },
-      /*🟢*/package_hls_observePlay(){
+      /*🟢*/package_HLS_observePlay(){
         if(!document.createElement('video').canPlayType('application/vnd.apple.mpegurl')){
           if(!('Hls'in globalThis)){
             const script=document.createElement('script');
             script.setAttribute('async','');
-            script.setAttribute('src',`${import.meta.url.replace('/main/machineTool.js','/package/hls@1.0.2/hls.min.js')}`);
+            script.setAttribute('src',`${import.meta.url.replace('/main/machineTool.js','/package/HLS@1.0.2/hls.min.js')}`);
             document.head.insertAdjacentElement('beforeend',script);
           }
           const load=(video)=>{
-            if(video._hls_){
-              video._hls_.destroy();
-              delete video._hls_;
+            if(video._HLS_){
+              video._HLS_.destroy();
+              delete video._HLS_;
             }
             if(video.hasAttribute('src')&&video.getAttribute('src').match(/\.m3u8/i)){
               if('Hls'in globalThis&&Hls.isSupported()){
-                const hls=new Hls({
+                const HLS=new Hls({
                   autoStartLoad:video.getAttribute('preload')==='auto'?true:false,
                   maxBufferLength:4,
                   maxBufferSize:4*1000*1000
                 });
-                hls.loadSource(video.getAttribute('src'));
-                hls.attachMedia(video);
-                video._hls_=hls;
+                HLS.loadSource(video.getAttribute('src'));
+                HLS.attachMedia(video);
+                video._HLS_=HLS;
               }
             }
           };
@@ -1923,12 +1923,11 @@
         }
       },
     // user interface
+      /*🟢*/_package_fontAwesomeFree_load_(){
+        this.elementCreate('link',{rel:'stylesheet',href:`${import.meta.url.replace('/main/machineTool.js','/package/fontAwesomeFree@5.15.3/css/all.min.css')}`,crossorigin:''},document.head);
+      },
       /*🔴*/unit(){},
-      /*🔴*/grid(){},
-      /*🔴*/dictionaryColorVSC(){},
-      /*🔴*/pageEditor(){},
-      /*🔴*/pageEncode(){},
-      /*🔴*/pageDecode(){},
+      /*🔴*/colorDictionary(){},
       /*🔴*/uploadListEditor(){},
       /*🔴*/downloadListEditor(){},
       /*🟢*/package_quill_create(insertElement,insertPosition,mode=[
@@ -1940,8 +1939,8 @@
           ['clean']
         ],placeholder='...',content='',readOnly=false,width,height,important){
         if(!('Quill'in globalThis)){
-          this.elementCreate('link',{rel:'stylesheet',href:`${import.meta.url.replace('/main/machineTool.js','/package/katex@0.13.3/katex.min.css')}`,crossorigin:''},document.head);
-          this.elementCreate('script',{async:'',src:`${import.meta.url.replace('/main/machineTool.js','/package/katex@0.13.3/katex.min.js')}`},document.head);
+          this.elementCreate('link',{rel:'stylesheet',href:`${import.meta.url.replace('/main/machineTool.js','/package/kaTeX@0.13.3/kaTeX.min.css')}`,crossorigin:''},document.head);
+          this.elementCreate('script',{async:'',src:`${import.meta.url.replace('/main/machineTool.js','/package/kaTeX@0.13.3/kaTeX.min.js')}`},document.head);
           this.elementCreate('link',{rel:'stylesheet',href:`${import.meta.url.replace('/main/machineTool.js','/package/highlight@10.7.2/build/styles/monokai-sublime.min.css')}`,crossorigin:''},document.head);
           this.elementCreate('script',{async:'module',src:`${import.meta.url.replace('/main/machineTool.js','/package/highlight@10.7.2/build/highlight.min.js')}`},document.head);
           this.elementCreate('link',{rel:'stylesheet',href:`${import.meta.url.replace('/main/machineTool.js','/package/quill@1.3.7/quill.snow.css')}`,crossorigin:''},document.head);
@@ -1988,7 +1987,7 @@
           }
         }
         return this.loop(()=>{
-          if('katex'in globalThis&&'hljs'in globalThis&&'Quill'in globalThis){
+          if('kaTeX'in globalThis&&'hljs'in globalThis&&'Quill'in globalThis){
             const attribute={
               class:'machineTool_package_quill_container'
             };
@@ -2016,12 +2015,35 @@
           return false;
         });
       },
-    // package
-      /*🔴*/applicationPackage(){},
-      /*🔴*/bookPackage(){},
-      /*🔴*/bookletPackage(){},
+    // w3daze
+      assistant:{
+        editor:{
+          image:{},
+          audio:{},
+          video:{},
+          color:{},
+          math:{}
+        },
+        box:{
+          dictionary:{},
+          symbol:{},
+          color:{},
+          font:{}
+        }
+      },
+      index:{
+        editor:{
+          note:{},
+          article:{},
+          table:{},
+          slide:{},
+          canvas:{},
+          code:{},
+          folder:{}
+        }
+      },
     // unknown
-      /*🟢*/mediaQuery:{
+      mediaQuery:{
         async _URIMode(arg,callback){
           switch(Object.prototype.toString.call(arg[0])){
             case'[object String]':
@@ -2223,19 +2245,18 @@
         image:{},
         text:{}
       },
-      /*🔴*/mediaSync:{
+      mediaSync:{
         video:{},
         audio:{},
         image:{},
         text:{}
       },
-      /*🔴*/mediaMatch:{
+      mediaMatch:{
         video:{},
         audio:{},
         image:{},
         text:{}
       }
-    // other
   };
   // CSS
   if(document){

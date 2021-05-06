@@ -16,6 +16,10 @@
 // #block
   // machineTool
     // base
+      /*🟢*/
+      pub fn test()->String{
+        "test echo".to_string()
+      }
     // local data
     // network data
     // application programming interface
@@ -40,13 +44,8 @@
     // command line interface
     // graphical user interface
     // user interface
-    // package
+    // w3daze
     // unknown
-    // other
-      /*🟢*/
-      pub fn test()->String{
-        "test echo".to_string()
-      }
 // #build
 // #debug
   // test
