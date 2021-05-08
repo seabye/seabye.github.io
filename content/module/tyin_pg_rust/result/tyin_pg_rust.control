@@ -1,0 +1,5 @@
+comment = 'tyin_pg_rust:  Created by pgx'
+default_version = '1.0'
+module_pathname = '$libdir/tyin_pg_rust'
+relocatable = false
+superuser = false
