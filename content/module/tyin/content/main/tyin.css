@@ -1,0 +1,104 @@
+@charset "UTF-8";
+/* <<<< <<<< <<<< <<<<
+  tyin
+  tyin.css
+>>>> >>>> >>>> >>>> */
+/* #before */
+/* #import */
+/* #variable */
+/* #block */
+  /* 💠 base */
+  /* 💠 local data */
+  /* 💠 network data */
+  /* 💠 application programming interface */
+  /* 💠 graphics */
+  /* 💠 graphics engine */
+  /* 💠 command line interface */
+  /* 💠 graphical user interface */
+  /* 💠 user interface */
+    /* 💧 tyin_package_quill */
+      /* custom */
+      .tyin_package_quill_container {
+        display: flex;
+        flex-direction: column;
+        min-width: 320px;
+        max-width: 100%;
+        max-height: 100%;
+        background-color: var(--ic_ve_color_black1_opacity);
+      }
+      /* overwrite */
+      .ql-toolbar,
+      .ql-container {
+        border: unset !important;
+      }
+      .ql-toolbar {
+        overflow: auto hidden !important;
+        padding: 8px 0 !important;
+        height: 42px !important;
+        white-space: nowrap !important;
+        box-shadow: var(--ic_ve_shadow_4dp3) !important;
+      }
+      .ql-toolbar .ql-formats {
+        margin-right: unset !important;
+      }
+      .ql-toolbar .ql-formats:not(:first-child) {
+        margin-left: 12px !important;
+      }
+      .ql-container {
+        max-height: calc(100% - 42px) !important;
+        font-family: inherit !important;
+      }
+      .ql-container,
+      .ql-container * {
+        line-height: var(--ic_ve_font_lineHeight_text) !important;
+      }
+      .ql-container .ql-editor {
+        padding: 20px !important;
+      }
+      .ql-container .ql-editor.ql-blank::before {
+        left: 20px !important;
+        line-height: var(--ic_ve_font_lineHeight_text) !important;
+        color: var(--ic_ve_color_black4_opacity) !important;
+      }
+      /* .ql-container .ql-editor ol,
+      .ql-container .ql-editor ul {
+        padding-left: unset !important;
+      }
+      .ql-container .ql-editor li.ql-indent-1:not(.ql-direction-rtl) {
+        padding-left: 3em !important;
+      } */
+      .ql-container .ql-editor img {
+        border: 1px dashed !important;
+        border-color: var(--ic_ve_color_white5) !important;
+      }
+      /* .ql-container strong {} */
+      /* .ql-container em {} */
+      .ql-container u {
+        text-decoration-style: wavy !important;
+        text-decoration-color: var(--ic_ve_color_system_orange_translucent) !important;
+        text-decoration-thickness: 2px !important;
+      }
+      .ql-container s {
+        text-decoration-color: var(--ic_ve_color_system_red_translucent) !important;
+        text-decoration-thickness: 4px !important;
+      }
+      .ql-container blockquote {
+        border-left-width: 3px !important;
+        border-left-color: var(--ic_ve_color_system_blue_translucent) !important;
+        color: var(--ic_ve_color_black5_opacity) !important;
+      }
+      .ql-container sub,
+      .ql-container sup {
+        padding: 1px !important;
+        margin-left: 2px !important;
+        margin-right: 2px !important;
+        border: 1px solid !important;
+        border-color: var(--ic_ve_color_black2_opacity) !important;
+        border-radius: 2px !important;
+        transform: scale(0.5) !important;
+      }
+  /* 💠 w3daze */
+  /* 💠 unknown */
+/* #build */
+/* #debug */
+/* #after */

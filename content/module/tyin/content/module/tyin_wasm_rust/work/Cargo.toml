@@ -1,0 +1,20 @@
+[package]
+name = "work"
+version = "0.1.0"
+authors = ["seabye <seabye@live.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+# [dependencies]
+
+# #### start
+[dependencies]
+tyin_wasm_rust = { path = "../" }
+# regex = "1.4.6"
+# json = "0.12.4"
+
+[profile.release]
+lto = true
+opt-level = "z"
+codegen-units = 1
