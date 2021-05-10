@@ -4,7 +4,7 @@
 // #variable
 // #block
 // #build
-  // online priority basic cache
+  // basic cache
   const version='basic';
   addEventListener('install',(event)=>{
     event.waitUntil(caches.open(version).then((cache)=>{

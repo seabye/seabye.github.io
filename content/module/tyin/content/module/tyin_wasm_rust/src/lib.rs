@@ -15,15 +15,15 @@
 // #variable
 // #block
   // tyin
-    // base
+    // 💠 base
       /*🟢*/
       pub fn test()->String{
         "test echo".to_string()
       }
-    // local data
-    // network data
-    // application programming interface
-    // graphics
+    // 💠 local data
+    // 💠 network data
+    // 💠 application programming interface
+    // 💠 graphics
       // /*🟢*/
       // pub fn image_data_url_to_webp_data_url(image_data_url:String)->String{
       //   let re:regex::Regex=regex::Regex::new(r"^data:image/.+;base64,(.+)").unwrap();
@@ -40,12 +40,10 @@
       //   // println!("{}",base64::encode(&result));
       //   format!("{}{}","data:image/webp;base64,".to_string(),base64::encode(&result))
       // }
-    // graphics engine
-    // command line interface
-    // graphical user interface
-    // user interface
-    // w3daze
-    // unknown
+    // 💠 command line interface
+    // 💠 graphical user interface
+    // 💠 w3daze
+    // 💠 unknown
 // #build
 // #debug
   // test

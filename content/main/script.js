@@ -10,7 +10,9 @@
 // #block
 // #build
   // font
-  document.fonts.add(new FontFace('New York_','url(/content/module/tyin/content/asset/font/apple/NewYork.woff2)'));
+  tyin.font_load('SF Pro Text_','/content/module/tyin/content/asset/font/apple/SF-Pro-Text-Regular_400.woff2',{weight:'normal'});
+  tyin.font_load('New York_','/content/module/tyin/content/asset/font/apple/NewYork.woff2');
+  // tyin.font_load('PingFang SC_','/content/module/tyin/content/asset/font/apple/PingFang_2_400.woff2',{weight:'normal'});
   // element
   tyin.loop(()=>{
     for(const value of document.documentElement.children){
@@ -89,8 +91,6 @@
       clear(){
         document.documentElement.classList.remove('ic_dg','debug');
         document.body.innerHTML='';
-        console.log('++++ tyin:',tyin);
-        globalThis.tyin=tyin;
       },
       async _loop(){
         console.log('++++ loop: start');
@@ -116,11 +116,11 @@
           console.log('++++ listenDOM, observe_resize, data:',data);
         });
       },
-      _listenDOM_URI(){
-        tyin.listenDOM('add',()=>{},'URI');
-        tyin.setURI('push',location.pathname);
-        tyin.setURI('replace',location.pathname);
-        tyin.listenDOM('remove',()=>{},'URI');
+      _listenDOM_URL(){
+        tyin.listenDOM('add',()=>{},'URL');
+        tyin.setURL('push',location.pathname);
+        tyin.setURL('replace',location.pathname);
+        tyin.listenDOM('remove',()=>{},'URL');
       },
       _elementCreate(){},
       _elementState(){},
@@ -198,15 +198,33 @@
       _file(){
         tyin.file();
       },
-      async package_quill_create(){
-        //
-        // globalThis.editor_full=await tyin.package_quill_create(document.body,undefined,'full','在此输入内容');
-        // globalThis.editor_snow=await tyin.package_quill_create(document.body,undefined,'snow','在此输入内容');
-        // globalThis.editor_buble=await tyin.package_quill_create(document.body,undefined,'bubble','在此输入内容');
-        globalThis.editor_default=await tyin.package_quill_create(document.body,undefined,undefined,'在此输入内容',JSON.parse(`{\"ops\":[{\"attributes\":{\"underline\":true},\"insert\":\"H1下划\"},{\"attributes\":{\"header\":1},\"insert\":\"\\n\"},{\"attributes\":{\"strike\":true},\"insert\":\"H2删除\"},{\"attributes\":{\"header\":2},\"insert\":\"\\n\"},{\"insert\":\"基线\"},{\"attributes\":{\"script\":\"sub\"},\"insert\":\"下标\"},{\"attributes\":{\"script\":\"super\"},\"insert\":\"上标\"},{\"insert\":\"\\n引用\"},{\"attributes\":{\"blockquote\":true},\"insert\":\"\\n\"},{\"insert\":{\"formula\":\"E=mc^2\"}},{\"insert\":\"\\n\"},{\"attributes\":{\"link\":\"//seabye.com\"},\"insert\":\"seabye.com\"},{\"insert\":\"\\n比如\"},{\"attributes\":{\"list\":\"bullet\"},\"insert\":\"\\n\"},{\"insert\":\"二层\"},{\"attributes\":{\"indent\":1,\"list\":\"bullet\"},\"insert\":\"\\n\"},{\"insert\":\"三层\"},{\"attributes\":{\"indent\":2,\"list\":\"bullet\"},\"insert\":\"\\n\"},{\"insert\":\"比如\"},{\"attributes\":{\"list\":\"ordered\"},\"insert\":\"\\n\"},{\"insert\":\"二层\"},{\"attributes\":{\"indent\":1,\"list\":\"ordered\"},\"insert\":\"\\n\"},{\"insert\":\"三层\"},{\"attributes\":{\"indent\":2,\"list\":\"ordered\"},\"insert\":\"\\n\"},{\"insert\":\"// 注释\"},{\"attributes\":{\"code-block\":true},\"insert\":\"\\n\"},{\"insert\":\"const zifuchuan='abc';﻿\"},{\"attributes\":{\"code-block\":true},\"insert\":\"\\n\"},{\"insert\":{\"image\":\"data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABsSFBcUERsXFhceHBsgKEIrKCUlKFE6PTBCYFVlZF9VXVtqeJmBanGQc1tdhbWGkJ6jq62rZ4C8ybqmx5moq6T/2wBDARweHigjKE4rK06kbl1upKSkpKSkpKSkpKSkpKSkpKSkpKSkpKSkpKSkpKSkpKSkpKSkpKSkpKSkpKSkpKSkpKT/wAARCABOAEMDAREAAhEBAxEB/8QAGgAAAgMBAQAAAAAAAAAAAAAAAwQAAgUBBv/EADoQAAIBAwMBBQUGAgsAAAAAAAECAwAEEQUSITETQVFxgSJhobHBFBUjQpHwMmIkMzVDUmNyssLR4f/EABQBAQAAAAAAAAAAAAAAAAAAAAD/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwD0M00cEZklcIg6k0GW11c6gzJah44gcbxwT693pk+VBeHRYEbfM7SMeT3Z9evxoOyDTYSIxBHI46Ike9v350AZbaS4jIkjjsrYD2sAF2H/ABoLqq2k9rLAhjgf8FlPH+lv340GvQdoJQZeuxq+mvuztVlZsHuyM0F49LSNFRLm6CAYAEpAFB37rtz/AFhll90krEfpmgahgjhXbFGsa+CjFAvPal37QPl88GTkJ5DxoKNbR3GnvEkjNuyRIxyd3j+vhQF06drmzjkcYfGHH8w4NA5QSgV1KPtbC4Txjb5UFrR+0tIX/wASA/CgYoJQcoKrkZzjHdQI239H1KeDokwEyefRvofWg0aCUFWAYFT0NAjo7E6dGp6xkxn0OKBt3WNSzsFUdSTgCgDFqFpLII4riN3PQK2aBqglBlavKkCpdIy9tbHdtJ5Kngj9+FBoW06XFvHMhyrrkUBqCUGPpt7DHNewu+0rOxGfA/8AuaA13cWlzbSRfaEyw4xzg91Bj/eU89y0Fw2xCm+MBMFHHI+IoND76jEaDC9sQNw3Z57+FyaDvaahdDCRSKD+Zz2Sj0GWoLJpAlj23crMOuyIbF/7PrQc0mVoJX0yY/iQcxnGN6UGvQQ8UGFZaYlyGvWlmiad2crG+MgnigZh060mMiuly2xtuZJW58uelAvfaJAsaS2kAMkTbihJO8eHNA/YPayQ77VEQdGVVwVPgRQGt7hLiMvGSQCV5GORQHoMbWw9rPb6jEu4xHY48VP7+NAymqWToGeSNGPVX6jzoCapL2OnzuDg7CB5ngfOgNbRCC2jiH5FC0BcUADdW4baZ492cY3jNAC4sA0v2i3cwXHe4GQ3uI76Cq3VzDxdWzH/ADIfbB9OooJJq1mkZYyPwP4ShBP6igwNR1u41ENbQRbY24wBlmoAJpN9foLkJvD/AJtw5xx9KD0eqyLJPa2eQWkmBZf5Rz9KBy4uYrZA0rYycAAZJPuFAnPqFxEFb7H/ABnCK0gDt6AGguIb2Q7ytrB34KFz6nIoCFdRXpJbSe4oy/U0Ehu90ghmjMM2MhTyG8j30DmBQCSCKNi0caIzdSFwTQean1Z9OuJrVM7UkbHqSfrQPqsg1KMtAxliSSU4I9snjj5c0DsMItlNzdSKZiPacn2UHgPAUCtxewm4juIbiElVKYkJA5I5BA91BY6uRyGsmHgLnB+K0DFlqMd3hQjxuRkK4xuHiPGgNdW63ERUkhhyrDqp7iKAdlO0qNHLgTRHbIB49x8iKB2g8jrVpv1WdvEj5Cg3x/bp91sP91BR8XV+0cgzHb7TtPRmboT5UGjgAdKDhjU9VU+lAlqMeLczLgSQfiKfIcjyI4oG423orYxuANAnc/gXsE6/3jdi48c8g+h+ZoNCgVkA7Q8UH//Z\"}},{\"insert\":\"\\n\"}]}`),undefined,'75%','75%');
-        // globalThis.editor_custom=await tyin.package_quill_create(document.body,undefined,['clean'],'在此输入内容');
-        //
-        console.log('editor_default.tyin_package_quill.getContents()',editor_default.tyin_package_quill.getContents());
+      miniEditor(){
+        globalThis.tyin_miniEditor=tyin.miniEditor(
+          document.body,
+          undefined,
+          false,
+          '100%',
+          '50%'
+        );
+        console.log('++++ tyin_miniEditor:',tyin_miniEditor);
+      },
+      miniEditor2(){
+        globalThis.tyin_miniEditor2=tyin.miniEditor2(
+          document.body,
+          undefined,
+          false,
+          '100%',
+          '50%'
+        );
+        console.log('++++ tyin_miniEditor2:',tyin_miniEditor2);
+      },
+      async _package_quill_create(){
+        // globalThis.tyin_quill_full=await tyin.package_quill_create(document.body,undefined,'full','在此输入内容');
+        // globalThis.tyin_quill_snow=await tyin.package_quill_create(document.body,undefined,'snow','在此输入内容');
+        // globalThis.tyin_quill_buble=await tyin.package_quill_create(document.body,undefined,'bubble','在此输入内容');
+        globalThis.tyin_quill_default=await tyin.package_quill_create(document.body,undefined,undefined,'在此输入内容',JSON.parse(`{\"ops\":[{\"attributes\":{\"underline\":true},\"insert\":\"H1下划\"},{\"attributes\":{\"header\":1},\"insert\":\"\\n\"},{\"attributes\":{\"strike\":true},\"insert\":\"H2删除\"},{\"attributes\":{\"header\":2},\"insert\":\"\\n\"},{\"insert\":\"基线\"},{\"attributes\":{\"script\":\"sub\"},\"insert\":\"下标\"},{\"attributes\":{\"script\":\"super\"},\"insert\":\"上标\"},{\"insert\":\"\\n引用\"},{\"attributes\":{\"blockquote\":true},\"insert\":\"\\n\"},{\"insert\":{\"formula\":\"E=mc^2\"}},{\"insert\":\"\\n\"},{\"attributes\":{\"link\":\"//seabye.com\"},\"insert\":\"seabye.com\"},{\"insert\":\"\\n一层\"},{\"attributes\":{\"list\":\"bullet\"},\"insert\":\"\\n\"},{\"insert\":\"二层\"},{\"attributes\":{\"indent\":1,\"list\":\"bullet\"},\"insert\":\"\\n\"},{\"insert\":\"三层\"},{\"attributes\":{\"indent\":2,\"list\":\"bullet\"},\"insert\":\"\\n\"},{\"insert\":\"一层\"},{\"attributes\":{\"list\":\"ordered\"},\"insert\":\"\\n\"},{\"insert\":\"二层\"},{\"attributes\":{\"indent\":1,\"list\":\"ordered\"},\"insert\":\"\\n\"},{\"insert\":\"三层\"},{\"attributes\":{\"indent\":2,\"list\":\"ordered\"},\"insert\":\"\\n\"},{\"insert\":\"// 注释\"},{\"attributes\":{\"code-block\":true},\"insert\":\"\\n\"},{\"insert\":\"const zifuchuan='abc';﻿\"},{\"attributes\":{\"code-block\":true},\"insert\":\"\\n\"},{\"insert\":{\"image\":\"data:image/webp;base64,UklGRiwCAABXRUJQVlA4WAoAAAAQAAAADwAADwAAQUxQSHgAAAABcFtr25M8JHOXSqhMk8AAVJToAll7HSTNkV2AmkE4VBm+4wgRMQH81/ROZ88UOI8oTaOHU7NN0spkW+GmQhfohJKwA3YqtmElW8FRdgRf5sM4lsRj4CK5AIyCumBUUuavqueUcm9kLe/f331h9bslRVNBN0DVFABWUDggjgEAAFALAJ0BKhAAEAAAAAAlsAJ0ugH4AUcn7ALlA/UDfAOAA6QD9lf1y9k25AfRn0rPqBkqnkX4n57vDM/xA11zUNf470Lv3T8gPV961+4B/Fv43/bPyf/f/lRv1ANJTiNs1+RdAAD+//8f7+nKYM26vS4XYyw3A76r8s08iCcyQOy+WW1Nmb64mIwDX3AoFKkRRCEPNC/XGiZ53nllEnuwnRi5Ua7XtkM9uxtfSb0XZChifAOhcjf9yIsSpzodPyIW2Z3r/8gPcT5j+IOH2dF1hwBtkv3S+jr/rY39iNiJa5OBPOmK7W3+vnb9cd507+7anv5/N/mzMR4uunU0OQhv1f8Dx/3eTf9LMY7PRXAFQ/dlSSEe/ynJgucStmtjlj66zkm/4QHvi/r7J/N/Jz+epxuk3x//rTuTpYix6yNV9+x3g1dZaPf1wfWKX8anSZ5G+h7mAFvZ9QOG/6cpnaozv/3NXZ7I9ugYY/DMtP0xPP9RwZ5j2uz/n3E/+PhgP6uQ4Gf/TDP+3hmgtl7IAAAA\"}},{\"insert\":\"\\n\"}]}`),undefined,'100%','50%');
+        // globalThis.tyin_quill_custom=await tyin.package_quill_create(document.body,undefined,['clean'],'在此输入内容');
+        console.log('++++ tyin_quill_default.tyin_package_quill.getContents():',tyin_quill_default.tyin_package_quill.getContents());
       }
     },'_');
   });

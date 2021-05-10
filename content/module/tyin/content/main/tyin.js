@@ -13,7 +13,7 @@
 // #block
   // tyin
   export const tyin={
-    // base
+    // 💠 base
       /*🟢*/throttle(callback,wait=1000/24,first=false){
         let timeOut=null;
         return function(...arg){
@@ -283,7 +283,7 @@
         }
         return result;
       },
-      /*🟢*/URIObject(data=location&&(location.search||location.hash)?`${location.search}${location.hash}`:''){
+      /*🟢*/URLObject(data=location&&(location.search||location.hash)?`${location.search}${location.hash}`:''){
         const result={
           search:{},
           hash:{}
@@ -412,7 +412,7 @@
           console.log('#### webAssembly, catch:',error);
         });
       },
-    // local data
+    // 💠 local data
       /*🔴*/
       file(listenElement,progressCallback,resultType='arrayBuffer'){
         // resultType<'BLObFile','objectURL','arrayBuffer','dataURL',undefined='arrayBuffer'>
@@ -431,8 +431,8 @@
       /*🔴*/redis(){},
       /*🔴*/mongoDB(){},
       /*🔴*/memcached(){},
-    // network data
-      /*🟢*/fetch(URI,method,data,dataPack,requestDataType,responseDataType,callback,optionPlus,optionHeadersPlus){
+    // 💠 network data
+      /*🟢*/fetch(URL,method,data,dataPack,requestDataType,responseDataType,callback,optionPlus,optionHeadersPlus){
         const option={};
         option.method=method;
         if(dataPack!==undefined){
@@ -473,10 +473,10 @@
         }
         const result={};
         this.debug(()=>{
-          console.log('#### fetch, request, URI:',URI);
+          console.log('#### fetch, request, URL:',URL);
           console.log('#### fetch, request, option:',option);
         });
-        return fetch(URI,option).then((data)=>{
+        return fetch(URL,option).then((data)=>{
           result.status=data.status;
           if(responseDataType&&responseDataType.match(/arrayBuffer|blob|formData|json|text/i)){
             return data[responseDataType]();
@@ -507,11 +507,11 @@
       /*🔴*/HTTP(){},
       /*🔴*/byteUpload(){},
       /*🔴*/byteDownload(){},
-    // application programming interface
+    // 💠 application programming interface
       /*🔴*/listenPort(){},
-      /*🔴*/portReceive(URI,method,data,callback,data2){
+      /*🔴*/portReceive(URL,method,data,callback,data2){
         const result={
-          URI:URI,
+          URL:URL,
           method:method,
           data:data
         };
@@ -530,14 +530,12 @@
       /*🔴*/staticFile(){},
       /*🔴*/siteMapGenerator(){},
       /*🔴*/siteMapHTMLGenerator(){},
-    // graphics
+    // 💠 graphics
       /*🔴*/_package_openCV_load_(){},
       /*🔴*/package_openCV_removeWatermark(){},
-    // graphics engine
-      /*🔴*/_(){},
-    // command line interface
+    // 💠 command line interface
       /*🔴*/cli(){},
-    // graphical user interface
+    // 💠 graphical user interface
       /*🔴*/cliEmulator(){},
       /*🟡*/listenDOM(action,target,type,callback,option={},option2='',option3=''){
         switch(type){
@@ -714,6 +712,11 @@
                               callback(mutation);
                             }
                             break;
+                          case'characterData':
+                            {
+                              callback(mutation);
+                            }
+                            break;
                           default:
                             break;
                         }
@@ -802,18 +805,18 @@
               }
             }
             break;
-          case'URI':
+          case'URL':
             {
-              if(!this.listenDOM.URI_template){
-                this.listenDOM.URI_template=class template{
+              if(!this.listenDOM.URL_template){
+                this.listenDOM.URL_template=class template{
                   constructor(callback){
                     if(history.pushState.name){
-                      history.pushState=tyin.observeFunction(history.pushState,'pushState',undefined,window,(...arg)=>{
+                      history.pushState=tyin.observeFunction(history.pushState,'pushState',undefined,globalThis,(...arg)=>{
                         return arg[2];
                       });
                     }
                     if(history.replaceState.name){
-                      history.replaceState=tyin.observeFunction(history.replaceState,'replaceState',undefined,window,(...arg)=>{
+                      history.replaceState=tyin.observeFunction(history.replaceState,'replaceState',undefined,globalThis,(...arg)=>{
                         return arg[2];
                       });
                     }
@@ -821,16 +824,16 @@
                   }
                   _popstate=(data)=>{
                     tyin.debug(()=>{
-                      console.log('#### listenDOM, URI, popstate:',data.type,tyin.URIPath());
+                      console.log('#### listenDOM, URL, popstate:',data.type,tyin.URLPath());
                     });
                     this.callback({
                       type:data.type,
-                      path:tyin.URIPath()
+                      path:tyin.URLPath()
                     });
                   }
                   _pushState=(data)=>{
                     tyin.debug(()=>{
-                      console.log('#### listenDOM, URI, pushState:',data.type,data.pushState.replace());
+                      console.log('#### listenDOM, URL, pushState:',data.type,data.pushState.replace());
                     });
                     this.callback({
                       type:data.type,
@@ -839,7 +842,7 @@
                   }
                   _replaceState=(data)=>{
                     tyin.debug(()=>{
-                      console.log('#### listenDOM, URI, replaceState:',data.type,data.replaceState.replace());
+                      console.log('#### listenDOM, URL, replaceState:',data.type,data.replaceState.replace());
                     });
                     this.callback({
                       type:data.type,
@@ -860,31 +863,31 @@
               }
               const callback=target;
               const id=`id_${this.hashCode(callback.toString().replace(/[\r\n\s]/g,''),true)}`;
-              if(!this.listenDOM.URI_data){
-                this.listenDOM.URI_data={};
+              if(!this.listenDOM.URL_data){
+                this.listenDOM.URL_data={};
               }
               switch(action){
                 case'add':
                   {
-                    if(!this.listenDOM.URI_data[id]){
-                      this.listenDOM.URI_data[id]=new this.listenDOM.URI_template(callback);
-                      this.listenDOM.URI_data[id].add();
+                    if(!this.listenDOM.URL_data[id]){
+                      this.listenDOM.URL_data[id]=new this.listenDOM.URL_template(callback);
+                      this.listenDOM.URL_data[id].add();
                       this.debug(()=>{
-                        console.log('#### listenDOM, URI, add, listenDOM.URI_data:',this.listenDOM.URI_data);
+                        console.log('#### listenDOM, URL, add, listenDOM.URL_data:',this.listenDOM.URL_data);
                       });
                     }
                   }
                   break;
                 case'remove':
                   {
-                    if(this.listenDOM.URI_data[id]){
-                      this.listenDOM.URI_data[id].remove();
-                      delete this.listenDOM.URI_data[id];
-                      if(!Object.keys(this.listenDOM.URI_data).length){
-                        delete this.listenDOM.URI_data;
+                    if(this.listenDOM.URL_data[id]){
+                      this.listenDOM.URL_data[id].remove();
+                      delete this.listenDOM.URL_data[id];
+                      if(!Object.keys(this.listenDOM.URL_data).length){
+                        delete this.listenDOM.URL_data;
                       }
                       this.debug(()=>{
-                        console.log('#### listenDOM, URI, remove, listenDOM.URI_data:',this.listenDOM.URI_data);
+                        console.log('#### listenDOM, URL, remove, listenDOM.URL_data:',this.listenDOM.URL_data);
                       });
                     }
                   }
@@ -1700,7 +1703,7 @@
         run(element);
         return result.replace(/,$/,'');
       },
-      /*🟢*/URIPath(hash=true){
+      /*🟢*/URLPath(hash=true){
         switch(hash){
           case true:
             {
@@ -1716,7 +1719,7 @@
             break;
         }
       },
-      /*🟢*/setURI(type,path){
+      /*🟢*/setURL(type,path){
         switch(type){
           case'push':
             {
@@ -1780,10 +1783,10 @@
       /*🔴*/orientationSwitch(){},
       /*🔴*/iframe(){},
       /*🔴*/languageSwitch(){},
-      /*🟢*/openTab(URI=location.href,name=''){
-        return open(URI,name);
+      /*🟢*/openTab(URL=location.href,name=''){
+        return open(URL,name);
       },
-      /*🟢*/openWindow(URI=location.href,name='',width=720,height=450,left,top){
+      /*🟢*/openWindow(URL=location.href,name='',width=720,height=450,left,top){
         if(typeof left==='number'){
           left+=screen.availLeft;
         }else{
@@ -1794,12 +1797,19 @@
         }else{
           top=(screen.availHeight-height)/2+screen.availTop;
         }
-        return open(URI,name,`width=${width},height=${height},left=${left},top=${top}`);
+        return open(URL,name,`width=${width},height=${height},left=${left},top=${top}`);
       },
       /*🟢*/debug(callback){
         if(document&&document.documentElement.classList.contains('debug')){
           callback();
         }
+      },
+      /*🟢*/font_load(title,URL,option={}){
+        return new Promise(async(resolve)=>{
+          const font=await new FontFace(title,`url(${URL})`,option).load();
+          document.fonts.add(font);
+          resolve(true);
+        });
       },
       /*🟢*/_package_fontAwesomeFree_load_(){
         this.elementCreate('link',{rel:'stylesheet',href:`${import.meta.url.replace('/main/tyin.js','/package/fontAwesomeFree@5.15.3/css/all.min.css')}`,crossorigin:''},document.head);
@@ -1925,11 +1935,190 @@
           }
         }
       },
-    // user interface
       /*🔴*/unit(){},
       /*🔴*/colorDictionary(){},
       /*🔴*/uploadListEditor(){},
       /*🔴*/downloadListEditor(){},
+      /*🔴*/miniEditor(insertElement,insertPosition,readOnly,width,height){
+        const resultAttribute={class:'tyin_miniEditor'};
+        if(width||height){
+          resultAttribute.style=`${width?`width: ${width}; `:''}${height?`height: ${height};`:''}`;
+        }
+        const result=tyin.elementCreate('div',resultAttribute,insertElement,insertPosition);
+        // if(!readOnly){
+          const undoState=()=>{
+            document.execCommand('undo',false,null);
+            tyin.elementState(redo,'','tyin_mk_disable',true);
+            const state=document.execCommand('undo',false,null);
+            if(state){
+              document.execCommand('redo',false,null);
+              tyin.elementState(undo,'','tyin_mk_disable',true);
+            }else{
+              tyin.elementState(undo,'tyin_mk_disable','',true);
+            }
+          };
+          const redoState=()=>{
+            document.execCommand('redo',false,null);
+            tyin.elementState(undo,'','tyin_mk_disable',true);
+            const state=document.execCommand('redo',false,null);
+            if(state){
+              document.execCommand('undo',false,null);
+              tyin.elementState(redo,'','tyin_mk_disable',true);
+            }else{
+              tyin.elementState(redo,'tyin_mk_disable','',true);
+            }
+          };
+          const toolbar=tyin.elementCreate('div',{class:'tyin_miniEditor_toolbar'},result);
+            let area=tyin.elementCreate('div',{class:'tyin_miniEditor_toolbar_cr'},toolbar);
+              let group=tyin.elementCreate('div',{class:'tyin_miniEditor_toolbar_cr_group'},area);
+                const file=tyin.elementCreate('input',{type:'file',accept:'image/*'},undefined,undefined,undefined,(input)=>{
+                  input.addEventListener('change',function(){
+                    for(let key=0,length=this.files.length;key<length;key++){
+                      const dataURL=new FileReader();
+                      dataURL.readAsDataURL(this.files[key]);
+                      dataURL.addEventListener('load',function(){
+                        document.execCommand('insertimage',0,this.result);
+                      });
+                    }
+                  });
+                });
+                tyin.elementCreate('div',{class:'tyin_miniEditor_toolbar_cr_group_item'},group,undefined,'􀏅',(image)=>{
+                  image.addEventListener('click',()=>{
+                    file.click();
+                  });
+                });
+            area=tyin.elementCreate('div',{class:'tyin_miniEditor_toolbar_cr'},toolbar);
+              group=tyin.elementCreate('div',{class:'tyin_miniEditor_toolbar_cr_group'},area);
+                let undo=tyin.elementCreate('div',{class:'tyin_miniEditor_toolbar_cr_group_item tyin_mk_disable'},group,undefined,'􀱎');
+                tyin.listenDOM('add',undo,'pointer_up',undoState,undefined,0);
+                let redo=tyin.elementCreate('div',{class:'tyin_miniEditor_toolbar_cr_group_item tyin_mk_disable'},group,undefined,'􀱔');
+                tyin.listenDOM('add',redo,'pointer_up',redoState,undefined,0);
+              group=tyin.elementCreate('div',{class:'tyin_miniEditor_toolbar_cr_group'},area);
+                tyin.elementCreate('div',{class:'tyin_miniEditor_toolbar_cr_group_item'},group,undefined,'􀁶');
+        // }
+        const container=tyin.elementCreate('div',{
+          class:'tyin_miniEditor_container',
+          contenteditable:readOnly?false:true
+        },result,undefined);
+        container.addEventListener('focus',()=>{
+          document.execCommand('defaultParagraphSeparator',false,'div');
+        });
+        container.addEventListener('input',(event)=>{
+          if(!event.inputType.match('history')){
+            tyin.elementState(undo,'','tyin_mk_disable',true);
+            tyin.elementState(redo,'tyin_mk_disable','',true);
+          }
+        });
+        // tyin.listenDOM('add',container,'observe_mutation',()=>{
+        //   if(container.innerHTML==='<br>'){
+        //     container.innerHTML='';
+        //   }
+        // },{childList:true,subtree:true,characterData:true});
+        container.addEventListener('paste',async(event)=>{
+          event.preventDefault();
+          let text='';
+          if(event.clipboardData&&event.clipboardData.getData){
+            text=event.clipboardData.getData('text/plain');
+          }else{
+            text=await navigator.clipboard.readText();
+          }
+          document.execCommand('insertHTML',false,text);
+        });
+        result.tyin_miniEditor_getContent=()=>{
+          return container.innerHTML;
+        };
+        return result;
+      },
+      /*🔴*/miniEditor2(insertElement,insertPosition,readOnly,width,height){
+        const resultAttribute={class:'tyin_miniEditor'};
+        if(width||height){
+          resultAttribute.style=`${width?`width: ${width}; `:''}${height?`height: ${height};`:''}`;
+        }
+        const result=tyin.elementCreate('div',resultAttribute,insertElement,insertPosition);
+        // if(!readOnly){
+          const undoState=()=>{
+            document.execCommand('undo',false,null);
+            tyin.elementState(redo,'','tyin_mk_disable',true);
+            const state=document.execCommand('undo',false,null);
+            if(state){
+              document.execCommand('redo',false,null);
+              tyin.elementState(undo,'','tyin_mk_disable',true);
+            }else{
+              tyin.elementState(undo,'tyin_mk_disable','',true);
+            }
+          };
+          const redoState=()=>{
+            document.execCommand('redo',false,null);
+            tyin.elementState(undo,'','tyin_mk_disable',true);
+            const state=document.execCommand('redo',false,null);
+            if(state){
+              document.execCommand('undo',false,null);
+              tyin.elementState(redo,'','tyin_mk_disable',true);
+            }else{
+              tyin.elementState(redo,'tyin_mk_disable','',true);
+            }
+          };
+          const toolbar=tyin.elementCreate('div',{class:'tyin_miniEditor_toolbar'},result);
+            let area=tyin.elementCreate('div',{class:'tyin_miniEditor_toolbar_cr'},toolbar);
+              let group=tyin.elementCreate('div',{class:'tyin_miniEditor_toolbar_cr_group'},area);
+                const file=tyin.elementCreate('input',{type:'file',accept:'image/*'},undefined,undefined,undefined,(input)=>{
+                  input.addEventListener('change',function(){
+                    for(let key=0,length=this.files.length;key<length;key++){
+                      const dataURL=new FileReader();
+                      dataURL.readAsDataURL(this.files[key]);
+                      dataURL.addEventListener('load',function(){
+                        document.execCommand('insertimage',0,this.result);
+                      });
+                    }
+                  });
+                });
+                tyin.elementCreate('div',{class:'tyin_miniEditor_toolbar_cr_group_item'},group,undefined,'􀏅',(image)=>{
+                  image.addEventListener('click',()=>{
+                    file.click();
+                  });
+                });
+            area=tyin.elementCreate('div',{class:'tyin_miniEditor_toolbar_cr'},toolbar);
+              group=tyin.elementCreate('div',{class:'tyin_miniEditor_toolbar_cr_group'},area);
+                let undo=tyin.elementCreate('div',{class:'tyin_miniEditor_toolbar_cr_group_item tyin_mk_disable'},group,undefined,'􀱎');
+                tyin.listenDOM('add',undo,'pointer_up',undoState,undefined,0);
+                let redo=tyin.elementCreate('div',{class:'tyin_miniEditor_toolbar_cr_group_item tyin_mk_disable'},group,undefined,'􀱔');
+                tyin.listenDOM('add',redo,'pointer_up',redoState,undefined,0);
+              group=tyin.elementCreate('div',{class:'tyin_miniEditor_toolbar_cr_group'},area);
+                tyin.elementCreate('div',{class:'tyin_miniEditor_toolbar_cr_group_item'},group,undefined,'􀁶');
+        // }
+        const container=tyin.elementCreate('div',{
+          class:'tyin_miniEditor_container',
+          contenteditable:readOnly?false:true
+        },result,undefined);
+        container.addEventListener('focus',()=>{
+          document.execCommand('defaultParagraphSeparator',false,'div');
+        });
+        container.addEventListener('input',(event)=>{
+          if(!event.inputType.match('history')){
+            tyin.elementState(undo,'','tyin_mk_disable',true);
+            tyin.elementState(redo,'tyin_mk_disable','',true);
+          }
+        });
+        // tyin.listenDOM('add',container,'observe_mutation',()=>{
+        //   if(container.innerHTML==='<br>'){
+        //     container.innerHTML='';
+        //   }
+        // },{childList:true,subtree:true,characterData:true});
+        container.addEventListener('paste',async(event)=>{
+          event.preventDefault();
+          let text='';
+          if(event.clipboardData&&event.clipboardData.getData){
+            text=event.clipboardData.getData('text/plain');
+          }else{
+            text=await navigator.clipboard.readText();
+          }
+          document.execCommand('insertHTML',false,text);
+        });
+        result.tyin_miniEditor_getContent=()=>{
+          return container.innerHTML;
+        };
+        return result;
+      },
       /*🟢*/async package_quill_create(insertElement,insertPosition,mode=[
           ['bold','italic','underline','strike'],
           [{'script':'sub'},{'script':'super'}],
@@ -2013,7 +2202,7 @@
           return false;
         });
       },
-    // w3daze
+    // 💠 w3daze
       assistant:{
         browse:{
           image:{},
@@ -2027,7 +2216,7 @@
         bag:{
           font:{},
           symbol:{},
-          dictionary:{},
+          phrase:{},
           math:{},
           color:{}
         }
@@ -2035,17 +2224,17 @@
       index:{
         editor:{
           note:{},
-          article:{},
+          manuscript:{},
           table:{},
-          slide:{},
+          speech:{},
           canvas:{},
           code:{},
           folder:{}
         }
       },
-    // unknown
+    // 💠 unknown
       mediaQuery:{
-        async _URIMode(arg,callback){
+        async _URLMode(arg,callback){
           switch(Object.prototype.toString.call(arg[0])){
             case'[object String]':
               {
@@ -2107,16 +2296,16 @@
             return result;
           },
           /*🟢*/info(...arg){
-            // tyin.mediaQuery.video.info(URI,filter,iterator)
-            //   URI<string,array>,
+            // tyin.mediaQuery.video.info(URL,filter,iterator)
+            //   URL<string,array>,
             //   filter<object=({key:RE}),undefined>,
             //   iterator<function,undefined>
-            return tyin.mediaQuery._URIMode(arg,(URI,...arg)=>{
+            return tyin.mediaQuery._URLMode(arg,(URL,...arg)=>{
               const filter=arg[0][1];
               const iterator=arg[0][2];
-              return tyin.fetch(`${URI}?pg=999999999&ac=list`,'GET',undefined,undefined,undefined,'json',async(data)=>{
+              return tyin.fetch(`${URL}?pg=999999999&ac=list`,'GET',undefined,undefined,undefined,'json',async(data)=>{
                 const result=this._filter(data,'class',filter,true);
-                result.in_URI=URI;
+                result.in_URL=URL;
                 result.in_filter=filter;
                 if(iterator){
                   for await(const value of (function*(){
@@ -2130,20 +2319,20 @@
             });
           },
           /*🔴*/all(...arg){
-            // tyin.mediaQuery.video.all(URI,filter,limit,start,end);
-            //   URI<string,array>,
+            // tyin.mediaQuery.video.all(URL,filter,limit,start,end);
+            //   URL<string,array>,
             //   filter<object=({key:RE}),undefined>,
             //   limit<number>,
             //   start<number>,
             //   end<number,undefined=start>
-            return tyin.mediaQuery._URIMode(arg,(URI,...arg)=>{
+            return tyin.mediaQuery._URLMode(arg,(URL,...arg)=>{
               const filter=arg[0][1];
               const limit=arg[0][2];
               const start=arg[0][3];
               const end=arg[0][4]?arg[0][4]:arg[0][3];
-              return tyin.fetch(`${URI}?pg=${start}&ac=list`,'GET',undefined,undefined,undefined,'json',(data)=>{
+              return tyin.fetch(`${URL}?pg=${start}&ac=list`,'GET',undefined,undefined,undefined,'json',(data)=>{
                 const result=this._filter(data,'list',filter,true);
-                result.in_URI=URI;
+                result.in_URL=URL;
                 result.in_filter=filter;
                 result.in_limit=limit;
                 result.in_start=start;
@@ -2153,22 +2342,22 @@
             });
           },
           /*🔴*/category(...arg){
-            // tyin.mediaQuery.video.category(URI,filter,category,limit,start,end);
-            //   URI<string,array>,
+            // tyin.mediaQuery.video.category(URL,filter,category,limit,start,end);
+            //   URL<string,array>,
             //   filter<object=({key:RE}),undefined>,
             //   category<number>,
             //   limit<number>,
             //   start<number>,
             //   end<number,undefined=start>
-            return tyin.mediaQuery._URIMode(arg,(URI,...arg)=>{
+            return tyin.mediaQuery._URLMode(arg,(URL,...arg)=>{
               const filter=arg[0][1];
               const category=arg[0][2];
               const limit=arg[0][3];
               const start=arg[0][4];
               const end=arg[0][5]?arg[0][5]:arg[0][4];
-              return tyin.fetch(`${URI}?t=${category}&pg=${start}&ac=list`,'GET',undefined,undefined,undefined,'json',(data)=>{
+              return tyin.fetch(`${URL}?t=${category}&pg=${start}&ac=list`,'GET',undefined,undefined,undefined,'json',(data)=>{
                 const result=this._filter(data,'list',filter,true);
-                result.in_URI=URI;
+                result.in_URL=URL;
                 result.in_filter=filter;
                 result.in_category=category;
                 result.in_limit=limit;
@@ -2179,22 +2368,22 @@
             });
           },
           /*🔴*/search(...arg){
-            // tyin.mediaQuery.video.search(URI,filter,search,limit,start,end);
-            //   URI<string,array>,
+            // tyin.mediaQuery.video.search(URL,filter,search,limit,start,end);
+            //   URL<string,array>,
             //   filter<object=({key:RE}),undefined>,
             //   search<string>,
             //   limit<number>,
             //   start<number>,
             //   end<number,undefined=start>
-            return tyin.mediaQuery._URIMode(arg,(URI,...arg)=>{
+            return tyin.mediaQuery._URLMode(arg,(URL,...arg)=>{
               const filter=arg[0][1];
               const search=arg[0][2];
               const limit=arg[0][3];
               const start=arg[0][4];
               const end=arg[0][5]?arg[0][5]:arg[0][4];
-              return tyin.fetch(`${URI}?wd=${search}&pg=${start}&ac=list`,'GET',undefined,undefined,undefined,'json',(data)=>{
+              return tyin.fetch(`${URL}?wd=${search}&pg=${start}&ac=list`,'GET',undefined,undefined,undefined,'json',(data)=>{
                 const result=this._filter(data,'list',filter,true);
-                result.in_URI=URI;
+                result.in_URL=URL;
                 result.in_filter=filter;
                 result.in_search=search;
                 result.in_limit=limit;
@@ -2205,13 +2394,13 @@
             });
           },
           /*🟢*/single(...arg){
-            // tyin.mediaQuery.video.single(URI,filter,start,end,iterator);
-            //   URI<string>,
+            // tyin.mediaQuery.video.single(URL,filter,start,end,iterator);
+            //   URL<string>,
             //   filter<object=({key:RE}),undefined>,
             //   start<number>,
             //   end<number,undefined=start>,
             //   iterator<function,undefined>
-            return tyin.mediaQuery._URIMode(arg,async(URI,...arg)=>{
+            return tyin.mediaQuery._URLMode(arg,async(URL,...arg)=>{
               const filter=arg[0][1];
               const start=arg[0][2];
               const end=arg[0][3]?arg[0][3]:arg[0][2];
@@ -2219,10 +2408,10 @@
               const result_={result:[]};
               for await(const value of (function*(){
                 for(let key=start,length=end;key<=length;key++){
-                  yield tyin.fetch(`${URI}?ids=${key}&ac=detail`,'GET',undefined,undefined,undefined,'json',async(data)=>{
+                  yield tyin.fetch(`${URL}?ids=${key}&ac=detail`,'GET',undefined,undefined,undefined,'json',async(data)=>{
                     const result=tyin.mediaQuery.video._filter(data,'list',filter,false);
-                    if(!result_.in_URI){
-                      result_.in_URI=URI;
+                    if(!result_.in_URL){
+                      result_.in_URL=URL;
                       result_.in_filter=filter;
                       result_.in_start=start;
                       result_.in_end=end;

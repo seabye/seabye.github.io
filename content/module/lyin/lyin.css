@@ -5,7 +5,7 @@
 ==== ==== ==== ====
   prefix...
 ~~~~ ~~~~ ~~~~ ~~~~
-  ic_ / initial css
+  ic_ / initial CSS
   ic_nr_ / navigator
   ic_action / :active
   ic_dg\_ / debug
@@ -523,7 +523,7 @@
     input,
     textarea,
     select {
-      /* <_ */
+      /* / */
       all: unset;
       /* _ */
       box-sizing: border-box;
@@ -532,7 +532,7 @@
       outline: unset;
       touch-action: pan-x pan-y;
       overscroll-behavior: contain;
-      /* _> */
+      /* \ */
       max-width: 100%;
     }
     input,
