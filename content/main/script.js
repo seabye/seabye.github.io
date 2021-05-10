@@ -74,7 +74,7 @@
   },1000/60);
 // #debug
   // debug
-  if(location.hostname==='localhost'){
+  if(location.hostname.match(/localhost|192\.168/)){
     // ic_dg
     document.documentElement.classList.add('ic_dg');
     // debug
@@ -198,33 +198,24 @@
       _file(){
         tyin.file();
       },
-      miniEditor(){
+      _miniEditor(){
         globalThis.tyin_miniEditor=tyin.miniEditor(
           document.body,
           undefined,
-          false,
+          'edit',
+          'seabye@live.com',
           '100%',
-          '50%'
+          '100%'
         );
-        console.log('++++ tyin_miniEditor:',tyin_miniEditor);
+        console.log('++++ tyin_miniEditor.tyin_miniEditor_getContent():',tyin_miniEditor.tyin_miniEditor_getContent());
       },
-      miniEditor2(){
-        globalThis.tyin_miniEditor2=tyin.miniEditor2(
-          document.body,
-          undefined,
-          false,
-          '100%',
-          '50%'
-        );
-        console.log('++++ tyin_miniEditor2:',tyin_miniEditor2);
-      },
-      async _package_quill_create(){
-        // globalThis.tyin_quill_full=await tyin.package_quill_create(document.body,undefined,'full','在此输入内容');
-        // globalThis.tyin_quill_snow=await tyin.package_quill_create(document.body,undefined,'snow','在此输入内容');
-        // globalThis.tyin_quill_buble=await tyin.package_quill_create(document.body,undefined,'bubble','在此输入内容');
-        globalThis.tyin_quill_default=await tyin.package_quill_create(document.body,undefined,undefined,'在此输入内容',JSON.parse(`{\"ops\":[{\"attributes\":{\"underline\":true},\"insert\":\"H1下划\"},{\"attributes\":{\"header\":1},\"insert\":\"\\n\"},{\"attributes\":{\"strike\":true},\"insert\":\"H2删除\"},{\"attributes\":{\"header\":2},\"insert\":\"\\n\"},{\"insert\":\"基线\"},{\"attributes\":{\"script\":\"sub\"},\"insert\":\"下标\"},{\"attributes\":{\"script\":\"super\"},\"insert\":\"上标\"},{\"insert\":\"\\n引用\"},{\"attributes\":{\"blockquote\":true},\"insert\":\"\\n\"},{\"insert\":{\"formula\":\"E=mc^2\"}},{\"insert\":\"\\n\"},{\"attributes\":{\"link\":\"//seabye.com\"},\"insert\":\"seabye.com\"},{\"insert\":\"\\n一层\"},{\"attributes\":{\"list\":\"bullet\"},\"insert\":\"\\n\"},{\"insert\":\"二层\"},{\"attributes\":{\"indent\":1,\"list\":\"bullet\"},\"insert\":\"\\n\"},{\"insert\":\"三层\"},{\"attributes\":{\"indent\":2,\"list\":\"bullet\"},\"insert\":\"\\n\"},{\"insert\":\"一层\"},{\"attributes\":{\"list\":\"ordered\"},\"insert\":\"\\n\"},{\"insert\":\"二层\"},{\"attributes\":{\"indent\":1,\"list\":\"ordered\"},\"insert\":\"\\n\"},{\"insert\":\"三层\"},{\"attributes\":{\"indent\":2,\"list\":\"ordered\"},\"insert\":\"\\n\"},{\"insert\":\"// 注释\"},{\"attributes\":{\"code-block\":true},\"insert\":\"\\n\"},{\"insert\":\"const zifuchuan='abc';﻿\"},{\"attributes\":{\"code-block\":true},\"insert\":\"\\n\"},{\"insert\":{\"image\":\"data:image/webp;base64,UklGRiwCAABXRUJQVlA4WAoAAAAQAAAADwAADwAAQUxQSHgAAAABcFtr25M8JHOXSqhMk8AAVJToAll7HSTNkV2AmkE4VBm+4wgRMQH81/ROZ88UOI8oTaOHU7NN0spkW+GmQhfohJKwA3YqtmElW8FRdgRf5sM4lsRj4CK5AIyCumBUUuavqueUcm9kLe/f331h9bslRVNBN0DVFABWUDggjgEAAFALAJ0BKhAAEAAAAAAlsAJ0ugH4AUcn7ALlA/UDfAOAA6QD9lf1y9k25AfRn0rPqBkqnkX4n57vDM/xA11zUNf470Lv3T8gPV961+4B/Fv43/bPyf/f/lRv1ANJTiNs1+RdAAD+//8f7+nKYM26vS4XYyw3A76r8s08iCcyQOy+WW1Nmb64mIwDX3AoFKkRRCEPNC/XGiZ53nllEnuwnRi5Ua7XtkM9uxtfSb0XZChifAOhcjf9yIsSpzodPyIW2Z3r/8gPcT5j+IOH2dF1hwBtkv3S+jr/rY39iNiJa5OBPOmK7W3+vnb9cd507+7anv5/N/mzMR4uunU0OQhv1f8Dx/3eTf9LMY7PRXAFQ/dlSSEe/ynJgucStmtjlj66zkm/4QHvi/r7J/N/Jz+epxuk3x//rTuTpYix6yNV9+x3g1dZaPf1wfWKX8anSZ5G+h7mAFvZ9QOG/6cpnaozv/3NXZ7I9ugYY/DMtP0xPP9RwZ5j2uz/n3E/+PhgP6uQ4Gf/TDP+3hmgtl7IAAAA\"}},{\"insert\":\"\\n\"}]}`),undefined,'100%','50%');
-        // globalThis.tyin_quill_custom=await tyin.package_quill_create(document.body,undefined,['clean'],'在此输入内容');
-        console.log('++++ tyin_quill_default.tyin_package_quill.getContents():',tyin_quill_default.tyin_package_quill.getContents());
+      async package_quill_create(){
+        // globalThis.tyin_quill=await tyin.package_quill_create(document.body,undefined,'full','在此输入内容',undefined,undefined,'100%','100%');
+        // globalThis.tyin_quill=await tyin.package_quill_create(document.body,undefined,'snow','在此输入内容',undefined,undefined,'100%','100%');
+        // globalThis.tyin_quill=await tyin.package_quill_create(document.body,undefined,'bubble','在此输入内容',undefined,undefined,'100%','100%');
+        globalThis.tyin_quill=await tyin.package_quill_create(document.body,undefined,undefined,'在此输入内容',JSON.parse(`{\"ops\":[{\"attributes\":{\"underline\":true},\"insert\":\"H1下划\"},{\"attributes\":{\"header\":1},\"insert\":\"\\n\"},{\"attributes\":{\"strike\":true},\"insert\":\"H2删除\"},{\"attributes\":{\"header\":2},\"insert\":\"\\n\"},{\"insert\":\"基线\"},{\"attributes\":{\"script\":\"sub\"},\"insert\":\"下标\"},{\"attributes\":{\"script\":\"super\"},\"insert\":\"上标\"},{\"insert\":\"\\n引用\"},{\"attributes\":{\"blockquote\":true},\"insert\":\"\\n\"},{\"insert\":{\"formula\":\"E=mc^2\"}},{\"insert\":\"\\n\"},{\"attributes\":{\"link\":\"//seabye.com\"},\"insert\":\"seabye.com\"},{\"insert\":\"\\n一层\"},{\"attributes\":{\"list\":\"bullet\"},\"insert\":\"\\n\"},{\"insert\":\"二层\"},{\"attributes\":{\"indent\":1,\"list\":\"bullet\"},\"insert\":\"\\n\"},{\"insert\":\"三层\"},{\"attributes\":{\"indent\":2,\"list\":\"bullet\"},\"insert\":\"\\n\"},{\"insert\":\"一层\"},{\"attributes\":{\"list\":\"ordered\"},\"insert\":\"\\n\"},{\"insert\":\"二层\"},{\"attributes\":{\"indent\":1,\"list\":\"ordered\"},\"insert\":\"\\n\"},{\"insert\":\"三层\"},{\"attributes\":{\"indent\":2,\"list\":\"ordered\"},\"insert\":\"\\n\"},{\"insert\":\"// 注释\"},{\"attributes\":{\"code-block\":true},\"insert\":\"\\n\"},{\"insert\":\"const zifuchuan='abc';﻿\"},{\"attributes\":{\"code-block\":true},\"insert\":\"\\n\"},{\"insert\":{\"image\":\"data:image/webp;base64,UklGRiwCAABXRUJQVlA4WAoAAAAQAAAADwAADwAAQUxQSHgAAAABcFtr25M8JHOXSqhMk8AAVJToAll7HSTNkV2AmkE4VBm+4wgRMQH81/ROZ88UOI8oTaOHU7NN0spkW+GmQhfohJKwA3YqtmElW8FRdgRf5sM4lsRj4CK5AIyCumBUUuavqueUcm9kLe/f331h9bslRVNBN0DVFABWUDggjgEAAFALAJ0BKhAAEAAAAAAlsAJ0ugH4AUcn7ALlA/UDfAOAA6QD9lf1y9k25AfRn0rPqBkqnkX4n57vDM/xA11zUNf470Lv3T8gPV961+4B/Fv43/bPyf/f/lRv1ANJTiNs1+RdAAD+//8f7+nKYM26vS4XYyw3A76r8s08iCcyQOy+WW1Nmb64mIwDX3AoFKkRRCEPNC/XGiZ53nllEnuwnRi5Ua7XtkM9uxtfSb0XZChifAOhcjf9yIsSpzodPyIW2Z3r/8gPcT5j+IOH2dF1hwBtkv3S+jr/rY39iNiJa5OBPOmK7W3+vnb9cd507+7anv5/N/mzMR4uunU0OQhv1f8Dx/3eTf9LMY7PRXAFQ/dlSSEe/ynJgucStmtjlj66zkm/4QHvi/r7J/N/Jz+epxuk3x//rTuTpYix6yNV9+x3g1dZaPf1wfWKX8anSZ5G+h7mAFvZ9QOG/6cpnaozv/3NXZ7I9ugYY/DMtP0xPP9RwZ5j2uz/n3E/+PhgP6uQ4Gf/TDP+3hmgtl7IAAAA\"}},{\"insert\":\"\\n\"}]}`),undefined,'100%','100%');
+        // globalThis.tyin_quill=await tyin.package_quill_create(document.body,undefined,['image'],'在此输入内容',undefined,undefined,'100%','100%');
+        console.log('++++ tyin_quill.tyin_package_quill.getContents():',tyin_quill.tyin_package_quill.getContents());
       }
     },'_');
   });

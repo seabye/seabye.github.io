@@ -1939,77 +1939,77 @@
       /*🔴*/colorDictionary(){},
       /*🔴*/uploadListEditor(){},
       /*🔴*/downloadListEditor(){},
-      /*🔴*/miniEditor(insertElement,insertPosition,readOnly,width,height){
+      /*🔴*/miniEditor(insertElement,insertPosition,mode,initialContent,width,height){
         const resultAttribute={class:'tyin_miniEditor'};
         if(width||height){
           resultAttribute.style=`${width?`width: ${width}; `:''}${height?`height: ${height};`:''}`;
         }
-        const result=tyin.elementCreate('div',resultAttribute,insertElement,insertPosition);
-        // if(!readOnly){
+        const result=this.elementCreate('div',resultAttribute,insertElement,insertPosition);
+        // if(mode==='edit'){
           const undoState=()=>{
             document.execCommand('undo',false,null);
-            tyin.elementState(redo,'','tyin_mk_disable',true);
+            this.elementState(redo,'','tyin_mk_disable',true);
             const state=document.execCommand('undo',false,null);
             if(state){
               document.execCommand('redo',false,null);
-              tyin.elementState(undo,'','tyin_mk_disable',true);
+              this.elementState(undo,'','tyin_mk_disable',true);
             }else{
-              tyin.elementState(undo,'tyin_mk_disable','',true);
+              this.elementState(undo,'tyin_mk_disable','',true);
             }
           };
           const redoState=()=>{
             document.execCommand('redo',false,null);
-            tyin.elementState(undo,'','tyin_mk_disable',true);
+            this.elementState(undo,'','tyin_mk_disable',true);
             const state=document.execCommand('redo',false,null);
             if(state){
               document.execCommand('undo',false,null);
-              tyin.elementState(redo,'','tyin_mk_disable',true);
+              this.elementState(redo,'','tyin_mk_disable',true);
             }else{
-              tyin.elementState(redo,'tyin_mk_disable','',true);
+              this.elementState(redo,'tyin_mk_disable','',true);
             }
           };
-          const toolbar=tyin.elementCreate('div',{class:'tyin_miniEditor_toolbar'},result);
-            let area=tyin.elementCreate('div',{class:'tyin_miniEditor_toolbar_cr'},toolbar);
-              let group=tyin.elementCreate('div',{class:'tyin_miniEditor_toolbar_cr_group'},area);
-                const file=tyin.elementCreate('input',{type:'file',accept:'image/*'},undefined,undefined,undefined,(input)=>{
-                  input.addEventListener('change',function(){
-                    for(let key=0,length=this.files.length;key<length;key++){
-                      const dataURL=new FileReader();
-                      dataURL.readAsDataURL(this.files[key]);
-                      dataURL.addEventListener('load',function(){
-                        document.execCommand('insertimage',0,this.result);
-                      });
-                    }
-                  });
+          const toolbar=this.elementCreate('div',{class:'tyin_miniEditor_toolbar'},result);
+          let cr=this.elementCreate('div',{class:'tyin_miniEditor_toolbar_cr'},toolbar);
+          let group=this.elementCreate('div',{class:'tyin_miniEditor_toolbar_cr_group'},cr);
+          const file=this.elementCreate('input',{type:'file',accept:'image/*'},undefined,undefined,undefined,(input)=>{
+            input.addEventListener('change',function(){
+              for(let key=0,length=this.files.length;key<length;key++){
+                const dataURL=new FileReader();
+                dataURL.readAsDataURL(this.files[key]);
+                dataURL.addEventListener('load',function(){
+                  document.execCommand('insertimage',0,this.result);
                 });
-                tyin.elementCreate('div',{class:'tyin_miniEditor_toolbar_cr_group_item'},group,undefined,'􀏅',(image)=>{
-                  image.addEventListener('click',()=>{
-                    file.click();
-                  });
-                });
-            area=tyin.elementCreate('div',{class:'tyin_miniEditor_toolbar_cr'},toolbar);
-              group=tyin.elementCreate('div',{class:'tyin_miniEditor_toolbar_cr_group'},area);
-                let undo=tyin.elementCreate('div',{class:'tyin_miniEditor_toolbar_cr_group_item tyin_mk_disable'},group,undefined,'􀱎');
-                tyin.listenDOM('add',undo,'pointer_up',undoState,undefined,0);
-                let redo=tyin.elementCreate('div',{class:'tyin_miniEditor_toolbar_cr_group_item tyin_mk_disable'},group,undefined,'􀱔');
-                tyin.listenDOM('add',redo,'pointer_up',redoState,undefined,0);
-              group=tyin.elementCreate('div',{class:'tyin_miniEditor_toolbar_cr_group'},area);
-                tyin.elementCreate('div',{class:'tyin_miniEditor_toolbar_cr_group_item'},group,undefined,'􀁶');
+              }
+            });
+          });
+          this.elementCreate('div',{class:'tyin_miniEditor_toolbar_cr_group_item'},group,undefined,'􀏅',(image)=>{
+            image.addEventListener('click',()=>{
+              file.click();
+            });
+          });
+          cr=this.elementCreate('div',{class:'tyin_miniEditor_toolbar_cr'},toolbar);
+          group=this.elementCreate('div',{class:'tyin_miniEditor_toolbar_cr_group'},cr);
+          const undo=this.elementCreate('div',{class:'tyin_miniEditor_toolbar_cr_group_item tyin_mk_disable'},group,undefined,'􀱎');
+          this.listenDOM('add',undo,'pointer_up',undoState,undefined,0);
+          const redo=this.elementCreate('div',{class:'tyin_miniEditor_toolbar_cr_group_item tyin_mk_disable'},group,undefined,'􀱔');
+          this.listenDOM('add',redo,'pointer_up',redoState,undefined,0);
+          group=this.elementCreate('div',{class:'tyin_miniEditor_toolbar_cr_group'},cr);
+          this.elementCreate('div',{class:'tyin_miniEditor_toolbar_cr_group_item'},group,undefined,'􀁶');
         // }
-        const container=tyin.elementCreate('div',{
+        const container=this.elementCreate('div',{
           class:'tyin_miniEditor_container',
-          contenteditable:readOnly?false:true
-        },result,undefined);
+          contenteditable:mode==='edit'?true:false
+        },result,undefined,initialContent);
         container.addEventListener('focus',()=>{
           document.execCommand('defaultParagraphSeparator',false,'div');
         });
         container.addEventListener('input',(event)=>{
           if(!event.inputType.match('history')){
-            tyin.elementState(undo,'','tyin_mk_disable',true);
-            tyin.elementState(redo,'tyin_mk_disable','',true);
+            this.elementState(undo,'','tyin_mk_disable',true);
+            this.elementState(redo,'tyin_mk_disable','',true);
           }
         });
-        // tyin.listenDOM('add',container,'observe_mutation',()=>{
+        // this.listenDOM('add',container,'observe_mutation',()=>{
         //   if(container.innerHTML==='<br>'){
         //     container.innerHTML='';
         //   }
@@ -2029,95 +2029,59 @@
         };
         return result;
       },
-      /*🔴*/miniEditor2(insertElement,insertPosition,readOnly,width,height){
-        const resultAttribute={class:'tyin_miniEditor'};
+      /*🔴*/miniEditor(insertElement,insertPosition='beforeend',mode,initialContent,width,height){
+        const miniEditorAttribute={class:'tyin_miniEditor'};
         if(width||height){
-          resultAttribute.style=`${width?`width: ${width}; `:''}${height?`height: ${height};`:''}`;
+          miniEditorAttribute.style=`${width?`width: ${width}; `:''}${height?`height: ${height};`:''}`;
         }
-        const result=tyin.elementCreate('div',resultAttribute,insertElement,insertPosition);
-        // if(!readOnly){
-          const undoState=()=>{
-            document.execCommand('undo',false,null);
-            tyin.elementState(redo,'','tyin_mk_disable',true);
-            const state=document.execCommand('undo',false,null);
-            if(state){
-              document.execCommand('redo',false,null);
-              tyin.elementState(undo,'','tyin_mk_disable',true);
-            }else{
-              tyin.elementState(undo,'tyin_mk_disable','',true);
-            }
-          };
-          const redoState=()=>{
-            document.execCommand('redo',false,null);
-            tyin.elementState(undo,'','tyin_mk_disable',true);
-            const state=document.execCommand('redo',false,null);
-            if(state){
-              document.execCommand('undo',false,null);
-              tyin.elementState(redo,'','tyin_mk_disable',true);
-            }else{
-              tyin.elementState(redo,'tyin_mk_disable','',true);
-            }
-          };
-          const toolbar=tyin.elementCreate('div',{class:'tyin_miniEditor_toolbar'},result);
-            let area=tyin.elementCreate('div',{class:'tyin_miniEditor_toolbar_cr'},toolbar);
-              let group=tyin.elementCreate('div',{class:'tyin_miniEditor_toolbar_cr_group'},area);
-                const file=tyin.elementCreate('input',{type:'file',accept:'image/*'},undefined,undefined,undefined,(input)=>{
-                  input.addEventListener('change',function(){
-                    for(let key=0,length=this.files.length;key<length;key++){
-                      const dataURL=new FileReader();
-                      dataURL.readAsDataURL(this.files[key]);
-                      dataURL.addEventListener('load',function(){
-                        document.execCommand('insertimage',0,this.result);
-                      });
-                    }
-                  });
+        const miniEditor=this.elementCreate('div',miniEditorAttribute);
+        switch(mode){
+          case'browse':
+            {}
+            break;
+          case'edit':
+            {
+              const toolbar=this.elementCreate('div',{class:'tyin_miniEditor_toolbar'},miniEditor);
+              let cr=this.elementCreate('div',{class:'tyin_miniEditor_toolbar_cr'},toolbar);
+              let group=this.elementCreate('div',{class:'tyin_miniEditor_toolbar_cr_group'},cr);
+              let item=this.elementCreate('div',{class:'tyin_miniEditor_toolbar_cr_group_item'},group,undefined,'􀏅');
+              cr=this.elementCreate('div',{class:'tyin_miniEditor_toolbar_cr'},toolbar);
+              group=this.elementCreate('div',{class:'tyin_miniEditor_toolbar_cr_group'},cr);
+              item=this.elementCreate('div',{class:'tyin_miniEditor_toolbar_cr_group_item tyin_mk_disable'},group,undefined,'􀱎');
+              item=this.elementCreate('div',{class:'tyin_miniEditor_toolbar_cr_group_item tyin_mk_disable'},group,undefined,'􀱔');
+              group=this.elementCreate('div',{class:'tyin_miniEditor_toolbar_cr_group'},cr);
+              item=this.elementCreate('div',{class:'tyin_miniEditor_toolbar_cr_group_item'},group,undefined,'􀁶');
+              const container=this.elementCreate('div',{class:'tyin_miniEditor_container'},miniEditor);
+              const line=this.elementCreate('div',{class:'tyin_miniEditor_container_line'},container);
+              const content=this.elementCreate('div',{class:'tyin_miniEditor_container_content'},container,undefined,initialContent);
+              content.addEventListener('pointerdown',()=>{
+                content.innerHTML=content.innerHTML.replace('<span class="tyin_miniEditor_container_content_prev">','').replace('</span><textarea class="tyin_miniEditor_container_content_cursor"></textarea>','');
+              });
+              this.listenDOM('add',content,'pointer_up',()=>{
+                const select=getSelection();
+                content.innerHTML=`${content.innerHTML.slice(0,select.focusOffset)}<span class="tyin_miniEditor_container_content_prev"></span><textarea class="tyin_miniEditor_container_content_cursor"></textarea>${content.innerHTML.slice(select.focusOffset)}`;
+                const cursor=document.querySelector('.tyin_miniEditor_container_content_cursor');
+                cursor.focus();
+                cursor.addEventListener('input',()=>{
+                  cursor.previousElementSibling.innerHTML=cursor.value;
                 });
-                tyin.elementCreate('div',{class:'tyin_miniEditor_toolbar_cr_group_item'},group,undefined,'􀏅',(image)=>{
-                  image.addEventListener('click',()=>{
-                    file.click();
-                  });
-                });
-            area=tyin.elementCreate('div',{class:'tyin_miniEditor_toolbar_cr'},toolbar);
-              group=tyin.elementCreate('div',{class:'tyin_miniEditor_toolbar_cr_group'},area);
-                let undo=tyin.elementCreate('div',{class:'tyin_miniEditor_toolbar_cr_group_item tyin_mk_disable'},group,undefined,'􀱎');
-                tyin.listenDOM('add',undo,'pointer_up',undoState,undefined,0);
-                let redo=tyin.elementCreate('div',{class:'tyin_miniEditor_toolbar_cr_group_item tyin_mk_disable'},group,undefined,'􀱔');
-                tyin.listenDOM('add',redo,'pointer_up',redoState,undefined,0);
-              group=tyin.elementCreate('div',{class:'tyin_miniEditor_toolbar_cr_group'},area);
-                tyin.elementCreate('div',{class:'tyin_miniEditor_toolbar_cr_group_item'},group,undefined,'􀁶');
-        // }
-        const container=tyin.elementCreate('div',{
-          class:'tyin_miniEditor_container',
-          contenteditable:readOnly?false:true
-        },result,undefined);
-        container.addEventListener('focus',()=>{
-          document.execCommand('defaultParagraphSeparator',false,'div');
-        });
-        container.addEventListener('input',(event)=>{
-          if(!event.inputType.match('history')){
-            tyin.elementState(undo,'','tyin_mk_disable',true);
-            tyin.elementState(redo,'tyin_mk_disable','',true);
-          }
-        });
-        // tyin.listenDOM('add',container,'observe_mutation',()=>{
-        //   if(container.innerHTML==='<br>'){
-        //     container.innerHTML='';
-        //   }
-        // },{childList:true,subtree:true,characterData:true});
-        container.addEventListener('paste',async(event)=>{
-          event.preventDefault();
-          let text='';
-          if(event.clipboardData&&event.clipboardData.getData){
-            text=event.clipboardData.getData('text/plain');
-          }else{
-            text=await navigator.clipboard.readText();
-          }
-          document.execCommand('insertHTML',false,text);
-        });
-        result.tyin_miniEditor_getContent=()=>{
-          return container.innerHTML;
-        };
-        return result;
+              },undefined,0);
+              const data=[];
+              const record=[];
+              const insert=()=>{};
+              if(initialContent){
+                insert(initialContent);
+              }
+              miniEditor.tyin_miniEditor_getContent=data;
+            }
+            break;
+          default:
+            break;
+        }
+        if(insertElement){
+          insertElement.insertAdjacentElement(insertPosition,miniEditor);
+        }
+        return miniEditor;
       },
       /*🟢*/async package_quill_create(insertElement,insertPosition,mode=[
           ['bold','italic','underline','strike'],
@@ -2202,250 +2166,258 @@
           return false;
         });
       },
-    // 💠 w3daze
-      assistant:{
-        browse:{
-          image:{},
-          audio:{},
-          video:{}
-        },
-        editor:{
-          math:{},
-          color:{}
-        },
-        bag:{
-          font:{},
-          symbol:{},
-          phrase:{},
-          math:{},
-          color:{}
-        }
-      },
-      index:{
-        editor:{
-          note:{},
-          manuscript:{},
-          table:{},
-          speech:{},
-          canvas:{},
-          code:{},
-          folder:{}
-        }
-      },
-    // 💠 unknown
-      mediaQuery:{
-        async _URLMode(arg,callback){
-          switch(Object.prototype.toString.call(arg[0])){
-            case'[object String]':
-              {
-                return callback(arg[0],arg);
-              }
-              break;
-            case'[object Array]':
-              {
-                const result={};
-                for await(const value of (async function*(){
-                  for(let key=0,length=arg[0].length;key<length;key++){
-                    const value_=await callback(arg[0][key],arg);
-                    yield [arg[0][key],value_];
-                  }
-                })()){
-                  result[value[0]]=value[1];
-                }
-                return result;
-              }
-              break;
-            default:
-              break;
+    // 💠 other
+      w3daze:{
+        package:{
+          editor:{
+            note:{}
           }
         },
-        video:{
-          _filter(data,dataProperty,filter,info){
-            let result={result:[]};
-            if(data.result){
-              if(filter){
-                tyin.for(data.result[dataProperty],(...data)=>{
-                  const match=[];
-                  tyin.for(filter,(...data_)=>{
-                    if(data[2][data_[1]].toString().trim().match(data_[2])){
-                      match.push(true);
-                    }else{
-                      match.push(false);
+        assistant:{
+          preview:{
+            image:{},
+            audio:{},
+            video:{}
+          },
+          editor:{
+            math:{},
+            color:{}
+          },
+          bag:{
+            font:{},
+            symbol:{},
+            phrase:{},
+            math:{},
+            color:{}
+          }
+        },
+        index:{
+          editor:{
+            note:{},
+            manuscript:{},
+            table:{},
+            speech:{},
+            canvas:{},
+            code:{},
+            folder:{}
+          }
+        }
+      },
+      unknown:{
+        mediaQuery:{
+          async _URLMode(arg,callback){
+            switch(Object.prototype.toString.call(arg[0])){
+              case'[object String]':
+                {
+                  return callback(arg[0],arg);
+                }
+                break;
+              case'[object Array]':
+                {
+                  const result={};
+                  for await(const value of (async function*(){
+                    for(let key=0,length=arg[0].length;key<length;key++){
+                      const value_=await callback(arg[0][key],arg);
+                      yield [arg[0][key],value_];
+                    }
+                  })()){
+                    result[value[0]]=value[1];
+                  }
+                  return result;
+                }
+                break;
+              default:
+                break;
+            }
+          },
+          video:{
+            _filter(data,dataProperty,filter,info){
+              let result={result:[]};
+              if(data.result){
+                if(filter){
+                  tyin.for(data.result[dataProperty],(...data)=>{
+                    const match=[];
+                    tyin.for(filter,(...data_)=>{
+                      if(data[2][data_[1]].toString().trim().match(data_[2])){
+                        match.push(true);
+                      }else{
+                        match.push(false);
+                      }
+                    },0);
+                    if(!match.includes(false)){
+                      // data[2].type_id=data[2].type_id;
+                      data[2].type_name=data[2].type_name.trim();
+                      result.result.push(data[2]);
                     }
                   },0);
-                  if(!match.includes(false)){
+                }else{
+                  tyin.for(data.result[dataProperty],(...data)=>{
                     // data[2].type_id=data[2].type_id;
                     data[2].type_name=data[2].type_name.trim();
                     result.result.push(data[2]);
+                  },0);
+                }
+                if(info){
+                  result._page_=parseInt(data.result.page);
+                  result._pagecount_=parseInt(data.result.pagecount);
+                  result._limit_=parseInt(data.result.limit);
+                  result._total_=parseInt(data.result.total);
+                }
+              }
+              return result;
+            },
+            /*🟢*/info(...arg){
+              // tyin.unknown.mediaQuery.video.info(URL,filter,iterator)
+              //   URL<string,array>,
+              //   filter<object=({key:RE}),undefined>,
+              //   iterator<function,undefined>
+              return tyin.unknown.mediaQuery._URLMode(arg,(URL,...arg)=>{
+                const filter=arg[0][1];
+                const iterator=arg[0][2];
+                return tyin.fetch(`${URL}?pg=999999999&ac=list`,'GET',undefined,undefined,undefined,'json',async(data)=>{
+                  const result=this._filter(data,'class',filter,true);
+                  result.in_URL=URL;
+                  result.in_filter=filter;
+                  if(iterator){
+                    for await(const value of (function*(){
+                      for(let key=0,length=result.result.length;key<length;key++){
+                        yield iterator(result.result[key]);
+                      }
+                    })()){}
                   }
-                },0);
-              }else{
-                tyin.for(data.result[dataProperty],(...data)=>{
-                  // data[2].type_id=data[2].type_id;
-                  data[2].type_name=data[2].type_name.trim();
-                  result.result.push(data[2]);
-                },0);
-              }
-              if(info){
-                result._page_=parseInt(data.result.page);
-                result._pagecount_=parseInt(data.result.pagecount);
-                result._limit_=parseInt(data.result.limit);
-                result._total_=parseInt(data.result.total);
-              }
+                  return result;
+                });
+              });
+            },
+            /*🔴*/all(...arg){
+              // tyin.unknown.mediaQuery.video.all(URL,filter,limit,start,end);
+              //   URL<string,array>,
+              //   filter<object=({key:RE}),undefined>,
+              //   limit<number>,
+              //   start<number>,
+              //   end<number,undefined=start>
+              return tyin.unknown.mediaQuery._URLMode(arg,(URL,...arg)=>{
+                const filter=arg[0][1];
+                const limit=arg[0][2];
+                const start=arg[0][3];
+                const end=arg[0][4]?arg[0][4]:arg[0][3];
+                return tyin.fetch(`${URL}?pg=${start}&ac=list`,'GET',undefined,undefined,undefined,'json',(data)=>{
+                  const result=this._filter(data,'list',filter,true);
+                  result.in_URL=URL;
+                  result.in_filter=filter;
+                  result.in_limit=limit;
+                  result.in_start=start;
+                  result.in_end=end;
+                  return result;
+                });
+              });
+            },
+            /*🔴*/category(...arg){
+              // tyin.unknown.mediaQuery.video.category(URL,filter,category,limit,start,end);
+              //   URL<string,array>,
+              //   filter<object=({key:RE}),undefined>,
+              //   category<number>,
+              //   limit<number>,
+              //   start<number>,
+              //   end<number,undefined=start>
+              return tyin.unknown.mediaQuery._URLMode(arg,(URL,...arg)=>{
+                const filter=arg[0][1];
+                const category=arg[0][2];
+                const limit=arg[0][3];
+                const start=arg[0][4];
+                const end=arg[0][5]?arg[0][5]:arg[0][4];
+                return tyin.fetch(`${URL}?t=${category}&pg=${start}&ac=list`,'GET',undefined,undefined,undefined,'json',(data)=>{
+                  const result=this._filter(data,'list',filter,true);
+                  result.in_URL=URL;
+                  result.in_filter=filter;
+                  result.in_category=category;
+                  result.in_limit=limit;
+                  result.in_start=start;
+                  result.in_end=end;
+                  return result;
+                });
+              });
+            },
+            /*🔴*/search(...arg){
+              // tyin.unknown.mediaQuery.video.search(URL,filter,search,limit,start,end);
+              //   URL<string,array>,
+              //   filter<object=({key:RE}),undefined>,
+              //   search<string>,
+              //   limit<number>,
+              //   start<number>,
+              //   end<number,undefined=start>
+              return tyin.unknown.mediaQuery._URLMode(arg,(URL,...arg)=>{
+                const filter=arg[0][1];
+                const search=arg[0][2];
+                const limit=arg[0][3];
+                const start=arg[0][4];
+                const end=arg[0][5]?arg[0][5]:arg[0][4];
+                return tyin.fetch(`${URL}?wd=${search}&pg=${start}&ac=list`,'GET',undefined,undefined,undefined,'json',(data)=>{
+                  const result=this._filter(data,'list',filter,true);
+                  result.in_URL=URL;
+                  result.in_filter=filter;
+                  result.in_search=search;
+                  result.in_limit=limit;
+                  result.in_start=start;
+                  result.in_end=end;
+                  return result;
+                });
+              });
+            },
+            /*🟢*/single(...arg){
+              // tyin.unknown.mediaQuery.video.single(URL,filter,start,end,iterator);
+              //   URL<string>,
+              //   filter<object=({key:RE}),undefined>,
+              //   start<number>,
+              //   end<number,undefined=start>,
+              //   iterator<function,undefined>
+              return tyin.unknown.mediaQuery._URLMode(arg,async(URL,...arg)=>{
+                const filter=arg[0][1];
+                const start=arg[0][2];
+                const end=arg[0][3]?arg[0][3]:arg[0][2];
+                const iterator=arg[0][4];
+                const result_={result:[]};
+                for await(const value of (function*(){
+                  for(let key=start,length=end;key<=length;key++){
+                    yield tyin.fetch(`${URL}?ids=${key}&ac=detail`,'GET',undefined,undefined,undefined,'json',async(data)=>{
+                      const result=tyin.unknown.mediaQuery.video._filter(data,'list',filter,false);
+                      if(!result_.in_URL){
+                        result_.in_URL=URL;
+                        result_.in_filter=filter;
+                        result_.in_start=start;
+                        result_.in_end=end;
+                      }
+                      if(iterator){
+                        await iterator(result.result[0]);
+                      }
+                      return result;
+                    });
+                  }
+                })()){
+                  if(value&&value.result[0]){
+                    result_.result.push(value.result[0]);
+                  }
+                }
+                return result_;
+              });
             }
-            return result;
           },
-          /*🟢*/info(...arg){
-            // tyin.mediaQuery.video.info(URL,filter,iterator)
-            //   URL<string,array>,
-            //   filter<object=({key:RE}),undefined>,
-            //   iterator<function,undefined>
-            return tyin.mediaQuery._URLMode(arg,(URL,...arg)=>{
-              const filter=arg[0][1];
-              const iterator=arg[0][2];
-              return tyin.fetch(`${URL}?pg=999999999&ac=list`,'GET',undefined,undefined,undefined,'json',async(data)=>{
-                const result=this._filter(data,'class',filter,true);
-                result.in_URL=URL;
-                result.in_filter=filter;
-                if(iterator){
-                  for await(const value of (function*(){
-                    for(let key=0,length=result.result.length;key<length;key++){
-                      yield iterator(result.result[key]);
-                    }
-                  })()){}
-                }
-                return result;
-              });
-            });
-          },
-          /*🔴*/all(...arg){
-            // tyin.mediaQuery.video.all(URL,filter,limit,start,end);
-            //   URL<string,array>,
-            //   filter<object=({key:RE}),undefined>,
-            //   limit<number>,
-            //   start<number>,
-            //   end<number,undefined=start>
-            return tyin.mediaQuery._URLMode(arg,(URL,...arg)=>{
-              const filter=arg[0][1];
-              const limit=arg[0][2];
-              const start=arg[0][3];
-              const end=arg[0][4]?arg[0][4]:arg[0][3];
-              return tyin.fetch(`${URL}?pg=${start}&ac=list`,'GET',undefined,undefined,undefined,'json',(data)=>{
-                const result=this._filter(data,'list',filter,true);
-                result.in_URL=URL;
-                result.in_filter=filter;
-                result.in_limit=limit;
-                result.in_start=start;
-                result.in_end=end;
-                return result;
-              });
-            });
-          },
-          /*🔴*/category(...arg){
-            // tyin.mediaQuery.video.category(URL,filter,category,limit,start,end);
-            //   URL<string,array>,
-            //   filter<object=({key:RE}),undefined>,
-            //   category<number>,
-            //   limit<number>,
-            //   start<number>,
-            //   end<number,undefined=start>
-            return tyin.mediaQuery._URLMode(arg,(URL,...arg)=>{
-              const filter=arg[0][1];
-              const category=arg[0][2];
-              const limit=arg[0][3];
-              const start=arg[0][4];
-              const end=arg[0][5]?arg[0][5]:arg[0][4];
-              return tyin.fetch(`${URL}?t=${category}&pg=${start}&ac=list`,'GET',undefined,undefined,undefined,'json',(data)=>{
-                const result=this._filter(data,'list',filter,true);
-                result.in_URL=URL;
-                result.in_filter=filter;
-                result.in_category=category;
-                result.in_limit=limit;
-                result.in_start=start;
-                result.in_end=end;
-                return result;
-              });
-            });
-          },
-          /*🔴*/search(...arg){
-            // tyin.mediaQuery.video.search(URL,filter,search,limit,start,end);
-            //   URL<string,array>,
-            //   filter<object=({key:RE}),undefined>,
-            //   search<string>,
-            //   limit<number>,
-            //   start<number>,
-            //   end<number,undefined=start>
-            return tyin.mediaQuery._URLMode(arg,(URL,...arg)=>{
-              const filter=arg[0][1];
-              const search=arg[0][2];
-              const limit=arg[0][3];
-              const start=arg[0][4];
-              const end=arg[0][5]?arg[0][5]:arg[0][4];
-              return tyin.fetch(`${URL}?wd=${search}&pg=${start}&ac=list`,'GET',undefined,undefined,undefined,'json',(data)=>{
-                const result=this._filter(data,'list',filter,true);
-                result.in_URL=URL;
-                result.in_filter=filter;
-                result.in_search=search;
-                result.in_limit=limit;
-                result.in_start=start;
-                result.in_end=end;
-                return result;
-              });
-            });
-          },
-          /*🟢*/single(...arg){
-            // tyin.mediaQuery.video.single(URL,filter,start,end,iterator);
-            //   URL<string>,
-            //   filter<object=({key:RE}),undefined>,
-            //   start<number>,
-            //   end<number,undefined=start>,
-            //   iterator<function,undefined>
-            return tyin.mediaQuery._URLMode(arg,async(URL,...arg)=>{
-              const filter=arg[0][1];
-              const start=arg[0][2];
-              const end=arg[0][3]?arg[0][3]:arg[0][2];
-              const iterator=arg[0][4];
-              const result_={result:[]};
-              for await(const value of (function*(){
-                for(let key=start,length=end;key<=length;key++){
-                  yield tyin.fetch(`${URL}?ids=${key}&ac=detail`,'GET',undefined,undefined,undefined,'json',async(data)=>{
-                    const result=tyin.mediaQuery.video._filter(data,'list',filter,false);
-                    if(!result_.in_URL){
-                      result_.in_URL=URL;
-                      result_.in_filter=filter;
-                      result_.in_start=start;
-                      result_.in_end=end;
-                    }
-                    if(iterator){
-                      await iterator(result.result[0]);
-                    }
-                    return result;
-                  });
-                }
-              })()){
-                if(value&&value.result[0]){
-                  result_.result.push(value.result[0]);
-                }
-              }
-              return result_;
-            });
-          }
+          audio:{},
+          image:{},
+          text:{}
         },
-        audio:{},
-        image:{},
-        text:{}
-      },
-      mediaSync:{
-        video:{},
-        audio:{},
-        image:{},
-        text:{}
-      },
-      mediaMatch:{
-        video:{},
-        audio:{},
-        image:{},
-        text:{}
+        mediaSync:{
+          video:{},
+          audio:{},
+          image:{},
+          text:{}
+        },
+        mediaMatch:{
+          video:{},
+          audio:{},
+          image:{},
+          text:{}
+        }
       }
   };
   // CSS

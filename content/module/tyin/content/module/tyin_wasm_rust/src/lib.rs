@@ -42,8 +42,7 @@
       // }
     // 💠 command line interface
     // 💠 graphical user interface
-    // 💠 w3daze
-    // 💠 unknown
+    // 💠 other
 // #build
 // #debug
   // test

@@ -18,6 +18,7 @@
     .tyin_miniEditor {
       min-width: 320px;
       max-width: 100%;
+      min-height: 86px;
       max-height: 100%;
       background-color: var(--ic_ve_color_black1_opacity);
       font-size: 14px;
@@ -25,9 +26,6 @@
     /* ^child */
     .tyin_miniEditor * {
       line-height: var(--ic_ve_font_lineHeight_text);
-    }
-    .tyin_miniEditor span {
-      all: unset !important;
     }
       /* tyin_miniEditor_toolbar */
       .tyin_miniEditor_toolbar {
@@ -90,6 +88,25 @@
       .tyin_miniEditor_container:not(:only-child) {
         height: calc(100% - 36px);
       }
+        /* tyin_miniEditor_container_content */
+        .tyin_miniEditor_container_content {
+          position: relative;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          cursor: text;
+          -webkit-user-select: text;
+          user-select: text;
+        }
+          /* tyin_miniEditor_container_content_cursor */
+          .tyin_miniEditor_container_content_cursor {
+            position: absolute;
+            width: 0;
+            height: 19px;
+            border-right: 2px solid;
+            border-right-color: var(--ic_ve_color_system_orange_translucent);
+          }
     /* 💧 tyin_package_quill */
       /* custom */
       .tyin_package_quill_container {
@@ -97,6 +114,7 @@
         flex-direction: column;
         min-width: 320px;
         max-width: 100%;
+        min-height: 86px;
         max-height: 100%;
         background-color: var(--ic_ve_color_black1_opacity);
       }
@@ -142,8 +160,10 @@
         padding-left: 3em !important;
       } */
       .ql-container .ql-editor img {
+        padding: 4px !important;
         border: 1px dashed !important;
         border-color: var(--ic_ve_color_white5) !important;
+        border-radius: 4px !important;
       }
       /* .ql-container strong {} */
       /* .ql-container em {} */
@@ -171,8 +191,7 @@
         border-radius: 2px !important;
         transform: scale(0.5) !important;
       }
-  /* 💠 w3daze */
-  /* 💠 unknown */
+  /* 💠 other */
 /* #build */
 /* #debug */
 /* #after */
