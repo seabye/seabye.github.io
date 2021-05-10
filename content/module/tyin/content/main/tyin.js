@@ -1804,7 +1804,7 @@
           callback();
         }
       },
-      /*🟢*/font_load(title,URL,option={}){
+      /*🟢*/loadFont(title,URL,option={}){
         return new Promise(async(resolve)=>{
           const font=await new FontFace(title,`url(${URL})`,option).load();
           document.fonts.add(font);

@@ -10,9 +10,9 @@
 // #block
 // #build
   // font
-  tyin.font_load('SF Pro Text_','/content/module/tyin/content/asset/font/apple/SF-Pro-Text-Regular_400.woff2',{weight:'normal'});
-  tyin.font_load('New York_','/content/module/tyin/content/asset/font/apple/NewYork.woff2');
-  // tyin.font_load('PingFang SC_','/content/module/tyin/content/asset/font/apple/PingFang_2_400.woff2',{weight:'normal'});
+  tyin.loadFont('SF Pro Text_','/content/module/tyin/content/asset/font/apple/SF-Pro-Text-Regular_400.woff2',{weight:'normal'});
+  tyin.loadFont('New York_','/content/module/tyin/content/asset/font/apple/NewYork.woff2');
+  // tyin.loadFont('PingFang SC_','/content/module/tyin/content/asset/font/apple/PingFang_2_400.woff2',{weight:'normal'});
   // element
   tyin.loop(()=>{
     for(const value of document.documentElement.children){
