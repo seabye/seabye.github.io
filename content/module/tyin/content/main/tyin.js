@@ -1800,7 +1800,7 @@
         return open(URL,name,`width=${width},height=${height},left=${left},top=${top}`);
       },
       /*🟢*/debug(callback){
-        if(document&&document.documentElement.classList.contains('debug')){
+        if('document'in globalThis&&document.documentElement.classList.contains('debug')){
           callback();
         }
       },
@@ -2449,7 +2449,7 @@
       }
   };
   // CSS
-  if(document){
+  if('document'in globalThis){
     tyin.elementCreate('link',{rel:'stylesheet',href:`${import.meta.url.replace('tyin.js','tyin.css')}`,crossorigin:''},document.head);
   }
   // // merge webAssembly rust
