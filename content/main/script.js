@@ -216,7 +216,7 @@
         // globalThis.tyin_quill=await tyin.package_quill_create(document.body,undefined,undefined,'在此输入内容','<a href="https://seabye.com">https://seabye.com</a>',false,'100%','100%');
         globalThis.tyin_quill=await tyin.package_quill_create(document.body,undefined,[
           ['underline','strike','link','image']
-        ],'在此输入内容','<a href="https://seabye.com">https://seabye.com</a>',false,'100%','100%');
+        ],'在此输入内容','<a href="https://seabye.com">https://seabye.com</a><br><br>',false,'100%','100%');
         console.log('++++ tyin_quill.tyin_package_quill.getContents():',JSON.stringify(tyin_quill.tyin_package_quill.getContents()));
       }
     },'_');

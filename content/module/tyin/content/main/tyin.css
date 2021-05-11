@@ -111,6 +111,7 @@
       .tyin_package_quill_container {
         display: flex;
         flex-direction: column;
+        position: relative;
         min-width: 320px;
         max-width: 100%;
         min-height: 86px;
@@ -236,13 +237,14 @@
         padding: 1px !important;
         border: 1px solid !important;
         border-color: var(--ic_ve_color_system_orange_translucent) !important;
-        border-radius: 2px !important;
       }
       .tyin_package_quill_container>.ql-container>.ql-tooltip:not(.ql-hidden) {
         display: flex !important;
         align-items: center !important;
         left: unset !important;
-        top: 0 !important;
+        right: 8px !important;
+        top: unset !important;
+        bottom: calc(36px + 8px*2) !important;
         margin: unset !important;
         padding: 4px 8px !important;
         line-height: 100% !important;
@@ -253,6 +255,7 @@
         box-shadow: var(--ic_ve_shadow_4dp3) !important;
         color: inherit !important;
         white-space: nowrap !important;
+        transform: unset !important;
       }
       .tyin_package_quill_container>.ql-container>.ql-tooltip::before {
         margin: unset !important;
