@@ -6,7 +6,7 @@
 /* #build */
   /* root */
   html {
-    font-family: "New York_", "PingFang SC_", var(--ic_ve_font_family_default), "SF Pro Text_";
+    font-family: "New York_", "PingFang SC_", var(--ic_ve_font_family_sansSerif), "SF Pro Text_";
   }
   body {
     justify-content: space-evenly;

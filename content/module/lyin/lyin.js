@@ -373,7 +373,10 @@
     },
     /*🟢*/no_contextMenu(){
       addEventListener('contextmenu',(event)=>{
-        event.preventDefault();
+        console.log(event);
+        if(!event.target.localName.match(/input|textarea/)&&event.target.contentEditable!=='true'){
+          event.preventDefault();
+        }
       });
     },
     /*🟢*/no_zoom_doubleClick(){

@@ -2085,7 +2085,7 @@
       },
       /*🟢*/async package_quill_create(insertElement,insertPosition,mode=[
           ['bold','italic','underline','strike'],
-          [{'script':'sub'},{'script':'super'}],
+          [{'script':'super'},{'script':'sub'}],
           [{'header':'1'},{'header':'2'},'blockquote','code-block'],
           [{'list':'ordered'},{'list':'bullet'},{'indent':'-1'},{'indent':'+1'}],
           ['link','image','video','formula'],
@@ -2161,6 +2161,9 @@
             if(typeof content==='object'){
               result.tyin_package_quill.setContents(content);
             }
+            const inputDataset=result.lastElementChild.lastElementChild.children[1].dataset;
+            inputDataset.link=location.origin;
+            inputDataset.video='URL';
             return result;
           }
           return false;

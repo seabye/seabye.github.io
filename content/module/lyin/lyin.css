@@ -292,15 +292,32 @@
     }
     /* family */
     html {
-      --ic_ve_font_family_sansSerif: sans-serif;
-      --ic_ve_font_family_serif: serif;
-      --ic_ve_font_family_monospace: monospace;
-      --ic_ve_font_family_cursive: cursive;
-      --ic_ve_font_family_fantasy: fantasy;
-      --ic_ve_font_family_fangsong: Fangsong;
-      --ic_ve_font_family_default: system-ui, -apple-system, BlinkMacSystemFont, "PingFang SC", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif, "SF Pro";
-      --ic_ve_font_family_code: "Menlo", "Monaco", "Consolas", "Courier New", "Ubuntu Mono", "Microsoft YaHei", monospace, "SF Pro";
-      --ic_ve_font_family_coding: "Consolas", "Microsoft YaHei", monospace, "SF Pro";
+      /* type */
+      --ic_ve_font_family_sansSerif_: sans-serif;
+      --ic_ve_font_family_serif_: serif;
+      --ic_ve_font_family_monospace_: monospace;
+      --ic_ve_font_family_cursive_: cursive;
+      --ic_ve_font_family_fantasy_: fantasy;
+      --ic_ve_font_family_fangsong_: Fangsong;
+      /* group */
+      --ic_ve_font_family_mono: "JetBrains Mono", "Menlo", "Monaco", "Consolas", "Courier New", "Ubuntu Mono";
+      --ic_ve_font_family_system: system-ui, -apple-system, BlinkMacSystemFont;
+      --ic_ve_font_family_CJK: "PingFang SC", "Noto Sans CJK SC", "Microsoft YaHei";
+      --ic_ve_font_family_SFPro: "SF Pro";
+      /* type group */
+      --ic_ve_font_family_sansSerif:
+        var(--ic_ve_font_family_system),
+        var(--ic_ve_font_family_CJK),
+        var(--ic_ve_font_family_sansSerif_),
+        var(--ic_ve_font_family_SFPro)
+      ;
+      --ic_ve_font_family_monospace:
+        var(--ic_ve_font_family_mono),
+        var(--ic_ve_font_family_system),
+        var(--ic_ve_font_family_CJK),
+        var(--ic_ve_font_family_monospace_),
+        var(--ic_ve_font_family_SFPro)
+      ;
     }
 /* #block */
   /* ic_bk_progressIndicatorCircular_indeterminate */
@@ -490,7 +507,7 @@
       color: var(--ic_ve_color_black8_opacity);
       font-weight: normal;
       font-size: 16px;
-      font-family: var(--ic_ve_font_family_default);
+      font-family: var(--ic_ve_font_family_sansSerif);
       overflow-wrap: break-word;
       -webkit-user-select: none;
       user-select: none;
@@ -518,11 +535,13 @@
       text-decoration: unset;
       cursor: default;
     }
+    /* image */
+    img {
+      vertical-align: bottom;
+    }
     /* form */
-    button,
     input,
-    textarea,
-    select {
+    textarea {
       /* / */
       all: unset;
       /* _ */
@@ -538,19 +557,10 @@
     input,
     textarea,
     [contenteditable] {
-      -webkit-user-select: text;
-      user-select: text;
+      -webkit-user-select: auto;
+      user-select: auto;
       cursor: auto;
-    }
-    ::placeholder,
-    [contenteditable]:empty::after {
-      color: var(--ic_ve_color_black4_opacity);
-      opacity: unset;
-      -webkit-user-select: none;
-      user-select: none;
-    }
-    [contenteditable]:empty::after {
-      content: attr(placeholder);
+      caret-color: currentColor;
     }
     input {
       text-overflow: ellipsis;
@@ -558,6 +568,16 @@
     input[type="search"]::-webkit-search-decoration,
     input[type="search"]::-webkit-search-cancel-button {
       display: none;
+    }
+    [contenteditable]:empty::after {
+      content: attr(placeholder);
+    }
+    ::placeholder,
+    [contenteditable]:empty::after {
+      color: var(--ic_ve_color_black4_opacity);
+      opacity: unset;
+      -webkit-user-select: none;
+      user-select: none;
     }
 /* #debug */
   /* wireframe */
