@@ -151,9 +151,9 @@
                 }
               },350/2);
             },350/2);
-            return true;
+          }else{
+            setTimeout(loop,1000/24);
           }
-          setTimeout(loop,1000/24);
         };
         loop();
       },{once:true});
@@ -162,9 +162,9 @@
       const loop=()=>{
         if(document.body){
           document.body.style.setProperty('opacity','0');
-          return true;
+        }else{
+          setTimeout(loop,1000/24);
         }
-        setTimeout(loop,1000/24);
       };
       loop();
       addEventListener('load',()=>{
@@ -178,9 +178,9 @@
                 }
               },350/2);
             },350/2);
-            return true;
+          }else{
+            setTimeout(loop,1000/24);
           }
-          setTimeout(loop,1000/24);
         };
         loop();
       },{once:true});
@@ -538,12 +538,20 @@
         }
       });
       addEventListener('pointerup',(event)=>{
-        setTimeout(()=>{
-          const top=visualViewport.height-event.y;
-          if(top<64){
-            document.activeElement.scroll({behavior:'smooth',top:document.activeElement.scrollTop+64-top,left:0});
+        const loop=(target)=>{
+          if(target!==document.documentElement){
+            if(target.contentEditable==='true'){
+              setTimeout(()=>{
+                const top=visualViewport.height-event.y;
+                if(top<64){
+                  document.activeElement.scroll({behavior:'smooth',top:document.activeElement.scrollTop+64-top,left:0});
+                }
+              },350/4);
+            }
+            loop(target.parentElement);
           }
-        },350/4);
+        };
+        loop(event.target);
       });
     },
     /*🟢*/viewport_safeAreaInsetBottom(){

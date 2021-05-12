@@ -1647,6 +1647,7 @@
         }
         return element;
       },
+      /*🔴*/modifyStyleSheet(){},
       /*🟢*/removeElement(element){
         element.parentElement.removeChild(element);
       },
