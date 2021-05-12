@@ -560,7 +560,7 @@
         }
       });
     },
-    /*🟢*/viewport_ic_ve_viewport_scale(){
+    /*🟢*/viewport_css_ic_ve_viewport_scale(){
       visualViewport.addEventListener('resize',()=>{
         for(let key=0,length=document.styleSheets.length;key<length;key++){
           if(document.styleSheets[key].href.match(/lyin\.css/i)){

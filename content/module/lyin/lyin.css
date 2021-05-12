@@ -72,10 +72,6 @@
 /* #before */
 /* #import */
 /* #variable */
-  /* ic_ve_viewport_scale */
-    html {
-      --ic_ve_viewport_scale: 1;
-    }
   /* color */
     /* base */
     html.ic_nr_media_prefers_colorScheme_light {
@@ -327,6 +323,10 @@
   html {
     --ic_ve_cubicBezier_ease: ease-in-out;
     --ic_ve_cubicBezier_slowFast: cubic-bezier(0.4,0,0.2,1);
+  }
+  /* other */
+  html {
+    --ic_ve_viewport_scale: 1;
   }
 /* #block */
   /* ic_bk_progressIndicatorCircular_indeterminate */
