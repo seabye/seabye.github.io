@@ -210,14 +210,14 @@
         console.log('++++ tyin, miniEditor, tyin_miniEditor.tyin_miniEditor_getContent():',tyin_miniEditor.tyin_miniEditor_getContent());
       },
       async package_quill_create(){
-        // globalThis.tyin_quill=await tyin.package_quill_create(document.body,undefined,'full','在此输入内容','<a href="https://seabye.com">https://seabye.com</a><br><br>',false,'100%','100%');
-        // globalThis.tyin_quill=await tyin.package_quill_create(document.body,undefined,'snow','在此输入内容','<a href="https://seabye.com">https://seabye.com</a><br><br>',false,'100%','100%');
-        // globalThis.tyin_quill=await tyin.package_quill_create(document.body,undefined,'bubble','在此输入内容','<a href="https://seabye.com">https://seabye.com</a><br><br>',false,'100%','100%');
-        // globalThis.tyin_quill=await tyin.package_quill_create(document.body,undefined,undefined,'在此输入内容',JSON.parse("{\"ops\":[{\"attributes\":{\"link\":\"https://seabye.com\"},\"insert\":\"https://seabye.com\"},{\"insert\":\"\\n\\n\"}]}"),false,'100%','100%');
+        // globalThis.tyin_quill=await tyin.package_quill_create(document.body,undefined,'full','1970-01-01 00:00:00','<a href="https://seabye.com">https://seabye.com</a><br><br>',false,'100%','100%');
+        // globalThis.tyin_quill=await tyin.package_quill_create(document.body,undefined,'snow','1970-01-01 00:00:00','<a href="https://seabye.com">https://seabye.com</a><br><br>',false,'100%','100%');
+        // globalThis.tyin_quill=await tyin.package_quill_create(document.body,undefined,'bubble','1970-01-01 00:00:00','<a href="https://seabye.com">https://seabye.com</a><br><br>',false,'100%','100%');
+        // globalThis.tyin_quill=await tyin.package_quill_create(document.body,undefined,undefined,'1970-01-01 00:00:00',JSON.parse("{\"ops\":[{\"attributes\":{\"link\":\"https://seabye.com\"},\"insert\":\"https://seabye.com\"},{\"insert\":\"\\n\\n\"}]}"),false,'100%','100%');
         globalThis.tyin_quill=await tyin.package_quill_create(document.body,undefined,[
           ['bold','italic','underline','strike'],
           ['link','image']
-        ],'在此输入内容',JSON.parse("{\"ops\":[{\"attributes\":{\"link\":\"https://seabye.com\"},\"insert\":\"https://seabye.com\"},{\"insert\":\"\\n\\n\"}]}"),false,'100%','100%');
+        ],'1970-01-01 00:00:00',JSON.parse("{\"ops\":[{\"attributes\":{\"link\":\"https://seabye.com\"},\"insert\":\"https://seabye.com\"},{\"insert\":\"\\n\\n\"}]}"),false,'100%','100%');
         console.log('++++ tyin, package_quill_create, JSON.stringify(tyin_quill.tyin_package_quill.getContents()):',JSON.stringify(tyin_quill.tyin_package_quill.getContents()));
       }
     },'_');

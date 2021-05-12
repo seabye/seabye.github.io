@@ -109,33 +109,46 @@
         max-width: 100%;
         max-height: 100%;
       }
-      html.ic_nr_media_prefers_colorScheme_dark .tyin_package_quill_container {
+      /* html.ic_nr_media_prefers_colorScheme_dark .tyin_package_quill_container {
         background-color: #1F2023;
-      }
+      } */
       .tyin_package_quill_container a {
         color: var(--ic_ve_color_system_blue) !important;
       }
       .tyin_package_quill_container>.ql-toolbar {
+        display: flex !important;
+        align-items: center !important;
         overflow: auto hidden !important;
         z-index: 1 !important;
         position: absolute !important;
         right: 8px !important;
         bottom: 8px !important;
-        padding: 6px 0 !important;
+        padding: unset !important;
         max-width: calc(100% - 16px) !important;
         height: 36px !important;
-        border: unset !important;
+        border: 1px solid !important;
+        border-color: var(--ic_ve_color_white8_opacity) !important;
         border-radius: 8px !important;
         background-color: var(--ic_ve_color_white8) !important;
         box-shadow: var(--ic_ve_shadow_4dp3) !important;
         white-space: nowrap !important;
       }
       .tyin_package_quill_container>.ql-toolbar>.ql-formats {
+        display: flex !important;
         margin-left: unset !important;
-        margin-right: 8px !important;
+        margin-right: unset !important;
+        padding-right: 12px !important;
       }
       .tyin_package_quill_container>.ql-toolbar>.ql-formats:first-child {
-        margin-left: 8px !important;
+        padding-left: 12px !important;
+      }
+      .tyin_package_quill_container>.ql-toolbar>.ql-formats>button {
+        padding: unset !important;
+        width: 18px !important;
+        height: 18px !important;
+      }
+      .tyin_package_quill_container>.ql-toolbar>.ql-formats>button:not(:last-child) {
+        margin-right: 6px !important;
       }
       .tyin_package_quill_container>.ql-toolbar>.ql-formats>button:not(.ql-active) {
         opacity: 0.4 !important;
@@ -166,11 +179,27 @@
       }
       .tyin_package_quill_container>.ql-container>.ql-editor {
         flex: auto !important;
-        padding: 20px 20px calc(36px + 8px*2) !important;
+        padding: 20px 20px 128px !important;
+        max-width: 800px !important;
+      }
+      .tyin_package_quill_container>.ql-container>.ql-editor:not(.ql-blank)::before {
+        content: "~ ~ ~ ~ START ~ ~ ~ ~" !important;
+        display: block !important;
+        color: var(--ic_ve_color_black2_opacity) !important;
+        text-align: center !important;
+      }
+      .tyin_package_quill_container>.ql-container>.ql-editor::after {
+        content: "~ ~ ~ ~ END ~ ~ ~ ~" !important;
+        display: block !important;
+        color: var(--ic_ve_color_black2_opacity) !important;
+        text-align: center !important;
       }
       .tyin_package_quill_container>.ql-container>.ql-editor.ql-blank::before {
-        margin: 2px 0 !important;
-        left: 20px !important;
+        max-width: 800px;
+        margin: 2px auto !important;
+        padding-left: 20px !important;
+        left: 0 !important;
+        right: 0 !important;
         line-height: var(--ic_ve_font_lineHeight_text) !important;
         color: var(--ic_ve_color_black4_opacity) !important;
         font-style: unset !important;
@@ -246,7 +275,7 @@
       .tyin_package_quill_container>.ql-container>.ql-tooltip::before {
         margin: unset !important;
         line-height: unset !important;
-        color: var(--ic_ve_color_black6_opacity) !important;
+        color: var(--ic_ve_color_black4_opacity) !important;
       }
       .tyin_package_quill_container>.ql-container>.ql-tooltip::before,
       .tyin_package_quill_container>.ql-container>.ql-tooltip[data-mode="link"]::before {
