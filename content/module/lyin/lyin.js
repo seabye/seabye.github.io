@@ -540,11 +540,11 @@
       addEventListener('pointerup',(event)=>{
         const loop=(target)=>{
           if(target!==document.documentElement){
-            if(target.contentEditable==='true'){
+            if(target.localName==='textarea'||target.contentEditable==='true'){
               setTimeout(()=>{
-                const top=visualViewport.height-event.y;
-                if(top<64){
-                  document.activeElement.scroll({behavior:'smooth',top:document.activeElement.scrollTop+64-top,left:0});
+                const distance=target.getBoundingClientRect().bottom-event.y;
+                if(distance<64){
+                  target.scroll({behavior:'smooth',top:target.scrollTop+64-distance,left:0});
                 }
               },350/4);
             }
