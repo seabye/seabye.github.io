@@ -502,7 +502,7 @@
         });
       }
     },
-    /*🟢*/_viewportToZero(){
+    /*🟢*/_viewportScrollToZero(){
       scroll({behavior:'smooth',top:0,left:0});
       document.documentElement.scrollIntoView({behavior:'smooth',block:'start',inline:'start'});
     },
