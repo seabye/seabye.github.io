@@ -527,7 +527,16 @@
         action();
         setTimeout(()=>{
           action();
-        },350);
+          setTimeout(()=>{
+            action();
+            setTimeout(()=>{
+              action();
+              setTimeout(()=>{
+                action();
+              },350/2);
+            },350/2);
+          },350/2);
+        },350/2);
       });
     },
     /*🟢*/dotActive(){
