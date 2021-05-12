@@ -516,7 +516,11 @@
         this._viewportToZero();
       });
       visualViewport.addEventListener('resize',()=>{
-        document.documentElement.style.setProperty('border-bottom','unset');
+        if(visualViewport.height===innerHeight){
+          document.documentElement.style.removeProperty('border-bottom');
+        }else{
+          document.documentElement.style.setProperty('border-bottom','unset');
+        }
         document.documentElement.style.setProperty('transform',`scale(${visualViewport.height/innerHeight})`);
         setTimeout(()=>{
           document.documentElement.style.setProperty('transform',`scale(${visualViewport.height/innerHeight})`);
