@@ -516,14 +516,17 @@
         this._viewportToZero();
       });
       visualViewport.addEventListener('resize',()=>{
-        if(visualViewport.height===innerHeight){
-          document.documentElement.style.removeProperty('border-bottom');
-        }else{
-          document.documentElement.style.setProperty('border-bottom','unset');
-        }
-        document.documentElement.style.setProperty('transform',`scale(${visualViewport.height/innerHeight})`);
-        setTimeout(()=>{
+        const action=()=>{
+          if(visualViewport.height===innerHeight){
+            document.documentElement.style.removeProperty('border-bottom');
+          }else{
+            document.documentElement.style.setProperty('border-bottom','unset');
+          }
           document.documentElement.style.setProperty('transform',`scale(${visualViewport.height/innerHeight})`);
+        };
+        action();
+        setTimeout(()=>{
+          action();
         },350);
       });
     },
