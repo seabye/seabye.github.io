@@ -506,10 +506,10 @@
       overscroll-behavior: none;
     }
     html {
-      border-left: calc(env(safe-area-inset-left)*1/var(--ic_ve_viewport_scale));
-      border-right: calc(env(safe-area-inset-right)*1/var(--ic_ve_viewport_scale));
-      border-top: calc(env(safe-area-inset-top)*1/var(--ic_ve_viewport_scale));
-      border-bottom: calc(env(safe-area-inset-bottom)*1/var(--ic_ve_viewport_scale));
+      border-left: calc(env(safe-area-inset-left)/var(--ic_ve_viewport_scale));
+      border-right: calc(env(safe-area-inset-right)/var(--ic_ve_viewport_scale));
+      border-top: calc(env(safe-area-inset-top)/var(--ic_ve_viewport_scale));
+      border-bottom: calc(env(safe-area-inset-bottom)/var(--ic_ve_viewport_scale));
       border-style: solid;
       border-color: var(--ic_ve_color_white);
       background-color: var(--ic_ve_color_white);
