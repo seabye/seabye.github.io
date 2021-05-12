@@ -319,6 +319,11 @@
         var(--ic_ve_font_family_SFPro)
       ;
     }
+  /* cubicBezier */
+  html {
+    --ic_ve_cubicBezier_ease: ease-in-out;
+    --ic_ve_cubicBezier_slowFast: cubic-bezier(0.4,0,0.2,1);
+  }
 /* #block */
   /* ic_bk_progressIndicatorCircular_indeterminate */
   html {
@@ -517,6 +522,8 @@
       -webkit-tap-highlight-color: rgba(0,0,0,0);
       -webkit-touch-callout: none;
       cursor: default;
+      transform-origin: top;
+      transition: border-bottom 350ms var(--ic_ve_cubicBezier_ease),transform 350ms var(--ic_ve_cubicBezier_ease);
     }
     body {
       display: flex;
