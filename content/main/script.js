@@ -93,14 +93,14 @@
         document.body.innerHTML='';
       },
       async _loop(){
-        console.log('++++ loop: start');
+        console.log('++++ tyin, loop: start');
         let result=await tyin.loop(()=>{
           return tyin.fetch('https://iptv-org.github.io/iptv/channels.nosj','GET',undefined,undefined,undefined,'json',(data)=>{
-            console.log('++++ loop, response data:',data);
+            console.log('++++ tyin, loop, response data:',data);
           });
         },500,3,()=>{
           return tyin.fetch('https://iptv-org.github.io/iptv/channels.json','GET',undefined,undefined,undefined,'json',(data)=>{
-            console.log('++++ loop, response data:',data);
+            console.log('++++ tyin, loop, response data:',data);
             return new Promise((resolve)=>{
               setTimeout(()=>{
                 resolve('Ok');
@@ -108,12 +108,12 @@
             });
           });
         });
-        console.log('++++ loop, result:',result);
-        console.log('++++ loop: end');
+        console.log('++++ tyin, loop, result:',result);
+        console.log('++++ tyin, loop: end');
       },
       _listenDOM_observe_resize(){
         tyin.listenDOM('add',document.body,'observe_resize',(data)=>{
-          console.log('++++ listenDOM, observe_resize, data:',data);
+          console.log('++++ tyin, listenDOM, observe_resize, data:',data);
         });
       },
       _listenDOM_URL(){
@@ -131,23 +131,23 @@
         await block.add(tyin.elementCreate(undefined,{class:'b_3'},undefined,undefined,'3'),3);
         await block.hide();
         await block.remove();
-        console.log('++++ elementBlock, get 3 tyin_elementBlock_prev:',block.get(3).tyin_elementBlock_prev);
+        console.log('++++ tyin, elementBlock, get 3 tyin_elementBlock_prev:',block.get(3).tyin_elementBlock_prev);
         block.set(tyin.elementCreate(undefined,undefined,undefined,undefined,'3Plus'),3);
         await block.add(tyin.elementCreate(undefined,{class:'b_4'},undefined,undefined,'4'));
         await block.back();
       },
       _doubleKeyContentCountSave(){},
       UUID36ToBLOb22(){
-        console.log('++++ 8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3 jvZe6aA5S_Kks2h_zB88ww, UUID36ToBLOb22:',tyin.UUID36ToBLOb22('8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3'));
+        console.log('++++ tyin, UUID36ToBLOb22, 8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3 jvZe6aA5S_Kks2h_zB88ww:',tyin.UUID36ToBLOb22('8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3'));
       },
       BLOb22ToUUID36(){
-        console.log('++++ 8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3 jvZe6aA5S_Kks2h_zB88ww, BLOb22ToUUID36:',tyin.BLOb22ToUUID36('jvZe6aA5S_Kks2h_zB88ww'));
+        console.log('++++ tyin, BLOb22ToUUID36, 8ef65ee9-a039-4bf2-a4b3-687fcc1f3cc3 jvZe6aA5S_Kks2h_zB88ww:',tyin.BLOb22ToUUID36('jvZe6aA5S_Kks2h_zB88ww'));
       },
       _webAssembly(){
-        console.log('++++ tyin webAssembly rust module, test():',tyin.test());
-        console.log('++++ tyin webAssembly rust module, test._isWebAssembly_:',tyin.test._isWebAssembly_);
-        // console.log('++++ tyin webAssembly c module, test():',tyin.test());
-        // console.log('++++ tyin webAssembly c module, test._isWebAssembly_:',tyin.test._isWebAssembly_);
+        console.log('++++ tyin, webAssembly rust module, test():',tyin.test());
+        console.log('++++ tyin, webAssembly rust module, test._isWebAssembly_:',tyin.test._isWebAssembly_);
+        // console.log('++++ tyin, webAssembly c module, test():',tyin.test());
+        // console.log('++++ tyin, webAssembly c module, test._isWebAssembly_:',tyin.test._isWebAssembly_);
       },
       _file_(){
         tyin.elementCreate('input',{type:'file',multiple:'',accept:'image/*'},document.body,undefined,undefined,(input)=>{
@@ -207,18 +207,18 @@
           '100%',
           '100%'
         );
-        console.log('++++ tyin_miniEditor.tyin_miniEditor_getContent():',tyin_miniEditor.tyin_miniEditor_getContent());
+        console.log('++++ tyin, miniEditor, tyin_miniEditor.tyin_miniEditor_getContent():',tyin_miniEditor.tyin_miniEditor_getContent());
       },
       async package_quill_create(){
         // globalThis.tyin_quill=await tyin.package_quill_create(document.body,undefined,'full','在此输入内容','<a href="https://seabye.com">https://seabye.com</a><br><br>',false,'100%','100%');
         // globalThis.tyin_quill=await tyin.package_quill_create(document.body,undefined,'snow','在此输入内容','<a href="https://seabye.com">https://seabye.com</a><br><br>',false,'100%','100%');
         // globalThis.tyin_quill=await tyin.package_quill_create(document.body,undefined,'bubble','在此输入内容','<a href="https://seabye.com">https://seabye.com</a><br><br>',false,'100%','100%');
-        // globalThis.tyin_quill=await tyin.package_quill_create(document.body,undefined,undefined,'在此输入内容','<a href="https://seabye.com">https://seabye.com</a><br><br>',false,'100%','100%');
+        // globalThis.tyin_quill=await tyin.package_quill_create(document.body,undefined,undefined,'在此输入内容',JSON.parse("{\"ops\":[{\"attributes\":{\"link\":\"https://seabye.com\"},\"insert\":\"https://seabye.com\"},{\"insert\":\"\\n\\n\"}]}"),false,'100%','100%');
         globalThis.tyin_quill=await tyin.package_quill_create(document.body,undefined,[
           ['bold','italic','underline','strike'],
           ['link','image']
-        ],'在此输入内容','<a href="https://seabye.com">https://seabye.com</a><br><br>',false,'100%','100%');
-        console.log('++++ tyin_quill.tyin_package_quill.getContents():',JSON.stringify(tyin_quill.tyin_package_quill.getContents()));
+        ],'在此输入内容',JSON.parse("{\"ops\":[{\"attributes\":{\"link\":\"https://seabye.com\"},\"insert\":\"https://seabye.com\"},{\"insert\":\"\\n\\n\"}]}"),false,'100%','100%');
+        console.log('++++ tyin, package_quill_create, JSON.stringify(tyin_quill.tyin_package_quill.getContents()):',JSON.stringify(tyin_quill.tyin_package_quill.getContents()));
       }
     },'_');
   });
