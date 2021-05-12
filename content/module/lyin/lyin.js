@@ -517,13 +517,13 @@
       });
       visualViewport.addEventListener('resize',()=>{
         if(visualViewport.height===innerHeight){
-          document.documentElement.style.removeProperty('border-bottom');
-          document.documentElement.style.removeProperty('transform');
-          setTimeout(()=>{
-            if(!document.documentElement.style[0]){
-              document.documentElement.removeAttribute('style');
-            }
-          },350/2);
+          // document.documentElement.style.removeProperty('border-bottom');
+          // document.documentElement.style.removeProperty('transform');
+          // setTimeout(()=>{
+          //   if(!document.documentElement.style[0]){
+          //     document.documentElement.removeAttribute('style');
+          //   }
+          // },350/2);
         }else{
           document.documentElement.style.setProperty('border-bottom','unset');
           document.documentElement.style.setProperty('transform',`scale(${visualViewport.height/innerHeight})`);
