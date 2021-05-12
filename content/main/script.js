@@ -216,8 +216,7 @@
         // globalThis.tyin_quill=await tyin.package_quill_create(document.body,undefined,undefined,'在此输入内容',JSON.parse("{\"ops\":[{\"attributes\":{\"link\":\"https://seabye.com\"},\"insert\":\"https://seabye.com\"},{\"insert\":\"\\n\\n\"}]}"),false,'100%','100%');
         globalThis.tyin_quill=await tyin.package_quill_create(document.body,undefined,[
           ['bold','italic','underline','strike'],
-          ['link','image'],
-          ['code-block','formula']
+          ['link','image']
         ],'在此输入内容',JSON.parse("{\"ops\":[{\"attributes\":{\"link\":\"https://seabye.com\"},\"insert\":\"https://seabye.com\"},{\"insert\":\"\\n\\n\"}]}"),false,'100%','100%');
         console.log('++++ tyin, package_quill_create, JSON.stringify(tyin_quill.tyin_package_quill.getContents()):',JSON.stringify(tyin_quill.tyin_package_quill.getContents()));
       }

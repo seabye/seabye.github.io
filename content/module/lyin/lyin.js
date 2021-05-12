@@ -238,6 +238,10 @@
         cls.add('ic_nr_video_m3u8');
       }
     },
+    /*🟢*/_viewportScrollToZero_(){
+      scroll({behavior:'smooth',top:0,left:0});
+      document.documentElement.scrollIntoView({behavior:'smooth',block:'start',inline:'start'});
+    },
     /*🟢*/navigator_media(){
       const set_media_prefers_colorScheme=(matches)=>{
         if(matches){
@@ -289,7 +293,7 @@
                   document.body.removeAttribute('style');
                 }
               },350/2);
-              this._viewportScrollToZero();
+              this._viewportScrollToZero_();
             },350/2);
           },350/2);
         }
@@ -416,6 +420,13 @@
         }
       });
     },
+    /*🟢*/no_scroll(){
+      addEventListener('touchmove',(event)=>{
+        if(event.target.localName==='html'){
+          event.preventDefault();
+        }
+      },{passive:false});
+    },
     /*🔴*/no_back_touch(){},
     /*🔴*/no_back_button(){},
     /*🟢*/inputEnter(){
@@ -510,41 +521,52 @@
         });
       }
     },
-    /*🟢*/_viewportScrollToZero(){
-      scroll({behavior:'smooth',top:0,left:0});
-      document.documentElement.scrollIntoView({behavior:'smooth',block:'start',inline:'start'});
-    },
     /*🟢*/viewport(){
-      addEventListener('touchmove',(event)=>{
-        if(event.target.localName==='html'){
-          event.preventDefault();
-        }
-      },{passive:false});
       visualViewport.addEventListener('scroll',()=>{
-        this._viewportScrollToZero();
+        this._viewportScrollToZero_();
       });
       visualViewport.addEventListener('resize',()=>{
-        const action=()=>{
-          if(visualViewport.height===innerHeight){
-            document.documentElement.style.removeProperty('border-bottom');
-          }else{
-            document.documentElement.style.setProperty('border-bottom','unset');
-          }
-          document.documentElement.style.setProperty('transform',`scale(${visualViewport.height/innerHeight})`);
-        };
-        action();
-        setTimeout(()=>{
-          action();
+        document.documentElement.style.setProperty('height',`${visualViewport.height}px`);
+        document.activeElement.scroll({behavior:'smooth',top:document.activeElement.scrollTop+visualViewport.offsetTop,left:0});
+        if(visualViewport.height===innerHeight){
+          document.documentElement.style.removeProperty('height');
           setTimeout(()=>{
-            action();
-            setTimeout(()=>{
-              action();
-              setTimeout(()=>{
-                action();
-              },350/2);
-            },350/2);
+            if(!document.documentElement.style[0]){
+              document.documentElement.removeAttribute('style');
+            }
           },350/2);
-        },350/2);
+        }
+      });
+      addEventListener('pointerup',(event)=>{
+        setTimeout(()=>{
+          const top=visualViewport.height-event.y;
+          if(top<64){
+            document.activeElement.scroll({behavior:'smooth',top:document.activeElement.scrollTop+64-top,left:0});
+          }
+        },350/4);
+      });
+    },
+    /*🟢*/viewport_safeAreaInsetBottom(){
+      visualViewport.addEventListener('resize',()=>{
+        if(visualViewport.height===innerHeight){
+          document.documentElement.style.removeProperty('border-bottom');
+          setTimeout(()=>{
+            if(!document.documentElement.style[0]){
+              document.documentElement.removeAttribute('style');
+            }
+          },350/2);
+        }else{
+          document.documentElement.style.setProperty('border-bottom','unset');
+        }
+      });
+    },
+    /*🟢*/viewport_ic_ve_viewport_scale(){
+      visualViewport.addEventListener('resize',()=>{
+        for(let key=0,length=document.styleSheets.length;key<length;key++){
+          if(document.styleSheets[key].href.match(/lyin\.css/i)){
+            document.styleSheets[key].insertRule(`html { --ic_ve_viewport_scale: ${visualViewport.scale}; }`,document.styleSheets[key].cssRules.length);
+          }
+        }
       });
     },
     /*🟢*/dotActive(){

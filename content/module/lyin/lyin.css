@@ -72,6 +72,10 @@
 /* #before */
 /* #import */
 /* #variable */
+  /* ic_ve_viewport_scale */
+    html {
+      --ic_ve_viewport_scale: 1;
+    }
   /* color */
     /* base */
     html.ic_nr_media_prefers_colorScheme_light {
@@ -502,10 +506,10 @@
       overscroll-behavior: none;
     }
     html {
-      border-left: env(safe-area-inset-left);
-      border-right: env(safe-area-inset-right);
-      border-top: env(safe-area-inset-top);
-      border-bottom: env(safe-area-inset-bottom);
+      border-left: calc(env(safe-area-inset-left)*1/var(--ic_ve_viewport_scale));
+      border-right: calc(env(safe-area-inset-right)*1/var(--ic_ve_viewport_scale));
+      border-top: calc(env(safe-area-inset-top)*1/var(--ic_ve_viewport_scale));
+      border-bottom: calc(env(safe-area-inset-bottom)*1/var(--ic_ve_viewport_scale));
       border-style: solid;
       border-color: var(--ic_ve_color_white);
       background-color: var(--ic_ve_color_white);
@@ -522,8 +526,6 @@
       -webkit-tap-highlight-color: rgba(0,0,0,0);
       -webkit-touch-callout: none;
       cursor: default;
-      transform-origin: top;
-      transition: border-bottom 350ms var(--ic_ve_cubicBezier_ease),transform 350ms var(--ic_ve_cubicBezier_ease);
     }
     body {
       display: flex;
