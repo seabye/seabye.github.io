@@ -289,7 +289,7 @@
                   document.body.removeAttribute('style');
                 }
               },350/2);
-              this._viewportToZero();
+              this._viewportScrollToZero();
             },350/2);
           },350/2);
         }
@@ -513,7 +513,7 @@
         }
       },{passive:false});
       visualViewport.addEventListener('scroll',()=>{
-        this._viewportToZero();
+        this._viewportScrollToZero();
       });
       visualViewport.addEventListener('resize',()=>{
         const action=()=>{
