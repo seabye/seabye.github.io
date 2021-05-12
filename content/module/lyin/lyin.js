@@ -371,8 +371,16 @@
     },
     /*🟢*/no_contextMenu(){
       addEventListener('contextmenu',(event)=>{
-        console.log(event);
-        if(!event.target.localName.match(/input|textarea/)&&event.target.contentEditable!=='true'){
+        const loop=(target)=>{
+          if(target!==document.documentElement){
+            if(target.contentEditable==='true'){
+              return true;
+            }
+            return loop(target.parentElement);
+          }
+          return false;
+        };
+        if(!event.target.localName.match(/input|textarea/)&&!loop(event.target)){
           event.preventDefault();
         }
       });
@@ -410,7 +418,7 @@
     },
     /*🔴*/no_back_touch(){},
     /*🔴*/no_back_button(){},
-    /*🟢*/form_focus(){
+    /*🟢*/inputEnter(){
       if(document.documentElement.classList.contains('ic_nr_platform_mobile')){
         addEventListener('keydown',(event)=>{
           if(event.key==='Enter'&&event.target.localName==='input'){

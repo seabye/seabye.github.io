@@ -92,9 +92,6 @@
           top: 0;
           width: 100%;
           height: 100%;
-          cursor: text;
-          -webkit-user-select: text;
-          user-select: text;
         }
           /* tyin_miniEditor_container_content_cursor */
           .tyin_miniEditor_container_content_cursor {
@@ -111,9 +108,6 @@
         position: relative;
         max-width: 100%;
         max-height: 100%;
-      }
-      .tyin_package_quill_container *:not(input):not(textarea):not([contenteditable]) {
-        cursor: default !important;
       }
       .tyin_package_quill_container a {
         color: var(--ic_ve_color_system_blue) !important;
@@ -214,9 +208,7 @@
         color: var(--ic_ve_color_black4_opacity) !important;
       }
       .tyin_package_quill_container>.ql-container>.ql-editor pre {
-        border: 1px solid !important;
-        border-color: var(--ic_ve_color_system_orange_translucent) !important;
-        border-radius: 2px !important;
+        border-radius: 4px !important;
         font-size: 12px !important;
       }
       .tyin_package_quill_container>.ql-container>.ql-editor ol,
