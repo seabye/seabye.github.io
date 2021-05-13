@@ -238,10 +238,6 @@
         cls.add('ic_nr_video_m3u8');
       }
     },
-    /*🟢*/_viewportScrollToZero_(){
-      scroll({behavior:'smooth',top:0,left:0});
-      document.documentElement.scrollIntoView({behavior:'smooth',block:'start',inline:'start'});
-    },
     /*🟢*/navigator_media(){
       const set_media_prefers_colorScheme=(matches)=>{
         if(matches){
@@ -293,7 +289,8 @@
                   document.body.removeAttribute('style');
                 }
               },350/2);
-              this._viewportScrollToZero_();
+              scroll({behavior:'smooth',top:0,left:0});
+              document.documentElement.scrollIntoView({behavior:'smooth',block:'start',inline:'start'});
             },350/2);
           },350/2);
         }
@@ -384,7 +381,7 @@
           }
           return false;
         };
-        if(!event.target.localName.match(/input|textarea/)&&!loop(event.target)){
+        if(!loop(event.target)&&!event.target.localName.match(/input|textarea/)){
           event.preventDefault();
         }
       });
@@ -420,7 +417,7 @@
         }
       });
     },
-    /*🟢*/no_scroll(){
+    /*🟢*/no_touchScrollViewport(){
       addEventListener('touchmove',(event)=>{
         if(event.target.localName==='html'){
           event.preventDefault();
@@ -429,7 +426,21 @@
     },
     /*🔴*/no_back_touch(){},
     /*🔴*/no_back_button(){},
-    /*🟢*/inputEnter(){
+    /*🟢*/inputBlur(){
+      addEventListener('pointerdown',(event)=>{
+        const loop=(target)=>{
+          if(target!==document.documentElement){
+            if(target.contentEditable==='true'){
+              return true;
+            }
+            return loop(target.parentElement);
+          }
+          return false;
+        };
+        if(!loop(event.target)&&!event.target.localName.match(/input|textarea/)){
+          document.activeElement.blur();
+        };
+      });
       if(document.documentElement.classList.contains('ic_nr_platform_mobile')){
         addEventListener('keydown',(event)=>{
           if(event.key==='Enter'&&event.target.localName==='input'){
@@ -437,6 +448,24 @@
           }
         });
       }
+    },
+    /*🟢*/inputOther(){
+      addEventListener('pointerup',(event)=>{
+        const loop=(target)=>{
+          if(target!==document.documentElement){
+            if(target.contentEditable==='true'||target.localName==='textarea'){
+              setTimeout(()=>{
+                const distance=target.getBoundingClientRect().bottom-event.y;
+                if(distance<64){
+                  target.scroll({behavior:'smooth',top:target.scrollTop+64-distance,left:0});
+                }
+              },350/4);
+            }
+            loop(target.parentElement);
+          }
+        };
+        loop(event.target);
+      });
     },
     /*🟢*/partialScroll(){
       if(!CSS.supports('overscroll-behavior:contain')){
@@ -522,57 +551,199 @@
       }
     },
     /*🟢*/viewport(){
-      visualViewport.addEventListener('scroll',()=>{
-        this._viewportScrollToZero_();
-      });
+
+
+
+
+
+      let _viewportScrollToZero_=()=>{
+        scroll({behavior:'smooth',top:0,left:0});
+        document.documentElement.scrollIntoView({behavior:'smooth',block:'start',inline:'start'});
+      }
+
+      let lock=false;
+      let recordViewportHeight=visualViewport.height;
       visualViewport.addEventListener('resize',()=>{
-        document.documentElement.style.setProperty('height',`${visualViewport.height}px`);
-        document.activeElement.scroll({behavior:'smooth',top:document.activeElement.scrollTop+visualViewport.offsetTop,left:0});
+        // console.log(visualViewport.height,innerHeight);
         if(visualViewport.height===innerHeight){
-          document.documentElement.style.removeProperty('height');
+          recordViewportHeight=visualViewport.height;
+        }
+        if(!lock){
+          lock=true;
+          document.documentElement.style.setProperty('translate',`0 ${visualViewport.offsetTop}px`);
           setTimeout(()=>{
-            if(!document.documentElement.style[0]){
-              document.documentElement.removeAttribute('style');
-            }
-          },350/2);
+            document.documentElement.style.setProperty('scale',visualViewport.height/recordViewportHeight);
+            setTimeout(()=>{
+              lock=false;
+            },350);
+          },350);
         }
       });
-      addEventListener('pointerup',(event)=>{
-        const loop=(target)=>{
-          if(target!==document.documentElement){
-            if(target.localName==='textarea'||target.contentEditable==='true'){
-              setTimeout(()=>{
-                const distance=target.getBoundingClientRect().bottom-event.y;
-                if(distance<64){
-                  target.scroll({behavior:'smooth',top:target.scrollTop+64-distance,left:0});
-                }
-              },350/4);
-            }
-            loop(target.parentElement);
-          }
-        };
-        loop(event.target);
-      });
+
+
+
+
+
+
+
+
+      // visualViewport.addEventListener('scroll',()=>{
+      //   // setTimeout(()=>{
+      //     // this._viewportScrollToZero_();
+      //     // scroll({behavior:'smooth',top:10240,left:0});
+      //   // },350);
+      // });
+      // // let recordViewportHeight=visualViewport.height;
+      // visualViewport.addEventListener('resize',()=>{
+      //   const recordViewportTop=visualViewport.offsetTop;
+      //   setTimeout(()=>{
+      //     let animate=({duration,draw,timing})=>{
+      //       const start=performance.now();
+      //       requestAnimationFrame(animate=(time)=>{
+      //         let timeFraction=(time-start)/duration;
+      //         if(timeFraction>1){
+      //           timeFraction=1;
+      //         }
+      //         const progress=timing(timeFraction);
+      //         draw(progress);
+      //         if(timeFraction<1){
+      //           requestAnimationFrame(animate);
+      //         }
+      //       });
+      //     }
+      //     animate({
+      //       duration:350,
+      //       timing:(timeFraction)=>{
+      //         return timeFraction;
+      //       },
+      //       draw:(progress)=>{
+      //         console.log(progress);
+      //         scroll({behavior:'smooth',top:recordViewportTop-progress*recordViewportTop,left:0});
+      //         // document.documentElement.style.setProperty('height',`${recordViewportHeight-progress*(recordViewportHeight-visualViewport.height)}px`);
+      //         // document.activeElement.scroll({behavior:'smooth',top:recordFocusTop+progress*recordViewportTop,left:0});
+      //         if(progress===1){
+      //           // lock=false;
+      //           document.documentElement.style.setProperty('transform',`scale(${visualViewport.height/innerHeight})`);
+      //           // recordViewportHeight=visualViewport.height;
+      //         }
+      //       }
+      //     });
+      //   },350);
+
+
+
+
+
+
+      //   // setTimeout(()=>{
+      //     const action=()=>{
+      //       // if(visualViewport.height===innerHeight){
+      //       //   document.documentElement.style.removeProperty('border-bottom');
+      //       // }else{
+      //       //   document.documentElement.style.setProperty('border-bottom','unset');
+      //       // }
+      //       // document.documentElement.style.setProperty('transform',`scale(${visualViewport.height/record})`);
+      //       // record=visualViewport.height;
+      //     };
+      //     action();
+      //     // setTimeout(()=>{
+      //     //   action();
+      //     //   setTimeout(()=>{
+      //     //     action();
+      //     //     setTimeout(()=>{
+      //     //       action();
+      //     //       setTimeout(()=>{
+      //     //         action();
+      //     //       },350/2);
+      //     //     },350/2);
+      //     //   },350/2);
+      //     // },350/2);
+      //   // },350);
+      // });
+      // let lock=false;
+      // visualViewport.addEventListener('resize',()=>{
+      //   if(!lock){
+      //     console.log('gogogo');
+      //     lock=true;
+      //     const recordFocusTop=document.activeElement.scrollTop;
+      //     const recordViewportTop=visualViewport.offsetTop;
+      //     const recordViewportHeight=visualViewport.height;
+      //     setTimeout(()=>{
+      //       let animate=({duration,draw,timing})=>{
+      //         const start=performance.now();
+      //         requestAnimationFrame(animate=(time)=>{
+      //           let timeFraction=(time-start)/duration;
+      //           if(timeFraction>1){
+      //             timeFraction=1;
+      //           }
+      //           const progress=timing(timeFraction);
+      //           draw(progress);
+      //           if(timeFraction<1){
+      //             requestAnimationFrame(animate);
+      //           }
+      //         });
+      //       }
+      //       animate({
+      //         duration:350,
+      //         timing:(timeFraction)=>{
+      //           return timeFraction;
+      //         },
+      //         draw:(progress)=>{
+      //           console.log(progress);
+      //           // scroll({behavior:'smooth',top:(recordViewportHeight-visualViewport.height)-progress*(recordViewportHeight-visualViewport.height),left:0});
+      //           // document.documentElement.style.setProperty('height',`${recordViewportHeight-progress*(recordViewportHeight-visualViewport.height)}px`);
+      //           // document.activeElement.scroll({behavior:'smooth',top:recordFocusTop+progress*recordViewportTop,left:0});
+      //           if(progress===1){
+      //             lock=false;
+      //           }
+      //         }
+      //       });
+      //     },350);
+      //   }
+      // // visualViewport.addEventListener('scroll',()=>{
+      //   // setTimeout(()=>{
+      //     // this._viewportScrollToZero_();
+      //   // },350);
+      // // });
+      //       // console.log(visualViewport.height);
+      //       // scroll({behavior:'smooth',top:0,left:0});
+      //       // document.documentElement.style.setProperty('height',`${visualViewport.height}px`);
+      //       // scroll({behavior:'smooth',top:102400,left:0});
+      //       // document.activeElement.scroll({behavior:'smooth',top:document.activeElement.scrollTop+visualViewport.offsetTop,left:0});
+      //   // if(visualViewport.height===innerHeight){
+      //   //   document.documentElement.style.removeProperty('height');
+      //   //   setTimeout(()=>{
+      //   //     if(!document.documentElement.style[0]){
+      //   //       document.documentElement.removeAttribute('style');
+      //   //     }
+      //   //   },350/2);
+      //   // }
+      // });
     },
     /*🟢*/viewport_safeAreaInsetBottom(){
-      visualViewport.addEventListener('resize',()=>{
-        if(visualViewport.height===innerHeight){
-          document.documentElement.style.removeProperty('border-bottom');
-          setTimeout(()=>{
-            if(!document.documentElement.style[0]){
-              document.documentElement.removeAttribute('style');
-            }
-          },350/2);
-        }else{
-          document.documentElement.style.setProperty('border-bottom','unset');
-        }
-      });
+      // visualViewport.addEventListener('resize',()=>{
+      //   document.documentElement.style.setProperty('border-bottom','unset');
+      //   setTimeout(()=>{
+      //     if(visualViewport.height===innerHeight){
+      //       document.documentElement.style.removeProperty('border-bottom');
+      //       setTimeout(()=>{
+      //         if(!document.documentElement.style[0]){
+      //           document.documentElement.removeAttribute('style');
+      //         }
+      //       },350/2);
+      //     }
+      //   },350*2);
+      // });
     },
-    /*🟢*/viewport_css_ic_ve_viewport_scale(){
+    /*🟢*/ic_ve_viewport_scale(){
+      let record=0;
       visualViewport.addEventListener('resize',()=>{
-        for(let key=0,length=document.styleSheets.length;key<length;key++){
-          if(document.styleSheets[key].href.match(/lyin\.css/i)){
-            document.styleSheets[key].insertRule(`html { --ic_ve_viewport_scale: ${visualViewport.scale}; }`,document.styleSheets[key].cssRules.length);
+        if(visualViewport.scale!==record){
+          record=visualViewport.scale;
+          for(let key=0,length=document.styleSheets.length;key<length;key++){
+            if(document.styleSheets[key].href.match(/lyin\.css/i)){
+              document.styleSheets[key].insertRule(`html { --ic_ve_viewport_scale: ${record}; }`,document.styleSheets[key].cssRules.length);
+            }
           }
         }
       });

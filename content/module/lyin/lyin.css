@@ -526,6 +526,11 @@
       -webkit-tap-highlight-color: rgba(0,0,0,0);
       -webkit-touch-callout: none;
       cursor: default;
+      /* transform-origin: top;
+      transition:
+        scale 350ms var(--ic_ve_cubicBezier_ease),
+        translate 350ms var(--ic_ve_cubicBezier_ease)
+      ; */
     }
     body {
       display: flex;
@@ -565,7 +570,7 @@
     }
     input,
     textarea,
-    [contenteditable] * {
+    [contenteditable] {
       -webkit-user-select: auto;
       user-select: auto;
       cursor: auto;

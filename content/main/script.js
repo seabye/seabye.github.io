@@ -88,7 +88,7 @@
   // tyin test
   tyin.debug(()=>{
     tyin.runObject({
-      _clear(){
+      clear(){
         document.documentElement.classList.remove('ic_dg','debug');
         document.body.innerHTML='';
       },
@@ -209,7 +209,7 @@
         );
         console.log('++++ tyin, miniEditor, tyin_miniEditor.tyin_miniEditor_getContent():',tyin_miniEditor.tyin_miniEditor_getContent());
       },
-      async _package_quill_create(){
+      async package_quill_create(){
         // globalThis.tyin_quill=await tyin.package_quill_create(document.body,undefined,'full','some','<a href="https://seabye.com">https://seabye.com</a><br><br>',false,'100%','100%');
         // globalThis.tyin_quill=await tyin.package_quill_create(document.body,undefined,'snow','some','<a href="https://seabye.com">https://seabye.com</a><br><br>',false,'100%','100%');
         // globalThis.tyin_quill=await tyin.package_quill_create(document.body,undefined,'bubble','some','<a href="https://seabye.com">https://seabye.com</a><br><br>',false,'100%','100%');
@@ -217,7 +217,7 @@
         globalThis.tyin_quill=await tyin.package_quill_create(document.body,undefined,[
           ['bold','italic','underline','strike'],
           ['link','image']
-        ],'some',JSON.parse("{\"ops\":[{\"attributes\":{\"link\":\"https://seabye.com\"},\"insert\":\"https://seabye.com\"},{\"insert\":\"\\n\\n\"}]}"),false,'100%','100%');
+        ],'some',JSON.parse("{\"ops\":[{\"attributes\":{\"link\":\"https://seabye.com\"},\"insert\":\"https://seabye.com\"},{\"insert\":\"\\n\\n\\n\\n\\n\\n\\n\\n\\n\\na\\n\\n\\n\\na\\n\\na\\n\\na\\na\\n\\na\\na\\n\\na\\n\\na\\n\\n\\n\\n\\n\\na\\n\\n\\n\\n\\na\\n\\n\\na\\n\\na\\na\\na\\na\\na\\n\\na\\n\\n\\na\\n\"}]}"),false,'100%','100%');
         console.log('++++ tyin, package_quill_create, JSON.stringify(tyin_quill.tyin_package_quill.getContents()):',JSON.stringify(tyin_quill.tyin_package_quill.getContents()));
       }
     },'_');
