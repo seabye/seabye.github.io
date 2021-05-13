@@ -108,10 +108,8 @@
         position: relative;
         max-width: 100%;
         max-height: 100%;
+        background-color: var(--ic_ve_color_black1_opacity) !important;
       }
-      /* html.ic_nr_media_prefers_colorScheme_dark .tyin_package_quill_container {
-        background-color: #1F2023;
-      } */
       .tyin_package_quill_container a {
         color: var(--ic_ve_color_system_blue) !important;
       }
@@ -182,30 +180,21 @@
         padding: 20px 20px 128px !important;
         max-width: 800px !important;
       }
-      .tyin_package_quill_container>.ql-container>.ql-editor:not(.ql-blank)::before {
-        content: "~ ~ ~ ~ START ~ ~ ~ ~" !important;
+      .tyin_package_quill_container>.ql-container>.ql-editor::before {
+        content: "2021-05-13 08:50:06" !important;
         display: block !important;
-        color: var(--ic_ve_color_black2_opacity) !important;
-        text-align: center !important;
-      }
-      .tyin_package_quill_container>.ql-container>.ql-editor::after {
-        content: "~ ~ ~ ~ END ~ ~ ~ ~" !important;
-        display: block !important;
-        color: var(--ic_ve_color_black2_opacity) !important;
-        text-align: center !important;
-      }
-      .tyin_package_quill_container>.ql-container>.ql-editor.ql-blank::before {
-        max-width: 800px;
-        margin: 2px auto !important;
-        padding-left: 20px !important;
-        left: 0 !important;
-        right: 0 !important;
         line-height: var(--ic_ve_font_lineHeight_text) !important;
         color: var(--ic_ve_color_black4_opacity) !important;
+        position: unset !important;
         font-style: unset !important;
+        zoom: 0.618 !important;
       }
-      .tyin_package_quill_container>.ql-container>.ql-editor>* {
-        margin: 2px 0 !important;
+      .tyin_package_quill_container>.ql-container>.ql-editor::after {
+        content: "2021-05-13 09:24:37" !important;
+        display: block !important;
+        line-height: var(--ic_ve_font_lineHeight_text) !important;
+        color: var(--ic_ve_color_black4_opacity) !important;
+        zoom: 0.618 !important;
       }
       .tyin_package_quill_container>.ql-container>.ql-editor u {
         text-decoration-color: var(--ic_ve_color_system_orange_translucent) !important;
