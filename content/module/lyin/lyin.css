@@ -565,7 +565,7 @@
     }
     input,
     textarea,
-    [contenteditable] {
+    [contenteditable] * {
       -webkit-user-select: auto;
       user-select: auto;
       cursor: auto;

@@ -88,7 +88,7 @@
   // tyin test
   tyin.debug(()=>{
     tyin.runObject({
-      clear(){
+      _clear(){
         document.documentElement.classList.remove('ic_dg','debug');
         document.body.innerHTML='';
       },

@@ -2094,9 +2094,7 @@
         ],placeholder='...',content='',readOnly=false,width,height){
         if(!('Quill'in globalThis)){
           this.elementCreate('link',{rel:'stylesheet',href:`${import.meta.url.replace('/main/tyin.js','/package/kaTeX@0.13.3/katex.min.css')}`,crossorigin:''},document.head);
-          // this.elementCreate('link',{rel:'stylesheet',href:'https://cdn.jsdelivr.net/npm/katex@0.13.10/dist/katex.min.css',crossorigin:''},document.head);
           this.elementCreate('script',{async:'',src:`${import.meta.url.replace('/main/tyin.js','/package/kaTeX@0.13.3/katex.min.js')}`},document.head);
-          // this.elementCreate('script',{async:'',src:'https://cdn.jsdelivr.net/npm/katex@0.13.10/dist/katex.min.js'},document.head);
           this.elementCreate('link',{rel:'stylesheet',href:`${import.meta.url.replace('/main/tyin.js','/package/highlight@10.7.2/build/styles/monokai-sublime.min.css')}`,crossorigin:''},document.head);
           this.elementCreate('script',{async:'module',src:`${import.meta.url.replace('/main/tyin.js','/package/highlight@10.7.2/build/highlight.min.js')}`},document.head);
           this.elementCreate('link',{rel:'stylesheet',href:`${import.meta.url.replace('/main/tyin.js','/package/quill@1.3.7/quill.snow.css')}`,crossorigin:''},document.head);
