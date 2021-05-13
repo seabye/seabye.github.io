@@ -1637,7 +1637,7 @@
         return new this.elementBlock.template(element,group,insertPosition,wait);
       },
       /*🔴*/DOM(){},
-      /*🔴*/fixedInput(){},
+      /*🔴*/magicInput(){},
       /*🟢*/insertStyle(style,wait){
         const element=this.elementCreate('style',undefined,document.head,undefined,style);
         if(wait){
