@@ -441,15 +441,13 @@
           document.activeElement.blur();
         };
       });
-      if(document.documentElement.classList.contains('ic_nr_platform_mobile')){
-        addEventListener('keydown',(event)=>{
-          if(event.key==='Enter'&&event.target.localName==='input'){
-            event.target.blur();
-          }
-        });
-      }
+      addEventListener('keydown',(event)=>{
+        if(event.key==='Enter'&&event.target.localName==='input'){
+          event.target.blur();
+        }
+      });
     },
-    /*🟢*/inputOther(){
+    /*🟢*/inputBottomScroll(){
       addEventListener('pointerup',(event)=>{
         const loop=(target)=>{
           if(target!==document.documentElement){
@@ -550,191 +548,7 @@
         });
       }
     },
-    /*🟢*/viewport(){
-
-
-
-
-
-      let _viewportScrollToZero_=()=>{
-        scroll({behavior:'smooth',top:0,left:0});
-        document.documentElement.scrollIntoView({behavior:'smooth',block:'start',inline:'start'});
-      }
-
-      let lock=false;
-      let recordViewportHeight=visualViewport.height;
-      visualViewport.addEventListener('resize',()=>{
-        // console.log(visualViewport.height,innerHeight);
-        if(visualViewport.height===innerHeight){
-          recordViewportHeight=visualViewport.height;
-        }
-        if(!lock){
-          lock=true;
-          document.documentElement.style.setProperty('translate',`0 ${visualViewport.offsetTop}px`);
-          setTimeout(()=>{
-            document.documentElement.style.setProperty('scale',visualViewport.height/recordViewportHeight);
-            setTimeout(()=>{
-              lock=false;
-            },350);
-          },350);
-        }
-      });
-
-
-
-
-
-
-
-
-      // visualViewport.addEventListener('scroll',()=>{
-      //   // setTimeout(()=>{
-      //     // this._viewportScrollToZero_();
-      //     // scroll({behavior:'smooth',top:10240,left:0});
-      //   // },350);
-      // });
-      // // let recordViewportHeight=visualViewport.height;
-      // visualViewport.addEventListener('resize',()=>{
-      //   const recordViewportTop=visualViewport.offsetTop;
-      //   setTimeout(()=>{
-      //     let animate=({duration,draw,timing})=>{
-      //       const start=performance.now();
-      //       requestAnimationFrame(animate=(time)=>{
-      //         let timeFraction=(time-start)/duration;
-      //         if(timeFraction>1){
-      //           timeFraction=1;
-      //         }
-      //         const progress=timing(timeFraction);
-      //         draw(progress);
-      //         if(timeFraction<1){
-      //           requestAnimationFrame(animate);
-      //         }
-      //       });
-      //     }
-      //     animate({
-      //       duration:350,
-      //       timing:(timeFraction)=>{
-      //         return timeFraction;
-      //       },
-      //       draw:(progress)=>{
-      //         console.log(progress);
-      //         scroll({behavior:'smooth',top:recordViewportTop-progress*recordViewportTop,left:0});
-      //         // document.documentElement.style.setProperty('height',`${recordViewportHeight-progress*(recordViewportHeight-visualViewport.height)}px`);
-      //         // document.activeElement.scroll({behavior:'smooth',top:recordFocusTop+progress*recordViewportTop,left:0});
-      //         if(progress===1){
-      //           // lock=false;
-      //           document.documentElement.style.setProperty('transform',`scale(${visualViewport.height/innerHeight})`);
-      //           // recordViewportHeight=visualViewport.height;
-      //         }
-      //       }
-      //     });
-      //   },350);
-
-
-
-
-
-
-      //   // setTimeout(()=>{
-      //     const action=()=>{
-      //       // if(visualViewport.height===innerHeight){
-      //       //   document.documentElement.style.removeProperty('border-bottom');
-      //       // }else{
-      //       //   document.documentElement.style.setProperty('border-bottom','unset');
-      //       // }
-      //       // document.documentElement.style.setProperty('transform',`scale(${visualViewport.height/record})`);
-      //       // record=visualViewport.height;
-      //     };
-      //     action();
-      //     // setTimeout(()=>{
-      //     //   action();
-      //     //   setTimeout(()=>{
-      //     //     action();
-      //     //     setTimeout(()=>{
-      //     //       action();
-      //     //       setTimeout(()=>{
-      //     //         action();
-      //     //       },350/2);
-      //     //     },350/2);
-      //     //   },350/2);
-      //     // },350/2);
-      //   // },350);
-      // });
-      // let lock=false;
-      // visualViewport.addEventListener('resize',()=>{
-      //   if(!lock){
-      //     console.log('gogogo');
-      //     lock=true;
-      //     const recordFocusTop=document.activeElement.scrollTop;
-      //     const recordViewportTop=visualViewport.offsetTop;
-      //     const recordViewportHeight=visualViewport.height;
-      //     setTimeout(()=>{
-      //       let animate=({duration,draw,timing})=>{
-      //         const start=performance.now();
-      //         requestAnimationFrame(animate=(time)=>{
-      //           let timeFraction=(time-start)/duration;
-      //           if(timeFraction>1){
-      //             timeFraction=1;
-      //           }
-      //           const progress=timing(timeFraction);
-      //           draw(progress);
-      //           if(timeFraction<1){
-      //             requestAnimationFrame(animate);
-      //           }
-      //         });
-      //       }
-      //       animate({
-      //         duration:350,
-      //         timing:(timeFraction)=>{
-      //           return timeFraction;
-      //         },
-      //         draw:(progress)=>{
-      //           console.log(progress);
-      //           // scroll({behavior:'smooth',top:(recordViewportHeight-visualViewport.height)-progress*(recordViewportHeight-visualViewport.height),left:0});
-      //           // document.documentElement.style.setProperty('height',`${recordViewportHeight-progress*(recordViewportHeight-visualViewport.height)}px`);
-      //           // document.activeElement.scroll({behavior:'smooth',top:recordFocusTop+progress*recordViewportTop,left:0});
-      //           if(progress===1){
-      //             lock=false;
-      //           }
-      //         }
-      //       });
-      //     },350);
-      //   }
-      // // visualViewport.addEventListener('scroll',()=>{
-      //   // setTimeout(()=>{
-      //     // this._viewportScrollToZero_();
-      //   // },350);
-      // // });
-      //       // console.log(visualViewport.height);
-      //       // scroll({behavior:'smooth',top:0,left:0});
-      //       // document.documentElement.style.setProperty('height',`${visualViewport.height}px`);
-      //       // scroll({behavior:'smooth',top:102400,left:0});
-      //       // document.activeElement.scroll({behavior:'smooth',top:document.activeElement.scrollTop+visualViewport.offsetTop,left:0});
-      //   // if(visualViewport.height===innerHeight){
-      //   //   document.documentElement.style.removeProperty('height');
-      //   //   setTimeout(()=>{
-      //   //     if(!document.documentElement.style[0]){
-      //   //       document.documentElement.removeAttribute('style');
-      //   //     }
-      //   //   },350/2);
-      //   // }
-      // });
-    },
-    /*🟢*/viewport_safeAreaInsetBottom(){
-      // visualViewport.addEventListener('resize',()=>{
-      //   document.documentElement.style.setProperty('border-bottom','unset');
-      //   setTimeout(()=>{
-      //     if(visualViewport.height===innerHeight){
-      //       document.documentElement.style.removeProperty('border-bottom');
-      //       setTimeout(()=>{
-      //         if(!document.documentElement.style[0]){
-      //           document.documentElement.removeAttribute('style');
-      //         }
-      //       },350/2);
-      //     }
-      //   },350*2);
-      // });
-    },
+    /*🔴*/magicInput(){},
     /*🟢*/ic_ve_viewport_scale(){
       let record=0;
       visualViewport.addEventListener('resize',()=>{

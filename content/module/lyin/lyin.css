@@ -324,7 +324,7 @@
     --ic_ve_cubicBezier_ease: ease-in-out;
     --ic_ve_cubicBezier_slowFast: cubic-bezier(0.4,0,0.2,1);
   }
-  /* other */
+  /* ic_ve_viewport_scale */
   html {
     --ic_ve_viewport_scale: 1;
   }
@@ -526,11 +526,6 @@
       -webkit-tap-highlight-color: rgba(0,0,0,0);
       -webkit-touch-callout: none;
       cursor: default;
-      /* transform-origin: top;
-      transition:
-        scale 350ms var(--ic_ve_cubicBezier_ease),
-        translate 350ms var(--ic_ve_cubicBezier_ease)
-      ; */
     }
     body {
       display: flex;
