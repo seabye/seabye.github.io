@@ -14,7 +14,7 @@
   #[wasm_bindgen]
 // #variable
 // #block
-  // tyin
+  // tyin webAssembly rust 💠 🔴 🟡 🟢
     // 💠 base
       /*🟢*/
       pub fn test()->String{

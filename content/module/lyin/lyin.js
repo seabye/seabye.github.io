@@ -126,7 +126,7 @@
 // #variable
 // #block
 // #build
-  // lyin
+  // lyin 💠 🔴 🟡 🟢
   const lyin={
     // 💠 parameter
       /*🟢*/dataset(){
@@ -452,7 +452,7 @@
           }
         });
       },
-      /*🟢*/no_zoom_doubleClick(){
+      /*🟢*/no_doubleClickZoom(){
         addEventListener('touchstart',(event)=>{
           if(event.touches.length>1){
             event.preventDefault();
@@ -466,7 +466,7 @@
           end=Date.now();
         });
       },
-      /*🟢*/no_zoom_twoFinger(){
+      /*🟢*/no_twoFingerZoom(){
         addEventListener('wheel',(event)=>{
           if(event.ctrlKey){
             event.preventDefault();
@@ -492,7 +492,7 @@
       },
       /*🔴*/no_back_touch(){},
       /*🔴*/no_back_button(){},
-      /*🟢*/inputBlur(){
+      /*🟢*/input_blur(){
         addEventListener('pointerdown',(event)=>{
           const loop=(target)=>{
             if(target!==document.documentElement){
@@ -513,7 +513,7 @@
           }
         });
       },
-      /*🟢*/inputBottomScroll(){
+      /*🟢*/input_clickScroll(){
         addEventListener('pointerup',(event)=>{
           const loop=(target)=>{
             if(target!==document.documentElement){
@@ -531,6 +531,7 @@
           loop(event.target);
         });
       },
+      /*🔴*/input_autoScroll(){},
       /*🟢*/partialScroll(){
         if(!CSS.supports('overscroll-behavior:contain')){
           const preventDefault=(event)=>{
@@ -615,7 +616,7 @@
         }
       },
     // 💠 function
-      /*🔴*/magicInput(){}
+      /*🔴*/magicForm(){}
   };
   for(const key in lyin){
     lyin[key]();

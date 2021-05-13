@@ -11,7 +11,7 @@
 // #import
 // #variable
 // #block
-  // tyin
+  // tyin 💠 🔴 🟡 🟢
   export const tyin={
     // 💠 base
       /*🟢*/throttle(callback,wait=1000/24,first=false){
@@ -1637,7 +1637,7 @@
         return new this.elementBlock.template(element,group,insertPosition,wait);
       },
       /*🔴*/DOM(){},
-      /*🔴*/magicInput(){},
+      /*🔴*/magicForm(){},
       /*🟢*/insertStyle(style,wait){
         const element=this.elementCreate('style',undefined,document.head,undefined,style);
         if(wait){
