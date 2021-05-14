@@ -128,7 +128,7 @@
 // #build
   // lyin 💠 🔴 🟡 🟢
   const lyin={
-    // 💠 parameter
+    // 💠 0 base
       /*🟢*/dataset(){
         for(const value of document.scripts){
           if(value.dataset.lyin){
@@ -139,8 +139,8 @@
           }
         }
       },
-    // 💠 boot
-      /*🟢*/start_backgroundColor(){
+    // 💠 1 boot
+      /*🟢*/boot_backgroundColor(){
         document.documentElement.style.setProperty('background-color',`${matchMedia('(prefers-color-scheme:dark)').matches?this.dataset.config.startBackgroundColor_dark?this.dataset.config.startBackgroundColor_dark:'#000000':this.dataset.config.startBackgroundColor_light?this.dataset.config.startBackgroundColor_light:'#FFFFFF'}`);
         addEventListener('load',()=>{
           const loop=()=>{
@@ -160,7 +160,7 @@
           loop();
         },{once:true});
       },
-      /*🟢*/start_opacity(){
+      /*🟢*/boot_opacity(){
         const loop=()=>{
           if(document.body){
             document.body.style.setProperty('opacity','0');
@@ -187,7 +187,7 @@
           loop();
         },{once:true});
       },
-      /*🟢*/start_progress(){
+      /*🟢*/boot_progress(){
         document.documentElement.classList.add('_ic_bk_progressIndicatorCircular_indeterminate_');
         addEventListener('load',()=>{
           if(document.documentElement.classList.contains('_ic_bk_progressIndicatorCircular_indeterminate_')){
@@ -197,12 +197,12 @@
           }
         },{once:true});
       },
+    // 💠 2 write
       /*🟢*/serviceWorker(){
         if(this.dataset.config.serviceWorker&&'serviceWorker'in navigator){
           navigator.serviceWorker.register(this.dataset.config.serviceWorker,{scope:'/'});
         }
       },
-    // 💠 write
       /*🟢*/navigator_basic(){
         const userAgent=navigator.userAgent;
         const cls=document.documentElement.classList;
@@ -378,11 +378,18 @@
         visualViewport.addEventListener('resize',()=>{
           if(visualViewport.scale!==record){
             record=visualViewport.scale;
-            for(let key=0,length=document.styleSheets.length;key<length;key++){
-              if(document.styleSheets[key].href.match(/lyin\.css/i)){
-                document.styleSheets[key].insertRule(`html { --ic_ve_viewport_scale: ${record}; }`,document.styleSheets[key].cssRules.length);
+            const loop=()=>{
+              if(document.styleSheets){
+                for(let key=0,length=document.styleSheets.length;key<length;key++){
+                  if(document.styleSheets[key].href.match(/lyin\.css/i)){
+                    document.styleSheets[key].insertRule(`html { --ic_ve_viewport_scale: ${record}; }`,document.styleSheets[key].cssRules.length);
+                  }
+                }
+              }else{
+                loop();
               }
-            }
+            };
+            loop();
           }
         });
       },
@@ -435,7 +442,7 @@
           addEventListener('dragend',remove,{once:true});
         });
       },
-    // 💠 intervene
+    // 💠 4 intervene
       /*🟢*/_isKeyboardInputArea_(target){
         const loop=(target)=>{
           if(target!==document.documentElement){
@@ -455,6 +462,23 @@
           }
         });
       },
+      /*🟢*/no_drag(){
+        addEventListener('dragstart',(event)=>{
+          if(event.target.localName.match(/a|img/i)){
+            event.preventDefault();
+          }
+        });
+      },
+      /*🟢*/no_twoFingerZoom(){
+        addEventListener('wheel',(event)=>{
+          if(event.ctrlKey){
+            event.preventDefault();
+          }
+        },{passive:false});
+        addEventListener('gesturestart',(event)=>{
+          event.preventDefault();
+        });
+      },
       /*🟢*/no_doubleClickZoom(){
         addEventListener('touchstart',(event)=>{
           if(event.touches.length>1){
@@ -469,33 +493,20 @@
           end=Date.now();
         });
       },
-      /*🟢*/no_twoFingerZoom(){
-        addEventListener('wheel',(event)=>{
-          if(event.ctrlKey){
-            event.preventDefault();
-          }
-        },{passive:false});
-        addEventListener('gesturestart',(event)=>{
-          event.preventDefault();
-        });
-      },
-      /*🟢*/no_drag(){
-        addEventListener('dragstart',(event)=>{
-          if(event.target.localName.match(/a|img/i)){
-            event.preventDefault();
-          }
-        });
-      },
       /*🔴*/no_touchBack(){},
       /*🔴*/no_buttonBack(){},
       /*🟢*/input_inputState(){
-        addEventListener('pointerup',()=>{
-          setTimeout(()=>{
+        const run=()=>{
+          if(document.documentElement.offsetHeight!==visualViewport.height||document.documentElement.classList.contains('ic_nr_inputState')){
             if(this._isKeyboardInputArea_(document.activeElement)){
               document.documentElement.classList.add('ic_nr_inputState');
-            };
-          },350);
-        });
+            }else{
+              document.documentElement.classList.remove('ic_nr_inputState');
+            }
+          }
+        };
+        visualViewport.addEventListener('resize',run);
+        addEventListener('pointerup',run);
       },
       /*🟢*/input_clickBottom(){
         addEventListener('pointerup',(event)=>{
@@ -522,33 +533,37 @@
           let scrollDirection=null;
           addEventListener('touchstart',(event)=>{
             const loop=(target)=>{
-              if(getComputedStyle(target).overflowY.match(/auto|scroll/i)||getComputedStyle(target).overflowX.match(/auto|scroll/i)){
-                if(getComputedStyle(target).overflowY.match(/auto|scroll/i)){
-                  if(target.scrollHeight!==target.offsetHeight){
-                    if(target.scrollTop<=0){
-                      start_y=event.changedTouches[0].screenY;
-                      scrollDirection='top';
-                    }else{
-                      if(target.scrollTop>=target.scrollHeight-target.offsetHeight){
+              if(document.documentElement.classList.contains('ic_nr_inputState')){
+                removeEventListener('touchmove',preventDefault);
+              }else{
+                if(getComputedStyle(target).overflowY.match(/auto|scroll/i)||getComputedStyle(target).overflowX.match(/auto|scroll/i)){
+                  if(getComputedStyle(target).overflowY.match(/auto|scroll/i)){
+                    if(target.scrollHeight!==target.offsetHeight){
+                      if(target.scrollTop<=0){
                         start_y=event.changedTouches[0].screenY;
-                        scrollDirection='bottom';
+                        scrollDirection='top';
                       }else{
-                        removeEventListener('touchmove',preventDefault);
+                        if(target.scrollTop>=target.scrollHeight-target.offsetHeight){
+                          start_y=event.changedTouches[0].screenY;
+                          scrollDirection='bottom';
+                        }else{
+                          removeEventListener('touchmove',preventDefault);
+                        }
                       }
+                    }
+                  }else{
+                    if(target.scrollWidth!==target.offsetWidth){
+                      start_y=event.changedTouches[0].screenY;
+                      start_x=event.changedTouches[0].screenX;
+                      scrollDirection='horizontal';
                     }
                   }
                 }else{
-                  if(target.scrollWidth!==target.offsetWidth){
-                    start_y=event.changedTouches[0].screenY;
-                    start_x=event.changedTouches[0].screenX;
-                    scrollDirection='horizontal';
+                  if(target.parentElement){
+                    loop(target.parentElement);
+                  }else{
+                    removeEventListener('touchmove',preventDefault);
                   }
-                }
-              }else{
-                if(target.parentElement){
-                  loop(target.parentElement);
-                }else{
-                  removeEventListener('touchmove',preventDefault);
                 }
               }
             };

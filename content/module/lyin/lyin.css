@@ -526,7 +526,7 @@
       -webkit-tap-highlight-color: rgba(0,0,0,0);
       -webkit-touch-callout: none;
       cursor: default;
-      transition: transform 350ms var(--ic_ve_cubicBezier_slowFast);
+      transition: transform 350ms var(--ic_ve_cubicBezier_ease);
     }
     html.ic_nr_inputState {
       transform: scale(0.75);
