@@ -527,8 +527,9 @@
       -webkit-touch-callout: none;
       cursor: default;
       border-radius: unset;
-      box-shadow: 0 0 0 2px var(--ic_ve_color_black_transparent),0 0 0 4px var(--ic_ve_color_black_transparent);
+      box-shadow: 0 0 0 1px var(--ic_ve_color_black_transparent),0 0 0 3px var(--ic_ve_color_black_transparent);
       transform: unset;
+      transform-origin: center;
       transition:
         border-width 350ms var(--ic_ve_cubicBezier_ease),
         border-radius 350ms var(--ic_ve_cubicBezier_ease),
@@ -536,11 +537,12 @@
         transform 350ms var(--ic_ve_cubicBezier_ease)
       ;
     }
-    html.ic_nr_inputState {
+    html.ic_nr_inputStateViewScale,
+    html.ic_nr_inputStatescrollEndpointOuter {
       border: unset;
-      border-radius: 2px;
-      box-shadow: 0 0 0 2px var(--ic_ve_color_white),0 0 0 4px var(--ic_ve_color_black2_opacity);
-      transform: scale(0.75);
+      border-radius: 1px;
+      box-shadow: 0 0 0 1px var(--ic_ve_color_white),0 0 0 3px var(--ic_ve_color_black2_opacity);
+      transform: scale(0.875);
     }
     body {
       display: flex;

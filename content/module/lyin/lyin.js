@@ -509,11 +509,39 @@
       /*🔴*/no_touchBack(){},
       /*🔴*/no_buttonBack(){},
       /*🟢*/input_inputState(){
+        addEventListener('scroll',()=>{
+          if(document.documentElement.scrollTop<0||document.documentElement.scrollTop>document.documentElement.clientHeight-visualViewport.height){
+            document.documentElement.classList.add('ic_nr_inputStatescrollEndpointOuter');
+            let plus=0;
+            if(document.documentElement.scrollTop<0){
+              plus=-document.documentElement.scrollTop/6;
+            }else{
+              plus=(document.documentElement.scrollTop-(document.documentElement.clientHeight-visualViewport.height))/6;
+            }
+            document.documentElement.style.removeProperty('background-color');
+            const currentColor=getComputedStyle(document.documentElement).backgroundColor.replace(/rgb\((\d+)\, (\d+)\, (\d+)\)/,'$1,$2,$3').split(',');
+            const isDark=matchMedia('(prefers-color-scheme:dark)').matches;
+            document.documentElement.style.setProperty('background-color',`rgb(
+              ${isDark?parseInt(currentColor[0])+plus:parseInt(currentColor[0])-plus},
+              ${isDark?parseInt(currentColor[1])+plus:parseInt(currentColor[1])-plus},
+              ${isDark?parseInt(currentColor[2])+plus:parseInt(currentColor[2])-plus}
+            )`);
+          }else{
+            document.documentElement.classList.remove('ic_nr_inputStatescrollEndpointOuter');
+            document.documentElement.style.removeProperty('background-color');
+            setTimeout(()=>{
+              if(!document.documentElement.style[0]){
+                document.documentElement.removeAttribute('style');
+              }
+            },350/2);
+          }
+        });
+        getComputedStyle(document.documentElement).backgroundColor
         visualViewport.addEventListener('resize',()=>{
           if(document.documentElement.clientHeight!==visualViewport.height){
-            document.documentElement.classList.add('ic_nr_inputState');
+            document.documentElement.classList.add('ic_nr_inputStateViewScale');
           }else{
-            document.documentElement.classList.remove('ic_nr_inputState');
+            document.documentElement.classList.remove('ic_nr_inputStateViewScale');
           }
         });
       },
@@ -542,37 +570,33 @@
           let scrollDirection=null;
           addEventListener('touchstart',(event)=>{
             const loop=(target)=>{
-              if(document.documentElement.classList.contains('ic_nr_inputState')){
-                removeEventListener('touchmove',preventDefault);
-              }else{
-                if(getComputedStyle(target).overflowY.match(/auto|scroll/i)||getComputedStyle(target).overflowX.match(/auto|scroll/i)){
-                  if(getComputedStyle(target).overflowY.match(/auto|scroll/i)){
-                    if(target.scrollHeight!==target.offsetHeight){
-                      if(target.scrollTop<=0){
-                        start_y=event.changedTouches[0].screenY;
-                        scrollDirection='top';
-                      }else{
-                        if(target.scrollTop>=target.scrollHeight-target.offsetHeight){
-                          start_y=event.changedTouches[0].screenY;
-                          scrollDirection='bottom';
-                        }else{
-                          removeEventListener('touchmove',preventDefault);
-                        }
-                      }
-                    }
-                  }else{
-                    if(target.scrollWidth!==target.offsetWidth){
+              if(getComputedStyle(target).overflowY.match(/auto|scroll/i)||getComputedStyle(target).overflowX.match(/auto|scroll/i)){
+                if(getComputedStyle(target).overflowY.match(/auto|scroll/i)){
+                  if(target.scrollHeight!==target.offsetHeight){
+                    if(target.scrollTop<=0){
                       start_y=event.changedTouches[0].screenY;
-                      start_x=event.changedTouches[0].screenX;
-                      scrollDirection='horizontal';
+                      scrollDirection='top';
+                    }else{
+                      if(target.scrollTop>=target.scrollHeight-target.offsetHeight){
+                        start_y=event.changedTouches[0].screenY;
+                        scrollDirection='bottom';
+                      }else{
+                        removeEventListener('touchmove',preventDefault);
+                      }
                     }
                   }
                 }else{
-                  if(target.parentElement){
-                    loop(target.parentElement);
-                  }else{
-                    removeEventListener('touchmove',preventDefault);
+                  if(target.scrollWidth!==target.offsetWidth){
+                    start_y=event.changedTouches[0].screenY;
+                    start_x=event.changedTouches[0].screenX;
+                    scrollDirection='horizontal';
                   }
+                }
+              }else{
+                if(target.parentElement){
+                  loop(target.parentElement);
+                }else{
+                  removeEventListener('touchmove',preventDefault);
                 }
               }
             };
