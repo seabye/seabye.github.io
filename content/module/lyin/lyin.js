@@ -443,6 +443,19 @@
         });
       },
     // 💠 4 intervene
+      /*🟢*/_tabIndex(){
+        document.documentElement.setAttribute('tabindex','-1');
+        const loop=()=>{
+          for(const value of document.documentElement.children){
+            if(value.localName==='body'){
+              document.body.setAttribute('tabindex','-1');
+              return true;
+            }
+          }
+          setTimeout(loop,1000/24);
+        };
+        loop();
+      },
       /*🟢*/_isKeyboardInputArea_(target){
         const loop=(target)=>{
           if(target!==document.documentElement){
@@ -496,18 +509,13 @@
       /*🔴*/no_touchBack(){},
       /*🔴*/no_buttonBack(){},
       /*🟢*/input_inputState(){
-        const run=(event)=>{
-          if(document.documentElement.clientHeight!==visualViewport.height&&this._isKeyboardInputArea_(event.target instanceof HTMLElement?event.target:document.activeElement)){
+        visualViewport.addEventListener('resize',()=>{
+          if(document.documentElement.clientHeight!==visualViewport.height){
             document.documentElement.classList.add('ic_nr_inputState');
           }else{
             document.documentElement.classList.remove('ic_nr_inputState');
-            if(document.documentElement.clientHeight!==visualViewport.height){
-              document.activeElement.blur();
-            }
           }
-        };
-        visualViewport.addEventListener('resize',run);
-        addEventListener('pointerup',run);
+        });
       },
       /*🟢*/input_clickBottom(){
         addEventListener('pointerup',(event)=>{

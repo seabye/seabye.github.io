@@ -530,7 +530,7 @@
       box-shadow: 0 0 0 2px var(--ic_ve_color_black_transparent),0 0 0 4px var(--ic_ve_color_black_transparent);
       transform: unset;
       transition:
-        border 350ms var(--ic_ve_cubicBezier_ease),
+        border-width 350ms var(--ic_ve_cubicBezier_ease),
         border-radius 350ms var(--ic_ve_cubicBezier_ease),
         box-shadow 350ms var(--ic_ve_cubicBezier_ease),
         transform 350ms var(--ic_ve_cubicBezier_ease)
