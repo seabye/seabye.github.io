@@ -497,11 +497,13 @@
       /*🔴*/no_buttonBack(){},
       /*🟢*/input_inputState(){
         const run=(event)=>{
-          if(document.documentElement.offsetHeight!==visualViewport.height&&this._isKeyboardInputArea_(event.target instanceof HTMLElement?event.target:document.activeElement)){
+          if(document.documentElement.clientHeight!==visualViewport.height&&this._isKeyboardInputArea_(event.target instanceof HTMLElement?event.target:document.activeElement)){
             document.documentElement.classList.add('ic_nr_inputState');
           }else{
             document.documentElement.classList.remove('ic_nr_inputState');
-            document.activeElement.blur();
+            if(document.documentElement.clientHeight!==visualViewport.height){
+              document.activeElement.blur();
+            }
           }
         };
         visualViewport.addEventListener('resize',run);
