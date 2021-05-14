@@ -160,7 +160,7 @@
           loop();
         },{once:true});
       },
-      /*🟢*/start_pacity(){
+      /*🟢*/start_opacity(){
         const loop=()=>{
           if(document.body){
             document.body.style.setProperty('opacity','0');
@@ -436,18 +436,21 @@
         });
       },
     // 💠 intervene
+      /*🟢*/_isKeyboardInputArea_(target){
+        const loop=(target)=>{
+          if(target!==document.documentElement){
+            if(target.contentEditable==='true'||target.localName.match(/input|textarea/)){
+              return target;
+            }
+            return loop(target.parentElement);
+          }
+          return false;
+        };
+        return loop(target);
+      },
       /*🟢*/no_contextMenu(){
         addEventListener('contextmenu',(event)=>{
-          const loop=(target)=>{
-            if(target!==document.documentElement){
-              if(target.contentEditable==='true'){
-                return true;
-              }
-              return loop(target.parentElement);
-            }
-            return false;
-          };
-          if(!loop(event.target)&&!event.target.localName.match(/input|textarea/)){
+          if(!this._isKeyboardInputArea_(event.target)){
             event.preventDefault();
           }
         });
@@ -483,55 +486,31 @@
           }
         });
       },
-      /*🟢*/no_touchScrollViewport(){
-        addEventListener('touchmove',(event)=>{
-          if(event.target.localName==='html'){
-            event.preventDefault();
-          }
-        },{passive:false});
-      },
-      /*🔴*/no_back_touch(){},
-      /*🔴*/no_back_button(){},
-      /*🟢*/input_blur(){
-        addEventListener('pointerdown',(event)=>{
-          const loop=(target)=>{
-            if(target!==document.documentElement){
-              if(target.contentEditable==='true'){
-                return true;
-              }
-              return loop(target.parentElement);
-            }
-            return false;
-          };
-          if(!loop(event.target)&&!event.target.localName.match(/input|textarea/)){
-            document.activeElement.blur();
-          };
-        });
-        addEventListener('keydown',(event)=>{
-          if(event.key==='Enter'&&event.target.localName==='input'){
-            event.target.blur();
-          }
+      /*🔴*/no_touchBack(){},
+      /*🔴*/no_buttonBack(){},
+      /*🟢*/input_inputState(){
+        addEventListener('pointerup',()=>{
+          setTimeout(()=>{
+            if(this._isKeyboardInputArea_(document.activeElement)){
+              document.documentElement.classList.add('ic_nr_inputState');
+            };
+          },350);
         });
       },
-      /*🟢*/input_clickScroll(){
+      /*🟢*/input_clickBottom(){
         addEventListener('pointerup',(event)=>{
-          const loop=(target)=>{
-            if(target!==document.documentElement){
-              if(target.contentEditable==='true'||target.localName==='textarea'){
-                setTimeout(()=>{
-                  const distance=target.getBoundingClientRect().bottom-event.y;
-                  if(distance<64){
-                    target.scroll({behavior:'smooth',top:target.scrollTop+64-distance,left:0});
-                  }
-                },350/4);
+          const target=this._isKeyboardInputArea_(event.target);
+          if(target){
+            setTimeout(()=>{
+              const distance=target.getBoundingClientRect().bottom-event.y;
+              if(distance<64){
+                target.scroll({behavior:'smooth',top:target.scrollTop+64-distance,left:0});
               }
-              loop(target.parentElement);
-            }
-          };
-          loop(event.target);
+            },350/4);
+          }
         });
       },
-      /*🔴*/input_autoScroll(){},
+      /*🔴*/input_observeCursor(){},
       /*🟢*/partialScroll(){
         if(!CSS.supports('overscroll-behavior:contain')){
           const preventDefault=(event)=>{
@@ -614,12 +593,12 @@
             start_y=start_x=scrollDirection=null;
           });
         }
-      },
-    // 💠 function
-      /*🔴*/magicForm(){}
+      }
   };
   for(const key in lyin){
-    lyin[key]();
+    if(!key.match(/^\_/)){
+      lyin[key]();
+    }
   }
 // #debug
 // #after

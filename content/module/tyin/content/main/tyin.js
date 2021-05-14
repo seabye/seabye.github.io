@@ -1637,6 +1637,18 @@
         return new this.elementBlock.template(element,group,insertPosition,wait);
       },
       /*🔴*/DOM(){},
+      /*🟢*/isKeyboardInputArea(target){
+        const loop=(target)=>{
+          if(target!==document.documentElement){
+            if(target.contentEditable==='true'||target.localName.match(/input|textarea/)){
+              return target;
+            }
+            return loop(target.parentElement);
+          }
+          return false;
+        };
+        return loop(target);
+      },
       /*🔴*/magicForm(){},
       /*🟢*/insertStyle(style,wait){
         const element=this.elementCreate('style',undefined,document.head,undefined,style);
