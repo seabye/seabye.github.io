@@ -529,10 +529,10 @@
       transition: transform 350ms var(--ic_ve_cubicBezier_ease);
     }
     html.ic_nr_inputState {
-      transform: scale(0.75);
       padding: 2px;
       border: 2px solid var(--ic_ve_color_black2_opacity);
       border-radius: 4px;
+      transform: scale(0.75);
     }
     body {
       display: flex;

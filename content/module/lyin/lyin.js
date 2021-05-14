@@ -381,7 +381,7 @@
             const loop=()=>{
               if(document.styleSheets){
                 for(let key=0,length=document.styleSheets.length;key<length;key++){
-                  if(document.styleSheets[key].href.match(/lyin\.css/i)){
+                  if(document.styleSheets[key].href&&document.styleSheets[key].href.match(/lyin\.css/i)){
                     document.styleSheets[key].insertRule(`html { --ic_ve_viewport_scale: ${record}; }`,document.styleSheets[key].cssRules.length);
                   }
                 }
