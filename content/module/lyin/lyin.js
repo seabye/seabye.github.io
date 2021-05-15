@@ -536,12 +536,16 @@
             },350/2);
           }
         });
-        getComputedStyle(document.documentElement).backgroundColor
         visualViewport.addEventListener('resize',()=>{
           if(document.documentElement.clientHeight!==visualViewport.height){
             document.documentElement.classList.add('ic_nr_inputStateViewScale');
           }else{
             document.documentElement.classList.remove('ic_nr_inputStateViewScale');
+          }
+        });
+        addEventListener('pointerup',(event)=>{
+          if(!this._isKeyboardInputArea_(event.target)){
+            document.activeElement.blur();
           }
         });
       },

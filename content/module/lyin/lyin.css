@@ -542,7 +542,7 @@
       border: unset;
       border-radius: 1px;
       box-shadow: 0 0 0 1px var(--ic_ve_color_white),0 0 0 3px var(--ic_ve_color_black2_opacity);
-      transform: scale(0.875);
+      transform: scale(calc(1/1.15));
     }
     body {
       display: flex;
