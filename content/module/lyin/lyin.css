@@ -370,7 +370,11 @@
     }
   }
   [class*="ic_bk_progressIndicatorCircular_indeterminate"],
-  [class*="ic_bk_progressIndicatorCircular_indeterminate"] * {
+  [class*="ic_bk_progressIndicatorCircular_indeterminate"]::before,
+  [class*="ic_bk_progressIndicatorCircular_indeterminate"]::after,
+  [class*="ic_bk_progressIndicatorCircular_indeterminate"] *,
+  [class*="ic_bk_progressIndicatorCircular_indeterminate"] *::before,
+  [class*="ic_bk_progressIndicatorCircular_indeterminate"] *::after {
     pointer-events: none !important;
   }
   [class*="ic_bk_progressIndicatorCircular_indeterminate"]::after {

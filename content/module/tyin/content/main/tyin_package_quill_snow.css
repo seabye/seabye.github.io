@@ -4,6 +4,200 @@
 /* #variable */
 /* #block */
 /* #build */
+  /*  */
+  .tyin_package_quill_container,
+  .tyin_package_quill_container :not([class^="hljs"]) {
+    all: unset;
+    max-width: 100%;
+  }
+  .tyin_package_quill_container {
+    position: relative;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    font-size: 14px;
+    background-color: var(--ic_ve_color_background);
+  }
+    /*  */
+    .tyin_package_quill_container>.ql-toolbar {
+      display: flex;
+      z-index: 1;
+      position: absolute;
+      overflow: auto hidden;
+      right: 8px;
+      bottom: 8px;
+      max-width: calc(100% - 8px*2);
+      height: 36px;
+      align-items: center;
+      border: 1px solid;
+      border-color: var(--ic_ve_color_highlight);
+      border-radius: 8px;
+      background-color: var(--ic_ve_color_foreground);
+      box-shadow: var(--ic_ve_shadow_2dp);
+    }
+      /*  */
+      .tyin_package_quill_container>.ql-toolbar>.ql-formats {
+        display: flex;
+        align-items: center;
+        margin-left: 8px;
+        height: 100%;
+      }
+      .tyin_package_quill_container>.ql-toolbar>.ql-formats:last-child {
+        margin-right: 8px;
+      }
+        /*  */
+        .tyin_package_quill_container>.ql-toolbar>.ql-formats>button {
+          margin-left: 4px;
+          min-width:20px;
+          height: calc(100% - 8px);
+          border-radius: 4px;
+          font-size: 20px;
+          text-align: center;
+          color: var(--ic_ve_color_black4_opacity);
+        }
+        .tyin_package_quill_container>.ql-toolbar>.ql-formats>button:last-child {
+          margin-right: 4px;
+        }
+        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-active {
+          color: var(--ic_ve_color_system_blue);
+        }
+        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ic_active_0 {
+          color: var(--ic_ve_color_system_blue_translucent);
+          background-color: var(--ic_ve_color_highlight);
+        }
+          /* */
+          .tyin_package_quill_container>.ql-toolbar>.ql-formats>button>svg {
+            display: none;
+          }
+    /*  */
+    .tyin_package_quill_container>.ql-container {
+      display: block;
+    }
+      /*  */
+      .tyin_package_quill_container>.ql-container>.ql-editor {
+        display: block;
+        overflow: hidden auto;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        -webkit-nbsp-mode: space;
+        nbsp-mode: space;
+        -webkit-user-modify: read-write;
+        user-modify: read-write;
+        -webkit-user-select: text;
+        user-select: text;
+      }
+        /*  */
+        .tyin_package_quill_container>.ql-container>.ql-editor>p {
+          display: block;
+        }
+        /*  */
+        .tyin_package_quill_container>.ql-container>.ql-editor>ul {
+          display: block;
+        }
+        .tyin_package_quill_container>.ql-container>.ql-editor>ul li {
+          display: block;
+        }
+
+/*  */
+.ql-font::before {
+  content: "?";
+}
+.ql-size::before {
+  content: "?";
+}
+/*  */
+.ql-bold::before {
+  content: "􀅓";
+}
+.ql-italic::before {
+  content: "􀅔";
+}
+.ql-underline::before {
+  content: "􀅕";
+}
+.ql-strike::before {
+  content: "􀅖";
+}
+/*  */
+.ql-color::before {
+  content: "􀣷";
+}
+.ql-background::before {
+  content: "􀎒";
+}
+/*  */
+.ql-script[value="sub"]::before {
+  content: "􀓡";
+}
+.ql-script[value="super"]::before {
+  content: "􀓢";
+}
+/*  */
+.ql-header[value="1"]::before {
+  content: "􀀺";
+}
+.ql-header[value="2"]::before {
+  content: "􀀼";
+}
+.ql-header[value="3"]::before {
+  content: "􀀾";
+}
+.ql-header[value="4"]::before {
+  content: "􀁀";
+}
+.ql-header[value="5"]::before {
+  content: "􀁂";
+}
+.ql-header[value="6"]::before {
+  content: "􀁄";
+}
+.ql-blockquote::before {
+  content: "􀋿";
+}
+.ql-code-block::before {
+  content: "􀙚";
+}
+/*  */
+.ql-list[value="ordered"]::before {
+  content: "􀋴";
+}
+.ql-list[value="bullet"]::before {
+  content: "􀋲";
+}
+.ql-indent[value="-1"]::before {
+  content: "􀋶";
+}
+.ql-indent[value="+1"]::before {
+  content: "􀋵";
+}
+/*  */
+.ql-direction::before {
+  content: "?";
+}
+.ql-align::before {
+  content: "?";
+}
+/*  */
+.ql-link::before {
+  content: "􀉣";
+}
+.ql-image::before {
+  content: "􀏅";
+}
+.ql-video::before {
+  content: "􀍊";
+}
+.ql-formula::before {
+  content: "􀅮";
+}
+/*  */
+.ql-clean::before {
+  content: "?";
+}
+
+
 /* #debug */
 /* #after */
 
@@ -11,16 +205,11 @@
 
 
 
+/* ==== ==== ==== ==== */
 
 
 
-/*!
- * Quill Editor v1.3.7
- * https://quilljs.com/
- * Copyright (c) 2014, Jason Chen
- * Copyright (c) 2013, salesforce.com
- */
- .ql-container {
+/* .ql-container {
   box-sizing: border-box;
   font-family: Helvetica, Arial, sans-serif;
   font-size: 13px;
@@ -968,215 +1157,213 @@
 
 
 
-
-      /* 💧 tyin_package_quill */
-      .tyin_package_quill_container {
-        display: flex;
-        flex-direction: column;
-        position: relative;
-        max-width: 100%;
-        max-height: 100%;
-        background-color: var(--ic_ve_color_black1_opacity) !important;
-      }
-      .tyin_package_quill_container a {
-        color: var(--ic_ve_color_system_blue) !important;
-      }
-      .tyin_package_quill_container>.ql-toolbar {
-        display: flex !important;
-        align-items: center !important;
-        overflow: auto hidden !important;
-        z-index: 1 !important;
-        position: absolute !important;
-        right: 8px !important;
-        bottom: 8px !important;
-        padding: unset !important;
-        max-width: calc(100% - 16px) !important;
-        height: 36px !important;
-        border: 1px solid !important;
-        border-color: var(--ic_ve_color_white8_opacity) !important;
-        border-radius: 8px !important;
-        background-color: var(--ic_ve_color_white8) !important;
-        box-shadow: var(--ic_ve_shadow_4dp3) !important;
-        white-space: nowrap !important;
-      }
-      .tyin_package_quill_container>.ql-toolbar>.ql-formats {
-        display: flex !important;
-        margin-left: unset !important;
-        margin-right: unset !important;
-        padding-right: 12px !important;
-      }
-      .tyin_package_quill_container>.ql-toolbar>.ql-formats:first-child {
-        padding-left: 12px !important;
-      }
-      .tyin_package_quill_container>.ql-toolbar>.ql-formats>button {
-        padding: unset !important;
-        width: 18px !important;
-        height: 18px !important;
-      }
-      .tyin_package_quill_container>.ql-toolbar>.ql-formats>button:not(:last-child) {
-        margin-right: 6px !important;
-      }
-      .tyin_package_quill_container>.ql-toolbar>.ql-formats>button:not(.ql-active) {
-        opacity: 0.4 !important;
-      }
-      .tyin_package_quill_container>.ql-toolbar>.ql-formats>button .ql-fill {
-        fill: var(--ic_ve_color_black) !important;
-      }
-      .tyin_package_quill_container>.ql-toolbar>.ql-formats>button .ql-stroke {
-        stroke: var(--ic_ve_color_black) !important;
-      }
-      .tyin_package_quill_container>.ql-toolbar>.ql-formats>button.ql-active .ql-fill {
-        fill: var(--ic_ve_color_system_blue) !important;
-      }
-      .tyin_package_quill_container>.ql-toolbar>.ql-formats>button.ql-active .ql-stroke {
-        stroke: var(--ic_ve_color_system_blue) !important;
-      }
-      .tyin_package_quill_container>.ql-container {
-        display: flex !important;
-        justify-content: center !important;
-        max-height: 100% !important;
-        border: unset !important;
-        font-size: 14px !important;
-        font-family: inherit !important;
-      }
-      .tyin_package_quill_container>.ql-container,
-      .tyin_package_quill_container>.ql-container::before,
-      .tyin_package_quill_container>.ql-container::after,
-      .tyin_package_quill_container>.ql-container *,
-      .tyin_package_quill_container>.ql-container *::before,
-      .tyin_package_quill_container>.ql-container *::after {
-        line-height: var(--ic_ve_font_lineHeight_text) !important;
-      }
-      .tyin_package_quill_container>.ql-container>.ql-editor {
-        flex: auto !important;
-        padding: 20px 20px 128px !important;
-        max-width: 800px !important;
-      }
-      .tyin_package_quill_container>.ql-container>.ql-editor::before {
-        content: "2021-05-13 08:50:06" !important;
-        display: block !important;
-        color: var(--ic_ve_color_black4_opacity) !important;
-        position: unset !important;
-        font-style: unset !important;
-        zoom: 0.618 !important;
-      }
-      .tyin_package_quill_container>.ql-container>.ql-editor::after {
-        content: "2021-05-13 09:24:37" !important;
-        display: block !important;
-        color: var(--ic_ve_color_black4_opacity) !important;
-        zoom: 0.618 !important;
-      }
-      .tyin_package_quill_container>.ql-container>.ql-editor u {
-        text-decoration-color: var(--ic_ve_color_system_orange_translucent) !important;
-        text-decoration-thickness: 2px !important;
-        border-bottom-color: var(--ic_ve_color_system_orange_translucent) !important;
-      }
-      .tyin_package_quill_container>.ql-container>.ql-editor s {
-        text-decoration-color: var(--ic_ve_color_system_red_translucent) !important;
-        text-decoration-thickness: 4px !important;
-      }
-      .tyin_package_quill_container>.ql-container>.ql-editor sub,
-      .tyin_package_quill_container>.ql-container>.ql-editor sup {
-        margin: 0 2px !important;
-        background-color: var(--ic_ve_color_system_orange_translucent) !important;
-        zoom: 0.618 !important;
-      }
-      .tyin_package_quill_container>.ql-container>.ql-editor sub {
-        vertical-align: bottom !important;
-      }
-      .tyin_package_quill_container>.ql-container>.ql-editor sup {
-        vertical-align: top !important;
-      }
-      .tyin_package_quill_container>.ql-container>.ql-editor sub::before,
-      .tyin_package_quill_container>.ql-container>.ql-editor sup::before,
-      .tyin_package_quill_container>.ql-container>.ql-editor sub::after,
-      .tyin_package_quill_container>.ql-container>.ql-editor sup::after {
-        content: "\00a0";
-      }
-      .tyin_package_quill_container>.ql-container>.ql-editor blockquote {
-        border-left-width: 3px !important;
-        border-left-color: var(--ic_ve_color_system_blue_translucent) !important;
-        color: var(--ic_ve_color_black4_opacity) !important;
-      }
-      .tyin_package_quill_container>.ql-container>.ql-editor pre {
-        border-radius: 4px !important;
-        font-size: 12px !important;
-      }
-      .tyin_package_quill_container>.ql-container>.ql-editor ol,
-      .tyin_package_quill_container>.ql-container>.ql-editor ul {
-        padding-left: unset !important;
-      }
-      .tyin_package_quill_container>.ql-container>.ql-editor li.ql-indent-1:not(.ql-direction-rtl) {
-        padding-left: 3em !important;
-      }
-      .tyin_package_quill_container>.ql-container>.ql-tooltip:not(.ql-hidden) {
-        display: flex !important;
-        align-items: center !important;
-        left: unset !important;
-        right: 8px !important;
-        top: unset !important;
-        bottom: calc(36px + 8px*2) !important;
-        margin: unset !important;
-        padding: 4px 8px !important;
-        line-height: 100% !important;
-        border: 1px solid !important;
-        border-color: var(--ic_ve_color_black2_opacity) !important;
-        border-radius: 8px !important;
-        background-color: var(--ic_ve_color_white8) !important;
-        box-shadow: var(--ic_ve_shadow_4dp3) !important;
-        color: inherit !important;
-        white-space: nowrap !important;
-        transform: unset !important;
-      }
-      .tyin_package_quill_container>.ql-container>.ql-tooltip::before {
-        margin: unset !important;
-        line-height: unset !important;
-        color: var(--ic_ve_color_black4_opacity) !important;
-      }
-      .tyin_package_quill_container>.ql-container>.ql-tooltip::before,
-      .tyin_package_quill_container>.ql-container>.ql-tooltip[data-mode="link"]::before {
-        content: "链接" !important;
-      }
-      .tyin_package_quill_container>.ql-container>.ql-tooltip[data-mode="video"]::before {
-        content: "视频" !important;
-      }
-      .tyin_package_quill_container>.ql-container>.ql-tooltip[data-mode="formula"]::before {
-        content: "公式" !important;
-      }
-      .tyin_package_quill_container>.ql-container>.ql-tooltip>* {
-        margin-left: 8px !important;
-      }
-      .tyin_package_quill_container>.ql-container>.ql-tooltip>input {
-        padding: 4px !important;
-        width: 128px !important;
-        height: unset !important;
-        border-color: var(--ic_ve_color_black2_opacity) !important;
-        border-radius: 6px !important;
-        background-color: var(--ic_ve_color_white4_opacity) !important;
-        font-size: unset !important;
-      }
-      .tyin_package_quill_container>.ql-container>.ql-tooltip>input:focus {
-        border-color: var(--ic_ve_color_system_blue_translucent) !important;
-      }
-      .tyin_package_quill_container>.ql-container>.ql-tooltip>input~a {
-        color: var(--ic_ve_color_system_blue_translucent) !important;
-      }
-      .tyin_package_quill_container>.ql-container>.ql-tooltip ::before,
-      .tyin_package_quill_container>.ql-container>.ql-tooltip ::after {
-        margin: unset !important;
-        padding: unset !important;
-        border: unset !important;
-      }
-      .tyin_package_quill_container>.ql-container>.ql-tooltip>.ql-action::after {
-        content: "编辑" !important;
-      }
-      .tyin_package_quill_container>.ql-container>.ql-tooltip.ql-editing>.ql-action::after {
-        content: "确定" !important;
-      }
-      .tyin_package_quill_container>.ql-container>.ql-tooltip>.ql-remove::before {
-        content: "消除" !important;
-      }
-      .tyin_package_quill_container>.ql-container>.ql-tooltip>.ql-preview {
-        max-width: 128px !important;
-        text-decoration: underline !important;
-      }
+.tyin_package_quill_container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  max-width: 100%;
+  max-height: 100%;
+  background-color: var(--ic_ve_color_black1_opacity) !important;
+}
+.tyin_package_quill_container a {
+  color: var(--ic_ve_color_system_blue) !important;
+}
+.tyin_package_quill_container>.ql-toolbar {
+  display: flex !important;
+  align-items: center !important;
+  overflow: auto hidden !important;
+  z-index: 1 !important;
+  position: absolute !important;
+  right: 8px !important;
+  bottom: 8px !important;
+  padding: unset !important;
+  max-width: calc(100% - 16px) !important;
+  height: 36px !important;
+  border: 1px solid !important;
+  border-color: var(--ic_ve_color_white8_opacity) !important;
+  border-radius: 8px !important;
+  background-color: var(--ic_ve_color_white8) !important;
+  box-shadow: var(--ic_ve_shadow_4dp3) !important;
+  white-space: nowrap !important;
+}
+.tyin_package_quill_container>.ql-toolbar>.ql-formats {
+  display: flex !important;
+  margin-left: unset !important;
+  margin-right: unset !important;
+  padding-right: 12px !important;
+}
+.tyin_package_quill_container>.ql-toolbar>.ql-formats:first-child {
+  padding-left: 12px !important;
+}
+.tyin_package_quill_container>.ql-toolbar>.ql-formats>button {
+  padding: unset !important;
+  width: 18px !important;
+  height: 18px !important;
+}
+.tyin_package_quill_container>.ql-toolbar>.ql-formats>button:not(:last-child) {
+  margin-right: 6px !important;
+}
+.tyin_package_quill_container>.ql-toolbar>.ql-formats>button:not(.ql-active) {
+  opacity: 0.4 !important;
+}
+.tyin_package_quill_container>.ql-toolbar>.ql-formats>button .ql-fill {
+  fill: var(--ic_ve_color_black) !important;
+}
+.tyin_package_quill_container>.ql-toolbar>.ql-formats>button .ql-stroke {
+  stroke: var(--ic_ve_color_black) !important;
+}
+.tyin_package_quill_container>.ql-toolbar>.ql-formats>button.ql-active .ql-fill {
+  fill: var(--ic_ve_color_system_blue) !important;
+}
+.tyin_package_quill_container>.ql-toolbar>.ql-formats>button.ql-active .ql-stroke {
+  stroke: var(--ic_ve_color_system_blue) !important;
+}
+.tyin_package_quill_container>.ql-container {
+  display: flex !important;
+  justify-content: center !important;
+  max-height: 100% !important;
+  border: unset !important;
+  font-size: 14px !important;
+  font-family: inherit !important;
+}
+.tyin_package_quill_container>.ql-container,
+.tyin_package_quill_container>.ql-container::before,
+.tyin_package_quill_container>.ql-container::after,
+.tyin_package_quill_container>.ql-container *,
+.tyin_package_quill_container>.ql-container *::before,
+.tyin_package_quill_container>.ql-container *::after {
+  line-height: var(--ic_ve_font_lineHeight_text) !important;
+}
+.tyin_package_quill_container>.ql-container>.ql-editor {
+  flex: auto !important;
+  padding: 20px 20px 128px !important;
+  max-width: 800px !important;
+}
+.tyin_package_quill_container>.ql-container>.ql-editor::before {
+  content: "2021-05-13 08:50:06" !important;
+  display: block !important;
+  color: var(--ic_ve_color_black4_opacity) !important;
+  position: unset !important;
+  font-style: unset !important;
+  zoom: 0.618 !important;
+}
+.tyin_package_quill_container>.ql-container>.ql-editor::after {
+  content: "2021-05-13 09:24:37" !important;
+  display: block !important;
+  color: var(--ic_ve_color_black4_opacity) !important;
+  zoom: 0.618 !important;
+}
+.tyin_package_quill_container>.ql-container>.ql-editor u {
+  text-decoration-color: var(--ic_ve_color_system_orange_translucent) !important;
+  text-decoration-thickness: 2px !important;
+  border-bottom-color: var(--ic_ve_color_system_orange_translucent) !important;
+}
+.tyin_package_quill_container>.ql-container>.ql-editor s {
+  text-decoration-color: var(--ic_ve_color_system_red_translucent) !important;
+  text-decoration-thickness: 4px !important;
+}
+.tyin_package_quill_container>.ql-container>.ql-editor sub,
+.tyin_package_quill_container>.ql-container>.ql-editor sup {
+  margin: 0 2px !important;
+  background-color: var(--ic_ve_color_system_orange_translucent) !important;
+  zoom: 0.618 !important;
+}
+.tyin_package_quill_container>.ql-container>.ql-editor sub {
+  vertical-align: bottom !important;
+}
+.tyin_package_quill_container>.ql-container>.ql-editor sup {
+  vertical-align: top !important;
+}
+.tyin_package_quill_container>.ql-container>.ql-editor sub::before,
+.tyin_package_quill_container>.ql-container>.ql-editor sup::before,
+.tyin_package_quill_container>.ql-container>.ql-editor sub::after,
+.tyin_package_quill_container>.ql-container>.ql-editor sup::after {
+  content: "\00a0";
+}
+.tyin_package_quill_container>.ql-container>.ql-editor blockquote {
+  border-left-width: 3px !important;
+  border-left-color: var(--ic_ve_color_system_blue_translucent) !important;
+  color: var(--ic_ve_color_black4_opacity) !important;
+}
+.tyin_package_quill_container>.ql-container>.ql-editor pre {
+  border-radius: 4px !important;
+  font-size: 12px !important;
+}
+.tyin_package_quill_container>.ql-container>.ql-editor ol,
+.tyin_package_quill_container>.ql-container>.ql-editor ul {
+  padding-left: unset !important;
+}
+.tyin_package_quill_container>.ql-container>.ql-editor li.ql-indent-1:not(.ql-direction-rtl) {
+  padding-left: 3em !important;
+}
+.tyin_package_quill_container>.ql-container>.ql-tooltip:not(.ql-hidden) {
+  display: flex !important;
+  align-items: center !important;
+  left: unset !important;
+  right: 8px !important;
+  top: unset !important;
+  bottom: calc(36px + 8px*2) !important;
+  margin: unset !important;
+  padding: 4px 8px !important;
+  line-height: 100% !important;
+  border: 1px solid !important;
+  border-color: var(--ic_ve_color_black2_opacity) !important;
+  border-radius: 8px !important;
+  background-color: var(--ic_ve_color_white8) !important;
+  box-shadow: var(--ic_ve_shadow_4dp3) !important;
+  color: inherit !important;
+  white-space: nowrap !important;
+  transform: unset !important;
+}
+.tyin_package_quill_container>.ql-container>.ql-tooltip::before {
+  margin: unset !important;
+  line-height: unset !important;
+  color: var(--ic_ve_color_black4_opacity) !important;
+}
+.tyin_package_quill_container>.ql-container>.ql-tooltip::before,
+.tyin_package_quill_container>.ql-container>.ql-tooltip[data-mode="link"]::before {
+  content: "链接" !important;
+}
+.tyin_package_quill_container>.ql-container>.ql-tooltip[data-mode="video"]::before {
+  content: "视频" !important;
+}
+.tyin_package_quill_container>.ql-container>.ql-tooltip[data-mode="formula"]::before {
+  content: "公式" !important;
+}
+.tyin_package_quill_container>.ql-container>.ql-tooltip>* {
+  margin-left: 8px !important;
+}
+.tyin_package_quill_container>.ql-container>.ql-tooltip>input {
+  padding: 4px !important;
+  width: 128px !important;
+  height: unset !important;
+  border-color: var(--ic_ve_color_black2_opacity) !important;
+  border-radius: 6px !important;
+  background-color: var(--ic_ve_color_white4_opacity) !important;
+  font-size: unset !important;
+}
+.tyin_package_quill_container>.ql-container>.ql-tooltip>input:focus {
+  border-color: var(--ic_ve_color_system_blue_translucent) !important;
+}
+.tyin_package_quill_container>.ql-container>.ql-tooltip>input~a {
+  color: var(--ic_ve_color_system_blue_translucent) !important;
+}
+.tyin_package_quill_container>.ql-container>.ql-tooltip ::before,
+.tyin_package_quill_container>.ql-container>.ql-tooltip ::after {
+  margin: unset !important;
+  padding: unset !important;
+  border: unset !important;
+}
+.tyin_package_quill_container>.ql-container>.ql-tooltip>.ql-action::after {
+  content: "编辑" !important;
+}
+.tyin_package_quill_container>.ql-container>.ql-tooltip.ql-editing>.ql-action::after {
+  content: "确定" !important;
+}
+.tyin_package_quill_container>.ql-container>.ql-tooltip>.ql-remove::before {
+  content: "消除" !important;
+}
+.tyin_package_quill_container>.ql-container>.ql-tooltip>.ql-preview {
+  max-width: 128px !important;
+  text-decoration: underline !important;
+} */
