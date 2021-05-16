@@ -507,6 +507,9 @@
             event.preventDefault();
           }
         },{passive:false});
+        addEventListener('scroll',()=>{
+          this._viewportScrollToZero_();
+        });
         visualViewport.addEventListener('scroll',()=>{
           this._viewportScrollToZero_();
         });

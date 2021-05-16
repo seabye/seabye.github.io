@@ -519,7 +519,9 @@
       font-weight: normal;
       font-size: 16px;
       font-family: var(--ic_ve_font_family_sansSerif);
+      word-break: break-all;
       overflow-wrap: break-word;
+      white-space: pre-wrap;
       -webkit-user-select: none;
       user-select: none;
       text-rendering: optimizeLegibility;

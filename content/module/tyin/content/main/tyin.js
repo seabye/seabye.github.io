@@ -2099,8 +2099,9 @@
       /*🟢*/async package_quill_create(insertElement,insertPosition,mode=[
           ['bold','italic','underline','strike'],
           [{'script':'super'},{'script':'sub'}],
-          [{'header':'1'},{'header':'2'},'blockquote','code-block'],
+          [{'header':1},{'header':2},'blockquote','code-block'],
           [{'list':'ordered'},{'list':'bullet'},{'indent':'-1'},{'indent':'+1'}],
+          [{'direction':'rtl'}],
           ['link','image','video','formula'],
           ['clean']
         ],placeholder='...',content='',readOnly=false,width,height){
@@ -2136,13 +2137,14 @@
         };
         if(mode==='full'){
           option.modules.toolbar=[
-            [{'font':[]},{'size':[]}],
+            [{'font':[]},{'size':['small',false,'large','huge']}],
             ['bold','italic','underline','strike'],
-            ['color','background'],
+            [{'color':[]},{'background':[]}],
             [{'script':'sub'},{'script':'super'}],
-            [{'header':'1'},{'header':'2'},'blockquote','code-block'],
+            [{'header':[1,2,3,4,5,6,false]}],
+            [{'header':1},{'header':2},'blockquote','code-block'],
             [{'list':'ordered'},{'list':'bullet'},{'indent':'-1'},{'indent':'+1'}],
-            [{'direction':'rtl'},'align'],
+            [{'direction':'rtl'},{'align':[]}],
             ['link','image','video','formula'],
             ['clean']
           ];

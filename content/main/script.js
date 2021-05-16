@@ -216,9 +216,14 @@
         // globalThis.tyin_quill=await tyin.package_quill_create(document.body,undefined,undefined,'some',undefined,false,'100%','100%');
         // globalThis.tyin_quill=await tyin.package_quill_create(document.body,undefined,[
         //   ['bold','italic','underline','strike'],
-        //   ['link','image']
+        //   [{'script':'sub'},{'script':'super'}],
+        //   [{'header':1},{'header':2},'blockquote','code-block'],
+        //   [{'list':'ordered'},{'list':'bullet'},{'indent':'-1'},{'indent':'+1'}],
+        //   [{'direction':'rtl'}],
+        //   ['link','image','video','formula'],
+        //   ['clean']
         // ],'some',undefined,false,'100%','100%');
-        tyin_quill.tyin_package_quill.setContents(JSON.parse("{\"ops\":[{\"attributes\":{\"link\":\"https://seabye.com\"},\"insert\":\"https://seabye.com\"},{\"insert\":\"\\n\\n\\n\\n\\n\\n\\n\\n\\n\\na\\n\\n\\n\\na\\n\\na\\n\\na\\na\\n\\na\\na\\n\\na\\n\\na\\n\\n\\n\\n\\n\\na\\n\\n\\n\\n\\na\\n\\n\\na\\n\\na\\na\\na\\na\\na\\n\\na\\n\\n\\na\\n\"}]}"));
+        tyin_quill.tyin_package_quill.setContents(JSON.parse("{\"ops\":[{\"attributes\":{\"link\":\"//seabye.com\"},\"insert\":\"seabye@live.com\"},{\"insert\":\"\\n\\nJSON.stringify(tyin_quill.tyin_package_quill.getContents())\"},{\"attributes\":{\"code-block\":true},\"insert\":\"\\n\"},{\"insert\":\"\\n\"},{\"insert\":{\"formula\":\"e=mc^2\"}},{\"insert\":\"\\n\\n\\n\"}]}"));
         console.log('++++ tyin, package_quill_create, JSON.stringify(tyin_quill.tyin_package_quill.getContents()):',JSON.stringify(tyin_quill.tyin_package_quill.getContents()));
       }
     },'_');

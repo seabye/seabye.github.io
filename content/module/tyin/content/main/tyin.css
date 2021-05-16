@@ -78,7 +78,7 @@
           overflow: hidden auto;
           padding: 20px;
           width: 100%;
-          white-space: break-spaces;
+          white-space: pre-wrap;
         }
         .tyin_miniEditor_container:only-child {
           height: 100%;
