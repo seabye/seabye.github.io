@@ -526,28 +526,15 @@
         });
       },
       /*🟢*/input_clickBottom(){
-        let downY=null;
-        let move=null;
         addEventListener('pointerdown',(event)=>{
-          downY=event.y;
-          move=false;
-        });
-        addEventListener('pointermove',(event)=>{
-          if(event.y<=downY+3&&event.y>=downY-3){
-            move=true;
-          }
-        });
-        addEventListener('pointerup',(event)=>{
-          if(!move){
-            const target=this._isKeyboardInputArea_(event.target);
-            if(target){
-              setTimeout(()=>{
-                const distance=target.getBoundingClientRect().bottom-event.y;
-                if(distance<64){
-                  target.scroll({behavior:'smooth',top:target.scrollTop+64-distance,left:0});
-                }
-              },350/4);
-            }
+          const target=this._isKeyboardInputArea_(event.target);
+          if(target){
+            setTimeout(()=>{
+              const distance=target.getBoundingClientRect().bottom-event.y;
+              if(distance<64){
+                target.scroll({behavior:'smooth',top:target.scrollTop+64-distance,left:0});
+              }
+            },350/4);
           }
         });
       },
