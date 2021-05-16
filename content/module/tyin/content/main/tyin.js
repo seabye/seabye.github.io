@@ -2106,12 +2106,13 @@
           ['clean']
         ],placeholder='...',content='',readOnly=false,width,height){
         if(!('Quill'in globalThis)){
+          this.elementCreate('link',{rel:'stylesheet',href:`${import.meta.url.replace('/main/tyin.js','/main/tyin_package_quill_tyin.css')}`,crossorigin:''},document.head);
           this.elementCreate('link',{rel:'stylesheet',href:`${import.meta.url.replace('/main/tyin.js','/package/kaTeX@0.13.3/katex.min.css')}`,crossorigin:''},document.head);
           this.elementCreate('script',{async:'',src:`${import.meta.url.replace('/main/tyin.js','/package/kaTeX@0.13.3/katex.min.js')}`},document.head);
+          // this.elementCreate('script',{async:'',src:`${import.meta.url.replace('/main/tyin.js','/package/kaTeX@0.13.3/contrib/auto-render.min.js')}`},document.head);
           this.elementCreate('link',{rel:'stylesheet',href:`${import.meta.url.replace('/main/tyin.js','/package/highlight@10.7.2/build/styles/monokai-sublime.min.css')}`,crossorigin:''},document.head);
           this.elementCreate('script',{async:'module',src:`${import.meta.url.replace('/main/tyin.js','/package/highlight@10.7.2/build/highlight.min.js')}`},document.head);
           // this.elementCreate('link',{rel:'stylesheet',href:`${import.meta.url.replace('/main/tyin.js','/package/quill@1.3.7/quill.snow.css')}`,crossorigin:''},document.head);
-          this.elementCreate('link',{rel:'stylesheet',href:`${import.meta.url.replace('/main/tyin.js','/main/tyin_package_quill_tyin.css')}`,crossorigin:''},document.head);
           // this.elementCreate('link',{rel:'stylesheet',href:`${import.meta.url.replace('/main/tyin.js','/package/quill@1.3.7/quill.bubble.css')}`,crossorigin:''},document.head);
           await this.loop(()=>{
             if('hljs'in globalThis){

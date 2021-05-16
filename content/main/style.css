@@ -20,7 +20,8 @@
     color: #53B1DE;
   }
   .seabye a.ic_active_0 {
-    border-bottom: 2px solid #E88448;
+    border-bottom: 2px solid;
+    border-bottom-color: #E88448;
   }
 /* #debug */
 /* #after */

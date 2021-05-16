@@ -6,7 +6,7 @@
 /* #build */
   /*  */
   .tyin_package_quill_container,
-  .tyin_package_quill_container *:not(pre):not(pre *) {
+  .tyin_package_quill_container * {
     /*  */
     all: unset;
     /*  */
@@ -25,7 +25,7 @@
     top: 0;
     width: 100%;
     height: 100%;
-    font-size: 14px;
+    font-size: 16px;
     background-color: var(--ic_ve_color_background);
   }
     /*  */
@@ -37,20 +37,18 @@
       overflow: auto hidden;
       right: 8px;
       bottom: 8px;
-      max-width: calc(100% - 8px*2);
-      height: 36px;
-      border: 1px solid;
-      border-color: var(--ic_ve_color_highlight);
+      max-width: calc(61.8% - 8px*2);
+      height: 40px;
       border-radius: 8px;
       background-color: var(--ic_ve_color_foreground);
-      box-shadow: var(--ic_ve_shadow_2dp);
+      box-shadow: var(--ic_ve_shadow_2dp3);
     }
     /* ^child */
     .tyin_package_quill_container>.ql-toolbar::after {
       content: "\00a0";
-      width: 2px;
-      min-width: 2px;
-      max-width: 2px;
+      width: 12px;
+      min-width: 12px;
+      max-width: 12px;
       height: 1px;
       font-size: 0px;
     }
@@ -62,10 +60,9 @@
       .tyin_package_quill_container>.ql-toolbar>.ql-formats {
         display: flex;
         align-items: center;
-        margin-left: 2px;
+        margin-left: 12px;
         height: calc(100% - 4px);
         border-radius: 6px;
-        background-color: var(--ic_ve_color_background);
       }
       /* ^child */
       .tyin_package_quill_container>.ql-toolbar>.ql-formats::after {
@@ -92,7 +89,7 @@
         }
         .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ic_active_0 {
           color: var(--ic_ve_color_system_blue_translucent);
-          background-color: var(--ic_ve_color_foreground);
+          background-color: var(--ic_ve_color_highlight);
         }
         .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ic_active_0.ic_active_outer {
           color: var(--ic_ve_color_system_red_translucent);
@@ -216,12 +213,12 @@
         user-select: auto;
       }
       /* ^child */
-      .tyin_package_quill_container>.ql-container>.ql-editor *,
-      .tyin_package_quill_container>.ql-container>.ql-clipboard * {
+      .tyin_package_quill_container>.ql-container>.ql-editor :not(.katex *),
+      .tyin_package_quill_container>.ql-container>.ql-clipboard :not(.katex *) {
         display: block;
       }
-      .tyin_package_quill_container>.ql-container>.ql-editor span,
-      .tyin_package_quill_container>.ql-container>.ql-clipboard span,
+      .tyin_package_quill_container>.ql-container>.ql-editor span:not(.katex *),
+      .tyin_package_quill_container>.ql-container>.ql-clipboard span:not(.katex *),
       .tyin_package_quill_container>.ql-container>.ql-editor sub,
       .tyin_package_quill_container>.ql-container>.ql-clipboard sub,
       .tyin_package_quill_container>.ql-container>.ql-editor sup,
@@ -254,6 +251,10 @@
         padding-bottom: 128px;
       }
         /*  */
+        .katex {
+          white-space: nowrap;
+          overflow: auto hidden;
+        }
         .tyin_package_quill_container>.ql-container>.ql-editor iframe {
           padding: 4px;
           width: 640px;
@@ -267,6 +268,9 @@
           border: 1px dashed;
           border-color: var(--ic_ve_color_highlight);
           border-radius: 4px;
+        }
+        .tyin_package_quill_container>.ql-container>.ql-editor .ql-formula {
+          color: #009688;
         }
         .tyin_package_quill_container>.ql-container>.ql-editor p {
 
@@ -310,11 +314,9 @@
         left: unset !important;
         right: 8px;
         top: unset !important;
-        bottom: 52px;
+        bottom: 56px;
         width: 256px;
         height: 32px;
-        border: 1px solid;
-        border-color: var(--ic_ve_color_highlight);
         border-radius: 8px;
         background-color: var(--ic_ve_color_foreground);
         box-shadow: var(--ic_ve_shadow_2dp3);

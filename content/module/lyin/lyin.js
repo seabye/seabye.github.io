@@ -529,7 +529,7 @@
         });
       },
       /*🟢*/input_clickBottom(){
-        addEventListener('pointerdown',(event)=>{
+        addEventListener('pointerup',(event)=>{
           const target=this._isKeyboardInputArea_(event.target);
           if(target){
             setTimeout(()=>{
