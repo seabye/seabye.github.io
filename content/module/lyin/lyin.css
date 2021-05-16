@@ -444,6 +444,7 @@
   /* package */
     /* fontAwesome */
     .fas {
+      font-style: unset;
       pointer-events: none;
     }
   /* scroll */
@@ -484,14 +485,11 @@
     ::before,
     ::after {
       box-sizing: border-box;
+      max-width: 100%;
       line-height: var(--ic_ve_font_lineHeight_initial);
-      /* vertical-align: middle; */
       outline: unset;
       touch-action: pan-x pan-y;
       overscroll-behavior: contain;
-    }
-    * {
-      max-width: 100%;
     }
     /* root */
     html,
@@ -546,7 +544,6 @@
     }
     /* text */
     a {
-      /* vertical-align: unset; */
       color: currentColor;
       text-decoration: unset;
       cursor: default;
@@ -558,17 +555,15 @@
     /* form */
     input,
     textarea {
-      /* / */
+      /*  */
       all: unset;
-      /* _ */
+      /*  */
       box-sizing: border-box;
-      line-height: normal;
-      /* vertical-align: middle; */
+      max-width: 100%;
+      line-height: var(--ic_ve_font_lineHeight_text);
       outline: unset;
       touch-action: pan-x pan-y;
       overscroll-behavior: contain;
-      /* \ */
-      max-width: 100%;
     }
     input,
     textarea,
