@@ -140,6 +140,16 @@
         }
       },
     // 💠 1 boot
+      /*🟢*/_removeEmpty_(element,wait=350/2){
+        setTimeout(()=>{
+          if(!element.style[0]){
+            element.removeAttribute('style');
+          }
+          if(!element.getAttribute('class')){
+            element.removeAttribute('class');
+          }
+        },wait);
+      },
       /*🟢*/boot_backgroundColor(){
         document.documentElement.style.setProperty('background-color',`${matchMedia('(prefers-color-scheme:dark)').matches?this.dataset.config.startBackgroundColor_dark?this.dataset.config.startBackgroundColor_dark:'#000000':this.dataset.config.startBackgroundColor_light?this.dataset.config.startBackgroundColor_light:'#FFFFFF'}`);
         addEventListener('load',()=>{
@@ -147,11 +157,7 @@
             if(document.documentElement.style.getPropertyValue('background-color')){
               setTimeout(()=>{
                 document.documentElement.style.removeProperty('background-color');
-                setTimeout(()=>{
-                  if(!document.documentElement.style[0]){
-                    document.documentElement.removeAttribute('style');
-                  }
-                },350/2);
+                this._removeEmpty_(document.documentElement);
               },350/2);
             }else{
               setTimeout(loop,1000/24);
@@ -174,11 +180,7 @@
             if(document.body.style.getPropertyValue('opacity')){
               setTimeout(()=>{
                 document.body.style.removeProperty('opacity');
-                setTimeout(()=>{
-                  if(!document.body.style[0]){
-                    document.body.removeAttribute('style');
-                  }
-                },350/2);
+                this._removeEmpty_(document.body);
               },350/2);
             }else{
               setTimeout(loop,1000/24);
@@ -291,11 +293,7 @@
               document.body.style.setProperty('margin','1px');
               setTimeout(()=>{
                 document.body.style.removeProperty('margin');
-                setTimeout(()=>{
-                  if(!document.body.style[0]){
-                    document.body.removeAttribute('style');
-                  }
-                },350/2);
+                this._removeEmpty_(document.body);
                 this._viewportScrollToZero_();
               },350/2);
             },350/2);
@@ -504,19 +502,23 @@
             document.activeElement.blur();
           }
         });
+        addEventListener('touchmove',(event)=>{
+          if(event.target===document.documentElement){
+            event.preventDefault();
+          }
+        },{passive:false});
+        visualViewport.addEventListener('scroll',()=>{
+          this._viewportScrollToZero_();
+        });
         visualViewport.addEventListener('resize',()=>{
           this._viewportScrollToZero_();
           if(document.documentElement.clientHeight!==visualViewport.height){
-            document.documentElement.classList.add('ic_nr_viewportInputState');
+            document.documentElement.classList.add('ic_nr_inputState');
             document.documentElement.style.setProperty('height',`${visualViewport.height}px`);
           }else{
-            document.documentElement.classList.remove('ic_nr_viewportInputState');
+            document.documentElement.classList.remove('ic_nr_inputState');
             document.documentElement.style.removeProperty('height');
-            setTimeout(()=>{
-              if(!document.documentElement.style[0]){
-                document.documentElement.removeAttribute('style');
-              }
-            },350/2);
+            this._removeEmpty_(document.documentElement);
           }
           if(visualViewport.offsetTop){
             document.activeElement.scroll({behavior:'smooth',top:document.activeElement.scrollTop+visualViewport.offsetTop+64,left:0});
@@ -524,15 +526,28 @@
         });
       },
       /*🟢*/input_clickBottom(){
+        let downY=null;
+        let move=null;
+        addEventListener('pointerdown',(event)=>{
+          downY=event.y;
+          move=false;
+        });
+        addEventListener('pointermove',(event)=>{
+          if(event.y<=downY+3&&event.y>=downY-3){
+            move=true;
+          }
+        });
         addEventListener('pointerup',(event)=>{
-          const target=this._isKeyboardInputArea_(event.target);
-          if(target){
-            setTimeout(()=>{
-              const distance=target.getBoundingClientRect().bottom-event.y;
-              if(distance<64){
-                target.scroll({behavior:'smooth',top:target.scrollTop+64-distance,left:0});
-              }
-            },350/4);
+          if(!move){
+            const target=this._isKeyboardInputArea_(event.target);
+            if(target){
+              setTimeout(()=>{
+                const distance=target.getBoundingClientRect().bottom-event.y;
+                if(distance<64){
+                  target.scroll({behavior:'smooth',top:target.scrollTop+64-distance,left:0});
+                }
+              },350/4);
+            }
           }
         });
       },
@@ -588,6 +603,8 @@
                     if(event.changedTouches[0].screenY<start_y){
                       removeEventListener('touchmove',preventDefault);
                       scrollDirection=null;
+                    }else{
+                      document.documentElement.classList.add('ic_nr_partialScrollEndpointOuter');
                     }
                   }
                   break;
@@ -596,6 +613,8 @@
                     if(event.changedTouches[0].screenY>start_y){
                       removeEventListener('touchmove',preventDefault);
                       scrollDirection=null;
+                    }else{
+                      document.documentElement.classList.add('ic_nr_partialScrollEndpointOuter');
                     }
                   }
                   break;
@@ -617,6 +636,8 @@
             removeEventListener('touchmove',preventDefault);
             addEventListener('touchmove',preventDefault,{passive:false});
             start_y=start_x=scrollDirection=null;
+            document.documentElement.classList.remove('ic_nr_partialScrollEndpointOuter');
+            this._removeEmpty_(document.documentElement);
           });
         }
       }
