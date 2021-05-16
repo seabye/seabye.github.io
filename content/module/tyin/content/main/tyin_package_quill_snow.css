@@ -7,8 +7,15 @@
   /*  */
   .tyin_package_quill_container,
   .tyin_package_quill_container :not([class^="hljs"]) {
+    /*  */
     all: unset;
+    /*  */
+    box-sizing: border-box;
     max-width: 100%;
+    line-height: var(--ic_ve_font_lineHeight_text);
+    outline: unset;
+    touch-action: pan-x pan-y;
+    overscroll-behavior: contain;
   }
   .tyin_package_quill_container {
     position: relative;
@@ -65,6 +72,9 @@
         .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ic_active_0 {
           color: var(--ic_ve_color_system_blue_translucent);
           background-color: var(--ic_ve_color_highlight);
+        }
+        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ic_active_0.ic_active_outer {
+          color: var(--ic_ve_color_system_red_translucent);
         }
           /* */
           .tyin_package_quill_container>.ql-toolbar>.ql-formats>button>svg {

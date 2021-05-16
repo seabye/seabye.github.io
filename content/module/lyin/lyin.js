@@ -548,6 +548,7 @@
           let start_y=null;
           let start_x=null;
           let scrollDirection=null;
+          let _element_=null;
           addEventListener('touchstart',(event)=>{
             const loop=(target)=>{
               if(getComputedStyle(target).overflowY.match(/auto|scroll/i)||getComputedStyle(target).overflowX.match(/auto|scroll/i)){
@@ -556,10 +557,12 @@
                     if(target.scrollTop<=0){
                       start_y=event.changedTouches[0].screenY;
                       scrollDirection='top';
+                      _element_=target;
                     }else{
                       if(target.scrollTop>=target.scrollHeight-target.offsetHeight){
                         start_y=event.changedTouches[0].screenY;
                         scrollDirection='bottom';
+                        _element_=target;
                       }else{
                         removeEventListener('touchmove',preventDefault);
                       }
@@ -591,7 +594,9 @@
                       removeEventListener('touchmove',preventDefault);
                       scrollDirection=null;
                     }else{
-                      document.documentElement.classList.add('ic_nr_partialScrollEndpointOuter');
+                      if(_element_.scrollTop===0){
+                        document.documentElement.classList.add('ic_nr_partialScrollEndpointOuter');
+                      }
                     }
                   }
                   break;
@@ -601,7 +606,9 @@
                       removeEventListener('touchmove',preventDefault);
                       scrollDirection=null;
                     }else{
-                      document.documentElement.classList.add('ic_nr_partialScrollEndpointOuter');
+                      if(_element_.scrollTop===_element_.scrollHeight-_element_.offsetHeight){
+                        document.documentElement.classList.add('ic_nr_partialScrollEndpointOuter');
+                      }
                     }
                   }
                   break;
