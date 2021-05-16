@@ -198,6 +198,10 @@
         },{once:true});
       },
     // 💠 2 write
+      /*🟢*/_viewportScrollToZero_(){
+        scroll({behavior:'smooth',top:0,left:0});
+        document.documentElement.scrollIntoView({behavior:'smooth',block:'start',inline:'start'});
+      },
       /*🟢*/serviceWorker(){
         if(this.dataset.config.serviceWorker&&'serviceWorker'in navigator){
           navigator.serviceWorker.register(this.dataset.config.serviceWorker,{scope:'/'});
@@ -292,8 +296,7 @@
                     document.body.removeAttribute('style');
                   }
                 },350/2);
-                scroll({behavior:'smooth',top:0,left:0});
-                document.documentElement.scrollIntoView({behavior:'smooth',block:'start',inline:'start'});
+                this._viewportScrollToZero_();
               },350/2);
             },350/2);
           }
@@ -496,43 +499,27 @@
       /*🔴*/no_touchBack(){},
       /*🔴*/no_buttonBack(){},
       /*🟢*/input_inputState(){
-        addEventListener('scroll',()=>{
-          if(document.documentElement.scrollTop<0||document.documentElement.scrollTop>document.documentElement.clientHeight-visualViewport.height){
-            document.documentElement.classList.add('ic_nr_inputStatescrollEndpointOuter');
-            let plus=0;
-            if(document.documentElement.scrollTop<0){
-              plus=-document.documentElement.scrollTop/6;
-            }else{
-              plus=(document.documentElement.scrollTop-(document.documentElement.clientHeight-visualViewport.height))/6;
-            }
-            document.documentElement.style.removeProperty('background-color');
-            const currentColor=getComputedStyle(document.documentElement).backgroundColor.replace(/rgb\((\d+)\, (\d+)\, (\d+)\)/,'$1,$2,$3').split(',');
-            const isDark=matchMedia('(prefers-color-scheme:dark)').matches;
-            document.documentElement.style.setProperty('background-color',`rgb(
-              ${isDark?parseInt(currentColor[0])+plus:parseInt(currentColor[0])-plus},
-              ${isDark?parseInt(currentColor[1])+plus:parseInt(currentColor[1])-plus},
-              ${isDark?parseInt(currentColor[2])+plus:parseInt(currentColor[2])-plus}
-            )`);
+        addEventListener('pointerup',(event)=>{
+          if(document.activeElement.localName.match(/input|textarea/)&&!this._isKeyboardInputArea_(event.target)){
+            document.activeElement.blur();
+          }
+        });
+        visualViewport.addEventListener('resize',()=>{
+          this._viewportScrollToZero_();
+          if(document.documentElement.clientHeight!==visualViewport.height){
+            document.documentElement.classList.add('ic_nr_viewportInputState');
+            document.documentElement.style.setProperty('height',`${visualViewport.height}px`);
           }else{
-            document.documentElement.classList.remove('ic_nr_inputStatescrollEndpointOuter');
-            document.documentElement.style.removeProperty('background-color');
+            document.documentElement.classList.remove('ic_nr_viewportInputState');
+            document.documentElement.style.removeProperty('height');
             setTimeout(()=>{
               if(!document.documentElement.style[0]){
                 document.documentElement.removeAttribute('style');
               }
             },350/2);
           }
-        });
-        visualViewport.addEventListener('resize',()=>{
-          if(document.documentElement.clientHeight!==visualViewport.height){
-            document.documentElement.classList.add('ic_nr_inputStateViewScale');
-          }else{
-            document.documentElement.classList.remove('ic_nr_inputStateViewScale');
-          }
-        });
-        addEventListener('pointerup',(event)=>{
-          if(!this._isKeyboardInputArea_(event.target)){
-            document.activeElement.blur();
+          if(visualViewport.offsetTop){
+            document.activeElement.scroll({behavior:'smooth',top:document.activeElement.scrollTop+visualViewport.offsetTop+64,left:0});
           }
         });
       },

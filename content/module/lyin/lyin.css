@@ -530,23 +530,9 @@
       -webkit-tap-highlight-color: rgba(0,0,0,0);
       -webkit-touch-callout: none;
       cursor: default;
-      border-radius: unset;
-      box-shadow: 0 0 0 1px var(--ic_ve_color_black_transparent),0 0 0 3px var(--ic_ve_color_black_transparent);
-      transform: unset;
-      transform-origin: center;
-      transition:
-        border-width 350ms var(--ic_ve_cubicBezier_ease),
-        border-radius 350ms var(--ic_ve_cubicBezier_ease),
-        box-shadow 350ms var(--ic_ve_cubicBezier_ease),
-        transform 350ms var(--ic_ve_cubicBezier_ease)
-      ;
     }
-    html.ic_nr_inputStateViewScale,
-    html.ic_nr_inputStatescrollEndpointOuter {
-      border: unset;
-      border-radius: 1px;
-      box-shadow: 0 0 0 1px var(--ic_ve_color_white),0 0 0 3px var(--ic_ve_color_black2_opacity);
-      transform: scale(calc(1/1.15));
+    html.ic_nr_viewportInputState {
+      border-bottom: unset;
     }
     body {
       display: flex;
