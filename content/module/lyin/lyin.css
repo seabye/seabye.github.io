@@ -287,7 +287,9 @@
   /* font */
     /* color */
     html {
-      --ic_ve_font_color_default: var(--ic_ve_color_black8_opacity);
+      --ic_ve_font_color_auto: var(--ic_ve_color_black8_opacity);
+      --ic_ve_font_color_black: rgba(0,0,0,0.8);
+      --ic_ve_font_color_white: rgba(255,255,255,0.8);
     }
     /* lineHeight */
     html {
@@ -521,7 +523,7 @@
       border-style: solid;
       border-color: var(--ic_ve_color_white);
       background-color: var(--ic_ve_color_white);
-      color: var(--ic_ve_font_color_default);
+      color: var(--ic_ve_font_color_auto);
       font-weight: normal;
       font-size: 16px;
       font-family: var(--ic_ve_font_family_sansSerif);

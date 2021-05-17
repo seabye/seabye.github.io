@@ -265,7 +265,7 @@
           /*  */
           .tyin_package_quill_container>.ql-container>.ql-editor sub {
             display: inline-block !important;
-            color: var(--ic_ve_font_color_default);
+            color: var(--ic_ve_font_color_white);
             background-color: var(--ic_ve_color_system_orange_translucent);
             vertical-align: bottom;
           }
@@ -287,7 +287,7 @@
           /*  */
           .tyin_package_quill_container>.ql-container>.ql-editor sup {
             display: inline-block !important;
-            color: var(--ic_ve_font_color_default);
+            color: var(--ic_ve_font_color_auto);
             background-color: var(--ic_ve_color_system_orange_translucent);
             vertical-align: top;
           }
@@ -364,7 +364,7 @@
           .tyin_package_quill_container>.ql-container>.ql-editor pre {
             padding: 1em;
             font-size: 12px;
-            color: var(--ic_ve_font_color_default);
+            color: var(--ic_ve_font_color_auto);
             background-color: #000000BF;
           }
         .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-list[value="ordered"]::before {
