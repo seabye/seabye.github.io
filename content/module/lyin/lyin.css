@@ -285,6 +285,10 @@
     --ic_ve_shadow_24dp3: 0 24px 38px 3px rgba(0,0,0,0.05),0 9px 46px 8px rgba(0,0,0,0.04),0 11px 15px -7px rgba(0,0,0,0.13);
   }
   /* font */
+    /* color */
+    html {
+      --ic_ve_font_color_default: var(--ic_ve_color_black8_opacity);
+    }
     /* lineHeight */
     html {
       --ic_ve_font_lineHeight_initial: 100%;
@@ -517,12 +521,13 @@
       border-style: solid;
       border-color: var(--ic_ve_color_white);
       background-color: var(--ic_ve_color_white);
-      color: var(--ic_ve_color_black8_opacity);
+      color: var(--ic_ve_font_color_default);
       font-weight: normal;
       font-size: 16px;
       font-family: var(--ic_ve_font_family_sansSerif);
       word-break: break-all;
       overflow-wrap: break-word;
+      tab-size: 8;
       -webkit-user-select: none;
       user-select: none;
       text-rendering: optimizeLegibility;
@@ -575,9 +580,9 @@
     /* form */
     input,
     textarea {
-      /*  */
+      /* _ */
       all: unset;
-      /*  */
+      /* _ */
       box-sizing: border-box;
       max-width: 100%;
       line-height: var(--ic_ve_font_lineHeight_text);

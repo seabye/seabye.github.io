@@ -237,6 +237,9 @@
         }else if(userAgent.match(/Edg/i)&&!userAgent.match(/EdgiOS/i)){
           cls.add('ic_nr_browser_edge');
         }
+        if(document.documentElement.classList.contains('ic_nr_browser_chrome')||document.documentElement.classList.contains('ic_nr_browser_edge')){
+          cls.add('ic_nr_browser_chromium');
+        }
         if(userAgent.match(/iPhone|iPad|Android|Mobile/i)){
           cls.add('ic_nr_platform_mobile');
         }
