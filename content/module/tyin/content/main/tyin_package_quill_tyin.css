@@ -45,7 +45,6 @@
     height: 100%;
     font-size: 14px;
     background-color: var(--ic_ve_color_gray_white);
-    cursor: auto;
   }
     /*  */
     .tyin_package_quill_container>.ql-toolbar {
@@ -126,14 +125,15 @@
       display: block;
     }
       /*  */
-      .tyin_package_quill_container>.ql-container>.ql-editor,
-      .tyin_package_quill_container>.ql-container>.ql-clipboard {
+      .tyin_package_quill_container>.ql-container>.ql-editor[contenteditable="true"],
+      .tyin_package_quill_container>.ql-container>.ql-clipboard[contenteditable="true"] {
         -webkit-nbsp-mode: space;
         nbsp-mode: space;
         -webkit-user-modify: read-write;
         user-modify: read-write;
         -webkit-user-select: auto;
         user-select: auto;
+        cursor: auto;
         white-space: pre-wrap;
       }
         /*  */

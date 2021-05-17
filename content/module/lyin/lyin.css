@@ -594,6 +594,10 @@
     textarea,
     [contenteditable] {
       white-space: pre-wrap;
+    }
+    input,
+    textarea,
+    [contenteditable="true"] {
       -webkit-user-select: auto;
       user-select: auto;
       cursor: auto;

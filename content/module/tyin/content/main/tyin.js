@@ -2180,6 +2180,9 @@
             const inputDataset=result.lastElementChild.lastElementChild.children[1].dataset;
             inputDataset.link=location.origin;
             inputDataset.video='URL';
+            if(readOnly){
+              this.removeElement(result.firstElementChild);
+            }
             return result;
           }
           return false;
