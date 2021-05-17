@@ -257,6 +257,12 @@
   html {
     --ic_ve_background_cover: center/cover no-repeat;
   }
+  /* backdrop filter */
+  html {
+    --ic_ve_backdropFilter_blur_basic: blur(20px);
+    --ic_ve_backdropFilter_blur_low: saturate(61.8%)blur(20px);
+    --ic_ve_backdropFilter_blur_high: saturate(180%)blur(20px);
+  }
   /* shadow */
   html {
     --ic_ve_shadow_2dp_translucent: 0 2px 2px 0 rgba(0,0,0,0),0 1px 5px 0 rgba(0,0,0,0),0 3px 1px -2px rgba(0,0,0,0);

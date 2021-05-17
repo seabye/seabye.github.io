@@ -2097,10 +2097,10 @@
         return miniEditor;
       },
       /*🟢*/async package_quill_create(insertElement,insertPosition,mode=[
-          ['bold','italic','underline','strike'],
-          [{'script':'sub'},{'script':'super'}],
-          [{'header':1},{'header':3},{'header':5},'blockquote','code-block'],
           [{'list':'bullet'},{'indent':'-1'},{'indent':'+1'}],
+          [{'script':'super'},{'script':'sub'}],
+          ['bold','italic','underline','strike'],
+          [{'header':1},{'header':3},{'header':5},'blockquote','code-block'],
           ['link','image','video','formula'],
           ['clean']
         ],placeholder='...',content='',readOnly=false,width,height){

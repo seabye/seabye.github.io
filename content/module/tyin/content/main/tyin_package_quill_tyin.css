@@ -65,16 +65,18 @@
       height: 38px;
       border-radius: 8px;
       font-size: 14px;
-      background-color: var(--ic_ve_color_foreground);
+      background-color: var(--ic_ve_color_white6_opacity);
+      -webkit-backdrop-filter: var(--ic_ve_backdropFilter_blur_low);
+      backdrop-filter: var(--ic_ve_backdropFilter_blur_low);
       box-shadow: var(--ic_ve_shadow_2dp3);
     }
       /*  */
       .tyin_package_quill_container>.ql-toolbar::before,
       .tyin_package_quill_container>.ql-toolbar::after {
         content: "\00a0";
-        width: 2px;
-        min-width: 2px;
-        max-width: 2px;
+        width: 3px;
+        min-width: 3px;
+        max-width: 3px;
         height: 1px;
         font-size: 0px;
       }
@@ -87,17 +89,16 @@
         display: flex;
         align-items: center;
         height: calc(100% - 4px);
-        border-radius: 6px;
       }
       .tyin_package_quill_container>.ql-toolbar>.ql-formats:not(:first-child) {
-        margin-left: 12px;
+        margin-left: 2px;
       }
         /*  */
         .tyin_package_quill_container>.ql-toolbar>.ql-formats::after {
           content: "\00a0";
-          width: 2px;
-          min-width: 2px;
-          max-width: 2px;
+          width: 1px;
+          min-width: 1px;
+          max-width: 1px;
           height: 1px;
           font-size: 0px;
         }
@@ -106,21 +107,38 @@
           display: flex;
           justify-content: center;
           align-items: center;
-          margin-left: 2px;
+          margin-left: 1px;
           width: 24px;
           height: calc(100% - 4px);
-          border-radius: 4px;
           color: var(--ic_ve_color_black4_opacity);
+          background-color: var(--ic_ve_color_highlight);
+          transition:
+            color 0ms calc(1000ms/12) var(--ic_ve_cubicBezier_slowFast),
+            background-color 0ms calc(1000ms/12) var(--ic_ve_cubicBezier_slowFast),
+            transform calc(1000ms/12) 0ms var(--ic_ve_cubicBezier_slowFast)
+          ;
+        }
+        .tyin_package_quill_container>.ql-toolbar>.ql-formats>*:first-child {
+          border-top-left-radius: 4px;
+          border-bottom-left-radius: 4px;
+        }
+        .tyin_package_quill_container>.ql-toolbar>.ql-formats>*:last-child {
+          border-top-right-radius: 4px;
+          border-bottom-right-radius: 4px;
         }
         .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-active {
           color: var(--ic_ve_color_system_blue);
+          background-color: var(--ic_ve_color_opposite);
         }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ic_active_0 {
-          color: var(--ic_ve_color_system_blue_translucent);
+        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ic_active_0:not(.ql-active) {
+          color: var(--ic_ve_color_system_blue);
+          background-color: var(--ic_ve_color_opposite);
+          transform: scale(0.875);
+        }
+        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ic_active_0.ql-active {
+          color: var(--ic_ve_color_black4_opacity);
           background-color: var(--ic_ve_color_highlight);
-        }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ic_active_0.ic_active_outer {
-          color: var(--ic_ve_color_system_red_translucent);
+          transform: scale(0.875);
         }
           /* */
           .tyin_package_quill_container>.ql-toolbar>.ql-formats>*>svg {
@@ -384,10 +402,14 @@
           content: "􀋱";
         }
           /*  */
+          .tyin_package_quill_container>.ql-container>.ql-editor ol {
+            padding-left: 2em;
+          }
             /*  */
             .tyin_package_quill_container>.ql-container>.ql-editor ol>li::before {
               content: "-";
               display: inline-block;
+              margin-left: -2em;
               width: 2em;
               text-align: center;
               color: var(--ic_ve_color_black6_opacity);
@@ -398,10 +420,14 @@
           content: "􀣩";
         }
           /*  */
+          .tyin_package_quill_container>.ql-container>.ql-editor ul {
+            padding-left: 2em;
+          }
             /*  */
             .tyin_package_quill_container>.ql-container>.ql-editor ul>li::before {
               content: "★";
               display: inline-block;
+              margin-left: -2em;
               width: 2em;
               text-align: center;
               color: var(--ic_ve_color_black6_opacity);
