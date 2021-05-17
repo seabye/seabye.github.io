@@ -2099,9 +2099,8 @@
       /*🟢*/async package_quill_create(insertElement,insertPosition,mode=[
           ['bold','italic','underline','strike'],
           [{'script':'sub'},{'script':'super'}],
-          [{'header':1},{'header':2},{'header':3},{'header':4},{'header':5},{'header':6},'blockquote','code-block'],
-          [{'list':'ordered'},{'list':'bullet'},{'indent':'-1'},{'indent':'+1'}],
-          [{'direction':'rtl'}],
+          [{'header':1},{'header':3},{'header':5},'blockquote','code-block'],
+          [{'list':'bullet'},{'indent':'-1'},{'indent':'+1'}],
           ['link','image','video','formula'],
           ['clean']
         ],placeholder='...',content='',readOnly=false,width,height){
