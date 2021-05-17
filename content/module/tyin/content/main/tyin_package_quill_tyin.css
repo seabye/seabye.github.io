@@ -111,11 +111,11 @@
           width: 24px;
           height: calc(100% - 4px);
           color: var(--ic_ve_color_black4_opacity);
-          background-color: var(--ic_ve_color_highlight);
+          background-color: var(--ic_ve_color_black1_opacity);
           transition:
             color 0ms calc(1000ms/12) var(--ic_ve_cubicBezier_slowFast),
             background-color 0ms calc(1000ms/12) var(--ic_ve_cubicBezier_slowFast),
-            transform calc(1000ms/12) 0ms var(--ic_ve_cubicBezier_slowFast)
+            transform calc(1000ms/24) 0ms var(--ic_ve_cubicBezier_slowFast)
           ;
         }
         .tyin_package_quill_container>.ql-toolbar>.ql-formats>*:first-child {
@@ -128,16 +128,16 @@
         }
         .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-active {
           color: var(--ic_ve_color_system_blue);
-          background-color: var(--ic_ve_color_opposite);
+          background-color: var(--ic_ve_color_black2_opacity);
         }
         .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ic_active_0:not(.ql-active) {
           color: var(--ic_ve_color_system_blue);
-          background-color: var(--ic_ve_color_opposite);
+          background-color: var(--ic_ve_color_black2_opacity);
           transform: scale(0.875);
         }
         .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ic_active_0.ql-active {
           color: var(--ic_ve_color_black4_opacity);
-          background-color: var(--ic_ve_color_highlight);
+          background-color: var(--ic_ve_color_black1_opacity);
           transform: scale(0.875);
         }
           /* */
