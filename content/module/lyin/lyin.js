@@ -378,24 +378,26 @@
         }
       },
       /*🟢*/ic_ve_viewport_scale(){
-        let record=0;
-        visualViewport.addEventListener('resize',()=>{
-          if(visualViewport.scale!==record){
-            record=visualViewport.scale;
-            const loop=()=>{
-              if(document.styleSheets){
-                for(let key=0,length=document.styleSheets.length;key<length;key++){
-                  if(document.styleSheets[key].href&&document.styleSheets[key].href.match(/lyin\.css/i)){
-                    document.styleSheets[key].insertRule(`html { --ic_ve_viewport_scale: ${record}; }`,document.styleSheets[key].cssRules.length);
+        if('visualViewport'in globalThis){
+          let record=0;
+          visualViewport.addEventListener('resize',()=>{
+            if(visualViewport.scale!==record){
+              record=visualViewport.scale;
+              const loop=()=>{
+                if(document.styleSheets){
+                  for(let key=0,length=document.styleSheets.length;key<length;key++){
+                    if(document.styleSheets[key].href&&document.styleSheets[key].href.match(/lyin\.css/i)){
+                      document.styleSheets[key].insertRule(`html { --ic_ve_viewport_scale: ${record}; }`,document.styleSheets[key].cssRules.length);
+                    }
                   }
+                }else{
+                  loop();
                 }
-              }else{
-                loop();
-              }
-            };
-            loop();
-          }
-        });
+              };
+              loop();
+            }
+          });
+        }
       },
       /*🟢*/dotActive(){
         addEventListener('pointerdown',(event)=>{
@@ -508,9 +510,11 @@
         addEventListener('scroll',()=>{
           this._viewportScrollToZero_();
         });
-        visualViewport.addEventListener('scroll',()=>{
-          this._viewportScrollToZero_();
-        });
+        if('visualViewport'in globalThis){
+          visualViewport.addEventListener('scroll',()=>{
+            this._viewportScrollToZero_();
+          });
+        }
       },
       /*🟢*/input_inputState(){
         addEventListener('pointerup',(event)=>{
@@ -518,20 +522,22 @@
             document.activeElement.blur();
           }
         });
-        visualViewport.addEventListener('resize',()=>{
-          this._viewportScrollToZero_();
-          if(document.documentElement.clientHeight!==visualViewport.height){
-            document.documentElement.classList.add('ic_nr_inputState');
-            document.documentElement.style.setProperty('height',`${visualViewport.height}px`);
-          }else{
-            document.documentElement.classList.remove('ic_nr_inputState');
-            document.documentElement.style.removeProperty('height');
-            this._removeEmpty_(document.documentElement);
-          }
-          if(visualViewport.offsetTop){
-            document.activeElement.scroll({behavior:'smooth',top:document.activeElement.scrollTop+visualViewport.offsetTop+64,left:0});
-          }
-        });
+        if('visualViewport'in globalThis){
+          visualViewport.addEventListener('resize',()=>{
+            this._viewportScrollToZero_();
+            if(document.documentElement.clientHeight!==visualViewport.height){
+              document.documentElement.classList.add('ic_nr_inputState');
+              document.documentElement.style.setProperty('height',`${visualViewport.height}px`);
+            }else{
+              document.documentElement.classList.remove('ic_nr_inputState');
+              document.documentElement.style.removeProperty('height');
+              this._removeEmpty_(document.documentElement);
+            }
+            if(visualViewport.offsetTop){
+              document.activeElement.scroll({behavior:'smooth',top:document.activeElement.scrollTop+visualViewport.offsetTop+64,left:0});
+            }
+          });
+        }
       },
       /*🟢*/input_clickBottom(){
         addEventListener('pointerup',(event)=>{
