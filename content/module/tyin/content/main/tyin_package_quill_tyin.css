@@ -178,7 +178,7 @@
           color: var(--ic_ve_color_black4_opacity);
           pointer-events: none;
         }
-        .tyin_package_quill_container>.ql-container>.ql-editor::after {
+        html.ic_nr_browser_firefox .tyin_package_quill_container>.ql-container>.ql-editor::after {
           padding-bottom: 24px;
         }
         .tyin_package_quill_container>.ql-container>.ql-editor[contenteditable="true"]::after {
