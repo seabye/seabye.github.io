@@ -294,7 +294,8 @@
     /* lineHeight */
     html {
       --ic_ve_font_lineHeight_initial: 100%;
-      --ic_ve_font_lineHeight_text: 138.2%;
+      --ic_ve_font_lineHeight_basic: 138.2%;
+      --ic_ve_font_lineHeight_plus: 161.8%;
     }
     /* family */
     html {
@@ -571,7 +572,8 @@
     code,
     var,
     kbd {
-      font-family: var(--ic_ve_font_family_mono);
+      line-height: var(--ic_ve_font_lineHeight_basic);
+      font-family: var(--ic_ve_font_family_monospace);
       white-space: pre-wrap;
     }
     /* image */
@@ -587,7 +589,7 @@
       /* _ */
       box-sizing: border-box;
       max-width: 100%;
-      line-height: var(--ic_ve_font_lineHeight_text);
+      line-height: var(--ic_ve_font_lineHeight_basic);
       outline: unset;
       touch-action: pan-x pan-y;
       overscroll-behavior: contain;

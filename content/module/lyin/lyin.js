@@ -540,7 +540,7 @@
         }
       },
       /*🟢*/input_clickBottom(){
-        addEventListener('pointerup',(event)=>{
+        addEventListener('click',(event)=>{
           const target=this._isKeyboardInputArea_(event.target);
           if(target){
             setTimeout(()=>{

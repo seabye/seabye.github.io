@@ -23,7 +23,7 @@
       }
       /* ^child */
       .tyin_miniEditor * {
-        line-height: var(--ic_ve_font_lineHeight_text);
+        line-height: var(--ic_ve_font_lineHeight_basic);
       }
         /* tyin_miniEditor_toolbar */
         .tyin_miniEditor_toolbar {

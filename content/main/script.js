@@ -65,10 +65,10 @@
                 <a href="//pasi.cat">pasi.cat</a>
               </div>
               <div style="transform: rotateY(-15deg);">
-                <a onclick="tyin_test._quill_tyin(false)" style="color: #E2378A;">quill_tyin(edit)</a>
+                <a onclick="tyin_test._quill_tyin(false)" style="color: #E2378A; -webkit-mask: linear-gradient(-90deg,#000000,rgba(0,0,0,0)); mask: linear-gradient(-90deg,#000000,rgba(0,0,0,0));">quill_tyin(edit)</a>
               </div>
               <div style="transform: rotateY(-30deg);">
-                <a onclick="tyin_test._quill_tyin(true)" style="color: #E2378A;">quill_tyin(browse)</a>
+                <a onclick="tyin_test._quill_tyin(true)" style="color: #E2378A; -webkit-mask: linear-gradient(-90deg,#000000,rgba(0,0,0,0)); mask: linear-gradient(-90deg,#000000,rgba(0,0,0,0));">quill_tyin(browse)</a>
               </div>
             </div>
           </div>
