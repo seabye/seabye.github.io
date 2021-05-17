@@ -9,6 +9,10 @@
 // #variable
 // #block
 // #build
+  // font
+  tyin.loadFont('SF Pro Text_','/content/module/tyin/content/asset/font/SFPro/SF-Pro-Text-Regular_400.woff2',{weight:'normal'});
+  tyin.loadFont('New York_','/content/module/tyin/content/asset/font/newYork/NewYork.woff2');
+  // tyin.loadFont('PingFang SC_','/content/module/tyin/content/asset/font/pingFang/PingFang_2_400.woff2',{weight:'normal'});
   // element
   tyin.loop(()=>{
     for(const value of document.documentElement.children){
@@ -237,10 +241,4 @@
   tyin.debug(()=>{
     tyin.runObject(tyin_test,'_');
   });
-  // font
-  setTimeout(()=>{
-    tyin.loadFont('SF Pro Text_','/content/module/tyin/content/asset/font/SFPro/SF-Pro-Text-Regular_400.woff2',{weight:'normal'});
-    tyin.loadFont('New York_','/content/module/tyin/content/asset/font/newYork/NewYork.woff2');
-    // tyin.loadFont('PingFang SC_','/content/module/tyin/content/asset/font/pingFang/PingFang_2_400.woff2',{weight:'normal'});
-  },350);
 // #after
