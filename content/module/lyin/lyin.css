@@ -556,13 +556,21 @@
     }
     /* text */
     a {
-      color: currentColor;
+      color: var(--ic_ve_color_system_blue);
       text-decoration: unset;
       cursor: default;
+    }
+    pre,
+    code,
+    var,
+    kbd {
+      font-family: var(--ic_ve_font_family_mono);
+      white-space: pre-wrap;
     }
     /* image */
     img {
       vertical-align: bottom;
+      cursor: default;
     }
     /* form */
     input,
@@ -584,7 +592,6 @@
       -webkit-user-select: auto;
       user-select: auto;
       cursor: auto;
-      caret-color: currentColor;
     }
     input {
       text-overflow: ellipsis;
