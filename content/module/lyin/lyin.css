@@ -523,7 +523,6 @@
       font-family: var(--ic_ve_font_family_sansSerif);
       word-break: break-all;
       overflow-wrap: break-word;
-      white-space: pre-wrap;
       -webkit-user-select: none;
       user-select: none;
       text-rendering: optimizeLegibility;
@@ -532,9 +531,14 @@
       -webkit-tap-highlight-color: rgba(0,0,0,0);
       -webkit-touch-callout: none;
       cursor: default;
-      transition: background-color 350ms var(--ic_ve_cubicBezier_ease);
+      opacity: unset;
+      transition:
+        background-color 350ms var(--ic_ve_cubicBezier_ease),
+        opacity 350ms var(--ic_ve_cubicBezier_ease)
+      ;
     }
     html.ic_nr_partialScrollEndpointOuter {
+      opacity: 0.875;
       background-color: var(--ic_ve_color_system_red);
     }
     html.ic_nr_inputState {
@@ -576,6 +580,7 @@
     input,
     textarea,
     [contenteditable] {
+      white-space: pre-wrap;
       -webkit-user-select: auto;
       user-select: auto;
       cursor: auto;

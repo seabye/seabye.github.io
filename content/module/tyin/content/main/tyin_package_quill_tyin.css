@@ -223,7 +223,7 @@
       .tyin_package_quill_container>.ql-container>.ql-clipboard sub,
       .tyin_package_quill_container>.ql-container>.ql-editor sup,
       .tyin_package_quill_container>.ql-container>.ql-clipboard sup {
-        display: inline-block;
+        display: inline-block !important;
       }
       /*  */
       .tyin_package_quill_container>.ql-container>.ql-editor {
@@ -270,6 +270,10 @@
           border-radius: 4px;
         }
         .tyin_package_quill_container>.ql-container>.ql-editor .ql-formula {
+          padding: 4px;
+          border: 1px dashed;
+          border-color: var(--ic_ve_color_highlight);
+          border-radius: 4px;
           color: #009688;
         }
         .tyin_package_quill_container>.ql-container>.ql-editor p {

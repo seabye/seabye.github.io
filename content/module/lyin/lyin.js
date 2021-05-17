@@ -496,12 +496,7 @@
       },
       /*🔴*/no_touchBack(){},
       /*🔴*/no_buttonBack(){},
-      /*🟢*/input_inputState(){
-        addEventListener('pointerup',(event)=>{
-          if(document.activeElement.localName.match(/input|textarea/)&&!this._isKeyboardInputArea_(event.target)){
-            document.activeElement.blur();
-          }
-        });
+      /*🟢*/fixedRootView(){
         addEventListener('touchmove',(event)=>{
           if(event.target===document.documentElement){
             event.preventDefault();
@@ -512,6 +507,13 @@
         });
         visualViewport.addEventListener('scroll',()=>{
           this._viewportScrollToZero_();
+        });
+      },
+      /*🟢*/input_inputState(){
+        addEventListener('pointerup',(event)=>{
+          if(document.activeElement.localName.match(/input|textarea/)&&!this._isKeyboardInputArea_(event.target)){
+            document.activeElement.blur();
+          }
         });
         visualViewport.addEventListener('resize',()=>{
           this._viewportScrollToZero_();
@@ -576,6 +578,8 @@
                     start_y=event.changedTouches[0].screenY;
                     start_x=event.changedTouches[0].screenX;
                     scrollDirection='horizontal';
+                  }else{
+                    loop(target.parentElement);
                   }
                 }
               }else{
@@ -618,7 +622,7 @@
                 case'horizontal':
                   {
                     const move_y=event.changedTouches[0].screenY;
-                    if((move_y<=start_y+3&&move_y>=start_y-3)&&event.changedTouches[0].screenX!==start_x){
+                    if((move_y<=start_y+4&&move_y>=start_y-4)&&event.changedTouches[0].screenX!==start_x){
                       removeEventListener('touchmove',preventDefault);
                       scrollDirection=null;
                     }
@@ -632,7 +636,10 @@
           addEventListener('touchend',()=>{
             removeEventListener('touchmove',preventDefault);
             addEventListener('touchmove',preventDefault,{passive:false});
-            start_y=start_x=scrollDirection=null;
+            start_y=null;
+            start_x=null;
+            scrollDirection=null;
+            _element_=null;
             document.documentElement.classList.remove('ic_nr_partialScrollEndpointOuter');
             this._removeEmpty_(document.documentElement);
           });
