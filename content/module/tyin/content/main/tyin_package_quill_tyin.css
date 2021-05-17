@@ -207,6 +207,16 @@
         .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-size::before {
           content: "􀅐";
         }
+          /*  */
+          .tyin_package_quill_container>.ql-container>.ql-editor .ql-size-small {
+            font-size: 0.75em;
+          }
+          .tyin_package_quill_container>.ql-container>.ql-editor .ql-size-large {
+            font-size: 1.5em;
+          }
+          .tyin_package_quill_container>.ql-container>.ql-editor .ql-size-huge {
+            font-size: 2.5em;
+          }
         .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-bold::before {
           content: "􀅓";
         }
@@ -343,21 +353,16 @@
         }
           /*  */
           .tyin_package_quill_container>.ql-container>.ql-editor blockquote {
-            padding: 4px;
-            border-radius: 4px;
-            color: var(--ic_ve_color_black6_opacity);
-            background-color: var(--ic_ve_color_foreground);
-            box-shadow: var(--ic_ve_shadow_2dp3);
-          }
-          .tyin_package_quill_container>.ql-container>.ql-editor blockquote+blockquote {
-            margin-top: 6px;
+            padding: 2px 0 2px calc(2em - 4px);
+            border-left: 4px solid;
+            border-left-color: var(--ic_ve_color_system_blue_translucent);
           }
         .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-code-block::before {
           content: "􀙚";
         }
           /*  */
           .tyin_package_quill_container>.ql-container>.ql-editor pre {
-            padding: 4px;
+            padding: 1em;
             border-radius: 4px;
             font-size: 12px;
             color: #FFFFFF;
@@ -414,6 +419,16 @@
         .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-align::before {
           content: "􀌀";
         }
+          /*  */
+          .tyin_package_quill_container>.ql-container>.ql-editor .ql-align-center {
+            text-align: center;
+          }
+          .tyin_package_quill_container>.ql-container>.ql-editor .ql-align-right {
+            text-align: right;
+          }
+          .tyin_package_quill_container>.ql-container>.ql-editor .ql-align-justify {
+            text-align: justify;
+          }
         .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-link::before {
           content: "􀉣";
         }
@@ -429,10 +444,6 @@
           /*  */
           .tyin_package_quill_container>.ql-container>.ql-editor img {
             display: inline !important;
-            padding: 4px;
-            border-radius: 4px;
-            background-color: var(--ic_ve_color_foreground);
-            box-shadow: var(--ic_ve_shadow_2dp3);
           }
         .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-video::before {
           content: "􀯪";
