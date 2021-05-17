@@ -251,7 +251,7 @@
             display: inline !important;
             text-decoration: line-through;
             text-decoration-color: var(--ic_ve_color_system_red_translucent);
-            text-decoration-thickness: 4px;
+            text-decoration-thickness: 2px;
           }
         .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-color::before {
           content: "􀣶";
@@ -363,7 +363,6 @@
           /*  */
           .tyin_package_quill_container>.ql-container>.ql-editor pre {
             padding: 1em;
-            border-radius: 4px;
             font-size: 12px;
             color: #FFFFFF;
             background-color: #000000;
@@ -446,14 +445,13 @@
             display: inline !important;
           }
         .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-video::before {
-          content: "􀯪";
+          content: "􀊙";
         }
           /*  */
           .tyin_package_quill_container>.ql-container>.ql-editor iframe {
-            padding: 4px;
+            padding: 2px;
             width: 640px;
             height: 360px;
-            border-radius: 4px;
             background-color: var(--ic_ve_color_foreground);
             box-shadow: var(--ic_ve_shadow_2dp3);
           }
@@ -463,12 +461,12 @@
           /*  */
           .tyin_package_quill_container>.ql-container>.ql-editor .katex {
             overflow: auto hidden;
-            padding: 4px;
-            border-radius: 4px;
+            padding: 2px;
             color: #009688;
             background-color: var(--ic_ve_color_foreground);
             box-shadow: var(--ic_ve_shadow_2dp3);
             white-space: nowrap;
+            vertical-align: bottom;
           }
         .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-clean::before {
           content: "􀇼";
