@@ -60,8 +60,8 @@
               <div style="transform: rotateY(45deg);">
                 <a href="//pasi.cat">pasi.cat</a>
               </div>
-              <div style="transform: rotateY(60deg);">
-                <a onclick="tyin_test._quill_tyin()">quill_tyin</a>
+              <div style="transform: rotateY(-15deg);">
+                <a onclick="tyin_test._quill_tyin()" style="color: #E2378A;">quill_tyin()</a>
               </div>
             </div>
           </div>
@@ -238,7 +238,9 @@
     tyin.runObject(tyin_test,'_');
   });
   // font
-  tyin.loadFont('SF Pro Text_','/content/module/tyin/content/asset/font/SFPro/SF-Pro-Text-Regular_400.woff2',{weight:'normal'});
-  tyin.loadFont('New York_','/content/module/tyin/content/asset/font/newYork/NewYork.woff2');
-  // tyin.loadFont('PingFang SC_','/content/module/tyin/content/asset/font/pingFang/PingFang_2_400.woff2',{weight:'normal'});
+  setTimeout(()=>{
+    tyin.loadFont('SF Pro Text_','/content/module/tyin/content/asset/font/SFPro/SF-Pro-Text-Regular_400.woff2',{weight:'normal'});
+    tyin.loadFont('New York_','/content/module/tyin/content/asset/font/newYork/NewYork.woff2');
+    // tyin.loadFont('PingFang SC_','/content/module/tyin/content/asset/font/pingFang/PingFang_2_400.woff2',{weight:'normal'});
+  },350);
 // #after
