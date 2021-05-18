@@ -626,24 +626,26 @@
     }
     input,
     textarea,
-    [contenteditable] {
-      word-break: break-word;
-      overflow-wrap: break-word;
-      white-space: pre-wrap;
-    }
-    input,
-    textarea,
     [contenteditable="true"] {
       -webkit-user-select: auto;
       user-select: auto;
       cursor: auto;
     }
     input {
+      word-break: normal;
+      overflow-wrap: normal;
+      white-space: nowrap;
       text-overflow: ellipsis;
     }
     input[type="search"]::-webkit-search-decoration,
     input[type="search"]::-webkit-search-cancel-button {
       display: none;
+    }
+    textarea,
+    [contenteditable] {
+      word-break: break-word;
+      overflow-wrap: break-word;
+      white-space: pre-wrap;
     }
     [contenteditable]:empty::after {
       content: attr(placeholder);
