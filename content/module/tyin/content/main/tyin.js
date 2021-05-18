@@ -2165,7 +2165,8 @@
               option.modules.toolbar=[
                 ['bold','italic','underline','strike',{'size':'small'},{'size':'large'}],
                 [{'color':'var(--ic_ve_color_system_red)'},{'color':'var(--ic_ve_color_system_green)'},{'color':'var(--ic_ve_color_system_blue)'},{'color':'var(--ic_ve_color_system_orange)'},{'script':'super'},{'script':'sub'}],
-                [{'list':'bullet'},{'indent':'-1'},{'indent':'+1'},{'align':'center'},'link','image']
+                [{'list':'bullet'},{'indent':'-1'},{'indent':'+1'},{'align':'center'},'link','image'],
+                ['clean','undo','redo']
               ];
             }
             break;

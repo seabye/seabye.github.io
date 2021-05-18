@@ -696,6 +696,7 @@
       .tyin_package_quill_container>.ql-container>.ql-tooltip {
         display: flex;
         flex-direction: column;
+        z-index: 1;
         position: absolute;
         margin: auto;
         padding: 4px;
