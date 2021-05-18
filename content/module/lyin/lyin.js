@@ -610,7 +610,7 @@
                       removeEventListener('touchmove',preventDefault);
                       scrollDirection=null;
                     }else{
-                      if(_element_.scrollTop===0){
+                      if(_element_.scrollTop===0&&getSelection().focusOffset===getSelection().anchorOffset){
                         document.documentElement.classList.add('ic_nr_partialScrollEndpointOuter');
                       }
                     }
@@ -622,7 +622,7 @@
                       removeEventListener('touchmove',preventDefault);
                       scrollDirection=null;
                     }else{
-                      if(_element_.scrollTop===_element_.scrollHeight-_element_.offsetHeight){
+                      if(_element_.scrollTop===_element_.scrollHeight-_element_.offsetHeight&&getSelection().focusOffset===getSelection().anchorOffset){
                         document.documentElement.classList.add('ic_nr_partialScrollEndpointOuter');
                       }
                     }

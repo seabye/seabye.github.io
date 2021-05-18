@@ -2097,12 +2097,10 @@
         return miniEditor;
       },
       /*🟢*/async package_quill_create(insertElement,insertPosition,mode=[
-          [{'list':'bullet'},{'indent':'-1'},{'indent':'+1'}],
-          [{'script':'super'},{'script':'sub'}],
-          ['bold','italic','underline','strike'],
-          [{'header':1},{'header':3},{'header':5},'blockquote','code-block'],
-          ['link','image','video','formula'],
-          ['clean']
+          ['blockquote','code-block','formula','image','link','video'],
+          [{'header':1},{'header':2},{'header':3},{'header':4},{'header':5},{'header':6}],
+          ['bold','italic','underline','strike',{'script':'super'},{'script':'sub'}],
+          [{'list':'bullet'},{'indent':'-1'},{'indent':'+1'},'clean']
         ],placeholder='...',content='',readOnly=false,width,height){
         if(!('Quill'in globalThis)){
           this.elementCreate('link',{rel:'stylesheet',href:`${import.meta.url.replace('/main/tyin.js','/main/tyin_package_quill_tyin.css')}`,crossorigin:''},document.head);

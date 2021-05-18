@@ -302,6 +302,7 @@
       --ic_ve_font_lineHeight_initial: 100%;
       --ic_ve_font_lineHeight_basic: 138.2%;
       --ic_ve_font_lineHeight_plus: 161.8%;
+      --ic_ve_font_lineHeight_two: 200%;
     }
     /* family */
     html {
@@ -473,7 +474,7 @@
     background-color: rgba(0,0,0,0);
   }
   html:not(.ic_nr_platform_mobile) ::-webkit-scrollbar-thumb {
-    border: 3px solid;
+    border: 2px solid;
     border-color: rgba(0,0,0,0);
     border-radius: 8px;
     background-color: var(--ic_ve_color_black2_opacity);
