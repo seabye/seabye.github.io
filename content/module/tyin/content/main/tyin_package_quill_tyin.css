@@ -115,7 +115,7 @@
     height: 100%;
     font-size: 14px;
     font-family: "PingFang SC_", var(--ic_ve_font_family_sansSerif), "SF Pro Text_";
-    background-color: var(--ic_ve_color_gray_white);
+    background-color: var(--ic_ve_color_gray_white_plus);
   }
     /*  */
     .tyin_package_quill_container>.ql-toolbar {

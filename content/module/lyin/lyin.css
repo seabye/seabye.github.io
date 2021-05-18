@@ -77,10 +77,14 @@
     html.ic_nr_media_prefers_colorScheme_light {
       --ic_ve_color_white: #FFFFFF;
       --ic_ve_color_white_transparent: rgba(255,255,255,0);
+      --ic_ve_color_gray_white_plus: #E0E0E0;
       --ic_ve_color_gray_white: #C0C0C0;
+      --ic_ve_color_gray_white_minus: #A0A0A0;
       --ic_ve_color_gray: #808080;
       --ic_ve_color_gray_transparent: rgba(128,128,128,0);
+      --ic_ve_color_gray_black_minus: #606060;
       --ic_ve_color_gray_black: #404040;
+      --ic_ve_color_gray_black_plus: #202020;
       --ic_ve_color_black: #000000;
       --ic_ve_color_black_transparent: rgba(0,0,0,0);
       --ic_ve_color_white9: rgb(242,242,242);
@@ -143,10 +147,14 @@
     html.ic_nr_media_prefers_colorScheme_dark {
       --ic_ve_color_white: #000000;
       --ic_ve_color_white_transparent: rgba(0,0,0,0);
+      --ic_ve_color_gray_white_plus: #202020;
       --ic_ve_color_gray_white: #404040;
+      --ic_ve_color_gray_white_minus: #606060;
       --ic_ve_color_gray: #808080;
       --ic_ve_color_gray_transparent: rgba(128,128,128,0);
+      --ic_ve_color_gray_black_minus: #A0A0A0;
       --ic_ve_color_gray_black: #C0C0C0;
+      --ic_ve_color_gray_black_plus: #E0E0E0;
       --ic_ve_color_black: #FFFFFF;
       --ic_ve_color_black_transparent: rgba(255,255,255,0);
       --ic_ve_color_white9: rgb(12,12,12);
