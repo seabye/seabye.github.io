@@ -579,7 +579,27 @@
     pre,
     code,
     var,
-    kbd {
+    kbd,
+    pre::before,
+    code::before,
+    var::before,
+    kbd::before,
+    pre::after,
+    code::after,
+    var::after,
+    kbd::after,
+    pre *,
+    code *,
+    var *,
+    kbd *,
+    pre *::before,
+    code *::before,
+    var *::before,
+    kbd *::before,
+    pre *::after,
+    code *::after,
+    var *::after,
+    kbd *::after {
       line-height: var(--ic_ve_font_lineHeight_basic);
       font-family: var(--ic_ve_font_family_monospace);
       word-break: break-all;

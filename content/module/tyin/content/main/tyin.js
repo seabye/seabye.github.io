@@ -2141,31 +2141,31 @@
                 [{'list':'ordered'},{'list':'bullet'},{'indent':'-1'},{'indent':'+1'}],
                 [{'direction':'rtl'},{'align':[]}],
                 ['link','image','video','formula'],
-                ['clean']
+                ['clean','undo','redo']
               ];
             }
             break;
           case'tyin_full':
             {
               option.modules.toolbar=[
-                ['blockquote','code-block','link','image','video','formula'],
+                ['blockquote',{'font':'monospace'},'code-block','link','image','video','formula'],
                 [{'header':1},{'header':2},{'header':3},{'header':4},{'header':5},{'header':6}],
-                ['bold','italic','underline','strike',{'script':'super'},{'script':'sub'},{'size':'small'},{'size':'large'},{'font':'monospace'}],
+                ['bold','italic','underline','strike',{'script':'super'},{'script':'sub'},{'size':'small'},{'size':'large'}],
                 [
                   {'color':'var(--ic_ve_color_system_red)'},{'color':'var(--ic_ve_color_system_green)'},{'color':'var(--ic_ve_color_system_blue)'},{'color':'var(--ic_ve_color_system_orange)'},
                   {'background':'var(--ic_ve_color_system_red_translucent)'},{'background':'var(--ic_ve_color_system_green_translucent)'},{'background':'var(--ic_ve_color_system_blue_translucent)'},{'background':'var(--ic_ve_color_system_orange_translucent)'},
                 ],
-                [{'list':'bullet'},{'list':'ordered'},{'indent':'-1'},{'indent':'+1'},{'align':'center'},{'align':'right'},{'align':'justify'},{'direction':'rtl'},'clean']
+                [{'list':'bullet'},{'list':'ordered'},{'indent':'-1'},{'indent':'+1'},{'align':'center'},{'align':'right'},{'align':'justify'},{'direction':'rtl'}],
+                ['clean','undo','redo']
               ];
             }
             break;
           case'tyin_simple':
             {
               option.modules.toolbar=[
-                ['link','image'],
-                ['bold','italic','underline','strike',{'script':'super'},{'script':'sub'}],
-                [{'color':'var(--ic_ve_color_system_red)'},{'color':'var(--ic_ve_color_system_green)'},{'color':'var(--ic_ve_color_system_blue)'},{'color':'var(--ic_ve_color_system_orange)'}],
-                [{'list':'bullet'},{'indent':'-1'},{'indent':'+1'},{'align':'center'}]
+                ['bold','italic','underline','strike',{'size':'small'},{'size':'large'}],
+                [{'color':'var(--ic_ve_color_system_red)'},{'color':'var(--ic_ve_color_system_green)'},{'color':'var(--ic_ve_color_system_blue)'},{'color':'var(--ic_ve_color_system_orange)'},{'script':'super'},{'script':'sub'}],
+                [{'list':'bullet'},{'indent':'-1'},{'indent':'+1'},{'align':'center'},'link','image']
               ];
             }
             break;
@@ -2183,7 +2183,7 @@
             font.whitelist=['monospace'];
             Quill.register(font,true);
             const attribute={
-              class:'tyin_package_quill_container'
+              class:`tyin_package_quill_container tyin_package_quill_UUID_${UUID}`
             };
             if(width||height){
               attribute.style=`${width?`width: ${width}; `:''}${height?`height: ${height};`:''}`;
@@ -2209,6 +2209,23 @@
             inputDataset.video='URL';
             if(readOnly){
               this.removeElement(result.firstElementChild);
+            }else{
+              const undo=document.querySelector(`.tyin_package_quill_container.tyin_package_quill_UUID_${UUID}>.ql-toolbar>.ql-formats>.ql-undo`);
+              const redo=document.querySelector(`.tyin_package_quill_container.tyin_package_quill_UUID_${UUID}>.ql-toolbar>.ql-formats>.ql-redo`);
+              if(undo){
+                undo.addEventListener('click',()=>{
+                  if(result.tyin_package_quill.history.stack.undo.length>1){
+                    result.tyin_package_quill.history.undo();
+                    result.tyin_package_quill.container.firstElementChild.focus();
+                  }
+                });
+              }
+              if(redo){
+                redo.addEventListener('click',()=>{
+                  result.tyin_package_quill.history.redo();
+                  result.tyin_package_quill.container.firstElementChild.focus();
+                });
+              }
             }
             return result;
           }
