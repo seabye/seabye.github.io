@@ -563,7 +563,7 @@
             background-color: var(--ic_ve_font_color_black);
           }
         .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-list[value="ordered"]::before {
-          content: "􀋱";
+          content: "􀋴";
         }
           /*  */
           .tyin_package_quill_container>.ql-container>.ql-editor ol {

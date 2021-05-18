@@ -2096,7 +2096,7 @@
         }
         return miniEditor;
       },
-      /*🟢*/async package_quill_create(insertElement,insertPosition,mode='tyin_simple',placeholder='...',content='',readOnly=false,width,height){
+      /*🟢*/async package_quill_create(insertElement,insertPosition,mode='tyin_default',placeholder='...',content='',readOnly=false,width,height){
         if(!('Quill'in globalThis)){
           this.elementCreate('link',{rel:'stylesheet',href:`${import.meta.url.replace('/main/tyin.js','/main/tyin_package_quill_tyin.css')}`,crossorigin:''},document.head);
           this.elementCreate('link',{rel:'stylesheet',href:`${import.meta.url.replace('/main/tyin.js','/package/kaTeX@0.13.3/katex.min.css')}`,crossorigin:''},document.head);
@@ -2160,10 +2160,21 @@
               ];
             }
             break;
+          case'tyin_default':
+            {
+              option.modules.toolbar=[
+                ['blockquote','code-block','formula',{'header':1},{'header':3},{'header':5}],
+                ['bold','italic','underline','strike',{'size':'small'},{'size':'large'}],
+                [{'color':'var(--qt_ve_color_red)'},{'color':'var(--qt_ve_color_green)'},{'color':'var(--qt_ve_color_blue)'},{'color':'var(--qt_ve_color_orange)'},{'script':'super'},{'script':'sub'}],
+                [{'list':'bullet'},{'indent':'-1'},{'indent':'+1'},{'align':'center'},'link','image'],
+                ['clean','undo','redo']
+              ];
+            }
+            break;
           case'tyin_simple':
             {
               option.modules.toolbar=[
-                ['bold','italic','underline','strike',{'size':'small'},{'size':'large'}],
+                ['bold','italic','underline','strike',{'header':1},{'header':4}],
                 [{'color':'var(--qt_ve_color_red)'},{'color':'var(--qt_ve_color_green)'},{'color':'var(--qt_ve_color_blue)'},{'color':'var(--qt_ve_color_orange)'},{'script':'super'},{'script':'sub'}],
                 [{'list':'bullet'},{'indent':'-1'},{'indent':'+1'},{'align':'center'},'link','image'],
                 ['clean','undo','redo']

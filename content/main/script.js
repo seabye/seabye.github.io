@@ -64,14 +64,17 @@
               <div style="transform: rotateY(45deg);">
                 <a href="//pasi.cat">pasi.cat</a>
               </div>
-              <div style="transform: rotateY(-15deg);">
-              <a onclick="tyin_test._quill_tyin(false,'tyin_simple')" style="color: #E2378A; -webkit-mask: linear-gradient(-90deg,#000000,rgba(0,0,0,0)); mask: linear-gradient(-90deg,#000000,rgba(0,0,0,0));">quill_tyin(edit,simple)</a>
+              <div style="font-size: 61.8%; transform: rotateY(-15deg);">
+                <a onclick="tyin_test._quill_tyin(false,'tyin_simple')" style="color: #E6844F; -webkit-mask: linear-gradient(-90deg,#000000,rgba(0,0,0,0)); mask: linear-gradient(-90deg,#000000,rgba(0,0,0,0));">quill_tyin(edit,simple)</a>
               </div>
-              <div style="transform: rotateY(-30deg);">
-                <a onclick="tyin_test._quill_tyin(false,'tyin_full')" style="color: #E2378A; -webkit-mask: linear-gradient(-90deg,#000000,rgba(0,0,0,0)); mask: linear-gradient(-90deg,#000000,rgba(0,0,0,0));">quill_tyin(edit,full)</a>
+              <div style="font-size: 61.8%; transform: rotateY(-30deg);">
+                <a onclick="tyin_test._quill_tyin(false,'tyin_default')" style="color: #E6844F; -webkit-mask: linear-gradient(-90deg,#000000,rgba(0,0,0,0)); mask: linear-gradient(-90deg,#000000,rgba(0,0,0,0));">quill_tyin(edit,default)</a>
               </div>
-              <div style="transform: rotateY(-45deg);">
-                <a onclick="tyin_test._quill_tyin(true)" style="color: #E2378A; -webkit-mask: linear-gradient(-90deg,#000000,rgba(0,0,0,0)); mask: linear-gradient(-90deg,#000000,rgba(0,0,0,0));">quill_tyin(browse)</a>
+              <div style="font-size: 61.8%; transform: rotateY(-45deg);">
+                <a onclick="tyin_test._quill_tyin(false,'tyin_full')" style="color: #E6844F; -webkit-mask: linear-gradient(-90deg,#000000,rgba(0,0,0,0)); mask: linear-gradient(-90deg,#000000,rgba(0,0,0,0));">quill_tyin(edit,full)</a>
+              </div>
+              <div style="font-size: 61.8%; transform: rotateY(-60deg);">
+                <a onclick="tyin_test._quill_tyin(true)" style="color: #E6844F; -webkit-mask: linear-gradient(-90deg,#000000,rgba(0,0,0,0)); mask: linear-gradient(-90deg,#000000,rgba(0,0,0,0));">quill_tyin(browse)</a>
               </div>
             </div>
           </div>
@@ -223,8 +226,8 @@
       // globalThis.tyin_quill=await tyin.package_quill_create(document.body,undefined,'snow','some',undefined,false,'100%','100%');
       // globalThis.tyin_quill=await tyin.package_quill_create(document.body,undefined,'bubble','some',undefined,false,'100%','100%');
       // globalThis.tyin_quill=await tyin.package_quill_create(document.body,undefined,'tyin_full','some',undefined,readOnly,'100%','100%');
-      // globalThis.tyin_quill=await tyin.package_quill_create(document.body,undefined,'tyin_simple','some',undefined,readOnly,'100%','100%');
-      globalThis.tyin_quill=await tyin.package_quill_create(document.body,undefined,mode?mode:'tyin_simple','some',undefined,readOnly,'100%','100%');
+      // globalThis.tyin_quill=await tyin.package_quill_create(document.body,undefined,'tyin_default','some',undefined,readOnly,'100%','100%');
+      globalThis.tyin_quill=await tyin.package_quill_create(document.body,undefined,mode?mode:'tyin_default','some',undefined,readOnly,'100%','100%');
       if(readOnly){
 tyin_quill.tyin_package_quill.setContents(JSON.parse(
 
