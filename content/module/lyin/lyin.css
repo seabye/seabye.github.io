@@ -535,8 +535,9 @@
       font-weight: normal;
       font-size: 16px;
       font-family: var(--ic_ve_font_family_sansSerif);
-      word-break: break-all;
+      word-break: break-word;
       overflow-wrap: break-word;
+      white-space: normal;
       tab-size: 8;
       -webkit-user-select: none;
       user-select: none;
@@ -581,6 +582,8 @@
     kbd {
       line-height: var(--ic_ve_font_lineHeight_basic);
       font-family: var(--ic_ve_font_family_monospace);
+      word-break: break-all;
+      overflow-wrap: break-word;
       white-space: pre-wrap;
     }
     /* image */
@@ -604,6 +607,8 @@
     input,
     textarea,
     [contenteditable] {
+      word-break: break-word;
+      overflow-wrap: break-word;
       white-space: pre-wrap;
     }
     input,

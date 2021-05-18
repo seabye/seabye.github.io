@@ -2096,12 +2096,7 @@
         }
         return miniEditor;
       },
-      /*🟢*/async package_quill_create(insertElement,insertPosition,mode=[
-          ['blockquote','code-block','formula','image','link','video'],
-          [{'header':1},{'header':2},{'header':3},{'header':4},{'header':5},{'header':6}],
-          ['bold','italic','underline','strike',{'script':'super'},{'script':'sub'}],
-          [{'list':'bullet'},{'indent':'-1'},{'indent':'+1'},'clean']
-        ],placeholder='...',content='',readOnly=false,width,height){
+      /*🟢*/async package_quill_create(insertElement,insertPosition,mode='tyin_simple',placeholder='...',content='',readOnly=false,width,height){
         if(!('Quill'in globalThis)){
           this.elementCreate('link',{rel:'stylesheet',href:`${import.meta.url.replace('/main/tyin.js','/main/tyin_package_quill_tyin.css')}`,crossorigin:''},document.head);
           this.elementCreate('link',{rel:'stylesheet',href:`${import.meta.url.replace('/main/tyin.js','/package/kaTeX@0.13.3/katex.min.css')}`,crossorigin:''},document.head);
@@ -2133,26 +2128,60 @@
           readOnly:readOnly,
           theme:mode==='bubble'?'bubble':'snow'
         };
-        if(mode==='full'){
-          option.modules.toolbar=[
-            [{'font':[]},{'size':['small',false,'large','huge']}],
-            ['bold','italic','underline','strike'],
-            [{'color':[]},{'background':[]}],
-            [{'script':'sub'},{'script':'super'}],
-            [{'header':[1,2,3,4,5,6,false]}],
-            [{'header':1},{'header':2},{'header':3},{'header':4},{'header':5},{'header':6},'blockquote','code-block'],
-            [{'list':'ordered'},{'list':'bullet'},{'indent':'-1'},{'indent':'+1'}],
-            [{'direction':'rtl'},{'align':[]}],
-            ['link','image','video','formula'],
-            ['clean']
-          ];
-        }else{
-          if(typeof mode!=='string'){
-            option.modules.toolbar=mode;
-          }
+        switch(mode){
+          case'full':
+            {
+              option.modules.toolbar=[
+                [{'font':[]},{'size':['small',false,'large','huge']}],
+                ['bold','italic','underline','strike'],
+                [{'color':[]},{'background':[]}],
+                [{'script':'sub'},{'script':'super'}],
+                [{'header':[1,2,3,4,5,6,false]}],
+                [{'header':1},{'header':2},{'header':3},{'header':4},{'header':5},{'header':6},'blockquote','code-block'],
+                [{'list':'ordered'},{'list':'bullet'},{'indent':'-1'},{'indent':'+1'}],
+                [{'direction':'rtl'},{'align':[]}],
+                ['link','image','video','formula'],
+                ['clean']
+              ];
+            }
+            break;
+          case'tyin_full':
+            {
+              option.modules.toolbar=[
+                ['blockquote','code-block','link','image','video','formula'],
+                [{'header':1},{'header':2},{'header':3},{'header':4},{'header':5},{'header':6}],
+                ['bold','italic','underline','strike',{'script':'super'},{'script':'sub'},{'size':'small'},{'size':'large'},{'font':'monospace'}],
+                [
+                  {'color':'var(--ic_ve_color_system_red)'},{'color':'var(--ic_ve_color_system_green)'},{'color':'var(--ic_ve_color_system_blue)'},{'color':'var(--ic_ve_color_system_orange)'},
+                  {'background':'var(--ic_ve_color_system_red_translucent)'},{'background':'var(--ic_ve_color_system_green_translucent)'},{'background':'var(--ic_ve_color_system_blue_translucent)'},{'background':'var(--ic_ve_color_system_orange_translucent)'},
+                ],
+                [{'list':'bullet'},{'list':'ordered'},{'indent':'-1'},{'indent':'+1'},{'align':'center'},{'align':'right'},{'align':'justify'},{'direction':'rtl'},'clean']
+              ];
+            }
+            break;
+          case'tyin_simple':
+            {
+              option.modules.toolbar=[
+                ['link','image'],
+                ['bold','italic','underline','strike',{'script':'super'},{'script':'sub'}],
+                [{'color':'var(--ic_ve_color_system_red)'},{'color':'var(--ic_ve_color_system_green)'},{'color':'var(--ic_ve_color_system_blue)'},{'color':'var(--ic_ve_color_system_orange)'}],
+                [{'list':'bullet'},{'indent':'-1'},{'indent':'+1'},{'align':'center'}]
+              ];
+            }
+            break;
+          default:
+            {
+              if(typeof mode!=='string'){
+                option.modules.toolbar=mode;
+              }
+            }
+            break;
         }
         return this.loop(()=>{
           if('katex'in globalThis&&'hljs'in globalThis&&'Quill'in globalThis){
+            const font=Quill.import('formats/font');
+            font.whitelist=['monospace'];
+            Quill.register(font,true);
             const attribute={
               class:'tyin_package_quill_container'
             };
