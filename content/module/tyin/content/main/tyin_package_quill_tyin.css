@@ -2,6 +2,27 @@
 /* #before */
 /* #import */
 /* #variable */
+  /*  */
+  html.ic_nr_media_prefers_colorScheme_light .tyin_package_quill_container {
+    --qt_ve_color_red: #CC0000;
+    --qt_ve_color_green: #00BB00;
+    --qt_ve_color_blue: #0088FF;
+    --qt_ve_color_orange: #FF8800;
+    --qt_ve_color_red_translucent: #CC000099;
+    --qt_ve_color_green_translucent: #00BB0099;
+    --qt_ve_color_blue_translucent: #0088FF99;
+    --qt_ve_color_orange_translucent: #FF880099;
+  }
+  html.ic_nr_media_prefers_colorScheme_dark .tyin_package_quill_container {
+    --qt_ve_color_red: #E2378A;
+    --qt_ve_color_green: #64A963;
+    --qt_ve_color_blue: #53B1DE;
+    --qt_ve_color_orange: #E6844F;
+    --qt_ve_color_red_translucent: #E2378A99;
+    --qt_ve_color_green_translucent: #64A96399;
+    --qt_ve_color_blue_translucent: #53B1DE99;
+    --qt_ve_color_orange_translucent: #E6844F99;
+  }
 /* #block */
 /* #build */
   /*  */
@@ -190,7 +211,7 @@
         }
         .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-active {
           color: var(--ic_ve_font_color_auto);
-          background-color: var(--ic_ve_color_system_blue_translucent);
+          background-color: var(--ic_ve_color_black2_opacity);
         }
         .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ic_active_0 {
           transform: scale(0.875);
@@ -317,7 +338,7 @@
           content: "􀤍";
         }
         .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-font[value="monospace"]::before {
-          content: "􀥊";
+          content: "􀃤";
         }
         .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-size::before {
           content: "􀅐";
@@ -374,34 +395,34 @@
         .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-color.ql-active::before {
           content: "􀣷";
         }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-color[value="var(--ic_ve_color_system_red)"]::before {
-          color: var(--ic_ve_color_system_red_translucent);
+        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-color[value="var(--qt_ve_color_red)"]::before {
+          color: var(--qt_ve_color_red_translucent);
         }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-color[value="var(--ic_ve_color_system_red)"].ql-active::before {
-          color: var(--ic_ve_color_system_red);
+        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-color[value="var(--qt_ve_color_red)"].ql-active::before {
+          color: var(--qt_ve_color_red);
         }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-color[value="var(--ic_ve_color_system_green)"]::before {
-          color: var(--ic_ve_color_system_green_translucent);
+        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-color[value="var(--qt_ve_color_green)"]::before {
+          color: var(--qt_ve_color_green_translucent);
         }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-color[value="var(--ic_ve_color_system_green)"].ql-active::before {
-          color: var(--ic_ve_color_system_green);
+        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-color[value="var(--qt_ve_color_green)"].ql-active::before {
+          color: var(--qt_ve_color_green);
         }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-color[value="var(--ic_ve_color_system_blue)"]::before {
-          color: var(--ic_ve_color_system_blue_translucent);
+        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-color[value="var(--qt_ve_color_blue)"]::before {
+          color: var(--qt_ve_color_blue_translucent);
         }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-color[value="var(--ic_ve_color_system_blue)"].ql-active::before {
-          color: var(--ic_ve_color_system_blue);
+        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-color[value="var(--qt_ve_color_blue)"].ql-active::before {
+          color: var(--qt_ve_color_blue);
         }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-color[value="var(--ic_ve_color_system_orange)"]::before {
-          color: var(--ic_ve_color_system_orange_translucent);
+        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-color[value="var(--qt_ve_color_orange)"]::before {
+          color: var(--qt_ve_color_orange_translucent);
         }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-color[value="var(--ic_ve_color_system_orange)"].ql-active::before {
-          color: var(--ic_ve_color_system_orange);
+        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-color[value="var(--qt_ve_color_orange)"].ql-active::before {
+          color: var(--qt_ve_color_orange);
         }
           /*  */
           .tyin_package_quill_container>.ql-container>.ql-editor [style^="color:"],
           .tyin_package_quill_container>.ql-container>.ql-editor [style*=" color:"] {
-            background-color: transparent;
+            background-color: transparent !important;
           }
         .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-background::before {
           content: "􀎑";
@@ -409,29 +430,29 @@
         .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-background.ql-active::before {
           content: "􀎒";
         }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-background[value="var(--ic_ve_color_system_red_translucent)"]::before {
-          color: var(--ic_ve_color_system_red_translucent);
+        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-background[value="var(--qt_ve_color_red_translucent)"]::before {
+          color: var(--qt_ve_color_red_translucent);
         }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-background[value="var(--ic_ve_color_system_red_translucent)"].ql-active::before {
-          color: var(--ic_ve_color_system_red);
+        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-background[value="var(--qt_ve_color_red_translucent)"].ql-active::before {
+          color: var(--qt_ve_color_red);
         }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-background[value="var(--ic_ve_color_system_green_translucent)"]::before {
-          color: var(--ic_ve_color_system_green_translucent);
+        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-background[value="var(--qt_ve_color_green_translucent)"]::before {
+          color: var(--qt_ve_color_green_translucent);
         }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-background[value="var(--ic_ve_color_system_green_translucent)"].ql-active::before {
-          color: var(--ic_ve_color_system_green_);
+        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-background[value="var(--qt_ve_color_green_translucent)"].ql-active::before {
+          color: var(--qt_ve_color_green_);
         }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-background[value="var(--ic_ve_color_system_blue_translucent)"]::before {
-          color: var(--ic_ve_color_system_blue_translucent);
+        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-background[value="var(--qt_ve_color_blue_translucent)"]::before {
+          color: var(--qt_ve_color_blue_translucent);
         }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-background[value="var(--ic_ve_color_system_blue_translucent)"].ql-active::before {
-          color: var(--ic_ve_color_system_blue);
+        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-background[value="var(--qt_ve_color_blue_translucent)"].ql-active::before {
+          color: var(--qt_ve_color_blue);
         }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-background[value="var(--ic_ve_color_system_orange_translucent)"]::before {
-          color: var(--ic_ve_color_system_orange_translucent);
+        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-background[value="var(--qt_ve_color_orange_translucent)"]::before {
+          color: var(--qt_ve_color_orange_translucent);
         }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-background[value="var(--ic_ve_color_system_orange_translucent)"].ql-active::before {
-          color: var(--ic_ve_color_system_orange);
+        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-background[value="var(--qt_ve_color_orange_translucent)"].ql-active::before {
+          color: var(--qt_ve_color_orange);
         }
         .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-script[value="sub"]::before {
           content: "􀓡";
@@ -519,10 +540,17 @@
         }
           /*  */
           .tyin_package_quill_container>.ql-container>.ql-editor blockquote {
+            opacity: calc(1/0.8*0.6);
+          }
+          .tyin_package_quill_container>.ql-container>.ql-editor blockquote:not(.ql-direction-rtl) {
             padding: 2px 0 2px calc(2em - 4px);
             border-left: 4px solid;
             border-left-color: var(--ic_ve_color_system_blue_translucent);
-            color: var(--ic_ve_color_black6_opacity);
+          }
+          .tyin_package_quill_container>.ql-container>.ql-editor blockquote.ql-direction-rtl {
+            padding: 2px calc(2em - 4px) 2px 0;
+            border-right: 4px solid;
+            border-right-color: var(--ic_ve_color_system_blue_translucent);
           }
         .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-code-block::before {
           content: "􀙚";
@@ -649,6 +677,7 @@
           /*  */
           .tyin_package_quill_container>.ql-container>.ql-editor img {
             display: inline !important;
+            max-width: calc(100% - 2em*2);
           }
         .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-video::before {
           content: "􀊙";
@@ -656,9 +685,12 @@
           /*  */
           .tyin_package_quill_container>.ql-container>.ql-editor iframe {
             padding: 2px;
-            width: 640px;
-            height: 360px;
+            width: 480px;
+            height: 270px;
             background-color: var(--ic_ve_color_foreground);
+          }
+          .tyin_package_quill_container>.ql-container>.ql-editor iframe.ql-align-center {
+            margin: 0 auto;
           }
           .tyin_package_quill_container>.ql-container>.ql-editor iframe.ql-align-right {
             margin: 0 0 0 auto;
@@ -707,21 +739,36 @@
         margin: auto !important;
         padding: 4px;
         width: 128px;
-        height: 35px;
+        height: 32px;
         border-radius: 8px;
+        font-size: 12px;
         background-color: var(--ic_ve_color_white6_opacity);
         -webkit-backdrop-filter: var(--ic_ve_backdropFilter_blur_low);
         backdrop-filter: var(--ic_ve_backdropFilter_blur_low);
         box-shadow: var(--ic_ve_shadow_2dp3);
+        pointer-events: unset;
+        opacity: unset;
+        visibility: visible;
+        transform: unset;
+        transition:
+          opacity 0ms var(--ic_ve_cubicBezier_slowFast),
+          visibility 0ms var(--ic_ve_cubicBezier_slowFast),
+          transform 0ms var(--ic_ve_cubicBezier_slowFast)
+        ;
       }
       .tyin_package_quill_container>.ql-container>.ql-tooltip:not([data-mode]) {
-        height: 63px;
+        height: calc(24px*2 + 4px*2 + 1px);
       }
       .tyin_package_quill_container>.ql-container>.ql-hidden {
-        /* display: none; */
-        visibility: hidden;
         pointer-events: none;
         opacity: 0;
+        visibility: hidden;
+        transform: scale(0.5);
+        transition:
+          opacity calc(350ms/2) var(--ic_ve_cubicBezier_slowFast),
+          visibility calc(350ms/2) var(--ic_ve_cubicBezier_slowFast),
+          transform calc(350ms/2) var(--ic_ve_cubicBezier_slowFast)
+        ;
       }
         /*  */
         .tyin_package_quill_container>.ql-container>.ql-tooltip[data-mode="link"]>.ql-preview,
@@ -738,7 +785,7 @@
           display: flex;
           justify-content: center;
           align-items: center;
-          height: 27px;
+          height: 24px;
           background-color: var(--ic_ve_color_black1_opacity);
           text-align: center;
           transition: transform calc(1000ms/24) 0ms var(--ic_ve_cubicBezier_slowFast);
@@ -755,7 +802,6 @@
           margin-top: 1px;
           border-radius: 0 0 4px 4px;
           color: var(--ic_ve_color_black4_opacity);
-          font-size: 12px;
         }
           /*  */
           .tyin_package_quill_container>.ql-container>.ql-tooltip>.ql-remove::before {

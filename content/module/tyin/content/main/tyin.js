@@ -2152,8 +2152,8 @@
                 [{'header':1},{'header':2},{'header':3},{'header':4},{'header':5},{'header':6}],
                 ['bold','italic','underline','strike',{'script':'super'},{'script':'sub'},{'size':'small'},{'size':'large'}],
                 [
-                  {'color':'var(--ic_ve_color_system_red)'},{'color':'var(--ic_ve_color_system_green)'},{'color':'var(--ic_ve_color_system_blue)'},{'color':'var(--ic_ve_color_system_orange)'},
-                  {'background':'var(--ic_ve_color_system_red_translucent)'},{'background':'var(--ic_ve_color_system_green_translucent)'},{'background':'var(--ic_ve_color_system_blue_translucent)'},{'background':'var(--ic_ve_color_system_orange_translucent)'},
+                  {'color':'var(--qt_ve_color_red)'},{'color':'var(--qt_ve_color_green)'},{'color':'var(--qt_ve_color_blue)'},{'color':'var(--qt_ve_color_orange)'},
+                  {'background':'var(--qt_ve_color_red_translucent)'},{'background':'var(--qt_ve_color_green_translucent)'},{'background':'var(--qt_ve_color_blue_translucent)'},{'background':'var(--qt_ve_color_orange_translucent)'},
                 ],
                 [{'list':'bullet'},{'list':'ordered'},{'indent':'-1'},{'indent':'+1'},{'align':'center'},{'align':'right'},{'align':'justify'},{'direction':'rtl'}],
                 ['clean','undo','redo']
@@ -2164,7 +2164,7 @@
             {
               option.modules.toolbar=[
                 ['bold','italic','underline','strike',{'size':'small'},{'size':'large'}],
-                [{'color':'var(--ic_ve_color_system_red)'},{'color':'var(--ic_ve_color_system_green)'},{'color':'var(--ic_ve_color_system_blue)'},{'color':'var(--ic_ve_color_system_orange)'},{'script':'super'},{'script':'sub'}],
+                [{'color':'var(--qt_ve_color_red)'},{'color':'var(--qt_ve_color_green)'},{'color':'var(--qt_ve_color_blue)'},{'color':'var(--qt_ve_color_orange)'},{'script':'super'},{'script':'sub'}],
                 [{'list':'bullet'},{'indent':'-1'},{'indent':'+1'},{'align':'center'},'link','image'],
                 ['clean','undo','redo']
               ];
