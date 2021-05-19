@@ -5,8 +5,8 @@
   /*  */
   .tyin_package_quill_container {
     overflow: hidden;
-    background-color: var(--ic_ve_color_opposite);
-    perspective: 100vw;
+    position: relative;
+    background-color: var(--ic_ve_color_white);
   }
   /*  */
   .tyin_package_quill_list {
@@ -15,7 +15,6 @@
     width: 200px;
     height: 100%;
     background-color: var(--ic_ve_color_foreground);
-    box-shadow: var(--ic_ve_shadow_8dp3);
     transform: translateX(-200px);
     transition: transform 350ms var(--ic_ve_cubicBezier_slowFast);
   }
@@ -26,7 +25,6 @@
   .tyin_package_quill_origin {
     pointer-events: unset;
     opacity: unset;
-    box-shadow: var(--ic_ve_shadow_4dp3);
     transform: unset;
     transition:
       opacity 350ms var(--ic_ve_cubicBezier_slowFast),
@@ -34,8 +32,8 @@
     ;
   }
   .tyin_package_quill_list.tyin_package_quill_mk_display+.tyin_package_quill_origin {
-    opacity: 0.75;
-    transform: rotateY(-15deg)scale(0.618);
+    opacity: 0.4;
+    transform: translateX(200px);
   }
   .tyin_package_quill_list[class*="tyin_package_quill_mk_display"]+.tyin_package_quill_origin,
   .tyin_package_quill_list[class*="tyin_package_quill_mk_display"]+.tyin_package_quill_origin * {
@@ -174,7 +172,7 @@
     height: 100%;
     font-size: 14px;
     font-family: "PingFang SC_", var(--ic_ve_font_family_sansSerif), "SF Pro Text_";
-    background-color: var(--ic_ve_color_gray_white_plus);
+    background-color: var(--ic_ve_color_background);
   }
     /*  */
     .tyin_package_quill_origin>.ql-toolbar {
@@ -192,10 +190,6 @@
       pointer-events: none;
       opacity: unset;
       visibility: visible;
-      transition:
-        opacity 350ms var(--ic_ve_cubicBezier_slowFast),
-        visibility 350ms var(--ic_ve_cubicBezier_slowFast)
-      ;
     }
     [class*="tyin_package_quill_mk_display"]+.tyin_package_quill_origin>.ql-toolbar {
       opacity: 0;
@@ -611,7 +605,11 @@
             padding: 0 2em;
           }
           .tyin_package_quill_origin>.ql-container>.ql-editor ol>li {
+            min-width: calc(100% + 2em);
             vertical-align: top;
+          }
+          .tyin_package_quill_origin>.ql-container>.ql-editor ol>li.ql-direction-rtl {
+            margin-left: -2em;
           }
             /*  */
             .tyin_package_quill_origin>.ql-container>.ql-editor ol>li::before {
@@ -637,7 +635,11 @@
             padding: 0 2em;
           }
           .tyin_package_quill_origin>.ql-container>.ql-editor ul>li {
+            min-width: calc(100% + 2em);
             vertical-align: top;
+          }
+          .tyin_package_quill_origin>.ql-container>.ql-editor ul>li.ql-direction-rtl {
+            margin-left: -2em;
           }
             /*  */
             .tyin_package_quill_origin>.ql-container>.ql-editor ul>li::before {
