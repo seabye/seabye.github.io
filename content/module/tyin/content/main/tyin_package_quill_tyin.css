@@ -3,7 +3,42 @@
 /* #import */
 /* #variable */
   /*  */
-  html.ic_nr_media_prefers_colorScheme_light .tyin_package_quill_container {
+  .tyin_package_quill_container {
+    background-color: var(--ic_ve_color_opposite);
+  }
+  /*  */
+  .tyin_package_quill_list {
+    z-index: 1;
+    position: absolute;
+    width: 200px;
+    height: 100%;
+    background-color: var(--ic_ve_color_foreground);
+    box-shadow: var(--ic_ve_shadow_8dp3);
+    transform: translateX(-200px);
+    transition: transform 350ms var(--ic_ve_cubicBezier_slowFast);
+  }
+  .tyin_package_quill_list.tyin_package_quill_mk_display {
+    transform: unset;
+  }
+  /*  */
+  .tyin_package_quill_origin {
+    pointer-events: unset;
+    opacity: unset;
+    box-shadow: var(--ic_ve_shadow_4dp3);
+    transform: unset;
+    transform-origin: left;
+    transition:
+      opacity 350ms var(--ic_ve_cubicBezier_slowFast),
+      transform 350ms var(--ic_ve_cubicBezier_slowFast)
+    ;
+  }
+  .tyin_package_quill_list.tyin_package_quill_mk_display+.tyin_package_quill_origin {
+    pointer-events: none;
+    opacity: 0.75;
+    transform: translateX(200px)scale(0.75);
+  }
+  /*  */
+  html.ic_nr_media_prefers_colorScheme_light .tyin_package_quill_origin {
     --qt_ve_color_red: #CC0000;
     --qt_ve_color_green: #00BB00;
     --qt_ve_color_blue: #0088FF;
@@ -13,7 +48,7 @@
     --qt_ve_color_blue_translucent: #0088FF99;
     --qt_ve_color_orange_translucent: #FF880099;
   }
-  html.ic_nr_media_prefers_colorScheme_dark .tyin_package_quill_container {
+  html.ic_nr_media_prefers_colorScheme_dark .tyin_package_quill_origin {
     --qt_ve_color_red: #E2378A;
     --qt_ve_color_green: #64A963;
     --qt_ve_color_blue: #53B1DE;
@@ -26,8 +61,7 @@
 /* #block */
 /* #build */
   /*  */
-  .tyin_package_quill_container,
-  .tyin_package_quill_container * {
+  .tyin_package_quill_origin * {
     /* _ */
     all: unset;
     /* _ */
@@ -39,36 +73,36 @@
     overscroll-behavior: contain;
   }
     /* text */
-    .tyin_package_quill_container a {
+    .tyin_package_quill_origin a {
       color: var(--ic_ve_font_color_auto);
       text-decoration: unset;
       cursor: default;
     }
-    .tyin_package_quill_container pre,
-    .tyin_package_quill_container code,
-    .tyin_package_quill_container var,
-    .tyin_package_quill_container kbd,
-    .tyin_package_quill_container pre::before,
-    .tyin_package_quill_container code::before,
-    .tyin_package_quill_container var::before,
-    .tyin_package_quill_container kbd::before,
-    .tyin_package_quill_container pre::after,
-    .tyin_package_quill_container code::after,
-    .tyin_package_quill_container var::after,
-    .tyin_package_quill_container kbd::after,
-    .tyin_package_quill_container pre *,
-    .tyin_package_quill_container code *,
-    .tyin_package_quill_container var *,
-    .tyin_package_quill_container kbd *,
-    .tyin_package_quill_container pre *::before,
-    .tyin_package_quill_container code *::before,
-    .tyin_package_quill_container var *::before,
-    .tyin_package_quill_container kbd *::before,
-    .tyin_package_quill_container pre *::after,
-    .tyin_package_quill_container code *::after,
-    .tyin_package_quill_container var *::after,
-    .tyin_package_quill_container kbd *::after,
-    .tyin_package_quill_container>.ql-container>.ql-editor .ql-font-monospace {
+    .tyin_package_quill_origin pre,
+    .tyin_package_quill_origin code,
+    .tyin_package_quill_origin var,
+    .tyin_package_quill_origin kbd,
+    .tyin_package_quill_origin pre::before,
+    .tyin_package_quill_origin code::before,
+    .tyin_package_quill_origin var::before,
+    .tyin_package_quill_origin kbd::before,
+    .tyin_package_quill_origin pre::after,
+    .tyin_package_quill_origin code::after,
+    .tyin_package_quill_origin var::after,
+    .tyin_package_quill_origin kbd::after,
+    .tyin_package_quill_origin pre *,
+    .tyin_package_quill_origin code *,
+    .tyin_package_quill_origin var *,
+    .tyin_package_quill_origin kbd *,
+    .tyin_package_quill_origin pre *::before,
+    .tyin_package_quill_origin code *::before,
+    .tyin_package_quill_origin var *::before,
+    .tyin_package_quill_origin kbd *::before,
+    .tyin_package_quill_origin pre *::after,
+    .tyin_package_quill_origin code *::after,
+    .tyin_package_quill_origin var *::after,
+    .tyin_package_quill_origin kbd *::after,
+    .tyin_package_quill_origin>.ql-container>.ql-editor .ql-font-monospace {
       line-height: var(--ic_ve_font_lineHeight_basic);
       font-family: var(--ic_ve_font_family_monospace), "SF Pro Text_";
       word-break: break-all;
@@ -76,13 +110,13 @@
       white-space: pre-wrap;
     }
     /* image */
-    .tyin_package_quill_container img {
+    .tyin_package_quill_origin img {
       vertical-align: bottom;
       cursor: default;
     }
     /* form */
-    .tyin_package_quill_container input,
-    .tyin_package_quill_container textarea {
+    .tyin_package_quill_origin input,
+    .tyin_package_quill_origin textarea {
       /* _ */
       all: unset;
       /* _ */
@@ -93,40 +127,40 @@
       touch-action: pan-x pan-y;
       overscroll-behavior: contain;
     }
-    .tyin_package_quill_container input,
-    .tyin_package_quill_container textarea,
+    .tyin_package_quill_origin input,
+    .tyin_package_quill_origin textarea,
     [contenteditable="true"] {
       -webkit-user-select: auto;
       user-select: auto;
       cursor: auto;
     }
-    .tyin_package_quill_container input {
+    .tyin_package_quill_origin input {
       word-break: normal;
       overflow-wrap: normal;
       white-space: nowrap;
       text-overflow: ellipsis;
     }
-    .tyin_package_quill_container input[type="search"]::-webkit-search-decoration,
-    .tyin_package_quill_container input[type="search"]::-webkit-search-cancel-button {
+    .tyin_package_quill_origin input[type="search"]::-webkit-search-decoration,
+    .tyin_package_quill_origin input[type="search"]::-webkit-search-cancel-button {
       display: none;
     }
-    .tyin_package_quill_container textarea,
+    .tyin_package_quill_origin textarea,
     [contenteditable] {
       word-break: break-word;
       overflow-wrap: break-word;
       white-space: pre-wrap;
     }
-    .tyin_package_quill_container [contenteditable]:empty::after {
+    .tyin_package_quill_origin [contenteditable]:empty::after {
       content: attr(placeholder);
     }
-    .tyin_package_quill_container ::placeholder,
-    .tyin_package_quill_container [contenteditable]:empty::after {
+    .tyin_package_quill_origin ::placeholder,
+    .tyin_package_quill_origin [contenteditable]:empty::after {
       color: var(--ic_ve_color_black4_opacity);
       opacity: unset;
       -webkit-user-select: none;
       user-select: none;
     }
-  .tyin_package_quill_container {
+  .tyin_package_quill_origin {
     display: block;
     overflow: hidden;
     position: relative;
@@ -139,7 +173,7 @@
     background-color: var(--ic_ve_color_gray_white_plus);
   }
     /*  */
-    .tyin_package_quill_container>.ql-toolbar {
+    .tyin_package_quill_origin>.ql-toolbar {
       direction: rtl;
       display: flex;
       flex-direction: column;
@@ -151,13 +185,14 @@
       max-width: calc(100% - (8px + 4px)*2);
       max-height: calc(100% - 8px*2);
       font-size: 12px;
+      pointer-events: none;
     }
       /*  */
-      .tyin_package_quill_container>.ql-toolbar>.ql-image {
+      .tyin_package_quill_origin>.ql-toolbar>.ql-image {
         display: none;
       }
       /*  */
-      .tyin_package_quill_container>.ql-toolbar>.ql-formats {
+      .tyin_package_quill_origin>.ql-toolbar>.ql-formats {
         direction: ltr;
         display: flex;
         align-items: center;
@@ -173,8 +208,8 @@
         box-shadow: var(--ic_ve_shadow_2dp3);
       }
         /*  */
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats::before,
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats::after {
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats::before,
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats::after {
           content: "\00a0";
           width: 4px;
           min-width: 4px;
@@ -183,7 +218,7 @@
           font-size: 0;
         }
         /*  */
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>* {
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>* {
           display: flex;
           justify-content: center;
           align-items: center;
@@ -192,41 +227,47 @@
           height: calc(100% - 8px);
           color: var(--ic_ve_color_black4_opacity);
           background-color: var(--ic_ve_color_black1_opacity);
+          pointer-events: auto;
           transition:
             color 0ms calc(1000ms/12) var(--ic_ve_cubicBezier_slowFast),
             background-color 0ms calc(1000ms/12) var(--ic_ve_cubicBezier_slowFast),
             transform calc(1000ms/24) 0ms var(--ic_ve_cubicBezier_slowFast)
           ;
         }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>:not(:first-child) {
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>:not(:first-child) {
           margin-left: 1px;
         }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>:first-child {
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>:first-child {
           border-top-left-radius: 4px;
           border-bottom-left-radius: 4px;
         }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>:last-child {
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>:last-child {
           border-top-right-radius: 4px;
           border-bottom-right-radius: 4px;
         }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-active {
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-active {
           color: var(--ic_ve_font_color_auto);
           background-color: var(--ic_ve_color_black2_opacity);
         }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ic_active_0 {
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ic_active_0 {
           transform: scale(0.875);
         }
           /* */
-          .tyin_package_quill_container>.ql-toolbar>.ql-formats>*>svg {
+          .tyin_package_quill_origin>.ql-toolbar>.ql-formats>*>svg {
             display: none;
           }
     /*  */
-    .tyin_package_quill_container>.ql-container {
+    .tyin_package_quill_origin>.ql-container {
       display: block;
+      max-width: 800px;
+      height: 100%;
+      margin: 0 auto;
+      background-color: var(--ic_ve_color_background);
+      box-shadow: var(--ic_ve_shadow_2dp3);
     }
       /*  */
-      .tyin_package_quill_container>.ql-container>.ql-editor[contenteditable="true"],
-      .tyin_package_quill_container>.ql-container>.ql-clipboard[contenteditable="true"] {
+      .tyin_package_quill_origin>.ql-container>.ql-editor[contenteditable="true"],
+      .tyin_package_quill_origin>.ql-container>.ql-clipboard[contenteditable="true"] {
         word-break: break-word;
         overflow-wrap: break-word;
         white-space: pre-wrap;
@@ -238,38 +279,24 @@
         cursor: auto;
       }
         /*  */
-        .tyin_package_quill_container>.ql-container>.ql-editor *,
-        .tyin_package_quill_container>.ql-container>.ql-clipboard * {
-          -webkit-user-select: auto;
-          user-select: auto;
-        }
-        .tyin_package_quill_container>.ql-container>.ql-editor :not(.katex *),
-        .tyin_package_quill_container>.ql-container>.ql-clipboard :not(.katex *) {
+        .tyin_package_quill_origin>.ql-container>.ql-editor :not(.katex *),
+        .tyin_package_quill_origin>.ql-container>.ql-clipboard :not(.katex *) {
           display: block;
         }
-        .tyin_package_quill_container>.ql-container>.ql-editor span:not(.katex *),
-        .tyin_package_quill_container>.ql-container>.ql-clipboard span:not(.katex *) {
+        .tyin_package_quill_origin>.ql-container>.ql-editor span:not(.katex *),
+        .tyin_package_quill_origin>.ql-container>.ql-clipboard span:not(.katex *) {
           display: inline-block;
         }
       /*  */
-      .tyin_package_quill_container>.ql-container>.ql-editor {
+      .tyin_package_quill_origin>.ql-container>.ql-editor {
         display: block;
         overflow: hidden auto;
-        position: absolute;
-        left: 0;
-        right: 0;
-        top: 0;
-        margin: auto;
         padding: 24px;
-        width: 100%;
-        max-width: 800px;
         height: 100%;
-        background-color: var(--ic_ve_color_background);
-        box-shadow: var(--ic_ve_shadow_2dp3);
       }
         /*  */
-        .tyin_package_quill_container>.ql-container>.ql-editor::before,
-        .tyin_package_quill_container>.ql-container>.ql-editor::after {
+        .tyin_package_quill_origin>.ql-container>.ql-editor::before,
+        .tyin_package_quill_origin>.ql-container>.ql-editor::after {
           content: "1970-01-01 00:00:00";
           display: inline-block;
           width: 100%;
@@ -279,301 +306,301 @@
           color: var(--ic_ve_color_black4_opacity);
           pointer-events: none;
         }
-        html.ic_nr_browser_firefox .tyin_package_quill_container>.ql-container>.ql-editor::after {
+        html.ic_nr_browser_firefox .tyin_package_quill_origin>.ql-container>.ql-editor::after {
           padding-bottom: 24px;
         }
-        .tyin_package_quill_container>.ql-container>.ql-editor[contenteditable="true"]::after {
+        .tyin_package_quill_origin>.ql-container>.ql-editor[contenteditable="true"]::after {
           padding-bottom: 128px;
         }
-        .tyin_package_quill_container>.ql-container>.ql-editor .ql-indent-1:not(.ql-direction-rtl) {
+        .tyin_package_quill_origin>.ql-container>.ql-editor .ql-indent-1:not(.ql-direction-rtl) {
           margin-left: 2em;
         }
-        .tyin_package_quill_container>.ql-container>.ql-editor .ql-indent-2:not(.ql-direction-rtl) {
+        .tyin_package_quill_origin>.ql-container>.ql-editor .ql-indent-2:not(.ql-direction-rtl) {
           margin-left: 4em;
         }
-        .tyin_package_quill_container>.ql-container>.ql-editor .ql-indent-3:not(.ql-direction-rtl) {
+        .tyin_package_quill_origin>.ql-container>.ql-editor .ql-indent-3:not(.ql-direction-rtl) {
           margin-left: 6em;
         }
-        .tyin_package_quill_container>.ql-container>.ql-editor .ql-indent-4:not(.ql-direction-rtl) {
+        .tyin_package_quill_origin>.ql-container>.ql-editor .ql-indent-4:not(.ql-direction-rtl) {
           margin-left: 8em;
         }
-        .tyin_package_quill_container>.ql-container>.ql-editor .ql-indent-5:not(.ql-direction-rtl) {
+        .tyin_package_quill_origin>.ql-container>.ql-editor .ql-indent-5:not(.ql-direction-rtl) {
           margin-left: 10em;
         }
-        .tyin_package_quill_container>.ql-container>.ql-editor .ql-indent-6:not(.ql-direction-rtl) {
+        .tyin_package_quill_origin>.ql-container>.ql-editor .ql-indent-6:not(.ql-direction-rtl) {
           margin-left: 12em;
         }
-        .tyin_package_quill_container>.ql-container>.ql-editor .ql-indent-7:not(.ql-direction-rtl) {
+        .tyin_package_quill_origin>.ql-container>.ql-editor .ql-indent-7:not(.ql-direction-rtl) {
           margin-left: 14em;
         }
-        .tyin_package_quill_container>.ql-container>.ql-editor .ql-indent-8:not(.ql-direction-rtl) {
+        .tyin_package_quill_origin>.ql-container>.ql-editor .ql-indent-8:not(.ql-direction-rtl) {
           margin-left: 16em;
         }
-        .tyin_package_quill_container>.ql-container>.ql-editor .ql-indent-1.ql-direction-rtl {
+        .tyin_package_quill_origin>.ql-container>.ql-editor .ql-indent-1.ql-direction-rtl {
           margin-right: 2em;
         }
-        .tyin_package_quill_container>.ql-container>.ql-editor .ql-indent-2.ql-direction-rtl {
+        .tyin_package_quill_origin>.ql-container>.ql-editor .ql-indent-2.ql-direction-rtl {
           margin-right: 4em;
         }
-        .tyin_package_quill_container>.ql-container>.ql-editor .ql-indent-3.ql-direction-rtl {
+        .tyin_package_quill_origin>.ql-container>.ql-editor .ql-indent-3.ql-direction-rtl {
           margin-right: 6em;
         }
-        .tyin_package_quill_container>.ql-container>.ql-editor .ql-indent-4.ql-direction-rtl {
+        .tyin_package_quill_origin>.ql-container>.ql-editor .ql-indent-4.ql-direction-rtl {
           margin-right: 8em;
         }
-        .tyin_package_quill_container>.ql-container>.ql-editor .ql-indent-5.ql-direction-rtl {
+        .tyin_package_quill_origin>.ql-container>.ql-editor .ql-indent-5.ql-direction-rtl {
           margin-right: 10em;
         }
-        .tyin_package_quill_container>.ql-container>.ql-editor .ql-indent-6.ql-direction-rtl {
+        .tyin_package_quill_origin>.ql-container>.ql-editor .ql-indent-6.ql-direction-rtl {
           margin-right: 12em;
         }
-        .tyin_package_quill_container>.ql-container>.ql-editor .ql-indent-7.ql-direction-rtl {
+        .tyin_package_quill_origin>.ql-container>.ql-editor .ql-indent-7.ql-direction-rtl {
           margin-right: 14em;
         }
-        .tyin_package_quill_container>.ql-container>.ql-editor .ql-indent-8.ql-direction-rtl {
+        .tyin_package_quill_origin>.ql-container>.ql-editor .ql-indent-8.ql-direction-rtl {
           margin-right: 16em;
         }
         /*  */
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-font::before {
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-font::before {
           content: "􀤍";
         }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-font[value="monospace"]::before {
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-font[value="monospace"]::before {
           content: "􀃤";
         }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-size::before {
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-size::before {
           content: "􀅐";
         }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-size[value="small"]::before {
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-size[value="small"]::before {
           content: "􀁎";
         }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-size[value="large"]::before {
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-size[value="large"]::before {
           content: "􀁌";
         }
           /*  */
-          .tyin_package_quill_container>.ql-container>.ql-editor .ql-size-small {
+          .tyin_package_quill_origin>.ql-container>.ql-editor .ql-size-small {
             font-size: smaller;
           }
-          .tyin_package_quill_container>.ql-container>.ql-editor .ql-size-large {
+          .tyin_package_quill_origin>.ql-container>.ql-editor .ql-size-large {
             font-size: larger;
           }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-bold::before {
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-bold::before {
           content: "􀅓";
         }
           /*  */
-          .tyin_package_quill_container>.ql-container>.ql-editor strong {
+          .tyin_package_quill_origin>.ql-container>.ql-editor strong {
             display: inline !important;
             font-weight: bold;
           }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-italic::before {
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-italic::before {
           content: "􀅔";
         }
           /*  */
-          .tyin_package_quill_container>.ql-container>.ql-editor em {
+          .tyin_package_quill_origin>.ql-container>.ql-editor em {
             display: inline !important;
             font-style: italic;
           }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-underline::before {
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-underline::before {
           content: "􀅕";
         }
           /*  */
-          .tyin_package_quill_container>.ql-container>.ql-editor u {
+          .tyin_package_quill_origin>.ql-container>.ql-editor u {
             display: inline !important;
             text-decoration: underline;
           }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-strike::before {
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-strike::before {
           content: "􀅖";
         }
           /*  */
-          .tyin_package_quill_container>.ql-container>.ql-editor s {
+          .tyin_package_quill_origin>.ql-container>.ql-editor s {
             display: inline !important;
             text-decoration: line-through;
             opacity: calc(1/0.8*0.4);
           }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-color::before {
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-color::before {
           content: "􀣶";
         }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-color.ql-active::before {
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-color.ql-active::before {
           content: "􀣷";
         }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-color[value="var(--qt_ve_color_red)"]::before {
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-color[value="var(--qt_ve_color_red)"]::before {
           color: var(--qt_ve_color_red_translucent);
         }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-color[value="var(--qt_ve_color_red)"].ql-active::before {
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-color[value="var(--qt_ve_color_red)"].ql-active::before {
           color: var(--qt_ve_color_red);
         }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-color[value="var(--qt_ve_color_green)"]::before {
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-color[value="var(--qt_ve_color_green)"]::before {
           color: var(--qt_ve_color_green_translucent);
         }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-color[value="var(--qt_ve_color_green)"].ql-active::before {
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-color[value="var(--qt_ve_color_green)"].ql-active::before {
           color: var(--qt_ve_color_green);
         }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-color[value="var(--qt_ve_color_blue)"]::before {
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-color[value="var(--qt_ve_color_blue)"]::before {
           color: var(--qt_ve_color_blue_translucent);
         }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-color[value="var(--qt_ve_color_blue)"].ql-active::before {
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-color[value="var(--qt_ve_color_blue)"].ql-active::before {
           color: var(--qt_ve_color_blue);
         }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-color[value="var(--qt_ve_color_orange)"]::before {
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-color[value="var(--qt_ve_color_orange)"]::before {
           color: var(--qt_ve_color_orange_translucent);
         }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-color[value="var(--qt_ve_color_orange)"].ql-active::before {
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-color[value="var(--qt_ve_color_orange)"].ql-active::before {
           color: var(--qt_ve_color_orange);
         }
           /*  */
-          .tyin_package_quill_container>.ql-container>.ql-editor [style^="color:"],
-          .tyin_package_quill_container>.ql-container>.ql-editor [style*=" color:"] {
+          .tyin_package_quill_origin>.ql-container>.ql-editor [style^="color:"]:not([style*="_translucent"]),
+          .tyin_package_quill_origin>.ql-container>.ql-editor [style*=" color:"]:not([style*="_translucent"]) {
             background-color: transparent !important;
           }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-background::before {
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-background::before {
           content: "􀎑";
         }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-background.ql-active::before {
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-background.ql-active::before {
           content: "􀎒";
         }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-background[value="var(--qt_ve_color_red_translucent)"]::before {
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-background[value="var(--qt_ve_color_red_translucent)"]::before {
           color: var(--qt_ve_color_red_translucent);
         }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-background[value="var(--qt_ve_color_red_translucent)"].ql-active::before {
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-background[value="var(--qt_ve_color_red_translucent)"].ql-active::before {
           color: var(--qt_ve_color_red);
         }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-background[value="var(--qt_ve_color_green_translucent)"]::before {
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-background[value="var(--qt_ve_color_green_translucent)"]::before {
           color: var(--qt_ve_color_green_translucent);
         }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-background[value="var(--qt_ve_color_green_translucent)"].ql-active::before {
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-background[value="var(--qt_ve_color_green_translucent)"].ql-active::before {
           color: var(--qt_ve_color_green_);
         }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-background[value="var(--qt_ve_color_blue_translucent)"]::before {
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-background[value="var(--qt_ve_color_blue_translucent)"]::before {
           color: var(--qt_ve_color_blue_translucent);
         }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-background[value="var(--qt_ve_color_blue_translucent)"].ql-active::before {
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-background[value="var(--qt_ve_color_blue_translucent)"].ql-active::before {
           color: var(--qt_ve_color_blue);
         }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-background[value="var(--qt_ve_color_orange_translucent)"]::before {
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-background[value="var(--qt_ve_color_orange_translucent)"]::before {
           color: var(--qt_ve_color_orange_translucent);
         }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-background[value="var(--qt_ve_color_orange_translucent)"].ql-active::before {
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-background[value="var(--qt_ve_color_orange_translucent)"].ql-active::before {
           color: var(--qt_ve_color_orange);
         }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-script[value="sub"]::before {
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-script[value="sub"]::before {
           content: "􀓡";
         }
           /*  */
-          .tyin_package_quill_container>.ql-container>.ql-editor sub {
+          .tyin_package_quill_origin>.ql-container>.ql-editor sub {
             display: inline !important;
             color: var(--ic_ve_font_color_auto);
             vertical-align: bottom;
           }
-          html:not(.ic_nr_browser_chromium) .tyin_package_quill_container>.ql-container>.ql-editor sub {
+          html:not(.ic_nr_browser_chromium) .tyin_package_quill_origin>.ql-container>.ql-editor sub {
             font-size: 0.618em;
           }
-          .ic_nr_browser_chromium .tyin_package_quill_container>.ql-container>.ql-editor sub {
+          .ic_nr_browser_chromium .tyin_package_quill_origin>.ql-container>.ql-editor sub {
             zoom: 0.618;
           }
-          .tyin_package_quill_container>.ql-container>.ql-editor sub * {
+          .tyin_package_quill_origin>.ql-container>.ql-editor sub * {
             vertical-align: bottom;
           }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-script[value="super"]::before {
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-script[value="super"]::before {
           content: "􀓢";
         }
           /*  */
-          .tyin_package_quill_container>.ql-container>.ql-editor sup {
+          .tyin_package_quill_origin>.ql-container>.ql-editor sup {
             display: inline !important;
             color: var(--ic_ve_font_color_auto);
             vertical-align: top;
           }
-          html:not(.ic_nr_browser_chromium) .tyin_package_quill_container>.ql-container>.ql-editor sup {
+          html:not(.ic_nr_browser_chromium) .tyin_package_quill_origin>.ql-container>.ql-editor sup {
             font-size: 0.618em;
           }
-          .ic_nr_browser_chromium .tyin_package_quill_container>.ql-container>.ql-editor sup {
+          .ic_nr_browser_chromium .tyin_package_quill_origin>.ql-container>.ql-editor sup {
             zoom: 0.618;
           }
-          .tyin_package_quill_container>.ql-container>.ql-editor sup * {
+          .tyin_package_quill_origin>.ql-container>.ql-editor sup * {
             vertical-align: top;
           }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-header::before {
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-header::before {
           content: "􀬎";
         }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-header[value="1"]::before {
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-header[value="1"]::before {
           content: "􀀺";
         }
           /*  */
-          .tyin_package_quill_container>.ql-container>.ql-editor h1 {
+          .tyin_package_quill_origin>.ql-container>.ql-editor h1 {
             font-size: 2.2em;
           }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-header[value="2"]::before {
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-header[value="2"]::before {
           content: "􀀼";
         }
           /*  */
-          .tyin_package_quill_container>.ql-container>.ql-editor h2 {
+          .tyin_package_quill_origin>.ql-container>.ql-editor h2 {
             font-size: 2em;
           }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-header[value="3"]::before {
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-header[value="3"]::before {
           content: "􀀾";
         }
           /*  */
-          .tyin_package_quill_container>.ql-container>.ql-editor h3 {
+          .tyin_package_quill_origin>.ql-container>.ql-editor h3 {
             font-size: 1.8em;
           }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-header[value="4"]::before {
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-header[value="4"]::before {
           content: "􀁀";
         }
           /*  */
-          .tyin_package_quill_container>.ql-container>.ql-editor h4 {
+          .tyin_package_quill_origin>.ql-container>.ql-editor h4 {
             font-size: 1.6em;
           }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-header[value="5"]::before {
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-header[value="5"]::before {
           content: "􀁂";
         }
           /*  */
-          .tyin_package_quill_container>.ql-container>.ql-editor h5 {
+          .tyin_package_quill_origin>.ql-container>.ql-editor h5 {
             font-size: 1.4em;
           }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-header[value="6"]::before {
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-header[value="6"]::before {
           content: "􀁄";
         }
           /*  */
-          .tyin_package_quill_container>.ql-container>.ql-editor h6 {
+          .tyin_package_quill_origin>.ql-container>.ql-editor h6 {
             font-size: 1.2em;
           }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-blockquote::before {
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-blockquote::before {
           content: "􀋿";
         }
           /*  */
-          .tyin_package_quill_container>.ql-container>.ql-editor blockquote {
+          .tyin_package_quill_origin>.ql-container>.ql-editor blockquote {
             opacity: calc(1/0.8*0.6);
           }
-          .tyin_package_quill_container>.ql-container>.ql-editor blockquote:not(.ql-direction-rtl) {
+          .tyin_package_quill_origin>.ql-container>.ql-editor blockquote:not(.ql-direction-rtl) {
             padding: 2px 0 2px calc(2em - 4px);
             border-left: 4px solid;
             border-left-color: var(--ic_ve_color_system_blue_translucent);
           }
-          .tyin_package_quill_container>.ql-container>.ql-editor blockquote.ql-direction-rtl {
+          .tyin_package_quill_origin>.ql-container>.ql-editor blockquote.ql-direction-rtl {
             padding: 2px calc(2em - 4px) 2px 0;
             border-right: 4px solid;
             border-right-color: var(--ic_ve_color_system_blue_translucent);
           }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-code-block::before {
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-code-block::before {
           content: "􀙚";
         }
           /*  */
-          .tyin_package_quill_container>.ql-container>.ql-editor pre {
+          .tyin_package_quill_origin>.ql-container>.ql-editor pre {
             padding: calc(1.1666666667em);
             font-size: 12px;
             color: var(--ic_ve_font_color_white);
             background-color: var(--ic_ve_font_color_black);
           }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-list[value="ordered"]::before {
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-list[value="ordered"]::before {
           content: "􀋴";
         }
           /*  */
-          .tyin_package_quill_container>.ql-container>.ql-editor ol {
+          .tyin_package_quill_origin>.ql-container>.ql-editor ol {
             padding: 0 2em;
           }
-          .tyin_package_quill_container>.ql-container>.ql-editor ol>li {
+          .tyin_package_quill_origin>.ql-container>.ql-editor ol>li {
             vertical-align: top;
           }
             /*  */
-            .tyin_package_quill_container>.ql-container>.ql-editor ol>li::before {
+            .tyin_package_quill_origin>.ql-container>.ql-editor ol>li::before {
               content: "?";
               display: inline-block;
               width: 2em;
@@ -582,124 +609,124 @@
               -webkit-mask: linear-gradient(-90deg,#000000,rgba(0,0,0,0));
               mask: linear-gradient(-90deg,#000000,rgba(0,0,0,0));
             }
-            .tyin_package_quill_container>.ql-container>.ql-editor ol>li:not(.ql-direction-rtl)::before {
+            .tyin_package_quill_origin>.ql-container>.ql-editor ol>li:not(.ql-direction-rtl)::before {
               margin-left: -2em;
             }
-            .tyin_package_quill_container>.ql-container>.ql-editor ol>li.ql-direction-rtl::before {
+            .tyin_package_quill_origin>.ql-container>.ql-editor ol>li.ql-direction-rtl::before {
               margin-right: -2em;
             }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-list[value="bullet"]::before {
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-list[value="bullet"]::before {
           content: "􀣩";
         }
           /*  */
-          .tyin_package_quill_container>.ql-container>.ql-editor ul {
+          .tyin_package_quill_origin>.ql-container>.ql-editor ul {
             padding: 0 2em;
           }
-          .tyin_package_quill_container>.ql-container>.ql-editor ul>li {
+          .tyin_package_quill_origin>.ql-container>.ql-editor ul>li {
             vertical-align: top;
           }
             /*  */
-            .tyin_package_quill_container>.ql-container>.ql-editor ul>li::before {
+            .tyin_package_quill_origin>.ql-container>.ql-editor ul>li::before {
               content: "★";
               display: inline-block;
               width: 2em;
               text-align: center;
-              color: var(--ic_ve_color_black6_opacity);
-              transform: scale(0.618);
+              transform: scale(0.75);
               -webkit-mask: linear-gradient(-90deg,#000000,rgba(0,0,0,0));
               mask: linear-gradient(-90deg,#000000,rgba(0,0,0,0));
             }
-            .tyin_package_quill_container>.ql-container>.ql-editor ul>li:not(.ql-direction-rtl)::before {
+            .tyin_package_quill_origin>.ql-container>.ql-editor ul>li:not(.ql-direction-rtl)::before {
               margin-left: -2em;
             }
-            .tyin_package_quill_container>.ql-container>.ql-editor ul>li.ql-direction-rtl::before {
+            .tyin_package_quill_origin>.ql-container>.ql-editor ul>li.ql-direction-rtl::before {
               margin-right: -2em;
             }
-            .tyin_package_quill_container>.ql-container>.ql-editor ul>.ql-indent-1:not(.ql-direction-rtl)::before,
-            .tyin_package_quill_container>.ql-container>.ql-editor ul>.ql-indent-3:not(.ql-direction-rtl)::before,
-            .tyin_package_quill_container>.ql-container>.ql-editor ul>.ql-indent-5:not(.ql-direction-rtl)::before,
-            .tyin_package_quill_container>.ql-container>.ql-editor ul>.ql-indent-7:not(.ql-direction-rtl)::before {
+            .tyin_package_quill_origin>.ql-container>.ql-editor ul>.ql-indent-1:not(.ql-direction-rtl)::before,
+            .tyin_package_quill_origin>.ql-container>.ql-editor ul>.ql-indent-3:not(.ql-direction-rtl)::before,
+            .tyin_package_quill_origin>.ql-container>.ql-editor ul>.ql-indent-5:not(.ql-direction-rtl)::before,
+            .tyin_package_quill_origin>.ql-container>.ql-editor ul>.ql-indent-7:not(.ql-direction-rtl)::before {
               content: "☆";
             }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-indent[value="-1"]::before {
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-indent[value="-1"]::before {
           content: "􀋶";
         }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-indent[value="+1"]::before {
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-indent[value="+1"]::before {
           content: "􀋵";
         }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-direction::before {
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-direction::before {
           content: "􀒆";
         }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-direction[value="rtl"]::before {
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-direction[value="rtl"]::before {
           content: "􀝿";
         }
           /*  */
-          .tyin_package_quill_container>.ql-container>.ql-editor .ql-direction-rtl {
+          .tyin_package_quill_origin>.ql-container>.ql-editor .ql-direction-rtl {
             direction: rtl;
           }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-align::before {
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-align::before {
           content: "􀌀";
         }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-align[value="center"]::before {
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-align[value="center"]::before {
           content: "􀌁";
         }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-align[value="right"]::before {
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-align[value="right"]::before {
           content: "􀌂";
         }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-align[value="justify"]::before {
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-align[value="justify"]::before {
           content: "􀌃";
         }
           /*  */
-          .tyin_package_quill_container>.ql-container>.ql-editor .ql-align-center {
+          .tyin_package_quill_origin>.ql-container>.ql-editor .ql-align-center {
             text-align: center;
           }
-          .tyin_package_quill_container>.ql-container>.ql-editor .ql-align-right {
+          .tyin_package_quill_origin>.ql-container>.ql-editor .ql-align-right {
             text-align: right;
           }
-          .tyin_package_quill_container>.ql-container>.ql-editor .ql-align-justify {
+          .tyin_package_quill_origin>.ql-container>.ql-editor .ql-align-justify {
             text-align: justify;
           }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-link::before {
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-link::before {
           content: "􀉣";
         }
           /*  */
-          .tyin_package_quill_container>.ql-container>.ql-editor a {
+          .tyin_package_quill_origin>.ql-container>.ql-editor a {
             display: inline !important;
             text-decoration: underline;
             text-decoration-style: dotted;
           }
-          .tyin_package_quill_container>.ql-container>.ql-editor a u {
+          .tyin_package_quill_origin>.ql-container>.ql-editor a u {
             text-decoration-style: dotted;
           }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-image::before {
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-image::before {
           content: "􀏅";
         }
           /*  */
-          .tyin_package_quill_container>.ql-container>.ql-editor img {
+          .tyin_package_quill_origin>.ql-container>.ql-editor img {
             display: inline !important;
             max-width: calc(100% - 2em*2);
           }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-video::before {
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-video::before {
           content: "􀊙";
         }
           /*  */
-          .tyin_package_quill_container>.ql-container>.ql-editor iframe {
+          .tyin_package_quill_origin>.ql-container>.ql-editor iframe {
             padding: 2px;
             width: 480px;
+            max-width: calc(100% - 2em*2);
             height: 270px;
             background-color: var(--ic_ve_color_foreground);
           }
-          .tyin_package_quill_container>.ql-container>.ql-editor iframe.ql-align-center {
+          .tyin_package_quill_origin>.ql-container>.ql-editor iframe.ql-align-center {
             margin: 0 auto;
           }
-          .tyin_package_quill_container>.ql-container>.ql-editor iframe.ql-align-right {
+          .tyin_package_quill_origin>.ql-container>.ql-editor iframe.ql-align-right {
             margin: 0 0 0 auto;
           }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-formula::before {
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-formula::before {
           content: "􀅮";
         }
           /*  */
-          .tyin_package_quill_container>.ql-container>.ql-editor .katex {
+          .tyin_package_quill_origin>.ql-container>.ql-editor .katex {
             overflow: auto hidden;
             padding: 2px;
             color: #009688;
@@ -707,17 +734,20 @@
             white-space: nowrap;
             vertical-align: bottom;
           }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-clean::before {
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-clean::before {
           content: "􀇼";
         }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-undo::before {
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-undo::before {
           content: "􀱍";
         }
-        .tyin_package_quill_container>.ql-toolbar>.ql-formats>.ql-redo::before {
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-redo::before {
           content: "􀱓";
         }
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-list_button::before {
+          content: "􀏚";
+        }
       /*  */
-      .tyin_package_quill_container>.ql-container>.ql-clipboard {
+      .tyin_package_quill_origin>.ql-container>.ql-clipboard {
         overflow: hidden;
         position: absolute;
         left: -1px;
@@ -727,7 +757,7 @@
         opacity: 0;
       }
       /*  */
-      .tyin_package_quill_container>.ql-container>.ql-tooltip {
+      .tyin_package_quill_origin>.ql-container>.ql-tooltip {
         display: flex;
         flex-direction: column;
         z-index: 1;
@@ -756,10 +786,10 @@
           transform 0ms var(--ic_ve_cubicBezier_slowFast)
         ;
       }
-      .tyin_package_quill_container>.ql-container>.ql-tooltip:not([data-mode]) {
+      .tyin_package_quill_origin>.ql-container>.ql-tooltip:not([data-mode]) {
         height: calc(24px*2 + 4px*2 + 1px);
       }
-      .tyin_package_quill_container>.ql-container>.ql-hidden {
+      .tyin_package_quill_origin>.ql-container>.ql-hidden {
         pointer-events: none;
         opacity: 0;
         visibility: hidden;
@@ -771,17 +801,17 @@
         ;
       }
         /*  */
-        .tyin_package_quill_container>.ql-container>.ql-tooltip[data-mode="link"]>.ql-preview,
-        .tyin_package_quill_container>.ql-container>.ql-tooltip[data-mode="video"]>.ql-preview,
-        .tyin_package_quill_container>.ql-container>.ql-tooltip[data-mode="formula"]>.ql-preview,
-        .tyin_package_quill_container>.ql-container>.ql-tooltip>.ql-action,
-        .tyin_package_quill_container>.ql-container>.ql-tooltip[data-mode="link"]>.ql-remove,
-        .tyin_package_quill_container>.ql-container>.ql-tooltip[data-mode="video"]>.ql-remove,
-        .tyin_package_quill_container>.ql-container>.ql-tooltip[data-mode="formula"]>.ql-remove,
-        .tyin_package_quill_container>.ql-container>.ql-tooltip:not(.ql-editing)>input {
+        .tyin_package_quill_origin>.ql-container>.ql-tooltip[data-mode="link"]>.ql-preview,
+        .tyin_package_quill_origin>.ql-container>.ql-tooltip[data-mode="video"]>.ql-preview,
+        .tyin_package_quill_origin>.ql-container>.ql-tooltip[data-mode="formula"]>.ql-preview,
+        .tyin_package_quill_origin>.ql-container>.ql-tooltip>.ql-action,
+        .tyin_package_quill_origin>.ql-container>.ql-tooltip[data-mode="link"]>.ql-remove,
+        .tyin_package_quill_origin>.ql-container>.ql-tooltip[data-mode="video"]>.ql-remove,
+        .tyin_package_quill_origin>.ql-container>.ql-tooltip[data-mode="formula"]>.ql-remove,
+        .tyin_package_quill_origin>.ql-container>.ql-tooltip:not(.ql-editing)>input {
           display: none;
         }
-        .tyin_package_quill_container>.ql-container>.ql-tooltip>a {
+        .tyin_package_quill_origin>.ql-container>.ql-tooltip>a {
           display: flex;
           justify-content: center;
           align-items: center;
@@ -790,24 +820,24 @@
           text-align: center;
           transition: transform calc(1000ms/24) 0ms var(--ic_ve_cubicBezier_slowFast);
         }
-        .tyin_package_quill_container>.ql-container>.ql-tooltip>a.ic_active_0 {
+        .tyin_package_quill_origin>.ql-container>.ql-tooltip>a.ic_active_0 {
           transform: scale(0.875);
         }
-        .tyin_package_quill_container>.ql-container>.ql-tooltip>.ql-preview {
+        .tyin_package_quill_origin>.ql-container>.ql-tooltip>.ql-preview {
           border-radius: 4px 4px 0 0;
           text-decoration: underline;
           text-decoration-style: dotted;
         }
-        .tyin_package_quill_container>.ql-container>.ql-tooltip>.ql-remove {
+        .tyin_package_quill_origin>.ql-container>.ql-tooltip>.ql-remove {
           margin-top: 1px;
           border-radius: 0 0 4px 4px;
           color: var(--ic_ve_color_black4_opacity);
         }
           /*  */
-          .tyin_package_quill_container>.ql-container>.ql-tooltip>.ql-remove::before {
+          .tyin_package_quill_origin>.ql-container>.ql-tooltip>.ql-remove::before {
             content: "􀈑";
           }
-        .tyin_package_quill_container>.ql-container>.ql-tooltip>input {
+        .tyin_package_quill_origin>.ql-container>.ql-tooltip>input {
           padding: 4px;
           width: 128px;
           border-radius: 6px;

@@ -431,6 +431,29 @@
       /*🔴*/redis(){},
       /*🔴*/mongoDB(){},
       /*🔴*/memcached(){},
+      /*🟢*/async loadPackage_IDB(){
+        if(!('idb'in globalThis)){
+          // this.elementCreate('script',{async:'module',src:`${import.meta.url.replace('/main/tyin.js','/package/IDB@6.1.0/build/iife/index-min.js')}`},document.head);
+          this.elementCreate('script',{async:'module',src:`${import.meta.url.replace('/main/tyin.js','/package/IDB@6.1.0/build/iife/with-async-ittr-min.js')}`},document.head);
+        }
+        return await this.loop(()=>{
+          if('idb'in globalThis){
+            return idb;
+          }
+          return false;
+        });
+      },
+      /*🟢*/async loadPackage_IDBKeyVal(){
+        if(!('idbKeyval'in globalThis)){
+          this.elementCreate('script',{async:'module',src:`${import.meta.url.replace('/main/tyin.js','/package/IDBKeyVal@5.0.5/dist/iife/index-min.js')}`},document.head);
+        }
+        return await this.loop(()=>{
+          if('idbKeyval'in globalThis){
+            return idbKeyval;
+          }
+          return false;
+        });
+      },
     // 💠 network data
       /*🟢*/fetch(URL,method,data,dataPack,requestDataType,responseDataType,callback,optionPlus,optionHeadersPlus){
         const option={};
@@ -531,7 +554,7 @@
       /*🔴*/siteMapGenerator(){},
       /*🔴*/siteMapHTMLGenerator(){},
     // 💠 graphics
-      /*🔴*/_package_openCV_load_(){},
+      /*🔴*/async loadPackage_openCV(){},
       /*🔴*/package_openCV_removeWatermark(){},
     // 💠 command line interface
       /*🔴*/cli(){},
@@ -1824,8 +1847,19 @@
           resolve(true);
         });
       },
-      /*🟢*/_package_fontAwesomeFree_load_(){
+      /*🟢*/async loadPackage_fontAwesomeFree(){
         this.elementCreate('link',{rel:'stylesheet',href:`${import.meta.url.replace('/main/tyin.js','/package/fontAwesomeFree@5.15.3/css/all.min.css')}`,crossorigin:''},document.head);
+      },
+      /*🟢*/async loadPackage_HLS(){
+        if(!('Hls'in globalThis)){
+          this.elementCreate('script',{async:'module',src:`${import.meta.url.replace('/main/tyin.js','/package/HLS@1.0.2/hls.min.js')}`},document.head);
+        }
+        return await this.loop(()=>{
+          if('Hls'in globalThis){
+            return Hls;
+          }
+          return false;
+        });
       },
       /*🟢*/package_HLS_play(mode='auto',video,src,poster='',config={
         autoStartLoad:video.getAttribute('preload')==='auto'?true:false,
@@ -1833,7 +1867,9 @@
         maxBufferSize:4*1000*1000
       }){
         if(!('Hls'in globalThis)){
-          this.elementCreate('script',{async:'',src:`${import.meta.url.replace('/main/tyin.js','/package/HLS@1.0.2/hls.min.js')}`},document.head);
+          (async()=>{
+            await this.loadPackage_HLS();
+          })();
         }
         this.loop(()=>{
           if('Hls'in globalThis){
@@ -1896,57 +1932,6 @@
           }
           return false;
         });
-      },
-      /*🟢*/package_HLS_observePlay(){
-        if(!document.createElement('video').canPlayType('application/vnd.apple.mpegurl')){
-          if(!('Hls'in globalThis)){
-            const script=document.createElement('script');
-            script.setAttribute('async','');
-            script.setAttribute('src',`${import.meta.url.replace('/main/tyin.js','/package/HLS@1.0.2/hls.min.js')}`);
-            document.head.insertAdjacentElement('beforeend',script);
-          }
-          const load=(video)=>{
-            if(video._HLS_){
-              video._HLS_.destroy();
-              delete video._HLS_;
-            }
-            if(video.hasAttribute('src')&&video.getAttribute('src').match(/\.m3u8/i)){
-              if('Hls'in globalThis&&Hls.isSupported()){
-                const HLS=new Hls({
-                  autoStartLoad:video.getAttribute('preload')==='auto'?true:false,
-                  maxBufferLength:4,
-                  maxBufferSize:4*1000*1000
-                });
-                HLS.loadSource(video.getAttribute('src'));
-                HLS.attachMedia(video);
-                video._HLS_=HLS;
-              }
-            }
-          };
-          const query=()=>{
-            document.querySelectorAll('body *').forEach((target)=>{
-              if(target.localName==='video'){
-                load(target);
-              }
-            });
-          };
-          const observe=()=>{
-            new MutationObserver((mutation_list)=>{
-              mutation_list.forEach((mutation)=>{
-                if(mutation.type==='attributes'&&mutation.target.localName==='video'){
-                  load(mutation.target);
-                }
-              });
-            }).observe(document.body,{attributes:true,attributeFilter:['src'],childList:true,subtree:true});
-          };
-          if(document.readyState==='complete'){
-            query();
-            observe();
-          }else{
-            document.addEventListener('load',query,{once:true});
-            document.addEventListener('load',observe,{once:true});
-          }
-        }
       },
       /*🔴*/unit(){},
       /*🔴*/colorDictionary(){},
@@ -2096,23 +2081,57 @@
         }
         return miniEditor;
       },
-      /*🟢*/async package_quill_create(insertElement,insertPosition,mode='tyin_default',placeholder='...',content='',readOnly=false,width,height){
-        if(!('Quill'in globalThis)){
-          this.elementCreate('link',{rel:'stylesheet',href:`${import.meta.url.replace('/main/tyin.js','/main/tyin_package_quill_tyin.css')}`,crossorigin:''},document.head);
+      /*🟢*/async loadPackage_kaTeX(){
+        if(!('katex'in globalThis)){
           this.elementCreate('link',{rel:'stylesheet',href:`${import.meta.url.replace('/main/tyin.js','/package/kaTeX@0.13.3/katex.min.css')}`,crossorigin:''},document.head);
-          this.elementCreate('script',{async:'',src:`${import.meta.url.replace('/main/tyin.js','/package/kaTeX@0.13.3/katex.min.js')}`},document.head);
-          // this.elementCreate('script',{async:'',src:`${import.meta.url.replace('/main/tyin.js','/package/kaTeX@0.13.3/contrib/auto-render.min.js')}`},document.head);
+          this.elementCreate('script',{async:'module',src:`${import.meta.url.replace('/main/tyin.js','/package/kaTeX@0.13.3/katex.min.js')}`},document.head);
+          // this.elementCreate('script',{async:'module',src:`${import.meta.url.replace('/main/tyin.js','/package/kaTeX@0.13.3/contrib/auto-render.min.js')}`},document.head);
+        }
+        return await this.loop(()=>{
+          if('katex'in globalThis){
+            return katex;
+          }
+          return false;
+        });
+      },
+      /*🟢*/async loadPackage_highlight(){
+        if(!('hljs'in globalThis)){
           this.elementCreate('link',{rel:'stylesheet',href:`${import.meta.url.replace('/main/tyin.js','/package/highlight@10.7.2/build/styles/monokai-sublime.min.css')}`,crossorigin:''},document.head);
           this.elementCreate('script',{async:'module',src:`${import.meta.url.replace('/main/tyin.js','/package/highlight@10.7.2/build/highlight.min.js')}`},document.head);
+        }
+        return await this.loop(()=>{
+          if('hljs'in globalThis){
+            return hljs;
+          }
+          return false;
+        });
+      },
+      /*🟢*/async loadPackage_quill(){
+        if(!('Quill'in globalThis)){
+          this.elementCreate('link',{rel:'stylesheet',href:`${import.meta.url.replace('/main/tyin.js','/main/tyin_package_quill_tyin.css')}`,crossorigin:''},document.head);
           // this.elementCreate('link',{rel:'stylesheet',href:`${import.meta.url.replace('/main/tyin.js','/package/quill@1.3.7/quill.snow.css')}`,crossorigin:''},document.head);
           // this.elementCreate('link',{rel:'stylesheet',href:`${import.meta.url.replace('/main/tyin.js','/package/quill@1.3.7/quill.bubble.css')}`,crossorigin:''},document.head);
+          this.elementCreate('script',{async:'module',src:`${import.meta.url.replace('/main/tyin.js','/package/quill@1.3.7/quill.min.js')}`},document.head);
+        }
+        return await this.loop(()=>{
+          if('Quill'in globalThis){
+            return Quill;
+          }
+          return false;
+        });
+      },
+      /*🟢*/async package_quill_create(insertElement,insertPosition,mode='tyin_default',placeholder='...',content,readOnly=false,width,height,first){
+        if(!('Quill'in globalThis)){
+          this.loadPackage_kaTeX();
+          this.loadPackage_highlight();
+          this.loadPackage_IDBKeyVal();
           await this.loop(()=>{
             if('hljs'in globalThis){
               hljs.configure({
                 useBR:false
               });
               hljs.highlightAll();
-              this.elementCreate('script',{async:'',src:`${import.meta.url.replace('/main/tyin.js','/package/quill@1.3.7/quill.min.js')}`},document.head);
+              this.loadPackage_quill();
               return true;
             }
             return false;
@@ -2141,7 +2160,7 @@
                 [{'list':'ordered'},{'list':'bullet'},{'indent':'-1'},{'indent':'+1'}],
                 [{'direction':'rtl'},{'align':[]}],
                 ['link','image','video','formula'],
-                ['clean','undo','redo']
+                ['clean','undo','redo','list_button']
               ];
             }
             break;
@@ -2156,7 +2175,7 @@
                   {'background':'var(--qt_ve_color_red_translucent)'},{'background':'var(--qt_ve_color_green_translucent)'},{'background':'var(--qt_ve_color_blue_translucent)'},{'background':'var(--qt_ve_color_orange_translucent)'},
                 ],
                 [{'list':'bullet'},{'list':'ordered'},{'indent':'-1'},{'indent':'+1'},{'align':'center'},{'align':'right'},{'align':'justify'},{'direction':'rtl'}],
-                ['clean','undo','redo']
+                ['clean','undo','redo','list_button']
               ];
             }
             break;
@@ -2167,7 +2186,7 @@
                 ['bold','italic','underline','strike',{'size':'small'},{'size':'large'}],
                 [{'color':'var(--qt_ve_color_red)'},{'color':'var(--qt_ve_color_green)'},{'color':'var(--qt_ve_color_blue)'},{'color':'var(--qt_ve_color_orange)'},{'script':'super'},{'script':'sub'}],
                 [{'list':'bullet'},{'indent':'-1'},{'indent':'+1'},{'align':'center'},'link','image'],
-                ['clean','undo','redo']
+                ['clean','undo','redo','list_button']
               ];
             }
             break;
@@ -2177,7 +2196,7 @@
                 ['bold','italic','underline','strike',{'header':1},{'header':4}],
                 [{'color':'var(--qt_ve_color_red)'},{'color':'var(--qt_ve_color_green)'},{'color':'var(--qt_ve_color_blue)'},{'color':'var(--qt_ve_color_orange)'},{'script':'super'},{'script':'sub'}],
                 [{'list':'bullet'},{'indent':'-1'},{'indent':'+1'},{'align':'center'},'link','image'],
-                ['clean','undo','redo']
+                ['clean','undo','redo','list_button']
               ];
             }
             break;
@@ -2189,8 +2208,17 @@
             }
             break;
         }
-        return this.loop(()=>{
-          if('katex'in globalThis&&'hljs'in globalThis&&'Quill'in globalThis){
+        return this.loop(async()=>{
+          if('katex'in globalThis&&'hljs'in globalThis&&'idbKeyval'in globalThis&&'Quill'in globalThis){
+            await tyin.loadPackage_IDBKeyVal();
+            const db=idbKeyval.createStore('tyin_package_quill','basic');
+            let last_UUID=await idbKeyval.get('last',db);
+            let last_content=null;
+            if(last_UUID){
+              last_content=await idbKeyval.get(last_UUID,db);
+            }else{
+              last_UUID=this.UUID();
+            }
             const font=Quill.import('formats/font');
             font.whitelist=['monospace'];
             Quill.register(font,true);
@@ -2200,12 +2228,12 @@
             if(width||height){
               attribute.style=`${width?`width: ${width}; `:''}${height?`height: ${height};`:''}`;
             }
-            const result=tyin.elementCreate(
+            const result=this.elementCreate(
               'div',
               attribute,
               insertElement,
               insertPosition,
-              `<div class="tyin_package_quill_${typeof mode==='string'?mode:'custom'}_container tyin_package_quill_UUID_${UUID}">${typeof content==='string'?content:''}</div>`,
+              `<div class="tyin_package_quill_list"></div><div class="tyin_package_quill_origin tyin_package_quill_UUID_${UUID}"><div class="tyin_package_quill_${typeof mode==='string'?mode:'custom'}_container tyin_package_quill_UUID_${UUID}">${typeof content==='string'?content:''}</div></div>`,
               (element)=>{
                 element.tyin_package_quill=new Quill(
                   `.tyin_package_quill_${typeof mode==='string'?mode:'custom'}_container.tyin_package_quill_UUID_${UUID}`,
@@ -2215,6 +2243,10 @@
             );
             if(typeof content==='object'){
               result.tyin_package_quill.setContents(content);
+            }else{
+              if(last_content){
+                result.tyin_package_quill.setContents(JSON.parse(last_content));
+              }
             }
             const inputDataset=result.lastElementChild.lastElementChild.children[1].dataset;
             inputDataset.link=location.origin;
@@ -2222,11 +2254,13 @@
             if(readOnly){
               this.removeElement(result.firstElementChild);
             }else{
-              const undo=document.querySelector(`.tyin_package_quill_container.tyin_package_quill_UUID_${UUID}>.ql-toolbar>.ql-formats>.ql-undo`);
-              const redo=document.querySelector(`.tyin_package_quill_container.tyin_package_quill_UUID_${UUID}>.ql-toolbar>.ql-formats>.ql-redo`);
+              const undo=document.querySelector(`.tyin_package_quill_origin.tyin_package_quill_UUID_${UUID}>.ql-toolbar>.ql-formats>.ql-undo`);
+              const redo=document.querySelector(`.tyin_package_quill_origin.tyin_package_quill_UUID_${UUID}>.ql-toolbar>.ql-formats>.ql-redo`);
+              const list_button=document.querySelector(`.tyin_package_quill_origin.tyin_package_quill_UUID_${UUID}>.ql-toolbar>.ql-formats>.ql-list_button`);
+              const list_element=document.querySelector(`.tyin_package_quill_container.tyin_package_quill_UUID_${UUID}>.tyin_package_quill_list`);
               if(undo){
                 undo.addEventListener('click',()=>{
-                  if(result.tyin_package_quill.history.stack.undo.length>1){
+                  if(result.tyin_package_quill.history.stack.undo.length>first){
                     result.tyin_package_quill.history.undo();
                     result.tyin_package_quill.container.firstElementChild.focus();
                   }
@@ -2238,6 +2272,20 @@
                   result.tyin_package_quill.container.firstElementChild.focus();
                 });
               }
+              if(list_button){
+                result.addEventListener('click',(event)=>{
+                  if(event.target===result){
+                    this.elementState(list_element,'tyin_package_quill_mk_display');
+                  }
+                });
+                this.listenDOM('add',list_button,'pointer_up',()=>{
+                  this.elementState(list_element,'tyin_package_quill_mk_display');
+                },undefined,0);
+              }
+              this.listenDOM('add',result.tyin_package_quill.container.firstElementChild,'observe_mutation',this.throttle(()=>{
+                idbKeyval.set(last_UUID,JSON.stringify(tyin_quill.tyin_package_quill.getContents()),db);
+                idbKeyval.set('last',last_UUID,db);
+              },1000/2),{attributes:true,childList:true,subtree:true});
             }
             return result;
           }
