@@ -222,12 +222,12 @@
       console.log('++++ tyin, miniEditor, tyin_miniEditor.tyin_miniEditor_getContent():',tyin_miniEditor.tyin_miniEditor_getContent());
     },
     async package_quill_create(readOnly,mode){
-      // globalThis.tyin_quill=await tyin.package_quill_create(document.body,undefined,'full','some',undefined,false,'100%','100%',0);
-      // globalThis.tyin_quill=await tyin.package_quill_create(document.body,undefined,'snow','some',undefined,false,'100%','100%',0);
-      // globalThis.tyin_quill=await tyin.package_quill_create(document.body,undefined,'bubble','some',undefined,false,'100%','100%',0);
-      // globalThis.tyin_quill=await tyin.package_quill_create(document.body,undefined,'tyin_full','some',undefined,readOnly,'100%','100%',0);
-      // globalThis.tyin_quill=await tyin.package_quill_create(document.body,undefined,'tyin_default','some',undefined,readOnly,'100%','100%',0);
-      globalThis.tyin_quill=await tyin.package_quill_create(document.body,undefined,mode?mode:'tyin_default','some',undefined,readOnly,'100%','100%',0);
+      // globalThis.tyin_quill=await tyin.package_quill_create(document.body,undefined,'full','some',undefined,false,'100%','100%',1);
+      // globalThis.tyin_quill=await tyin.package_quill_create(document.body,undefined,'snow','some',undefined,false,'100%','100%',1);
+      // globalThis.tyin_quill=await tyin.package_quill_create(document.body,undefined,'bubble','some',undefined,false,'100%','100%',1);
+      // globalThis.tyin_quill=await tyin.package_quill_create(document.body,undefined,'tyin_full','some',undefined,readOnly,'100%','100%',1);
+      // globalThis.tyin_quill=await tyin.package_quill_create(document.body,undefined,'tyin_default','some',undefined,readOnly,'100%','100%',1);
+      globalThis.tyin_quill=await tyin.package_quill_create(document.body,undefined,mode?mode:'tyin_default','some',undefined,readOnly,'100%','100%',1);
       if(readOnly){
 tyin_quill.tyin_package_quill.setContents(JSON.parse(
 

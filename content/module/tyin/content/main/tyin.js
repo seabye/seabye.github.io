@@ -445,7 +445,8 @@
       },
       /*🟢*/async loadPackage_IDBKeyVal(){
         if(!('idbKeyval'in globalThis)){
-          this.elementCreate('script',{async:'module',src:`${import.meta.url.replace('/main/tyin.js','/package/IDBKeyVal@5.0.5/dist/iife/index-min.js')}`},document.head);
+          // this.elementCreate('script',{async:'module',src:`${import.meta.url.replace('/main/tyin.js','/package/IDBKeyVal@5.0.5/dist/iife/index-min.js')}`},document.head);
+          this.elementCreate('script',{async:'module',src:`${import.meta.url.replace('/main/tyin.js','/package/IDBKeyVal@5.0.5/dist/iife-compat/index-min.js')}`},document.head);
         }
         return await this.loop(()=>{
           if('idbKeyval'in globalThis){
@@ -2256,8 +2257,6 @@
             }else{
               const undo=document.querySelector(`.tyin_package_quill_origin.tyin_package_quill_UUID_${UUID}>.ql-toolbar>.ql-formats>.ql-undo`);
               const redo=document.querySelector(`.tyin_package_quill_origin.tyin_package_quill_UUID_${UUID}>.ql-toolbar>.ql-formats>.ql-redo`);
-              const list_button=document.querySelector(`.tyin_package_quill_origin.tyin_package_quill_UUID_${UUID}>.ql-toolbar>.ql-formats>.ql-list_button`);
-              const list_element=document.querySelector(`.tyin_package_quill_container.tyin_package_quill_UUID_${UUID}>.tyin_package_quill_list`);
               if(undo){
                 undo.addEventListener('click',()=>{
                   if(result.tyin_package_quill.history.stack.undo.length>first){
@@ -2272,6 +2271,17 @@
                   result.tyin_package_quill.container.firstElementChild.focus();
                 });
               }
+              this.listenDOM('add',result.tyin_package_quill.container.firstElementChild,'observe_mutation',this.throttle(()=>{
+                idbKeyval.set(last_UUID,JSON.stringify(tyin_quill.tyin_package_quill.getContents()),db);
+                idbKeyval.set('last',last_UUID,db);
+              },1000/2),{attributes:true,childList:true,subtree:true});
+              const list_element=document.querySelector(`.tyin_package_quill_container.tyin_package_quill_UUID_${UUID}>.tyin_package_quill_list`);
+              const list_button=document.querySelector(`.tyin_package_quill_origin.tyin_package_quill_UUID_${UUID}>.ql-toolbar>.ql-formats>.ql-list_button`);
+              await idbKeyval.keys(db).then((key)=>{
+                this.for(key,(...data)=>{
+                  this.elementCreate('div',{'data-abc':data[2]},list_element,undefined,data[2]);
+                },0);
+              });
               if(list_button){
                 result.addEventListener('click',(event)=>{
                   if(event.target===result){
@@ -2282,10 +2292,6 @@
                   this.elementState(list_element,'tyin_package_quill_mk_display');
                 },undefined,0);
               }
-              this.listenDOM('add',result.tyin_package_quill.container.firstElementChild,'observe_mutation',this.throttle(()=>{
-                idbKeyval.set(last_UUID,JSON.stringify(tyin_quill.tyin_package_quill.getContents()),db);
-                idbKeyval.set('last',last_UUID,db);
-              },1000/2),{attributes:true,childList:true,subtree:true});
             }
             return result;
           }

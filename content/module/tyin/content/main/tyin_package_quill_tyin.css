@@ -4,7 +4,9 @@
 /* #variable */
   /*  */
   .tyin_package_quill_container {
+    overflow: hidden;
     background-color: var(--ic_ve_color_opposite);
+    perspective: 100vw;
   }
   /*  */
   .tyin_package_quill_list {
@@ -26,7 +28,6 @@
     opacity: unset;
     box-shadow: var(--ic_ve_shadow_4dp3);
     transform: unset;
-    transform-origin: left;
     transition:
       opacity 350ms var(--ic_ve_cubicBezier_slowFast),
       transform 350ms var(--ic_ve_cubicBezier_slowFast)
@@ -35,7 +36,10 @@
   .tyin_package_quill_list.tyin_package_quill_mk_display+.tyin_package_quill_origin {
     pointer-events: none;
     opacity: 0.75;
-    transform: translateX(200px)scale(0.75);
+    transform: rotateY(-15deg)scale(0.618);
+  }
+  .tyin_package_quill_list.tyin_package_quill_mk_display+.tyin_package_quill_origin * {
+    pointer-events: none !important;
   }
   /*  */
   html.ic_nr_media_prefers_colorScheme_light .tyin_package_quill_origin {
