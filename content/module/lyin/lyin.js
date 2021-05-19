@@ -451,7 +451,7 @@
     // 💠 4 intervene
       /*🟢*/_isKeyboardInputArea_(target){
         const loop=(target)=>{
-          if(target!==document.documentElement){
+          if(target&&target!==document.documentElement){
             if(target.contentEditable==='true'||target.localName.match(/input|textarea/)){
               return target;
             }

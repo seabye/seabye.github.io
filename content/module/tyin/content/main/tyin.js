@@ -1663,7 +1663,7 @@
       /*🔴*/DOM(){},
       /*🟢*/isKeyboardInputArea(target){
         const loop=(target)=>{
-          if(target!==document.documentElement){
+          if(target&&target!==document.documentElement){
             if(target.contentEditable==='true'||target.localName.match(/input|textarea/)){
               return target;
             }
@@ -2234,7 +2234,7 @@
               attribute,
               insertElement,
               insertPosition,
-              `<div class="tyin_package_quill_list"></div><div class="tyin_package_quill_origin tyin_package_quill_UUID_${UUID}"><div class="tyin_package_quill_${typeof mode==='string'?mode:'custom'}_container tyin_package_quill_UUID_${UUID}">${typeof content==='string'?content:''}</div></div>`,
+              `<div class="tyin_package_quill_list" tabindex="-1"></div><div class="tyin_package_quill_origin tyin_package_quill_UUID_${UUID}"><div class="tyin_package_quill_${typeof mode==='string'?mode:'custom'}_container tyin_package_quill_UUID_${UUID}">${typeof content==='string'?content:''}</div></div>`,
               (element)=>{
                 element.tyin_package_quill=new Quill(
                   `.tyin_package_quill_${typeof mode==='string'?mode:'custom'}_container.tyin_package_quill_UUID_${UUID}`,
@@ -2253,7 +2253,7 @@
             inputDataset.link=location.origin;
             inputDataset.video='URL';
             if(readOnly){
-              this.removeElement(result.firstElementChild);
+              this.removeElement(result.lastElementChild.firstElementChild);
             }else{
               const undo=document.querySelector(`.tyin_package_quill_origin.tyin_package_quill_UUID_${UUID}>.ql-toolbar>.ql-formats>.ql-undo`);
               const redo=document.querySelector(`.tyin_package_quill_origin.tyin_package_quill_UUID_${UUID}>.ql-toolbar>.ql-formats>.ql-redo`);
@@ -2288,19 +2288,20 @@
                     this.elementState(list_element,'tyin_package_quill_mk_display');
                     this.elementState(list_element,'tyin_package_quill_mk_display_lock','',true);
                     setTimeout(()=>{
+                      result.tyin_package_quill.container.firstElementChild.setAttribute('contenteditable','true');
                       this.elementState(list_element,'','tyin_package_quill_mk_display_lock',true);
                     },350);
                   }
+                },undefined,0);
+                this.listenDOM('add',list_button,'pointer_up',()=>{
+                  this.elementState(list_element,'tyin_package_quill_mk_display');
+                  result.tyin_package_quill.container.firstElementChild.setAttribute('contenteditable','false');
                 },undefined,0);
                 result.tyin_package_quill.container.firstElementChild.addEventListener('focus',()=>{
                   if(list_element.classList.contains('tyin_package_quill_mk_display_lock')){
                     document.activeElement.blur();
                   }
                 });
-                this.listenDOM('add',list_button,'pointer_up',()=>{
-                  this.elementState(list_element,'tyin_package_quill_mk_display');
-                  document.activeElement.blur();
-                },undefined,0);
               }
             }
             return result;

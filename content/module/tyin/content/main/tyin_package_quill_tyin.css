@@ -190,6 +190,16 @@
       max-height: calc(100% - 8px*2);
       font-size: 12px;
       pointer-events: none;
+      opacity: unset;
+      visibility: visible;
+      transition:
+        opacity 350ms var(--ic_ve_cubicBezier_slowFast),
+        visibility 350ms var(--ic_ve_cubicBezier_slowFast)
+      ;
+    }
+    [class*="tyin_package_quill_mk_display"]+.tyin_package_quill_origin>.ql-toolbar {
+      opacity: 0;
+      visibility: hidden;
     }
       /*  */
       .tyin_package_quill_origin>.ql-toolbar>.ql-image {
