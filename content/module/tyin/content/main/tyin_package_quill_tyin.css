@@ -34,11 +34,11 @@
     ;
   }
   .tyin_package_quill_list.tyin_package_quill_mk_display+.tyin_package_quill_origin {
-    pointer-events: none;
     opacity: 0.75;
     transform: rotateY(-15deg)scale(0.618);
   }
-  .tyin_package_quill_list.tyin_package_quill_mk_display+.tyin_package_quill_origin * {
+  .tyin_package_quill_list[class*="tyin_package_quill_mk_display"]+.tyin_package_quill_origin,
+  .tyin_package_quill_list[class*="tyin_package_quill_mk_display"]+.tyin_package_quill_origin * {
     pointer-events: none !important;
   }
   /*  */

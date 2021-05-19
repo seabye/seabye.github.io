@@ -2283,13 +2283,23 @@
                 },0);
               });
               if(list_button){
-                result.addEventListener('click',(event)=>{
+                this.listenDOM('add',result,'pointer_up',(event)=>{
                   if(event.target===result){
                     this.elementState(list_element,'tyin_package_quill_mk_display');
+                    this.elementState(list_element,'tyin_package_quill_mk_display_lock','',true);
+                    setTimeout(()=>{
+                      this.elementState(list_element,'','tyin_package_quill_mk_display_lock',true);
+                    },350);
+                  }
+                },undefined,0);
+                result.tyin_package_quill.container.firstElementChild.addEventListener('focus',()=>{
+                  if(list_element.classList.contains('tyin_package_quill_mk_display_lock')){
+                    document.activeElement.blur();
                   }
                 });
                 this.listenDOM('add',list_button,'pointer_up',()=>{
                   this.elementState(list_element,'tyin_package_quill_mk_display');
+                  document.activeElement.blur();
                 },undefined,0);
               }
             }
