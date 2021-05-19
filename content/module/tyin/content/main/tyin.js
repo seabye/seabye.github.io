@@ -2173,7 +2173,7 @@
                 ['bold','italic','underline','strike',{'script':'super'},{'script':'sub'},{'size':'small'},{'size':'large'}],
                 [
                   {'color':'var(--qt_ve_color_red)'},{'color':'var(--qt_ve_color_green)'},{'color':'var(--qt_ve_color_blue)'},{'color':'var(--qt_ve_color_orange)'},
-                  {'background':'var(--qt_ve_color_red_translucent)'},{'background':'var(--qt_ve_color_green_translucent)'},{'background':'var(--qt_ve_color_blue_translucent)'},{'background':'var(--qt_ve_color_orange_translucent)'},
+                  {'background':'var(--qt_ve_background_red)'},{'background':'var(--qt_ve_background_green)'},{'background':'var(--qt_ve_background_blue)'},{'background':'var(--qt_ve_background_orange)'},
                 ],
                 [{'list':'bullet'},{'list':'ordered'},{'indent':'-1'},{'indent':'+1'},{'align':'center'},{'align':'right'},{'align':'justify'},{'direction':'rtl'}],
                 ['clean','undo','redo','list_button']

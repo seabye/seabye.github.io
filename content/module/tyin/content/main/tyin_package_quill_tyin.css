@@ -45,20 +45,20 @@
     --qt_ve_color_green: #00BB00;
     --qt_ve_color_blue: #0088FF;
     --qt_ve_color_orange: #FF8800;
-    --qt_ve_color_red_translucent: #CC000099;
-    --qt_ve_color_green_translucent: #00BB0099;
-    --qt_ve_color_blue_translucent: #0088FF99;
-    --qt_ve_color_orange_translucent: #FF880099;
+    --qt_ve_background_red: #CC000099;
+    --qt_ve_background_green: #00BB0099;
+    --qt_ve_background_blue: #0088FF99;
+    --qt_ve_background_orange: #FF880099;
   }
   html.ic_nr_media_prefers_colorScheme_dark .tyin_package_quill_origin {
     --qt_ve_color_red: #E2378A;
     --qt_ve_color_green: #64A963;
     --qt_ve_color_blue: #53B1DE;
     --qt_ve_color_orange: #E6844F;
-    --qt_ve_color_red_translucent: #E2378A99;
-    --qt_ve_color_green_translucent: #64A96399;
-    --qt_ve_color_blue_translucent: #53B1DE99;
-    --qt_ve_color_orange_translucent: #E6844F99;
+    --qt_ve_background_red: #E2378A99;
+    --qt_ve_background_green: #64A96399;
+    --qt_ve_background_blue: #53B1DE99;
+    --qt_ve_background_orange: #E6844F99;
   }
 /* #block */
 /* #build */
@@ -431,33 +431,32 @@
           content: "􀣷";
         }
         .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-color[value="var(--qt_ve_color_red)"]::before {
-          color: var(--qt_ve_color_red_translucent);
+          color: var(--qt_ve_background_red);
         }
         .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-color[value="var(--qt_ve_color_red)"].ql-active::before {
           color: var(--qt_ve_color_red);
         }
         .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-color[value="var(--qt_ve_color_green)"]::before {
-          color: var(--qt_ve_color_green_translucent);
+          color: var(--qt_ve_background_green);
         }
         .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-color[value="var(--qt_ve_color_green)"].ql-active::before {
           color: var(--qt_ve_color_green);
         }
         .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-color[value="var(--qt_ve_color_blue)"]::before {
-          color: var(--qt_ve_color_blue_translucent);
+          color: var(--qt_ve_background_blue);
         }
         .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-color[value="var(--qt_ve_color_blue)"].ql-active::before {
           color: var(--qt_ve_color_blue);
         }
         .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-color[value="var(--qt_ve_color_orange)"]::before {
-          color: var(--qt_ve_color_orange_translucent);
+          color: var(--qt_ve_background_orange);
         }
         .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-color[value="var(--qt_ve_color_orange)"].ql-active::before {
           color: var(--qt_ve_color_orange);
         }
           /*  */
-          .tyin_package_quill_origin>.ql-container>.ql-editor [style^="color:"]:not([style*="_translucent"]),
-          .tyin_package_quill_origin>.ql-container>.ql-editor [style*=" color:"]:not([style*="_translucent"]) {
-            background-color: transparent !important;
+          .tyin_package_quill_origin>.ql-container>.ql-editor [style*="color:"]:not([style*="var(--qt_ve_color_"]) {
+            color: var(--ic_ve_font_color_auto) !important;
           }
         .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-background::before {
           content: "􀎑";
@@ -465,30 +464,34 @@
         .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-background.ql-active::before {
           content: "􀎒";
         }
-        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-background[value="var(--qt_ve_color_red_translucent)"]::before {
-          color: var(--qt_ve_color_red_translucent);
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-background[value="var(--qt_ve_background_red)"]::before {
+          color: var(--qt_ve_background_red);
         }
-        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-background[value="var(--qt_ve_color_red_translucent)"].ql-active::before {
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-background[value="var(--qt_ve_background_red)"].ql-active::before {
           color: var(--qt_ve_color_red);
         }
-        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-background[value="var(--qt_ve_color_green_translucent)"]::before {
-          color: var(--qt_ve_color_green_translucent);
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-background[value="var(--qt_ve_background_green)"]::before {
+          color: var(--qt_ve_background_green);
         }
-        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-background[value="var(--qt_ve_color_green_translucent)"].ql-active::before {
-          color: var(--qt_ve_color_green_);
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-background[value="var(--qt_ve_background_green)"].ql-active::before {
+          color: var(--qt_ve_color_green);
         }
-        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-background[value="var(--qt_ve_color_blue_translucent)"]::before {
-          color: var(--qt_ve_color_blue_translucent);
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-background[value="var(--qt_ve_background_blue)"]::before {
+          color: var(--qt_ve_background_blue);
         }
-        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-background[value="var(--qt_ve_color_blue_translucent)"].ql-active::before {
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-background[value="var(--qt_ve_background_blue)"].ql-active::before {
           color: var(--qt_ve_color_blue);
         }
-        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-background[value="var(--qt_ve_color_orange_translucent)"]::before {
-          color: var(--qt_ve_color_orange_translucent);
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-background[value="var(--qt_ve_background_orange)"]::before {
+          color: var(--qt_ve_background_orange);
         }
-        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-background[value="var(--qt_ve_color_orange_translucent)"].ql-active::before {
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-background[value="var(--qt_ve_background_orange)"].ql-active::before {
           color: var(--qt_ve_color_orange);
         }
+          /*  */
+          .tyin_package_quill_origin>.ql-container>.ql-editor [style*="background-color:"]:not([style*="var(--qt_ve_background_)"]) {
+            background-color: transparent !important;
+          }
         .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-script[value="sub"]::before {
           content: "􀓡";
         }
