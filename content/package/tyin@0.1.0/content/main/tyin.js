@@ -2012,7 +2012,7 @@
         //   if(container.innerHTML==='<br>'){
         //     container.innerHTML='';
         //   }
-        // },{childList:true,subtree:true,characterData:true});
+        // },{subtree:true,characterData:true});
         container.addEventListener('paste',async(event)=>{
           event.preventDefault();
           let text='';
@@ -2234,7 +2234,7 @@
               attribute,
               insertElement,
               insertPosition,
-              `<div class="tyin_package_quill_list" tabindex="-1"></div><div class="tyin_package_quill_origin tyin_package_quill_UUID_${UUID}"><div class="tyin_package_quill_${typeof mode==='string'?mode:'custom'}_container tyin_package_quill_UUID_${UUID}">${typeof content==='string'?content:''}</div></div>`,
+              `<div class="tyin_package_quill_list"><div class="tyin_package_quill_list_group tyin_package_quill_list_default"></div></div><div class="tyin_package_quill_origin tyin_package_quill_UUID_${UUID}"><div class="tyin_package_quill_${typeof mode==='string'?mode:'custom'}_container tyin_package_quill_UUID_${UUID}">${typeof content==='string'?content:''}</div></div>`,
               (element)=>{
                 element.tyin_package_quill=new Quill(
                   `.tyin_package_quill_${typeof mode==='string'?mode:'custom'}_container.tyin_package_quill_UUID_${UUID}`,
@@ -2246,7 +2246,7 @@
               result.tyin_package_quill.setContents(content);
             }else{
               if(last_content){
-                result.tyin_package_quill.setContents(JSON.parse(last_content));
+                result.tyin_package_quill.setContents(JSON.parse(last_content).data);
               }
             }
             const inputDataset=result.lastElementChild.lastElementChild.children[1].dataset;
@@ -2272,37 +2272,31 @@
                 });
               }
               this.listenDOM('add',result.tyin_package_quill.container.firstElementChild,'observe_mutation',this.throttle(()=>{
-                idbKeyval.set(last_UUID,JSON.stringify(tyin_quill.tyin_package_quill.getContents()),db);
+                idbKeyval.set(last_UUID,JSON.stringify({createTime:'',editTime:'',data:tyin_quill.tyin_package_quill.getContents()}),db);
                 idbKeyval.set('last',last_UUID,db);
-              },1000/2),{attributes:true,childList:true,subtree:true});
+              },1000/2),{subtree:true,attributes:true,childList:true,characterData:true});
               const list_element=document.querySelector(`.tyin_package_quill_container.tyin_package_quill_UUID_${UUID}>.tyin_package_quill_list`);
               const list_button=document.querySelector(`.tyin_package_quill_origin.tyin_package_quill_UUID_${UUID}>.ql-toolbar>.ql-formats>.ql-list_button`);
-              await idbKeyval.keys(db).then((key)=>{
+              await idbKeyval.entries(db).then((key)=>{
                 this.for(key,(...data)=>{
-                  this.elementCreate('div',{'data-abc':data[2]},list_element,undefined,data[2]);
+                  if(data[2][0]!=='last'){
+                    // this.elementCreate('div',{class:'tyin_package_quill_list_item','data-tyin_package_quill':data[2][0]},list_element.firstElementChild,undefined,data[2][1]);
+                  }
                 },0);
               });
               if(list_button){
-                this.listenDOM('add',result,'pointer_up',(event)=>{
-                  if(event.target===result){
-                    this.elementState(list_element,'tyin_package_quill_mk_display');
-                    this.elementState(list_element,'tyin_package_quill_mk_display_lock','',true);
-                    setTimeout(()=>{
-                      result.tyin_package_quill.container.firstElementChild.setAttribute('contenteditable','true');
-                      this.elementState(list_element,'','tyin_package_quill_mk_display_lock',true);
-                    },350);
-                  }
-                },undefined,0);
-                this.listenDOM('add',list_button,'pointer_up',()=>{
-                  this.elementState(list_element,'tyin_package_quill_mk_display');
+                list_button.addEventListener('click',()=>{
+                  this.elementState(list_element,'tyin_package_quill_mk_display','',true);
                   result.tyin_package_quill.container.firstElementChild.setAttribute('contenteditable','false');
-                },undefined,0);
-                result.tyin_package_quill.container.firstElementChild.addEventListener('focus',()=>{
-                  if(list_element.classList.contains('tyin_package_quill_mk_display_lock')){
-                    document.activeElement.blur();
+                });
+                result.addEventListener('click',(event)=>{
+                  if(event.target===result){
+                    this.elementState(list_element,'','tyin_package_quill_mk_display',true);
+                    result.tyin_package_quill.container.firstElementChild.setAttribute('contenteditable','true');
                   }
                 });
               }
+              // const toolbar=document.querySelector(`.tyin_package_quill_container.tyin_package_quill_UUID_${UUID}>.tyin_package_quill_origin>.ql-toolbar`);
             }
             return result;
           }
@@ -2568,14 +2562,14 @@
     tyin.elementCreate('link',{rel:'stylesheet',href:`${import.meta.url.replace('tyin.js','tyin.css')}`,crossorigin:''},document.head);
   }
   // // merge webAssembly rust
-  // await tyin.webAssembly('../module/tyin_wasm_rust/result/tyin_wasm_rust.js',(module)=>{
+  // await tyin.webAssembly('../package/tyin_wasm_rust/result/tyin_wasm_rust.js',(module)=>{
   //   for(const key in module){
   //     module[key]._isWebAssembly_='rust';
   //   }
   //   Object.assign(tyin,module);
   // });
   // // merge webAssembly c
-  // await tyin.webAssembly('../module/tyin_wasm_c/result/tyin_wasm_c.js',(module)=>{
+  // await tyin.webAssembly('../package/tyin_wasm_c/result/tyin_wasm_c.js',(module)=>{
   //   for(const key in module){
   //     module[key]._isWebAssembly_='c';
   //   }

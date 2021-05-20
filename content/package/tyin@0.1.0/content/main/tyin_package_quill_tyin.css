@@ -1,0 +1,920 @@
+@charset "UTF-8";
+/* #before */
+/* #import */
+/* #variable */
+  /*  */
+  html.ic_nr_media_prefers_colorScheme_light .tyin_package_quill_origin {
+    --qt_ve_color_red: #CC0000;
+    --qt_ve_color_green: #00BB00;
+    --qt_ve_color_blue: #0088FF;
+    --qt_ve_color_orange: #FF8800;
+    --qt_ve_background_red: #CC000099;
+    --qt_ve_background_green: #00BB0099;
+    --qt_ve_background_blue: #0088FF99;
+    --qt_ve_background_orange: #FF880099;
+  }
+  html.ic_nr_media_prefers_colorScheme_dark .tyin_package_quill_origin {
+    --qt_ve_color_red: #E2378A;
+    --qt_ve_color_green: #64A963;
+    --qt_ve_color_blue: #53B1DE;
+    --qt_ve_color_orange: #E88448;
+    --qt_ve_background_red: #E2378A99;
+    --qt_ve_background_green: #64A96399;
+    --qt_ve_background_blue: #53B1DE99;
+    --qt_ve_background_orange: #E8844899;
+  }
+/* #block */
+/* #build */
+  /*  */
+  .tyin_package_quill_container {
+    overflow: hidden;
+    position: relative;
+    background-color: var(--ic_ve_color_white);
+  }
+    /*  */
+    .tyin_package_quill_list {
+      overflow: hidden auto;
+      z-index: 2;
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 288px;
+      margin: auto;
+      max-width: calc(100% - 64px);
+      height: 512px;
+      max-height: calc(100% - 64px);
+      border-radius: 8px;
+      background-color: var(--ic_ve_color_white6_opacity);
+      -webkit-backdrop-filter: var(--ic_ve_backdropFilter_blur_high);
+      backdrop-filter: var(--ic_ve_backdropFilter_blur_high);
+      box-shadow: var(--ic_ve_shadow_2dp3);
+      pointer-events: none;
+      opacity: 0;
+      visibility: hidden;
+      transform: scale(0.5);
+      transition:
+        opacity calc(350ms*2/3) var(--ic_ve_cubicBezier_slowFast),
+        visibility calc(350ms*2/3) var(--ic_ve_cubicBezier_slowFast),
+        transform calc(350ms*2/3) var(--ic_ve_cubicBezier_slowFast)
+      ;
+    }
+    .tyin_package_quill_list.tyin_package_quill_mk_display {
+      pointer-events: unset;
+      opacity: unset;
+      visibility: visible;
+      transform: unset;
+      transition:
+        opacity 0ms var(--ic_ve_cubicBezier_slowFast),
+        visibility 0ms var(--ic_ve_cubicBezier_slowFast),
+        transform 0ms var(--ic_ve_cubicBezier_slowFast)
+      ;
+    }
+      /*  */
+      .tyin_package_quill_list_group {
+        position: relative;
+        left: 4px;
+        width: calc(100% - 8px);
+      }
+      .tyin_package_quill_list_group::before,
+      .tyin_package_quill_list_group::after {
+        content: "";
+        display: block;
+        width: 1px;
+        height: 4px;
+      }
+        /*  */
+        .tyin_package_quill_list_item {
+          overflow: hidden;
+          padding: 8px;
+          width: 100%;
+          color: var(--ic_ve_color_black6_opacity);
+          background-color: var(--ic_ve_color_black2_opacity);
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          transition: transform calc(1000ms/24) 0ms var(--ic_ve_cubicBezier_slowFast);
+        }
+        .tyin_package_quill_list_item:first-child {
+          border-top-left-radius: 6px;
+          border-top-right-radius: 6px;
+        }
+        .tyin_package_quill_list_item:last-child {
+          border-bottom-left-radius: 6px;
+          border-bottom-right-radius: 6px;
+        }
+        .tyin_package_quill_list_item:not(:first-child) {
+          margin-top: 1px;
+        }
+        .tyin_package_quill_list_item.ic_active_0 {
+          transform: scale(0.875);
+        }
+    /*  */
+    .tyin_package_quill_list[class*="tyin_package_quill_mk_display"]+.tyin_package_quill_origin {
+      pointer-events: none;
+      transition: filter 0ms var(--ic_ve_cubicBezier_slowFast);
+    }
+    html.ic_nr_media_prefers_colorScheme_light .tyin_package_quill_list[class*="tyin_package_quill_mk_display"]+.tyin_package_quill_origin {
+      filter: brightness(0.75);
+    }
+    html.ic_nr_media_prefers_colorScheme_dark .tyin_package_quill_list[class*="tyin_package_quill_mk_display"]+.tyin_package_quill_origin {
+      filter: contrast(0.75);
+    }
+    /*  */
+    .tyin_package_quill_origin {
+      display: block;
+      overflow: hidden;
+      position: relative;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      font-size: 14px;
+      font-family: "PingFang SC_", var(--ic_ve_font_family_sansSerif), "SF Pro Text_";
+      background-color: var(--ic_ve_color_background);
+      filter: unset;
+      transition: filter calc(350ms*2/3) var(--ic_ve_cubicBezier_slowFast);
+    }
+      /*  */
+      .tyin_package_quill_origin * {
+        /* _ */
+        all: unset;
+        /* _ */
+        box-sizing: border-box;
+        max-width: 100%;
+        line-height: var(--ic_ve_font_lineHeight_plus);
+        outline: unset;
+        touch-action: pan-x pan-y;
+        overscroll-behavior: contain;
+      }
+      /* text */
+      .tyin_package_quill_origin a {
+        color: var(--ic_ve_font_color_auto);
+        text-decoration: unset;
+        cursor: default;
+      }
+      .tyin_package_quill_origin pre,
+      .tyin_package_quill_origin code,
+      .tyin_package_quill_origin var,
+      .tyin_package_quill_origin kbd,
+      .tyin_package_quill_origin pre::before,
+      .tyin_package_quill_origin code::before,
+      .tyin_package_quill_origin var::before,
+      .tyin_package_quill_origin kbd::before,
+      .tyin_package_quill_origin pre::after,
+      .tyin_package_quill_origin code::after,
+      .tyin_package_quill_origin var::after,
+      .tyin_package_quill_origin kbd::after,
+      .tyin_package_quill_origin pre *,
+      .tyin_package_quill_origin code *,
+      .tyin_package_quill_origin var *,
+      .tyin_package_quill_origin kbd *,
+      .tyin_package_quill_origin pre *::before,
+      .tyin_package_quill_origin code *::before,
+      .tyin_package_quill_origin var *::before,
+      .tyin_package_quill_origin kbd *::before,
+      .tyin_package_quill_origin pre *::after,
+      .tyin_package_quill_origin code *::after,
+      .tyin_package_quill_origin var *::after,
+      .tyin_package_quill_origin kbd *::after,
+      .tyin_package_quill_origin>.ql-container>.ql-editor .ql-font-monospace {
+        line-height: var(--ic_ve_font_lineHeight_basic);
+        font-family: var(--ic_ve_font_family_monospace), "SF Pro Text_";
+        word-break: break-all;
+        overflow-wrap: break-word;
+        white-space: pre-wrap;
+      }
+      /* image */
+      .tyin_package_quill_origin img {
+        vertical-align: bottom;
+        cursor: default;
+      }
+      /* form */
+      .tyin_package_quill_origin input,
+      .tyin_package_quill_origin textarea {
+        /* _ */
+        all: unset;
+        /* _ */
+        box-sizing: border-box;
+        max-width: 100%;
+        line-height: var(--ic_ve_font_lineHeight_basic);
+        outline: unset;
+        touch-action: pan-x pan-y;
+        overscroll-behavior: contain;
+      }
+      .tyin_package_quill_origin input,
+      .tyin_package_quill_origin textarea,
+      [contenteditable="true"] {
+        -webkit-user-select: auto;
+        user-select: auto;
+        cursor: auto;
+      }
+      .tyin_package_quill_origin input {
+        word-break: normal;
+        overflow-wrap: normal;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+      .tyin_package_quill_origin input[type="search"]::-webkit-search-decoration,
+      .tyin_package_quill_origin input[type="search"]::-webkit-search-cancel-button {
+        display: none;
+      }
+      .tyin_package_quill_origin textarea,
+      [contenteditable] {
+        word-break: break-word;
+        overflow-wrap: break-word;
+        white-space: pre-wrap;
+      }
+      .tyin_package_quill_origin [contenteditable]:empty::after {
+        content: attr(placeholder);
+      }
+      .tyin_package_quill_origin ::placeholder,
+      .tyin_package_quill_origin [contenteditable]:empty::after {
+        color: var(--ic_ve_color_black4_opacity);
+        opacity: unset;
+        -webkit-user-select: none;
+        user-select: none;
+      }
+      /*  */
+      .tyin_package_quill_origin>.ql-toolbar {
+        direction: rtl;
+        display: flex;
+        flex-direction: column;
+        overflow: auto;
+        z-index: 1;
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        max-width: 100%;
+        max-height: 100%;
+        font-size: 12px;
+      }
+        /*  */
+        .tyin_package_quill_origin>.ql-toolbar>.ql-image {
+          display: none;
+        }
+        /*  */
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats {
+          direction: ltr;
+          display: flex;
+          align-items: center;
+          margin-bottom: 4px;
+          width: fit-content;
+          min-width: fit-content;
+          height: 28px;
+          min-height: 28px;
+          border-radius: 8px 0 0 8px;
+          background-color: var(--ic_ve_color_white6_opacity);
+          -webkit-backdrop-filter: var(--ic_ve_backdropFilter_blur_low);
+          backdrop-filter: var(--ic_ve_backdropFilter_blur_low);
+          box-shadow: var(--ic_ve_shadow_2dp3);
+        }
+        .tyin_package_quill_origin>.ql-toolbar>.ql-formats:first-child {
+          margin-top: 4px;
+        }
+          /*  */
+          .tyin_package_quill_origin>.ql-toolbar>.ql-formats::before,
+          .tyin_package_quill_origin>.ql-toolbar>.ql-formats::after {
+            content: "\00a0";
+            width: 4px;
+            min-width: 4px;
+            max-width: 4px;
+            height: 1px;
+            font-size: 0;
+          }
+          /*  */
+          .tyin_package_quill_origin>.ql-toolbar>.ql-formats>* {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 26px;
+            min-width: 26px;
+            height: calc(100% - 8px);
+            color: var(--ic_ve_color_black4_opacity);
+            background-color: var(--ic_ve_color_black1_opacity);
+            transition:
+              color calc(1000ms/24) var(--ic_ve_cubicBezier_slowFast),
+              background-color calc(1000ms/24) var(--ic_ve_cubicBezier_slowFast),
+              transform calc(1000ms/24) var(--ic_ve_cubicBezier_slowFast)
+            ;
+          }
+          .tyin_package_quill_origin>.ql-toolbar>.ql-formats>:not(:first-child) {
+            margin-left: 1px;
+          }
+          .tyin_package_quill_origin>.ql-toolbar>.ql-formats>:first-child {
+            border-top-left-radius: 6px;
+            border-bottom-left-radius: 6px;
+          }
+          .tyin_package_quill_origin>.ql-toolbar>.ql-formats>:last-child {
+            border-top-right-radius: 6px;
+            border-bottom-right-radius: 6px;
+          }
+          .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-active {
+            color: var(--ic_ve_font_color_auto);
+            background-color: var(--ic_ve_color_black2_opacity);
+          }
+          .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ic_active_0 {
+            transform: scale(0.875);
+          }
+            /* */
+            .tyin_package_quill_origin>.ql-toolbar>.ql-formats>*>svg {
+              display: none;
+            }
+      /*  */
+      .tyin_package_quill_origin>.ql-container {
+        display: block;
+        max-width: 800px;
+        height: 100%;
+        margin: 0 auto;
+      }
+        /*  */
+        .tyin_package_quill_origin>.ql-container>.ql-editor[contenteditable="true"],
+        .tyin_package_quill_origin>.ql-container>.ql-clipboard[contenteditable="true"] {
+          word-break: break-word;
+          overflow-wrap: break-word;
+          white-space: pre-wrap;
+          -moz-user-modify: read-write;
+          -webkit-user-modify: read-write;
+          user-modify: read-write;
+          -webkit-user-select: auto;
+          user-select: auto;
+          cursor: auto;
+        }
+          /*  */
+          .tyin_package_quill_origin>.ql-container>.ql-editor :not(.katex *),
+          .tyin_package_quill_origin>.ql-container>.ql-clipboard :not(.katex *) {
+            display: block;
+          }
+          .tyin_package_quill_origin>.ql-container>.ql-editor span:not(.katex *),
+          .tyin_package_quill_origin>.ql-container>.ql-clipboard span:not(.katex *) {
+            display: inline-block;
+          }
+        /*  */
+        .tyin_package_quill_origin>.ql-container>.ql-editor {
+          display: block;
+          overflow: hidden auto;
+          padding: 24px;
+          height: 100%;
+        }
+          /*  */
+          .tyin_package_quill_origin>.ql-container>.ql-editor::before,
+          .tyin_package_quill_origin>.ql-container>.ql-editor::after {
+            content: "1970-01-01 00:00:00";
+            display: inline-block;
+            width: 100%;
+            font-size: 12px;
+            font-family: "PingFang SC_", var(--ic_ve_font_family_sansSerif), "SF Pro Text_";
+            text-align: right;
+            color: var(--ic_ve_color_black4_opacity);
+            pointer-events: none;
+          }
+          html.ic_nr_browser_firefox .tyin_package_quill_origin>.ql-container>.ql-editor::after {
+            padding-bottom: 24px;
+          }
+          .tyin_package_quill_origin>.ql-toolbar+.ql-container>.ql-editor::after {
+            padding-bottom: 128px;
+          }
+          .tyin_package_quill_origin>.ql-container>.ql-editor .ql-indent-1:not(.ql-direction-rtl) {
+            margin-left: 2em;
+          }
+          .tyin_package_quill_origin>.ql-container>.ql-editor .ql-indent-2:not(.ql-direction-rtl) {
+            margin-left: 4em;
+          }
+          .tyin_package_quill_origin>.ql-container>.ql-editor .ql-indent-3:not(.ql-direction-rtl) {
+            margin-left: 6em;
+          }
+          .tyin_package_quill_origin>.ql-container>.ql-editor .ql-indent-4:not(.ql-direction-rtl) {
+            margin-left: 8em;
+          }
+          .tyin_package_quill_origin>.ql-container>.ql-editor .ql-indent-5:not(.ql-direction-rtl) {
+            margin-left: 10em;
+          }
+          .tyin_package_quill_origin>.ql-container>.ql-editor .ql-indent-6:not(.ql-direction-rtl) {
+            margin-left: 12em;
+          }
+          .tyin_package_quill_origin>.ql-container>.ql-editor .ql-indent-7:not(.ql-direction-rtl) {
+            margin-left: 14em;
+          }
+          .tyin_package_quill_origin>.ql-container>.ql-editor .ql-indent-8:not(.ql-direction-rtl) {
+            margin-left: 16em;
+          }
+          .tyin_package_quill_origin>.ql-container>.ql-editor .ql-indent-1.ql-direction-rtl {
+            margin-right: 2em;
+          }
+          .tyin_package_quill_origin>.ql-container>.ql-editor .ql-indent-2.ql-direction-rtl {
+            margin-right: 4em;
+          }
+          .tyin_package_quill_origin>.ql-container>.ql-editor .ql-indent-3.ql-direction-rtl {
+            margin-right: 6em;
+          }
+          .tyin_package_quill_origin>.ql-container>.ql-editor .ql-indent-4.ql-direction-rtl {
+            margin-right: 8em;
+          }
+          .tyin_package_quill_origin>.ql-container>.ql-editor .ql-indent-5.ql-direction-rtl {
+            margin-right: 10em;
+          }
+          .tyin_package_quill_origin>.ql-container>.ql-editor .ql-indent-6.ql-direction-rtl {
+            margin-right: 12em;
+          }
+          .tyin_package_quill_origin>.ql-container>.ql-editor .ql-indent-7.ql-direction-rtl {
+            margin-right: 14em;
+          }
+          .tyin_package_quill_origin>.ql-container>.ql-editor .ql-indent-8.ql-direction-rtl {
+            margin-right: 16em;
+          }
+          /*  */
+          .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-font::before {
+            content: "􀤍";
+          }
+          .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-font[value="monospace"]::before {
+            content: "􀃤";
+          }
+          .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-size::before {
+            content: "􀅐";
+          }
+          .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-size[value="small"]::before {
+            content: "􀁎";
+          }
+          .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-size[value="large"]::before {
+            content: "􀁌";
+          }
+            /*  */
+            .tyin_package_quill_origin>.ql-container>.ql-editor .ql-size-small {
+              font-size: smaller;
+            }
+            .tyin_package_quill_origin>.ql-container>.ql-editor .ql-size-large {
+              font-size: larger;
+            }
+          .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-bold::before {
+            content: "􀅓";
+          }
+            /*  */
+            .tyin_package_quill_origin>.ql-container>.ql-editor strong {
+              display: inline !important;
+              font-weight: bold;
+            }
+          .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-italic::before {
+            content: "􀅔";
+          }
+            /*  */
+            .tyin_package_quill_origin>.ql-container>.ql-editor em {
+              display: inline !important;
+              font-style: italic;
+            }
+          .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-underline::before {
+            content: "􀅕";
+          }
+            /*  */
+            .tyin_package_quill_origin>.ql-container>.ql-editor u {
+              display: inline !important;
+              text-decoration: underline;
+            }
+          .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-strike::before {
+            content: "􀅖";
+          }
+            /*  */
+            .tyin_package_quill_origin>.ql-container>.ql-editor s {
+              display: inline !important;
+              text-decoration: line-through;
+              opacity: calc(1/0.8*0.4);
+            }
+          .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-color::before {
+            content: "􀣶";
+          }
+          .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-color.ql-active::before {
+            content: "􀣷";
+          }
+          .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-color[value="var(--qt_ve_color_red)"]::before {
+            color: var(--qt_ve_background_red);
+          }
+          .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-color[value="var(--qt_ve_color_red)"].ql-active::before {
+            color: var(--qt_ve_color_red);
+          }
+          .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-color[value="var(--qt_ve_color_green)"]::before {
+            color: var(--qt_ve_background_green);
+          }
+          .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-color[value="var(--qt_ve_color_green)"].ql-active::before {
+            color: var(--qt_ve_color_green);
+          }
+          .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-color[value="var(--qt_ve_color_blue)"]::before {
+            color: var(--qt_ve_background_blue);
+          }
+          .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-color[value="var(--qt_ve_color_blue)"].ql-active::before {
+            color: var(--qt_ve_color_blue);
+          }
+          .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-color[value="var(--qt_ve_color_orange)"]::before {
+            color: var(--qt_ve_background_orange);
+          }
+          .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-color[value="var(--qt_ve_color_orange)"].ql-active::before {
+            color: var(--qt_ve_color_orange);
+          }
+            /*  */
+            .tyin_package_quill_origin>.ql-container>.ql-editor [style*="color:"]:not([style*="var(--qt_ve_color_"]) {
+              color: var(--ic_ve_font_color_auto) !important;
+            }
+          .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-background::before {
+            content: "􀎑";
+          }
+          .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-background.ql-active::before {
+            content: "􀎒";
+          }
+          .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-background[value="var(--qt_ve_background_red)"]::before {
+            color: var(--qt_ve_background_red);
+          }
+          .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-background[value="var(--qt_ve_background_red)"].ql-active::before {
+            color: var(--qt_ve_color_red);
+          }
+          .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-background[value="var(--qt_ve_background_green)"]::before {
+            color: var(--qt_ve_background_green);
+          }
+          .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-background[value="var(--qt_ve_background_green)"].ql-active::before {
+            color: var(--qt_ve_color_green);
+          }
+          .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-background[value="var(--qt_ve_background_blue)"]::before {
+            color: var(--qt_ve_background_blue);
+          }
+          .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-background[value="var(--qt_ve_background_blue)"].ql-active::before {
+            color: var(--qt_ve_color_blue);
+          }
+          .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-background[value="var(--qt_ve_background_orange)"]::before {
+            color: var(--qt_ve_background_orange);
+          }
+          .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-background[value="var(--qt_ve_background_orange)"].ql-active::before {
+            color: var(--qt_ve_color_orange);
+          }
+            /*  */
+            .tyin_package_quill_origin>.ql-container>.ql-editor [style*="background-color:"]:not([style*="var(--qt_ve_background_"]) {
+              background-color: transparent !important;
+            }
+          .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-script[value="sub"]::before {
+            content: "􀓡";
+          }
+            /*  */
+            .tyin_package_quill_origin>.ql-container>.ql-editor sub {
+              display: inline !important;
+              color: var(--ic_ve_font_color_auto);
+              vertical-align: bottom;
+            }
+            html:not(.ic_nr_browser_chromium) .tyin_package_quill_origin>.ql-container>.ql-editor sub {
+              font-size: 0.618em;
+            }
+            .ic_nr_browser_chromium .tyin_package_quill_origin>.ql-container>.ql-editor sub {
+              zoom: 0.618;
+            }
+            .tyin_package_quill_origin>.ql-container>.ql-editor sub * {
+              vertical-align: bottom;
+            }
+          .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-script[value="super"]::before {
+            content: "􀓢";
+          }
+            /*  */
+            .tyin_package_quill_origin>.ql-container>.ql-editor sup {
+              display: inline !important;
+              color: var(--ic_ve_font_color_auto);
+              vertical-align: top;
+            }
+            html:not(.ic_nr_browser_chromium) .tyin_package_quill_origin>.ql-container>.ql-editor sup {
+              font-size: 0.618em;
+            }
+            .ic_nr_browser_chromium .tyin_package_quill_origin>.ql-container>.ql-editor sup {
+              zoom: 0.618;
+            }
+            .tyin_package_quill_origin>.ql-container>.ql-editor sup * {
+              vertical-align: top;
+            }
+          .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-header::before {
+            content: "􀬎";
+          }
+          .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-header[value="1"]::before {
+            content: "􀀺";
+          }
+            /*  */
+            .tyin_package_quill_origin>.ql-container>.ql-editor h1 {
+              font-size: 2.2em;
+            }
+          .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-header[value="2"]::before {
+            content: "􀀼";
+          }
+            /*  */
+            .tyin_package_quill_origin>.ql-container>.ql-editor h2 {
+              font-size: 2em;
+            }
+          .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-header[value="3"]::before {
+            content: "􀀾";
+          }
+            /*  */
+            .tyin_package_quill_origin>.ql-container>.ql-editor h3 {
+              font-size: 1.8em;
+            }
+          .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-header[value="4"]::before {
+            content: "􀁀";
+          }
+            /*  */
+            .tyin_package_quill_origin>.ql-container>.ql-editor h4 {
+              font-size: 1.6em;
+            }
+          .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-header[value="5"]::before {
+            content: "􀁂";
+          }
+            /*  */
+            .tyin_package_quill_origin>.ql-container>.ql-editor h5 {
+              font-size: 1.4em;
+            }
+          .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-header[value="6"]::before {
+            content: "􀁄";
+          }
+            /*  */
+            .tyin_package_quill_origin>.ql-container>.ql-editor h6 {
+              font-size: 1.2em;
+            }
+          .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-blockquote::before {
+            content: "􀋿";
+          }
+            /*  */
+            .tyin_package_quill_origin>.ql-container>.ql-editor blockquote {
+              opacity: calc(1/0.8*0.6);
+            }
+            .tyin_package_quill_origin>.ql-container>.ql-editor blockquote:not(.ql-direction-rtl) {
+              padding: 2px 0 2px calc(2em - 4px);
+              border-left: 4px solid;
+              border-left-color: var(--ic_ve_color_system_blue_translucent);
+            }
+            .tyin_package_quill_origin>.ql-container>.ql-editor blockquote.ql-direction-rtl {
+              padding: 2px calc(2em - 4px) 2px 0;
+              border-right: 4px solid;
+              border-right-color: var(--ic_ve_color_system_blue_translucent);
+            }
+          .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-code-block::before {
+            content: "􀙚";
+          }
+            /*  */
+            .tyin_package_quill_origin>.ql-container>.ql-editor pre {
+              padding: calc(1.1666666667em);
+              font-size: 12px;
+              color: var(--ic_ve_font_color_white);
+              background-color: var(--ic_ve_font_color_black);
+            }
+          .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-list[value="ordered"]::before {
+            content: "􀋴";
+          }
+            /*  */
+            .tyin_package_quill_origin>.ql-container>.ql-editor ol {
+              padding: 0 2em;
+            }
+            .tyin_package_quill_origin>.ql-container>.ql-editor ol>li {
+              min-width: calc(100% + 2em);
+              vertical-align: top;
+            }
+            .tyin_package_quill_origin>.ql-container>.ql-editor ol>li.ql-direction-rtl {
+              margin-left: -2em;
+            }
+              /*  */
+              .tyin_package_quill_origin>.ql-container>.ql-editor ol>li::before {
+                content: "?";
+                display: inline-block;
+                width: 2em;
+                text-align: center;
+                color: var(--ic_ve_color_black6_opacity);
+                -webkit-mask: linear-gradient(-90deg,#000000,rgba(0,0,0,0));
+                mask: linear-gradient(-90deg,#000000,rgba(0,0,0,0));
+              }
+              .tyin_package_quill_origin>.ql-container>.ql-editor ol>li:not(.ql-direction-rtl)::before {
+                margin-left: -2em;
+              }
+              .tyin_package_quill_origin>.ql-container>.ql-editor ol>li.ql-direction-rtl::before {
+                margin-right: -2em;
+              }
+          .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-list[value="bullet"]::before {
+            content: "􀣩";
+          }
+            /*  */
+            .tyin_package_quill_origin>.ql-container>.ql-editor ul {
+              padding: 0 2em;
+            }
+            .tyin_package_quill_origin>.ql-container>.ql-editor ul>li {
+              min-width: calc(100% + 2em);
+              vertical-align: top;
+            }
+            .tyin_package_quill_origin>.ql-container>.ql-editor ul>li.ql-direction-rtl {
+              margin-left: -2em;
+            }
+              /*  */
+              .tyin_package_quill_origin>.ql-container>.ql-editor ul>li::before {
+                content: "★";
+                display: inline-block;
+                width: 2em;
+                text-align: center;
+                transform: scale(0.75);
+                -webkit-mask: linear-gradient(-90deg,#000000,rgba(0,0,0,0));
+                mask: linear-gradient(-90deg,#000000,rgba(0,0,0,0));
+              }
+              .tyin_package_quill_origin>.ql-container>.ql-editor ul>li:not(.ql-direction-rtl)::before {
+                margin-left: -2em;
+              }
+              .tyin_package_quill_origin>.ql-container>.ql-editor ul>li.ql-direction-rtl::before {
+                margin-right: -2em;
+              }
+              .tyin_package_quill_origin>.ql-container>.ql-editor ul>.ql-indent-1:not(.ql-direction-rtl)::before,
+              .tyin_package_quill_origin>.ql-container>.ql-editor ul>.ql-indent-3:not(.ql-direction-rtl)::before,
+              .tyin_package_quill_origin>.ql-container>.ql-editor ul>.ql-indent-5:not(.ql-direction-rtl)::before,
+              .tyin_package_quill_origin>.ql-container>.ql-editor ul>.ql-indent-7:not(.ql-direction-rtl)::before {
+                content: "☆";
+              }
+          .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-indent[value="-1"]::before {
+            content: "􀋶";
+          }
+          .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-indent[value="+1"]::before {
+            content: "􀋵";
+          }
+          .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-direction::before {
+            content: "􀒆";
+          }
+          .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-direction[value="rtl"]::before {
+            content: "􀝿";
+          }
+            /*  */
+            .tyin_package_quill_origin>.ql-container>.ql-editor .ql-direction-rtl {
+              direction: rtl;
+            }
+          .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-align::before {
+            content: "􀌀";
+          }
+          .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-align[value="center"]::before {
+            content: "􀌁";
+          }
+          .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-align[value="right"]::before {
+            content: "􀌂";
+          }
+          .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-align[value="justify"]::before {
+            content: "􀌃";
+          }
+            /*  */
+            .tyin_package_quill_origin>.ql-container>.ql-editor .ql-align-center {
+              text-align: center;
+            }
+            .tyin_package_quill_origin>.ql-container>.ql-editor .ql-align-right {
+              text-align: right;
+            }
+            .tyin_package_quill_origin>.ql-container>.ql-editor .ql-align-justify {
+              text-align: justify;
+            }
+          .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-link::before {
+            content: "􀉣";
+          }
+            /*  */
+            .tyin_package_quill_origin>.ql-container>.ql-editor a {
+              display: inline !important;
+              text-decoration: underline;
+              text-decoration-style: dotted;
+            }
+            .tyin_package_quill_origin>.ql-container>.ql-editor a u {
+              text-decoration-style: dotted;
+            }
+          .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-image::before {
+            content: "􀏅";
+          }
+            /*  */
+            .tyin_package_quill_origin>.ql-container>.ql-editor img {
+              display: inline !important;
+              max-width: calc(100% - 2em*2);
+            }
+          .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-video::before {
+            content: "􀊙";
+          }
+            /*  */
+            .tyin_package_quill_origin>.ql-container>.ql-editor iframe {
+              padding: 2px;
+              width: 480px;
+              max-width: calc(100% - 2em*2);
+              height: 270px;
+              background-color: var(--ic_ve_color_foreground);
+            }
+            .tyin_package_quill_origin>.ql-container>.ql-editor iframe.ql-align-center {
+              margin: 0 auto;
+            }
+            .tyin_package_quill_origin>.ql-container>.ql-editor iframe.ql-align-right {
+              margin: 0 0 0 auto;
+            }
+          .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-formula::before {
+            content: "􀅮";
+          }
+            /*  */
+            .tyin_package_quill_origin>.ql-container>.ql-editor .katex {
+              overflow: auto hidden;
+              padding: 2px;
+              color: #009688;
+              background-color: var(--ic_ve_color_foreground);
+              white-space: nowrap;
+              vertical-align: bottom;
+            }
+          .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-clean::before {
+            content: "􀇼";
+          }
+          .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-undo::before {
+            content: "􀱍";
+          }
+          .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-redo::before {
+            content: "􀱓";
+          }
+          .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-list_button::before {
+            content: "􀤂";
+          }
+        /*  */
+        .tyin_package_quill_origin>.ql-container>.ql-clipboard {
+          overflow: hidden;
+          position: absolute;
+          left: -1px;
+          top: -1px;
+          width: 1px;
+          height: 1px;
+          opacity: 0;
+        }
+        /*  */
+        .tyin_package_quill_origin>.ql-container>.ql-tooltip {
+          display: flex;
+          flex-direction: column;
+          z-index: 1;
+          position: absolute;
+          left: 0 !important;
+          right: 0;
+          top: 0 !important;
+          bottom: 0;
+          margin: auto !important;
+          padding: 4px;
+          width: 128px;
+          height: 32px;
+          border-radius: 8px;
+          font-size: 12px;
+          background-color: var(--ic_ve_color_white6_opacity);
+          -webkit-backdrop-filter: var(--ic_ve_backdropFilter_blur_low);
+          backdrop-filter: var(--ic_ve_backdropFilter_blur_low);
+          box-shadow: var(--ic_ve_shadow_2dp3);
+          pointer-events: unset;
+          opacity: unset;
+          visibility: visible;
+          transform: unset;
+          transition:
+            opacity 0ms var(--ic_ve_cubicBezier_slowFast),
+            visibility 0ms var(--ic_ve_cubicBezier_slowFast),
+            transform 0ms var(--ic_ve_cubicBezier_slowFast)
+          ;
+        }
+        .tyin_package_quill_origin>.ql-container>.ql-tooltip:not([data-mode]) {
+          height: calc(24px*2 + 4px*2 + 1px);
+        }
+        .tyin_package_quill_origin>.ql-container>.ql-hidden {
+          pointer-events: none;
+          opacity: 0;
+          visibility: hidden;
+          transform: scale(0.5);
+          transition:
+            opacity calc(350ms*2/3) var(--ic_ve_cubicBezier_slowFast),
+            visibility calc(350ms*2/3) var(--ic_ve_cubicBezier_slowFast),
+            transform calc(350ms*2/3) var(--ic_ve_cubicBezier_slowFast)
+          ;
+        }
+          /*  */
+          .tyin_package_quill_origin>.ql-container>.ql-tooltip[data-mode="link"]>.ql-preview,
+          .tyin_package_quill_origin>.ql-container>.ql-tooltip[data-mode="video"]>.ql-preview,
+          .tyin_package_quill_origin>.ql-container>.ql-tooltip[data-mode="formula"]>.ql-preview,
+          .tyin_package_quill_origin>.ql-container>.ql-tooltip>.ql-action,
+          .tyin_package_quill_origin>.ql-container>.ql-tooltip[data-mode="link"]>.ql-remove,
+          .tyin_package_quill_origin>.ql-container>.ql-tooltip[data-mode="video"]>.ql-remove,
+          .tyin_package_quill_origin>.ql-container>.ql-tooltip[data-mode="formula"]>.ql-remove,
+          .tyin_package_quill_origin>.ql-container>.ql-tooltip:not(.ql-editing)>input {
+            display: none;
+          }
+          .tyin_package_quill_origin>.ql-container>.ql-tooltip>a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 24px;
+            background-color: var(--ic_ve_color_black1_opacity);
+            text-align: center;
+            transition: transform calc(1000ms/24) 0ms var(--ic_ve_cubicBezier_slowFast);
+          }
+          .tyin_package_quill_origin>.ql-container>.ql-tooltip>a.ic_active_0 {
+            transform: scale(0.875);
+          }
+          .tyin_package_quill_origin>.ql-container>.ql-tooltip>.ql-preview {
+            border-radius: 6px 6px 0 0;
+            text-decoration: underline;
+            text-decoration-style: dotted;
+          }
+          .tyin_package_quill_origin>.ql-container>.ql-tooltip>.ql-remove {
+            margin-top: 1px;
+            border-radius: 0 0 6px 6px;
+            color: var(--ic_ve_color_black4_opacity);
+          }
+            /*  */
+            .tyin_package_quill_origin>.ql-container>.ql-tooltip>.ql-remove::before {
+              content: "􀈑";
+            }
+          .tyin_package_quill_origin>.ql-container>.ql-tooltip>input {
+            padding: 4px;
+            width: 128px;
+            border-radius: 6px;
+            background-color: var(--ic_ve_color_black1_opacity);
+          }
+/* #debug */
+/* #after */
