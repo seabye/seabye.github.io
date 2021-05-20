@@ -271,7 +271,7 @@
       height: 100%;
       margin: 0 auto;
       background-color: var(--ic_ve_color_background);
-      box-shadow: var(--ic_ve_shadow_2dp3);
+      box-shadow: var(--ic_ve_shadow_2dp);
     }
       /*  */
       .tyin_package_quill_origin>.ql-container>.ql-editor[contenteditable="true"],

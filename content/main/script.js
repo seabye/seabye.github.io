@@ -2,7 +2,7 @@
 // #before
 // #import
   // tyin
-  import{tyin}from'/content/module/tyin/content/main/tyin.js';
+  import{tyin}from'/content/module/tyin@0.1.0/content/main/tyin.js';
   // Google Analytics
   tyin.elementCreate('script',{async:'',src:'https://www.googletagmanager.com/gtag/js?id=G-SBCF7D104D'},document.head);
   tyin.elementCreate('script',undefined,document.head,undefined,`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-SBCF7D104D');`);
@@ -10,9 +10,9 @@
 // #block
 // #build
   // font
-  tyin.loadFont('SF Pro Text_','/content/module/tyin/content/asset/font/SFPro/SF-Pro-Text-Regular_400.woff2',{weight:'normal'});
-  tyin.loadFont('New York_','/content/module/tyin/content/asset/font/newYork/NewYork.woff2');
-  // tyin.loadFont('PingFang SC_','/content/module/tyin/content/asset/font/pingFang/PingFang_2_400.woff2',{weight:'normal'});
+  tyin.loadFont('SF Pro Text_','/content/module/tyin@0.1.0/content/asset/font/SFPro/SF-Pro-Text-Regular_400.woff2',{weight:'normal'});
+  tyin.loadFont('New York_','/content/module/tyin@0.1.0/content/asset/font/newYork/NewYork.woff2');
+  // tyin.loadFont('PingFang SC_','/content/module/tyin@0.1.0/content/asset/font/pingFang/PingFang_2_400.woff2',{weight:'normal'});
   // element
   tyin.loop(()=>{
     for(const value of document.documentElement.children){
@@ -26,14 +26,14 @@
                 <div style="font-size: 61.8%;">
                   <div>
                     <span>lyin</span>
-                    <a href="/content/module/lyin/lyin.js">.js</a>
-                    <a href="/content/module/lyin/lyin.css">.css</a>
+                    <a href="/content/module/lyin@0.1.0/lyin.js">.js</a>
+                    <a href="/content/module/lyin@0.1.0/lyin.css">.css</a>
                     <span style="font-size: 38.2%; color: #64A963;">􀇲 90%</span>
                   </div>
                   <div>
                     <span>tyin</span>
-                    <a href="/content/module/tyin/content/main/tyin.js">.js</a>
-                    <a href="/content/module/tyin/content/main/tyin.css">.css</a>
+                    <a href="/content/module/tyin@0.1.0/content/main/tyin.js">.js</a>
+                    <a href="/content/module/tyin@0.1.0/content/main/tyin.css">.css</a>
                     <span style="font-size: 38.2%; color: #DEA615;">􀇲 50%</span>
                   </div>
                   <div>
