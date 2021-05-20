@@ -54,11 +54,11 @@
     --qt_ve_color_red: #E2378A;
     --qt_ve_color_green: #64A963;
     --qt_ve_color_blue: #53B1DE;
-    --qt_ve_color_orange: #E6844F;
+    --qt_ve_color_orange: #E88448;
     --qt_ve_background_red: #E2378A99;
     --qt_ve_background_green: #64A96399;
     --qt_ve_background_blue: #53B1DE99;
-    --qt_ve_background_orange: #E6844F99;
+    --qt_ve_background_orange: #E8844899;
   }
 /* #block */
 /* #build */
@@ -489,7 +489,7 @@
           color: var(--qt_ve_color_orange);
         }
           /*  */
-          .tyin_package_quill_origin>.ql-container>.ql-editor [style*="background-color:"]:not([style*="var(--qt_ve_background_)"]) {
+          .tyin_package_quill_origin>.ql-container>.ql-editor [style*="background-color:"]:not([style*="var(--qt_ve_background_"]) {
             background-color: transparent !important;
           }
         .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-script[value="sub"]::before {

@@ -22,27 +22,15 @@
             <div style="font-size: calc(100vmax/25); background-color: #1F2023BF; transform: rotateX(-15deg); text-align: center; perspective: 61.8vw;">
               <div style="transform: rotateY(-60deg);">
                 <a href="//seabye.com">seabye.com</a>
-                <span style="font-size: 38.2%; color: #E2378A;">􀇲 0%</span>
+                <span style="font-size: 38.2%; color: #E6844F;">􀇲</span>
                 <div style="font-size: 61.8%;">
                   <div>
-                    <span>lyin</span>
-                    <a href="/content/module/lyin@0.1.0/lyin.js">.js</a>
-                    <a href="/content/module/lyin@0.1.0/lyin.css">.css</a>
-                    <span style="font-size: 38.2%; color: #64A963;">􀇲 90%</span>
+                    <span>tyin@0.1.0</span>
+                    <span style="font-size: 38.2%; color: #E6844F;">50%</span>
                   </div>
                   <div>
-                    <span>tyin</span>
-                    <a href="/content/module/tyin@0.1.0/content/main/tyin.js">.js</a>
-                    <a href="/content/module/tyin@0.1.0/content/main/tyin.css">.css</a>
-                    <span style="font-size: 38.2%; color: #DEA615;">􀇲 50%</span>
-                  </div>
-                  <div>
-                    <span>tyin_rust</span>
-                    <span style="font-size: 38.2%; color: #E2378A;">􀇲 0%</span>
-                  </div>
-                  <div>
-                    <span>tyin_pg_rust</span>
-                    <span style="font-size: 38.2%; color: #E2378A;">􀇲 0%</span>
+                    <span>lyin@0.1.0</span>
+                    <span style="font-size: 38.2%; color: #E6844F;">50%</span>
                   </div>
                 </div>
               </div>
@@ -55,7 +43,7 @@
               </div>
               <div style="transform: rotateY(-15deg)rotateY(180deg);">
                 <span>planC</span>
-                <span style="font-size: 38.2%; color: #DEA615;">􀇲 50%</span>
+                <span style="font-size: 38.2%; color: #E6844F;">􀇲 50%</span>
               </div>
               <div style="font-size: 138.2%; color: #707C74;">Hello, World!</div>
               <div style="transform: rotateY(30deg);">
@@ -65,16 +53,16 @@
                 <a href="//pasi.cat">pasi.cat</a>
               </div>
               <div style="font-size: 61.8%; transform: rotateY(-15deg);">
-                <a onclick="tyin_test._quill_tyin(false,'tyin_simple')" style="color: #E6844F; -webkit-mask: linear-gradient(-90deg,#000000,rgba(0,0,0,0)); mask: linear-gradient(-90deg,#000000,rgba(0,0,0,0));">quill_tyin(edit,simple)</a>
+                <a onclick="tyin_test._quill_tyin(false,'tyin_simple')" style="color: #64A963; -webkit-mask: linear-gradient(-90deg,#000000,rgba(0,0,0,0)); mask: linear-gradient(-90deg,#000000,rgba(0,0,0,0));">quill_tyin(edit,simple)</a>
               </div>
               <div style="font-size: 61.8%; transform: rotateY(-30deg);">
-                <a onclick="tyin_test._quill_tyin(false,'tyin_default')" style="color: #E6844F; -webkit-mask: linear-gradient(-90deg,#000000,rgba(0,0,0,0)); mask: linear-gradient(-90deg,#000000,rgba(0,0,0,0));">quill_tyin(edit,default)</a>
+                <a onclick="tyin_test._quill_tyin(false,'tyin_default')" style="color: #64A963; -webkit-mask: linear-gradient(-90deg,#000000,rgba(0,0,0,0)); mask: linear-gradient(-90deg,#000000,rgba(0,0,0,0));">quill_tyin(edit,default)</a>
               </div>
               <div style="font-size: 61.8%; transform: rotateY(-45deg);">
-                <a onclick="tyin_test._quill_tyin(false,'tyin_full')" style="color: #E6844F; -webkit-mask: linear-gradient(-90deg,#000000,rgba(0,0,0,0)); mask: linear-gradient(-90deg,#000000,rgba(0,0,0,0));">quill_tyin(edit,full)</a>
+                <a onclick="tyin_test._quill_tyin(false,'tyin_full')" style="color: #64A963; -webkit-mask: linear-gradient(-90deg,#000000,rgba(0,0,0,0)); mask: linear-gradient(-90deg,#000000,rgba(0,0,0,0));">quill_tyin(edit,full)</a>
               </div>
               <div style="font-size: 61.8%; transform: rotateY(-60deg);">
-                <a onclick="tyin_test._quill_tyin(true)" style="color: #E6844F; -webkit-mask: linear-gradient(-90deg,#000000,rgba(0,0,0,0)); mask: linear-gradient(-90deg,#000000,rgba(0,0,0,0));">quill_tyin(browse)</a>
+                <a onclick="tyin_test._quill_tyin(true)" style="color: #64A963; -webkit-mask: linear-gradient(-90deg,#000000,rgba(0,0,0,0)); mask: linear-gradient(-90deg,#000000,rgba(0,0,0,0));">quill_tyin(browse)</a>
               </div>
             </div>
           </div>
@@ -85,14 +73,13 @@
     return false;
   },1000/60);
 // #debug
-  // debug
-  if(location.hostname.match(/localhost/)){
-  // if(location.hostname.match(/localhost|192\.168/)){
-    // ic_dg
-    document.documentElement.classList.add('ic_dg');
-    // debug
-    document.documentElement.classList.add('debug');
-  }
+  // // debug
+  // if(location.hostname.match(/127.0.0.1|192\.168/)){
+  //   // ic_dg
+  //   document.documentElement.classList.add('ic_dg');
+  //   // debug
+  //   document.documentElement.classList.add('debug');
+  // }
   // tyin
   tyin.debug(()=>{
     console.log('++++ tyin:',tyin);
