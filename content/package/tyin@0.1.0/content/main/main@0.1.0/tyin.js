@@ -433,8 +433,8 @@
       /*🔴*/memcached(){},
       /*🟢*/async loadPackage_IDB(){
         if(!('idb'in globalThis)){
-          // this.elementCreate('script',{async:'module',src:`${import.meta.url.replace('/main/tyin.js','/package/IDB@6.1.0/build/iife/index-min.js')}`},document.head);
-          this.elementCreate('script',{async:'module',src:`${import.meta.url.replace('/main/tyin.js','/package/IDB@6.1.0/build/iife/with-async-ittr-min.js')}`},document.head);
+          // this.elementCreate('script',{async:'module',src:`${import.meta.url.replace('/main/main@0.1.0/tyin.js','/package/IDB@6.1.0/build/iife/index-min.js')}`},document.head);
+          this.elementCreate('script',{async:'module',src:`${import.meta.url.replace('/main/main@0.1.0/tyin.js','/package/IDB@6.1.0/build/iife/with-async-ittr-min.js')}`},document.head);
         }
         return await this.loop(()=>{
           if('idb'in globalThis){
@@ -445,8 +445,8 @@
       },
       /*🟢*/async loadPackage_IDBKeyVal(){
         if(!('idbKeyval'in globalThis)){
-          // this.elementCreate('script',{async:'module',src:`${import.meta.url.replace('/main/tyin.js','/package/IDBKeyVal@5.0.5/dist/iife/index-min.js')}`},document.head);
-          this.elementCreate('script',{async:'module',src:`${import.meta.url.replace('/main/tyin.js','/package/IDBKeyVal@5.0.5/dist/iife-compat/index-min.js')}`},document.head);
+          // this.elementCreate('script',{async:'module',src:`${import.meta.url.replace('/main/main@0.1.0/tyin.js','/package/IDBKeyVal@5.0.5/dist/iife/index-min.js')}`},document.head);
+          this.elementCreate('script',{async:'module',src:`${import.meta.url.replace('/main/main@0.1.0/tyin.js','/package/IDBKeyVal@5.0.5/dist/iife-compat/index-min.js')}`},document.head);
         }
         return await this.loop(()=>{
           if('idbKeyval'in globalThis){
@@ -1849,11 +1849,11 @@
         });
       },
       /*🟢*/async loadPackage_fontAwesomeFree(){
-        this.elementCreate('link',{rel:'stylesheet',href:`${import.meta.url.replace('/main/tyin.js','/package/fontAwesomeFree@5.15.3/css/all.min.css')}`,crossorigin:''},document.head);
+        this.elementCreate('link',{rel:'stylesheet',href:`${import.meta.url.replace('/main/main@0.1.0/tyin.js','/package/fontAwesomeFree@5.15.3/css/all.min.css')}`,crossorigin:''},document.head);
       },
       /*🟢*/async loadPackage_HLS(){
         if(!('Hls'in globalThis)){
-          this.elementCreate('script',{async:'module',src:`${import.meta.url.replace('/main/tyin.js','/package/HLS@1.0.2/hls.min.js')}`},document.head);
+          this.elementCreate('script',{async:'module',src:`${import.meta.url.replace('/main/main@0.1.0/tyin.js','/package/HLS@1.0.2/hls.min.js')}`},document.head);
         }
         return await this.loop(()=>{
           if('Hls'in globalThis){
@@ -2084,9 +2084,9 @@
       },
       /*🟢*/async loadPackage_kaTeX(){
         if(!('katex'in globalThis)){
-          this.elementCreate('link',{rel:'stylesheet',href:`${import.meta.url.replace('/main/tyin.js','/package/kaTeX@0.13.3/katex.min.css')}`,crossorigin:''},document.head);
-          this.elementCreate('script',{async:'module',src:`${import.meta.url.replace('/main/tyin.js','/package/kaTeX@0.13.3/katex.min.js')}`},document.head);
-          // this.elementCreate('script',{async:'module',src:`${import.meta.url.replace('/main/tyin.js','/package/kaTeX@0.13.3/contrib/auto-render.min.js')}`},document.head);
+          this.elementCreate('link',{rel:'stylesheet',href:`${import.meta.url.replace('/main/main@0.1.0/tyin.js','/package/kaTeX@0.13.3/katex.min.css')}`,crossorigin:''},document.head);
+          this.elementCreate('script',{async:'module',src:`${import.meta.url.replace('/main/main@0.1.0/tyin.js','/package/kaTeX@0.13.3/katex.min.js')}`},document.head);
+          // this.elementCreate('script',{async:'module',src:`${import.meta.url.replace('/main/main@0.1.0/tyin.js','/package/kaTeX@0.13.3/contrib/auto-render.min.js')}`},document.head);
         }
         return await this.loop(()=>{
           if('katex'in globalThis){
@@ -2097,8 +2097,8 @@
       },
       /*🟢*/async loadPackage_highlight(){
         if(!('hljs'in globalThis)){
-          this.elementCreate('link',{rel:'stylesheet',href:`${import.meta.url.replace('/main/tyin.js','/package/highlight@10.7.2/build/styles/monokai-sublime.min.css')}`,crossorigin:''},document.head);
-          this.elementCreate('script',{async:'module',src:`${import.meta.url.replace('/main/tyin.js','/package/highlight@10.7.2/build/highlight.min.js')}`},document.head);
+          this.elementCreate('link',{rel:'stylesheet',href:`${import.meta.url.replace('/main/main@0.1.0/tyin.js','/package/highlight@10.7.2/build/styles/monokai-sublime.min.css')}`,crossorigin:''},document.head);
+          this.elementCreate('script',{async:'module',src:`${import.meta.url.replace('/main/main@0.1.0/tyin.js','/package/highlight@10.7.2/build/highlight.min.js')}`},document.head);
         }
         return await this.loop(()=>{
           if('hljs'in globalThis){
@@ -2109,10 +2109,10 @@
       },
       /*🟢*/async loadPackage_quill(){
         if(!('Quill'in globalThis)){
-          this.elementCreate('link',{rel:'stylesheet',href:`${import.meta.url.replace('/main/tyin.js','/main/tyin_package_quill_tyin.css')}`,crossorigin:''},document.head);
-          // this.elementCreate('link',{rel:'stylesheet',href:`${import.meta.url.replace('/main/tyin.js','/package/quill@1.3.7/quill.snow.css')}`,crossorigin:''},document.head);
-          // this.elementCreate('link',{rel:'stylesheet',href:`${import.meta.url.replace('/main/tyin.js','/package/quill@1.3.7/quill.bubble.css')}`,crossorigin:''},document.head);
-          this.elementCreate('script',{async:'module',src:`${import.meta.url.replace('/main/tyin.js','/package/quill@1.3.7/quill.min.js')}`},document.head);
+          this.elementCreate('link',{rel:'stylesheet',href:`${import.meta.url.replace('/main/main@0.1.0/tyin.js','/main/main@0.1.0/tyin_package_quill_tyin.css')}`,crossorigin:''},document.head);
+          // this.elementCreate('link',{rel:'stylesheet',href:`${import.meta.url.replace('/main/main@0.1.0/tyin.js','/package/quill@1.3.7/quill.snow.css')}`,crossorigin:''},document.head);
+          // this.elementCreate('link',{rel:'stylesheet',href:`${import.meta.url.replace('/main/main@0.1.0/tyin.js','/package/quill@1.3.7/quill.bubble.css')}`,crossorigin:''},document.head);
+          this.elementCreate('script',{async:'module',src:`${import.meta.url.replace('/main/main@0.1.0/tyin.js','/package/quill@1.3.7/quill.min.js')}`},document.head);
         }
         return await this.loop(()=>{
           if('Quill'in globalThis){
@@ -2562,14 +2562,14 @@
     tyin.elementCreate('link',{rel:'stylesheet',href:`${import.meta.url.replace('tyin.js','tyin.css')}`,crossorigin:''},document.head);
   }
   // // merge webAssembly rust
-  // await tyin.webAssembly('../package/tyin_wasm_rust/result/tyin_wasm_rust.js',(module)=>{
+  // await tyin.webAssembly('../package/tyin_wasm_rust@0.1.0/result/tyin_wasm_rust.js',(module)=>{
   //   for(const key in module){
   //     module[key]._isWebAssembly_='rust';
   //   }
   //   Object.assign(tyin,module);
   // });
   // // merge webAssembly c
-  // await tyin.webAssembly('../package/tyin_wasm_c/result/tyin_wasm_c.js',(module)=>{
+  // await tyin.webAssembly('../package/tyin_wasm_c@0.1.0/result/tyin_wasm_c.js',(module)=>{
   //   for(const key in module){
   //     module[key]._isWebAssembly_='c';
   //   }

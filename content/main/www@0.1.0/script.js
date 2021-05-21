@@ -2,7 +2,7 @@
 // #before
 // #import
   // tyin
-  import{tyin}from'/content/package/tyin@0.1.0/content/main/tyin.js';
+  import{tyin}from'/content/package/tyin@0.1.0/content/main/main@0.1.0/tyin.js';
   // Google Analytics
   tyin.elementCreate('script',{async:'',src:'https://www.googletagmanager.com/gtag/js?id=G-SBCF7D104D'},document.head);
   tyin.elementCreate('script',undefined,document.head,undefined,`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-SBCF7D104D');`);
@@ -10,9 +10,9 @@
 // #block
 // #build
   // font
-  tyin.loadFont('SF Pro Text_','/content/package/tyin@0.1.0/content/asset/font/SFPro/SF-Pro-Text-Regular_400.woff2',{weight:'normal'});
-  tyin.loadFont('New York_','/content/package/tyin@0.1.0/content/asset/font/newYork/NewYork.woff2');
-  // tyin.loadFont('PingFang SC_','/content/package/tyin@0.1.0/content/asset/font/pingFang/PingFang_2_400.woff2',{weight:'normal'});
+  tyin.loadFont('SF Pro Text_','/content/package/tyin@0.1.0/content/asset/font@0.1.0/SFPro/SF-Pro-Text-Regular_400.woff2',{weight:'normal'});
+  tyin.loadFont('New York_','/content/package/tyin@0.1.0/content/asset/font@0.1.0/newYork/NewYork.woff2');
+  // tyin.loadFont('PingFang SC_','/content/package/tyin@0.1.0/content/asset/font@0.1.0/pingFang/PingFang_2_400.woff2',{weight:'normal'});
   // element
   tyin.loop(()=>{
     for(const value of document.documentElement.children){
