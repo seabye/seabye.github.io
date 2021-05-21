@@ -416,7 +416,7 @@
       /*🔴*/
       file(listenElement,progressCallback,resultType='arrayBuffer'){
         // resultType<'BLObFile','objectURL','arrayBuffer','dataURL',undefined='arrayBuffer'>
-        console.log('#### file, ???');
+        console.log('#### file, ????');
       },
       /*🔴*/fileSystem(){},
       /*🔴*/localStorage(){},
