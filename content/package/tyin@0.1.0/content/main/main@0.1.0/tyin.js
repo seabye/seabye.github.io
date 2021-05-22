@@ -2122,6 +2122,7 @@
         });
       },
       /*🟢*/async package_quill_create(insertElement,insertPosition,mode='tyin_default',placeholder='...',content,readOnly=false,width,height,first){
+        // initial
         if(!('Quill'in globalThis)){
           this.loadPackage_kaTeX();
           this.loadPackage_highlight();
@@ -2138,6 +2139,7 @@
             return false;
           });
         }
+        //
         const UUID=this.UUID();
         const option={
           modules:{
