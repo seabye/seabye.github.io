@@ -136,7 +136,7 @@
       transition: filter calc(350ms*2/3) var(--ic_ve_cubicBezier_slowFast);
     }
       /*  */
-      .tyin_package_quill_origin * {
+      .tyin_package_quill_origin *:not(pre *) {
         /* _ */
         all: unset;
         /* _ */
@@ -375,52 +375,52 @@
             padding-bottom: 128px;
           }
           .tyin_package_quill_origin>.ql-container>.ql-editor .ql-indent-1:not(.ql-direction-rtl) {
-            margin-left: 2em;
+            padding-left: 2em;
           }
           .tyin_package_quill_origin>.ql-container>.ql-editor .ql-indent-2:not(.ql-direction-rtl) {
-            margin-left: 4em;
+            padding-left: 4em;
           }
           .tyin_package_quill_origin>.ql-container>.ql-editor .ql-indent-3:not(.ql-direction-rtl) {
-            margin-left: 6em;
+            padding-left: 6em;
           }
           .tyin_package_quill_origin>.ql-container>.ql-editor .ql-indent-4:not(.ql-direction-rtl) {
-            margin-left: 8em;
+            padding-left: 8em;
           }
           .tyin_package_quill_origin>.ql-container>.ql-editor .ql-indent-5:not(.ql-direction-rtl) {
-            margin-left: 10em;
+            padding-left: 10em;
           }
           .tyin_package_quill_origin>.ql-container>.ql-editor .ql-indent-6:not(.ql-direction-rtl) {
-            margin-left: 12em;
+            padding-left: 12em;
           }
           .tyin_package_quill_origin>.ql-container>.ql-editor .ql-indent-7:not(.ql-direction-rtl) {
-            margin-left: 14em;
+            padding-left: 14em;
           }
           .tyin_package_quill_origin>.ql-container>.ql-editor .ql-indent-8:not(.ql-direction-rtl) {
-            margin-left: 16em;
+            padding-left: 16em;
           }
           .tyin_package_quill_origin>.ql-container>.ql-editor .ql-indent-1.ql-direction-rtl {
-            margin-right: 2em;
+            padding-right: 2em;
           }
           .tyin_package_quill_origin>.ql-container>.ql-editor .ql-indent-2.ql-direction-rtl {
-            margin-right: 4em;
+            padding-right: 4em;
           }
           .tyin_package_quill_origin>.ql-container>.ql-editor .ql-indent-3.ql-direction-rtl {
-            margin-right: 6em;
+            padding-right: 6em;
           }
           .tyin_package_quill_origin>.ql-container>.ql-editor .ql-indent-4.ql-direction-rtl {
-            margin-right: 8em;
+            padding-right: 8em;
           }
           .tyin_package_quill_origin>.ql-container>.ql-editor .ql-indent-5.ql-direction-rtl {
-            margin-right: 10em;
+            padding-right: 10em;
           }
           .tyin_package_quill_origin>.ql-container>.ql-editor .ql-indent-6.ql-direction-rtl {
-            margin-right: 12em;
+            padding-right: 12em;
           }
           .tyin_package_quill_origin>.ql-container>.ql-editor .ql-indent-7.ql-direction-rtl {
-            margin-right: 14em;
+            padding-right: 14em;
           }
           .tyin_package_quill_origin>.ql-container>.ql-editor .ql-indent-8.ql-direction-rtl {
-            margin-right: 16em;
+            padding-right: 16em;
           }
           /*  */
           .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-font::before {
@@ -546,24 +546,6 @@
             .tyin_package_quill_origin>.ql-container>.ql-editor [style*="background-color:"]:not([style*="var(--qt_ve_background_"]) {
               background-color: transparent !important;
             }
-          .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-script[value="sub"]::before {
-            content: "􀓡";
-          }
-            /*  */
-            .tyin_package_quill_origin>.ql-container>.ql-editor sub {
-              display: inline !important;
-              color: var(--ic_ve_font_color_auto);
-              vertical-align: bottom;
-            }
-            html:not(.ic_nr_browser_chromium) .tyin_package_quill_origin>.ql-container>.ql-editor sub {
-              font-size: 0.618em;
-            }
-            .ic_nr_browser_chromium .tyin_package_quill_origin>.ql-container>.ql-editor sub {
-              zoom: 0.618;
-            }
-            .tyin_package_quill_origin>.ql-container>.ql-editor sub * {
-              vertical-align: bottom;
-            }
           .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-script[value="super"]::before {
             content: "􀓢";
           }
@@ -576,11 +558,41 @@
             html:not(.ic_nr_browser_chromium) .tyin_package_quill_origin>.ql-container>.ql-editor sup {
               font-size: 0.618em;
             }
+            html:not(.ic_nr_browser_chromium) .tyin_package_quill_origin>.ql-container>.ql-editor sup.ql-size-small {
+              font-size: 0.5485em;
+            }
+            html:not(.ic_nr_browser_chromium) .tyin_package_quill_origin>.ql-container>.ql-editor sup.ql-size-large {
+              font-size: 0.6875em;
+            }
             .ic_nr_browser_chromium .tyin_package_quill_origin>.ql-container>.ql-editor sup {
               zoom: 0.618;
             }
             .tyin_package_quill_origin>.ql-container>.ql-editor sup * {
               vertical-align: top;
+            }
+          .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-script[value="sub"]::before {
+            content: "􀓡";
+          }
+            /*  */
+            .tyin_package_quill_origin>.ql-container>.ql-editor sub {
+              display: inline !important;
+              color: var(--ic_ve_font_color_auto);
+              vertical-align: bottom;
+            }
+            html:not(.ic_nr_browser_chromium) .tyin_package_quill_origin>.ql-container>.ql-editor sub {
+              font-size: 0.618em;
+            }
+            html:not(.ic_nr_browser_chromium) .tyin_package_quill_origin>.ql-container>.ql-editor sub.ql-size-small {
+              font-size: 0.5485em;
+            }
+            html:not(.ic_nr_browser_chromium) .tyin_package_quill_origin>.ql-container>.ql-editor sub.ql-size-large {
+              font-size: 0.6875em;
+            }
+            .ic_nr_browser_chromium .tyin_package_quill_origin>.ql-container>.ql-editor sub {
+              zoom: 0.618;
+            }
+            .tyin_package_quill_origin>.ql-container>.ql-editor sub * {
+              vertical-align: bottom;
             }
           .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-header::before {
             content: "􀬎";
@@ -684,6 +696,9 @@
               .tyin_package_quill_origin>.ql-container>.ql-editor ol>li.ql-direction-rtl::before {
                 margin-right: -2em;
               }
+              .tyin_package_quill_origin>.ql-container>.ql-editor ol>li>* {
+                vertical-align: top;
+              }
           .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-list[value="bullet"]::before {
             content: "􀣩";
           }
@@ -719,6 +734,9 @@
               .tyin_package_quill_origin>.ql-container>.ql-editor ul>.ql-indent-5:not(.ql-direction-rtl)::before,
               .tyin_package_quill_origin>.ql-container>.ql-editor ul>.ql-indent-7:not(.ql-direction-rtl)::before {
                 content: "☆";
+              }
+              .tyin_package_quill_origin>.ql-container>.ql-editor ul>li>* {
+                vertical-align: top;
               }
           .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-indent[value="-1"]::before {
             content: "􀋶";
