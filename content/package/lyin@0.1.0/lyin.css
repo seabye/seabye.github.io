@@ -463,12 +463,6 @@
     height: 32px;
   }
 /* #build */
-  /* package */
-    /* fontAwesome */
-    .fas {
-      font-style: unset;
-      pointer-events: none;
-    }
   /* scroll */
   html:not(.ic_nr_platform_mobile) ::-webkit-scrollbar {
     width: 8px;
@@ -555,18 +549,6 @@
       -webkit-tap-highlight-color: rgba(0,0,0,0);
       -webkit-touch-callout: none;
       cursor: default;
-      opacity: unset;
-      transition:
-        background-color 350ms var(--ic_ve_cubicBezier_ease),
-        opacity 350ms var(--ic_ve_cubicBezier_ease)
-      ;
-    }
-    html.ic_nr_partialScrollEndpointOuter {
-      opacity: 0.875;
-      background-color: var(--ic_ve_color_system_red);
-    }
-    html.ic_nr_inputState {
-      border-bottom: unset;
     }
     body {
       display: flex;
@@ -588,26 +570,10 @@
     code,
     var,
     kbd,
-    pre::before,
-    code::before,
-    var::before,
-    kbd::before,
-    pre::after,
-    code::after,
-    var::after,
-    kbd::after,
     pre *,
     code *,
     var *,
-    kbd *,
-    pre *::before,
-    code *::before,
-    var *::before,
-    kbd *::before,
-    pre *::after,
-    code *::after,
-    var *::after,
-    kbd *::after {
+    kbd * {
       line-height: var(--ic_ve_font_lineHeight_basic);
       font-family: var(--ic_ve_font_family_monospace);
       word-break: break-all;
@@ -664,6 +630,29 @@
       opacity: unset;
       -webkit-user-select: none;
       user-select: none;
+    }
+  /* lyin.js */
+    /* input_inputState */
+    html.ic_nr_inputState {
+      border-bottom: unset;
+    }
+    /* partialScroll */
+    html {
+      opacity: unset;
+      transition:
+        background-color 350ms var(--ic_ve_cubicBezier_ease),
+        opacity 350ms var(--ic_ve_cubicBezier_ease)
+      ;
+    }
+    html.ic_nr_partialScrollEndpointOuter {
+      opacity: 0.875;
+      background-color: var(--ic_ve_color_system_red);
+    }
+  /* package */
+    /* fontAwesome */
+    .fas {
+      font-style: unset;
+      pointer-events: none;
     }
 /* #debug */
   /* wireframe */

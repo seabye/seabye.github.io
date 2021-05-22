@@ -35,17 +35,19 @@
       }));
     });
     addEventListener('fetch',(event)=>{
-      event.respondWith(caches.match(event.request).then((resp)=>{
-        return fetch(event.request).then((response)=>{
-          const responseClone=response.clone();
-          caches.open(version).then((cache)=>{
-            cache.put(event.request,responseClone);
+      if(event.request.method==='GET'&&event.request.url.match(/^http/)){
+        event.respondWith(caches.match(event.request).then((resp)=>{
+          return fetch(event.request).then((response)=>{
+            const responseClone=response.clone();
+            caches.open(version).then((cache)=>{
+              cache.put(event.request,responseClone);
+            });
+            return response;
+          }).catch((error)=>{
+            return resp;
           });
-          return response;
-        }).catch((error)=>{
-          return resp;
-        });
-      }));
+        }));
+      }
     });
     addEventListener('activate',(event)=>{
       event.waitUntil(caches.keys().then((keyList)=>{
@@ -237,7 +239,7 @@
         }else if(userAgent.match(/Edg/i)&&!userAgent.match(/EdgiOS/i)){
           cls.add('ic_nr_browser_edge');
         }
-        if(document.documentElement.classList.contains('ic_nr_browser_chrome')||document.documentElement.classList.contains('ic_nr_browser_edge')){
+        if(document.documentElement.classList.value.match(/ic_nr_browser_chrome|ic_nr_browser_edge/)){
           cls.add('ic_nr_browser_chromium');
         }
         if(userAgent.match(/iPhone|iPad|Android|Mobile/i)){
@@ -291,7 +293,7 @@
           set_media_prefers_reducedData(event.matches);
         });
         const set_media_orientation=(matches)=>{
-          if(document.documentElement.classList.contains('ic_nr_browser_safari')&&document.documentElement.classList.value.match(/ic_nr_media_orientation_landscape|ic_nr_media_orientation_portrait/i)){
+          if(document.documentElement.classList.contains('ic_nr_browser_safari')&&document.documentElement.classList.value.match(/ic_nr_media_orientation_landscape|ic_nr_media_orientation_portrait/)){
             setTimeout(()=>{
               document.body.style.setProperty('margin','1px');
               setTimeout(()=>{
@@ -339,7 +341,7 @@
         if(this.dataset.config.head_title||this.dataset.config.head_title===''){
           this.dataset.config.lyin_js.insertAdjacentHTML('beforebegin',`<title>${this.dataset.config.head_title}</title>`);
         }
-        this.dataset.config.lyin_js.insertAdjacentHTML('beforebegin',`<link rel="stylesheet" href="${this.dataset.config.lyin_js.getAttribute('src').replace(/\.js/i,'.css')}" crossorigin>`);
+        this.dataset.config.lyin_js.insertAdjacentHTML('beforebegin',`<link rel="stylesheet" href="${this.dataset.config.lyin_js.getAttribute('src').replace('.js','.css')}" crossorigin>`);
         if(this.dataset.config.head_style){
           this.dataset.config.lyin_js.insertAdjacentHTML('beforebegin',`<link rel="stylesheet" href="${this.dataset.config.head_style}" crossorigin>`);
         }
@@ -386,7 +388,7 @@
               const loop=()=>{
                 if(document.styleSheets){
                   for(let key=0,length=document.styleSheets.length;key<length;key++){
-                    if(document.styleSheets[key].href&&document.styleSheets[key].href.match(/lyin\.css/i)){
+                    if(document.styleSheets[key].href&&document.styleSheets[key].href.match('lyin.css')){
                       document.styleSheets[key].insertRule(`html { --ic_ve_viewport_scale: ${record}; }`,document.styleSheets[key].cssRules.length);
                     }
                   }
@@ -470,7 +472,7 @@
       },
       /*🟢*/no_drag(){
         addEventListener('dragstart',(event)=>{
-          if(event.target.localName.match(/a|img/i)){
+          if(event.target.localName.match(/a|img/)){
             event.preventDefault();
           }
         });
@@ -565,8 +567,8 @@
           let _element_=null;
           addEventListener('touchstart',(event)=>{
             const loop=(target)=>{
-              if(getComputedStyle(target).overflowY.match(/auto|scroll/i)||getComputedStyle(target).overflowX.match(/auto|scroll/i)){
-                if(getComputedStyle(target).overflowY.match(/auto|scroll/i)){
+              if(getComputedStyle(target).overflowY.match(/auto|scroll/)||getComputedStyle(target).overflowX.match(/auto|scroll/)){
+                if(getComputedStyle(target).overflowY.match(/auto|scroll/)){
                   if(target.scrollHeight!==target.offsetHeight){
                     if(target.scrollTop<=0){
                       start_y=event.changedTouches[0].screenY;

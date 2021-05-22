@@ -412,6 +412,46 @@
           console.log('#### webAssembly, catch:',error);
         });
       },
+      /*🟢*/async loadGlobalPackage(type,path,variable){
+        let insertElement=document.head;
+        let insertPosition='beforeend';
+        switch(type){
+          case'style':
+            {
+              for(let key=document.styleSheets.length;key>0;key--){
+                if(document.styleSheets[key-1].ownerNode.parentElement===document.head){
+                  insertElement=document.styleSheets[key-1].ownerNode;
+                  insertPosition='afterend';
+                  break;
+                }
+              }
+              this.elementCreate('link',{rel:'stylesheet',href:`${import.meta.url.replace('/main/main@0.1.0/tyin.js',`/${path}`)}`,crossorigin:''},insertElement,insertPosition);
+            }
+            break;
+          case'script':
+            {
+              for(let key=document.scripts.length;key>0;key--){
+                if(document.scripts[key-1].parentElement===document.head){
+                  insertElement=document.scripts[key-1];
+                  insertPosition='afterend';
+                  break;
+                }
+              }
+              if(!(variable in globalThis)){
+                this.elementCreate('script',{async:'module',src:`${import.meta.url.replace('/main/main@0.1.0/tyin.js',`/${path}`)}`},insertElement,insertPosition);
+              }
+              return await this.loop(()=>{
+                if(variable in globalThis){
+                  return variable;
+                }
+                return false;
+              });
+            }
+            break;
+          default:
+            break;
+        }
+      },
     // 💠 local data
       /*🔴*/
       file(listenElement,progressCallback,resultType='arrayBuffer'){
@@ -431,29 +471,13 @@
       /*🔴*/redis(){},
       /*🔴*/mongoDB(){},
       /*🔴*/memcached(){},
-      /*🟢*/async loadPackage_IDB(){
-        if(!('idb'in globalThis)){
-          // this.elementCreate('script',{async:'module',src:`${import.meta.url.replace('/main/main@0.1.0/tyin.js','/package/IDB@6.1.0/build/iife/index-min.js')}`},document.head);
-          this.elementCreate('script',{async:'module',src:`${import.meta.url.replace('/main/main@0.1.0/tyin.js','/package/IDB@6.1.0/build/iife/with-async-ittr-min.js')}`},document.head);
-        }
-        return await this.loop(()=>{
-          if('idb'in globalThis){
-            return idb;
-          }
-          return false;
-        });
+      /*🟢*/async loadGlobalPackage_IDB(){
+        // return await this.loadGlobalPackage('script','package/IDB@6.1.0/build/iife/index-min.js','idb');
+        return await this.loadGlobalPackage('script','package/IDB@6.1.0/build/iife/with-async-ittr-min.js','idb');
       },
-      /*🟢*/async loadPackage_IDBKeyVal(){
-        if(!('idbKeyval'in globalThis)){
-          // this.elementCreate('script',{async:'module',src:`${import.meta.url.replace('/main/main@0.1.0/tyin.js','/package/IDBKeyVal@5.0.5/dist/iife/index-min.js')}`},document.head);
-          this.elementCreate('script',{async:'module',src:`${import.meta.url.replace('/main/main@0.1.0/tyin.js','/package/IDBKeyVal@5.0.5/dist/iife-compat/index-min.js')}`},document.head);
-        }
-        return await this.loop(()=>{
-          if('idbKeyval'in globalThis){
-            return idbKeyval;
-          }
-          return false;
-        });
+      /*🟢*/async loadGlobalPackage_IDBKeyVal(){
+        // return await this.loadGlobalPackage('script','package/IDBKeyVal@5.0.5/dist/iife/index-min.js','idbKeyval');
+        return await this.loadGlobalPackage('script','package/IDBKeyVal@5.0.5/dist/iife-compat/index-min.js','idbKeyval');
       },
     // 💠 network data
       /*🟢*/fetch(URL,method,data,dataPack,requestDataType,responseDataType,callback,optionPlus,optionHeadersPlus){
@@ -555,7 +579,7 @@
       /*🔴*/siteMapGenerator(){},
       /*🔴*/siteMapHTMLGenerator(){},
     // 💠 graphics
-      /*🔴*/async loadPackage_openCV(){},
+      /*🔴*/async loadGlobalPackage_openCV(){},
       /*🔴*/package_openCV_removeWatermark(){},
     // 💠 command line interface
       /*🔴*/cli(){},
@@ -1738,7 +1762,7 @@
           }
         };
         run(element);
-        return result.replace(/,$/,'');
+        return result.replace(/\,$/,'');
       },
       /*🟢*/URLPath(hash=true){
         switch(hash){
@@ -1848,91 +1872,74 @@
           resolve(true);
         });
       },
-      /*🟢*/async loadPackage_fontAwesomeFree(){
-        this.elementCreate('link',{rel:'stylesheet',href:`${import.meta.url.replace('/main/main@0.1.0/tyin.js','/package/fontAwesomeFree@5.15.3/css/all.min.css')}`,crossorigin:''},document.head);
+      /*🟢*/loadGlobalPackage_fontAwesomeFree(){
+        this.loadGlobalPackage('style','package/fontAwesomeFree@5.15.3/css/all.min.css');
       },
-      /*🟢*/async loadPackage_HLS(){
-        if(!('Hls'in globalThis)){
-          this.elementCreate('script',{async:'module',src:`${import.meta.url.replace('/main/main@0.1.0/tyin.js','/package/HLS@1.0.2/hls.min.js')}`},document.head);
-        }
-        return await this.loop(()=>{
-          if('Hls'in globalThis){
-            return Hls;
-          }
-          return false;
-        });
+      /*🟢*/async loadGlobalPackage_HLS(){
+        return await this.loadGlobalPackage('script','package/HLS@1.0.2/hls.min.js','Hls');
       },
-      /*🟢*/package_HLS_play(mode='auto',video,src,poster='',config={
+      /*🟢*/async package_HLS_play(mode='auto',video,src,poster='',config={
         autoStartLoad:video.getAttribute('preload')==='auto'?true:false,
         maxBufferLength:4,
         maxBufferSize:4*1000*1000
       }){
         if(!('Hls'in globalThis)){
-          (async()=>{
-            await this.loadPackage_HLS();
-          })();
+          await this.loadGlobalPackage_HLS();
         }
-        this.loop(()=>{
-          if('Hls'in globalThis){
-            video.pause();
-            if(!this.package_HLS_play.play){
-              this.package_HLS_play.play=()=>{
-                video._HLS_.startLoad();
-              };
+        if(!this.package_HLS_play.play){
+          this.package_HLS_play.play=()=>{
+            video._HLS_.startLoad();
+          };
+        }
+        if(!this.package_HLS_play.pause){
+          this.package_HLS_play.pause=()=>{
+            video._HLS_.stopLoad();
+          };
+        }
+        video.pause();
+        video.setAttribute('src',src);
+        video.setAttribute('poster',poster);
+        if(src.match(/\.m3u8/i)){
+          const HLSGo=()=>{
+            if(video._HLS_){
+              video._HLS_.destroy();
+              delete video._HLS_;
+              video.removeEventListener('play',this.package_HLS_play.play);
+              video.removeEventListener('pause',this.package_HLS_play.pause);
             }
-            if(!this.package_HLS_play.pause){
-              this.package_HLS_play.pause=()=>{
-                video._HLS_.stopLoad();
-              };
-            }
-            video.setAttribute('src',src);
-            video.setAttribute('poster',poster);
-            if(src.match(/\.m3u8/i)){
-              const HLSGo=()=>{
-                if(video._HLS_){
-                  video._HLS_.destroy();
-                  delete video._HLS_;
-                  video.removeEventListener('play',this.package_HLS_play.play);
-                  video.removeEventListener('pause',this.package_HLS_play.pause);
-                }
-                const HLS=new Hls(config);
-                HLS.loadSource(src);
-                HLS.attachMedia(video);
-                video.addEventListener('play',this.package_HLS_play.play);
-                video.addEventListener('pause',this.package_HLS_play.pause);
-                video._HLS_=HLS;
-                return HLS;
-              };
-              return this.loop(()=>{
-                switch(mode){
-                  case'auto':
-                    {
-                      if(video.canPlayType('application/vnd.apple.mpegurl')){
-                        return true;
-                      }else{
-                        if('Hls'in globalThis&&Hls.isSupported()){
-                          return HLSGo();
-                        }
-                      }
+            const HLS=new Hls(config);
+            HLS.loadSource(src);
+            HLS.attachMedia(video);
+            video.addEventListener('play',this.package_HLS_play.play);
+            video.addEventListener('pause',this.package_HLS_play.pause);
+            video._HLS_=HLS;
+            return HLS;
+          };
+          return this.loop(()=>{
+            switch(mode){
+              case'auto':
+                {
+                  if(video.canPlayType('application/vnd.apple.mpegurl')){
+                    return true;
+                  }else{
+                    if(Hls.isSupported()){
+                      return HLSGo();
                     }
-                    break;
-                  case'HLS':
-                    {
-                      if('Hls'in globalThis&&Hls.isSupported()){
-                        return HLSGo();
-                      }
-                    }
-                    break;
-                  default:
-                    break;
+                  }
                 }
-                return false;
-              });
+                break;
+              case'HLS':
+                {
+                  if(Hls.isSupported()){
+                    return HLSGo();
+                  }
+                }
+                break;
+              default:
+                break;
             }
-            return true;
-          }
-          return false;
-        });
+          });
+        }
       },
       /*🔴*/unit(){},
       /*🔴*/colorDictionary(){},
@@ -2082,228 +2089,236 @@
         }
         return miniEditor;
       },
-      /*🟢*/async loadPackage_kaTeX(){
-        if(!('katex'in globalThis)){
-          this.elementCreate('link',{rel:'stylesheet',href:`${import.meta.url.replace('/main/main@0.1.0/tyin.js','/package/kaTeX@0.13.3/katex.min.css')}`,crossorigin:''},document.head);
-          this.elementCreate('script',{async:'module',src:`${import.meta.url.replace('/main/main@0.1.0/tyin.js','/package/kaTeX@0.13.3/katex.min.js')}`},document.head);
-          // this.elementCreate('script',{async:'module',src:`${import.meta.url.replace('/main/main@0.1.0/tyin.js','/package/kaTeX@0.13.3/contrib/auto-render.min.js')}`},document.head);
-        }
-        return await this.loop(()=>{
-          if('katex'in globalThis){
-            return katex;
-          }
-          return false;
-        });
+      /*🟢*/async loadGlobalPackage_kaTeX(){
+        this.loadGlobalPackage('style','package/kaTeX@0.13.3/katex.min.css');
+        return await this.loadGlobalPackage('script','package/kaTeX@0.13.3/katex.min.js','katex');
       },
-      /*🟢*/async loadPackage_highlight(){
-        if(!('hljs'in globalThis)){
-          this.elementCreate('link',{rel:'stylesheet',href:`${import.meta.url.replace('/main/main@0.1.0/tyin.js','/package/highlight@10.7.2/build/styles/monokai-sublime.min.css')}`,crossorigin:''},document.head);
-          this.elementCreate('script',{async:'module',src:`${import.meta.url.replace('/main/main@0.1.0/tyin.js','/package/highlight@10.7.2/build/highlight.min.js')}`},document.head);
-        }
-        return await this.loop(()=>{
-          if('hljs'in globalThis){
-            return hljs;
-          }
-          return false;
-        });
+      /*🟢*/async loadGlobalPackage_highlight(){
+        this.loadGlobalPackage('style','package/highlight@10.7.2/build/styles/monokai-sublime.min.css');
+        return await this.loadGlobalPackage('script','package/highlight@10.7.2/build/highlight.min.js','hljs');
       },
-      /*🟢*/async loadPackage_quill(){
-        if(!('Quill'in globalThis)){
-          this.elementCreate('link',{rel:'stylesheet',href:`${import.meta.url.replace('/main/main@0.1.0/tyin.js','/main/main@0.1.0/tyin_package_quill_tyin.css')}`,crossorigin:''},document.head);
-          // this.elementCreate('link',{rel:'stylesheet',href:`${import.meta.url.replace('/main/main@0.1.0/tyin.js','/package/quill@1.3.7/quill.snow.css')}`,crossorigin:''},document.head);
-          // this.elementCreate('link',{rel:'stylesheet',href:`${import.meta.url.replace('/main/main@0.1.0/tyin.js','/package/quill@1.3.7/quill.bubble.css')}`,crossorigin:''},document.head);
-          this.elementCreate('script',{async:'module',src:`${import.meta.url.replace('/main/main@0.1.0/tyin.js','/package/quill@1.3.7/quill.min.js')}`},document.head);
-        }
-        return await this.loop(()=>{
-          if('Quill'in globalThis){
-            return Quill;
-          }
-          return false;
-        });
+      /*🟢*/async loadGlobalPackage_quill(){
+        this.loadGlobalPackage('style','main/main@0.1.0/tyin_package_quill_tyin.css');
+        return await this.loadGlobalPackage('script','package/quill@1.3.7/quill.min.js','Quill');
       },
-      /*🟢*/async package_quill_create(insertElement,insertPosition,mode='tyin_default',placeholder='...',content,readOnly=false,width,height,first){
+      /*🟢*/async package_quill_create(insertElement,insertPosition,mode='tyin_default',placeholder='...',content,readOnly=false,width,height,disableUndo=0){
         // initial
-        if(!('Quill'in globalThis)){
-          this.loadPackage_kaTeX();
-          this.loadPackage_highlight();
-          this.loadPackage_IDBKeyVal();
-          await this.loop(()=>{
-            if('hljs'in globalThis){
-              hljs.configure({
-                useBR:false
-              });
-              hljs.highlightAll();
-              this.loadPackage_quill();
-              return true;
+          // load package
+          if(!('katex'in globalThis)){
+            await this.loadGlobalPackage_kaTeX();
+          }
+          if(!('hljs'in globalThis)){
+            await this.loadGlobalPackage_highlight();
+            hljs.configure({
+              useBR:false
+            });
+            hljs.highlightAll();
+          }
+          if(!('Quill'in globalThis)){
+            await this.loadGlobalPackage_quill();
+          }
+          if(!('idbKeyval'in globalThis)){
+            await this.loadGlobalPackage_IDBKeyVal();
+          }
+          // register font
+          const font=Quill.import('formats/font');
+          font.whitelist=['monospace'];
+          Quill.register(font,true);
+        // mode
+          // option
+          const option={
+            debug:'error',
+            modules:{
+              formula:true,
+              syntax:true
+            },
+            placeholder:placeholder,
+            readOnly:readOnly,
+            theme:mode==='bubble'?'bubble':'snow'
+          };
+          // toolbar
+          switch(mode){
+            case'full':
+              {
+                option.modules.toolbar=[
+                  [{'font':[]},{'size':['small',false,'large','huge']}],
+                  ['bold','italic','underline','strike'],
+                  [{'color':[]},{'background':[]}],
+                  [{'script':'sub'},{'script':'super'}],
+                  [{'header':[1,2,3,4,5,6,false]}],
+                  [{'header':1},{'header':2},{'header':3},{'header':4},{'header':5},{'header':6},'blockquote','code-block'],
+                  [{'list':'ordered'},{'list':'bullet'},{'indent':'-1'},{'indent':'+1'}],
+                  [{'direction':'rtl'},{'align':[]}],
+                  ['link','image','video','formula'],
+                  ['clean','undo','redo','listButton']
+                ];
+              }
+              break;
+            case'tyin_full':
+              {
+                option.modules.toolbar=[
+                  ['blockquote',{'font':'monospace'},'code-block','link','image','video','formula'],
+                  [{'header':1},{'header':2},{'header':3},{'header':4},{'header':5},{'header':6}],
+                  ['bold','italic','underline','strike',{'script':'super'},{'script':'sub'},{'size':'small'},{'size':'large'}],
+                  [
+                    {'color':'var(--qt_ve_color_red)'},{'color':'var(--qt_ve_color_green)'},{'color':'var(--qt_ve_color_blue)'},{'color':'var(--qt_ve_color_orange)'},
+                    {'background':'var(--qt_ve_background_red)'},{'background':'var(--qt_ve_background_green)'},{'background':'var(--qt_ve_background_blue)'},{'background':'var(--qt_ve_background_orange)'},
+                  ],
+                  [{'list':'bullet'},{'list':'ordered'},{'indent':'-1'},{'indent':'+1'},{'align':'center'},{'align':'right'},{'align':'justify'},{'direction':'rtl'}],
+                  ['clean','undoButton','redoButton','listButton']
+                ];
+              }
+              break;
+            case'tyin_default':
+              {
+                option.modules.toolbar=[
+                  ['blockquote','code-block','formula',{'header':1},{'header':3},{'header':5}],
+                  ['bold','italic','underline','strike',{'size':'small'},{'size':'large'}],
+                  [{'color':'var(--qt_ve_color_red)'},{'color':'var(--qt_ve_color_green)'},{'color':'var(--qt_ve_color_blue)'},{'color':'var(--qt_ve_color_orange)'},{'script':'super'},{'script':'sub'}],
+                  [{'list':'bullet'},{'indent':'-1'},{'indent':'+1'},{'align':'center'},'link','image'],
+                  ['clean','undoButton','redoButton','listButton']
+                ];
+              }
+              break;
+            case'tyin_simple':
+              {
+                option.modules.toolbar=[
+                  ['bold','italic','underline','strike',{'header':1},{'header':4}],
+                  [{'color':'var(--qt_ve_color_red)'},{'color':'var(--qt_ve_color_green)'},{'color':'var(--qt_ve_color_blue)'},{'color':'var(--qt_ve_color_orange)'},{'script':'super'},{'script':'sub'}],
+                  [{'list':'bullet'},{'indent':'-1'},{'indent':'+1'},{'align':'center'},'link','image'],
+                  ['clean','undoButton','redoButton','listButton']
+                ];
+              }
+              break;
+            default:
+              {
+                if(typeof mode!=='string'){
+                  option.modules.toolbar=mode;
+                }
+              }
+              break;
+          }
+        // result
+        const UUID=this.UUID();
+        const attribute={
+          class:`tyin_package_quill_container tyin_package_quill_UUID_${UUID}`
+        };
+        if(width||height){
+          attribute.style=`${width?`width: ${width}; `:''}${height?`height: ${height};`:''}`;
+        }
+        const result=this.elementCreate(
+          'div',
+          attribute,
+          insertElement,
+          insertPosition,
+          `<div class="tyin_package_quill_list"><div class="tyin_package_quill_list_group"></div></div><div class="tyin_package_quill_origin"><div></div></div>`,
+          (element)=>{
+            element.tyin_package_quill=new Quill(
+              `.tyin_package_quill_UUID_${UUID}>.tyin_package_quill_origin>div`,
+              option
+            );
+          }
+        );
+        // variable
+        const tyin_package_quill=result.tyin_package_quill;
+        const tyin_package_quill_container=result;
+        const tyin_package_quill_list=tyin_package_quill_container.children[0];
+        const tyin_package_quill_list_group=tyin_package_quill_list.children[0];
+        const tyin_package_quill_origin=tyin_package_quill_container.children[1];
+        const tyin_package_quill_origin_toolbar=tyin_package_quill_origin.children[0];
+        const tyin_package_quill_origin_container=tyin_package_quill_origin.children[1];
+        const tyin_package_quill_origin_container_editor=tyin_package_quill_origin_container.children[0];
+        const tyin_package_quill_origin_container_clipboard=tyin_package_quill_origin_container.children[1];
+        const tyin_package_quill_origin_container_tooltip=tyin_package_quill_origin_container.children[2];
+        const tyin_package_quill_origin_container_tooltip_preview=tyin_package_quill_origin_container_tooltip.children[0];
+        const tyin_package_quill_origin_container_tooltip_input=tyin_package_quill_origin_container_tooltip.children[1];
+        const tyin_package_quill_origin_container_tooltip_action=tyin_package_quill_origin_container_tooltip.children[2];
+        const tyin_package_quill_origin_container_tooltip_remove=tyin_package_quill_origin_container_tooltip.children[3];
+        const undoButton=document.querySelector(`.tyin_package_quill_UUID_${UUID}>.tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-undoButton`);
+        if(undoButton){
+          undoButton.addEventListener('click',()=>{
+            if(tyin_package_quill.history.stack.undo.length>disableUndo){
+              tyin_package_quill.history.undo();
+              tyin_package_quill_origin_container_editor.focus();
             }
-            return false;
           });
         }
-        //
-        const UUID=this.UUID();
-        const option={
-          modules:{
-            formula:true,
-            syntax:true
-          },
-          placeholder:placeholder,
-          readOnly:readOnly,
-          theme:mode==='bubble'?'bubble':'snow'
-        };
-        switch(mode){
-          case'full':
+        const redoButton=document.querySelector(`.tyin_package_quill_UUID_${UUID}>.tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-redoButton`);
+        if(redoButton){
+          redoButton.addEventListener('click',()=>{
+            tyin_package_quill.history.redo();
+            tyin_package_quill_origin_container_editor.focus();
+          });
+        }
+        const listButton=document.querySelector(`.tyin_package_quill_UUID_${UUID}>.tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-listButton`);
+        if(listButton){
+          listButton.addEventListener('click',()=>{
+            this.elementState(tyin_package_quill_list,'tyin_package_quill_mk_display','',true);
+            tyin_package_quill_origin_container_editor.setAttribute('contenteditable','false');
+          });
+          result.addEventListener('click',(event)=>{
+            if(event.target===tyin_package_quill_container){
+              this.elementState(tyin_package_quill_list,'','tyin_package_quill_mk_display',true);
+              tyin_package_quill_origin_container_editor.setAttribute('contenteditable','true');
+            }
+          });
+        }
+        // modify
+        tyin_package_quill_container.classList.remove(`tyin_package_quill_UUID_${UUID}`);
+        tyin_package_quill_origin_toolbar.classList.remove('ql-snow');
+        tyin_package_quill_origin_container.classList.remove('ql-snow');
+        tyin_package_quill_origin_container_tooltip_input.dataset.link=location.origin;
+        tyin_package_quill_origin_container_tooltip_input.dataset.video='URL';
+        // set content
+        switch(typeof content){
+          case'string':
             {
-              option.modules.toolbar=[
-                [{'font':[]},{'size':['small',false,'large','huge']}],
-                ['bold','italic','underline','strike'],
-                [{'color':[]},{'background':[]}],
-                [{'script':'sub'},{'script':'super'}],
-                [{'header':[1,2,3,4,5,6,false]}],
-                [{'header':1},{'header':2},{'header':3},{'header':4},{'header':5},{'header':6},'blockquote','code-block'],
-                [{'list':'ordered'},{'list':'bullet'},{'indent':'-1'},{'indent':'+1'}],
-                [{'direction':'rtl'},{'align':[]}],
-                ['link','image','video','formula'],
-                ['clean','undo','redo','list_button']
-              ];
+              tyin_package_quill_origin_container_editor.innerHTML=content;
             }
             break;
-          case'tyin_full':
+          case'object':
             {
-              option.modules.toolbar=[
-                ['blockquote',{'font':'monospace'},'code-block','link','image','video','formula'],
-                [{'header':1},{'header':2},{'header':3},{'header':4},{'header':5},{'header':6}],
-                ['bold','italic','underline','strike',{'script':'super'},{'script':'sub'},{'size':'small'},{'size':'large'}],
-                [
-                  {'color':'var(--qt_ve_color_red)'},{'color':'var(--qt_ve_color_green)'},{'color':'var(--qt_ve_color_blue)'},{'color':'var(--qt_ve_color_orange)'},
-                  {'background':'var(--qt_ve_background_red)'},{'background':'var(--qt_ve_background_green)'},{'background':'var(--qt_ve_background_blue)'},{'background':'var(--qt_ve_background_orange)'},
-                ],
-                [{'list':'bullet'},{'list':'ordered'},{'indent':'-1'},{'indent':'+1'},{'align':'center'},{'align':'right'},{'align':'justify'},{'direction':'rtl'}],
-                ['clean','undo','redo','list_button']
-              ];
-            }
-            break;
-          case'tyin_default':
-            {
-              option.modules.toolbar=[
-                ['blockquote','code-block','formula',{'header':1},{'header':3},{'header':5}],
-                ['bold','italic','underline','strike',{'size':'small'},{'size':'large'}],
-                [{'color':'var(--qt_ve_color_red)'},{'color':'var(--qt_ve_color_green)'},{'color':'var(--qt_ve_color_blue)'},{'color':'var(--qt_ve_color_orange)'},{'script':'super'},{'script':'sub'}],
-                [{'list':'bullet'},{'indent':'-1'},{'indent':'+1'},{'align':'center'},'link','image'],
-                ['clean','undo','redo','list_button']
-              ];
-            }
-            break;
-          case'tyin_simple':
-            {
-              option.modules.toolbar=[
-                ['bold','italic','underline','strike',{'header':1},{'header':4}],
-                [{'color':'var(--qt_ve_color_red)'},{'color':'var(--qt_ve_color_green)'},{'color':'var(--qt_ve_color_blue)'},{'color':'var(--qt_ve_color_orange)'},{'script':'super'},{'script':'sub'}],
-                [{'list':'bullet'},{'indent':'-1'},{'indent':'+1'},{'align':'center'},'link','image'],
-                ['clean','undo','redo','list_button']
-              ];
+              tyin_package_quill.setContents(content);
             }
             break;
           default:
-            {
-              if(typeof mode!=='string'){
-                option.modules.toolbar=mode;
-              }
-            }
             break;
         }
-        return this.loop(async()=>{
-          if('katex'in globalThis&&'hljs'in globalThis&&'idbKeyval'in globalThis&&'Quill'in globalThis){
-            await tyin.loadPackage_IDBKeyVal();
-            const db=idbKeyval.createStore('tyin_package_quill','basic');
-            let last_UUID=await idbKeyval.get('last',db);
+        // readOnly?
+        if(readOnly){
+          // remove toolbar
+          this.removeElement(tyin_package_quill_origin_toolbar);
+        }else{
+          // build editor
+            // local data
+            const data_basic=idbKeyval.createStore('tyin_package_quill','basic');
+            //
+            let last_UUID=await idbKeyval.get('last',data_basic);
             let last_content=null;
             if(last_UUID){
-              last_content=await idbKeyval.get(last_UUID,db);
+              last_content=await idbKeyval.get(last_UUID,data_basic);
             }else{
               last_UUID=this.UUID();
             }
-            const font=Quill.import('formats/font');
-            font.whitelist=['monospace'];
-            Quill.register(font,true);
-            const attribute={
-              class:`tyin_package_quill_container tyin_package_quill_UUID_${UUID}`
-            };
-            if(width||height){
-              attribute.style=`${width?`width: ${width}; `:''}${height?`height: ${height};`:''}`;
-            }
-            const result=this.elementCreate(
-              'div',
-              attribute,
-              insertElement,
-              insertPosition,
-              `<div class="tyin_package_quill_list"><div class="tyin_package_quill_list_group tyin_package_quill_list_default"></div></div><div class="tyin_package_quill_origin tyin_package_quill_UUID_${UUID}"><div class="tyin_package_quill_${typeof mode==='string'?mode:'custom'}_container tyin_package_quill_UUID_${UUID}">${typeof content==='string'?content:''}</div></div>`,
-              (element)=>{
-                element.tyin_package_quill=new Quill(
-                  `.tyin_package_quill_${typeof mode==='string'?mode:'custom'}_container.tyin_package_quill_UUID_${UUID}`,
-                  option
-                );
-              }
-            );
-            if(typeof content==='object'){
-              result.tyin_package_quill.setContents(content);
-            }else{
+            if(!typeof content!=='object'&&last_content){
               if(last_content){
-                result.tyin_package_quill.setContents(JSON.parse(last_content).data);
+                tyin_package_quill.setContents(JSON.parse(last_content).data);
               }
             }
-            const inputDataset=result.lastElementChild.lastElementChild.children[1].dataset;
-            inputDataset.link=location.origin;
-            inputDataset.video='URL';
-            if(readOnly){
-              this.removeElement(result.lastElementChild.firstElementChild);
-            }else{
-              const undo=document.querySelector(`.tyin_package_quill_origin.tyin_package_quill_UUID_${UUID}>.ql-toolbar>.ql-formats>.ql-undo`);
-              const redo=document.querySelector(`.tyin_package_quill_origin.tyin_package_quill_UUID_${UUID}>.ql-toolbar>.ql-formats>.ql-redo`);
-              if(undo){
-                undo.addEventListener('click',()=>{
-                  if(result.tyin_package_quill.history.stack.undo.length>first){
-                    result.tyin_package_quill.history.undo();
-                    result.tyin_package_quill.container.firstElementChild.focus();
-                  }
-                });
-              }
-              if(redo){
-                redo.addEventListener('click',()=>{
-                  result.tyin_package_quill.history.redo();
-                  result.tyin_package_quill.container.firstElementChild.focus();
-                });
-              }
-              this.listenDOM('add',result.tyin_package_quill.container.firstElementChild,'observe_mutation',this.throttle(()=>{
-                idbKeyval.set(last_UUID,JSON.stringify({createTime:'',editTime:'',data:tyin_quill.tyin_package_quill.getContents()}),db);
-                idbKeyval.set('last',last_UUID,db);
-              },1000/2),{subtree:true,attributes:true,childList:true,characterData:true});
-              const list_element=document.querySelector(`.tyin_package_quill_container.tyin_package_quill_UUID_${UUID}>.tyin_package_quill_list`);
-              const list_button=document.querySelector(`.tyin_package_quill_origin.tyin_package_quill_UUID_${UUID}>.ql-toolbar>.ql-formats>.ql-list_button`);
-              await idbKeyval.entries(db).then((key)=>{
-                this.for(key,(...data)=>{
-                  if(data[2][0]!=='last'){
-                    // this.elementCreate('div',{class:'tyin_package_quill_list_item','data-tyin_package_quill':data[2][0]},list_element.firstElementChild,undefined,data[2][1]);
-                  }
-                },0);
-              });
-              if(list_button){
-                list_button.addEventListener('click',()=>{
-                  this.elementState(list_element,'tyin_package_quill_mk_display','',true);
-                  result.tyin_package_quill.container.firstElementChild.setAttribute('contenteditable','false');
-                });
-                result.addEventListener('click',(event)=>{
-                  if(event.target===result){
-                    this.elementState(list_element,'','tyin_package_quill_mk_display',true);
-                    result.tyin_package_quill.container.firstElementChild.setAttribute('contenteditable','true');
-                  }
-                });
-              }
-              // const toolbar=document.querySelector(`.tyin_package_quill_container.tyin_package_quill_UUID_${UUID}>.tyin_package_quill_origin>.ql-toolbar`);
-            }
-            return result;
-          }
-          return false;
-        });
+            this.listenDOM('add',tyin_package_quill.container.firstElementChild,'observe_mutation',this.throttle(()=>{
+              idbKeyval.set(last_UUID,JSON.stringify({createTime:'',editTime:'',data:tyin_package_quill.getContents()}),data_basic);
+              idbKeyval.set('last',last_UUID,data_basic);
+            },1000/2),{subtree:true,attributes:true,childList:true,characterData:true});
+            await idbKeyval.entries(data_basic).then((key)=>{
+              this.for(key,(...data)=>{
+                if(data[2][0]!=='last'){
+                  // this.elementCreate('div',{class:'tyin_package_quill_list_item','data-tyin_package_quill':data[2][0]},tyin_package_quill_list.firstElementChild,undefined,data[2][1]);
+                }
+              },0);
+            });
+        }
+        // ok
+        return result;
       },
     // 💠 other
       w3daze:{
@@ -2561,7 +2576,7 @@
   };
   // CSS
   if('document'in globalThis){
-    tyin.elementCreate('link',{rel:'stylesheet',href:`${import.meta.url.replace('tyin.js','tyin.css')}`,crossorigin:''},document.head);
+    tyin.loadGlobalPackage('style','main/main@0.1.0/tyin.css');
   }
   // // merge webAssembly rust
   // await tyin.webAssembly('../package/tyin_wasm_rust@0.1.0/result/tyin_wasm_rust.js',(module)=>{

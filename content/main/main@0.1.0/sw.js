@@ -12,17 +12,19 @@
     }));
   });
   addEventListener('fetch',(event)=>{
-    event.respondWith(caches.match(event.request).then((resp)=>{
-      return fetch(event.request).then((response)=>{
-        const responseClone=response.clone();
-        caches.open(version).then((cache)=>{
-          cache.put(event.request,responseClone);
+    if(event.request.method==='GET'&&event.request.url.match(/^http/)){
+      event.respondWith(caches.match(event.request).then((resp)=>{
+        return fetch(event.request).then((response)=>{
+          const responseClone=response.clone();
+          caches.open(version).then((cache)=>{
+            cache.put(event.request,responseClone);
+          });
+          return response;
+        }).catch((error)=>{
+          return resp;
         });
-        return response;
-      }).catch((error)=>{
-        return resp;
-      });
-    }));
+      }));
+    }
   });
   addEventListener('activate',(event)=>{
     event.waitUntil(caches.keys().then((keyList)=>{
