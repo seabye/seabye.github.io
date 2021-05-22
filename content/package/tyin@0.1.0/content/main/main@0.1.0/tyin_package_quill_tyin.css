@@ -136,7 +136,7 @@
       transition: filter calc(350ms*2/3) var(--ic_ve_cubicBezier_slowFast);
     }
       /*  */
-      .tyin_package_quill_origin :not(pre,pre *,.katex,.katex *) {
+      .tyin_package_quill_origin :not(pre,pre *,.ql-formula,.ql-formula *) {
         /* _ */
         all: unset;
         /* _ */
@@ -325,13 +325,13 @@
           cursor: auto;
         }
           /*  */
-          .tyin_package_quill_origin>.ql-container>.ql-editor :not(.katex *),
-          .tyin_package_quill_origin>.ql-container>.ql-clipboard :not(.katex *) {
+          .tyin_package_quill_origin>.ql-container>.ql-editor :not(.ql-formula,.ql-formula *),
+          .tyin_package_quill_origin>.ql-container>.ql-clipboard :not(.ql-formula,.ql-formula *) {
             display: block;
           }
-          .tyin_package_quill_origin>.ql-container>.ql-editor span:not(.katex *),
-          .tyin_package_quill_origin>.ql-container>.ql-clipboard span:not(.katex *) {
-            display: inline-block;
+          .tyin_package_quill_origin>.ql-container>.ql-editor span:not(.ql-formula,.ql-formula *),
+          .tyin_package_quill_origin>.ql-container>.ql-clipboard span:not(.ql-formula,.ql-formula *) {
+            display: inline;
           }
         /*  */
         .tyin_package_quill_origin>.ql-container>.ql-editor {
@@ -639,6 +639,7 @@
           }
             /*  */
             .tyin_package_quill_origin>.ql-container>.ql-editor pre {
+              margin: unset;
               padding: calc(1.1666666667em);
               font-size: 12px;
               color: var(--ic_ve_font_color_white);
@@ -675,7 +676,7 @@
               .tyin_package_quill_origin>.ql-container>.ql-editor ol>li.ql-direction-rtl::before {
                 margin-right: -2em;
               }
-              .tyin_package_quill_origin>.ql-container>.ql-editor ol>li>*:not(img,.katex,sup,sub,.ql-size-small,.ql-size-large) {
+              .tyin_package_quill_origin>.ql-container>.ql-editor ol>li>*:not(img,.ql-formula,sup,sub,.ql-size-small,.ql-size-large) {
                 display: inline;
                 vertical-align: top;
               }
@@ -716,7 +717,7 @@
               .tyin_package_quill_origin>.ql-container>.ql-editor ul>.ql-indent-7:not(.ql-direction-rtl)::before {
                 content: "☆";
               }
-              .tyin_package_quill_origin>.ql-container>.ql-editor ul>li>*:not(img,.katex,sup,sub,.ql-size-small,.ql-size-large) {
+              .tyin_package_quill_origin>.ql-container>.ql-editor ul>li>*:not(img,.ql-formula,sup,sub,.ql-size-small,.ql-size-large) {
                 display: inline;
                 vertical-align: top;
               }
@@ -800,6 +801,7 @@
           }
             /*  */
             .tyin_package_quill_origin>.ql-container>.ql-editor .katex {
+              display: inline-block;
               overflow: auto hidden;
               padding: 2px;
               color: #009688;
