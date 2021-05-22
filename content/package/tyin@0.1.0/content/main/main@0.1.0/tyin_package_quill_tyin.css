@@ -49,7 +49,7 @@
       background-color: var(--ic_ve_color_white6_opacity);
       -webkit-backdrop-filter: var(--ic_ve_backdropFilter_blur_high);
       backdrop-filter: var(--ic_ve_backdropFilter_blur_high);
-      box-shadow: var(--ic_ve_shadow_2dp3);
+      box-shadow: inset 0 0 0 1px var(--ic_ve_color_black3_opacity),0 0 0 1px var(--ic_ve_color_white3_opacity),var(--ic_ve_shadow_3dp3);
       pointer-events: none;
       opacity: 0;
       visibility: hidden;
@@ -136,7 +136,7 @@
       transition: filter calc(350ms*2/3) var(--ic_ve_cubicBezier_slowFast);
     }
       /*  */
-      .tyin_package_quill_origin :not(pre,pre *,.ql-formula,.ql-formula *) {
+      .tyin_package_quill_origin :not(pre,pre *,.katex,.ql-formula *) {
         /* _ */
         all: unset;
         /* _ */
@@ -251,7 +251,6 @@
           background-color: var(--ic_ve_color_white6_opacity);
           -webkit-backdrop-filter: var(--ic_ve_backdropFilter_blur_low);
           backdrop-filter: var(--ic_ve_backdropFilter_blur_low);
-          box-shadow: var(--ic_ve_shadow_2dp3);
         }
         .tyin_package_quill_origin>.ql-toolbar>.ql-formats:first-child {
           margin-top: 4px;
@@ -850,7 +849,7 @@
           background-color: var(--ic_ve_color_white6_opacity);
           -webkit-backdrop-filter: var(--ic_ve_backdropFilter_blur_low);
           backdrop-filter: var(--ic_ve_backdropFilter_blur_low);
-          box-shadow: var(--ic_ve_shadow_2dp3);
+          box-shadow: inset 0 0 0 1px var(--ic_ve_color_black3_opacity),0 0 0 1px var(--ic_ve_color_white3_opacity),var(--ic_ve_shadow_3dp3);
           pointer-events: unset;
           opacity: unset;
           visibility: visible;
