@@ -1,7 +1,7 @@
 'use strict';
 // #before
 // #import
-  // cache
+  // serviceWorker
   importScripts('/content/main/main@0.1.0/sw.js');
 // #variable
 // #block
