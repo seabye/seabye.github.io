@@ -691,7 +691,8 @@
               .tyin_package_quill_origin>.ql-container>.ql-editor ol>li.ql-direction-rtl::before {
                 margin-right: -2em;
               }
-              .tyin_package_quill_origin>.ql-container>.ql-editor ol>li>*:not(img,.katex,sup,sub) {
+              .tyin_package_quill_origin>.ql-container>.ql-editor ol>li>*:not(img,.katex,sup,sub,.ql-size-small,.ql-size-large) {
+                display: inline;
                 vertical-align: top;
               }
           .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-list[value="bullet"]::before {
@@ -731,7 +732,8 @@
               .tyin_package_quill_origin>.ql-container>.ql-editor ul>.ql-indent-7:not(.ql-direction-rtl)::before {
                 content: "☆";
               }
-              .tyin_package_quill_origin>.ql-container>.ql-editor ul>li>*:not(img,.katex,sup,sub) {
+              .tyin_package_quill_origin>.ql-container>.ql-editor ul>li>*:not(img,.katex,sup,sub,.ql-size-small,.ql-size-large) {
+                display: inline;
                 vertical-align: top;
               }
           .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-indent[value="-1"]::before {
