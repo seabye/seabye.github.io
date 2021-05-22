@@ -136,7 +136,7 @@
       transition: filter calc(350ms*2/3) var(--ic_ve_cubicBezier_slowFast);
     }
       /*  */
-      .tyin_package_quill_origin *:not(pre *) {
+      .tyin_package_quill_origin *:not(pre,pre *,.katex,.katex *) {
         /* _ */
         all: unset;
         /* _ */
@@ -686,9 +686,10 @@
                 display: inline-block;
                 width: 2em;
                 text-align: center;
-                color: var(--ic_ve_color_black6_opacity);
-                -webkit-mask: linear-gradient(-90deg,#000000,rgba(0,0,0,0));
-                mask: linear-gradient(-90deg,#000000,rgba(0,0,0,0));
+                color: var(--ic_ve_color_black4_opacity);
+                transform: scale(0.75);
+                /* -webkit-mask: linear-gradient(-90deg,#000000,rgba(0,0,0,0));
+                mask: linear-gradient(-90deg,#000000,rgba(0,0,0,0)); */
               }
               .tyin_package_quill_origin>.ql-container>.ql-editor ol>li:not(.ql-direction-rtl)::before {
                 margin-left: -2em;
@@ -719,9 +720,10 @@
                 display: inline-block;
                 width: 2em;
                 text-align: center;
+                color: var(--ic_ve_color_black4_opacity);
                 transform: scale(0.75);
-                -webkit-mask: linear-gradient(-90deg,#000000,rgba(0,0,0,0));
-                mask: linear-gradient(-90deg,#000000,rgba(0,0,0,0));
+                /* -webkit-mask: linear-gradient(-90deg,#000000,rgba(0,0,0,0));
+                mask: linear-gradient(-90deg,#000000,rgba(0,0,0,0)); */
               }
               .tyin_package_quill_origin>.ql-container>.ql-editor ul>li:not(.ql-direction-rtl)::before {
                 margin-left: -2em;
