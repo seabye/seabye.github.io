@@ -567,9 +567,6 @@
             .ic_nr_browser_chromium .tyin_package_quill_origin>.ql-container>.ql-editor sup {
               zoom: 0.618;
             }
-            .tyin_package_quill_origin>.ql-container>.ql-editor sup * {
-              vertical-align: text-top;
-            }
           .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-script[value="sub"]::before {
             content: "􀓡";
           }
@@ -590,9 +587,6 @@
             }
             .ic_nr_browser_chromium .tyin_package_quill_origin>.ql-container>.ql-editor sub {
               zoom: 0.618;
-            }
-            .tyin_package_quill_origin>.ql-container>.ql-editor sub * {
-              vertical-align: bottom;
             }
           .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-header::before {
             content: "􀬎";
@@ -675,7 +669,7 @@
             }
             .tyin_package_quill_origin>.ql-container>.ql-editor ol>li {
               min-width: calc(100% + 2em);
-              vertical-align: text-top;
+              vertical-align: top;
             }
             .tyin_package_quill_origin>.ql-container>.ql-editor ol>li.ql-direction-rtl {
               margin-left: -2em;
@@ -698,7 +692,7 @@
                 margin-right: -2em;
               }
               .tyin_package_quill_origin>.ql-container>.ql-editor ol>li>*:not(img,.katex,sup,sub) {
-                vertical-align: text-top;
+                vertical-align: top;
               }
           .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-list[value="bullet"]::before {
             content: "􀣩";
@@ -709,7 +703,7 @@
             }
             .tyin_package_quill_origin>.ql-container>.ql-editor ul>li {
               min-width: calc(100% + 2em);
-              vertical-align: text-top;
+              vertical-align: top;
             }
             .tyin_package_quill_origin>.ql-container>.ql-editor ul>li.ql-direction-rtl {
               margin-left: -2em;
@@ -738,7 +732,7 @@
                 content: "☆";
               }
               .tyin_package_quill_origin>.ql-container>.ql-editor ul>li>*:not(img,.katex,sup,sub) {
-                vertical-align: text-top;
+                vertical-align: top;
               }
           .tyin_package_quill_origin>.ql-toolbar>.ql-formats>.ql-indent[value="-1"]::before {
             content: "􀋶";
