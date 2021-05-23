@@ -3,25 +3,15 @@
 /* #import */
 /* #variable */
   /*  */
-  html.ic_nr_media_prefers_colorScheme_light .tyin_package_quill_origin {
-    --qt_ve_color_red: #CC0000;
-    --qt_ve_color_green: #00BB00;
-    --qt_ve_color_blue: #0088FF;
-    --qt_ve_color_orange: #FF8800;
-    --qt_ve_background_red: #CC000099;
-    --qt_ve_background_green: #00BB0099;
-    --qt_ve_background_blue: #0088FF99;
-    --qt_ve_background_orange: #FF880099;
-  }
-  html.ic_nr_media_prefers_colorScheme_dark .tyin_package_quill_origin {
-    --qt_ve_color_red: #E2378A;
-    --qt_ve_color_green: #64A963;
-    --qt_ve_color_blue: #53B1DE;
-    --qt_ve_color_orange: #E88448;
-    --qt_ve_background_red: #E2378A99;
-    --qt_ve_background_green: #64A96399;
-    --qt_ve_background_blue: #53B1DE99;
-    --qt_ve_background_orange: #E8844899;
+  .tyin_package_quill_origin {
+    --qt_ve_color_red: #FF6666;
+    --qt_ve_color_green: #66CC99;
+    --qt_ve_color_blue: #3399CC;
+    --qt_ve_color_orange: #CC9933;
+    --qt_ve_background_red: #FF666666;
+    --qt_ve_background_green: #66CC9966;
+    --qt_ve_background_blue: #3399CC66;
+    --qt_ve_background_orange: #CC993366;
   }
 /* #block */
 /* #build */
