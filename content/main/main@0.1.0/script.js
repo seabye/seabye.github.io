@@ -42,7 +42,7 @@
                 <span style="font-size: 38.2%; color: #E2378A;">􀇲 0%</span>
               </div>
               <div style="transform: rotateY(-15deg)rotateY(180deg);">
-                <span>planC</span>
+                <span>pc3</span>
                 <span style="font-size: 38.2%; color: #E6844F;">􀇲 50%</span>
               </div>
               <div style="font-size: 138.2%; color: #707C74;">Hello, World!</div>

@@ -297,7 +297,8 @@
       /*  */
       .tyin_package_quill_origin>.ql-container {
         display: block;
-        max-width: 800px;
+        position: relative;
+        width: 100%;
         height: 100%;
         margin: 0 auto;
       }
@@ -656,7 +657,7 @@
                 width: 2em;
                 text-align: center;
                 color: var(--ic_ve_color_black4_opacity);
-                transform: scale(0.75);
+                transform: scale(0.618);
                 /* -webkit-mask: linear-gradient(-90deg,#000000,rgba(0,0,0,0));
                 mask: linear-gradient(-90deg,#000000,rgba(0,0,0,0)); */
               }
@@ -691,7 +692,7 @@
                 width: 2em;
                 text-align: center;
                 color: var(--ic_ve_color_black4_opacity);
-                transform: scale(0.75);
+                transform: scale(0.618);
                 /* -webkit-mask: linear-gradient(-90deg,#000000,rgba(0,0,0,0));
                 mask: linear-gradient(-90deg,#000000,rgba(0,0,0,0)); */
               }
