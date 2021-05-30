@@ -35,22 +35,22 @@
                 </div>
               </div>
               <div style="font-size: 61.8%; transform: rotateY(-45deg);">
-                <a href="//github.com/seabye">github.com/seabye</a>
+                <a href="//github.com/seabye" style="color: #53B1DE;">github.com/seabye</a>
               </div>
               <div style="transform: rotateY(-30deg);">
                 <a href="//w3daze.com">w3daze.com</a>
                 <span style="font-size: 38.2%; color: #E2378A;">􀇲 0%</span>
               </div>
               <div style="transform: rotateY(-15deg)rotateY(180deg);">
-                <span>pc3</span>
+                <span style="color: #6594E9;">pc3</span>
                 <span style="font-size: 38.2%; color: #E6844F;">􀇲 50%</span>
               </div>
               <div style="font-size: 138.2%; color: #707C74;">Hello, World!</div>
               <div style="transform: rotateY(30deg);">
-                <a href="//luojia.me">luojia.me</a>
+                <a href="//luojia.me" style="color: #53B1DE;">luojia.me</a>
               </div>
               <div style="transform: rotateY(45deg);">
-                <a href="//pasi.cat">pasi.cat</a>
+                <a href="//pasi.cat" style="color: #53B1DE;">pasi.cat</a>
               </div>
               <div style="font-size: 61.8%; transform: rotateY(-15deg);">
                 <a onclick="tyin_test._tyin_package_quill(false,'tyin_simple')" style="color: #64A963; -webkit-mask: linear-gradient(-90deg,#000000,rgba(0,0,0,0)); mask: linear-gradient(-90deg,#000000,rgba(0,0,0,0));">quill_tyin(edit,simple)</a>
