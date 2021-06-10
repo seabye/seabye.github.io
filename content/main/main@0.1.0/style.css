@@ -3,6 +3,15 @@
 /* #import */
 /* #variable */
 /* #block */
+  /* timelapse */
+  /* @keyframes timelapse {
+    0% {
+      transform: translateX(-50vw)rotate(0deg);
+    }
+    100% {
+      transform: translateX(-50vw)rotate(360deg);
+    }
+  } */
 /* #build */
   /* root */
   html {
@@ -11,6 +20,22 @@
   body {
     justify-content: space-evenly;
   }
+  /* body::before {
+    content: "􀇲";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: -1;
+    position: absolute;
+    min-width: 200vmin;
+    max-width: 200vmin;
+    min-height: 200vmin;
+    max-height: 200vmin;
+    font-size: 100vmin;
+    opacity: 0.125;
+    transform: translateX(-50vw);
+    animation: timelapse 60s linear 0s infinite normal none running;
+  } */
   /* seabye */
   .seabye {
     color: #BCB38B;

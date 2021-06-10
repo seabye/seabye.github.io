@@ -2290,6 +2290,16 @@
           this.removeElement(tyin_package_quill_origin_toolbar);
         }else{
           // build editor
+/*
+  await idbKeyval.set(key,value,data_basic);
+  await idbKeyval.del(key,data_basic);
+  await idbKeyval.get(key,data_basic);
+  await idbKeyval.entries(data_basic).then((key)=>{
+    this.for(key,(...data)=>{
+      console.log(data[2]);
+    },0);
+  });
+*/
             // local data
             const data_basic=idbKeyval.createStore('tyin_package_quill','basic');
             //
