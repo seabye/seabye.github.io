@@ -2299,6 +2299,8 @@
       console.log(data[2]);
     },0);
   });
+  从清单cdru内容 将cdru方法挂靠在对象上
+  监听idbKeyval的set del函数执行清单刷新以避免多个编辑器之间不同步
 */
             // local data
             const data_basic=idbKeyval.createStore('tyin_package_quill','basic');
